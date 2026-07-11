@@ -186,6 +186,11 @@
   /* activities */
   .act{display:grid;grid-template-columns:86px 78px 26px 1fr auto;gap:10px;align-items:center;padding:9px 2px;border-top:1px solid var(--grid);font-size:13px}
   .alogo{width:26px;height:26px;border-radius:7px;object-fit:contain;background:#fff;border:1px solid var(--border);display:block}
+  .hlogo{width:30px;height:30px;border-radius:8px;object-fit:contain;background:#fff;border:1px solid var(--border);flex:none}
+  .plogo{width:18px;height:18px;border-radius:5px;object-fit:contain;background:#fff;border:1px solid var(--border);flex:none}
+  .nlogo{width:16px;height:16px;border-radius:4px;object-fit:contain;background:#fff;border:1px solid var(--border);vertical-align:-3px;margin-right:5px;display:inline-block}
+  .llogo{width:16px;height:16px;border-radius:4px;object-fit:contain;background:#fff;border:1px solid var(--border);flex:none}
+  .cname .tk .bd{display:inline-block;margin-right:6px;vertical-align:1px}
   .act:first-child{border-top:0}
   .act .ad{color:var(--muted);font-size:11.5px;font-variant-numeric:tabular-nums;white-space:nowrap}
   .atype{font-size:10.5px;font-weight:700;padding:2px 7px;border-radius:5px;text-align:center;letter-spacing:.3px}
@@ -350,7 +355,7 @@ function renderFeed(){
     const hd=n.url?`<a href="${esc(n.url)}" target="_blank" rel="noopener">${esc(n.headline)}</a>`:esc(n.headline);
     return `<div class="fi">
       <div class="fd">${n._sec?'<span style="color:var(--down)">SEC</span>':enDate(n.date)}</div>
-      <div><div class="ft"><span class="tkr" style="background:${col}">${esc(n.ticker)}</span> ${hd}</div>
+      <div><div class="ft">${logoImg(tickerLogos(n.ticker),'nlogo')}<span class="tkr" style="background:${col}">${esc(n.ticker)}</span> ${hd}</div>
       ${n.summary?`<div class="fs">${esc(n.summary)}</div>`:''}
       <div class="fm">${esc(n.source)}</div></div></div>`;
   }).join('');
@@ -475,7 +480,7 @@ function renderAlloc(){
     a0=a1;
   });
   const legend=hs.map(h=>`<div class="lg"><span class="dot" style="background:${colOf(h)}"></span>
-    <span class="lt">${esc(h.ticker)}</span><span class="lp tnum">${(100*h.value/total).toFixed(1)}%</span></div>`).join('');
+    ${logoImg(h.logos,'llogo')}<span class="lt">${esc(h.ticker)}</span><span class="lp tnum">${(100*h.value/total).toFixed(1)}%</span></div>`).join('');
   el.innerHTML=`<div class="donutwrap">
     <svg viewBox="0 0 180 180" class="donut">${segs}
       <text x="90" y="86" text-anchor="middle" fill="${cvar('--ink')}" font-size="20" font-weight="700" font-family="system-ui">${fmtUsd(total).replace('$','$')}</text>
@@ -492,6 +497,7 @@ function renderPerfBars(){
     const v=h.unrealizedReturn||0, up=v>=0, col=up?cvar('--up'):cvar('--down');
     const w=(Math.abs(v)/mx*50).toFixed(1);            // half-width max (bidirectional from center)
     return `<div class="pf">
+      ${logoImg(h.logos,'plogo')}
       <div class="pft">${esc(h.ticker)}</div>
       <div class="pfbar"><div class="pfmid"></div>
         <div class="pffill" style="${up?'left:50%':'right:50%'};width:${w}%;background:${col}"></div></div>
@@ -572,8 +578,8 @@ function renderHoldings(){
     const spark=sparkSvg(h.spark, up);
     return `<div class="card">
       <div class="chead">
-        <div class="cname"><span class="bd" style="background:${col}"></span>
-          <div style="min-width:0"><div class="tk">${esc(h.ticker)}</div><div class="nm">${esc(h.name)}</div></div>
+        <div class="cname">${logoImg(h.logos,'hlogo')}
+          <div style="min-width:0"><div class="tk"><span class="bd" style="background:${col}"></span>${esc(h.ticker)}</div><div class="nm">${esc(h.name)}</div></div>
         </div>
         <div class="cvals"><div class="px tnum">${fmtEur(h.value)}</div>
           ${dc!==null?`<div class="dc ${dcUp?'up':'down'} tnum">${fmtPct(dc)} today</div>`:''}</div>
@@ -761,7 +767,7 @@ function renderSocial(){
     const i=tIdx(m.ticker), col=i>=0?colorFor(i):cvar('--muted');
     const sent=m.sentiment==='Bullish'?'<span class="sent bull">BULL</span>':m.sentiment==='Bearish'?'<span class="sent bear">BEAR</span>':'';
     return `<div class="si">
-      <div class="sm"><span class="tkr" style="background:${col}">${esc(m.ticker)}</span>
+      <div class="sm">${logoImg(tickerLogos(m.ticker),'nlogo')}<span class="tkr" style="background:${col}">${esc(m.ticker)}</span>
         <span class="su">@${esc(m.user)}</span>${sent}<span class="stime">${relTime(m.time)}</span></div>
       <div class="sb">${esc(m.body)}</div></div>`;
   }).join('');
@@ -900,6 +906,15 @@ function isCashAct(a){ return actTicker(a)==='Cash' || /cash/i.test(a.holdingAss
 const CCY_SYM={USD:"$",EUR:"€",CAD:"C$",GBP:"£"};
 function actIsin(a){ return a.isin||(a.asset&&a.asset.identifier)||''; }
 function actSec(a){ return DATA.secByIsin&&DATA.secByIsin[actIsin(a)]; }   // any security ever traded (depot.xml)
+/* ---- company logos: <img> with a fallback chain (Parqet CDN -> favicon -> hide) ---- */
+window._lerr=function(el){ const a=(el.dataset.alt||'').split('|').filter(Boolean);
+  if(a.length){ el.src=a.shift(); el.dataset.alt=a.join('|'); } else el.style.visibility='hidden'; };
+function logoImg(cands,cls){
+  if(!cands||!cands.length) return `<span class="${cls}" style="visibility:hidden"></span>`;
+  return `<img class="${cls}" src="${esc(cands[0])}" alt="" loading="lazy"
+    data-alt="${esc(cands.slice(1).join('|'))}" onerror="window._lerr(this)">`;
+}
+function tickerLogos(tk){ const h=DATA.holdings.find(x=>x.ticker===tk); return (h&&h.logos)||[]; }
 function actTicker(a){
   const byPid=DATA.holdings.find(h=>h.pid===a.holding);
   if(byPid) return byPid.ticker;
@@ -918,12 +933,13 @@ function actName(a){
   return (byPid&&byPid.name)||(sec&&sec.name)||(a.asset&&a.asset.name)||"";
 }
 function actLogo(a,tk){
-  // Parqet logo CDN: by ISIN when we have it, else by symbol; hide on 404
+  const cur=tickerLogos(tk);                       // current holding -> curated chain (incl. overrides)
+  if(cur.length) return logoImg(cur,'alogo');
   const isin=actIsin(a)||(DATA.isinByTicker&&DATA.isinByTicker[tk])||'';
-  const src=isin? "https://assets.parqet.com/logos/isin/"+isin+"?format=png&size=64"
-    : (tk&&tk!=="Cash"&&tk!=="—"? "https://assets.parqet.com/logos/symbol/"+encodeURIComponent(tk)+"?format=png&size=64":"");
-  return src? `<img class="alogo" src="${esc(src)}" alt="" loading="lazy" onerror="this.style.visibility='hidden'">`
-            : `<span class="alogo"></span>`;
+  const cands=[];
+  if(isin) cands.push("https://assets.parqet.com/logos/isin/"+isin+"?format=png&size=64");
+  if(tk&&tk!=="Cash"&&tk!=="—") cands.push("https://assets.parqet.com/logos/symbol/"+encodeURIComponent(tk.split(' ')[0])+"?format=png&size=64");
+  return logoImg(cands,'alogo');
 }
 function actCls(t){
   if(t==="Buy")return "buy"; if(t==="Sell")return "sell";
@@ -938,7 +954,6 @@ function renderActivities(){
     const isTrade=(a.type==="Buy"||a.type==="Sell")&&a.shares&&a.price;
     const sub=isTrade? (Number(a.shares).toLocaleString('en-US')+" @ "+sym+(+a.price).toLocaleString('en-US',{maximumFractionDigits:4}))
       : (a.shares&&a.price!==1? Number(a.shares).toLocaleString('en-US')+" units":"");
-    const fees=(a.fee?("fee "+sym+(+a.fee).toFixed(2)):"")+(a.tax?((a.fee?" · ":"")+"tax "+sym+(+a.tax).toFixed(2)):"");
     const sign=a.type==="Buy"?"−":a.type==="Sell"||/Dividend|Interest/.test(a.type)?"+":"";
     return `<div class="act">
       <div class="ad">${dt}</div>
@@ -946,8 +961,7 @@ function renderActivities(){
       ${actLogo(a,tk)}
       <div class="amain"><div class="aname">${esc(tk)}${nm&&nm!==tk?' <span class="asub">'+esc(nm)+'</span>':''}</div>
         ${sub?`<div class="asub">${esc(sub)}</div>`:''}</div>
-      <div class="aval tnum">${sign}${sym}${(+a.amount).toLocaleString('en-US',{maximumFractionDigits:2})}
-        ${fees?`<span class="fee">${esc(fees)}</span>`:''}</div>
+      <div class="aval tnum">${sign}${sym}${(+a.amount).toLocaleString('en-US',{maximumFractionDigits:2})}</div>
     </div>`;
   }).join('');
   const btn=document.getElementById('actmore');

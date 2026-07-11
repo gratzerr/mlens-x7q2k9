@@ -116,10 +116,41 @@ NEWS_QUERY = {
 # Currency of the live Yahoo quote (PINK.V trades in CAD; all others USD)
 LIVE_CCY = {"PINK": "CAD"}
 
+# ---- company logos: candidate URL chain per holding (client falls through on 404) ----
+# Parqet CDN covers nearly everything; overrides for the few it misses (micro caps).
+LOGO_OVERRIDE = {
+    "LXEO": ["https://www.lexeotx.com/wp-content/themes/lexeo/images/favicon.png"],
+    "NRXS": ["https://www.google.com/s2/favicons?domain=neuraxis.com&sz=64"],
+    "TENX": ["https://www.google.com/s2/favicons?domain=tenaxthera.com&sz=64"],   # Parqet logo is white-on-transparent (invisible)
+    "NKTR": ["https://www.google.com/s2/favicons?domain=nektar.com&sz=64"],       # Parqet only has a generated "NE" letter tile
+}
+isin_by_ticker = {h["ticker"]: h["isin"] for h in (pp.get("holdings", []) if pp else [])
+                  if h.get("isin")}
+def logo_candidates(h):
+    if h.get("assetType") == "cash":
+        return []
+    tk = h["ticker"]
+    if tk in LOGO_OVERRIDE:
+        return LOGO_OVERRIDE[tk]
+    out = []
+    isin = isin_by_ticker.get(tk)
+    if isin:
+        out.append(f"https://assets.parqet.com/logos/isin/{isin}?format=png&size=64")
+    sym = tk.split()[0].upper()            # "NVO $40C" -> NVO (option gets the Novo logo)
+    out.append(f"https://assets.parqet.com/logos/symbol/{sym}?format=png&size=64")
+    ir = (h.get("links") or {}).get("ir", "")
+    if ir:
+        dom = ir.split("//")[-1].split("/")[0]
+        for pre in ("www.", "ir.", "investors.", "investor."):
+            if dom.startswith(pre): dom = dom[len(pre):]
+        out.append(f"https://www.google.com/s2/favicons?domain={dom}&sz=64")
+    return out
+
 # Attach research + market to each holding; compute allocation
 total = port["totalValue"]
 for h in port["holdings"]:
     h["alloc"] = round(100.0 * h["value"] / total, 1)
+    h["logos"] = logo_candidates(h)
     if h["assetType"] != "cash":
         h["ySym"] = YAHOO_SYM.get(h["ticker"], h["ticker"])
         h["gquery"] = NEWS_QUERY.get(h["ticker"], h["name"])
