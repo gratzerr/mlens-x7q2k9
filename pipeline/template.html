@@ -888,7 +888,8 @@ const CCY_SYM={USD:"$",EUR:"€",CAD:"C$",GBP:"£"};
 function actTicker(a){
   const byPid=DATA.holdings.find(h=>h.pid===a.holding);
   if(byPid) return byPid.ticker;
-  if(a.holdingAssetType==="cash") return "Cash";
+  if(a.holdingAssetType && /cash/i.test(a.holdingAssetType)) return "Cash";
+  if(!a.isin && !a.asset && Math.abs((+a.price||1)-1)<1e-9) return "Cash";
   if(a.asset&&(a.asset.ticker||a.asset.symbol)) return a.asset.ticker||a.asset.symbol;
   if(a.assetName) return a.assetName;
   return a.isin||"—";
