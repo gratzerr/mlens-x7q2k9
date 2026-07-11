@@ -1,6 +1,6 @@
 {
  "fileDate": "2026-07-11 21:15",
- "generated": "2026-07-11 23:51",
+ "generated": "2026-07-11 23:56",
  "engine": "pp-exact (verified vs PP app 2026-07-11)",
  "totalSecuritiesEur": 2184440,
  "cashEur": -90923.38,
@@ -44,6 +44,8 @@
  },
  "realizedEur": 699185,
  "unrealizedEur": 723345,
+ "realizedUsd": 855901,
+ "unrealizedUsd": 803490,
  "series": [
   {
    "d": "2022-01-01",

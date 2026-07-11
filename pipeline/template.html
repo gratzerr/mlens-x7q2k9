@@ -66,6 +66,9 @@
     font-weight:660;margin:0 0 12px;display:flex;align-items:center;gap:8px}
   .panel h2 .live{width:7px;height:7px;border-radius:50%;background:var(--up);box-shadow:0 0 0 3px var(--up-bg)}
   .cols{display:grid;grid-template-columns:1.35fr 1fr;gap:16px;align-items:start}
+  .cols.eq{grid-template-columns:1fr 1fr;align-items:stretch}
+  .cols.eq .panel{display:flex;flex-direction:column}
+  .cols.eq .panel>div:last-child{flex:1;display:flex;flex-direction:column;justify-content:center}
 
   /* portfolio chart */
   .chartbox{position:relative}
@@ -230,7 +233,7 @@
 
   @media(max-width:860px){
     .kpis{grid-template-columns:repeat(2,1fr)}
-    .cols{grid-template-columns:1fr}
+    .cols,.cols.eq{grid-template-columns:1fr}
     .hgrid{grid-template-columns:1fr}
     .wrap{padding:16px 12px 48px}
     .sparkrow{flex-direction:column;align-items:stretch;gap:8px}
@@ -272,7 +275,7 @@
     </div>
   </div>
 
-  <div class="cols">
+  <div class="cols eq">
     <div class="panel">
       <h2>Allocation</h2>
       <div id="allocdonut"></div>
@@ -316,14 +319,14 @@ const enDate = s => new Date(s).toLocaleDateString('en-US',{month:'short',day:'2
 /* ---- KPI tiles ---- */
 function renderKpis(){
   const d=DATA;
-  // capital gains from the PP-exact FIFO engine (depot.xml), like PP -> Performance -> Calculation
-  const un=d.ppUnrealizedEur!=null?d.ppUnrealizedEur:d.netGainUnrealized;
-  const rl=d.ppRealizedEur!=null?d.ppRealizedEur:d.realizedAllTime;
+  // capital gains from the PP-exact FIFO engine (depot.xml), USD at tx-date FX
+  const un=d.ppUnrealizedUsd!=null?d.ppUnrealizedUsd:d.netGainUnrealized;
+  const rl=d.ppRealizedUsd!=null?d.ppRealizedUsd:d.realizedAllTime;
   const gn=(un||0)>=0, rz=(rl||0)>=0;
   const tiles=[
     {lab:'Portfolio Value', val:fmtUsd(d.totalValue), note:'USD · '+(d.holdings.length-1)+' positions · net cash '+fmtUsd(d.cashValue)+' (PP)'},
-    {lab:'Unrealized Gain', val:fmtE(un), note:'current holdings · FIFO vs cost (PP)', cls:gn?'up':'down'},
-    {lab:'Realized Gain', val:fmtE(rl), note:'booked from sells since 2022 (PP)', cls:rz?'up':'down'},
+    {lab:'Unrealized Gain', val:fmtUsd(un), note:'current holdings · FIFO vs cost (PP)', cls:gn?'up':'down'},
+    {lab:'Realized Gain', val:fmtUsd(rl), note:'booked from sells since 2022 (PP)', cls:rz?'up':'down'},
     {lab:'Return YTD', val:fmtPct(d.ttwrorYtd||0), note:'since inception (2022) '+fmtPct(d.since2022!=null?d.since2022:(d.pp&&d.pp.ppReferenceTtwror)||0)+'<br>IRR '+(d.izf||0).toFixed(1)+'%', cls:(d.ttwrorYtd||0)>=0?'up':'down'},
   ];
   document.getElementById('kpis').innerHTML = tiles.map(t=>
@@ -486,9 +489,15 @@ function renderAlloc(){
     segs+=`<path data-ai="${ai}" d="M${x0.toFixed(2)},${y0.toFixed(2)} A${r},${r} 0 ${laf} 1 ${x1.toFixed(2)},${y1.toFixed(2)} L${xi1.toFixed(2)},${yi1.toFixed(2)} A${rin},${rin} 0 ${laf} 0 ${xi0.toFixed(2)},${yi0.toFixed(2)} Z" fill="${colOf(h)}"/>`;
     a0=a1;
   });
+  // negative cash (margin) can't be a slice — net it into the center total + its own legend row
+  const cash=DATA.holdings.find(h=>h.assetType==='cash'&&h.value<0);
+  const net=total+(cash?cash.value:0);
   const legend=hs.map((h,ai)=>`<div class="lg2" data-ai="${ai}"><span class="dot" style="background:${colOf(h)}"></span>
     ${logoImg(h.logos,'llogo')}<span class="lt">${esc(h.ticker)}</span>
-    <span class="lv">${fmtUsd(h.value)}</span><span class="lp">${(100*h.value/total).toFixed(1)}%</span></div>`).join('');
+    <span class="lv">${fmtUsd(h.value)}</span><span class="lp">${(100*h.value/total).toFixed(1)}%</span></div>`).join('')
+    +(cash?`<div class="lg2" data-ai="cash"><span class="dot" style="background:${cvar('--down')}"></span>
+    <span class="llogo" style="visibility:hidden"></span><span class="lt">Cash · margin</span>
+    <span class="lv">${fmtUsd(cash.value)}</span><span class="lp down">${(100*cash.value/total).toFixed(1)}%</span></div>`:'');
   el.innerHTML=`<div class="donutwrap">
     <svg viewBox="0 0 230 230" class="donut" id="donutsvg">${segs}
       <text id="dc1" x="115" y="105" text-anchor="middle" fill="${cvar('--ink')}" font-size="21" font-weight="700" font-family="system-ui"></text>
@@ -498,18 +507,22 @@ function renderAlloc(){
   const svg=el.querySelector('#donutsvg');
   const c1=el.querySelector('#dc1'), c2=el.querySelector('#dc2'), c3=el.querySelector('#dc3');
   const setCenter=ai=>{
-    if(ai===null){ c1.textContent=fmtUsd(total); c2.textContent=hs.filter(h=>h.assetType!=='cash').length+' positions'; c3.textContent=''; }
-    else { const h=hs[ai]; c1.textContent=fmtUsd(h.value); c2.textContent=h.ticker; c3.textContent=(100*h.value/total).toFixed(1)+'% of portfolio'; }
+    if(ai===null){ c1.textContent=fmtUsd(net); c2.textContent=hs.filter(h=>h.assetType!=='cash').length+' positions';
+      c3.textContent=cash?('net of '+fmtUsd(cash.value)+' margin'):''; }
+    else if(ai==='cash'){ c1.textContent=fmtUsd(cash.value); c2.textContent='Cash · margin';
+      c3.textContent='gross '+fmtUsd(total)+' → net '+fmtUsd(net); }
+    else { const h=hs[ai]; c1.textContent=fmtUsd(h.value); c2.textContent=h.ticker; c3.textContent=(100*h.value/total).toFixed(1)+'% of invested'; }
   };
+
   const mark=ai=>{
-    svg.classList.toggle('hashot',ai!==null);
+    svg.classList.toggle('hashot',ai!==null&&ai!=='cash');
     svg.querySelectorAll('path').forEach(p=>p.classList.toggle('hot',p.dataset.ai===String(ai)));
     el.querySelectorAll('.lg2').forEach(g=>g.classList.toggle('hot',g.dataset.ai===String(ai)));
     setCenter(ai);
   };
   setCenter(null);
   [...svg.querySelectorAll('path'),...el.querySelectorAll('.lg2')].forEach(n=>{
-    n.addEventListener('mouseenter',()=>mark(+n.dataset.ai));
+    n.addEventListener('mouseenter',()=>mark(n.dataset.ai==='cash'?'cash':+n.dataset.ai));
     n.addEventListener('mouseleave',()=>mark(null));
   });
 }
