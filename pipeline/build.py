@@ -161,9 +161,18 @@ data = {
     "netGainUnrealized": port.get("netGainUnrealized", 0),
     "unrealizedReturn": port.get("unrealizedReturn", 0),
     "realizedAllTime": port.get("realizedAllTime", 0),
+    # PP-exact capital gains (FIFO over depot.xml) — the KPI tiles use these, not Parqet
+    "ppRealizedEur": pp.get("realizedEur") if pp else None,
+    "ppUnrealizedEur": pp.get("unrealizedEur") if pp else None,
+    # PP net-worth curve (daily EUR value + cum TTWROR) — replaces Parqet's wrong chart
+    "chartPP": pp.get("series", []) if pp else [],
+    # every security ever traded (isin -> ticker/name) so sold positions render in Activities
+    "secByIsin": {s["isin"]: {"tk": s["ticker"], "name": s["name"]}
+                  for s in (pp.get("securities", []) if pp else [])},
+    "isinByTicker": {h["ticker"]: h["isin"] for h in (pp.get("holdings", []) if pp else [])
+                     if h.get("isin")},
     "cashValue": port["cashValue"],
     "cashPct": round(100.0 * port["cashValue"] / total, 1),
-    "chartYtd": chart_ytd,
     "holdings": port["holdings"],
     "catalysts": merged,
     "latestNews": all_news,

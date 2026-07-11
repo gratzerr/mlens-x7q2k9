@@ -184,7 +184,8 @@
   .tfsel button.on{background:var(--surface);color:var(--ink);box-shadow:0 1px 2px rgba(0,0,0,.12)}
   .tfsel button:hover:not(.on){color:var(--ink)}
   /* activities */
-  .act{display:grid;grid-template-columns:86px 78px 1fr auto;gap:10px;align-items:center;padding:9px 2px;border-top:1px solid var(--grid);font-size:13px}
+  .act{display:grid;grid-template-columns:86px 78px 26px 1fr auto;gap:10px;align-items:center;padding:9px 2px;border-top:1px solid var(--grid);font-size:13px}
+  .alogo{width:26px;height:26px;border-radius:7px;object-fit:contain;background:#fff;border:1px solid var(--border);display:block}
   .act:first-child{border-top:0}
   .act .ad{color:var(--muted);font-size:11.5px;font-variant-numeric:tabular-nums;white-space:nowrap}
   .atype{font-size:10.5px;font-weight:700;padding:2px 7px;border-radius:5px;text-align:center;letter-spacing:.3px}
@@ -293,6 +294,7 @@ const cvar = n => getComputedStyle(document.documentElement).getPropertyValue(n)
 const colorFor = i => cvar(SC[i % SC.length]);
 const fmtUsd = n => (n<0?'-':'')+'$'+Math.abs(Math.round(n)).toLocaleString('en-US');
 const fmtEur = fmtUsd; // alias (values are USD from Parqet)
+const fmtE = n => (n<0?'-':'')+'€'+Math.abs(Math.round(n)).toLocaleString('en-US'); // real EUR (PP figures)
 const fmtPct = n => (n>0?'+':'')+n.toFixed(1)+'%';
 const esc = s => (s||'').replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
 const tIdx = tk => DATA.holdings.findIndex(x=>x.ticker===tk);
@@ -300,12 +302,15 @@ const enDate = s => new Date(s).toLocaleDateString('en-US',{month:'short',day:'2
 
 /* ---- KPI tiles ---- */
 function renderKpis(){
-  const d=DATA, gn=(d.netGainUnrealized||0)>=0;
-  const rz=(d.realizedAllTime||0)>=0;
+  const d=DATA;
+  // capital gains from the PP-exact FIFO engine (depot.xml), like PP -> Performance -> Calculation
+  const un=d.ppUnrealizedEur!=null?d.ppUnrealizedEur:d.netGainUnrealized;
+  const rl=d.ppRealizedEur!=null?d.ppRealizedEur:d.realizedAllTime;
+  const gn=(un||0)>=0, rz=(rl||0)>=0;
   const tiles=[
     {lab:'Portfolio Value', val:fmtUsd(d.totalValue), note:'USD · '+(d.holdings.length-1)+' positions · net cash '+fmtUsd(d.cashValue)+' (PP)'},
-    {lab:'Unrealized Gain', val:fmtUsd(d.netGainUnrealized), note:'current holdings · '+fmtPct(d.unrealizedReturn||0), cls:gn?'up':'down'},
-    {lab:'Realized Gain', val:fmtUsd(d.realizedAllTime), note:'booked from closed trades', cls:rz?'up':'down'},
+    {lab:'Unrealized Gain', val:fmtE(un), note:'current holdings · FIFO vs cost (PP)', cls:gn?'up':'down'},
+    {lab:'Realized Gain', val:fmtE(rl), note:'booked from sells since 2022 (PP)', cls:rz?'up':'down'},
     {lab:'Return YTD', val:fmtPct(d.ttwrorYtd||0), note:'since inception (2022) '+fmtPct(d.since2022!=null?d.since2022:(d.pp&&d.pp.ppReferenceTtwror)||0)+'<br>IRR '+(d.izf||0).toFixed(1)+'%', cls:(d.ttwrorYtd||0)>=0?'up':'down'},
   ];
   document.getElementById('kpis').innerHTML = tiles.map(t=>
@@ -351,12 +356,33 @@ function renderFeed(){
   }).join('');
 }
 
-/* ---- portfolio line chart (time-based x-axis with year/month labels) ---- */
+/* ---- portfolio net-worth chart (PP engine over depot.xml — NOT Parqet) ---- */
+function tfStartDate(k){
+  const s=DATA.chartPP||[]; if(!s.length) return '';
+  const last=s[s.length-1].d;
+  if(k==='ytd') return last.slice(0,4)+'-01-01';
+  const days={'1y':365,'6m':182,'3m':91,'1m':30}[k]||0;
+  return new Date(new Date(last).getTime()-days*86400000).toISOString().slice(0,10);
+}
+function chartSlice(){
+  const s=(DATA.chartPP||[]).filter(p=>p.v>0);
+  if(curTf==='max'||!s.length) return s;
+  const from=tfStartDate(curTf);
+  const i=s.findIndex(p=>p.d>=from);
+  return i<=0? s : s.slice(i-1);   // keep one base point so the period return starts at 0
+}
+function renderChartRet(pts){
+  const el=document.getElementById('chart-ret'); if(!el||pts.length<2) return;
+  const tw=((1+pts[pts.length-1].r)/(1+pts[0].r)-1)*100;
+  const lab=(TFS.find(t=>t.k===curTf)||{}).l||curTf;
+  el.innerHTML=`<span class="rl">TTWROR ${esc(lab)}</span> <span class="rv ${tw>=0?'up':'down'}">${fmtPct(tw)}</span>`;
+}
 function renderChart(){
   const svg=document.getElementById('chart'), tip=document.getElementById('tip');
   const box=svg.getBoundingClientRect(); const W=box.width||900, H=220;
   const pad={l:0,r:0,t:14,b:22};
-  const pts=(DATA.chartSeries||DATA.chartYtd).filter(p=>p.v>0);
+  const pts=chartSlice();
+  renderChartRet(pts);
   if(pts.length<2){svg.innerHTML='';return;}
   const T=d=>new Date(d).getTime();
   const t0=T(pts[0].d), t1=T(pts[pts.length-1].d), tspan=(t1-t0)||1;
@@ -654,14 +680,12 @@ async function refreshParqet(){
     {method:"POST",headers:{"Content-Type":"application/json"},
      body:JSON.stringify({portfolioIds:[DATA.portfolioId],timeframe:"max",currency:"USD"})});
   if(!r.ok) return;
-  const j=await r.json(); const P=j.performance||{};
+  const j=await r.json();
   const byId={}; (j.holdings||[]).forEach(h=>{ if(h.position&&h.position.currentValue>0) byId[h._id]=h; });
-  // portfolio-level (total is recomputed below: Parqet securities + PP cash + option)
-  if(P.unrealized){ DATA.netGainUnrealized=Math.round(P.unrealized.gainNet); DATA.unrealizedReturn=+P.unrealized.returnNet.toFixed(1); }
-  if(P.realized) DATA.realizedAllTime=Math.round(P.realized.gainNet);
-  // NOTE: return figures (ttwrorYtd / since2022 / izf) come from the PP-exact
-  // engine (pp_sync.py over depot.xml) and are NOT overwritten by Parqet
-  // anymore (Rafael 2026-07-11: "Parqet rechnet falsch").
+  // NOTE: ALL portfolio-level figures (returns, realized/unrealized gains) come from
+  // the PP-exact engine (pp_sync.py over depot.xml) and are NOT overwritten by
+  // Parqet anymore (Rafael 2026-07-11: "Parqet rechnet falsch"). Parqet is only
+  // used for live per-holding market values below.
   // per-holding from Parqet (cash + NVO option stay as built from Portfolio Performance)
   DATA.holdings.forEach(h=>{
     const pq=byId[h.pid]; if(!pq) return;
@@ -677,29 +701,15 @@ async function refreshParqet(){
   renderKpis(); renderAlloc(); renderPerfBars(); renderHoldings(); setBadge();
 }
 
-/* ---- chart timeframe selector (Parqet value curve + period TTWROR) ---- */
+/* ---- chart timeframe selector (PP net-worth series, sliced locally) ---- */
 const TFS=[{k:'max',l:'Since inception'},{k:'ytd',l:'YTD'},{k:'1y',l:'1Y'},{k:'6m',l:'6M'},{k:'3m',l:'3M'},{k:'1m',l:'1M'}];
 let curTf='max';
 function renderTfSel(){
   document.getElementById('tfsel').innerHTML=TFS.map(t=>
     `<button data-tf="${t.k}" class="${t.k===curTf?'on':''}">${t.l}</button>`).join('');
   document.querySelectorAll('#tfsel button').forEach(b=>b.addEventListener('click',()=>{
-    curTf=b.dataset.tf; renderTfSel(); refreshChart(curTf).catch(()=>{});
+    curTf=b.dataset.tf; renderTfSel(); renderChart();
   }));
-}
-async function refreshChart(tf){
-  const r=await fetch("https://api.parqet.com/v1/portfolios/assemble?useInclude=true&include=ttwror&include=performance_charts",
-    {method:"POST",headers:{"Content-Type":"application/json"},
-     body:JSON.stringify({portfolioIds:[DATA.portfolioId],timeframe:tf,currency:"USD"})});
-  if(!r.ok) return;
-  const j=await r.json();
-  const series=(j.charts||[]).map(c=>({d:c.date.slice(0,10), v:c.values&&c.values.history})).filter(p=>p.v>0);
-  if(series.length>1){ DATA.chartSeries=series; renderChart(); }
-  const tw=j.performance&&j.performance.ttwror;
-  const lab=(TFS.find(t=>t.k===tf)||{}).l||tf;
-  const el=document.getElementById('chart-ret');
-  if(el && tw!=null){ const up=tw>=0;
-    el.innerHTML=`<span class="rl">TTWROR ${esc(lab)}</span> <span class="rv ${up?'up':'down'}">${fmtPct(tw)}</span>`; }
 }
 
 function gdeltDate(s){ return (s&&s.length>=8)? s.slice(0,4)+'-'+s.slice(4,6)+'-'+s.slice(6,8):''; }
@@ -888,18 +898,32 @@ let _actItems=[], _actRawOffset=0, _actTotal=0;
 // cash lives in Portfolio Performance. Hide cash activities; show only real trades/dividends.
 function isCashAct(a){ return actTicker(a)==='Cash' || /cash/i.test(a.holdingAssetType||''); }
 const CCY_SYM={USD:"$",EUR:"€",CAD:"C$",GBP:"£"};
+function actIsin(a){ return a.isin||(a.asset&&a.asset.identifier)||''; }
+function actSec(a){ return DATA.secByIsin&&DATA.secByIsin[actIsin(a)]; }   // any security ever traded (depot.xml)
 function actTicker(a){
   const byPid=DATA.holdings.find(h=>h.pid===a.holding);
   if(byPid) return byPid.ticker;
   if(a.holdingAssetType && /cash/i.test(a.holdingAssetType)) return "Cash";
-  if(!a.isin && !a.asset && Math.abs((+a.price||1)-1)<1e-9) return "Cash";
+  if(!actIsin(a) && !a.asset && Math.abs((+a.price||1)-1)<1e-9) return "Cash";
+  const sec=actSec(a);
+  if(sec&&sec.tk) return sec.tk;
   if(a.asset&&(a.asset.ticker||a.asset.symbol)) return a.asset.ticker||a.asset.symbol;
   if(a.assetName) return a.assetName;
-  return a.isin||"—";
+  if(sec&&sec.name) return sec.name;
+  return actIsin(a)||"—";
 }
 function actName(a){
   const byPid=DATA.holdings.find(h=>h.pid===a.holding);
-  return (byPid&&byPid.name)||(a.asset&&a.asset.name)||"";
+  const sec=actSec(a);
+  return (byPid&&byPid.name)||(sec&&sec.name)||(a.asset&&a.asset.name)||"";
+}
+function actLogo(a,tk){
+  // Parqet logo CDN: by ISIN when we have it, else by symbol; hide on 404
+  const isin=actIsin(a)||(DATA.isinByTicker&&DATA.isinByTicker[tk])||'';
+  const src=isin? "https://assets.parqet.com/logos/isin/"+isin+"?format=png&size=64"
+    : (tk&&tk!=="Cash"&&tk!=="—"? "https://assets.parqet.com/logos/symbol/"+encodeURIComponent(tk)+"?format=png&size=64":"");
+  return src? `<img class="alogo" src="${esc(src)}" alt="" loading="lazy" onerror="this.style.visibility='hidden'">`
+            : `<span class="alogo"></span>`;
 }
 function actCls(t){
   if(t==="Buy")return "buy"; if(t==="Sell")return "sell";
@@ -919,6 +943,7 @@ function renderActivities(){
     return `<div class="act">
       <div class="ad">${dt}</div>
       <div class="atype ${actCls(a.type)}">${esc(a.type.replace(/([a-z])([A-Z])/g,'$1 $2').toUpperCase())}</div>
+      ${actLogo(a,tk)}
       <div class="amain"><div class="aname">${esc(tk)}${nm&&nm!==tk?' <span class="asub">'+esc(nm)+'</span>':''}</div>
         ${sub?`<div class="asub">${esc(sub)}</div>`:''}</div>
       <div class="aval tnum">${sign}${sym}${(+a.amount).toLocaleString('en-US',{maximumFractionDigits:2})}
@@ -959,14 +984,13 @@ async function loadMoreActivities(){
 
 function startLive(){
   // initial pulls + intervals; each guarded so one failure never breaks the page
-  refreshParqet().catch(()=>{}); refreshChart(curTf).catch(()=>{});
+  refreshParqet().catch(()=>{});
   refreshPrices().catch(()=>{}); refreshNews().catch(()=>{}); refreshSocial().catch(()=>{});
   refreshSEC().catch(()=>{});                                // SEC baseline, then watch
   refreshActivities().catch(()=>{});
   setInterval(()=>refreshActivities().catch(()=>{}), 180000); // activities every 3 min
   const amb=document.getElementById('actmore'); if(amb) amb.addEventListener('click',()=>loadMoreActivities());
   setInterval(()=>refreshParqet().catch(()=>{}), 120000);   // portfolio (Parqet) every 2 min
-  setInterval(()=>refreshChart(curTf).catch(()=>{}), 300000); // value curve refresh every 5 min
   setInterval(()=>refreshPrices().catch(()=>{}), 180000);   // intraday prices (Yahoo) every 3 min
   setInterval(()=>refreshSocial().catch(()=>{}), 90000);    // social sweep (Stocktwits) every 90s
   setInterval(()=>refreshSEC().catch(()=>{}), 90000);       // SEC EDGAR filing watch every 90s
