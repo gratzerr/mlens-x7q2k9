@@ -777,8 +777,9 @@ async function refreshSocial(){
    EDGAR within minutes of publication. We poll data.sec.gov via the jina proxy,
    detect new filings, and fire: a sticky BREAKING banner + a top-of-feed item +
    a desktop notification (works even when this tab is backgrounded). */
-const SEC_CIK={QURE:"0001590560",NKTR:"0000906709",WGS:"0001818331",CLPT:"0001285550",
-  TENX:"0000034956",DCTH:"0000872912",LXEO:"0001907108",CRBU:"0001619856",NRXS:"0001933567"};
+// CIK map is built dynamically by build.py from SEC's ticker directory, so any newly
+// bought US ticker is watched automatically (no manual list to maintain).
+const SEC_CIK=DATA.secCik||{};
 const SEC_FORMS={"8-K":"material event","6-K":"material event","424B5":"offering","424B3":"offering",
   "424B4":"offering","FWP":"offering","S-1":"registration","S-1/A":"registration",
   "SC 13D":"activist stake","SC 13D/A":"activist stake","SC 13G":"5%+ stake"};

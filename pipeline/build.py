@@ -60,6 +60,34 @@ if pp:
                     h["totalGainNet"] = round(h["value"] - nvo["shares"]*h["costPrice"])
     port["totalValue"] = sum(h["value"] for h in port["holdings"])
 
+# ---- SEC CIK auto-resolution (so a NEWLY bought US ticker auto-gets instant SEC alerts) ----
+def sec_cik_map(holdings):
+    import subprocess, time
+    f = os.path.join(ROOT, "sec_tickers.json")
+    stale = (not os.path.exists(f)) or (time.time() - os.path.getmtime(f) > 7*86400)
+    if stale:
+        try:
+            subprocess.run(["curl", "-s", "-m", "20", "-H",
+                "User-Agent: PortfolioCockpit rafael.gratzer@gmail.com",
+                "https://www.sec.gov/files/company_tickers.json", "-o", f], check=True)
+            json.load(open(f))  # validate
+        except Exception:
+            pass
+    try:
+        raw = json.load(open(f))
+    except Exception:
+        return {}
+    by_ticker = {v["ticker"].upper(): str(v["cik_str"]).zfill(10) for v in raw.values()}
+    out = {}
+    for h in holdings:
+        if h.get("assetType") not in ("cash", "option"):
+            cik = by_ticker.get((h["ticker"] or "").upper())
+            if cik:
+                out[h["ticker"]] = cik
+    return out
+
+sec_cik = sec_cik_map(port["holdings"])
+
 research = {}
 rdir = os.path.join(ROOT, "research")
 for fn in os.listdir(rdir):
@@ -140,6 +168,7 @@ data = {
     "catalysts": merged,
     "latestNews": all_news,
     "pp": pp,
+    "secCik": sec_cik,
 }
 
 DATA_JSON = json.dumps(data, ensure_ascii=True)
