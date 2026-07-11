@@ -203,8 +203,8 @@
    }
   },
   {
-   "ticker": "NVO $40C",
-   "name": "Novo Nordisk Jan-2027 $40 Call",
+   "ticker": "NVO",
+   "name": "Novo Nordisk — Jan-2027 $40 Call",
    "assetType": "option",
    "value": 114000,
    "shares": 10000,
@@ -212,8 +212,14 @@
    "costPrice": 8.26,
    "unrealizedReturn": 38.0,
    "totalGainNet": 31400,
-   "thesis": "Long call on Novo Nordisk (exp Jan 2027, strike $40)",
-   "links": {}
+   "thesis": "Long call on Novo Nordisk (exp Jan 2027, strike $40) — leveraged bet on the GLP-1 franchise re-rating",
+   "links": {
+    "ir": "https://www.novonordisk.com/investors.html",
+    "stocktwits": "https://stocktwits.com/symbol/NVO",
+    "x": "https://x.com/search?q=%24NVO&f=live",
+    "finviz": "https://finviz.com/quote.ashx?t=NVO"
+   },
+   "gquery": "Novo Nordisk"
   }
  ],
  "ttwrorYtd": 76.4

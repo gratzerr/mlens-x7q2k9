@@ -80,7 +80,7 @@ def sec_cik_map(holdings):
     by_ticker = {v["ticker"].upper(): str(v["cik_str"]).zfill(10) for v in raw.values()}
     out = {}
     for h in holdings:
-        if h.get("assetType") not in ("cash", "option"):
+        if h.get("assetType") != "cash":       # option too: watch the underlying's SEC filings
             cik = by_ticker.get((h["ticker"] or "").upper())
             if cik:
                 out[h["ticker"]] = cik
@@ -112,6 +112,7 @@ NEWS_QUERY = {
     "QURE": "uniQure", "WGS": "GeneDx", "CLPT": "ClearPoint Neuro",
     "NKTR": "Nektar Therapeutics", "DCTH": "Delcath", "NRXS": "Neuraxis",
     "PINK": "Perimeter Medical Imaging", "TENX": "Tenax Therapeutics",
+    "NVO": "Novo Nordisk",   # option on NVO — covered like the underlying stock
 }
 # Currency of the live Yahoo quote (PINK.V trades in CAD; all others USD)
 LIVE_CCY = {"PINK": "CAD"}

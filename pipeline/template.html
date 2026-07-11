@@ -11,7 +11,6 @@
     --down:#c62f2f; --down-bg:rgba(198,47,47,.10);
     --accent:#2a78d6;
     --chip:#eef0ee; --chip-ink:#3a3a37;
-    --s1:#5778a4;--s2:#e49444;--s3:#6a9f58;--s4:#d1615d;--s5:#85b6b2;--s6:#a87c9f;--s7:#e7ca60;--s8:#967662;--s9:#808b9a;--s10:#f1a2a9;--s11:#b8b06d;
     --confirmed:#0a7a24; --tentative:#a98600;
   }
   :root[data-theme="dark"]{ color-scheme:dark; }
@@ -23,7 +22,6 @@
     --down:#f0625f; --down-bg:rgba(240,98,95,.14);
     --accent:#3987e5;
     --chip:#262624; --chip-ink:#cfcec6;
-    --s1:#6d92c4;--s2:#f0a955;--s3:#7fb56b;--s4:#e07671;--s5:#93c7c2;--s6:#bd93b4;--s7:#edd377;--s8:#ab8a74;--s9:#95a1b1;--s10:#f7b3ba;--s11:#c9c17e;
     --confirmed:#37c24d; --tentative:#e0b23a;
   }}
   :root[data-theme="dark"]{
@@ -34,7 +32,6 @@
     --down:#f0625f; --down-bg:rgba(240,98,95,.14);
     --accent:#3987e5;
     --chip:#262624; --chip-ink:#cfcec6;
-    --s1:#6d92c4;--s2:#f0a955;--s3:#7fb56b;--s4:#e07671;--s5:#93c7c2;--s6:#bd93b4;--s7:#edd377;--s8:#ab8a74;--s9:#95a1b1;--s10:#f7b3ba;--s11:#c9c17e;
     --confirmed:#37c24d; --tentative:#e0b23a;
   }
   *{box-sizing:border-box}
@@ -305,9 +302,22 @@
 <script>
 const DATA = /*__DATA__*/;
 const liveState = {news:null, fx:1.37, lastPrice:null, lastNews:null};
-const SC = ['--s1','--s2','--s3','--s4','--s5','--s6','--s7','--s8','--s9','--s10','--s11'];
 const cvar = n => getComputedStyle(document.documentElement).getPropertyValue(n).trim();
-const colorFor = i => cvar(SC[i % SC.length]);
+/* monochrome steel-blue ramp, shaded by portfolio weight (largest = deepest) */
+function isDarkTheme(){
+  const t=document.documentElement.getAttribute('data-theme');
+  return t? t==='dark' : window.matchMedia('(prefers-color-scheme:dark)').matches;
+}
+function colorFor(i){
+  const hs=DATA.holdings.filter(h=>h.assetType!=='cash');
+  const order=[...hs].sort((a,b)=>b.value-a.value);
+  const h=DATA.holdings[i];
+  const rank=Math.max(0,order.findIndex(x=>x&&h&&x.ticker===h.ticker));
+  const n=Math.max(1,order.length-1);
+  const [l0,l1]=isDarkTheme()?[72,34]:[24,70];      // big -> deep, small -> pale
+  const L=l0+(l1-l0)*rank/n;
+  return `hsl(214 34% ${L.toFixed(0)}%)`;
+}
 const fmtUsd = n => (n<0?'-':'')+'$'+Math.abs(Math.round(n)).toLocaleString('en-US');
 const fmtEur = fmtUsd; // alias (values are USD from Parqet)
 const fmtE = n => (n<0?'-':'')+'€'+Math.abs(Math.round(n)).toLocaleString('en-US'); // real EUR (PP figures)
@@ -324,9 +334,9 @@ function renderKpis(){
   const rl=d.ppRealizedUsd!=null?d.ppRealizedUsd:d.realizedAllTime;
   const gn=(un||0)>=0, rz=(rl||0)>=0;
   const tiles=[
-    {lab:'Portfolio Value', val:fmtUsd(d.totalValue), note:'USD · '+(d.holdings.length-1)+' positions · net cash '+fmtUsd(d.cashValue)+' (PP)'},
-    {lab:'Unrealized Gain', val:fmtUsd(un), note:'current holdings · FIFO vs cost (PP)', cls:gn?'up':'down'},
-    {lab:'Realized Gain', val:fmtUsd(rl), note:'booked from sells since 2022 (PP)', cls:rz?'up':'down'},
+    {lab:'Portfolio Value', val:fmtUsd(d.totalValue), note:'USD · '+(d.holdings.length-1)+' positions · net cash '+fmtUsd(d.cashValue)},
+    {lab:'Unrealized Gain', val:fmtUsd(un), note:'current holdings · FIFO vs cost', cls:gn?'up':'down'},
+    {lab:'Realized Gain', val:fmtUsd(rl), note:'booked from sells since 2022', cls:rz?'up':'down'},
     {lab:'Return YTD', val:fmtPct(d.ttwrorYtd||0), note:'since inception (2022) '+fmtPct(d.since2022!=null?d.since2022:(d.pp&&d.pp.ppReferenceTtwror)||0)+'<br>IRR '+(d.izf||0).toFixed(1)+'%', cls:(d.ttwrorYtd||0)>=0?'up':'down'},
   ];
   document.getElementById('kpis').innerHTML = tiles.map(t=>
@@ -408,11 +418,21 @@ function renderChart(){
   const line=pts.map((p,i)=>`${i?'L':'M'}${X(p.d).toFixed(1)},${Y(p.v).toFixed(1)}`).join(' ');
   const area=line+` L${X(pts[pts.length-1].d).toFixed(1)},${H-pad.b} L${X(pts[0].d).toFixed(1)},${H-pad.b} Z`;
   const acc=cvar('--accent'), gc=cvar('--grid'), mc=cvar('--muted');
-  // y gridlines (value)
+  // y gridlines at NICE round steps ($250k / $500k / ...), compact labels ($1.5M)
   let grid='';
-  for(let k=0;k<=3;k++){const v=vmin+(vmax-vmin)*k/3; const y=Y(v).toFixed(1);
-    grid+=`<line x1="0" y1="${y}" x2="${W}" y2="${y}" stroke="${gc}" stroke-width="1"/>`+
-          `<text x="4" y="${(+y-4)}" fill="${mc}" font-size="10.5" font-family="system-ui">${fmtUsd(v)}</text>`;}
+  {
+    const span=(vmax-vmin)||1, raw=span/4;
+    const mag=Math.pow(10,Math.floor(Math.log10(raw)));
+    const step=[1,2,2.5,5,10].map(m=>m*mag).find(s=>span/s<=5)||5*mag;
+    const fmtTick=v=> v>=1e6? '$'+(v/1e6).toFixed(v%1e6?1:0).replace(/\.0$/,'')+'M'
+                    : v>=1e3? '$'+Math.round(v/1e3)+'k' : '$'+Math.round(v);
+    for(let v=Math.ceil(vmin/step)*step; v<=vmax+1e-9; v+=step){
+      const y=Y(v).toFixed(1);
+      if(+y<pad.t+8||+y>H-pad.b-2) continue;
+      grid+=`<line x1="0" y1="${y}" x2="${W}" y2="${y}" stroke="${gc}" stroke-width="1"/>`+
+            `<text x="4" y="${(+y-4)}" fill="${mc}" font-size="10.5" font-family="system-ui">${fmtTick(v)}</text>`;
+    }
+  }
   // x time axis: year ticks for long spans, month ticks for short
   let xlab='';
   const yb=H-pad.b, ybt=H-5;
@@ -571,12 +591,11 @@ function catKey(w){
 function renderTimeline(){
   const cats=[...DATA.catalysts].sort((a,b)=>catKey(a.when).localeCompare(catKey(b.when)));
   document.getElementById('timeline').innerHTML = cats.map(c=>{
-    const i=tIdx(c.ticker), col=colorFor(i);
     const cf=c.confirmed?cvar('--confirmed'):cvar('--tentative');
     return `<div class="tl-item">
       <div class="tl-when"><span class="cf" style="background:${cf}"></span>${esc(c.when)}</div>
       <div class="tl-body">
-        <div class="lb"><span class="tkr" style="background:${col}">${esc(c.ticker)}</span>${esc(c.label)}</div>
+        <div class="lb">${logoImg(tickerLogos(c.ticker),'nlogo')}<span class="tkr neutral">${esc(c.ticker)}</span> ${esc(c.label)}</div>
         <div class="dt">${esc(c.detail)}</div>
       </div></div>`;
   }).join('');
@@ -817,7 +836,7 @@ async function refreshSocial(){
   // to the front of the next sweep. Per-ticker cache -> feed always merged/fresh.
   if(_socialBusy) return; _socialBusy=true;
   try{
-    const secs=DATA.holdings.filter(h=>h.assetType!=='cash'&&h.assetType!=='option').map(h=>h.ticker);
+    const secs=DATA.holdings.filter(h=>h.assetType!=='cash').map(h=>h.ticker);   // option = underlying's Stocktwits
     const order=[..._socialRetry.filter(t=>secs.includes(t)), ...secs.filter(t=>!_socialRetry.includes(t))];
     _socialRetry=[];
     liveState.socialBy=liveState.socialBy||{};
