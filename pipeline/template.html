@@ -11,7 +11,7 @@
     --down:#c62f2f; --down-bg:rgba(198,47,47,.10);
     --accent:#2a78d6;
     --chip:#eef0ee; --chip-ink:#3a3a37;
-    --s1:#2a78d6;--s2:#1baf7a;--s3:#c98500;--s4:#008300;--s5:#4a3aa7;--s6:#d03b3b;--s7:#c85f88;--s8:#d1521f;
+    --s1:#5778a4;--s2:#e49444;--s3:#6a9f58;--s4:#d1615d;--s5:#85b6b2;--s6:#a87c9f;--s7:#e7ca60;--s8:#967662;--s9:#808b9a;--s10:#f1a2a9;--s11:#b8b06d;
     --confirmed:#0a7a24; --tentative:#a98600;
   }
   :root[data-theme="dark"]{ color-scheme:dark; }
@@ -23,7 +23,7 @@
     --down:#f0625f; --down-bg:rgba(240,98,95,.14);
     --accent:#3987e5;
     --chip:#262624; --chip-ink:#cfcec6;
-    --s1:#3987e5;--s2:#199e70;--s3:#e0a53a;--s4:#3fae3f;--s5:#9085e9;--s6:#e66767;--s7:#d55181;--s8:#e07a4d;
+    --s1:#6d92c4;--s2:#f0a955;--s3:#7fb56b;--s4:#e07671;--s5:#93c7c2;--s6:#bd93b4;--s7:#edd377;--s8:#ab8a74;--s9:#95a1b1;--s10:#f7b3ba;--s11:#c9c17e;
     --confirmed:#37c24d; --tentative:#e0b23a;
   }}
   :root[data-theme="dark"]{
@@ -34,7 +34,7 @@
     --down:#f0625f; --down-bg:rgba(240,98,95,.14);
     --accent:#3987e5;
     --chip:#262624; --chip-ink:#cfcec6;
-    --s1:#3987e5;--s2:#199e70;--s3:#e0a53a;--s4:#3fae3f;--s5:#9085e9;--s6:#e66767;--s7:#d55181;--s8:#e07a4d;
+    --s1:#6d92c4;--s2:#f0a955;--s3:#7fb56b;--s4:#e07671;--s5:#93c7c2;--s6:#bd93b4;--s7:#edd377;--s8:#ab8a74;--s9:#95a1b1;--s10:#f7b3ba;--s11:#c9c17e;
     --confirmed:#37c24d; --tentative:#e0b23a;
   }
   *{box-sizing:border-box}
@@ -111,14 +111,20 @@
   .feedmax::-webkit-scrollbar{width:6px}
   .feedmax::-webkit-scrollbar-thumb{background:var(--line);border-radius:3px}
 
-  /* allocation donut */
-  .donutwrap{display:flex;align-items:center;gap:18px;flex-wrap:wrap}
-  .donut{width:180px;height:180px;flex:none}
-  .legend{flex:1;min-width:140px;display:grid;grid-template-columns:1fr 1fr;gap:3px 14px}
-  .lg{display:flex;align-items:center;gap:7px;font-size:12.5px}
-  .lg .dot{width:9px;height:9px;border-radius:2px;flex:none}
-  .lg .lt{font-weight:600;color:var(--ink-2)}
-  .lg .lp{margin-left:auto;color:var(--muted);font-weight:600}
+  /* allocation donut (interactive) */
+  .donutwrap{display:flex;align-items:center;gap:24px;flex-wrap:wrap}
+  .donut{width:230px;height:230px;flex:none}
+  .donut path{transition:opacity .12s;cursor:pointer}
+  .donut.hashot path{opacity:.28}
+  .donut.hashot path.hot{opacity:1}
+  .legend2{flex:1;min-width:200px;display:flex;flex-direction:column}
+  .lg2{display:flex;align-items:center;gap:9px;padding:6px 7px;border-top:1px solid var(--grid);font-size:12.5px;border-radius:7px;cursor:default}
+  .lg2:first-child{border-top:0}
+  .lg2.hot{background:var(--surface-2)}
+  .lg2 .dot{width:8px;height:8px;border-radius:2px;flex:none}
+  .lg2 .lt{font-weight:650}
+  .lg2 .lv{margin-left:auto;color:var(--muted);font-variant-numeric:tabular-nums}
+  .lg2 .lp{width:52px;text-align:right;font-weight:650;font-variant-numeric:tabular-nums}
   /* performance by holding */
   .pf{display:flex;align-items:center;gap:10px;margin:7px 0}
   .pf .pft{width:48px;font-size:12.5px;font-weight:640;color:var(--ink-2)}
@@ -296,7 +302,7 @@
 <script>
 const DATA = /*__DATA__*/;
 const liveState = {news:null, fx:1.37, lastPrice:null, lastNews:null};
-const SC = ['--s1','--s2','--s3','--s4','--s5','--s6','--s7','--s8'];
+const SC = ['--s1','--s2','--s3','--s4','--s5','--s6','--s7','--s8','--s9','--s10','--s11'];
 const cvar = n => getComputedStyle(document.documentElement).getPropertyValue(n).trim();
 const colorFor = i => cvar(SC[i % SC.length]);
 const fmtUsd = n => (n<0?'-':'')+'$'+Math.abs(Math.round(n)).toLocaleString('en-US');
@@ -463,30 +469,49 @@ function sparkSvg(spark, up){
     <circle cx="${X(spark.length-1).toFixed(1)}" cy="${Y(spark[spark.length-1]).toFixed(1)}" r="2.6" fill="${col}"/></svg>`;
 }
 
-/* ---- allocation donut ---- */
+/* ---- allocation donut (interactive: hover slice/row -> details in the center) ---- */
 function renderAlloc(){
   const el=document.getElementById('allocdonut'); if(!el) return;
-  const hs=[...DATA.holdings].filter(h=>h.value>0).sort((a,b)=>b.value-a.value);
+  const hs=[...DATA.holdings].filter(h=>h.value>0).sort((a,b)=>b.value-a.value);   // sorted by weight, largest first
   const total=hs.reduce((s,h)=>s+h.value,0)||1;
-  const cx=90,cy=90,r=78,rin=50; let a0=-Math.PI/2, segs='';
+  const cx=115,cy=115,r=101,rin=66; let a0=-Math.PI/2, segs='';
   const colOf=h=>h.assetType==='cash'?cvar('--muted'):colorFor(tIdx(h.ticker));
-  hs.forEach(h=>{
+  hs.forEach((h,ai)=>{
     const frac=h.value/total, a1=a0+frac*2*Math.PI;
-    const gap=frac>0.008?0.018:0;                       // small surface gap between slices
+    const gap=frac>0.008?0.016:0;                       // small surface gap between slices
     const b0=a0+gap, b1=a1-gap;
     const x0=cx+r*Math.cos(b0), y0=cy+r*Math.sin(b0), x1=cx+r*Math.cos(b1), y1=cy+r*Math.sin(b1);
     const xi1=cx+rin*Math.cos(b1), yi1=cy+rin*Math.sin(b1), xi0=cx+rin*Math.cos(b0), yi0=cy+rin*Math.sin(b0);
     const laf=(b1-b0)>Math.PI?1:0;
-    segs+=`<path d="M${x0.toFixed(2)},${y0.toFixed(2)} A${r},${r} 0 ${laf} 1 ${x1.toFixed(2)},${y1.toFixed(2)} L${xi1.toFixed(2)},${yi1.toFixed(2)} A${rin},${rin} 0 ${laf} 0 ${xi0.toFixed(2)},${yi0.toFixed(2)} Z" fill="${colOf(h)}"/>`;
+    segs+=`<path data-ai="${ai}" d="M${x0.toFixed(2)},${y0.toFixed(2)} A${r},${r} 0 ${laf} 1 ${x1.toFixed(2)},${y1.toFixed(2)} L${xi1.toFixed(2)},${yi1.toFixed(2)} A${rin},${rin} 0 ${laf} 0 ${xi0.toFixed(2)},${yi0.toFixed(2)} Z" fill="${colOf(h)}"/>`;
     a0=a1;
   });
-  const legend=hs.map(h=>`<div class="lg"><span class="dot" style="background:${colOf(h)}"></span>
-    ${logoImg(h.logos,'llogo')}<span class="lt">${esc(h.ticker)}</span><span class="lp tnum">${(100*h.value/total).toFixed(1)}%</span></div>`).join('');
+  const legend=hs.map((h,ai)=>`<div class="lg2" data-ai="${ai}"><span class="dot" style="background:${colOf(h)}"></span>
+    ${logoImg(h.logos,'llogo')}<span class="lt">${esc(h.ticker)}</span>
+    <span class="lv">${fmtUsd(h.value)}</span><span class="lp">${(100*h.value/total).toFixed(1)}%</span></div>`).join('');
   el.innerHTML=`<div class="donutwrap">
-    <svg viewBox="0 0 180 180" class="donut">${segs}
-      <text x="90" y="86" text-anchor="middle" fill="${cvar('--ink')}" font-size="20" font-weight="700" font-family="system-ui">${fmtUsd(total).replace('$','$')}</text>
-      <text x="90" y="104" text-anchor="middle" fill="${cvar('--muted')}" font-size="11" font-family="system-ui">${hs.length} positions</text></svg>
-    <div class="legend">${legend}</div></div>`;
+    <svg viewBox="0 0 230 230" class="donut" id="donutsvg">${segs}
+      <text id="dc1" x="115" y="105" text-anchor="middle" fill="${cvar('--ink')}" font-size="21" font-weight="700" font-family="system-ui"></text>
+      <text id="dc2" x="115" y="126" text-anchor="middle" fill="${cvar('--muted')}" font-size="12" font-weight="600" font-family="system-ui"></text>
+      <text id="dc3" x="115" y="143" text-anchor="middle" fill="${cvar('--muted')}" font-size="11" font-family="system-ui"></text></svg>
+    <div class="legend2">${legend}</div></div>`;
+  const svg=el.querySelector('#donutsvg');
+  const c1=el.querySelector('#dc1'), c2=el.querySelector('#dc2'), c3=el.querySelector('#dc3');
+  const setCenter=ai=>{
+    if(ai===null){ c1.textContent=fmtUsd(total); c2.textContent=hs.filter(h=>h.assetType!=='cash').length+' positions'; c3.textContent=''; }
+    else { const h=hs[ai]; c1.textContent=fmtUsd(h.value); c2.textContent=h.ticker; c3.textContent=(100*h.value/total).toFixed(1)+'% of portfolio'; }
+  };
+  const mark=ai=>{
+    svg.classList.toggle('hashot',ai!==null);
+    svg.querySelectorAll('path').forEach(p=>p.classList.toggle('hot',p.dataset.ai===String(ai)));
+    el.querySelectorAll('.lg2').forEach(g=>g.classList.toggle('hot',g.dataset.ai===String(ai)));
+    setCenter(ai);
+  };
+  setCenter(null);
+  [...svg.querySelectorAll('path'),...el.querySelectorAll('.lg2')].forEach(n=>{
+    n.addEventListener('mouseenter',()=>mark(+n.dataset.ai));
+    n.addEventListener('mouseleave',()=>mark(null));
+  });
 }
 
 /* ---- performance by holding (return %, winners/losers) ---- */
