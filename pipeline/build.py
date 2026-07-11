@@ -117,6 +117,23 @@ NEWS_QUERY = {
 LIVE_CCY = {"PINK": "CAD"}
 
 # ---- company logos: candidate URL chain per holding (client falls through on 404) ----
+# FIRST choice: curated official logo from logos/<TICKER>.{png,jpg,svg} (scraped from the
+# company's own website / TradingView), embedded as a data URI so it works everywhere
+# (GitHub Pages AND the CSP-locked artifact). CDN chain only as fallback / for sold positions.
+import base64
+LOGO_DIR = os.path.join(ROOT, "logos")
+def local_logo(tk):
+    sym = tk.split()[0].upper().replace(".", "_")
+    for ext in ("png", "jpg", "jpeg", "svg", "webp"):
+        f = os.path.join(LOGO_DIR, f"{sym}.{ext}")
+        if os.path.exists(f) and os.path.getsize(f) > 200:
+            raw = open(f, "rb").read()
+            mime = ("image/png" if raw[:4] == b"\x89PNG" else
+                    "image/jpeg" if raw[:2] == b"\xff\xd8" else
+                    "image/svg+xml" if raw.lstrip()[:1] == b"<" else "image/png")
+            return f"data:{mime};base64,{base64.b64encode(raw).decode()}"
+    return None
+
 # Parqet CDN covers nearly everything; overrides for the few it misses (micro caps).
 LOGO_OVERRIDE = {
     "LXEO": ["https://www.lexeotx.com/wp-content/themes/lexeo/images/favicon.png"],
@@ -130,6 +147,9 @@ def logo_candidates(h):
     if h.get("assetType") == "cash":
         return []
     tk = h["ticker"]
+    loc = local_logo(tk)
+    if loc:
+        return [loc]                        # curated official logo — no fallback needed
     if tk in LOGO_OVERRIDE:
         return LOGO_OVERRIDE[tk]
     out = []
