@@ -3,12 +3,12 @@
  "currency": "USD",
  "source": "Parqet (live)",
  "portfolioId": "66e18c9426cf62020ccc7ee7",
- "totalValue": 2379073,
+ "totalValue": 2412962,
  "cashValue": 39000,
- "netGainUnrealized": 772404,
- "unrealizedReturn": 48.1,
- "izf": 97.8,
- "ttwror": 331.6,
+ "netGainUnrealized": 774092,
+ "unrealizedReturn": 48.4,
+ "izf": 97.9,
+ "ttwror": 332.2,
  "realizedAllTime": 1075764,
  "chartYtd": "__CHART_YTD__",
  "holdings": [
@@ -117,9 +117,9 @@
    "ticker": "DCTH",
    "name": "Delcath Systems",
    "assetType": "security",
-   "value": 208266,
-   "unrealizedReturn": 44.9,
-   "totalGainNet": 48191,
+   "value": 221282,
+   "unrealizedReturn": 41.4,
+   "totalGainNet": 48366,
    "thesis": "HEPZATO KIT (interventional oncology)",
    "ySym": "DCTH",
    "gquery": "Delcath",
@@ -171,9 +171,9 @@
    "ticker": "CRBU",
    "name": "Caribou Biosciences",
    "assetType": "security",
-   "value": 153600,
-   "unrealizedReturn": 2.3,
-   "totalGainNet": 3397,
+   "value": 172800,
+   "unrealizedReturn": 2.9,
+   "totalGainNet": 4910,
    "thesis": "CRISPR allogeneic cell therapy (CB-010)",
    "ySym": "CRBU",
    "gquery": "Caribou Biosciences",
@@ -222,5 +222,5 @@
    "gquery": "Novo Nordisk"
   }
  ],
- "ttwrorYtd": 76.4
+ "ttwrorYtd": 74.6
 }
