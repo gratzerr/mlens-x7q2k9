@@ -87,6 +87,8 @@
   .feed .fs{font-size:12.5px;color:var(--ink-2);margin-top:3px}
   .feed .fm{font-size:11.5px;color:var(--muted);margin-top:3px}
   .tkr{font-weight:700;font-size:11px;padding:1px 6px;border-radius:4px;color:#fff;vertical-align:middle}
+  .tkr.neutral{background:var(--chip);color:var(--chip-ink)}
+  .tkr.sec{background:var(--down);color:#fff}
   .social .si{display:block;padding:10px 2px;border-top:1px solid var(--grid)}
   .social .si:first-child{border-top:0}
   .social .sm{display:flex;align-items:center;gap:7px;margin-bottom:3px}
@@ -351,11 +353,10 @@ function renderFeed(){
   const source = [...(liveState.secNews||[]), ...(live ? liveState.news : DATA.latestNews)];
   const el=document.getElementById('feed'); el.classList.add('feedmax');
   el.innerHTML = source.map(n=>{
-    const i=tIdx(n.ticker), col=n._sec?cvar('--down'):(i>=0?colorFor(i):cvar('--muted'));
     const hd=n.url?`<a href="${esc(n.url)}" target="_blank" rel="noopener">${esc(n.headline)}</a>`:esc(n.headline);
     return `<div class="fi">
       <div class="fd">${n._sec?'<span style="color:var(--down)">SEC</span>':enDate(n.date)}</div>
-      <div><div class="ft">${logoImg(tickerLogos(n.ticker),'nlogo')}<span class="tkr" style="background:${col}">${esc(n.ticker)}</span> ${hd}</div>
+      <div><div class="ft">${logoImg(tickerLogos(n.ticker),'nlogo')}<span class="tkr ${n._sec?'sec':'neutral'}">${esc(n.ticker)}</span> ${hd}</div>
       ${n.summary?`<div class="fs">${esc(n.summary)}</div>`:''}
       <div class="fm">${esc(n.source)}</div></div></div>`;
   }).join('');
@@ -764,10 +765,9 @@ function renderSocial(){
   el.classList.add('feedmax');
   if(!items.length){ el.innerHTML=''; return; }
   el.innerHTML=items.map(m=>{
-    const i=tIdx(m.ticker), col=i>=0?colorFor(i):cvar('--muted');
     const sent=m.sentiment==='Bullish'?'<span class="sent bull">BULL</span>':m.sentiment==='Bearish'?'<span class="sent bear">BEAR</span>':'';
     return `<div class="si">
-      <div class="sm">${logoImg(tickerLogos(m.ticker),'nlogo')}<span class="tkr" style="background:${col}">${esc(m.ticker)}</span>
+      <div class="sm">${logoImg(tickerLogos(m.ticker),'nlogo')}<span class="tkr neutral">${esc(m.ticker)}</span>
         <span class="su">@${esc(m.user)}</span>${sent}<span class="stime">${relTime(m.time)}</span></div>
       <div class="sb">${esc(m.body)}</div></div>`;
   }).join('');
