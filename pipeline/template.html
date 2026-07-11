@@ -1,7 +1,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta name="robots" content="noindex, nofollow">
-<title>Portfolio Cockpit</title>
+<title>Rafael's Portfolio</title>
 <style>
   :root{
     --plane:#f4f5f2; --surface:#fcfcfb; --surface-2:#f7f7f4;
@@ -183,6 +183,20 @@
   .tfsel button{border:0;background:none;color:var(--ink-2);font-size:12px;font-weight:600;padding:5px 10px;border-radius:6px;cursor:pointer;font-family:inherit}
   .tfsel button.on{background:var(--surface);color:var(--ink);box-shadow:0 1px 2px rgba(0,0,0,.12)}
   .tfsel button:hover:not(.on){color:var(--ink)}
+  /* activities */
+  .act{display:grid;grid-template-columns:86px 78px 1fr auto;gap:10px;align-items:center;padding:9px 2px;border-top:1px solid var(--grid);font-size:13px}
+  .act:first-child{border-top:0}
+  .act .ad{color:var(--muted);font-size:11.5px;font-variant-numeric:tabular-nums;white-space:nowrap}
+  .atype{font-size:10.5px;font-weight:700;padding:2px 7px;border-radius:5px;text-align:center;letter-spacing:.3px}
+  .atype.buy{background:var(--up-bg);color:var(--up)}
+  .atype.sell{background:var(--down-bg);color:var(--down)}
+  .atype.div{background:rgba(42,120,214,.12);color:var(--accent)}
+  .atype.oth{background:var(--chip);color:var(--chip-ink)}
+  .act .amain{min-width:0}
+  .act .aname{font-weight:640}
+  .act .asub{font-size:11.5px;color:var(--muted)}
+  .act .aval{text-align:right;font-weight:640;white-space:nowrap}
+  .act .aval .fee{display:block;font-size:10.5px;color:var(--muted);font-weight:500}
   .breaking{position:sticky;top:8px;z-index:30;background:var(--down);color:#fff;padding:10px 14px;
     border-radius:11px;margin-bottom:14px;display:none;align-items:center;gap:9px;font-size:13.5px;font-weight:600;
     box-shadow:0 6px 22px rgba(198,47,47,.35)}
@@ -214,8 +228,8 @@
   <div class="breaking" id="breaking"></div>
   <header class="top">
     <div>
-      <div class="title"><span class="dot"></span>Portfolio Cockpit</div>
-      <div class="sub"><span id="livebadge" class="badge snap">Snapshot</span> As of <b id="asof"></b> · <span id="hcount"></span> positions · Prices: Yahoo · News: GDELT + research · Portfolio: Parqet</div>
+      <div class="title"><span class="dot"></span>Rafael's Portfolio</div>
+      <div class="sub"><span id="livebadge" class="badge snap">Snapshot</span> As of <b id="asof"></b> · <span id="hcount"></span> positions</div>
     </div>
     <div><button class="secbtn" id="secalertbtn" style="display:none">🔔 SEC alerts</button><button class="themebtn" id="themebtn">Theme</button></div>
   </header>
@@ -252,6 +266,14 @@
     <div class="panel">
       <h2>Performance by Holding</h2>
       <div id="perfbars"></div>
+    </div>
+  </div>
+
+  <div class="cols">
+    <div class="panel" style="grid-column:1 / -1">
+      <h2><span class="live"></span>Activities</h2>
+      <div class="feedmax" id="activities"></div>
+      <button class="morebtn" id="actmore" style="display:none">Load more</button>
     </div>
   </div>
 
@@ -724,7 +746,7 @@ function renderSocial(){
   const items=(liveState.social||[]).slice(0,24);
   const el=document.getElementById('social'); if(!el) return;
   el.classList.add('feedmax');
-  if(!items.length){ el.innerHTML='<div class="fm" style="padding:8px 2px;color:var(--muted)">Loading live Stocktwits…</div>'; return; }
+  if(!items.length){ el.innerHTML=''; return; }
   el.innerHTML=items.map(m=>{
     const i=tIdx(m.ticker), col=i>=0?colorFor(i):cvar('--muted');
     const sent=m.sentiment==='Bullish'?'<span class="sent bull">BULL</span>':m.sentiment==='Bearish'?'<span class="sent bear">BEAR</span>':'';
@@ -767,9 +789,23 @@ async function refreshSocial(){
       const all=Object.values(liveState.socialBy).flat();
       all.sort((a,b)=>new Date(b.time)-new Date(a.time));
       liveState.social=all.slice(0,40); liveState.lastSocial=new Date();
+      try{localStorage.setItem('pc-social',JSON.stringify(liveState.socialBy));}catch(e){}
       renderSocial(); setBadge();
     }
   } finally { _socialBusy=false; }
+}
+function loadSocialCache(){
+  // Instant-full feed on open: start from the baked-in snapshot (hourly job),
+  // overlay any newer localStorage cache, live sweep refreshes from there.
+  liveState.socialBy = Object.assign({}, DATA.social||{});
+  try{ const by=JSON.parse(localStorage.getItem('pc-social')||'null');
+    if(by) for(const [tk,msgs] of Object.entries(by)){
+      const cur=liveState.socialBy[tk];
+      if(!cur || (msgs[0]&&cur[0]&&new Date(msgs[0].time)>new Date(cur[0].time))) liveState.socialBy[tk]=msgs;
+    }
+  }catch(e){}
+  const all=Object.values(liveState.socialBy).flat();
+  if(all.length){ all.sort((a,b)=>new Date(b.time)-new Date(a.time)); liveState.social=all.slice(0,40); }
 }
 
 /* ===== SEC EDGAR live filing watcher — INSTANT IR alerts =====================
@@ -846,11 +882,82 @@ function initSecAlerts(){
   btn.onclick=()=>{ Notification.requestPermission().then(sync); };
 }
 
+/* ---- Activities (live from Parqet, like the Parqet app) ---- */
+let _actItems=[], _actOffset=0, _actTotal=0;
+const CCY_SYM={USD:"$",EUR:"€",CAD:"C$",GBP:"£"};
+function actTicker(a){
+  const byPid=DATA.holdings.find(h=>h.pid===a.holding);
+  if(byPid) return byPid.ticker;
+  if(a.holdingAssetType==="cash") return "Cash";
+  if(a.asset&&(a.asset.ticker||a.asset.symbol)) return a.asset.ticker||a.asset.symbol;
+  if(a.assetName) return a.assetName;
+  return a.isin||"—";
+}
+function actName(a){
+  const byPid=DATA.holdings.find(h=>h.pid===a.holding);
+  return (byPid&&byPid.name)||(a.asset&&a.asset.name)||"";
+}
+function actCls(t){
+  if(t==="Buy")return "buy"; if(t==="Sell")return "sell";
+  if(/Dividend|Interest/.test(t))return "div"; return "oth";
+}
+function renderActivities(){
+  const el=document.getElementById('activities'); if(!el)return;
+  el.innerHTML=_actItems.map(a=>{
+    const sym=CCY_SYM[a.currency]||(a.currency+" ");
+    const dt=new Date(a.datetime).toLocaleDateString('en-US',{month:'short',day:'2-digit',year:'2-digit'});
+    const tk=actTicker(a), nm=actName(a);
+    const isTrade=(a.type==="Buy"||a.type==="Sell")&&a.shares&&a.price;
+    const sub=isTrade? (Number(a.shares).toLocaleString('en-US')+" @ "+sym+(+a.price).toLocaleString('en-US',{maximumFractionDigits:4}))
+      : (a.shares&&a.price!==1? Number(a.shares).toLocaleString('en-US')+" units":"");
+    const fees=(a.fee?("fee "+sym+(+a.fee).toFixed(2)):"")+(a.tax?((a.fee?" · ":"")+"tax "+sym+(+a.tax).toFixed(2)):"");
+    const sign=a.type==="Buy"?"−":a.type==="Sell"||/Dividend|Interest/.test(a.type)?"+":"";
+    return `<div class="act">
+      <div class="ad">${dt}</div>
+      <div class="atype ${actCls(a.type)}">${esc(a.type.replace(/([a-z])([A-Z])/g,'$1 $2').toUpperCase())}</div>
+      <div class="amain"><div class="aname">${esc(tk)}${nm&&nm!==tk?' <span class="asub">'+esc(nm)+'</span>':''}</div>
+        ${sub?`<div class="asub">${esc(sub)}</div>`:''}</div>
+      <div class="aval tnum">${sign}${sym}${(+a.amount).toLocaleString('en-US',{maximumFractionDigits:2})}
+        ${fees?`<span class="fee">${esc(fees)}</span>`:''}</div>
+    </div>`;
+  }).join('');
+  const btn=document.getElementById('actmore');
+  if(btn){ btn.style.display=_actItems.length<_actTotal?'':'none';
+    btn.textContent='Load more ('+(_actTotal-_actItems.length).toLocaleString('en-US')+' older)'; }
+}
+async function fetchActivities(offset){
+  const r=await fetch("https://api.parqet.com/v1/activities?portfolioIds="+DATA.portfolioId+"&limit=50&offset="+offset);
+  if(!r.ok) throw new Error(r.status);
+  return await r.json();
+}
+async function refreshActivities(){
+  try{
+    const j=await fetchActivities(0);
+    _actTotal=j.totalCount||0;
+    const known=new Set(_actItems.map(a=>a._id));
+    const fresh=(j.activities||[]).filter(a=>!known.has(a._id));
+    // prepend fresh (new trades appear on top), keep already-loaded older pages
+    _actItems=[...(j.activities||[]), ..._actItems.filter(a=>!(j.activities||[]).some(x=>x._id===a._id))];
+    renderActivities();
+  }catch(e){}
+}
+async function loadMoreActivities(){
+  try{
+    const j=await fetchActivities(_actItems.length);
+    const known=new Set(_actItems.map(a=>a._id));
+    _actItems=[..._actItems, ...(j.activities||[]).filter(a=>!known.has(a._id))];
+    renderActivities();
+  }catch(e){}
+}
+
 function startLive(){
   // initial pulls + intervals; each guarded so one failure never breaks the page
   refreshParqet().catch(()=>{}); refreshChart(curTf).catch(()=>{});
   refreshPrices().catch(()=>{}); refreshNews().catch(()=>{}); refreshSocial().catch(()=>{});
   refreshSEC().catch(()=>{});                                // SEC baseline, then watch
+  refreshActivities().catch(()=>{});
+  setInterval(()=>refreshActivities().catch(()=>{}), 180000); // activities every 3 min
+  const amb=document.getElementById('actmore'); if(amb) amb.addEventListener('click',()=>loadMoreActivities());
   setInterval(()=>refreshParqet().catch(()=>{}), 120000);   // portfolio (Parqet) every 2 min
   setInterval(()=>refreshChart(curTf).catch(()=>{}), 300000); // value curve refresh every 5 min
   setInterval(()=>refreshPrices().catch(()=>{}), 180000);   // intraday prices (Yahoo) every 3 min
@@ -860,9 +967,9 @@ function startLive(){
 }
 
 document.getElementById('asof').textContent=new Date(DATA.asOf).toLocaleDateString('en-US',{month:'long',day:'numeric',year:'numeric'});
-document.getElementById('hcount').textContent=DATA.holdings.length;
+document.getElementById('hcount').textContent=DATA.holdings.filter(h=>h.assetType!=='cash').length;
 document.getElementById('foot').innerHTML='Snapshot built '+esc(DATA.generated)+
   ' · When hosted live, prices refresh every 3 min (Yahoo) and headlines every 15 min (GDELT), computed in your browser · Curated news &amp; catalysts refreshed twice daily · Not investment advice.<br>Green dot = confirmed date, amber dot = estimated.';
-renderKpis(); renderTfSel(); renderSocial(); rerender(); initTheme(); initSecAlerts(); startLive();
+loadSocialCache(); renderKpis(); renderTfSel(); renderSocial(); rerender(); initTheme(); initSecAlerts(); startLive();
 window.addEventListener('resize',()=>{clearTimeout(window._rz);window._rz=setTimeout(renderChart,150);});
 </script>

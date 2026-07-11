@@ -169,6 +169,8 @@ data = {
     "latestNews": all_news,
     "pp": pp,
     "secCik": sec_cik,
+    "social": (lambda: (json.load(open(os.path.join(ROOT, "social.json"), encoding="utf-8"))
+                        if os.path.exists(os.path.join(ROOT, "social.json")) else {}))(),
 }
 
 DATA_JSON = json.dumps(data, ensure_ascii=True)
