@@ -883,7 +883,10 @@ function initSecAlerts(){
 }
 
 /* ---- Activities (live from Parqet, like the Parqet app) ---- */
-let _actItems=[], _actOffset=0, _actTotal=0;
+let _actItems=[], _actRawOffset=0, _actTotal=0;
+// Cash transfers in Parqet are fictional (artifact of modeling the NVO option) — real
+// cash lives in Portfolio Performance. Hide cash activities; show only real trades/dividends.
+function isCashAct(a){ return actTicker(a)==='Cash' || /cash/i.test(a.holdingAssetType||''); }
 const CCY_SYM={USD:"$",EUR:"€",CAD:"C$",GBP:"£"};
 function actTicker(a){
   const byPid=DATA.holdings.find(h=>h.pid===a.holding);
@@ -923,8 +926,8 @@ function renderActivities(){
     </div>`;
   }).join('');
   const btn=document.getElementById('actmore');
-  if(btn){ btn.style.display=_actItems.length<_actTotal?'':'none';
-    btn.textContent='Load more ('+(_actTotal-_actItems.length).toLocaleString('en-US')+' older)'; }
+  if(btn){ btn.style.display=_actRawOffset<_actTotal?'':'none';
+    btn.textContent='Load more ('+Math.max(0,_actTotal-_actRawOffset).toLocaleString('en-US')+' older)'; }
 }
 async function fetchActivities(offset){
   const r=await fetch("https://api.parqet.com/v1/activities?portfolioIds="+DATA.portfolioId+"&limit=50&offset="+offset);
@@ -935,18 +938,21 @@ async function refreshActivities(){
   try{
     const j=await fetchActivities(0);
     _actTotal=j.totalCount||0;
+    const page=(j.activities||[]);
     const known=new Set(_actItems.map(a=>a._id));
-    const fresh=(j.activities||[]).filter(a=>!known.has(a._id));
-    // prepend fresh (new trades appear on top), keep already-loaded older pages
-    _actItems=[...(j.activities||[]), ..._actItems.filter(a=>!(j.activities||[]).some(x=>x._id===a._id))];
+    const fresh=page.filter(a=>!known.has(a._id)&&!isCashAct(a));  // new trades on top, cash hidden
+    if(fresh.length) _actItems=[...fresh, ..._actItems];
+    if(page.length>_actRawOffset) _actRawOffset=page.length;       // first page consumed
     renderActivities();
   }catch(e){}
 }
 async function loadMoreActivities(){
   try{
-    const j=await fetchActivities(_actItems.length);
+    const j=await fetchActivities(_actRawOffset);
+    const page=(j.activities||[]);
     const known=new Set(_actItems.map(a=>a._id));
-    _actItems=[..._actItems, ...(j.activities||[]).filter(a=>!known.has(a._id))];
+    _actItems=[..._actItems, ...page.filter(a=>!known.has(a._id)&&!isCashAct(a))];
+    _actRawOffset+=page.length;
     renderActivities();
   }catch(e){}
 }
