@@ -88,12 +88,25 @@ def sec_cik_map(holdings):
 
 sec_cik = sec_cik_map(port["holdings"])
 
+# class-action / law-firm noise is never wanted — not as news, not as "catalysts"
+import re
+JUNK_RE = re.compile(
+    r"class action|class-action|lead.plaintiff|shareholder (notice|alert|rights|deadline)|"
+    r"reminds (investors|shareholders)|claimsfiler|faruqi|rosen law|pomerantz|bragar|kaskela|"
+    r"levi\s*&|encourages investors|investigation (on behalf|of)|law offices|deadline alert|"
+    r"securities fraud|lawsuit", re.I)
+def _clean_research(r):
+    r["news"] = [n for n in r.get("news", []) if not JUNK_RE.search(n.get("headline", "") + " " + n.get("summary", ""))]
+    r["catalysts"] = [c for c in r.get("catalysts", [])
+                      if not JUNK_RE.search(c.get("label", "") + " " + c.get("detail", ""))]
+    return r
+
 research = {}
 rdir = os.path.join(ROOT, "research")
 for fn in os.listdir(rdir):
     if fn.endswith(".json"):
         r = json.load(open(os.path.join(rdir, fn), encoding="utf-8"))
-        research[r["ticker"]] = r
+        research[r["ticker"]] = _clean_research(r)
 
 # Live market data from Yahoo (fetched via browser). Map Yahoo symbol -> our ticker.
 YMAP = {"PINK.V": "PINK"}
