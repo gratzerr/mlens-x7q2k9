@@ -381,8 +381,10 @@ function renderKpis(){
   const un=d.ppUnrealizedUsd!=null?d.ppUnrealizedUsd:d.netGainUnrealized;
   const rl=d.ppRealizedUsd!=null?d.ppRealizedUsd:d.realizedAllTime;
   const gn=(un||0)>=0, rz=(rl||0)>=0;
+  const invested=d.holdings.filter(h=>h.assetType!=='cash').reduce((s,h)=>s+(h.ppBasisUsd||0),0);
   const tiles=[
-    {lab:'Portfolio Value', val:fmtUsd(d.totalValue), note:'USD · '+(d.holdings.length-1)+' positions · net cash '+fmtUsd(d.cashValue)},
+    {lab:'Portfolio Value', val:fmtUsd(d.totalValue),
+     note:'USD · '+(d.holdings.length-1)+' positions<br>invested capital '+fmtUsd(invested)+' · net cash '+fmtUsd(d.cashValue)},
     {lab:'Unrealized Gain', val:fmtUsd(un), note:'current holdings · FIFO vs cost', cls:gn?'up':'down'},
     {lab:'Realized Gain', val:fmtUsd(rl), note:'booked from sells since 2022', cls:rz?'up':'down'},
     {lab:'Return YTD', val:fmtPct(d.ttwrorYtd||0), note:'since inception (2022) '+fmtPct(d.since2022!=null?d.since2022:(d.pp&&d.pp.ppReferenceTtwror)||0)+'<br>IRR '+(d.izf||0).toFixed(1)+'%', cls:(d.ttwrorYtd||0)>=0?'up':'down'},
