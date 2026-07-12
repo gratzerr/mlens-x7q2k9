@@ -33,15 +33,23 @@ def main():
     old = {}
     try: old = json.load(open(OUT))
     except Exception: pass
-    res = {}
-    for sym in all_syms():
+    # MISSING_ONLY=1: fast path for the minute loop — only fetch symbols the
+    # owner just added that have no series yet (new benchmark lands within a minute)
+    missing_only = os.environ.get("MISSING_ONLY") == "1"
+    syms = all_syms()
+    if missing_only:
+        syms = [s for s in syms if len(old.get(s, [])) < 20]
+        if not syms:
+            return
+    res = dict(old) if missing_only else {}
+    for sym in syms:
         try:
             s = fetch(sym)
         except Exception as e:
             s = []
-        if len(s) > 200:
+        if len(s) > 20:  # >20 not >200: newly listed tickers have short histories
             res[sym] = s
-        elif sym in old and len(old[sym]) > 200:
+        elif sym in old and len(old[sym]) > 20:
             res[sym] = old[sym]; print(f"bench: {sym} fetch failed -> alte Serie behalten")
         else:
             print(f"bench: {sym} FAILED")

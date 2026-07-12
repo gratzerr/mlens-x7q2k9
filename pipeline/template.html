@@ -809,6 +809,12 @@ async function fsDataPoll(){
       DATA.holdings.forEach(h=>{ live[h.ticker]={lp:h.livePrice,dc:h.dayChange,hi:h.hi52,lo:h.lo52,sp:h.spark,pos:h.pos52}; });
       DATA=fresh;
       DATA.holdings.forEach(h=>{ const l=live[h.ticker]; if(l){ h.livePrice=l.lp; h.dayChange=l.dc; h.hi52=l.hi; h.lo52=l.lo; h.spark=l.sp; h.pos52=l.pos; } });
+      /* keep instant client-side benchmark previews until the cloud series arrives */
+      Object.entries(window._benchPreview||{}).forEach(([s,ser])=>{
+        DATA.bench=DATA.bench||{};
+        if(DATA.bench[s]&&DATA.bench[s].length>20) delete window._benchPreview[s];
+        else DATA.bench[s]=ser;
+      });
       Object.assign(_cfg,{name:c.name,public:c.public,owner:c.owner});
       renderKpis(); rerender(); applyName(); applyVisibility();
     }
@@ -1149,7 +1155,18 @@ function initTheme(){
     if(!localStorage.getItem('pc-theme')){ icon(); rerender(); }
   });
 }
-function rerender(){ renderFeed(); renderChart(); renderHoldingsTable(); renderAlloc(); renderPerfBars(); renderTimeline(); renderHoldings(); if(_tab==='performance') renderPerf(); }
+/* true while the user is mid-interaction on the performance tab (typing a date,
+   open widget/add popover) — a background re-render would destroy that UI */
+function pfBusy(){
+  const ae=document.activeElement;
+  if(ae&&/^(INPUT|SELECT|TEXTAREA)$/.test(ae.tagName)){
+    const sec=document.querySelector('[data-tab="performance"]');
+    if(sec&&sec.contains(ae)) return true;
+  }
+  if(document.getElementById('pfw-addpop')) return true;
+  return [...document.querySelectorAll('.pfw-pop')].some(p=>p.style.display&&p.style.display!=='none');
+}
+function rerender(){ renderFeed(); renderChart(); renderHoldingsTable(); renderAlloc(); renderPerfBars(); renderTimeline(); renderHoldings(); if(_tab==='performance'&&!pfBusy()) renderPerf(); }
 
 /* ===== LIVE DATA LAYER =====================================================
    Works on GitHub Pages (fetch allowed). Inside the Claude artifact the CSP
@@ -1564,7 +1581,11 @@ function boot(){
   document.getElementById('foot').innerHTML='Snapshot built '+esc(DATA.generated)+
     ' · When hosted live, prices refresh every 3 min (Yahoo) and headlines every 15 min (GDELT), computed in your browser · Curated news &amp; catalysts refreshed twice daily · Not investment advice.<br>Green dot = confirmed date, amber dot = estimated.';
   initTheme(); applyName(); initTabs(); pfInitToolbar(); loadConfig(); loadSocialCache(); renderKpis(); renderTfSel(); renderSocial(); rerender(); initSecAlerts(); initHtSettings(); initAppSettings(); startLive();
-  window.addEventListener('resize',()=>{clearTimeout(window._rz);window._rz=setTimeout(()=>{renderChart();hydrateSparks();if(_tab==='performance')renderPerf();},150);});
+  window._lastW=window.innerWidth;
+  window.addEventListener('resize',()=>{clearTimeout(window._rz);window._rz=setTimeout(()=>{
+    if(window.innerWidth===window._lastW) return; /* height-only = mobile keyboard, keep focused inputs alive */
+    window._lastW=window.innerWidth;
+    renderChart();hydrateSparks();if(_tab==='performance'&&!pfBusy())renderPerf();},150);});
 }
 
 /* ===================== TABS ===================== */
@@ -1603,7 +1624,7 @@ function benchMeta(){
   return m;
 }
 const PF_REL=[['all','All data'],['ytd','Year to date'],['1m','1 month'],['3m','3 months'],['6m','6 months'],['1y','1 year'],['2y','2 years'],['3y','3 years'],['5y','5 years']];
-const PF_SCHEMES=[['classic','Green / Red'],['traffic','Traffic light'],['blue','Blue / Orange'],['mono','Monochrome']];
+const PF_SCHEMES=[['traffic','Traffic light (PP)'],['classic','Green / Red'],['blue','Blue / Orange'],['mono','Monochrome']];
 
 /* ---- reporting periods (PP ReportingPeriod equivalents) ---- */
 function normP(p){
@@ -1700,14 +1721,19 @@ function pfMetrics(p){
     lastR:(1+pts[li].r)/(1+pts[li-1].r)-1, lastAbs:val(pts[li])-val(pts[li-1]), lastD:pts[li].d};
 }
 function heatColor(scheme,v){
-  const x=Math.max(-15,Math.min(15,v)), dark=isDarkTheme();
-  if(scheme==='traffic'){
-    const h=v>=0?Math.min(120,90+v*4):Math.max(0,60+v*6);
-    return `hsl(${h} 70% ${dark?30:62}%)`;
+  const dark=isDarkTheme();
+  /* nonlinear ramp: typical monthly moves (±2–3%) must already differ visibly */
+  const m=Math.sign(v)*Math.sqrt(Math.min(Math.abs(v),15)/15), a=Math.abs(m);
+  if(scheme==='traffic'){ /* PP-style continuum: deep red → orange → yellow → green */
+    const h=60+m*60, s=62+a*26, l=dark?44-a*10:72-a*22;
+    return `hsl(${h} ${s}% ${l}%)`;
   }
-  if(scheme==='blue') return v>=0?`hsl(214 60% ${dark?28+(15-x)*1.5:90-x*2.6}%)`:`hsl(28 80% ${dark?26+(15+x)*1.2:90+x*2.4}%)`;
-  if(scheme==='mono') return `hsl(214 10% ${dark?20+(x+15)*1.2:95-(x+15)*1.4}%)`;
-  return v>=0?`hsl(145 65% ${dark?22+(15-x)*1.4:88-x*2.4}%)`:`hsl(0 70% ${dark?24+(15+x)*1.2:88+x*2.2}%)`;
+  if(scheme==='blue') return v>=0?`hsl(${218-a*10} ${45+a*40}% ${dark?26+(1-a)*14:92-a*30}%)`
+                                 :`hsl(${35-a*10} ${55+a*35}% ${dark?24+(1-a)*13:92-a*26}%)`;
+  if(scheme==='mono') return `hsl(215 8% ${dark?18+(m+1)*13:96-(m+1)*17}%)`;
+  /* classic green/red with hue+saturation ramp instead of flat site colors */
+  return v>=0?`hsl(${150+a*12} ${40+a*38}% ${dark?22+(1-a)*14:93-a*32}%)`
+             :`hsl(${8-a*8} ${50+a*32}% ${dark?22+(1-a)*13:93-a*28}%)`;
 }
 /* ---- widget catalog ---- */
 const money=(u,e)=>_priv?MASK:(_ccy==='EUR'&&e!=null?fmtE(e):fmtUsd(u));
@@ -1797,15 +1823,22 @@ const PF_WIDGETS={
         <span style="margin-left:auto" class="tnum ${up?'up':'down'}">${fmtUsd(h.totalGainNet)}</span>
         <span class="tnum ${up?'up':'down'}" style="width:64px;text-align:right">${fmtPct(h.unrealizedReturn||0)}</span></div>`;}).join('');}}
 };
+/* canonical layout order — new widgets are inserted at their logical place */
+const PF_ORDER=['chart','ttwror','ttwror_ann','irr','lastday','abs','delta','invested',
+  'earnings','fees','taxes','total','maxdd','curdd','dddur','vola','semivola','sharpe',
+  'calc','years','heat','contrib','ddchart'];
 const PF_DEFAULT=[{t:'chart',p:'all',bench:['SPY']},
   {t:'ttwror',p:'all'},{t:'ttwror_ann',p:'all'},{t:'irr'},{t:'lastday'},
   {t:'abs',p:'all'},{t:'delta',p:'all'},{t:'invested'},{t:'total',p:'all'},
   {t:'maxdd',p:'all'},{t:'dddur',p:'all'},{t:'vola',p:'all'},{t:'semivola',p:'all'},
-  {t:'calc'},{t:'years',bench:['SPY'],scheme:'classic'},
-  {t:'heat',p:'all',scheme:'classic'},{t:'ddchart',p:'all'}];
+  {t:'calc'},{t:'years',bench:['SPY'],scheme:'traffic'},
+  {t:'heat',p:'all',scheme:'traffic'},{t:'ddchart',p:'all'}];
 let PF_P=(()=>{try{const p=JSON.parse(localStorage.getItem('pc-pfperiod')||'null');return p&&p.k?p:{k:'rel',v:'all'};}catch(e){return {k:'rel',v:'all'};}})();
 function renderPeriodBar(){
   const bar=document.getElementById('pf-period'); if(!bar) return;
+  /* never rebuild while the user is typing in the bar — the minute poll and
+     mobile-keyboard resize would destroy the focused date field mid-entry */
+  if(bar.contains(document.activeElement)&&document.activeElement!==bar) return;
   const p=normP(PF_P);
   const yearsAvail=[...new Set((DATA.chartPP||[]).map(x=>x.d.slice(0,4)))];
   bar.innerHTML=`<span style="font-size:11px;text-transform:uppercase;letter-spacing:.6px;color:var(--muted);font-weight:660">Reporting period</span>
@@ -1823,9 +1856,10 @@ function renderPeriodBar(){
     if(v.startsWith('rel:')) PF_P={k:'rel',v:v.slice(4)};
     else if(v.startsWith('year:')) PF_P={k:'year',y:+v.slice(5)};
     else if(v==='since'){ from.style.display='inline-block'; to.style.display='none';
-      if(!from.value) return; PF_P={k:'since',from:from.value}; }
+      if(!from.value){ from.focus(); return; } PF_P={k:'since',from:from.value}; }
     else if(v==='range'){ from.style.display='inline-block'; to.style.display='inline-block';
-      if(!from.value||!to.value) return; PF_P={k:'range',from:from.value,to:to.value}; }
+      if(!from.value){ from.focus(); return; }
+      if(!to.value){ to.focus(); return; } PF_P={k:'range',from:from.value,to:to.value}; }
     try{localStorage.setItem('pc-pfperiod',JSON.stringify(PF_P));}catch(e){}
     renderPerf();
   };
@@ -1836,7 +1870,24 @@ function renderPeriodBar(){
 let pfW=(()=>{try{const w=JSON.parse(localStorage.getItem('pc-pfw')||'null');
   return Array.isArray(w)&&w.length?w.filter(x=>PF_WIDGETS[x.t]):JSON.parse(JSON.stringify(PF_DEFAULT));}
   catch(e){return JSON.parse(JSON.stringify(PF_DEFAULT));}})();
+/* one-time: saved layouts predate the nuanced palettes — move them to the new default once */
+try{if(!localStorage.getItem('pc-schemev2')){
+  pfW.forEach(w=>{if(w.scheme==='classic')w.scheme='traffic';});
+  localStorage.setItem('pc-schemev2','1');localStorage.setItem('pc-pfw',JSON.stringify(pfW));}}catch(e){}
 const pfSave=()=>{try{localStorage.setItem('pc-pfw',JSON.stringify(pfW));}catch(e){}};
+/* instant benchmark series fetched in the browser (CORS proxy → Yahoo chart API);
+   the cloud series (yfinance, adjusted closes) replaces it within ~1 minute */
+async function fetchBenchNow(sym){
+  const y=`https://query1.finance.yahoo.com/v8/finance/chart/${encodeURIComponent(sym)}?range=5y&interval=1d&events=div%2Csplit&includeAdjustedClose=true`;
+  const r=await fetch('https://corsproxy.io/?url='+encodeURIComponent(y));
+  const q=(await r.json()).chart.result[0];
+  const ts=q.timestamp||[], cl=(q.indicators.adjclose&&q.indicators.adjclose[0].adjclose)||q.indicators.quote[0].close;
+  const out=[];
+  for(let i=0;i<ts.length;i++){ const c=cl[i];
+    if(c!=null){ const d=new Date(ts[i]*1000).toISOString().slice(0,10); if(d>='2021-12-30') out.push([d,+c.toFixed(4)]); } }
+  if(out.length<20) throw new Error('no data');
+  return out;
+}
 /* owner: persist the custom benchmark list for everyone (cloud fetches it) */
 async function saveBenchList(list){
   if(!_user) return false;
@@ -1957,8 +2008,17 @@ function renderPerf(){
         if(!isOwner()){ msg.textContent='sign in as owner first'; msg.style.color='var(--down)'; return; }
         const list=[...new Set([...(_cfg.benchmarks||[]),sym])];
         msg.textContent='saving…';
-        if(await saveBenchList(list)){ msg.textContent='✓ added — data live in a few minutes'; msg.style.color='var(--up)';
-          w.bench=[...new Set([...(w.bench||[]),sym])]; pfSave(); }
+        if(await saveBenchList(list)){
+          w.bench=[...new Set([...(w.bench||[]),sym])]; pfSave();
+          msg.textContent='✓ added — loading data…'; msg.style.color='var(--up)';
+          try{ /* instant: fetch the series client-side and draw it right away */
+            const ser=await fetchBenchNow(sym);
+            DATA.bench=DATA.bench||{};
+            if(!DATA.bench[sym]||DATA.bench[sym].length<20){
+              DATA.bench[sym]=ser; (window._benchPreview=window._benchPreview||{})[sym]=ser; }
+            renderPerf();
+          }catch(err){ msg.textContent='✓ added — data live within a minute'; }
+        }
         else { msg.textContent='save failed'; msg.style.color='var(--down)'; }
       });
     });
@@ -1983,10 +2043,15 @@ function pfInitToolbar(){
       const t=x.dataset.add, def=PF_WIDGETS[t];
       const w={t}; if(def.opts.includes('p')) w.p={k:'rel',v:'all'};
       if(def.opts.includes('bench')) w.bench=['SPY'];
-      if(def.opts.includes('scheme')) w.scheme='classic';
-      pfW.push(w); pfSave(); pop.remove(); renderPerf();
-      const cards=document.querySelectorAll('#pf-grid .pfw');
-      if(cards.length) cards[cards.length-1].scrollIntoView({behavior:'smooth',block:'center'});
+      if(def.opts.includes('scheme')) w.scheme='traffic';
+      /* insert where it logically belongs (canonical layout order), not at the end */
+      const rank=s=>{const r=PF_ORDER.indexOf(s);return r<0?PF_ORDER.length:r;};
+      let at=0; pfW.forEach((e,i)=>{ if(rank(e.t)<=rank(t)) at=i+1; });
+      pfW.splice(at,0,w); pfSave(); pop.remove(); renderPerf();
+      const card=document.querySelector(`#pf-grid .pfw[data-wi="${at}"]`);
+      if(card){ card.scrollIntoView({behavior:'smooth',block:'center'});
+        card.style.transition='box-shadow .4s'; card.style.boxShadow='0 0 0 3px var(--accent)';
+        setTimeout(()=>{card.style.boxShadow='';},1400); }
     }));
   });
   document.getElementById('pfw-reset').addEventListener('click',()=>{

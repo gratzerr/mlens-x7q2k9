@@ -38,8 +38,12 @@ jobs:
         run: |
           for i in $(seq 1 22); do
             t0=$(date +%s)
+            # pick up template/script pushes mid-job (otherwise a running job keeps
+            # building with its old checkout for up to 22 minutes)
+            git -C .. fetch -q origin && git -C .. checkout -q origin/main -- pipeline/ .github/ || true
             python drive_fetch.py /tmp/depot.xml || true
             python firestore_sync.py pull || true
+            MISSING_ONLY=1 python bench_fetch.py || true
             python pp_sync.py >/dev/null 2>&1 || true
             if [ $((i % 5)) -eq 1 ]; then python social_sync.py || true; fi
             if [ $((i % 2)) -eq 1 ]; then python ir_sweep.py || true; fi
