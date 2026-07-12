@@ -1,0 +1,475 @@
+#!/usr/bin/env python3
+"""PP-exact performance engine over Portfolio Performance's depot.xml.
+
+Replicates Portfolio Performance's own calculations (verified 2026-07-11 against
+the PP app to the cent / heatmap decimal):
+  - daily-chained TTWROR since 2022-01-01 (ClientIndex formula:
+      delta = (V_t + outbound_t) / (V_{t-1} + inbound_t) - 1, calendar-daily)
+  - yearly TTWROR slices (heatmap) + YTD + annualized
+  - IZF (money-weighted XIRR, act/365, ClientIRRYield flow set)
+  - per-account cash balances (fully computed - no anchor constants)
+  - exact holdings + EUR values
+
+Scope: UNFILTERED entire portfolio (all accounts + portfolios). Verified: this
+is what Rafael's PP dashboard widgets show. The legacy SC EUR account nets to
+0.00 and SQ NOK to 0 since Feb 2023, so today's values equal the IBKR+SQ
+filter; only 2022/23 history differs (and matches the app this way:
+2022 3.3%, 2023 11.8%).
+
+Verification snapshot (2026-07-11, file quotes Jul 9/10):
+  initial 2022-01-01 EUR 2,278.48 (app 2,278.51) | neutral transfers 666,772.19
+  (app 666,771.93) | earnings/taxes to the cent | with the app's intraday final
+  value the engine returns exactly TTWROR 434.25% / YTD 112.1% / IZF 76.01%.
+
+XStream parsing rules (hard-won, do not simplify):
+  - txs appear under SIX tags: portfolio-transaction/portfolioTransaction,
+    account-transaction/accountTransaction, transactionFrom/transactionTo
+    (transfer legs embedded in crossEntries). Dedup by <uuid>.
+  - references are relative paths ("../..", "tag[N]" 1-indexed); resolve via
+    parent map, follow chains.
+  - owner: parent <transactions> under an account/portfolio def, or crossEntry
+    sibling (account/portfolio/accountFrom/accountTo/portfolioFrom/portfolioTo).
+  - untyped legs: buysell -> mirror of portfolioTransaction type;
+    transfers -> transactionFrom=TRANSFER_OUT / transactionTo=TRANSFER_IN.
+  - units: shares x1e8, amounts in cents, prices x1e8. GBX = GBP pence (/100).
+  - security price lookup = PP Security.getSecurityPrice (latest-quote rules,
+    first-price fallback before history).
+
+Run before build.py. Refreshes fx_daily.json (ECB via frankfurter, multi-ccy).
+"""
+import xml.etree.ElementTree as ET, re, bisect, json, os, subprocess, datetime, sys
+from collections import defaultdict
+
+ROOT=os.path.dirname(os.path.abspath(__file__))
+FXFILE=os.path.join(ROOT,"fx_daily.json")
+START="2022-01-01"
+FX_SYMBOLS="USD,CAD,GBP,DKK,JPY,NOK,CHF,SEK"
+
+def find_depot():
+    """Locate the live depot.xml robustly (survives moves/renames of the folder).
+    Cloud runners (GitHub Actions) set DEPOT_XML to a freshly downloaded copy.
+    Candidates: any depot.xml >5MB, not a backup, under CloudStorage/Desktop/Documents.
+    Pick the most recently modified one that parses and contains the QURE ISIN."""
+    import glob
+    envp=os.environ.get("DEPOT_XML")
+    if envp and os.path.exists(envp) and os.path.getsize(envp)>1_000_000:
+        return envp
+    known=[
+        "/Users/rafaelgratzer/Library/CloudStorage/GoogleDrive-rafael.gratzer@gmail.com/My Drive/JSRG/2 Finances/2 Portfolio Performance/depot.xml",
+        "/Users/rafaelgratzer/Desktop/depot.xml",
+    ]
+    hits=[f for f in known if os.path.exists(f) and os.path.getsize(f)>5_000_000]
+    if hits:
+        best=max(hits,key=os.path.getmtime)
+        with open(best,encoding="utf-8",errors="replace") as fh:
+            if "NL0010696654" in fh.read(): return best
+    pats=[
+        "/Users/rafaelgratzer/Library/CloudStorage/*/My Drive/**/depot.xml",
+        "/Users/rafaelgratzer/Library/CloudStorage/*/Meine Ablage/**/depot.xml",
+        "/Users/rafaelgratzer/Desktop/**/depot.xml",
+        "/Users/rafaelgratzer/Documents/**/depot.xml",
+    ]
+    cands=[]
+    for p in pats:
+        for f in glob.glob(p, recursive=True):
+            b=os.path.basename(f).lower()
+            if "backup" in b or "alt" in b: continue
+            try:
+                if os.path.getsize(f)<5_000_000: continue
+                cands.append((os.path.getmtime(f), f))
+            except OSError: continue
+    for _,f in sorted(cands, reverse=True):
+        try:
+            head=open(f,encoding="utf-8",errors="replace").read(200)
+            if "<client>" in head:
+                with open(f,encoding="utf-8",errors="replace") as fh:
+                    if "NL0010696654" in fh.read():
+                        return f
+        except OSError: continue
+    raise SystemExit("depot.xml not found in any known location")
+
+DEPOT=find_depot()
+print("using depot:",DEPOT)
+
+# ---------------- FX (ECB daily, EUR base, multi-currency) ----------------
+def refresh_fx():
+    need=True
+    if os.path.exists(FXFILE):
+        try:
+            sample=json.load(open(FXFILE))["rates"]
+            latest=sample[sorted(sample)[-1]]
+            age=(datetime.datetime.now()-datetime.datetime.fromtimestamp(os.path.getmtime(FXFILE))).days
+            need=age>=1 or "CAD" not in latest   # daily refresh; force once for multi-ccy upgrade
+        except Exception:
+            need=True
+    if need:
+        end=datetime.date.today().isoformat()
+        try:
+            tmp=FXFILE+".tmp"
+            subprocess.run(["curl","-s","-m","30","-H","User-Agent: Mozilla/5.0",
+                f"https://api.frankfurter.dev/v1/2021-10-01..{end}?base=EUR&symbols={FX_SYMBOLS}",
+                "-o",tmp],check=True)
+            json.load(open(tmp))["rates"]   # validate before replacing
+            os.replace(tmp,FXFILE)
+        except Exception:
+            pass  # keep old file
+refresh_fx()
+FXD=json.load(open(FXFILE))["rates"]
+fx_dates=sorted(FXD)
+def fx_rate(ccy,d):
+    i=bisect.bisect_right(fx_dates,d)-1
+    if i<0: i=0
+    return FXD[fx_dates[i]].get(ccy) or 1.0
+def to_eur(amount,ccy,d):
+    if ccy=="EUR": return amount
+    if ccy=="GBX": return amount/100.0/fx_rate("GBP",d)
+    return amount/fx_rate(ccy,d)
+def to_usd(amount,ccy,d):
+    return to_eur(amount,ccy,d)*fx_rate("USD",d)
+
+# ---------------- parse + canonical extraction ----------------
+tree=ET.parse(DEPOT); root=tree.getroot()
+parent={c:p for p in root.iter() for c in p}
+STEP=re.compile(r'([\w\-\.]+)(?:\[(\d+)\])?$')
+def _resolve(el,ref):
+    cur=el
+    for part in ref.split('/'):
+        if part=='..': cur=parent.get(cur)
+        elif part:
+            m=STEP.match(part)
+            if not m: return None
+            kids=[k for k in cur if k.tag==m.group(1)]
+            i=int(m.group(2) or 1)
+            if len(kids)<i: return None
+            cur=kids[i-1]
+        if cur is None: return None
+    return cur
+def deref(el):
+    n=0
+    while el is not None and el.get("reference") and n<10:
+        el=_resolve(el,el.get("reference")); n+=1
+    return el
+
+secs=root.find("securities").findall("security")
+sec_index={id(s):i for i,s in enumerate(secs)}
+SEC=[{"name":s.findtext("name"),"tk":s.findtext("tickerSymbol"),
+      "isin":s.findtext("isin"),"ccy":s.findtext("currencyCode") or "EUR"} for s in secs]
+PRICES=[];LATEST=[]
+for s in secs:
+    pr=sorted((p.get("t"),int(p.get("v"))) for p in s.findall("prices/price"))
+    PRICES.append(([d for d,_ in pr],[v for _,v in pr]))
+    la=s.find("latest")
+    LATEST.append((la.get("t"),int(la.get("v"))) if (la is not None and la.get("v")) else None)
+def sec_price(i,d):
+    """PP Security.getSecurityPrice: prefer historic; latest only if newest."""
+    ds,vs=PRICES[i]; la=LATEST[i]
+    last=ds[-1] if ds else None
+    if la is not None and (last is None or (d>=la[0] and la[0]>=last)):
+        return la[1]/1e8
+    if last is None: return 0.0
+    if last<=d: return vs[-1]/1e8
+    k=bisect.bisect_right(ds,d)-1
+    if k<0: k=0
+    return vs[k]/1e8
+
+ACC_TAGS={"account","accountFrom","accountTo","referenceAccount"}
+PORT_TAGS={"portfolio","portfolioFrom","portfolioTo"}
+accounts={};portfolios={};el2acc={};el2port={}
+for el in root.iter():
+    if el.get("reference"): continue
+    u=el.findtext("uuid")
+    if not u: continue
+    if el.tag in ACC_TAGS and el.find("currencyCode") is not None:
+        accounts.setdefault(u,{"name":el.findtext("name"),"ccy":el.findtext("currencyCode")})
+        el2acc[id(el)]=u
+    elif el.tag in PORT_TAGS and el.find("referenceAccount") is not None:
+        portfolios.setdefault(u,{"name":el.findtext("name")})
+        el2port[id(el)]=u
+def owner_uuid(el):
+    if el is None: return None
+    el=deref(el)
+    return el.findtext("uuid") if el is not None else None
+
+TX_TAGS={"account-transaction","accountTransaction","portfolio-transaction",
+         "portfolioTransaction","transactionFrom","transactionTo"}
+txs={}
+for el in root.iter():
+    if el.tag not in TX_TAGS or el.get("reference"): continue
+    u=el.findtext("uuid")
+    if not u or u in txs: continue
+    par=parent.get(el)
+    kind=None;owner=None;ce=None;legrole=None
+    if par is not None and par.tag=="transactions":
+        gp=parent.get(par)
+        if id(gp) in el2acc: kind="acc";owner=el2acc[id(gp)]
+        elif id(gp) in el2port: kind="port";owner=el2port[id(gp)]
+    elif par is not None and par.tag=="crossEntry":
+        ce=par;cls=par.get("class")
+        if el.tag=="accountTransaction": kind="acc";owner=owner_uuid(par.find("account"))
+        elif el.tag=="portfolioTransaction": kind="port";owner=owner_uuid(par.find("portfolio"))
+        elif el.tag=="transactionFrom":
+            legrole="from"
+            kind="acc" if cls=="account-transfer" else "port"
+            owner=owner_uuid(par.find("accountFrom" if kind=="acc" else "portfolioFrom"))
+        elif el.tag=="transactionTo":
+            legrole="to"
+            kind="acc" if cls=="account-transfer" else "port"
+            owner=owner_uuid(par.find("accountTo" if kind=="acc" else "portfolioTo"))
+    if ce is None:
+        cee=el.find("crossEntry")
+        if cee is not None: ce=deref(cee)
+    ty=el.findtext("type")
+    if ty is None and ce is not None:
+        cls=ce.get("class")
+        if cls=="buysell":
+            pt=deref(ce.find("portfolioTransaction"))
+            if pt is not None: ty=pt.findtext("type")
+        else:
+            if legrole is None:
+                tf=deref(ce.find("transactionFrom"))
+                legrole="from" if (tf is not None and tf.findtext("uuid")==u) else "to"
+            ty={"from":"TRANSFER_OUT","to":"TRANSFER_IN"}[legrole]
+    sidx=None
+    sref=el.find("security")
+    if sref is not None:
+        s=deref(sref)
+        if s is not None: sidx=sec_index.get(id(s))
+    amt=el.findtext("amount");sh=el.findtext("shares")
+    fee=tax=0.0   # FEE/TAX units (cents, tx currency) — needed for PP-gross capital gains
+    for un in el.findall("units/unit"):
+        ua=un.find("amount")
+        if ua is None: continue
+        v=int(ua.get("amount") or 0)/100.0
+        if un.get("type")=="FEE": fee+=v
+        elif un.get("type")=="TAX": tax+=v
+    txs[u]={"kind":kind,"owner":owner,"type":ty,"date":(el.findtext("date") or "")[:10],
+            "ccy":el.findtext("currencyCode") or "EUR",
+            "amount":int(amt)/100.0 if amt else 0.0,
+            "fee":fee,"tax":tax,
+            "shares":int(sh)/1e8 if sh else 0.0,"sec":sidx}
+_bad=[t for t in txs.values() if t["type"] is None or t["owner"] is None]
+if _bad:
+    print(f"WARNING: {len(_bad)} unresolved tx legs — results may drift",file=sys.stderr)
+
+# ---------------- event streams (unfiltered entire portfolio) ----------------
+CREDIT={"DEPOSIT","DIVIDENDS","FEES_REFUND","INTEREST","SELL","TRANSFER_IN","TAX_REFUND"}
+DEBIT={"REMOVAL","FEES","INTEREST_CHARGE","TAXES","TRANSFER_OUT","BUY"}
+PADD={"BUY","DELIVERY_INBOUND","TRANSFER_IN"};PSUB={"SELL","DELIVERY_OUTBOUND","TRANSFER_OUT"}
+pos_ev=defaultdict(list);cash_ev=defaultdict(list)
+inflow=defaultdict(float);outflow=defaultdict(float)
+irr_flows=[]
+# net contributions ("Performance neutral Transfers" in PP's Calculation tab):
+# deposits + inbound deliveries minus removals + outbound deliveries, at tx-date FX
+contrib_eur=0.0;contrib_usd=0.0
+for t in txs.values():
+    d=t["date"];ty=t["type"];a=t["amount"];ccy=t["ccy"]
+    if t["kind"]=="port":
+        if ty in PADD: pos_ev[d].append((t["sec"],t["shares"]))
+        elif ty in PSUB: pos_ev[d].append((t["sec"],-t["shares"]))
+        if ty=="DELIVERY_INBOUND":
+            inflow[d]+=to_eur(a,ccy,d);irr_flows.append((d,-to_eur(a,ccy,d)))
+            if d>START: contrib_eur+=to_eur(a,ccy,d);contrib_usd+=to_usd(a,ccy,d)
+        elif ty=="DELIVERY_OUTBOUND":
+            outflow[d]+=to_eur(a,ccy,d);irr_flows.append((d,to_eur(a,ccy,d)))
+            if d>START: contrib_eur-=to_eur(a,ccy,d);contrib_usd-=to_usd(a,ccy,d)
+        elif ty=="TRANSFER_IN": irr_flows.append((d,-to_eur(a,ccy,d)))
+        elif ty=="TRANSFER_OUT": irr_flows.append((d,to_eur(a,ccy,d)))
+    else:
+        if ty in CREDIT: cash_ev[d].append((t["owner"],a))
+        elif ty in DEBIT: cash_ev[d].append((t["owner"],-a))
+        if ty=="DEPOSIT":
+            inflow[d]+=to_eur(a,ccy,d);irr_flows.append((d,-to_eur(a,ccy,d)))
+            if d>START: contrib_eur+=to_eur(a,ccy,d);contrib_usd+=to_usd(a,ccy,d)
+        elif ty=="REMOVAL":
+            outflow[d]+=to_eur(a,ccy,d);irr_flows.append((d,to_eur(a,ccy,d)))
+            if d>START: contrib_eur-=to_eur(a,ccy,d);contrib_usd-=to_usd(a,ccy,d)
+        elif ty=="TRANSFER_IN": irr_flows.append((d,-to_eur(a,ccy,d)))
+        elif ty=="TRANSFER_OUT": irr_flows.append((d,to_eur(a,ccy,d)))
+
+# ---------------- daily total-wealth series + TTWROR chain ----------------
+TODAY=datetime.date.today().isoformat()
+END=TODAY
+shares=defaultdict(float);cash=defaultdict(float)
+for d in sorted(set(list(pos_ev)+list(cash_ev))):
+    if d>START: break
+    for s,ds in pos_ev.get(d,[]): shares[s]+=ds
+    for a,da in cash_ev.get(d,[]): cash[a]+=da
+def valuation(d):
+    tot=0.0
+    for s,sh in shares.items():
+        if abs(sh)>1e-9: tot+=to_eur(sh*sec_price(s,d),SEC[s]["ccy"],d)
+    for a,c in cash.items():
+        if abs(c)>1e-9: tot+=to_eur(c,accounts[a]["ccy"],d)
+    return tot
+V0=valuation(START)
+open_sh=dict(shares)   # opening positions at START (basis for FIFO capital gains)
+series={START:0.0};acc_ret=0.0;prevV=V0
+daily=[{"d":START,"v":round(V0*fx_rate("USD",START)),"e":round(V0),"r":0.0}]   # PP net-worth curve: v=USD, e=EUR (daily FX)
+day=datetime.date.fromisoformat(START)+datetime.timedelta(days=1)
+endd=datetime.date.fromisoformat(END)
+while day<=endd:
+    d=day.isoformat()
+    for s,ds in pos_ev.get(d,[]): shares[s]+=ds
+    for a,da in cash_ev.get(d,[]): cash[a]+=da
+    V=valuation(d)
+    inb=inflow.get(d,0.0);outb=outflow.get(d,0.0)
+    delta=0.0 if abs(prevV+inb)<1e-9 else (V+outb)/(prevV+inb)-1
+    acc_ret=(acc_ret+1)*(delta+1)-1
+    series[d]=acc_ret;prevV=V
+    daily.append({"d":d,"v":round(V*fx_rate("USD",d)),"e":round(V),"r":round(acc_ret,6)})
+    day+=datetime.timedelta(days=1)
+Vend=prevV
+
+def slice_ret(a,b):
+    return ((1+series[b])/(1+series[a])-1)*100
+yearly={}
+prev=START
+for y in range(2022,int(END[:4])+1):
+    b=min(f"{y}-12-31",END)
+    yearly[str(y)]=round(slice_ret(prev,b),1)
+    prev=b
+ytd=slice_ret(f"{int(END[:4])-1}-12-31",END)
+ndays=(endd-datetime.date.fromisoformat(START)).days
+annualized=((1+acc_ret)**(365.0/ndays)-1)*100
+
+# ---------------- FIFO capital gains (PP Performance -> Calculation semantics, in EUR) --
+# realized = SELL proceeds minus FIFO purchase basis (EUR at the respective tx dates);
+# unrealized = current value of remaining lots minus their FIFO basis.
+# Opening positions at START are valued at the START price (period basis, like PP).
+# Inner portfolio transfers are neutral (skipped); deliveries move basis without realizing
+# (PP books deliveries under "transfers", not capital gains).
+from collections import deque
+lots=defaultdict(deque)   # sec -> deque of [shares, basis_eur, basis_usd]
+for s,sh in open_sh.items():
+    if sh>1e-9:
+        v=sh*sec_price(s,START)
+        lots[s].append([sh, to_eur(v,SEC[s]["ccy"],START), to_usd(v,SEC[s]["ccy"],START)])
+realized_eur=0.0;realized_usd=0.0
+rz_usd_by_sec=defaultdict(float)   # per-security realized (USD) for the holdings table
+# same-date ordering: process adds (BUY/inbound) BEFORE removes, otherwise a same-day
+# round-trip sells from an empty lot queue (full proceeds booked as "gain") and leaves
+# a ghost lot behind (caused +99k realized / +20k unrealized drift vs the PP app)
+ptx=sorted((t for t in txs.values() if t["kind"]=="port" and t["sec"] is not None and t["date"]>START),
+           key=lambda t:(t["date"], 0 if t["type"] in ("BUY","DELIVERY_INBOUND") else 1))
+for t in ptx:
+    ty=t["type"];s=t["sec"];sh=t["shares"]
+    if ty in ("TRANSFER_IN","TRANSFER_OUT"): continue     # internal moves, client-neutral
+    # PP capital gains are GROSS: fees/taxes sit in their own rows of the Calculation tab.
+    # BUY amount includes fees -> basis = amount - fee - tax; SELL amount is net -> proceeds + fee + tax.
+    if ty=="BUY": g=t["amount"]-t["fee"]-t["tax"]
+    elif ty=="SELL": g=t["amount"]+t["fee"]+t["tax"]
+    else: g=t["amount"]
+    eur=to_eur(g,t["ccy"],t["date"]);usd=to_usd(g,t["ccy"],t["date"])
+    if ty in ("BUY","DELIVERY_INBOUND"):
+        lots[s].append([sh,eur,usd])
+    elif ty in ("SELL","DELIVERY_OUTBOUND"):
+        rem=sh;basis=0.0;basis_u=0.0;q=lots[s]
+        while rem>1e-9 and q:
+            l=q[0];take=min(l[0],rem)
+            frac=take/l[0] if l[0]>1e-12 else 0.0
+            basis+=l[1]*frac;l[1]-=l[1]*frac
+            basis_u+=l[2]*frac;l[2]-=l[2]*frac
+            l[0]-=take;rem-=take
+            if l[0]<=1e-9: q.popleft()
+        if ty=="SELL":
+            realized_eur+=eur-basis;realized_usd+=usd-basis_u
+            rz_usd_by_sec[s]+=usd-basis_u
+unrealized_eur=0.0;unrealized_usd=0.0
+for s,q in lots.items():
+    rsh=sum(l[0] for l in q)
+    if rsh<=1e-6: continue
+    v=rsh*sec_price(s,END)
+    unrealized_eur+=to_eur(v,SEC[s]["ccy"],END)-sum(l[1] for l in q)
+    unrealized_usd+=to_usd(v,SEC[s]["ccy"],END)-sum(l[2] for l in q)
+
+# ---------------- IZF (XIRR act/365) ----------------
+flows=[(START,-V0)]+[(d,v) for d,v in irr_flows if START<d<=END]+[(END,Vend)]
+flows.sort()
+d0=datetime.date.fromisoformat(START)
+fdays=[(datetime.date.fromisoformat(d)-d0).days for d,_ in flows]
+fvals=[v for _,v in flows]
+def npv(r): return sum(v/((1+r)**(dd/365.0)) for v,dd in zip(fvals,fdays))
+izf=None
+lo,hi=-0.95,50.0
+flo,fhi=npv(lo),npv(hi)
+if flo*fhi<0:
+    for _ in range(200):
+        mid=(lo+hi)/2;fm=npv(mid)
+        if abs(fm)<1e-7: break
+        if (fm<0)==(flo<0): lo,flo=mid,fm
+        else: hi,fhi=mid,fm
+    izf=(lo+hi)/2*100
+
+# ---------------- cash + holdings ----------------
+cash_by_acc=[]
+net_cash_eur=0.0
+for a,c in sorted(cash.items(),key=lambda kv:-abs(kv[1])):
+    if abs(c)>0.005:
+        e=to_eur(c,accounts[a]["ccy"],END);net_cash_eur+=e
+        cash_by_acc.append({"account":accounts[a]["name"],"ccy":accounts[a]["ccy"],
+                            "balance":round(c,2),"eur":round(e,2)})
+PP_CASH_EUR=round(net_cash_eur,2)
+
+posagg={}
+for t in txs.values():
+    if t["kind"]!="port": continue
+    a=posagg.setdefault(t["sec"],{"net":0.0,"buyAmt":0.0,"buySh":0.0})
+    if t["type"] in PADD:
+        a["net"]+=t["shares"]
+        if t["type"]=="BUY": a["buyAmt"]+=t["amount"];a["buySh"]+=t["shares"]
+    elif t["type"] in PSUB: a["net"]-=t["shares"]
+holdings=[]
+tot_sec_eur=0.0
+for si,a in posagg.items():
+    if si is None or a["net"]<=1e-4: continue
+    s=SEC[si]
+    px=sec_price(si,END)
+    la=LATEST[si];ds,_=PRICES[si]
+    pdate=(la[0] if la else None) or (ds[-1] if ds else None)
+    avg=a["buyAmt"]/a["buySh"] if a["buySh"] else 0
+    val=a["net"]*px
+    veur=to_eur(val,s["ccy"],END)
+    tot_sec_eur+=veur
+    basis_usd=sum(l[2] for l in lots.get(si,[]))   # FIFO remaining cost basis (USD, tx-date FX)
+    holdings.append({"account":"ALL","ticker":s["tk"] or (s["name"] or "")[:10],"name":s["name"],
+        "isin":s["isin"],"ccy":s["ccy"],"shares":round(a["net"],4),"price":px,
+        "value":round(val,2),"valueEur":round(veur),
+        "valueUsd":round(to_usd(val,s["ccy"],END)),
+        "basisUsd":round(basis_usd),
+        "realizedUsd":round(rz_usd_by_sec.get(si,0.0)),
+        "avgCost":round(avg,4),"unrealRet":round((px-avg)/avg*100,1) if avg else 0,
+        "priceDate":pdate})
+holdings.sort(key=lambda h:-h["valueEur"])
+
+out={"fileDate":datetime.datetime.fromtimestamp(os.path.getmtime(DEPOT)).strftime("%Y-%m-%d %H:%M"),
+     "generated":datetime.datetime.now().strftime("%Y-%m-%d %H:%M"),
+     "engine":"pp-exact (verified vs PP app 2026-07-11)",
+     "totalSecuritiesEur":round(tot_sec_eur),
+     "cashEur":PP_CASH_EUR,
+     "cashByAccount":cash_by_acc,
+     "totalEur":round(tot_sec_eur+net_cash_eur),
+     "ttwrorSince2022":round(acc_ret*100,1),
+     "ttwrorYtd":round(ytd,1),
+     "ttwrorAnnualized":round(annualized,1),
+     "izf":round(izf,1) if izf is not None else None,
+     "yearlyReturns":yearly,
+     "realizedEur":round(realized_eur),
+     "unrealizedEur":round(unrealized_eur),
+     "realizedUsd":round(realized_usd),
+     "unrealizedUsd":round(unrealized_usd),
+     "netContribEur":round(contrib_eur),
+     "netContribUsd":round(contrib_usd),
+     "series":daily,
+     "securities":[{"isin":s["isin"],"ticker":s["tk"],"name":s["name"]}
+                   for s in SEC if s["isin"]],
+     # legacy keys kept for template compatibility (now = the exact numbers)
+     "ppReferenceTtwror":round(acc_ret*100,1),
+     "ppReferenceDate":datetime.date.today().isoformat(),
+     "ttwrorApproxSince2022":round(acc_ret*100,1),
+     "yearlyReturnsApprox":yearly,
+     "holdings":holdings}
+json.dump(out,open(os.path.join(ROOT,"pp.json"),"w"),ensure_ascii=False,indent=1)
+print(f"pp.json written: {len(holdings)} holdings, securities EUR {tot_sec_eur:,.0f}, cash EUR {PP_CASH_EUR:,.2f}")
+print(f"TTWROR since 2022: {acc_ret*100:.2f}%  YTD {ytd:.2f}%  annualized {annualized:.2f}%  IZF {izf:.2f}%")
+print(f"capital gains (FIFO since 2022): realized EUR {realized_eur:,.0f} / USD {realized_usd:,.0f}  unrealized EUR {unrealized_eur:,.0f} / USD {unrealized_usd:,.0f}  net-worth series {len(daily)} days (today USD {daily[-1]['v']:,})")
+print("yearly:",yearly)
