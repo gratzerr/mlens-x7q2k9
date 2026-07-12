@@ -198,7 +198,6 @@
   .plogo{width:18px;height:18px;border-radius:5px;object-fit:contain;background:#fff;border:1px solid var(--border);flex:none}
   .nlogo{width:16px;height:16px;border-radius:4px;object-fit:contain;background:#fff;border:1px solid var(--border);vertical-align:-3px;margin-right:5px;display:inline-block}
   .llogo{width:16px;height:16px;border-radius:4px;object-fit:contain;background:#fff;border:1px solid var(--border);flex:none}
-  .cname .tk .bd{display:inline-block;margin-right:6px;vertical-align:1px}
   .act:first-child{border-top:0}
   .act .ad{color:var(--muted);font-size:11.5px;font-variant-numeric:tabular-nums;white-space:nowrap}
   .atype{font-size:10.5px;font-weight:700;padding:2px 7px;border-radius:5px;text-align:center;letter-spacing:.3px}
@@ -605,7 +604,6 @@ function renderTimeline(){
 function renderHoldings(){
   const hs=DATA.holdings.filter(h=>h.assetType!=='cash');
   document.getElementById('holdings').innerHTML = hs.map(h=>{
-    const i=tIdx(h.ticker), col=colorFor(i);
     const up=h.unrealizedReturn>=0;
     const dc=(h.dayChange!==undefined)?h.dayChange:null;
     const dcUp=(dc||0)>=0;
@@ -630,14 +628,14 @@ function renderHoldings(){
     // 52-week range widget
     let rng='';
     if(h.pos52!==undefined){
-      rng=`<div class="rng"><div class="rtrack"><div class="rdot" style="left:${h.pos52}%;background:${col}"></div></div>
+      rng=`<div class="rng"><div class="rtrack"><div class="rdot" style="left:${h.pos52}%;background:${cvar('--accent')}"></div></div>
         <div class="rlab"><span>$${h.lo52}</span><span>52w</span><span>$${h.hi52}</span></div></div>`;
     }
     const spark=sparkSvg(h.spark, up);
     return `<div class="card">
       <div class="chead">
         <div class="cname">${logoImg(h.logos,'hlogo')}
-          <div style="min-width:0"><div class="tk"><span class="bd" style="background:${col}"></span>${esc(h.ticker)}</div><div class="nm">${esc(h.name)}</div></div>
+          <div style="min-width:0"><div class="tk">${esc(h.ticker)}</div><div class="nm">${esc(h.name)}</div></div>
         </div>
         <div class="cvals"><div class="px tnum">${fmtEur(h.value)}</div>
           ${dc!==null?`<div class="dc ${dcUp?'up':'down'} tnum">${fmtPct(dc)} today</div>`:''}</div>
