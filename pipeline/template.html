@@ -523,7 +523,8 @@ function sparkSvg(spark, up){
 
 /* ---- Holdings table (Parqet-style: stacked primary/secondary cells; data from PP) ---- */
 let _hsort={key:'value',dir:-1};
-let _hcols=(()=>{try{return Object.assign({shares:true,day:true,realized:false},JSON.parse(localStorage.getItem('pc-htcols')||'{}'));}catch(e){return {shares:true,day:true,realized:false};}})();
+const _HCOLS_DEF={shares:true,entry:true,price:true,day:true,gain:true,realized:false,value:true};
+let _hcols=(()=>{try{return Object.assign({},_HCOLS_DEF,JSON.parse(localStorage.getItem('pc-htcols')||'{}'));}catch(e){return {..._HCOLS_DEF};}})();
 function _htRows(){
   return DATA.holdings.filter(h=>h.assetType!=='cash').map(h=>{
     const sym=h.ppCcy==='CAD'?'C$':'$';
@@ -544,12 +545,12 @@ function renderHoldingsTable(){
   const cols=[
     {key:'name',  lab:'Position', on:true},
     {key:'shares',lab:'Shares', on:_hcols.shares},
-    {key:'basis', lab:'Entry', on:true},
-    {key:'price', lab:'Price', on:true},
+    {key:'basis', lab:'Entry', on:_hcols.entry},
+    {key:'price', lab:'Price', on:_hcols.price},
     {key:'day',   lab:'Today', on:_hcols.day},
-    {key:'gain',  lab:'Gain', on:true},
+    {key:'gain',  lab:'Gain', on:_hcols.gain},
     {key:'realized',lab:'Realized', on:_hcols.realized},
-    {key:'value', lab:'Value', on:true},
+    {key:'value', lab:'Value', on:_hcols.value},
   ].filter(c=>c.on);
   const arrow=c=>c.key===_hsort.key?(d<0?' ▾':' ▴'):'';
   const fmt2=(n,dec)=>n==null?'—':(+n).toLocaleString('en-US',{minimumFractionDigits:dec,maximumFractionDigits:dec});
@@ -558,20 +559,20 @@ function renderHoldingsTable(){
       const cells=[];
       cells.push(`<td><div class="hname">${logoImg(r.h.logos,'llogo')}<div style="min-width:0"><div class="c1">${esc(r.h.ticker)}</div><div class="nm2">${esc(r.h.name)}</div></div></div></td>`);
       if(_hcols.shares) cells.push(`<td><div class="c1">${r.shares!=null?(+r.shares).toLocaleString('en-US'):'—'}</div></td>`);
-      cells.push(`<td><div class="c1">${r.avg!=null?r.sym+fmt2(r.avg,r.avg<1?4:2):'—'}</div><div class="c2">${r.basis?fmtUsd(r.basis):''}</div></td>`);
-      cells.push(`<td><div class="c1">${r.price!=null?r.sym+fmt2(r.price,r.price<1?4:2):'—'}</div><div class="c2">&nbsp;</div></td>`);
+      if(_hcols.entry) cells.push(`<td><div class="c1">${r.avg!=null?r.sym+fmt2(r.avg,r.avg<1?4:2):'—'}</div><div class="c2">${r.basis?fmtUsd(r.basis):''}</div></td>`);
+      if(_hcols.price) cells.push(`<td><div class="c1">${r.price!=null?r.sym+fmt2(r.price,r.price<1?4:2):'—'}</div><div class="c2">&nbsp;</div></td>`);
       if(_hcols.day) cells.push(`<td><div class="c1 ${r.day==null?'':(r.day>=0?'up':'down')}">${r.day==null?'—':fmtPct(r.day)}</div></td>`);
       const gup=(r.gain||0)>=0;
-      cells.push(`<td><div class="c1 ${r.gain==null?'':(gup?'up':'down')}">${r.gain==null?'—':fmtUsd(r.gain)}</div><div class="c2 ${r.gainPct==null?'':(gup?'up':'down')}">${r.gainPct==null?'':fmtPct(r.gainPct)}</div></td>`);
+      if(_hcols.gain) cells.push(`<td><div class="c1 ${r.gain==null?'':(gup?'up':'down')}">${r.gain==null?'—':fmtUsd(r.gain)}</div><div class="c2 ${r.gainPct==null?'':(gup?'up':'down')}">${r.gainPct==null?'':fmtPct(r.gainPct)}</div></td>`);
       if(_hcols.realized){const rup=(r.realized||0)>=0;
         cells.push(`<td><div class="c1 ${r.realized==null?'':(rup?'up':'down')}">${r.realized==null?'—':fmtUsd(r.realized)}</div></td>`);}
-      cells.push(`<td><div class="c1">${fmtUsd(r.value)}</div><div class="c2">${r.weight!=null?r.weight.toFixed(1)+'%':''}</div></td>`);
+      if(_hcols.value) cells.push(`<td><div class="c1">${fmtUsd(r.value)}</div><div class="c2">${r.weight!=null?r.weight.toFixed(1)+'%':''}</div></td>`);
       return '<tr>'+cells.join('')+'</tr>';
     }).join('')
     +(()=>{const c=DATA.holdings.find(x=>x.assetType==='cash');
       if(!c) return '';
-      const span=cols.length-2;
-      return `<tr class="cashrow"><td><div class="hname"><span class="llogo" style="visibility:hidden"></span><div><div class="c1">Cash</div><div class="nm2">net (margin)</div></div></div></td><td colspan="${span}"></td><td><div class="c1 ${c.value>=0?'':'down'}">${fmtUsd(c.value)}</div></td></tr>`;})()
+      const mid=cols.length-1-(_hcols.value?1:0);
+      return `<tr class="cashrow"><td><div class="hname"><span class="llogo" style="visibility:hidden"></span><div><div class="c1">Cash</div><div class="nm2">net (margin)</div></div></div></td>${mid>0?`<td colspan="${mid}"></td>`:''}${_hcols.value?`<td><div class="c1 ${c.value>=0?'':'down'}">${fmtUsd(c.value)}</div></td>`:''}</tr>`;})()
     +'</tbody>';
   el.querySelectorAll('th').forEach(th=>th.addEventListener('click',()=>{
     const key=th.dataset.k;
@@ -582,7 +583,8 @@ function renderHoldingsTable(){
 function initHtSettings(){
   const gear=document.getElementById('htgear'), pop=document.getElementById('htpop');
   if(!gear||!pop) return;
-  const OPTS=[['shares','Shares column'],['day','Today % column'],['realized','Realized gain column']];
+  const OPTS=[['shares','Shares'],['entry','Entry (avg / total cost)'],['price','Price'],
+    ['day','Today %'],['gain','Gain ($ / %)'],['realized','Realized gain'],['value','Value / weight']];
   const draw=()=>{pop.innerHTML=OPTS.map(([k,l])=>
     `<label><input type="checkbox" data-k="${k}" ${_hcols[k]?'checked':''}> ${l}</label>`).join('');
     pop.querySelectorAll('input').forEach(i=>i.addEventListener('change',()=>{
