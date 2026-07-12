@@ -314,7 +314,7 @@ function colorFor(i){
   const h=DATA.holdings[i];
   const rank=Math.max(0,order.findIndex(x=>x&&h&&x.ticker===h.ticker));
   const n=Math.max(1,order.length-1);
-  const [l0,l1]=isDarkTheme()?[72,34]:[24,70];      // big -> deep, small -> pale
+  const [l0,l1]=isDarkTheme()?[32,74]:[22,72];      // biggest weight = DARKEST, smallest = palest
   const L=l0+(l1-l0)*rank/n;
   return `hsl(214 34% ${L.toFixed(0)}%)`;
 }
