@@ -366,6 +366,8 @@ const fmtUsd = n => (n<0?'-':'')+'$'+Math.abs(Math.round(n)).toLocaleString('en-
 const fmtEur = fmtUsd; // alias (values are USD from Parqet)
 const fmtE = n => (n<0?'-':'')+'€'+Math.abs(Math.round(n)).toLocaleString('en-US'); // real EUR (PP figures)
 const fmtPct = n => (n>0?'+':'')+n.toFixed(1)+'%';
+const fmtShort = n => { const a=Math.abs(n), s=n<0?'-':'';
+  return a>=1e6? s+'$'+(a/1e6).toFixed(2).replace(/\.?0+$/,'')+'M' : a>=1e3? s+'$'+Math.round(a/1e3)+'k' : s+'$'+Math.round(a); };
 const esc = s => (s||'').replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
 const tIdx = tk => DATA.holdings.findIndex(x=>x.ticker===tk);
 const enDate = s => new Date(s).toLocaleDateString('en-US',{month:'short',day:'2-digit'});
@@ -648,9 +650,9 @@ function renderAlloc(){
   const c1=el.querySelector('#dc1'), c2=el.querySelector('#dc2'), c3=el.querySelector('#dc3');
   const setCenter=ai=>{
     if(ai===null){ c1.textContent=fmtUsd(net); c2.textContent=hs.filter(h=>h.assetType!=='cash').length+' positions';
-      c3.textContent=cash?('net of '+fmtUsd(cash.value)+' margin'):''; }
+      c3.textContent=cash?('net of '+fmtShort(cash.value)+' margin'):''; }
     else if(ai==='cash'){ c1.textContent=fmtUsd(cash.value); c2.textContent='Cash · margin';
-      c3.textContent='gross '+fmtUsd(total)+' → net '+fmtUsd(net); }
+      c3.textContent='gross '+fmtShort(total)+' → net '+fmtShort(net); }
     else { const h=hs[ai]; c1.textContent=fmtUsd(h.value); c2.textContent=h.ticker; c3.textContent=(100*h.value/total).toFixed(1)+'% of invested'; }
   };
 
@@ -1155,7 +1157,7 @@ function renderActivities(){
     const dt=new Date(a.datetime).toLocaleDateString('en-US',{month:'short',day:'2-digit',year:'2-digit'});
     const tk=actTicker(a), nm=actName(a);
     const isTrade=(a.type==="Buy"||a.type==="Sell")&&a.shares&&a.price;
-    const sub=isTrade? (Number(a.shares).toLocaleString('en-US')+" @ "+sym+(+a.price).toLocaleString('en-US',{maximumFractionDigits:4}))
+    const sub=isTrade? (Number(a.shares).toLocaleString('en-US')+" @ "+sym+(+a.price).toLocaleString('en-US',{minimumFractionDigits:2,maximumFractionDigits:4}))
       : (a.shares&&a.price!==1? Number(a.shares).toLocaleString('en-US')+" units":"");
     const sign=a.type==="Buy"?"−":a.type==="Sell"||/Dividend|Interest/.test(a.type)?"+":"";
     return `<div class="act">
@@ -1164,7 +1166,7 @@ function renderActivities(){
       ${actLogo(a,tk)}
       <div class="amain"><div class="aname">${esc(tk)}${nm&&nm!==tk?' <span class="asub">'+esc(nm)+'</span>':''}</div>
         ${sub?`<div class="asub">${esc(sub)}</div>`:''}</div>
-      <div class="aval tnum">${sign}${sym}${(+a.amount).toLocaleString('en-US',{maximumFractionDigits:2})}</div>
+      <div class="aval tnum">${sign}${sym}${(+a.amount).toLocaleString('en-US',{minimumFractionDigits:2,maximumFractionDigits:2})}</div>
     </div>`;
   }).join('');
   const btn=document.getElementById('actmore');
