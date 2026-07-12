@@ -1851,15 +1851,23 @@ function renderPeriodBar(){
     <input type="date" id="pf-from" value="${p.from||''}" style="display:${p.k==='since'||p.k==='range'?'inline-block':'none'};background:var(--surface);border:1px solid var(--border);border-radius:9px;padding:6px 9px;font:inherit;font-size:12.5px;color:var(--ink)">
     <input type="date" id="pf-to" value="${p.to||''}" style="display:${p.k==='range'?'inline-block':'none'};background:var(--surface);border:1px solid var(--border);border-radius:9px;padding:6px 9px;font:inherit;font-size:12.5px;color:var(--ink)">`;
   const sel=document.getElementById('pf-psel'), from=document.getElementById('pf-from'), to=document.getElementById('pf-to');
+  const d0=(DATA.chartPP&&DATA.chartPP[0]||{}).d||'2021-12-30', d1=(DATA.chartPP&&DATA.chartPP[DATA.chartPP.length-1]||{}).d||'';
+  [from,to].forEach(x=>{x.min=d0; if(d1)x.max=d1;});
+  /* Chromium commits a 'change' after EVERY typed year digit (0002 → 0020 → 0202 → 2026);
+     only accept dates that can be real, so half-typed years never apply */
+  const okDate=s=>s&&s>=d0.slice(0,4)+'-01-01'&&(!d1||s<=d1);
   const apply=()=>{
     const v=sel.value;
     if(v.startsWith('rel:')) PF_P={k:'rel',v:v.slice(4)};
     else if(v.startsWith('year:')) PF_P={k:'year',y:+v.slice(5)};
     else if(v==='since'){ from.style.display='inline-block'; to.style.display='none';
-      if(!from.value){ from.focus(); return; } PF_P={k:'since',from:from.value}; }
+      if(!from.value){ from.value=d0; from.focus(); } /* prefill: all segments set, overtyping always works */
+      if(!okDate(from.value)) return; PF_P={k:'since',from:from.value}; }
     else if(v==='range'){ from.style.display='inline-block'; to.style.display='inline-block';
-      if(!from.value){ from.focus(); return; }
-      if(!to.value){ to.focus(); return; } PF_P={k:'range',from:from.value,to:to.value}; }
+      if(!from.value){ from.value=d0; from.focus(); }
+      if(!to.value){ to.value=d1||d0; }
+      if(!okDate(from.value)||!okDate(to.value)||from.value>to.value) return;
+      PF_P={k:'range',from:from.value,to:to.value}; }
     try{localStorage.setItem('pc-pfperiod',JSON.stringify(PF_P));}catch(e){}
     renderPerf();
   };
@@ -1874,6 +1882,11 @@ let pfW=(()=>{try{const w=JSON.parse(localStorage.getItem('pc-pfw')||'null');
 try{if(!localStorage.getItem('pc-schemev2')){
   pfW.forEach(w=>{if(w.scheme==='classic')w.scheme='traffic';});
   localStorage.setItem('pc-schemev2','1');localStorage.setItem('pc-pfw',JSON.stringify(pfW));}}catch(e){}
+/* one-time: widgets added before positional insert existed were appended at the
+   bottom (taxes, current drawdown …) — sort the layout into canonical order once */
+try{if(!localStorage.getItem('pc-orderv2')){
+  pfW.sort((a,b)=>PF_ORDER.indexOf(a.t)-PF_ORDER.indexOf(b.t));
+  localStorage.setItem('pc-orderv2','1');localStorage.setItem('pc-pfw',JSON.stringify(pfW));}}catch(e){}
 const pfSave=()=>{try{localStorage.setItem('pc-pfw',JSON.stringify(pfW));}catch(e){}};
 /* instant benchmark series fetched in the browser (CORS proxy → Yahoo chart API);
    the cloud series (yfinance, adjusted closes) replaces it within ~1 minute */
@@ -1972,7 +1985,7 @@ function renderPerf(){
         `<div style="display:flex;gap:6px;margin-top:6px">
            <input type="text" data-bnew placeholder="+ ticker (e.g. IWM, DAX…)" maxlength="12" style="flex:1;background:var(--surface-2);border:1px solid var(--border);border-radius:7px;padding:5px 8px;font:inherit;font-size:12px;color:var(--ink)">
          </div>
-         <div data-bmsg style="font-size:11px;color:var(--muted);margin-top:4px">${isOwner()?'press Enter — prices load within a few minutes':'sign in as owner to add benchmarks'}</div>`;
+         <div data-bmsg style="font-size:11px;color:var(--muted);margin-top:4px">${isOwner()?'press Enter to add':'sign in as owner to add benchmarks'}</div>`;
       }
       if(def.opts.includes('scheme')) html+=`<div class="pfw-lbl">Colors</div><select data-scheme>${PF_SCHEMES.map(([k,l])=>`<option value="${k}" ${w.scheme===k?'selected':''}>${l}</option>`).join('')}</select>`;
       pop.innerHTML=html; pop.style.display='block';
@@ -1997,8 +2010,16 @@ function renderPerf(){
         w.bench=[...pop.querySelectorAll('[data-bch]')].filter(x=>x.checked).map(x=>x.dataset.bch);
         pfSave(); renderPerf(); }));
       pop.querySelectorAll('[data-bdel]').forEach(b=>b.addEventListener('click',async()=>{
-        const list=(_cfg.benchmarks||[]).filter(s=>s!==b.dataset.bdel);
-        if(await saveBenchList(list)) renderPerf();
+        const sym=b.dataset.bdel;
+        const list=(_cfg.benchmarks||[]).filter(s=>s!==sym);
+        if(await saveBenchList(list)){
+          /* drop it everywhere right away — benchMeta also lists DATA.bench keys,
+             so the chip would otherwise survive until the next cloud rebuild */
+          if(DATA.bench) delete DATA.bench[sym];
+          if(window._benchPreview) delete window._benchPreview[sym];
+          pfW.forEach(x=>{ if(x.bench) x.bench=x.bench.filter(s=>s!==sym); });
+          pfSave(); renderPerf();
+        }
       }));
       const bnew=pop.querySelector('[data-bnew]');
       if(bnew) bnew.addEventListener('keydown',async e2=>{
@@ -2017,7 +2038,7 @@ function renderPerf(){
             if(!DATA.bench[sym]||DATA.bench[sym].length<20){
               DATA.bench[sym]=ser; (window._benchPreview=window._benchPreview||{})[sym]=ser; }
             renderPerf();
-          }catch(err){ msg.textContent='✓ added — data live within a minute'; }
+          }catch(err){ msg.textContent='✓ added'; }
         }
         else { msg.textContent='save failed'; msg.style.color='var(--down)'; }
       });
