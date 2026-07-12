@@ -267,8 +267,40 @@ data = {
 
 DATA_JSON = json.dumps(data, ensure_ascii=True)
 
+# ---- REAL privacy: when site/config.json says public:false, the built page carries
+# ONLY AES-256-GCM ciphertext of DATA (PBKDF2-SHA256, 150k iters, PIN from the local
+# privacy_pin.txt — never committed). Without the PIN the page is cryptographically
+# unreadable, view-source included. If the PIN file is absent (cloud rebuild), we ship
+# a locked page with NO data at all rather than ever leaking plaintext.
+def site_is_public():
+    try:
+        return json.load(open(os.path.join(ROOT, "site", "config.json"))).get("public", True) is not False
+    except Exception:
+        return True
+
+def encrypt_payload(plain):
+    import base64, secrets as _s
+    from cryptography.hazmat.primitives.ciphers.aead import AESGCM
+    from cryptography.hazmat.primitives.kdf.pbkdf2 import PBKDF2HMAC
+    from cryptography.hazmat.primitives import hashes
+    pin = open(os.path.join(ROOT, "privacy_pin.txt")).read().strip()
+    salt, iv = _s.token_bytes(16), _s.token_bytes(12)
+    key = PBKDF2HMAC(algorithm=hashes.SHA256(), length=32, salt=salt, iterations=150000).derive(pin.encode())
+    ct = AESGCM(key).encrypt(iv, plain.encode(), None)
+    b64 = lambda b: base64.b64encode(b).decode()
+    return json.dumps({"salt": b64(salt), "iv": b64(iv), "ct": b64(ct), "iter": 150000})
+
 TEMPLATE = open(os.path.join(ROOT, "template.html"), encoding="utf-8").read()
-out = TEMPLATE.replace("/*__DATA__*/", DATA_JSON)
+if site_is_public():
+    out = TEMPLATE.replace("/*__DATA__*/", DATA_JSON).replace("/*__ENC__*/", "null")
+    mode = "public"
+else:
+    try:
+        out = TEMPLATE.replace("/*__DATA__*/", "null").replace("/*__ENC__*/", encrypt_payload(DATA_JSON))
+        mode = "PRIVATE (encrypted)"
+    except FileNotFoundError:
+        out = TEMPLATE.replace("/*__DATA__*/", "null").replace("/*__ENC__*/", '{"nopin":true}')
+        mode = "PRIVATE (locked, no data — no PIN available)"
 with open(os.path.join(ROOT, "cockpit.html"), "w", encoding="utf-8") as f:
     f.write(out)
-print(f"Built cockpit.html  ({len(out):,} bytes)  as-of {data['asOf']}  holdings={len(data['holdings'])}")
+print(f"Built cockpit.html  ({len(out):,} bytes)  as-of {data['asOf']}  holdings={len(data['holdings'])}  mode={mode}")

@@ -226,10 +226,10 @@
   .htpop{position:absolute;right:14px;top:40px;z-index:20;background:var(--surface);border:1px solid var(--border);
     border-radius:10px;padding:10px 14px;box-shadow:0 8px 28px rgba(0,0,0,.18);font-size:13px}
   .htpop label{display:flex;gap:8px;align-items:center;padding:4px 0;cursor:pointer;white-space:nowrap}
-  #lockov{position:fixed;inset:0;background:var(--plane);z-index:100;display:flex;align-items:center;justify-content:center}
-  #lockov .lockbox{text-align:center;color:var(--muted)}
-  #lockov .lt1{font-size:19px;font-weight:700;color:var(--ink);margin-top:12px}
-  #lockov .lt2{font-size:13.5px;margin-top:5px}
+  #lockov,#pingate{position:fixed;inset:0;background:var(--plane);z-index:100;display:flex;align-items:center;justify-content:center}
+  #lockov .lockbox,#pingate .lockbox{text-align:center;color:var(--muted)}
+  #lockov .lt1,#pingate .lt1{font-size:19px;font-weight:700;color:var(--ink);margin-top:12px}
+  #lockov .lt2,#pingate .lt2{font-size:13.5px;margin-top:5px}
   /* activities */
   .act{display:grid;grid-template-columns:86px 78px 26px 1fr auto;gap:10px;align-items:center;padding:9px 2px;border-top:1px solid var(--grid);font-size:13px}
   .alogo{width:26px;height:26px;border-radius:7px;object-fit:contain;background:#fff;border:1px solid var(--border);display:block}
@@ -1205,7 +1205,7 @@ function loadSocialCache(){
    a desktop notification (works even when this tab is backgrounded). */
 // CIK map is built dynamically by build.py from SEC's ticker directory, so any newly
 // bought US ticker is watched automatically (no manual list to maintain).
-const SEC_CIK=DATA.secCik||{};
+let SEC_CIK={};   // filled in boot() — DATA may still be encrypted at parse time
 const SEC_FORMS={"8-K":"material event","6-K":"material event","424B5":"offering","424B3":"offering",
   "424B4":"offering","FWP":"offering","S-1":"registration","S-1/A":"registration",
   "SC 13D":"activist stake","SC 13D/A":"activist stake","SC 13G":"5%+ stake"};
@@ -1385,10 +1385,73 @@ function startLive(){
   setInterval(()=>refreshNews().catch(()=>{}), 900000);     // news (GDELT) every 15 min
 }
 
-document.getElementById('asof').textContent=new Date(DATA.asOf).toLocaleDateString('en-US',{month:'long',day:'numeric',year:'numeric'});
-document.getElementById('hcount').textContent=DATA.holdings.filter(h=>h.assetType!=='cash').length;
-document.getElementById('foot').innerHTML='Snapshot built '+esc(DATA.generated)+
-  ' · When hosted live, prices refresh every 3 min (Yahoo) and headlines every 15 min (GDELT), computed in your browser · Curated news &amp; catalysts refreshed twice daily · Not investment advice.<br>Green dot = confirmed date, amber dot = estimated.';
-initTheme(); applyName(); loadConfig(); loadSocialCache(); renderKpis(); renderTfSel(); renderSocial(); rerender(); initSecAlerts(); initHtSettings(); initAppSettings(); startLive();
-window.addEventListener('resize',()=>{clearTimeout(window._rz);window._rz=setTimeout(()=>{renderChart();hydrateSparks();},150);});
+function boot(){
+  SEC_CIK=DATA.secCik||{};
+  document.getElementById('asof').textContent=new Date(DATA.asOf).toLocaleDateString('en-US',{month:'long',day:'numeric',year:'numeric'});
+  document.getElementById('hcount').textContent=DATA.holdings.filter(h=>h.assetType!=='cash').length;
+  document.getElementById('foot').innerHTML='Snapshot built '+esc(DATA.generated)+
+    ' · When hosted live, prices refresh every 3 min (Yahoo) and headlines every 15 min (GDELT), computed in your browser · Curated news &amp; catalysts refreshed twice daily · Not investment advice.<br>Green dot = confirmed date, amber dot = estimated.';
+  initTheme(); applyName(); loadConfig(); loadSocialCache(); renderKpis(); renderTfSel(); renderSocial(); rerender(); initSecAlerts(); initHtSettings(); initAppSettings(); startLive();
+  window.addEventListener('resize',()=>{clearTimeout(window._rz);window._rz=setTimeout(()=>{renderChart();hydrateSparks();},150);});
+}
+
+/* ===== PIN gate for the encrypted (private) build ============================ */
+const b64d=s=>Uint8Array.from(atob(s),c=>c.charCodeAt(0));
+async function deriveKey(pin,salt,iter){
+  const km=await crypto.subtle.importKey('raw',new TextEncoder().encode(pin),'PBKDF2',false,['deriveKey']);
+  return crypto.subtle.deriveKey({name:'PBKDF2',salt,iterations:iter,hash:'SHA-256'},km,
+    {name:'AES-GCM',length:256},true,['decrypt']);
+}
+async function tryDecrypt(key){
+  const pt=await crypto.subtle.decrypt({name:'AES-GCM',iv:b64d(DATA_ENC.iv)},key,b64d(DATA_ENC.ct));
+  return JSON.parse(new TextDecoder().decode(pt));
+}
+function showGate(msg){
+  document.querySelector('.wrap').style.display='none';
+  let g=document.getElementById('pingate');
+  if(!g){ g=document.createElement('div'); g.id='pingate';
+    g.innerHTML=`<div class="lockbox">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="30" height="30" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>
+      <div class="lt1">This portfolio is private</div>
+      ${DATA_ENC&&DATA_ENC.nopin?'<div class="lt2">The owner has turned off public sharing.</div>':`
+      <div class="lt2">Enter the PIN to unlock.</div>
+      <div style="display:flex;gap:8px;justify-content:center;margin-top:14px">
+        <input type="password" id="pinin" inputmode="numeric" maxlength="12" style="width:130px;text-align:center;letter-spacing:4px;
+          background:var(--surface);border:1px solid var(--border);border-radius:10px;padding:9px 10px;font:inherit;font-size:17px;color:var(--ink);outline:none">
+        <button id="pingo" class="secbtn" style="margin:0">Unlock</button>
+      </div>
+      <label style="display:flex;gap:7px;justify-content:center;align-items:center;margin-top:11px;font-size:12.5px;color:var(--muted);cursor:pointer">
+        <input type="checkbox" id="pinrem" checked> remember on this device</label>
+      <div id="pinerr" style="color:var(--down);font-size:12.5px;margin-top:9px;min-height:16px"></div>`}
+    </div>`;
+    document.body.appendChild(g);
+    const go=async()=>{
+      const pin=(document.getElementById('pinin').value||'').trim(); if(!pin) return;
+      const err=document.getElementById('pinerr'); err.textContent='';
+      try{
+        const key=await deriveKey(pin,b64d(DATA_ENC.salt),DATA_ENC.iter||150000);
+        DATA=await tryDecrypt(key);
+        if(document.getElementById('pinrem').checked){
+          const raw=await crypto.subtle.exportKey('raw',key);
+          localStorage.setItem('pc-pk',btoa(String.fromCharCode(...new Uint8Array(raw))));
+        }
+        g.remove(); document.querySelector('.wrap').style.display=''; boot();
+      }catch(e){ err.textContent='wrong PIN'; document.getElementById('pinin').value=''; }
+    };
+    const btn=document.getElementById('pingo'); if(btn){ btn.addEventListener('click',go);
+      document.getElementById('pinin').addEventListener('keydown',e=>{ if(e.key==='Enter') go(); });
+      setTimeout(()=>document.getElementById('pinin').focus(),50); }
+  }
+}
+(async function start(){
+  if(DATA){ boot(); return; }
+  if(!DATA_ENC || DATA_ENC.nopin){ showGate(); return; }
+  // silent unlock with a remembered key
+  const saved=localStorage.getItem('pc-pk');
+  if(saved){ try{
+      const key=await crypto.subtle.importKey('raw',b64d(saved),{name:'AES-GCM'},true,['decrypt']);
+      DATA=await tryDecrypt(key); boot(); return;
+    }catch(e){ localStorage.removeItem('pc-pk'); } }
+  showGate();
+})();
 </script>
