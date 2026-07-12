@@ -17,26 +17,26 @@
   }
   :root[data-theme="dark"]{ color-scheme:dark; }
   @media (prefers-color-scheme:dark){:root:not([data-theme="light"]){
-    --plane:#0b0c0e; --surface:#151719; --surface-2:#1d2023;
-    --ink:#f2f3f5; --ink-2:#c0c5cc; --muted:#8b929c;
-    --grid:#26292d; --line:#3a3e44; --border:rgba(255,255,255,.075);
+    --plane:#0f131c; --surface:#161c29; --surface-2:#1d2433;
+    --ink:#eef1f6; --ink-2:#bfc7d4; --muted:#8b95a7;
+    --grid:#232c3d; --line:#39445a; --border:rgba(255,255,255,.06);
     --up:#3ecb63; --up-bg:rgba(62,203,99,.13);
     --down:#f0625f; --down-bg:rgba(240,98,95,.13);
     --accent:#5b8ded;
-    --chip:#24272b; --chip-ink:#ced3da;
+    --chip:#212938; --chip-ink:#ccd4e0;
     --confirmed:#3ecb63; --tentative:#e0b23a;
-    --shadow:0 1px 2px rgba(0,0,0,.5),0 12px 32px rgba(0,0,0,.38);
+    --shadow:0 1px 2px rgba(2,6,16,.5),0 14px 36px rgba(2,6,16,.38);
   }}
   :root[data-theme="dark"]{
-    --plane:#0b0c0e; --surface:#151719; --surface-2:#1d2023;
-    --ink:#f2f3f5; --ink-2:#c0c5cc; --muted:#8b929c;
-    --grid:#26292d; --line:#3a3e44; --border:rgba(255,255,255,.075);
+    --plane:#0f131c; --surface:#161c29; --surface-2:#1d2433;
+    --ink:#eef1f6; --ink-2:#bfc7d4; --muted:#8b95a7;
+    --grid:#232c3d; --line:#39445a; --border:rgba(255,255,255,.06);
     --up:#3ecb63; --up-bg:rgba(62,203,99,.13);
     --down:#f0625f; --down-bg:rgba(240,98,95,.13);
     --accent:#5b8ded;
-    --chip:#24272b; --chip-ink:#ced3da;
+    --chip:#212938; --chip-ink:#ccd4e0;
     --confirmed:#3ecb63; --tentative:#e0b23a;
-    --shadow:0 1px 2px rgba(0,0,0,.5),0 12px 32px rgba(0,0,0,.38);
+    --shadow:0 1px 2px rgba(2,6,16,.5),0 14px 36px rgba(2,6,16,.38);
   }
   *{box-sizing:border-box}
   body{margin:0;background:var(--plane);color:var(--ink);
@@ -346,7 +346,8 @@
 const DATA = /*__DATA__*/;
 const liveState = {news:null, fx:1.37, lastPrice:null, lastNews:null};
 const cvar = n => getComputedStyle(document.documentElement).getPropertyValue(n).trim();
-/* monochrome steel-blue ramp, shaded by portfolio weight (largest = deepest) */
+/* Parqet-style hue sweep for the donut: deep blue -> indigo -> violet -> pink -> orange,
+   assigned by portfolio weight (largest position starts the wheel) */
 function isDarkTheme(){
   const t=document.documentElement.getAttribute('data-theme');
   return t? t==='dark' : window.matchMedia('(prefers-color-scheme:dark)').matches;
@@ -357,9 +358,9 @@ function colorFor(i){
   const h=DATA.holdings[i];
   const rank=Math.max(0,order.findIndex(x=>x&&h&&x.ticker===h.ticker));
   const n=Math.max(1,order.length-1);
-  const [l0,l1]=isDarkTheme()?[32,74]:[22,72];      // biggest weight = DARKEST, smallest = palest
-  const L=l0+(l1-l0)*rank/n;
-  return `hsl(214 34% ${L.toFixed(0)}%)`;
+  const hue=(212 + rank/n*195) % 360;               // 212° blue -> 407°%360 = 47° amber
+  const [s,l]=isDarkTheme()?[52,60]:[52,52];
+  return `hsl(${hue.toFixed(0)} ${s}% ${l}%)`;
 }
 const fmtUsd = n => (n<0?'-':'')+'$'+Math.abs(Math.round(n)).toLocaleString('en-US');
 const fmtEur = fmtUsd; // alias (values are USD from Parqet)
@@ -460,7 +461,7 @@ function renderChart(){
   const Y=v=>pad.t + (1-(v-vmin)/(vmax-vmin||1))*(H-pad.t-pad.b);
   const line=pts.map((p,i)=>`${i?'L':'M'}${X(p.d).toFixed(1)},${Y(p.v).toFixed(1)}`).join(' ');
   const area=line+` L${X(pts[pts.length-1].d).toFixed(1)},${H-pad.b} L${X(pts[0].d).toFixed(1)},${H-pad.b} Z`;
-  const acc=cvar('--accent'), gc=cvar('--grid'), mc=cvar('--muted');
+  const acc=cvar('--ink'), gc=cvar('--grid'), mc=cvar('--muted');   // Parqet-style: ink line (black/white)
   // y gridlines at NICE round steps ($250k / $500k / ...), compact labels ($1.5M)
   let grid='';
   {
@@ -496,7 +497,7 @@ function renderChart(){
   svg.setAttribute('viewBox',`0 0 ${W} ${H}`);
   svg.innerHTML = grid + xlab +
     `<defs><linearGradient id="g" x1="0" x2="0" y1="0" y2="1">
-       <stop offset="0" stop-color="${acc}" stop-opacity="0.22"/>
+       <stop offset="0" stop-color="${acc}" stop-opacity="0.10"/>
        <stop offset="1" stop-color="${acc}" stop-opacity="0"/></linearGradient></defs>`+
     `<path d="${area}" fill="url(#g)"/>`+
     `<path d="${line}" fill="none" stroke="${acc}" stroke-width="2.4" stroke-linejoin="round" stroke-linecap="round"/>`+
