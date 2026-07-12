@@ -654,13 +654,18 @@ function renderHoldingsTable(){
   }));
 }
 function refreshAllMoney(){ renderKpis(); rerender(); renderActivities(); }
-/* Parqet-style ownership: config.json in the Pages repo holds {name, public}.
-   EVERY visitor loads it — the owner's name shows for everyone, and public:false
-   locks the page for anyone without the owner key. The owner edits both straight
-   from settings via a fine-grained GitHub token (kept ONLY in the owner's browser). */
-const GH_REPO='gratzerr/mlens-x7q2k9', GH_BRANCH='main';
-let _cfg={name:"Rafael's Portfolio", public:true};
-const isOwner=()=>!!(localStorage.getItem('pc-ghtok')||'').trim();
+/* Parqet-style ownership, backed by Firebase:
+   - portfolios/main in Firestore holds {owner, name, public, data}
+   - anyone can READ it while public (security rules, enforced on Google's servers)
+   - the owner signs in with Google; only then do name/visibility edits (and, when
+     private, the data itself) work. No tokens, no PINs — just the Gmail login. */
+const FB_CFG={apiKey:'AIzaSyA8ycuNIjcLCmYpTV8IMJLLpW8S0Jiv4mA',
+  authDomain:'portfolio-cockpit-rg.firebaseapp.com', projectId:'portfolio-cockpit-rg'};
+const FS_DOC='https://firestore.googleapis.com/v1/projects/portfolio-cockpit-rg/databases/(default)/documents/portfolios/main';
+let _cfg={name:"Rafael's Portfolio", public:true, owner:''};
+let _user=null;           // firebase user when signed in
+const isOwner=()=>!!(_user && _cfg.owner && _user.email===_cfg.owner);
+
 function applyName(){
   const el=document.getElementById('ptitle'); if(el) el.textContent=_cfg.name;
   document.title=_cfg.name;
@@ -670,36 +675,93 @@ function applyVisibility(){
   const locked=_cfg.public===false && !isOwner();
   if(locked){
     if(!ov){ ov=document.createElement('div'); ov.id='lockov';
-      ov.innerHTML='<div class="lockbox"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="30" height="30" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg><div class="lt1">This portfolio is private</div><div class="lt2">The owner has turned off public sharing.</div></div>';
+      ov.innerHTML='<div class="lockbox"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="30" height="30" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg><div class="lt1">This portfolio is private</div><div class="lt2">The owner has turned off public sharing.</div><div style="margin-top:14px"><button class="secbtn" onclick="ownerSignIn()">Owner sign in with Google</button></div></div>';
       document.body.appendChild(ov); }
     ov.style.display='flex';
   } else if(ov) ov.style.display='none';
 }
+
+/* Firebase Auth SDK loads lazily (compat build). On the CSP-locked artifact this
+   fails silently — the artifact always carries baked data anyway. */
+let _fbReady=null;
+function fbInit(){
+  if(_fbReady) return _fbReady;
+  _fbReady=new Promise(res=>{
+    const urls=['https://www.gstatic.com/firebasejs/10.12.2/firebase-app-compat.js',
+                'https://www.gstatic.com/firebasejs/10.12.2/firebase-auth-compat.js'];
+    let n=0;
+    const next=()=>{ if(n>=urls.length){
+        try{ firebase.initializeApp(FB_CFG);
+          firebase.auth().onAuthStateChanged(u=>{ _user=u; onAuthChange(); });
+          res(true); }catch(e){ res(false); } return; }
+      const s=document.createElement('script'); s.src=urls[n++];
+      s.onload=next; s.onerror=()=>res(false); document.head.appendChild(s); };
+    next();
+  });
+  return _fbReady;
+}
+async function ownerSignIn(){
+  const ok=await fbInit(); if(!ok) return alert('Google sign-in unavailable here');
+  try{ await firebase.auth().signInWithPopup(new firebase.auth.GoogleAuthProvider()); }
+  catch(e){ if(e&&e.code!=='auth/popup-closed-by-user') alert('Sign-in failed: '+(e.message||e)); }
+}
+function ownerSignOut(){ try{ firebase.auth().signOut(); }catch(e){} }
+async function onAuthChange(){
+  applyVisibility();
+  const pop=document.getElementById('apppop');
+  if(pop && pop.style.display!=='none' && window._drawAppSettings) window._drawAppSettings();
+  if(!DATA && isOwner()) await fsLoadData();     // private mode: owner just unlocked
+}
+
+/* ---- Firestore REST (reads work anonymously while public; owner uses idToken) ---- */
+function fsParse(j){
+  const f=(j&&j.fields)||{};
+  return { name:f.name?f.name.stringValue:_cfg.name,
+           public:f.public?f.public.booleanValue!==false:true,
+           owner:f.owner?f.owner.stringValue:'',
+           data:f.data?f.data.stringValue:'' };
+}
+async function fsGet(withAuth){
+  const h={};
+  if(withAuth&&_user) h['Authorization']='Bearer '+await _user.getIdToken();
+  const r=await fetch(FS_DOC+'?key='+FB_CFG.apiKey,{headers:h,cache:'no-store'});
+  if(!r.ok) throw new Error('HTTP '+r.status);
+  return fsParse(await r.json());
+}
 async function loadConfig(){
-  try{ const r=await fetch('config.json?ts='+Date.now(),{cache:'no-store'});
-    if(r.ok){ const c=await r.json();
-      if(c&&typeof c.name==='string') _cfg.name=c.name;
-      if(c&&typeof c.public==='boolean') _cfg.public=c.public;
-      applyName(); applyVisibility();
-      const i=document.getElementById('pnamein'); if(i) i.value=_cfg.name; } }
-  catch(e){}   // artifact/CSP or offline -> defaults stay (page remains usable)
+  try{
+    const c=await fsGet(false);
+    Object.assign(_cfg,{name:c.name,public:c.public,owner:c.owner});
+  }catch(e){
+    if(String(e.message).includes('403')){ _cfg.public=false; }   // private -> rules deny anon reads
+    else return;                                                   // offline/CSP -> keep defaults
+  }
+  applyName(); applyVisibility();
+  const i=document.getElementById('pnamein'); if(i) i.value=_cfg.name;
+}
+async function fsLoadData(){
+  try{
+    const c=await fsGet(true);
+    Object.assign(_cfg,{name:c.name,public:c.public,owner:c.owner});
+    if(c.data){ DATA=JSON.parse(c.data); applyName(); applyVisibility();
+      document.querySelector('.wrap').style.display=''; boot(); }
+  }catch(e){}
 }
 async function saveConfig(statusEl){
-  const tok=(localStorage.getItem('pc-ghtok')||'').trim();
-  if(!tok){ statusEl.textContent='owner key required'; statusEl.style.color='var(--down)'; return; }
-  const api=`https://api.github.com/repos/${GH_REPO}/contents/config.json`;
-  const hdr={'Authorization':'Bearer '+tok,'Accept':'application/vnd.github+json'};
+  if(!_user){ statusEl.textContent='sign in with Google first'; statusEl.style.color='var(--down)'; return; }
   statusEl.textContent='saving…'; statusEl.style.color='var(--muted)';
   try{
-    const cur=await fetch(api+'?ref='+GH_BRANCH,{headers:hdr});
-    const sha=cur.ok?(await cur.json()).sha:undefined;
-    const body={message:'update portfolio settings (from cockpit)',branch:GH_BRANCH,
-      content:btoa(unescape(encodeURIComponent(JSON.stringify({name:_cfg.name,public:_cfg.public})))), ...(sha?{sha}:{})};
-    const w=await fetch(api,{method:'PUT',headers:{...hdr,'Content-Type':'application/json'},body:JSON.stringify(body)});
-    if(!w.ok) throw new Error('HTTP '+w.status);
+    const body={fields:{name:{stringValue:_cfg.name},public:{booleanValue:_cfg.public!==false}}};
+    const r=await fetch(FS_DOC+'?updateMask.fieldPaths=name&updateMask.fieldPaths=public&key='+FB_CFG.apiKey,
+      {method:'PATCH',headers:{'Content-Type':'application/json','Authorization':'Bearer '+await _user.getIdToken()},
+       body:JSON.stringify(body)});
+    if(!r.ok) throw new Error('HTTP '+r.status);
     applyName(); applyVisibility();
-    statusEl.textContent='✓ saved — live for everyone in ~1 min'; statusEl.style.color='var(--up)';
-  }catch(e){ statusEl.textContent='failed ('+e.message+') — check owner key'; statusEl.style.color='var(--down)'; }
+    statusEl.textContent='✓ saved — live for everyone'; statusEl.style.color='var(--up)';
+  }catch(e){
+    statusEl.textContent=String(e.message).includes('403')?'not the owner account':'failed: '+e.message;
+    statusEl.style.color='var(--down)';
+  }
 }
 function initAppSettings(){
   const btn=document.getElementById('appset'), pop=document.getElementById('apppop');
@@ -733,10 +795,14 @@ function initAppSettings(){
     </div>
     <div style="font-size:11px;text-transform:uppercase;letter-spacing:.6px;color:var(--muted);font-weight:660;margin-bottom:5px">Privacy</div>
     <label style="margin-bottom:10px"><input type="checkbox" id="privchk" ${_priv?'checked':''}> Hide amounts (this device)</label>
-    <div style="font-size:11px;text-transform:uppercase;letter-spacing:.6px;color:var(--muted);font-weight:660;margin:2px 0 5px">Owner key</div>
-    <input type="password" id="ghtok" placeholder="required to save name/sharing" value="${esc(localStorage.getItem('pc-ghtok')||'')}" style="width:230px;
-      background:var(--surface-2);border:1px solid var(--border);border-radius:8px;padding:6px 10px;
-      font:inherit;font-size:12px;color:var(--ink);outline:none">`;
+    <div style="font-size:11px;text-transform:uppercase;letter-spacing:.6px;color:var(--muted);font-weight:660;margin:2px 0 6px">Owner</div>
+    ${_user
+      ? `<div style="font-size:12.5px;display:flex;align-items:center;gap:8px">
+           <span style="color:${isOwner()?'var(--up)':'var(--down)'}">●</span>
+           <span>${esc(_user.email)}${isOwner()?'':' (not the owner)'}</span>
+           <button id="fbout" class="secbtn" style="margin:0;padding:3px 9px;font-size:11.5px">Sign out</button></div>`
+      : `<button id="fbin" class="secbtn" style="margin:0;padding:6px 12px;font-size:12.5px">
+           <svg viewBox="0 0 24 24" width="13" height="13" style="vertical-align:-2px;margin-right:6px"><path fill="#4285F4" d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92a5.06 5.06 0 0 1-2.2 3.32v2.77h3.57c2.08-1.92 3.27-4.74 3.27-8.1z"/><path fill="#34A853" d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84A11 11 0 0 0 12 23z"/><path fill="#FBBC05" d="M5.84 14.1a6.6 6.6 0 0 1 0-4.2V7.06H2.18a11 11 0 0 0 0 9.88l3.66-2.84z"/><path fill="#EA4335" d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15A11 11 0 0 0 12 1 11 11 0 0 0 2.18 7.06l3.66 2.84c.87-2.6 3.3-4.52 6.16-4.52z"/></svg>Sign in with Google</button>`}`;
     pop.querySelectorAll('[data-c]').forEach(b=>b.addEventListener('click',()=>{
       _ccy=b.dataset.c; localStorage.setItem('pc-ccy',_ccy); draw(); refreshAllMoney();
     }));
@@ -755,13 +821,16 @@ function initAppSettings(){
         e.target.textContent='✓'; setTimeout(()=>e.target.textContent='Copy',1200); }
       catch(err){ pop.querySelector('#sharein').select(); document.execCommand('copy'); }
     });
-    const tokIn=pop.querySelector('#ghtok');
-    tokIn.addEventListener('input',()=>{ localStorage.setItem('pc-ghtok',tokIn.value.trim()); });
+    const fbin=pop.querySelector('#fbin');
+    if(fbin) fbin.addEventListener('click',e=>{ e.stopPropagation(); ownerSignIn(); });
+    const fbout=pop.querySelector('#fbout');
+    if(fbout) fbout.addEventListener('click',e=>{ e.stopPropagation(); ownerSignOut(); });
     pop.querySelector('#cfgsave').addEventListener('click',e=>{
       e.stopPropagation(); saveConfig(pop.querySelector('#cfgstat'));
     });
     pop.querySelectorAll('input').forEach(i=>i.addEventListener('click',e=>e.stopPropagation()));
   };
+  window._drawAppSettings=draw;
   draw();
   btn.addEventListener('click',e=>{e.stopPropagation(); pop.style.display=pop.style.display==='none'?'':'none';});
   document.addEventListener('click',e=>{ if(!pop.contains(e.target)&&e.target!==btn) pop.style.display='none'; });
@@ -963,6 +1032,7 @@ const SVG_MOON='<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strok
 function initTheme(){
   // MUST run before the first rerender(): charts/donut bake theme colors into SVG,
   // so the saved theme has to be applied to <html> before anything is drawn.
+  if(window._themeInit) return; window._themeInit=true;
   const btn=document.getElementById('themebtn');
   const saved=localStorage.getItem('pc-theme');
   if(saved) document.documentElement.setAttribute('data-theme',saved);
@@ -1396,63 +1466,12 @@ function boot(){
   window.addEventListener('resize',()=>{clearTimeout(window._rz);window._rz=setTimeout(()=>{renderChart();hydrateSparks();},150);});
 }
 
-/* ===== PIN gate for the encrypted (private) build ============================ */
-const b64d=s=>Uint8Array.from(atob(s),c=>c.charCodeAt(0));
-async function deriveKey(pin,salt,iter){
-  const km=await crypto.subtle.importKey('raw',new TextEncoder().encode(pin),'PBKDF2',false,['deriveKey']);
-  return crypto.subtle.deriveKey({name:'PBKDF2',salt,iterations:iter,hash:'SHA-256'},km,
-    {name:'AES-GCM',length:256},true,['decrypt']);
-}
-async function tryDecrypt(key){
-  const pt=await crypto.subtle.decrypt({name:'AES-GCM',iv:b64d(DATA_ENC.iv)},key,b64d(DATA_ENC.ct));
-  return JSON.parse(new TextDecoder().decode(pt));
-}
-function showGate(msg){
-  document.querySelector('.wrap').style.display='none';
-  let g=document.getElementById('pingate');
-  if(!g){ g=document.createElement('div'); g.id='pingate';
-    g.innerHTML=`<div class="lockbox">
-      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="30" height="30" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>
-      <div class="lt1">This portfolio is private</div>
-      ${DATA_ENC&&DATA_ENC.nopin?'<div class="lt2">The owner has turned off public sharing.</div>':`
-      <div class="lt2">Enter the PIN to unlock.</div>
-      <div style="display:flex;gap:8px;justify-content:center;margin-top:14px">
-        <input type="password" id="pinin" inputmode="numeric" maxlength="12" style="width:130px;text-align:center;letter-spacing:4px;
-          background:var(--surface);border:1px solid var(--border);border-radius:10px;padding:9px 10px;font:inherit;font-size:17px;color:var(--ink);outline:none">
-        <button id="pingo" class="secbtn" style="margin:0">Unlock</button>
-      </div>
-      <label style="display:flex;gap:7px;justify-content:center;align-items:center;margin-top:11px;font-size:12.5px;color:var(--muted);cursor:pointer">
-        <input type="checkbox" id="pinrem" checked> remember on this device</label>
-      <div id="pinerr" style="color:var(--down);font-size:12.5px;margin-top:9px;min-height:16px"></div>`}
-    </div>`;
-    document.body.appendChild(g);
-    const go=async()=>{
-      const pin=(document.getElementById('pinin').value||'').trim(); if(!pin) return;
-      const err=document.getElementById('pinerr'); err.textContent='';
-      try{
-        const key=await deriveKey(pin,b64d(DATA_ENC.salt),DATA_ENC.iter||150000);
-        DATA=await tryDecrypt(key);
-        if(document.getElementById('pinrem').checked){
-          const raw=await crypto.subtle.exportKey('raw',key);
-          localStorage.setItem('pc-pk',btoa(String.fromCharCode(...new Uint8Array(raw))));
-        }
-        g.remove(); document.querySelector('.wrap').style.display=''; boot();
-      }catch(e){ err.textContent='wrong PIN'; document.getElementById('pinin').value=''; }
-    };
-    const btn=document.getElementById('pingo'); if(btn){ btn.addEventListener('click',go);
-      document.getElementById('pinin').addEventListener('keydown',e=>{ if(e.key==='Enter') go(); });
-      setTimeout(()=>document.getElementById('pinin').focus(),50); }
-  }
-}
+/* ===== start: public build boots instantly; private build gates on Google sign-in ===== */
 (async function start(){
-  if(DATA){ boot(); return; }
-  if(!DATA_ENC || DATA_ENC.nopin){ showGate(); return; }
-  // silent unlock with a remembered key
-  const saved=localStorage.getItem('pc-pk');
-  if(saved){ try{
-      const key=await crypto.subtle.importKey('raw',b64d(saved),{name:'AES-GCM'},true,['decrypt']);
-      DATA=await tryDecrypt(key); boot(); return;
-    }catch(e){ localStorage.removeItem('pc-pk'); } }
-  showGate();
+  if(DATA){ boot(); fbInit(); return; }               // public: baked data, auth lazily for owner edits
+  // private build: no data in the page at all — everything comes from Firestore
+  document.querySelector('.wrap').style.display='none';
+  initTheme(); _cfg.public=false; applyVisibility();  // lock screen with "Owner sign in" button
+  await fbInit();                                     // onAuthStateChanged -> fsLoadData() when owner
 })();
 </script>
