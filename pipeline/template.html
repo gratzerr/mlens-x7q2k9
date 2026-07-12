@@ -9,11 +9,11 @@
     --plane:#eef2f7; --surface:#ffffff; --surface-2:#f3f6fa;
     --ink:#101828; --ink-2:#475467; --muted:#8290a4;
     --grid:#eef1f6; --line:#cbd5e4; --border:rgba(16,24,40,.03);
-    --up:#0a7a3c; --up-bg:rgba(10,122,60,.09);
+    --up:#3ecb63; --up-bg:rgba(62,203,99,.12);
     --down:#d13438; --down-bg:rgba(209,52,56,.09);
     --accent:#3468d6;
     --chip:#eef2f7; --chip-ink:#3d4757;
-    --confirmed:#0a7a3c; --tentative:#a98600;
+    --confirmed:#3ecb63; --tentative:#a98600;
     --radius:16px;
     --shadow:0 2px 4px rgba(30,41,59,.04),0 14px 44px rgba(30,41,59,.08);
   }
@@ -167,7 +167,10 @@
   .cvals .px{font-size:15px;font-weight:660}
   .cvals .dc{font-size:12.5px;font-weight:640;margin-top:1px}
   .sparkrow{display:flex;align-items:center;gap:10px;margin:11px 0 2px}
-  svg.spark{height:34px;flex:1;overflow:visible}
+  svg.spark{height:34px;flex:1;overflow:visible;cursor:crosshair}
+  #sptip{position:fixed;transform:translate(-50%,-100%);background:var(--ink);color:var(--surface);
+    padding:3px 8px;border-radius:6px;font-size:11.5px;font-weight:650;pointer-events:none;z-index:60;
+    display:none;font-variant-numeric:tabular-nums;white-space:nowrap}
   .rng{width:120px;flex:none}
   .rng .rtrack{height:5px;background:var(--surface-2);border-radius:3px;position:relative;margin:8px 0 3px}
   .rng .rdot{position:absolute;top:50%;width:9px;height:9px;border-radius:50%;transform:translate(-50%,-50%);border:2px solid var(--surface)}
@@ -279,7 +282,12 @@
       <div class="title"><span class="dot"></span>Rafael's Portfolio</div>
       <div class="sub"><span id="livebadge" class="badge snap">Snapshot</span> As of <b id="asof"></b> · <span id="hcount"></span> positions</div>
     </div>
-    <div><button class="secbtn" id="secalertbtn" style="display:none">SEC alerts</button><button class="themebtn" id="themebtn" title="theme"></button></div>
+    <div style="position:relative;display:flex;align-items:center;gap:8px">
+      <button class="secbtn" id="secalertbtn" style="display:none;margin-right:0">SEC alerts</button>
+      <button class="themebtn" id="appset" title="settings"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="15" height="15" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 1 1-2.83 2.83l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 1 1-4 0v-.09a1.65 1.65 0 0 0-1-1.51 1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 1 1-2.83-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 1 1 0-4h.09a1.65 1.65 0 0 0 1.51-1 1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 1 1 2.83-2.83l.06.06a1.65 1.65 0 0 0 1.82.33h.01a1.65 1.65 0 0 0 1-1.51V3a2 2 0 1 1 4 0v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 1 1 2.83 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82v.01a1.65 1.65 0 0 0 1.51 1H21a2 2 0 1 1 0 4h-.09a1.65 1.65 0 0 0-1.51 1Z"/></svg></button>
+      <button class="themebtn" id="themebtn" title="theme"></button>
+      <div class="htpop" id="apppop" style="display:none;top:44px;right:0"></div>
+    </div>
   </header>
 
   <div class="kpis" id="kpis"></div>
@@ -364,12 +372,20 @@ function colorFor(i){
   const [s,l]=isDarkTheme()?[50,52]:[54,44];        // Parqet-deep: richer, darker tones
   return `hsl(${hue.toFixed(0)} ${s}% ${l}%)`;
 }
-const fmtUsd = n => (n<0?'-':'')+'$'+Math.abs(Math.round(n)).toLocaleString('en-US');
-const fmtEur = fmtUsd; // alias (values are USD from Parqet)
-const fmtE = n => (n<0?'-':'')+'€'+Math.abs(Math.round(n)).toLocaleString('en-US'); // real EUR (PP figures)
+/* display settings: currency (USD/EUR at today's ECB rate) + privacy (mask amounts) */
+let _ccy = localStorage.getItem('pc-ccy')||'USD';
+let _priv = localStorage.getItem('pc-priv')==='1';
+const curSym = () => _ccy==='EUR' ? '€' : '$';
+const inCcy = n => _ccy==='EUR' ? n/(DATA.usdPerEur||1.14) : n;
+const MASK = '•••••';
+const fmtUsd = n => { if(_priv) return MASK; const v=inCcy(n);
+  return (v<0?'-':'')+curSym()+Math.abs(Math.round(v)).toLocaleString('en-US'); };
+const fmtEur = fmtUsd; // alias
+const fmtE = n => (n<0?'-':'')+'€'+Math.abs(Math.round(n)).toLocaleString('en-US'); // raw EUR (engine figures)
 const fmtPct = n => (n>0?'+':'')+n.toFixed(1)+'%';
-const fmtShort = n => { const a=Math.abs(n), s=n<0?'-':'';
-  return a>=1e6? s+'$'+(a/1e6).toFixed(2).replace(/\.?0+$/,'')+'M' : a>=1e3? s+'$'+Math.round(a/1e3)+'k' : s+'$'+Math.round(a); };
+const fmtShort = n => { if(_priv) return '•••'; const v=inCcy(n); const a=Math.abs(v), s=v<0?'-':'';
+  return a>=1e6? s+curSym()+(a/1e6).toFixed(2).replace(/\.?0+$/,'')+'M' : a>=1e3? s+curSym()+Math.round(a/1e3)+'k' : s+curSym()+Math.round(a); };
+const maskable = s => _priv ? MASK : s;   // for native-currency strings (prices, activity amounts)
 const esc = s => (s||'').replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
 const tIdx = tk => DATA.holdings.findIndex(x=>x.ticker===tk);
 const enDate = s => new Date(s).toLocaleDateString('en-US',{month:'short',day:'2-digit'});
@@ -382,11 +398,13 @@ function renderKpis(){
   const rl=d.ppRealizedUsd!=null?d.ppRealizedUsd:d.realizedAllTime;
   const gn=(un||0)>=0, rz=(rl||0)>=0;
   const invested=d.holdings.filter(h=>h.assetType!=='cash').reduce((s,h)=>s+(h.ppBasisUsd||0),0);
+  // gains: in EUR mode use the engine-exact EUR figures (verified vs the PP app), not FX-converted USD
+  const money=(usd,eur)=>_priv?MASK:(_ccy==='EUR'&&eur!=null?fmtE(eur):fmtUsd(usd));
   const tiles=[
     {lab:'Portfolio Value', val:fmtUsd(d.totalValue),
-     note:'USD · '+(d.holdings.length-1)+' positions<br>invested capital '+fmtUsd(invested)+' · net cash '+fmtUsd(d.cashValue)},
-    {lab:'Unrealized Gain', val:fmtUsd(un), note:'current holdings · FIFO vs cost', cls:gn?'up':'down'},
-    {lab:'Realized Gain', val:fmtUsd(rl), note:'booked from sells since 2022', cls:rz?'up':'down'},
+     note:_ccy+' · '+(d.holdings.length-1)+' positions<br>invested capital '+fmtUsd(invested)+' · net cash '+fmtUsd(d.cashValue)},
+    {lab:'Unrealized Gain', val:money(un,d.ppUnrealizedEur), note:'current holdings · FIFO vs cost', cls:gn?'up':'down'},
+    {lab:'Realized Gain', val:money(rl,d.ppRealizedEur), note:'booked from sells since 2022', cls:rz?'up':'down'},
     {lab:'Return YTD', val:fmtPct(d.ttwrorYtd||0), note:'since inception (2022) '+fmtPct(d.since2022!=null?d.since2022:(d.pp&&d.pp.ppReferenceTtwror)||0)+'<br>IRR '+(d.izf||0).toFixed(1)+'%', cls:(d.ttwrorYtd||0)>=0?'up':'down'},
   ];
   document.getElementById('kpis').innerHTML = tiles.map(t=>
@@ -459,13 +477,14 @@ function renderChart(){
   const pts=chartSlice();
   renderChartRet(pts);
   if(pts.length<2){svg.innerHTML='';return;}
+  const val=p=>(_ccy==='EUR'&&p.e!=null)?p.e:p.v;   // exact daily-FX EUR series when toggled
   const T=d=>new Date(d).getTime();
   const t0=T(pts[0].d), t1=T(pts[pts.length-1].d), tspan=(t1-t0)||1;
   const spanDays=tspan/86400000;
-  const vs=pts.map(p=>p.v); const vmin=Math.min(...vs), vmax=Math.max(...vs);
+  const vs=pts.map(val); const vmin=Math.min(...vs), vmax=Math.max(...vs);
   const X=d=>pad.l + (T(d)-t0)/tspan*(W-pad.l-pad.r);
   const Y=v=>pad.t + (1-(v-vmin)/(vmax-vmin||1))*(H-pad.t-pad.b);
-  const line=pts.map((p,i)=>`${i?'L':'M'}${X(p.d).toFixed(1)},${Y(p.v).toFixed(1)}`).join(' ');
+  const line=pts.map((p,i)=>`${i?'L':'M'}${X(p.d).toFixed(1)},${Y(val(p)).toFixed(1)}`).join(' ');
   const area=line+` L${X(pts[pts.length-1].d).toFixed(1)},${H-pad.b} L${X(pts[0].d).toFixed(1)},${H-pad.b} Z`;
   const acc=cvar('--ink'), gc=cvar('--grid'), mc=cvar('--muted');   // Parqet-style: ink line (black/white)
   // y gridlines at NICE round steps ($250k / $500k / ...), compact labels ($1.5M)
@@ -474,8 +493,9 @@ function renderChart(){
     const span=(vmax-vmin)||1, raw=span/4;
     const mag=Math.pow(10,Math.floor(Math.log10(raw)));
     const step=[1,2,2.5,5,10].map(m=>m*mag).find(s=>span/s<=5)||5*mag;
-    const fmtTick=v=> v>=1e6? '$'+(v/1e6).toFixed(v%1e6?1:0).replace(/\.0$/,'')+'M'
-                    : v>=1e3? '$'+Math.round(v/1e3)+'k' : '$'+Math.round(v);
+    const fmtTick=v=>{ if(_priv) return ''; const cs=curSym();
+      return v>=1e6? cs+(v/1e6).toFixed(v%1e6?1:0).replace(/\.0$/,'')+'M'
+           : v>=1e3? cs+Math.round(v/1e3)+'k' : cs+Math.round(v); };
     for(let v=Math.ceil(vmin/step)*step; v<=vmax+1e-9; v+=step){
       const y=Y(v).toFixed(1);
       if(+y<pad.t+8||+y>H-pad.b-2) continue;
@@ -507,7 +527,7 @@ function renderChart(){
        <stop offset="1" stop-color="${acc}" stop-opacity="0"/></linearGradient></defs>`+
     `<path d="${area}" fill="url(#g)"/>`+
     `<path d="${line}" fill="none" stroke="${acc}" stroke-width="2.4" stroke-linejoin="round" stroke-linecap="round"/>`+
-    `<circle cx="${X(pts[pts.length-1].d).toFixed(1)}" cy="${Y(pts[pts.length-1].v).toFixed(1)}" r="4" fill="${acc}" stroke="${cvar('--surface')}" stroke-width="2"/>`+
+    `<circle cx="${X(pts[pts.length-1].d).toFixed(1)}" cy="${Y(val(pts[pts.length-1])).toFixed(1)}" r="4" fill="${acc}" stroke="${cvar('--surface')}" stroke-width="2"/>`+
     `<line class="cross" id="cx" x1="0" y1="${pad.t}" x2="0" y2="${yb}" style="opacity:0"/>`+
     `<circle id="cd" r="4.5" fill="${acc}" stroke="${cvar('--surface')}" stroke-width="2" style="opacity:0"/>`;
   const cx=svg.querySelector('#cx'), cd=svg.querySelector('#cd');
@@ -516,30 +536,57 @@ function renderChart(){
     const mx=(e.touches?e.touches[0].clientX:e.clientX)-r.left;
     const targT=t0 + Math.max(0,Math.min(1,mx/r.width))*tspan;
     let bi=0,bd=1e18; for(let i=0;i<pts.length;i++){const dd=Math.abs(T(pts[i].d)-targT); if(dd<bd){bd=dd;bi=i;}}
-    const p=pts[bi], px=X(p.d), py=Y(p.v);
+    const p=pts[bi], px=X(p.d), py=Y(val(p));
     cx.setAttribute('x1',px);cx.setAttribute('x2',px);cx.style.opacity=1;
     cd.setAttribute('cx',px);cd.setAttribute('cy',py);cd.style.opacity=1;
     tip.style.opacity=1; tip.style.left=(px/W*r.width)+'px'; tip.style.top=(py/H*r.height)+'px';
     const dt=new Date(p.d).toLocaleDateString('en-US',{day:'2-digit',month:'short',year:'numeric'});
-    tip.innerHTML=`<span class="tv">${fmtUsd(p.v)}</span> · ${dt}`;
+    const tv=_priv?MASK:(curSym()+Math.abs(Math.round(val(p))).toLocaleString('en-US'));
+    tip.innerHTML=`<span class="tv">${tv}</span> · ${dt}`;
   }
   svg.addEventListener('mousemove',move);
   svg.addEventListener('touchmove',move,{passive:true});
   svg.addEventListener('mouseleave',()=>{cx.style.opacity=0;cd.style.opacity=0;tip.style.opacity=0;});
 }
 
-/* ---- sparkline (per card) ---- */
-function sparkSvg(spark, up){
-  if(!spark||spark.length<2) return '';
-  const W=200,H=34,p=3;
-  const mn=Math.min(...spark), mx=Math.max(...spark);
-  const X=i=>p+(i/(spark.length-1))*(W-2*p);
-  const Y=v=>p+(1-(v-mn)/(mx-mn||1))*(H-2*p);
-  const col=up?cvar('--up'):cvar('--down');
-  const d=spark.map((v,i)=>`${i?'L':'M'}${X(i).toFixed(1)},${Y(v).toFixed(1)}`).join(' ');
-  return `<svg class="spark" viewBox="0 0 ${W} ${H}" preserveAspectRatio="none">
-    <path d="${d}" fill="none" stroke="${col}" stroke-width="1.6" stroke-linejoin="round" stroke-linecap="round"/>
-    <circle cx="${X(spark.length-1).toFixed(1)}" cy="${Y(spark[spark.length-1]).toFixed(1)}" r="2.6" fill="${col}"/></svg>`;
+/* ---- sparkline (per card): pixel-true, colored by DAY change, interactive hover ---- */
+function sparkSvg(h){
+  const sp=h.spark; if(!sp||sp.length<2) return '';
+  const dayUp=(h.dayChange!=null?h.dayChange:(h.unrealizedReturn||0))>=0;   // intraday line -> day color
+  const sym=h.liveCcy==='CAD'?'C$':'$';
+  return `<svg class="spark" data-v="${sp.join(',')}" data-up="${dayUp?1:0}" data-sym="${sym}"></svg>`;
+}
+function getSpTip(){ let t=document.getElementById('sptip');
+  if(!t){ t=document.createElement('div'); t.id='sptip'; document.body.appendChild(t); } return t; }
+function hydrateSparks(){
+  document.querySelectorAll('svg.spark[data-v]').forEach(svg=>{
+    const vs=(svg.dataset.v||'').split(',').map(Number).filter(x=>!isNaN(x)); if(vs.length<2) return;
+    const W=Math.max(80,Math.round(svg.clientWidth||200)), H=34, p=4;
+    svg.setAttribute('viewBox',`0 0 ${W} ${H}`);
+    const mn=Math.min(...vs), mx=Math.max(...vs);
+    const X=i=>p+(i/(vs.length-1))*(W-2*p), Y=v=>p+(1-(v-mn)/(mx-mn||1))*(H-2*p);
+    const col=svg.dataset.up==='1'?cvar('--up'):cvar('--down');
+    const d=vs.map((v,i)=>`${i?'L':'M'}${X(i).toFixed(1)},${Y(v).toFixed(1)}`).join(' ');
+    svg.innerHTML=`<path d="${d}" fill="none" stroke="${col}" stroke-width="1.6" stroke-linejoin="round" stroke-linecap="round"/>
+      <circle cx="${X(vs.length-1).toFixed(1)}" cy="${Y(vs[vs.length-1]).toFixed(1)}" r="2.6" fill="${col}"/>
+      <circle class="spcur" r="3.2" fill="${col}" stroke="${cvar('--surface')}" stroke-width="1.5" style="opacity:0"/>`;
+    svg._geo={vs,X,Y,W};
+    if(svg._hooked) return; svg._hooked=true;
+    const tipEl=getSpTip();
+    const move=e=>{
+      const g=svg._geo, r=svg.getBoundingClientRect();
+      const fx=(e.touches?e.touches[0].clientX:e.clientX)-r.left;
+      const i=Math.max(0,Math.min(g.vs.length-1,Math.round(fx/r.width*(g.vs.length-1))));
+      const cur=svg.querySelector('.spcur');
+      cur.setAttribute('cx',g.X(i)); cur.setAttribute('cy',g.Y(g.vs[i])); cur.style.opacity=1;
+      tipEl.style.display='block';
+      tipEl.style.left=(r.left+g.X(i)/g.W*r.width)+'px'; tipEl.style.top=(r.top-6)+'px';
+      tipEl.textContent=svg.dataset.sym+g.vs[i].toLocaleString('en-US',{minimumFractionDigits:2,maximumFractionDigits:4});
+    };
+    svg.addEventListener('mousemove',move);
+    svg.addEventListener('touchmove',move,{passive:true});
+    svg.addEventListener('mouseleave',()=>{ svg.querySelector('.spcur').style.opacity=0; tipEl.style.display='none'; });
+  });
 }
 
 /* ---- Holdings table (Parqet-style: stacked primary/secondary cells; data from PP) ---- */
@@ -579,8 +626,8 @@ function renderHoldingsTable(){
     +'<tbody>'+rows.map(r=>{
       const cells=[];
       cells.push(`<td><div class="hname">${logoImg(r.h.logos,'llogo')}<div style="min-width:0"><div class="c1">${esc(r.h.ticker)}</div><div class="nm2">${esc(r.h.name)}</div></div></div></td>`);
-      if(_hcols.shares) cells.push(`<td><div class="c1">${r.shares!=null?(+r.shares).toLocaleString('en-US'):'—'}</div></td>`);
-      if(_hcols.entry) cells.push(`<td><div class="c1">${r.avg!=null?r.sym+fmt2(r.avg,r.avg<1?4:2):'—'}</div><div class="c2">${r.basis?fmtUsd(r.basis):''}</div></td>`);
+      if(_hcols.shares) cells.push(`<td><div class="c1">${r.shares!=null?maskable((+r.shares).toLocaleString('en-US')):'—'}</div></td>`);
+      if(_hcols.entry) cells.push(`<td><div class="c1">${r.avg!=null?maskable(r.sym+fmt2(r.avg,r.avg<1?4:2)):'—'}</div><div class="c2">${r.basis?fmtUsd(r.basis):''}</div></td>`);
       if(_hcols.price) cells.push(`<td><div class="c1">${r.price!=null?r.sym+fmt2(r.price,r.price<1?4:2):'—'}</div><div class="c2">&nbsp;</div></td>`);
       if(_hcols.day) cells.push(`<td><div class="c1 ${r.day==null?'':(r.day>=0?'up':'down')}">${r.day==null?'—':fmtPct(r.day)}</div></td>`);
       const gup=(r.gain||0)>=0;
@@ -600,6 +647,29 @@ function renderHoldingsTable(){
     if(_hsort.key===key) _hsort.dir*=-1; else _hsort={key,dir:-1};
     renderHoldingsTable();
   }));
+}
+function refreshAllMoney(){ renderKpis(); rerender(); renderActivities(); }
+function initAppSettings(){
+  const btn=document.getElementById('appset'), pop=document.getElementById('apppop');
+  if(!btn||!pop) return;
+  const draw=()=>{ pop.innerHTML=`
+    <div style="font-size:11px;text-transform:uppercase;letter-spacing:.6px;color:var(--muted);font-weight:660;margin-bottom:7px">Currency</div>
+    <div class="tfsel" style="margin-bottom:12px">
+      <button data-c="USD" class="${_ccy==='USD'?'on':''}">USD</button>
+      <button data-c="EUR" class="${_ccy==='EUR'?'on':''}">EUR</button>
+    </div>
+    <div style="font-size:11px;text-transform:uppercase;letter-spacing:.6px;color:var(--muted);font-weight:660;margin-bottom:5px">Privacy</div>
+    <label><input type="checkbox" id="privchk" ${_priv?'checked':''}> Hide amounts (private view)</label>`;
+    pop.querySelectorAll('[data-c]').forEach(b=>b.addEventListener('click',()=>{
+      _ccy=b.dataset.c; localStorage.setItem('pc-ccy',_ccy); draw(); refreshAllMoney();
+    }));
+    pop.querySelector('#privchk').addEventListener('change',e=>{
+      _priv=e.target.checked; localStorage.setItem('pc-priv',_priv?'1':'0'); refreshAllMoney();
+    });
+  };
+  draw();
+  btn.addEventListener('click',e=>{e.stopPropagation(); pop.style.display=pop.style.display==='none'?'':'none';});
+  document.addEventListener('click',e=>{ if(!pop.contains(e.target)&&e.target!==btn) pop.style.display='none'; });
 }
 function initHtSettings(){
   const gear=document.getElementById('htgear'), pop=document.getElementById('htpop');
@@ -763,7 +833,7 @@ function renderHoldings(){
       rng=`<div class="rng"><div class="rtrack"><div class="rdot" style="left:${h.pos52}%;background:${cvar('--accent')}"></div></div>
         <div class="rlab"><span>$${h.lo52}</span><span>52w</span><span>$${h.hi52}</span></div></div>`;
     }
-    const spark=sparkSvg(h.spark, up);
+    const spark=sparkSvg(h);
     return `<div class="card">
       <div class="chead">
         <div class="cname">${logoImg(h.logos,'hlogo')}
@@ -789,6 +859,7 @@ function renderHoldings(){
     b.previousElementSibling.querySelectorAll('li').forEach(li=>li.style.display='');
     b.remove();
   }));
+  hydrateSparks();
 }
 
 /* ---- theme ---- */
@@ -1169,8 +1240,8 @@ function renderActivities(){
       <div class="atype ${actCls(a.type)}">${esc(a.type.replace(/([a-z])([A-Z])/g,'$1 $2').toUpperCase())}</div>
       ${actLogo(a,tk)}
       <div class="amain"><div class="aname">${esc(tk)}${nm&&nm!==tk?' <span class="asub">'+esc(nm)+'</span>':''}</div>
-        ${sub?`<div class="asub">${esc(sub)}</div>`:''}</div>
-      <div class="aval tnum">${sign}${sym}${(+a.amount).toLocaleString('en-US',{minimumFractionDigits:2,maximumFractionDigits:2})}</div>
+        ${sub?`<div class="asub">${maskable(esc(sub))}</div>`:''}</div>
+      <div class="aval tnum">${maskable(sign+sym+(+a.amount).toLocaleString('en-US',{minimumFractionDigits:2,maximumFractionDigits:2}))}</div>
     </div>`;
   }).join('');
   const btn=document.getElementById('actmore');
@@ -1224,6 +1295,6 @@ document.getElementById('asof').textContent=new Date(DATA.asOf).toLocaleDateStri
 document.getElementById('hcount').textContent=DATA.holdings.filter(h=>h.assetType!=='cash').length;
 document.getElementById('foot').innerHTML='Snapshot built '+esc(DATA.generated)+
   ' · When hosted live, prices refresh every 3 min (Yahoo) and headlines every 15 min (GDELT), computed in your browser · Curated news &amp; catalysts refreshed twice daily · Not investment advice.<br>Green dot = confirmed date, amber dot = estimated.';
-initTheme(); loadSocialCache(); renderKpis(); renderTfSel(); renderSocial(); rerender(); initSecAlerts(); initHtSettings(); startLive();
-window.addEventListener('resize',()=>{clearTimeout(window._rz);window._rz=setTimeout(renderChart,150);});
+initTheme(); loadSocialCache(); renderKpis(); renderTfSel(); renderSocial(); rerender(); initSecAlerts(); initHtSettings(); initAppSettings(); startLive();
+window.addEventListener('resize',()=>{clearTimeout(window._rz);window._rz=setTimeout(()=>{renderChart();hydrateSparks();},150);});
 </script>

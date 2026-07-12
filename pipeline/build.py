@@ -243,6 +243,10 @@ data = {
     # PP-exact capital gains (FIFO over depot.xml, USD at tx-date rates) — KPI tiles, not Parqet
     "ppRealizedUsd": pp.get("realizedUsd") if pp else None,
     "ppUnrealizedUsd": pp.get("unrealizedUsd") if pp else None,
+    # engine-exact EUR twins + current FX for the currency toggle
+    "ppRealizedEur": pp.get("realizedEur") if pp else None,
+    "ppUnrealizedEur": pp.get("unrealizedEur") if pp else None,
+    "usdPerEur": usd_per_eur if pp else 1.14,
     # PP net-worth curve (daily EUR value + cum TTWROR) — replaces Parqet's wrong chart
     "chartPP": pp.get("series", []) if pp else [],
     # every security ever traded (isin -> ticker/name) so sold positions render in Activities
