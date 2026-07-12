@@ -226,6 +226,10 @@
   .htpop{position:absolute;right:14px;top:40px;z-index:20;background:var(--surface);border:1px solid var(--border);
     border-radius:10px;padding:10px 14px;box-shadow:0 8px 28px rgba(0,0,0,.18);font-size:13px}
   .htpop label{display:flex;gap:8px;align-items:center;padding:4px 0;cursor:pointer;white-space:nowrap}
+  #lockov{position:fixed;inset:0;background:var(--plane);z-index:100;display:flex;align-items:center;justify-content:center}
+  #lockov .lockbox{text-align:center;color:var(--muted)}
+  #lockov .lt1{font-size:19px;font-weight:700;color:var(--ink);margin-top:12px}
+  #lockov .lt2{font-size:13.5px;margin-top:5px}
   /* activities */
   .act{display:grid;grid-template-columns:86px 78px 26px 1fr auto;gap:10px;align-items:center;padding:9px 2px;border-top:1px solid var(--grid);font-size:13px}
   .alogo{width:26px;height:26px;border-radius:7px;object-fit:contain;background:#fff;border:1px solid var(--border);display:block}
@@ -649,55 +653,77 @@ function renderHoldingsTable(){
   }));
 }
 function refreshAllMoney(){ renderKpis(); rerender(); renderActivities(); }
-/* global site name lives in config.json in the Pages repo — every visitor loads it.
-   The owner can rewrite it straight from the page via a fine-grained GitHub token
-   (stored ONLY in the owner's browser, never in the page/repo). */
+/* Parqet-style ownership: config.json in the Pages repo holds {name, public}.
+   EVERY visitor loads it — the owner's name shows for everyone, and public:false
+   locks the page for anyone without the owner key. The owner edits both straight
+   from settings via a fine-grained GitHub token (kept ONLY in the owner's browser). */
 const GH_REPO='gratzerr/mlens-x7q2k9', GH_BRANCH='main';
-let _gname=null;   // global name from config.json
-let _pname = localStorage.getItem('pc-name') || "Rafael's Portfolio";
-function effName(){ return localStorage.getItem('pc-name') || _gname || "Rafael's Portfolio"; }
+let _cfg={name:"Rafael's Portfolio", public:true};
+const isOwner=()=>!!(localStorage.getItem('pc-ghtok')||'').trim();
 function applyName(){
-  const el=document.getElementById('ptitle'); if(el) el.textContent=effName();
-  document.title=effName();
+  const el=document.getElementById('ptitle'); if(el) el.textContent=_cfg.name;
+  document.title=_cfg.name;
 }
-async function loadGlobalName(){
+function applyVisibility(){
+  let ov=document.getElementById('lockov');
+  const locked=_cfg.public===false && !isOwner();
+  if(locked){
+    if(!ov){ ov=document.createElement('div'); ov.id='lockov';
+      ov.innerHTML='<div class="lockbox"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="30" height="30" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg><div class="lt1">This portfolio is private</div><div class="lt2">The owner has turned off public sharing.</div></div>';
+      document.body.appendChild(ov); }
+    ov.style.display='flex';
+  } else if(ov) ov.style.display='none';
+}
+async function loadConfig(){
   try{ const r=await fetch('config.json?ts='+Date.now(),{cache:'no-store'});
-    if(r.ok){ const c=await r.json(); if(c&&c.name){ _gname=c.name; applyName();
-      const i=document.getElementById('pnamein'); if(i&&!localStorage.getItem('pc-name')) i.value=_gname; } }
-  }catch(e){}
+    if(r.ok){ const c=await r.json();
+      if(c&&typeof c.name==='string') _cfg.name=c.name;
+      if(c&&typeof c.public==='boolean') _cfg.public=c.public;
+      applyName(); applyVisibility();
+      const i=document.getElementById('pnamein'); if(i) i.value=_cfg.name; } }
+  catch(e){}   // artifact/CSP or offline -> defaults stay (page remains usable)
 }
-async function saveGlobalName(name,tok,statusEl){
+async function saveConfig(statusEl){
+  const tok=(localStorage.getItem('pc-ghtok')||'').trim();
+  if(!tok){ statusEl.textContent='owner key required'; statusEl.style.color='var(--down)'; return; }
   const api=`https://api.github.com/repos/${GH_REPO}/contents/config.json`;
   const hdr={'Authorization':'Bearer '+tok,'Accept':'application/vnd.github+json'};
-  statusEl.textContent='saving…';
+  statusEl.textContent='saving…'; statusEl.style.color='var(--muted)';
   try{
     const cur=await fetch(api+'?ref='+GH_BRANCH,{headers:hdr});
     const sha=cur.ok?(await cur.json()).sha:undefined;
-    const body={message:'rename portfolio (from cockpit settings)',branch:GH_BRANCH,
-      content:btoa(unescape(encodeURIComponent(JSON.stringify({name})))), ...(sha?{sha}:{})};
+    const body={message:'update portfolio settings (from cockpit)',branch:GH_BRANCH,
+      content:btoa(unescape(encodeURIComponent(JSON.stringify({name:_cfg.name,public:_cfg.public})))), ...(sha?{sha}:{})};
     const w=await fetch(api,{method:'PUT',headers:{...hdr,'Content-Type':'application/json'},body:JSON.stringify(body)});
     if(!w.ok) throw new Error('HTTP '+w.status);
-    _gname=name; localStorage.removeItem('pc-name'); applyName();
-    statusEl.textContent='✓ live for everyone (~1 min)'; statusEl.style.color='var(--up)';
-  }catch(e){ statusEl.textContent='failed: '+e.message+' — check token'; statusEl.style.color='var(--down)'; }
+    applyName(); applyVisibility();
+    statusEl.textContent='✓ saved — live for everyone in ~1 min'; statusEl.style.color='var(--up)';
+  }catch(e){ statusEl.textContent='failed ('+e.message+') — check owner key'; statusEl.style.color='var(--down)'; }
 }
 function initAppSettings(){
   const btn=document.getElementById('appset'), pop=document.getElementById('apppop');
   if(!btn||!pop) return;
   applyName();
-  const draw=()=>{ const tok=localStorage.getItem('pc-ghtok')||''; pop.innerHTML=`
+  const shareUrl='https://gratzerr.github.io/mlens-x7q2k9/';
+  const draw=()=>{ pop.innerHTML=`
     <div style="font-size:11px;text-transform:uppercase;letter-spacing:.6px;color:var(--muted);font-weight:660;margin-bottom:6px">Portfolio name</div>
-    <input type="text" id="pnamein" value="${esc(effName())}" maxlength="40" style="width:210px;margin-bottom:7px;
+    <input type="text" id="pnamein" value="${esc(_cfg.name)}" maxlength="40" style="width:230px;margin-bottom:12px;
       background:var(--surface-2);border:1px solid var(--border);border-radius:8px;padding:7px 10px;
       font:inherit;font-size:13px;color:var(--ink);outline:none">
-    <div style="display:flex;align-items:center;gap:8px;margin-bottom:4px">
-      <button id="pnamesave" class="secbtn" style="margin:0;padding:5px 10px;font-size:12px">Save for everyone</button>
-      <span id="pnamestat" style="font-size:11.5px;color:var(--muted)"></span>
+    <div style="font-size:11px;text-transform:uppercase;letter-spacing:.6px;color:var(--muted);font-weight:660;margin-bottom:7px">Sharing</div>
+    <div class="tfsel" style="margin-bottom:8px">
+      <button data-vis="1" class="${_cfg.public!==false?'on':''}">Public</button>
+      <button data-vis="0" class="${_cfg.public===false?'on':''}">Private</button>
     </div>
-    <div id="ownerrow" style="margin-bottom:12px">
-      <input type="password" id="ghtok" placeholder="owner key (GitHub token)" value="${esc(tok)}" style="width:210px;margin-top:4px;
-        background:var(--surface-2);border:1px solid var(--border);border-radius:8px;padding:6px 10px;
-        font:inherit;font-size:12px;color:var(--ink);outline:none">
+    <div style="display:flex;gap:6px;margin-bottom:12px">
+      <input type="text" readonly value="${shareUrl}" id="sharein" style="flex:1;min-width:150px;
+        background:var(--surface-2);border:1px solid var(--border);border-radius:8px;padding:6px 9px;
+        font:inherit;font-size:11.5px;color:var(--muted);outline:none">
+      <button id="sharecopy" class="secbtn" style="margin:0;padding:5px 11px;font-size:12px">Copy</button>
+    </div>
+    <div style="display:flex;align-items:center;gap:8px;margin-bottom:12px">
+      <button id="cfgsave" class="secbtn" style="margin:0;padding:6px 12px;font-size:12.5px;font-weight:650">Save</button>
+      <span id="cfgstat" style="font-size:11.5px;color:var(--muted)"></span>
     </div>
     <div style="font-size:11px;text-transform:uppercase;letter-spacing:.6px;color:var(--muted);font-weight:660;margin-bottom:7px">Currency</div>
     <div class="tfsel" style="margin-bottom:12px">
@@ -705,7 +731,11 @@ function initAppSettings(){
       <button data-c="EUR" class="${_ccy==='EUR'?'on':''}">EUR</button>
     </div>
     <div style="font-size:11px;text-transform:uppercase;letter-spacing:.6px;color:var(--muted);font-weight:660;margin-bottom:5px">Privacy</div>
-    <label><input type="checkbox" id="privchk" ${_priv?'checked':''}> Hide amounts (private view)</label>`;
+    <label style="margin-bottom:10px"><input type="checkbox" id="privchk" ${_priv?'checked':''}> Hide amounts (this device)</label>
+    <div style="font-size:11px;text-transform:uppercase;letter-spacing:.6px;color:var(--muted);font-weight:660;margin:2px 0 5px">Owner key</div>
+    <input type="password" id="ghtok" placeholder="required to save name/sharing" value="${esc(localStorage.getItem('pc-ghtok')||'')}" style="width:230px;
+      background:var(--surface-2);border:1px solid var(--border);border-radius:8px;padding:6px 10px;
+      font:inherit;font-size:12px;color:var(--ink);outline:none">`;
     pop.querySelectorAll('[data-c]').forEach(b=>b.addEventListener('click',()=>{
       _ccy=b.dataset.c; localStorage.setItem('pc-ccy',_ccy); draw(); refreshAllMoney();
     }));
@@ -713,19 +743,21 @@ function initAppSettings(){
       _priv=e.target.checked; localStorage.setItem('pc-priv',_priv?'1':'0'); refreshAllMoney();
     });
     const nameIn=pop.querySelector('#pnamein');
-    nameIn.addEventListener('input',()=>{
-      const v=nameIn.value.trim();
-      if(v) localStorage.setItem('pc-name',v); else localStorage.removeItem('pc-name');
-      applyName();
+    nameIn.addEventListener('input',()=>{ _cfg.name=nameIn.value.trim()||"Rafael's Portfolio"; applyName(); });
+    pop.querySelectorAll('[data-vis]').forEach(b=>b.addEventListener('click',e=>{
+      e.stopPropagation(); _cfg.public=b.dataset.vis==='1';
+      pop.querySelectorAll('[data-vis]').forEach(x=>x.classList.toggle('on',x===b));
+    }));
+    pop.querySelector('#sharecopy').addEventListener('click',async e=>{
+      e.stopPropagation();
+      try{ await navigator.clipboard.writeText(shareUrl);
+        e.target.textContent='✓'; setTimeout(()=>e.target.textContent='Copy',1200); }
+      catch(err){ pop.querySelector('#sharein').select(); document.execCommand('copy'); }
     });
     const tokIn=pop.querySelector('#ghtok');
     tokIn.addEventListener('input',()=>{ localStorage.setItem('pc-ghtok',tokIn.value.trim()); });
-    pop.querySelector('#pnamesave').addEventListener('click',e=>{
-      e.stopPropagation();
-      const t=(tokIn.value||'').trim(), stat=pop.querySelector('#pnamestat');
-      const name=nameIn.value.trim()||"Rafael's Portfolio";
-      if(!t){ stat.textContent='paste your owner key below first'; stat.style.color='var(--down)'; return; }
-      saveGlobalName(name,t,stat);
+    pop.querySelector('#cfgsave').addEventListener('click',e=>{
+      e.stopPropagation(); saveConfig(pop.querySelector('#cfgstat'));
     });
     pop.querySelectorAll('input').forEach(i=>i.addEventListener('click',e=>e.stopPropagation()));
   };
@@ -1357,6 +1389,6 @@ document.getElementById('asof').textContent=new Date(DATA.asOf).toLocaleDateStri
 document.getElementById('hcount').textContent=DATA.holdings.filter(h=>h.assetType!=='cash').length;
 document.getElementById('foot').innerHTML='Snapshot built '+esc(DATA.generated)+
   ' · When hosted live, prices refresh every 3 min (Yahoo) and headlines every 15 min (GDELT), computed in your browser · Curated news &amp; catalysts refreshed twice daily · Not investment advice.<br>Green dot = confirmed date, amber dot = estimated.';
-initTheme(); loadSocialCache(); renderKpis(); renderTfSel(); renderSocial(); rerender(); initSecAlerts(); initHtSettings(); initAppSettings(); loadGlobalName(); startLive();
+initTheme(); applyName(); loadConfig(); loadSocialCache(); renderKpis(); renderTfSel(); renderSocial(); rerender(); initSecAlerts(); initHtSettings(); initAppSettings(); startLive();
 window.addEventListener('resize',()=>{clearTimeout(window._rz);window._rz=setTimeout(()=>{renderChart();hydrateSparks();},150);});
 </script>
