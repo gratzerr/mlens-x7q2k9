@@ -132,6 +132,7 @@
   .pfmid{position:absolute;left:50%;top:0;bottom:0;width:1px;background:var(--line)}
   .pffill{position:absolute;top:2px;bottom:2px;border-radius:3px;min-width:2px}
   .pf .pfv{width:56px;text-align:right;font-size:12.5px;font-weight:640}
+  .pf .pfg{width:76px;text-align:right;font-size:12px;font-weight:600;opacity:.85}
 
   /* timeline */
   .tl{display:flex;flex-direction:column;gap:2px;max-height:360px;overflow-y:auto}
@@ -249,17 +250,6 @@
 
   <div class="kpis" id="kpis"></div>
 
-  <div class="cols">
-    <div class="panel">
-      <h2><span class="live"></span>Latest News</h2>
-      <div class="feed" id="feed"></div>
-    </div>
-    <div class="panel">
-      <h2><span class="live"></span>Social buzz · Stocktwits</h2>
-      <div class="feed social" id="social"></div>
-    </div>
-  </div>
-
   <div class="panel">
     <div class="chart-head">
       <h2 style="margin:0">Portfolio Value <span id="chart-ret"></span></h2>
@@ -279,6 +269,22 @@
     <div class="panel">
       <h2>Performance by Holding</h2>
       <div id="perfbars"></div>
+    </div>
+  </div>
+
+  <div class="panel">
+    <h2>Upcoming Catalysts</h2>
+    <div class="tl" id="timeline"></div>
+  </div>
+
+  <div class="cols">
+    <div class="panel">
+      <h2><span class="live"></span>Latest News</h2>
+      <div class="feed" id="feed"></div>
+    </div>
+    <div class="panel">
+      <h2><span class="live"></span>Social buzz · Stocktwits</h2>
+      <div class="feed social" id="social"></div>
     </div>
   </div>
 
@@ -554,12 +560,14 @@ function renderPerfBars(){
   el.innerHTML=hs.map(h=>{
     const v=h.unrealizedReturn||0, up=v>=0, col=up?cvar('--up'):cvar('--down');
     const w=(Math.abs(v)/mx*50).toFixed(1);            // half-width max (bidirectional from center)
+    const g=h.totalGainNet, gup=(g||0)>=0;
     return `<div class="pf">
       ${logoImg(h.logos,'plogo')}
       <div class="pft">${esc(h.ticker)}</div>
       <div class="pfbar"><div class="pfmid"></div>
         <div class="pffill" style="${up?'left:50%':'right:50%'};width:${w}%;background:${col}"></div></div>
-      <div class="pfv tnum ${up?'up':'down'}">${fmtPct(v)}</div></div>`;
+      <div class="pfv tnum ${up?'up':'down'}">${fmtPct(v)}</div>
+      <div class="pfg tnum ${gup?'up':'down'}">${g!=null?fmtUsd(g):''}</div></div>`;
   }).join('');
 }
 
@@ -588,7 +596,10 @@ function catKey(w){
   return '99999999';
 }
 function renderTimeline(){
-  const cats=[...DATA.catalysts].sort((a,b)=>catKey(a.when).localeCompare(catKey(b.when)));
+  const today=new Date().toISOString().slice(0,10).replace(/-/g,'');
+  const cats=[...DATA.catalysts]
+    .filter(c=>catKey(c.when)>=today)                    // upcoming only — past readouts drop off
+    .sort((a,b)=>catKey(a.when).localeCompare(catKey(b.when)));
   document.getElementById('timeline').innerHTML = cats.map(c=>{
     const cf=c.confirmed?cvar('--confirmed'):cvar('--tentative');
     return `<div class="tl-item">
@@ -674,7 +685,7 @@ function initTheme(){
     rerender();
   });
 }
-function rerender(){ renderFeed(); renderChart(); renderAlloc(); renderPerfBars(); renderHoldings(); }
+function rerender(){ renderFeed(); renderChart(); renderAlloc(); renderPerfBars(); renderTimeline(); renderHoldings(); }
 
 /* ===== LIVE DATA LAYER =====================================================
    Works on GitHub Pages (fetch allowed). Inside the Claude artifact the CSP
@@ -780,15 +791,20 @@ async function fetchGdelt(q){
     "&mode=ArtList&maxrecords=12&format=json&sort=DateDesc&sourcelang=english";
   const r=await fetch(u); const j=await r.json(); return j.articles||[];
 }
+// same junk rules as ir_sweep.py — law-firm spam & digest roundups never reach the feed
+const NEWS_JUNK=/shareholder (notice|alert|rights|deadline)|reminds (investors|shareholders)|class action|claimsfiler|faruqi|rosen law|pomerantz|bragar|kaskela|levi\s*&|encourages investors|investigation (on behalf|of)|lead plaintiff|law offices|deadline alert|lawsuit|investor alert|morning (medical )?update|roundup|weekly recap|week in review/i;
 async function refreshNews(){
   const secs=DATA.holdings.filter(h=>h.assetType!=='cash');
   const results=await Promise.allSettled(secs.map(h=>fetchGdelt(h.gquery).then(a=>({h,a}))));
   const all=[];
   results.forEach(r=>{ if(r.status!=='fulfilled')return; const {h,a}=r.value;
+    const first=((h.gquery||h.name||h.ticker).split(' ')[0]||'').toLowerCase();
     a.forEach(art=>{
       const dom=(art.domain||'').replace(/^www\./,'');
       if(!NEWS_DOMAINS.has(dom)) return;
       const title=(art.title||'').trim(); if(title.length<15) return;
+      if(NEWS_JUNK.test(title)) return;
+      if(first && !title.toLowerCase().includes(first)) return;   // company must appear in the headline
       all.push({ticker:h.ticker, headline:title, url:art.url, source:dom, date:gdeltDate(art.seendate)});
     });
   });
@@ -817,6 +833,12 @@ async function fetchStocktwits(tk){
   const t=await r.text(); const i=t.indexOf('{"symbol"'); if(i<0) throw new Error('no');
   const d=JSON.parse(t.slice(i)); return d.messages||[];
 }
+function cleanBody(s){
+  // Stocktwits ships HTML entities + raw links — decode the entities, drop the URLs
+  return (s||'').replace(/&#39;|&apos;/g,"'").replace(/&quot;/g,'"').replace(/&lt;/g,'<')
+    .replace(/&gt;/g,'>').replace(/&amp;/g,'&')
+    .replace(/https?:\/\/\S+/g,'').replace(/\s{2,}/g,' ').trim();
+}
 function renderSocial(){
   const items=(liveState.social||[]).slice(0,24);
   const el=document.getElementById('social'); if(!el) return;
@@ -824,10 +846,11 @@ function renderSocial(){
   if(!items.length){ el.innerHTML=''; return; }
   el.innerHTML=items.map(m=>{
     const sent=m.sentiment==='Bullish'?'<span class="sent bull">BULL</span>':m.sentiment==='Bearish'?'<span class="sent bear">BEAR</span>':'';
+    const body=cleanBody(m.body); if(!body) return '';
     return `<div class="si">
       <div class="sm">${logoImg(tickerLogos(m.ticker),'nlogo')}<span class="tkr neutral">${esc(m.ticker)}</span>
         <span class="su">@${esc(m.user)}</span>${sent}<span class="stime">${relTime(m.time)}</span></div>
-      <div class="sb">${esc(m.body)}</div></div>`;
+      <div class="sb">${esc(body)}</div></div>`;
   }).join('');
 }
 let _socialBusy=false, _socialRetry=[];
@@ -950,8 +973,8 @@ async function refreshSEC(){
 function initSecAlerts(){
   const btn=document.getElementById('secalertbtn'); if(!btn) return;
   if(!('Notification' in window)) return;
-  const sync=()=>{ btn.style.display = Notification.permission==='granted' ? 'none':'inline-block';
-    btn.textContent = Notification.permission==='denied' ? '🔕 alerts blocked' : '🔔 enable SEC alerts'; };
+  const sync=()=>{ btn.style.display = Notification.permission==='default' ? 'inline-block':'none';
+    btn.textContent='🔔 enable SEC alerts'; };   // granted or denied -> just stay quiet
   sync();
   btn.onclick=()=>{ Notification.requestPermission().then(sync); };
 }
