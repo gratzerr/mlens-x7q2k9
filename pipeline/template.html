@@ -796,10 +796,11 @@ async function refreshNews(){
   // always substantive; GDELT adds whatever is newer). Dedupe by title, newest first.
   const combined=[...all, ...DATA.latestNews];
   combined.sort((a,b)=>(b.date||'').localeCompare(a.date||''));
-  const seen=new Set(), dedup=[], perTk={};
+  const seen=new Set(), dedup=[], perTkDay={};
   for(const n of combined){ const k=(n.headline||'').slice(0,55).toLowerCase().replace(/[^a-z0-9]/g,'');
     if(!k||seen.has(k))continue; seen.add(k);
-    if((perTk[n.ticker]=(perTk[n.ticker]||0)+1)>4)continue;   // no single ticker floods the feed
+    const dk=n.ticker+'|'+(n.date||'');                        // cap per ticker per DAY, not overall
+    if((perTkDay[dk]=(perTkDay[dk]||0)+1)>5)continue;
     dedup.push(n); if(dedup.length>=25)break; }
   liveState.news=dedup; liveState.lastNews=new Date();
   renderFeed(); setBadge();
