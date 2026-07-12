@@ -1,6 +1,6 @@
 {
  "fileDate": "2026-07-11 21:15",
- "generated": "2026-07-12 11:35",
+ "generated": "2026-07-12 11:48",
  "engine": "pp-exact (verified vs PP app 2026-07-11)",
  "totalSecuritiesEur": 2184440,
  "cashEur": -90923.38,
@@ -9056,6 +9056,9 @@
    "price": 42.63,
    "value": 426300.0,
    "valueEur": 372966,
+   "valueUsd": 426300,
+   "basisUsd": 91996,
+   "realizedUsd": 11487,
    "avgCost": 12.7255,
    "unrealRet": 235.0,
    "priceDate": "2026-07-10"
@@ -9070,6 +9073,9 @@
    "price": 65.64,
    "value": 328200.0,
    "valueEur": 287139,
+   "valueUsd": 328200,
+   "basisUsd": 183278,
+   "realizedUsd": 0,
    "avgCost": 36.6597,
    "unrealRet": 79.1,
    "priceDate": "2026-07-10"
@@ -9084,6 +9090,9 @@
    "price": 17.5,
    "value": 306250.0,
    "valueEur": 267935,
+   "valueUsd": 306250,
+   "basisUsd": 168705,
+   "realizedUsd": -60391,
    "avgCost": 12.0988,
    "unrealRet": 44.6,
    "priceDate": "2026-07-10"
@@ -9098,6 +9107,9 @@
    "price": 0.33,
    "value": 330000.0,
    "valueEur": 203993,
+   "valueUsd": 233164,
+   "basisUsd": 229612,
+   "realizedUsd": 0,
    "avgCost": 0.3173,
    "unrealRet": 4.0,
    "priceDate": "2026-07-10"
@@ -9112,6 +9124,9 @@
    "price": 13.01,
    "value": 221170.0,
    "valueEur": 193500,
+   "valueUsd": 221170,
+   "basisUsd": 156329,
+   "realizedUsd": -16090,
    "avgCost": 9.6139,
    "unrealRet": 35.3,
    "priceDate": "2026-07-10"
@@ -9126,6 +9141,9 @@
    "price": 7.14,
    "value": 214200.0,
    "valueEur": 187402,
+   "valueUsd": 214200,
+   "basisUsd": 163566,
+   "realizedUsd": 0,
    "avgCost": 5.4548,
    "unrealRet": 30.9,
    "priceDate": "2026-07-10"
@@ -9140,6 +9158,9 @@
    "price": 70.36,
    "value": 211080.0,
    "valueEur": 184672,
+   "valueUsd": 211080,
+   "basisUsd": 193331,
+   "realizedUsd": -54345,
    "avgCost": 80.4296,
    "unrealRet": -12.5,
    "priceDate": "2026-07-10"
@@ -9154,6 +9175,9 @@
    "price": 4.82,
    "value": 192800.0,
    "valueEur": 168679,
+   "valueUsd": 192800,
+   "basisUsd": 199200,
+   "realizedUsd": 0,
    "avgCost": 4.985,
    "unrealRet": -3.3,
    "priceDate": "2026-07-10"
@@ -9168,6 +9192,9 @@
    "price": 1.925,
    "value": 173250.0,
    "valueEur": 151575,
+   "valueUsd": 173250,
+   "basisUsd": 167527,
+   "realizedUsd": 0,
    "avgCost": 1.8654,
    "unrealRet": 3.2,
    "priceDate": "2026-07-10"
@@ -9182,6 +9209,9 @@
    "price": 12.02,
    "value": 120200.0,
    "valueEur": 105162,
+   "valueUsd": 120200,
+   "basisUsd": 96482,
+   "realizedUsd": 0,
    "avgCost": 9.6552,
    "unrealRet": 24.5,
    "priceDate": "2026-07-10"
@@ -9196,6 +9226,9 @@
    "price": 17.55,
    "value": 70200.0,
    "valueEur": 61417,
+   "valueUsd": 70200,
+   "basisUsd": 43298,
+   "realizedUsd": 0,
    "avgCost": 10.8275,
    "unrealRet": 62.1,
    "priceDate": "2026-07-10"

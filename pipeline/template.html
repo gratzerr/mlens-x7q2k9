@@ -192,6 +192,24 @@
   .tfsel button{border:0;background:none;color:var(--ink-2);font-size:12px;font-weight:600;padding:5px 10px;border-radius:6px;cursor:pointer;font-family:inherit}
   .tfsel button.on{background:var(--surface);color:var(--ink);box-shadow:0 1px 2px rgba(0,0,0,.12)}
   .tfsel button:hover:not(.on){color:var(--ink)}
+  /* holdings table (Parqet-style stacked cells) */
+  .htable{width:100%;border-collapse:collapse;min-width:680px}
+  .htable th{font-size:10.5px;text-transform:uppercase;letter-spacing:.5px;color:var(--muted);
+    font-weight:660;text-align:right;padding:2px 9px 7px;cursor:pointer;white-space:nowrap;user-select:none}
+  .htable th:first-child{text-align:left;padding-left:2px}
+  .htable th:hover{color:var(--ink)}
+  .htable td{padding:8px 9px;border-top:1px solid var(--grid);text-align:right;white-space:nowrap;vertical-align:middle}
+  .htable td:first-child{text-align:left;padding-left:2px}
+  .htable .c1{font-weight:650;font-size:13.5px;font-variant-numeric:tabular-nums}
+  .htable .c2{font-size:11.5px;color:var(--muted);margin-top:1px;font-variant-numeric:tabular-nums}
+  .htable .hname{display:flex;align-items:center;gap:9px;min-width:0}
+  .htable .hname .nm2{font-size:11.5px;color:var(--muted);max-width:150px;overflow:hidden;text-overflow:ellipsis}
+  .htable tr.cashrow td{color:var(--muted)}
+  .gearbtn{border:0;background:none;color:var(--muted);font-size:14px;cursor:pointer;padding:0 2px;margin-left:auto}
+  .gearbtn:hover{color:var(--ink)}
+  .htpop{position:absolute;right:14px;top:40px;z-index:20;background:var(--surface);border:1px solid var(--border);
+    border-radius:10px;padding:10px 14px;box-shadow:0 8px 28px rgba(0,0,0,.18);font-size:13px}
+  .htpop label{display:flex;gap:8px;align-items:center;padding:4px 0;cursor:pointer;white-space:nowrap}
   /* activities */
   .act{display:grid;grid-template-columns:86px 78px 26px 1fr auto;gap:10px;align-items:center;padding:9px 2px;border-top:1px solid var(--grid);font-size:13px}
   .alogo{width:26px;height:26px;border-radius:7px;object-fit:contain;background:#fff;border:1px solid var(--border);display:block}
@@ -259,6 +277,12 @@
       <svg class="line" id="chart" preserveAspectRatio="none"></svg>
       <div class="tip" id="tip"></div>
     </div>
+  </div>
+
+  <div class="panel" style="position:relative">
+    <h2>Holdings <button class="gearbtn" id="htgear" title="columns">⚙</button></h2>
+    <div class="htpop" id="htpop" style="display:none"></div>
+    <div style="overflow-x:auto"><table class="htable" id="holdingstable"></table></div>
   </div>
 
   <div class="cols eq">
@@ -497,6 +521,80 @@ function sparkSvg(spark, up){
     <circle cx="${X(spark.length-1).toFixed(1)}" cy="${Y(spark[spark.length-1]).toFixed(1)}" r="2.6" fill="${col}"/></svg>`;
 }
 
+/* ---- Holdings table (Parqet-style: stacked primary/secondary cells; data from PP) ---- */
+let _hsort={key:'value',dir:-1};
+let _hcols=(()=>{try{return Object.assign({shares:true,day:true,realized:false},JSON.parse(localStorage.getItem('pc-htcols')||'{}'));}catch(e){return {shares:true,day:true,realized:false};}})();
+function _htRows(){
+  return DATA.holdings.filter(h=>h.assetType!=='cash').map(h=>{
+    const sym=h.ppCcy==='CAD'?'C$':'$';
+    const price=(h.livePrice!=null&&h.assetType!=='option')?h.livePrice:h.ppPrice;
+    const basis=h.ppBasisUsd||0;
+    const gain=basis?h.value-basis:null;
+    return {h, sym, shares:h.ppShares, avg:h.ppAvgCost, basis, price,
+      day:(h.dayChange!=null?h.dayChange:null), gain,
+      gainPct:(gain!=null&&basis)?gain/basis*100:null,
+      value:h.value, weight:h.alloc, realized:h.ppRealizedUsd};
+  });
+}
+function renderHoldingsTable(){
+  const el=document.getElementById('holdingstable'); if(!el) return;
+  const rows=_htRows();
+  const k=_hsort.key, d=_hsort.dir;
+  rows.sort((a,b)=>d*(((a[k]==null)-(b[k]==null)) || (a[k]>b[k]?1:a[k]<b[k]?-1:0)));
+  const cols=[
+    {key:'name',  lab:'Position', on:true},
+    {key:'shares',lab:'Shares', on:_hcols.shares},
+    {key:'basis', lab:'Entry', on:true},
+    {key:'price', lab:'Price', on:true},
+    {key:'day',   lab:'Today', on:_hcols.day},
+    {key:'gain',  lab:'Gain', on:true},
+    {key:'realized',lab:'Realized', on:_hcols.realized},
+    {key:'value', lab:'Value', on:true},
+  ].filter(c=>c.on);
+  const arrow=c=>c.key===_hsort.key?(d<0?' ▾':' ▴'):'';
+  const fmt2=(n,dec)=>n==null?'—':(+n).toLocaleString('en-US',{minimumFractionDigits:dec,maximumFractionDigits:dec});
+  el.innerHTML='<thead><tr>'+cols.map(c=>`<th data-k="${c.key==='name'?'value':c.key}">${c.lab}${arrow(c)}</th>`).join('')+'</tr></thead>'
+    +'<tbody>'+rows.map(r=>{
+      const cells=[];
+      cells.push(`<td><div class="hname">${logoImg(r.h.logos,'llogo')}<div style="min-width:0"><div class="c1">${esc(r.h.ticker)}</div><div class="nm2">${esc(r.h.name)}</div></div></div></td>`);
+      if(_hcols.shares) cells.push(`<td><div class="c1">${r.shares!=null?(+r.shares).toLocaleString('en-US'):'—'}</div></td>`);
+      cells.push(`<td><div class="c1">${r.avg!=null?r.sym+fmt2(r.avg,r.avg<1?4:2):'—'}</div><div class="c2">${r.basis?fmtUsd(r.basis):''}</div></td>`);
+      cells.push(`<td><div class="c1">${r.price!=null?r.sym+fmt2(r.price,r.price<1?4:2):'—'}</div><div class="c2">&nbsp;</div></td>`);
+      if(_hcols.day) cells.push(`<td><div class="c1 ${r.day==null?'':(r.day>=0?'up':'down')}">${r.day==null?'—':fmtPct(r.day)}</div></td>`);
+      const gup=(r.gain||0)>=0;
+      cells.push(`<td><div class="c1 ${r.gain==null?'':(gup?'up':'down')}">${r.gain==null?'—':fmtUsd(r.gain)}</div><div class="c2 ${r.gainPct==null?'':(gup?'up':'down')}">${r.gainPct==null?'':fmtPct(r.gainPct)}</div></td>`);
+      if(_hcols.realized){const rup=(r.realized||0)>=0;
+        cells.push(`<td><div class="c1 ${r.realized==null?'':(rup?'up':'down')}">${r.realized==null?'—':fmtUsd(r.realized)}</div></td>`);}
+      cells.push(`<td><div class="c1">${fmtUsd(r.value)}</div><div class="c2">${r.weight!=null?r.weight.toFixed(1)+'%':''}</div></td>`);
+      return '<tr>'+cells.join('')+'</tr>';
+    }).join('')
+    +(()=>{const c=DATA.holdings.find(x=>x.assetType==='cash');
+      if(!c) return '';
+      const span=cols.length-2;
+      return `<tr class="cashrow"><td><div class="hname"><span class="llogo" style="visibility:hidden"></span><div><div class="c1">Cash</div><div class="nm2">net (margin)</div></div></div></td><td colspan="${span}"></td><td><div class="c1 ${c.value>=0?'':'down'}">${fmtUsd(c.value)}</div></td></tr>`;})()
+    +'</tbody>';
+  el.querySelectorAll('th').forEach(th=>th.addEventListener('click',()=>{
+    const key=th.dataset.k;
+    if(_hsort.key===key) _hsort.dir*=-1; else _hsort={key,dir:-1};
+    renderHoldingsTable();
+  }));
+}
+function initHtSettings(){
+  const gear=document.getElementById('htgear'), pop=document.getElementById('htpop');
+  if(!gear||!pop) return;
+  const OPTS=[['shares','Shares column'],['day','Today % column'],['realized','Realized gain column']];
+  const draw=()=>{pop.innerHTML=OPTS.map(([k,l])=>
+    `<label><input type="checkbox" data-k="${k}" ${_hcols[k]?'checked':''}> ${l}</label>`).join('');
+    pop.querySelectorAll('input').forEach(i=>i.addEventListener('change',()=>{
+      _hcols[i.dataset.k]=i.checked;
+      try{localStorage.setItem('pc-htcols',JSON.stringify(_hcols));}catch(e){}
+      renderHoldingsTable();
+    }));};
+  draw();
+  gear.addEventListener('click',e=>{e.stopPropagation(); pop.style.display=pop.style.display==='none'?'':'none';});
+  document.addEventListener('click',e=>{ if(!pop.contains(e.target)) pop.style.display='none'; });
+}
+
 /* ---- allocation donut (interactive: hover slice/row -> details in the center) ---- */
 function renderAlloc(){
   const el=document.getElementById('allocdonut'); if(!el) return;
@@ -685,7 +783,7 @@ function initTheme(){
     rerender();
   });
 }
-function rerender(){ renderFeed(); renderChart(); renderAlloc(); renderPerfBars(); renderTimeline(); renderHoldings(); }
+function rerender(){ renderFeed(); renderChart(); renderHoldingsTable(); renderAlloc(); renderPerfBars(); renderTimeline(); renderHoldings(); }
 
 /* ===== LIVE DATA LAYER =====================================================
    Works on GitHub Pages (fetch allowed). Inside the Claude artifact the CSP
@@ -744,7 +842,7 @@ async function refreshPrices(){
   });
   if(!any) return;
   liveState.lastPrice=new Date();
-  renderHoldings(); setBadge();
+  renderHoldingsTable(); renderHoldings(); setBadge();
 }
 
 /* ---- LIVE PORTFOLIO from Parqet (holdings, values, gains, IRR) ---- */
@@ -771,7 +869,7 @@ async function refreshParqet(){
   DATA.cashPct=+(100*DATA.cashValue/DATA.totalValue).toFixed(1);
   DATA.holdings.forEach(h=>{ h.alloc=+(100*h.value/DATA.totalValue).toFixed(1); });
   liveState.lastParqet=new Date();
-  renderKpis(); renderAlloc(); renderPerfBars(); renderHoldings(); setBadge();
+  renderKpis(); renderHoldingsTable(); renderAlloc(); renderPerfBars(); renderHoldings(); setBadge();
 }
 
 /* ---- chart timeframe selector (PP net-worth series, sliced locally) ---- */
@@ -1096,6 +1194,6 @@ document.getElementById('asof').textContent=new Date(DATA.asOf).toLocaleDateStri
 document.getElementById('hcount').textContent=DATA.holdings.filter(h=>h.assetType!=='cash').length;
 document.getElementById('foot').innerHTML='Snapshot built '+esc(DATA.generated)+
   ' · When hosted live, prices refresh every 3 min (Yahoo) and headlines every 15 min (GDELT), computed in your browser · Curated news &amp; catalysts refreshed twice daily · Not investment advice.<br>Green dot = confirmed date, amber dot = estimated.';
-loadSocialCache(); renderKpis(); renderTfSel(); renderSocial(); rerender(); initTheme(); initSecAlerts(); startLive();
+loadSocialCache(); renderKpis(); renderTfSel(); renderSocial(); rerender(); initTheme(); initSecAlerts(); initHtSettings(); startLive();
 window.addEventListener('resize',()=>{clearTimeout(window._rz);window._rz=setTimeout(renderChart,150);});
 </script>

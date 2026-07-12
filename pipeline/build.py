@@ -180,6 +180,20 @@ def logo_candidates(h):
         out.append(f"https://www.google.com/s2/favicons?domain={dom}&sz=64")
     return out
 
+# ---- PP per-holding numbers for the Holdings table (Rafael: "Daten unbedingt aus PP") ----
+def _pp_key(t):
+    return "NVO" if t.startswith("NVO") else t.split(".")[0]   # PINK.V -> PINK, NVO2701.. -> NVO
+pp_by_ticker = {_pp_key(x["ticker"]): x for x in (pp.get("holdings", []) if pp else [])}
+for h in port["holdings"]:
+    px = pp_by_ticker.get(h["ticker"])
+    if px and h.get("assetType") != "cash":
+        h["ppShares"] = px["shares"]
+        h["ppAvgCost"] = px["avgCost"]          # native ccy (USD, PINK: CAD)
+        h["ppBasisUsd"] = px.get("basisUsd")    # FIFO remaining cost basis
+        h["ppRealizedUsd"] = px.get("realizedUsd")
+        h["ppPrice"] = px["price"]
+        h["ppCcy"] = px["ccy"]
+
 # Attach research + market to each holding; compute allocation
 total = port["totalValue"]
 for h in port["holdings"]:
