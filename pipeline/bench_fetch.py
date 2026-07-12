@@ -7,7 +7,16 @@ warnings.filterwarnings("ignore")
 
 ROOT = os.path.dirname(os.path.abspath(__file__))
 OUT = os.path.join(ROOT, "bench.json")
-SYMS = ["SPY", "QQQ", "XBI", "VWCE.DE"]
+BASE = ["SPY", "QQQ", "XBI", "VWCE.DE"]
+def all_syms():
+    syms = list(BASE)
+    try:
+        extra = json.load(open(os.path.join(ROOT, "site_state.json"))).get("benchmarks", [])
+        for s in extra:
+            s = s.strip().upper()
+            if s and s not in syms: syms.append(s)
+    except Exception: pass
+    return syms
 SINCE = "2021-12-30"
 
 def fetch(sym):
@@ -25,7 +34,7 @@ def main():
     try: old = json.load(open(OUT))
     except Exception: pass
     res = {}
-    for sym in SYMS:
+    for sym in all_syms():
         try:
             s = fetch(sym)
         except Exception as e:

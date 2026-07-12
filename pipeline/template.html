@@ -258,6 +258,10 @@
   .pfw-lbl{font-size:10.5px;text-transform:uppercase;letter-spacing:.5px;color:var(--muted);font-weight:660;margin:6px 0 4px}
   .pfw-additem{padding:6px 8px;border-radius:7px;cursor:pointer;font-size:13px;white-space:nowrap}
   .pfw-additem:hover{background:var(--surface-2)}
+  .pfw{cursor:grab}
+  .pfw.dragging{opacity:.45}
+  .pfw.dragover{outline:2px dashed var(--accent);outline-offset:3px}
+  .pfw-dates input{width:100%;background:var(--surface-2);border:1px solid var(--border);border-radius:7px;padding:4px 8px;font:inherit;font-size:12px;color:var(--ink)}
   @media(max-width:860px){ #pf-grid{grid-template-columns:1fr 1fr} }
   /* activities */
   .act{display:grid;grid-template-columns:86px 78px 26px 1fr auto;gap:10px;align-items:center;padding:9px 2px;border-top:1px solid var(--grid);font-size:13px}
@@ -1568,25 +1572,57 @@ function initTabs(){
 /* ===================== PERFORMANCE TAB (formulas replicated from PP source: Risk.java) ===================== */
 
 /* ===== PERFORMANCE TAB: configurable widget dashboard (modeled on PP's WidgetFactory) =====
-   Every widget carries its own settings (reporting period, benchmarks, color scheme).
-   Layout + configs persist per device in localStorage 'pc-pfw'. Formulas: PP Risk.java. */
-const BENCH_META={SPY:{label:'S&P 500',col:'#6d92c4'},QQQ:{label:'Nasdaq 100',col:'#bd93b4'},
+   Every widget carries its own settings: a full PP-style reporting period (relative,
+   specific year, since-date, from–to), benchmarks (incl. user-added tickers), colors.
+   Reorder via drag & drop. Layout persists in localStorage 'pc-pfw'. Formulas: PP Risk.java. */
+const BENCH_BASE={SPY:{label:'S&P 500',col:'#6d92c4'},QQQ:{label:'Nasdaq 100',col:'#bd93b4'},
   XBI:{label:'Biotech (XBI)',col:'#f0a955'},'VWCE.DE':{label:'All-World',col:'#5bb98c'}};
-const PF_PERIODS=[['max','Since 2022'],['ytd','YTD'],['1m','1 month'],['3m','3 months'],['6m','6 months'],['1y','1 year'],['2y','2 years'],['3y','3 years']];
+function benchMeta(){
+  const m=JSON.parse(JSON.stringify(BENCH_BASE));
+  const cols=['#e07671','#8f7ad6','#4db6ac','#c9a227','#7a9d54','#d06fa8','#5d8aa8','#b8860b'];
+  let ci=0;
+  new Set([...Object.keys(DATA.bench||{}), ...(_cfg.benchmarks||[])]).forEach(s=>{
+    if(!m[s]) m[s]={label:s,col:cols[ci++%cols.length],custom:true};
+  });
+  return m;
+}
+const PF_REL=[['all','All data'],['ytd','Year to date'],['1m','1 month'],['3m','3 months'],['6m','6 months'],['1y','1 year'],['2y','2 years'],['3y','3 years'],['5y','5 years']];
 const PF_SCHEMES=[['classic','Green / Red'],['traffic','Traffic light'],['blue','Blue / Orange'],['mono','Monochrome']];
 
-function isWeekday(d){ const wd=new Date(d+'T00:00:00Z').getUTCDay(); return wd>=1&&wd<=5; }
-function pfSliceP(p){
-  const s=(DATA.chartPP||[]).filter(x=>x.v>0);
-  if(p==='max'||!s.length) return s;
-  const last=s[s.length-1].d;
-  let from;
-  if(p==='ytd') from=last.slice(0,4)+'-01-01';
-  else{ const days={'1m':30,'3m':91,'6m':182,'1y':365,'2y':730,'3y':1095}[p]||0;
-    from=new Date(new Date(last).getTime()-days*86400000).toISOString().slice(0,10); }
-  const i=s.findIndex(x=>x.d>=from);
-  return i<=0?s:s.slice(i-1);
+/* ---- reporting periods (PP ReportingPeriod equivalents) ---- */
+function normP(p){
+  if(!p) return {k:'rel',v:'all'};
+  if(typeof p==='string') return {k:'rel',v:(p==='max'?'all':p)};
+  return p;
 }
+function pLabel(p){
+  p=normP(p);
+  if(p.k==='rel') return (PF_REL.find(x=>x[0]===p.v)||['','All data'])[1];
+  if(p.k==='year') return 'Year '+p.y;
+  if(p.k==='since') return 'since '+p.from;
+  if(p.k==='range') return p.from+' → '+p.to;
+  return 'All data';
+}
+function pfSliceP(p){
+  p=normP(p);
+  const s=(DATA.chartPP||[]).filter(x=>x.v>0);
+  if(!s.length) return s;
+  const last=s[s.length-1].d;
+  let from=null, to=null;
+  if(p.k==='rel'){
+    if(p.v==='all') return s;
+    if(p.v==='ytd') from=last.slice(0,4)+'-01-01';
+    else{ const days={'1m':30,'3m':91,'6m':182,'1y':365,'2y':730,'3y':1095,'5y':1825}[p.v]||0;
+      from=new Date(new Date(last).getTime()-days*86400000).toISOString().slice(0,10); }
+  } else if(p.k==='year'){ from=p.y+'-01-01'; to=p.y+'-12-31'; }
+  else if(p.k==='since'){ from=p.from; }
+  else if(p.k==='range'){ from=p.from; to=p.to; }
+  let arr=s;
+  if(to) arr=arr.filter(x=>x.d<=to);
+  if(from){ const i=arr.findIndex(x=>x.d>=from); arr=i<=0?arr:arr.slice(i-1); }
+  return arr;
+}
+function isWeekday(d){ const wd=new Date(d+'T00:00:00Z').getUTCDay(); return wd>=1&&wd<=5; }
 function ppVolatility(rets){   // PP Risk.java: stddev of log returns, scaled sqrt(n)
   if(rets.length<2) return {vol:0,semi:0,daily:0,n:0};
   const logs=rets.map(r=>Math.log(1+r));
@@ -1649,7 +1685,7 @@ function pfMetrics(p){
 }
 function heatColor(scheme,v){
   const x=Math.max(-15,Math.min(15,v)), dark=isDarkTheme();
-  if(scheme==='traffic'){ // PP-like green-yellow-red
+  if(scheme==='traffic'){
     const h=v>=0?Math.min(120,90+v*4):Math.max(0,60+v*6);
     return `hsl(${h} 70% ${dark?30:62}%)`;
   }
@@ -1660,30 +1696,31 @@ function heatColor(scheme,v){
 /* ---- widget catalog ---- */
 const money=(u,e)=>_priv?MASK:(_ccy==='EUR'&&e!=null?fmtE(e):fmtUsd(u));
 const IND=(v,cls,note)=>`<div class="val ${cls||''}" style="font-size:23px">${v}</div>${note?`<div class="note" style="font-size:11.5px;color:var(--muted)">${note}</div>`:''}`;
+function dataRange(){ const f=(DATA.chartPP||[]); return f.length?f[0].d+' → '+f[f.length-1].d:''; }
 const PF_WIDGETS={
   ttwror:{lab:'TTWROR (cumulative)',opts:['p'],render:w=>{const m=pfMetrics(w.p);return m?IND(fmtPct(m.tt*100),m.tt>=0?'up':'down'):'—';}},
   ttwror_ann:{lab:'TTWROR (annualized)',opts:['p'],render:w=>{const m=pfMetrics(w.p);return m&&m.ann!=null?IND(fmtPct(m.ann*100),m.ann>=0?'up':'down'):IND('—','','period too short');}},
-  irr:{lab:'IRR · since 2022',opts:[],render:()=>IND((DATA.izf||0).toFixed(2)+'%','up','money-weighted (XIRR)')},
-  total:{lab:'Portfolio value',opts:['p'],render:w=>{const m=pfMetrics(w.p);return m?IND(fmtUsd(m.endVal),'', 'end of period'):'—';}},
+  irr:{lab:'IRR (money-weighted)',opts:[],render:()=>IND((DATA.izf||0).toFixed(2)+'%','up',dataRange())},
+  total:{lab:'Portfolio value',opts:['p'],render:w=>{const m=pfMetrics(w.p);return m?IND(fmtUsd(m.endVal),'','end of period'):'—';}},
   abs:{lab:'Absolute change',opts:['p'],render:w=>{const m=pfMetrics(w.p);return m?IND(fmtUsd(m.absCh),m.absCh>=0?'up':'down'):'—';}},
   delta:{lab:'Delta (excl. deposits)',opts:['p'],render:w=>{const m=pfMetrics(w.p);return m?IND(fmtUsd(m.delta),m.delta>=0?'up':'down'):'—';}},
-  invested:{lab:'Invested capital',opts:[],render:()=>IND(money(DATA.ppNetContribUsd,DATA.ppNetContribEur),'','net deposits since 2022')},
-  earnings:{lab:'Earnings · since 2022',opts:[],render:()=>IND(money(DATA.ppEarningsUsd,DATA.ppEarningsEur),'up','dividends + interest')},
-  fees:{lab:'Fees · since 2022',opts:[],render:()=>IND(money(DATA.ppFeesUsd,DATA.ppFeesEur),'down')},
-  taxes:{lab:'Taxes · since 2022',opts:[],render:()=>IND(money(DATA.ppTaxesUsd,DATA.ppTaxesEur),'down')},
-  lastday:{lab:'Last day',opts:[],render:()=>{const m=pfMetrics('max');return m?IND(fmtPct(m.lastR*100)+' · '+fmtUsd(m.lastAbs),m.lastR>=0?'up':'down',m.lastD):'—';}},
+  invested:{lab:'Invested capital',opts:[],render:()=>IND(money(DATA.ppNetContribUsd,DATA.ppNetContribEur),'','net deposits · '+dataRange())},
+  earnings:{lab:'Earnings',opts:[],render:()=>IND(money(DATA.ppEarningsUsd,DATA.ppEarningsEur),'up','dividends + interest · '+dataRange())},
+  fees:{lab:'Fees',opts:[],render:()=>IND(money(DATA.ppFeesUsd,DATA.ppFeesEur),'down',dataRange())},
+  taxes:{lab:'Taxes',opts:[],render:()=>IND(money(DATA.ppTaxesUsd,DATA.ppTaxesEur),'down',dataRange())},
+  lastday:{lab:'Last day',opts:[],render:()=>{const m=pfMetrics({k:'rel',v:'all'});return m?IND(fmtPct(m.lastR*100)+' · '+fmtUsd(m.lastAbs),m.lastR>=0?'up':'down',m.lastD):'—';}},
   maxdd:{lab:'Max drawdown',opts:['p'],render:w=>{const m=pfMetrics(w.p);return m?IND(fmtPct(-m.dd.maxDD*100),'down',m.dd.ddFrom?`${m.dd.ddFrom} → ${m.dd.ddTo}`:''):'—';}},
   curdd:{lab:'Current drawdown',opts:['p'],render:w=>{const m=pfMetrics(w.p);return m?IND(fmtPct(-m.dd.cur*100),m.dd.cur>0.001?'down':'up','vs. period peak'):'—';}},
   dddur:{lab:'Max drawdown duration',opts:['p'],render:w=>{const m=pfMetrics(w.p);return m?IND(m.dd.maxDur+' days','',m.dd.durFrom?`${m.dd.durFrom} → ${m.dd.durTo}`:''):'—';}},
   vola:{lab:'Volatility',opts:['p'],render:w=>{const m=pfMetrics(w.p);return m?IND((m.vol*100).toFixed(2)+'%'):'—';}},
   semivola:{lab:'Semivolatility',opts:['p'],render:w=>{const m=pfMetrics(w.p);return m?IND((m.semi*100).toFixed(2)+'%'):'—';}},
   sharpe:{lab:'Sharpe ratio',opts:['p'],render:w=>{const m=pfMetrics(w.p);if(!m||!m.volDaily) return '—';
-    const s=(m.ann!=null?m.ann:m.tt)/(m.volDaily*Math.sqrt(252));return IND(s.toFixed(2),s>=1?'up':'', 'risk-free 0%');}},
+    const s=(m.ann!=null?m.ann:m.tt)/(m.volDaily*Math.sqrt(252));return IND(s.toFixed(2),s>=1?'up':'','risk-free 0%');}},
   chart:{lab:'Performance chart',big:1,opts:['p','bench'],render:w=>`<div class="chartbox"><svg class="line pfw-chart" preserveAspectRatio="none" style="height:230px"></svg><div class="tip"></div></div><div class="pfw-legend" style="display:flex;gap:14px;flex-wrap:wrap;margin-top:8px;font-size:12px;color:var(--ink-2)"></div>`,
     after:(w,el)=>drawPerfChart(w,el)},
-  ddchart:{lab:'Drawdown chart',big:1,opts:['p'],render:()=>`<div class="chartbox"><svg class="line pfw-chart" preserveAspectRatio="none" style="height:180px"></svg></div>`,
+  ddchart:{lab:'Drawdown chart',big:1,opts:['p'],render:()=>`<div class="chartbox"><svg class="line pfw-chart" preserveAspectRatio="none" style="height:180px"></svg><div class="tip"></div></div>`,
     after:(w,el)=>drawDDChart(w,el)},
-  calc:{lab:'Calculation · since 2022',big:1,opts:[],render:()=>{
+  calc:{lab:'Calculation',big:1,opts:[],render:()=>{
     const full=(DATA.chartPP||[]); if(full.length<2) return '—';
     const D=DATA, rows=[
       ['Initial value ('+full[0].d+')',money(full[0].v,full[0].e),''],
@@ -1716,10 +1753,11 @@ const PF_WIDGETS={
   years:{lab:'Yearly returns',big:1,opts:['bench','scheme'],render:w=>{
     const full=(DATA.chartPP||[]); if(full.length<2) return '—';
     const years=[...new Set(full.map(p=>p.d.slice(0,4)))].sort();
+    const BM=benchMeta();
     const activeB=(w.bench||[]).filter(s=>(DATA.bench||{})[s]);
     let h='<div style="overflow-x:auto"><table style="border-collapse:separate;border-spacing:3px;font-size:12.5px"><tr><th></th>'+
       `<th style="color:var(--muted);font-weight:650;padding:2px 10px">Portfolio</th>`+
-      activeB.map(s=>`<th style="color:${BENCH_META[s].col};font-weight:650;padding:2px 10px">${BENCH_META[s].label}</th>`).join('')+'</tr>';
+      activeB.map(s=>`<th style="color:${BM[s].col};font-weight:650;padding:2px 10px">${esc(BM[s].label)}</th>`).join('')+'</tr>';
     years.forEach(y=>{
       const yPts=full.filter(p=>p.d.slice(0,4)===y);
       const prev=full[full.indexOf(yPts[0])-1]||yPts[0];
@@ -1743,57 +1781,136 @@ const PF_WIDGETS={
         <span style="margin-left:auto" class="tnum ${up?'up':'down'}">${fmtUsd(h.totalGainNet)}</span>
         <span class="tnum ${up?'up':'down'}" style="width:64px;text-align:right">${fmtPct(h.unrealizedReturn||0)}</span></div>`;}).join('');}}
 };
-const PF_DEFAULT=[{t:'chart',p:'max',bench:['SPY']},
-  {t:'ttwror',p:'max'},{t:'ttwror_ann',p:'max'},{t:'irr'},{t:'lastday'},
-  {t:'abs',p:'max'},{t:'delta',p:'max'},{t:'invested'},{t:'total',p:'max'},
-  {t:'maxdd',p:'max'},{t:'dddur',p:'max'},{t:'vola',p:'max'},{t:'semivola',p:'max'},
+const PF_DEFAULT=[{t:'chart',p:'all',bench:['SPY']},
+  {t:'ttwror',p:'all'},{t:'ttwror_ann',p:'all'},{t:'irr'},{t:'lastday'},
+  {t:'abs',p:'all'},{t:'delta',p:'all'},{t:'invested'},{t:'total',p:'all'},
+  {t:'maxdd',p:'all'},{t:'dddur',p:'all'},{t:'vola',p:'all'},{t:'semivola',p:'all'},
   {t:'calc'},{t:'years',bench:['SPY'],scheme:'classic'},
-  {t:'heat',p:'max',scheme:'classic'},{t:'ddchart',p:'max'}];
+  {t:'heat',p:'all',scheme:'classic'},{t:'ddchart',p:'all'}];
 let pfW=(()=>{try{const w=JSON.parse(localStorage.getItem('pc-pfw')||'null');
   return Array.isArray(w)&&w.length?w.filter(x=>PF_WIDGETS[x.t]):JSON.parse(JSON.stringify(PF_DEFAULT));}
   catch(e){return JSON.parse(JSON.stringify(PF_DEFAULT));}})();
 const pfSave=()=>{try{localStorage.setItem('pc-pfw',JSON.stringify(pfW));}catch(e){}};
-function pfPeriodLabel(p){ return (PF_PERIODS.find(x=>x[0]===p)||['','Since 2022'])[1]; }
+/* owner: persist the custom benchmark list for everyone (cloud fetches it) */
+async function saveBenchList(list){
+  if(!_user) return false;
+  try{
+    const body={fields:{benchmarks:{arrayValue:{values:list.map(s=>({stringValue:s}))}}}};
+    const r=await fetch(FS_DOC+'?updateMask.fieldPaths=benchmarks&key='+FB_CFG.apiKey,
+      {method:'PATCH',headers:{'Content-Type':'application/json','Authorization':'Bearer '+await _user.getIdToken()},
+       body:JSON.stringify(body)});
+    if(r.ok){ _cfg.benchmarks=list; return true; }
+  }catch(e){}
+  return false;
+}
 function renderPerf(){
   const grid=document.getElementById('pf-grid'); if(!grid) return;
   grid.innerHTML=pfW.map((w,i)=>{
     const def=PF_WIDGETS[w.t];
-    const per=def.opts.includes('p')?`<span class="pfw-per">${pfPeriodLabel(w.p||'max')}</span>`:'';
-    return `<div class="panel pfw ${def.big?'pfw-b':'pfw-s'}" data-wi="${i}">
+    const per=def.opts.includes('p')?`<span class="pfw-per">${pLabel(w.p)}</span>`:'';
+    return `<div class="panel pfw ${def.big?'pfw-b':'pfw-s'}" data-wi="${i}" draggable="true">
       <div class="pfw-head"><h2 style="margin:0">${def.lab} ${per}</h2>
         <span class="pfw-ctl">
-          <button data-mv="-1" title="move left">‹</button><button data-mv="1" title="move right">›</button>
           ${def.opts.length?'<button data-cfg title="settings">⚙</button>':''}
           <button data-rm title="remove">×</button></span></div>
       <div class="pfw-body">${def.render(w)}</div>
       <div class="pfw-pop" style="display:none"></div>
     </div>`;
   }).join('');
+  // drag & drop reorder
+  let dragI=null;
+  grid.querySelectorAll('.pfw').forEach(card=>{
+    card.addEventListener('dragstart',e=>{ dragI=+card.dataset.wi; card.classList.add('dragging');
+      e.dataTransfer.effectAllowed='move'; });
+    card.addEventListener('dragend',()=>{ card.classList.remove('dragging');
+      grid.querySelectorAll('.pfw').forEach(c=>c.classList.remove('dragover')); });
+    card.addEventListener('dragover',e=>{ e.preventDefault(); e.dataTransfer.dropEffect='move';
+      if(+card.dataset.wi!==dragI) card.classList.add('dragover'); });
+    card.addEventListener('dragleave',()=>card.classList.remove('dragover'));
+    card.addEventListener('drop',e=>{
+      e.preventDefault();
+      const j=+card.dataset.wi;
+      if(dragI===null||j===dragI) return;
+      const [mv]=pfW.splice(dragI,1); pfW.splice(j,0,mv);
+      dragI=null; pfSave(); renderPerf();
+    });
+  });
   // per-widget handlers
   grid.querySelectorAll('.pfw').forEach(card=>{
     const i=+card.dataset.wi, w=pfW[i], def=PF_WIDGETS[w.t];
     if(def.after) def.after(w,card);
-    card.querySelectorAll('[data-mv]').forEach(b=>b.addEventListener('click',()=>{
-      const j=i+(+b.dataset.mv); if(j<0||j>=pfW.length) return;
-      [pfW[i],pfW[j]]=[pfW[j],pfW[i]]; pfSave(); renderPerf();
-    }));
     card.querySelector('[data-rm]').addEventListener('click',()=>{ pfW.splice(i,1); pfSave(); renderPerf(); });
     const cfgBtn=card.querySelector('[data-cfg]');
     if(cfgBtn) cfgBtn.addEventListener('click',e=>{
       e.stopPropagation();
       const pop=card.querySelector('.pfw-pop');
       if(pop.style.display!=='none'){ pop.style.display='none'; return; }
+      const p=normP(w.p);
       let html='';
-      if(def.opts.includes('p')) html+=`<div class="pfw-lbl">Reporting period</div><select data-set="p">${PF_PERIODS.map(([k,l])=>`<option value="${k}" ${w.p===k?'selected':''}>${l}</option>`).join('')}</select>`;
-      if(def.opts.includes('bench')) html+=`<div class="pfw-lbl">Benchmarks</div>`+Object.entries(BENCH_META).map(([s,m])=>
-        `<label style="display:flex;gap:7px;align-items:center;padding:2px 0;font-size:12.5px"><input type="checkbox" data-bch="${s}" ${(w.bench||[]).includes(s)?'checked':''} ${(DATA.bench||{})[s]?'':'disabled'}> <span style="color:${m.col}">●</span> ${m.label}</label>`).join('');
-      if(def.opts.includes('scheme')) html+=`<div class="pfw-lbl">Colors</div><select data-set="scheme">${PF_SCHEMES.map(([k,l])=>`<option value="${k}" ${w.scheme===k?'selected':''}>${l}</option>`).join('')}</select>`;
+      if(def.opts.includes('p')){
+        const yearsAvail=[...new Set((DATA.chartPP||[]).map(x=>x.d.slice(0,4)))];
+        html+=`<div class="pfw-lbl">Reporting period</div><select data-per>
+          <optgroup label="Relative">${PF_REL.map(([k,l])=>`<option value="rel:${k}" ${p.k==='rel'&&p.v===k?'selected':''}>${l}</option>`).join('')}</optgroup>
+          <optgroup label="Year">${yearsAvail.map(y=>`<option value="year:${y}" ${p.k==='year'&&String(p.y)===y?'selected':''}>Year ${y}</option>`).join('')}</optgroup>
+          <optgroup label="Custom"><option value="since" ${p.k==='since'?'selected':''}>Since date…</option>
+          <option value="range" ${p.k==='range'?'selected':''}>From – to…</option></optgroup></select>
+          <div class="pfw-dates" style="display:${p.k==='since'||p.k==='range'?'block':'none'}">
+            <input type="date" data-from value="${p.from||''}" style="margin-bottom:4px">
+            <input type="date" data-to value="${p.to||''}" style="display:${p.k==='range'?'block':'none'}">
+          </div>`;
+      }
+      if(def.opts.includes('bench')){
+        const BM=benchMeta();
+        html+=`<div class="pfw-lbl">Benchmarks</div>`+Object.entries(BM).map(([s,m])=>{
+          const has=!!(DATA.bench||{})[s];
+          return `<label style="display:flex;gap:7px;align-items:center;padding:2px 0;font-size:12.5px">
+            <input type="checkbox" data-bch="${s}" ${(w.bench||[]).includes(s)?'checked':''} ${has?'':'disabled'}>
+            <span style="color:${m.col}">●</span> ${esc(m.label)}${has?'':' <span style="color:var(--muted)">(loading…)</span>'}
+            ${m.custom&&isOwner()?`<button data-bdel="${s}" style="border:0;background:none;color:var(--muted);cursor:pointer;margin-left:auto">×</button>`:''}</label>`;
+        }).join('')+
+        `<div style="display:flex;gap:6px;margin-top:6px">
+           <input type="text" data-bnew placeholder="+ ticker (e.g. IWM, DAX…)" maxlength="12" style="flex:1;background:var(--surface-2);border:1px solid var(--border);border-radius:7px;padding:5px 8px;font:inherit;font-size:12px;color:var(--ink)">
+         </div>
+         <div data-bmsg style="font-size:11px;color:var(--muted);margin-top:4px">${isOwner()?'Enter drücken — Kurse laden in wenigen Minuten':'sign in as owner to add benchmarks'}</div>`;
+      }
+      if(def.opts.includes('scheme')) html+=`<div class="pfw-lbl">Colors</div><select data-scheme>${PF_SCHEMES.map(([k,l])=>`<option value="${k}" ${w.scheme===k?'selected':''}>${l}</option>`).join('')}</select>`;
       pop.innerHTML=html; pop.style.display='block';
-      pop.querySelectorAll('[data-set]').forEach(s=>s.addEventListener('change',()=>{ w[s.dataset.set]=s.value; pfSave(); renderPerf(); }));
-      pop.querySelectorAll('[data-bch]').forEach(c=>c.addEventListener('change',()=>{
-        w.bench=Object.keys(BENCH_META).filter(s=>pop.querySelector(`[data-bch="${s}"]`).checked);
-        pfSave(); renderPerf(); }));
       pop.addEventListener('click',e2=>e2.stopPropagation());
+      const applyPeriod=()=>{
+        const sel=pop.querySelector('[data-per]'); if(!sel) return;
+        const v=sel.value, from=pop.querySelector('[data-from]'), to=pop.querySelector('[data-to]');
+        const dates=pop.querySelector('.pfw-dates');
+        if(v.startsWith('rel:')){ w.p={k:'rel',v:v.slice(4)}; dates.style.display='none'; pfSave(); renderPerf(); }
+        else if(v.startsWith('year:')){ w.p={k:'year',y:+v.slice(5)}; dates.style.display='none'; pfSave(); renderPerf(); }
+        else if(v==='since'){ dates.style.display='block'; to.style.display='none';
+          if(from.value){ w.p={k:'since',from:from.value}; pfSave(); renderPerf(); } }
+        else if(v==='range'){ dates.style.display='block'; to.style.display='block';
+          if(from.value&&to.value){ w.p={k:'range',from:from.value,to:to.value}; pfSave(); renderPerf(); } }
+      };
+      const perSel=pop.querySelector('[data-per]');
+      if(perSel){ perSel.addEventListener('change',applyPeriod);
+        pop.querySelectorAll('[data-from],[data-to]').forEach(x=>x.addEventListener('change',applyPeriod)); }
+      const sch=pop.querySelector('[data-scheme]');
+      if(sch) sch.addEventListener('change',()=>{ w.scheme=sch.value; pfSave(); renderPerf(); });
+      pop.querySelectorAll('[data-bch]').forEach(c=>c.addEventListener('change',()=>{
+        w.bench=[...pop.querySelectorAll('[data-bch]')].filter(x=>x.checked).map(x=>x.dataset.bch);
+        pfSave(); renderPerf(); }));
+      pop.querySelectorAll('[data-bdel]').forEach(b=>b.addEventListener('click',async()=>{
+        const list=(_cfg.benchmarks||[]).filter(s=>s!==b.dataset.bdel);
+        if(await saveBenchList(list)) renderPerf();
+      }));
+      const bnew=pop.querySelector('[data-bnew]');
+      if(bnew) bnew.addEventListener('keydown',async e2=>{
+        if(e2.key!=='Enter') return;
+        const sym=bnew.value.trim().toUpperCase(); if(!sym) return;
+        const msg=pop.querySelector('[data-bmsg]');
+        if(!isOwner()){ msg.textContent='sign in as owner first'; msg.style.color='var(--down)'; return; }
+        const list=[...new Set([...(_cfg.benchmarks||[]),sym])];
+        msg.textContent='saving…';
+        if(await saveBenchList(list)){ msg.textContent='✓ added — data live in a few minutes'; msg.style.color='var(--up)';
+          w.bench=[...new Set([...(w.bench||[]),sym])]; pfSave(); }
+        else { msg.textContent='save failed'; msg.style.color='var(--down)'; }
+      });
     });
   });
 }
@@ -1812,7 +1929,7 @@ function pfInitToolbar(){
     add.parentElement.appendChild(pop);
     pop.querySelectorAll('[data-add]').forEach(x=>x.addEventListener('click',()=>{
       const t=x.dataset.add, def=PF_WIDGETS[t];
-      const w={t}; if(def.opts.includes('p')) w.p='max';
+      const w={t}; if(def.opts.includes('p')) w.p={k:'rel',v:'all'};
       if(def.opts.includes('bench')) w.bench=['SPY'];
       if(def.opts.includes('scheme')) w.scheme='classic';
       pfW.push(w); pfSave(); pop.remove(); renderPerf();
@@ -1828,20 +1945,20 @@ function pfInitToolbar(){
 }
 function drawPerfChart(w,card){
   const svg=card.querySelector('svg.pfw-chart'), tip=card.querySelector('.tip');
-  const m=pfMetrics(w.p||'max'); if(!m) return;
-  const pts=m.pts, r0=pts[0].r;
+  const m=pfMetrics(w.p); if(!m) return;
+  const pts=m.pts, r0=pts[0].r, BM=benchMeta();
   const lines=[{name:'Portfolio',col:cvar('--ink'),pts:pts.map(p=>({d:p.d,y:((1+p.r)/(1+r0)-1)*100})),w:2.4}];
   (w.bench||[]).forEach(s=>{ const b=benchSeries(s,pts);
-    if(b) lines.push({name:BENCH_META[s].label,col:BENCH_META[s].col,pts:b.map(p=>({d:p.d,y:p.r*100})),w:1.8}); });
+    if(b&&BM[s]) lines.push({name:BM[s].label,col:BM[s].col,pts:b.map(p=>({d:p.d,y:p.r*100})),w:1.8}); });
   drawLines(svg,tip,lines,pts);
   const lg=card.querySelector('.pfw-legend');
   if(lg) lg.innerHTML=lines.map(l=>{ const last=l.pts[l.pts.length-1];
     return `<span><span style="display:inline-block;width:16px;height:3px;background:${l.col};border-radius:2px;vertical-align:3px;margin-right:6px"></span>${esc(l.name)} <b class="tnum ${last.y>=0?'up':'down'}">${fmtPct(last.y)}</b></span>`; }).join('');
 }
 function drawDDChart(w,card){
-  const svg=card.querySelector('svg.pfw-chart');
-  const m=pfMetrics(w.p||'max'); if(!m) return;
-  drawLines(svg,null,[{name:'Drawdown',col:cvar('--down'),pts:m.dd.serie,w:1.8,fill:true}],m.pts);
+  const svg=card.querySelector('svg.pfw-chart'), tip=card.querySelector('.tip');
+  const m=pfMetrics(w.p); if(!m) return;
+  drawLines(svg,tip,[{name:'Drawdown',col:cvar('--down'),pts:m.dd.serie,w:1.8,fill:true}],m.pts);
 }
 function drawLines(svg,tip,lines,pts){
   const W=svg.getBoundingClientRect().width||900, H=parseFloat(svg.style.height)||230, pad={t:12,b:20};
