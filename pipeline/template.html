@@ -2,6 +2,8 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta name="robots" content="noindex, nofollow">
 <title>Rafael's Portfolio</title>
+<link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%23101828'/%3E%3Cpath d='M12 44L26 30l10 8 16-20' fill='none' stroke='%233ecb63' stroke-width='6' stroke-linecap='round' stroke-linejoin='round'/%3E%3Ccircle cx='52' cy='18' r='4.5' fill='%233ecb63'/%3E%3C/svg%3E">
+<link rel="apple-touch-icon" href="apple-touch-icon.png">
 <style>
   :root{
     --plane:#eef2f7; --surface:#ffffff; --surface-2:#f3f6fa;
@@ -359,7 +361,7 @@ function colorFor(i){
   const rank=Math.max(0,order.findIndex(x=>x&&h&&x.ticker===h.ticker));
   const n=Math.max(1,order.length-1);
   const hue=(212 + rank/n*195) % 360;               // 212° blue -> 407°%360 = 47° amber
-  const [s,l]=isDarkTheme()?[52,60]:[52,52];
+  const [s,l]=isDarkTheme()?[50,52]:[54,44];        // Parqet-deep: richer, darker tones
   return `hsl(${hue.toFixed(0)} ${s}% ${l}%)`;
 }
 const fmtUsd = n => (n<0?'-':'')+'$'+Math.abs(Math.round(n)).toLocaleString('en-US');
