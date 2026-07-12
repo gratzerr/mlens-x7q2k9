@@ -292,7 +292,9 @@ data = {
     "holdings": port["holdings"],
     "catalysts": merged,
     "latestNews": all_news,
-    "pp": pp,
+    # only the single field the template reads — NOT the whole pp.json (which contains
+    # the full securities list of every depot; that would leak the separate depots' names)
+    "pp": {"ppReferenceTtwror": pp.get("ppReferenceTtwror")} if pp else None,
     "secCik": sec_cik,
     "social": (lambda: (json.load(open(os.path.join(ROOT, "social.json"), encoding="utf-8"))
                         if os.path.exists(os.path.join(ROOT, "social.json")) else {}))(),
