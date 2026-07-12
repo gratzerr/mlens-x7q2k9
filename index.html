@@ -59,6 +59,18 @@
   .themebtn:hover{background:var(--surface-2)}
   .themebtn svg{width:15px;height:15px;display:block}
 
+  .tabbar{position:sticky;top:0;z-index:40;display:flex;gap:4px;margin:0 0 20px;padding:5px;
+    background:color-mix(in srgb, var(--surface) 82%, transparent);backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);
+    border:1px solid var(--border);border-radius:13px;box-shadow:var(--shadow);width:fit-content}
+  .tabbar button{border:0;background:none;color:var(--muted);font:inherit;font-size:13.5px;font-weight:650;
+    padding:8px 18px;border-radius:9px;cursor:pointer;transition:background .12s,color .12s}
+  .tabbar button:hover{color:var(--ink)}
+  .tabbar button.on{background:var(--accent);color:#fff}
+  [data-tab]{display:none}
+  [data-tab].tabon{display:block}
+  .kpis[data-tab].tabon{display:grid}
+  .cols[data-tab].tabon{display:grid}
+
   .kpis{display:grid;grid-template-columns:repeat(4,1fr);gap:14px;margin-bottom:20px}
   .tile{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);
     padding:18px 19px 16px;box-shadow:var(--shadow)}
@@ -294,9 +306,15 @@
     </div>
   </header>
 
-  <div class="kpis" id="kpis"></div>
+  <nav class="tabbar" id="tabbar">
+    <button data-tabbtn="portfolio" class="on">Portfolio</button>
+    <button data-tabbtn="news">News</button>
+    <button data-tabbtn="performance">Performance</button>
+  </nav>
 
-  <div class="panel">
+  <div class="kpis" id="kpis" data-tab="portfolio"></div>
+
+  <div class="panel" data-tab="portfolio">
     <div class="chart-head">
       <h2 style="margin:0">Portfolio Value <span id="chart-ret"></span></h2>
       <div class="tfsel" id="tfsel"></div>
@@ -307,13 +325,13 @@
     </div>
   </div>
 
-  <div class="panel" style="position:relative">
+  <div class="panel" data-tab="portfolio" style="position:relative">
     <h2>Holdings <button class="gearbtn" id="htgear" title="columns"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="14" height="14" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 1 1-2.83 2.83l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 1 1-4 0v-.09a1.65 1.65 0 0 0-1-1.51 1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 1 1-2.83-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 1 1 0-4h.09a1.65 1.65 0 0 0 1.51-1 1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 1 1 2.83-2.83l.06.06a1.65 1.65 0 0 0 1.82.33h.01a1.65 1.65 0 0 0 1-1.51V3a2 2 0 1 1 4 0v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 1 1 2.83 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82v.01a1.65 1.65 0 0 0 1.51 1H21a2 2 0 1 1 0 4h-.09a1.65 1.65 0 0 0-1.51 1Z"/></svg></button></h2>
     <div class="htpop" id="htpop" style="display:none"></div>
     <div style="overflow-x:auto"><table class="htable" id="holdingstable"></table></div>
   </div>
 
-  <div class="cols eq">
+  <div class="cols eq" data-tab="portfolio">
     <div class="panel">
       <h2>Allocation</h2>
       <div id="allocdonut"></div>
@@ -324,7 +342,7 @@
     </div>
   </div>
 
-  <div class="cols">
+  <div class="cols" data-tab="portfolio">
     <div class="panel" style="grid-column:1 / -1">
       <h2><span class="live"></span>Activities</h2>
       <div class="feedmax" id="activities"></div>
@@ -332,7 +350,7 @@
     </div>
   </div>
 
-  <div class="cols">
+  <div class="cols" data-tab="news">
     <div class="panel">
       <h2><span class="live"></span>Latest News</h2>
       <div class="feed" id="feed"></div>
@@ -343,14 +361,55 @@
     </div>
   </div>
 
-  <div class="panel">
+  <div class="panel" data-tab="news">
     <h2>Upcoming Catalysts</h2>
     <div class="tl" id="timeline"></div>
   </div>
 
-  <div class="panel" style="background:none;border:0;padding:0">
+  <div class="panel" data-tab="news" style="background:none;border:0;padding:0;box-shadow:none">
     <h2 style="margin-left:2px">Positions &amp; News</h2>
     <div class="hgrid" id="holdings"></div>
+  </div>
+
+  <!-- ===================== PERFORMANCE TAB (PP-style analysis) ===================== -->
+  <div class="panel" data-tab="performance">
+    <div class="chart-head">
+      <h2 style="margin:0">Performance <span id="pf-ret"></span></h2>
+      <div class="tfsel" id="pf-tfsel"></div>
+    </div>
+    <div class="chips" id="pf-bench" style="margin:2px 0 12px"></div>
+    <div class="chartbox">
+      <svg class="line" id="pf-chart" preserveAspectRatio="none" style="height:240px"></svg>
+      <div class="tip" id="pf-tip"></div>
+    </div>
+    <div id="pf-legend" style="display:flex;gap:16px;flex-wrap:wrap;margin-top:8px;font-size:12px;color:var(--ink-2)"></div>
+  </div>
+
+  <div class="cols eq" data-tab="performance">
+    <div class="panel">
+      <h2>Key figures</h2>
+      <div class="pprow" id="pf-stats" style="display:grid;grid-template-columns:1fr 1fr;gap:14px"></div>
+    </div>
+    <div class="panel">
+      <h2>Risk</h2>
+      <div class="pprow" id="pf-risk" style="display:grid;grid-template-columns:1fr 1fr;gap:14px"></div>
+    </div>
+  </div>
+
+  <div class="cols eq" data-tab="performance">
+    <div class="panel">
+      <h2>Calculation · since 2022</h2>
+      <div id="pf-calc"></div>
+    </div>
+    <div class="panel">
+      <h2>Yearly returns</h2>
+      <div id="pf-years" style="overflow-x:auto"></div>
+    </div>
+  </div>
+
+  <div class="panel" data-tab="performance">
+    <h2>Monthly returns</h2>
+    <div id="pf-heat" style="overflow-x:auto"></div>
   </div>
 
   <div class="foot" id="foot"></div>
@@ -1087,7 +1146,7 @@ function initTheme(){
     if(!localStorage.getItem('pc-theme')){ icon(); rerender(); }
   });
 }
-function rerender(){ renderFeed(); renderChart(); renderHoldingsTable(); renderAlloc(); renderPerfBars(); renderTimeline(); renderHoldings(); }
+function rerender(){ renderFeed(); renderChart(); renderHoldingsTable(); renderAlloc(); renderPerfBars(); renderTimeline(); renderHoldings(); if(_tab==='performance') renderPerf(); }
 
 /* ===== LIVE DATA LAYER =====================================================
    Works on GitHub Pages (fetch allowed). Inside the Claude artifact the CSP
@@ -1501,8 +1560,252 @@ function boot(){
   document.getElementById('hcount').textContent=DATA.holdings.filter(h=>h.assetType!=='cash').length;
   document.getElementById('foot').innerHTML='Snapshot built '+esc(DATA.generated)+
     ' · When hosted live, prices refresh every 3 min (Yahoo) and headlines every 15 min (GDELT), computed in your browser · Curated news &amp; catalysts refreshed twice daily · Not investment advice.<br>Green dot = confirmed date, amber dot = estimated.';
-  initTheme(); applyName(); loadConfig(); loadSocialCache(); renderKpis(); renderTfSel(); renderSocial(); rerender(); initSecAlerts(); initHtSettings(); initAppSettings(); startLive();
+  initTheme(); applyName(); initTabs(); loadConfig(); loadSocialCache(); renderKpis(); renderTfSel(); renderSocial(); rerender(); initSecAlerts(); initHtSettings(); initAppSettings(); startLive();
   window.addEventListener('resize',()=>{clearTimeout(window._rz);window._rz=setTimeout(()=>{renderChart();hydrateSparks();},150);});
+}
+
+/* ===================== TABS ===================== */
+let _tab='portfolio';
+function switchTab(t){
+  _tab=t;
+  document.querySelectorAll('[data-tab]').forEach(el=>el.classList.toggle('tabon',el.dataset.tab===t));
+  document.querySelectorAll('[data-tabbtn]').forEach(b=>b.classList.toggle('on',b.dataset.tabbtn===t));
+  try{ history.replaceState(null,'','#'+t); }catch(e){}
+  if(t==='portfolio'){ renderChart(); hydrateSparks(); }
+  if(t==='performance'){ renderPerf(); }
+}
+function initTabs(){
+  document.querySelectorAll('[data-tabbtn]').forEach(b=>b.addEventListener('click',()=>switchTab(b.dataset.tabbtn)));
+  const h=(location.hash||'').replace('#','');
+  switchTab(['portfolio','news','performance'].includes(h)?h:'portfolio');
+}
+
+/* ===================== PERFORMANCE TAB (formulas replicated from PP source: Risk.java) ===================== */
+let pfTf=localStorage.getItem('pc-pftf')||'max';
+let pfBench=(()=>{try{return new Set(JSON.parse(localStorage.getItem('pc-bench')||'["SPY"]'));}catch(e){return new Set(['SPY']);}})();
+const BENCH_META={SPY:{label:'S&P 500',col:'#6d92c4'},QQQ:{label:'Nasdaq 100',col:'#bd93b4'},
+  XBI:{label:'Biotech (XBI)',col:'#f0a955'},'VWCE.DE':{label:'All-World',col:'#5bb98c'}};
+function pfSlice(){
+  const s=(DATA.chartPP||[]).filter(p=>p.v>0);
+  if(pfTf==='max'||!s.length) return s;
+  const last=s[s.length-1].d;
+  let from;
+  if(pfTf==='ytd') from=last.slice(0,4)+'-01-01';
+  else { const days={'1y':365,'6m':182,'3m':91,'1m':30}[pfTf]||0;
+    from=new Date(new Date(last).getTime()-days*86400000).toISOString().slice(0,10); }
+  const i=s.findIndex(p=>p.d>=from);
+  return i<=0?s:s.slice(i-1);
+}
+function isWeekday(d){ const wd=new Date(d+'T00:00:00Z').getUTCDay(); return wd>=1&&wd<=5; }
+function pfDailyReturns(pts){
+  const out=[];
+  for(let i=1;i<pts.length;i++){
+    if(!isWeekday(pts[i].d)) continue;                       // PP: exclude weekends/holidays
+    out.push((1+pts[i].r)/(1+pts[i-1].r)-1);
+  }
+  return out;
+}
+function ppVolatility(rets){   // Risk.java: stddev of log returns, scaled by sqrt(n)
+  if(rets.length<2) return {vol:0,semi:0};
+  const logs=rets.map(r=>Math.log(1+r));
+  const avg=logs.reduce((a,b)=>a+b,0)/logs.length;
+  let s=0, semi=0;
+  logs.forEach(l=>{ const a=(l-avg)*(l-avg); s+=a; if(l<avg) semi+=a; });
+  const n=logs.length;
+  return {vol:Math.sqrt(s/(n-1)*n), semi:Math.sqrt(semi/(n-1)*n)};
+}
+function ppDrawdown(pts){      // Risk.java: peak tracking on (1+accumulated return)
+  let peak=-1e18, peakDate=null, maxDD=0, ddFrom=null, ddTo=null, maxDur=0, durFrom=null, durTo=null;
+  let lastPeakDate=pts.length?pts[0].d:null;
+  pts.forEach(p=>{
+    const v=1+p.r;
+    if(v>=peak-1e-12 && v>peak){ // new peak
+      const dur=(new Date(p.d)-new Date(lastPeakDate))/86400000;
+      if(dur>maxDur){ maxDur=dur; durFrom=lastPeakDate; durTo=p.d; }
+      peak=v; peakDate=p.d; lastPeakDate=p.d;
+    } else {
+      const dd=(peak-v)/peak;
+      if(dd>maxDD){ maxDD=dd; ddFrom=peakDate; ddTo=p.d; }
+      const dur=(new Date(p.d)-new Date(lastPeakDate))/86400000;
+      if(dur>maxDur){ maxDur=dur; durFrom=lastPeakDate; durTo=p.d; }
+    }
+  });
+  return {maxDD, ddFrom, ddTo, maxDur:Math.round(maxDur), durFrom, durTo};
+}
+function benchSeries(sym,pts){  // benchmark % line aligned to the period, 0% at start
+  const raw=(DATA.bench||{})[sym]; if(!raw||!raw.length||!pts.length) return null;
+  const start=pts[0].d, end=pts[pts.length-1].d;
+  let base=null; const out=[];
+  for(const [d,c] of raw){
+    if(d<start){ base=c; continue; }
+    if(d>end) break;
+    if(base===null) base=c;
+    out.push({d, r:c/base-1});
+  }
+  return out.length>5?out:null;
+}
+const pfStat=(lab,val,cls,note)=>`<div class="ppstat"><div class="lab">${lab}</div>
+  <div class="val ${cls||''}">${val}</div>${note?`<div class="note">${note}</div>`:''}</div>`;
+function renderPerf(){
+  const pts=pfSlice(); if(pts.length<2) return;
+  const val=p=>(_ccy==='EUR'&&p.e!=null)?p.e:p.v;
+  const contrib=p=>(_ccy==='EUR'?(p.k||0):(p.c||0));
+  // ---- timeframe buttons + benchmark chips
+  document.getElementById('pf-tfsel').innerHTML=TFS.map(t=>
+    `<button data-pftf="${t.k}" class="${t.k===pfTf?'on':''}">${t.l}</button>`).join('');
+  document.querySelectorAll('[data-pftf]').forEach(b=>b.addEventListener('click',()=>{
+    pfTf=b.dataset.pftf; localStorage.setItem('pc-pftf',pfTf); renderPerf();
+  }));
+  document.getElementById('pf-bench').innerHTML=Object.entries(BENCH_META).map(([s,m])=>{
+    const on=pfBench.has(s), has=!!(DATA.bench||{})[s];
+    return `<button class="chip" data-bch="${s}" ${has?'':'disabled title="no data yet"'}
+      style="cursor:pointer;border:1px solid ${on?m.col:'var(--border)'};${on?`background:${m.col}22;color:${m.col};font-weight:680`:''}">
+      <span class="cf" style="background:${m.col}"></span>${m.label}</button>`;
+  }).join('');
+  document.querySelectorAll('[data-bch]').forEach(b=>b.addEventListener('click',()=>{
+    const s=b.dataset.bch;
+    pfBench.has(s)?pfBench.delete(s):pfBench.add(s);
+    localStorage.setItem('pc-bench',JSON.stringify([...pfBench])); renderPerf();
+  }));
+  // ---- key figures
+  const r0=pts[0].r, r1=pts[pts.length-1].r;
+  const tt=((1+r1)/(1+r0)-1);
+  const days=(new Date(pts[pts.length-1].d)-new Date(pts[0].d))/86400000;
+  const ann=days>90?(Math.pow(1+tt,365/days)-1):null;
+  const absCh=val(pts[pts.length-1])-val(pts[0]);
+  const delta=absCh-(contrib(pts[pts.length-1])-contrib(pts[0]));
+  let li=pts.length-1;                                   // last day WITH movement (stale weekend tail skipped)
+  while(li>1 && pts[li].r===pts[li-1].r) li--;
+  const dPrev=pts[li-1], dLast=pts[li];
+  const lastR=(1+dLast.r)/(1+dPrev.r)-1, lastAbs=val(dLast)-val(dPrev);
+  document.getElementById('pf-ret').innerHTML=`<span class="rl">TTWROR</span> <span class="rv ${tt>=0?'up':'down'}">${fmtPct(tt*100)}</span>`;
+  document.getElementById('pf-stats').innerHTML=
+    pfStat('TTWROR (cumulative)',fmtPct(tt*100),tt>=0?'up':'down')+
+    pfStat('TTWROR (annualized)',ann!=null?fmtPct(ann*100):'—',(ann||0)>=0?'up':'down')+
+    pfStat('IRR (since 2022)',(DATA.izf||0).toFixed(2)+'%','up')+
+    pfStat('Absolute change',fmtUsd(absCh),absCh>=0?'up':'down')+
+    pfStat('Delta (in period)',fmtUsd(delta),delta>=0?'up':'down','excl. deposits/withdrawals')+
+    pfStat('Last day',fmtPct(lastR*100)+' · '+fmtUsd(lastAbs),lastR>=0?'up':'down',dLast.d);
+  // ---- risk
+  const rets=pfDailyReturns(pts).filter(r=>r!==0);
+  const {vol,semi}=ppVolatility(rets);
+  const dd=ppDrawdown(pts);
+  document.getElementById('pf-risk').innerHTML=
+    pfStat('Max drawdown',fmtPct(-dd.maxDD*100),'down',dd.ddFrom?`${dd.ddFrom} → ${dd.ddTo}`:'')+
+    pfStat('Max drawdown duration',dd.maxDur+' days','',dd.durFrom?`${dd.durFrom} → ${dd.durTo}`:'')+
+    pfStat('Volatility',(vol*100).toFixed(2)+'%')+
+    pfStat('Semivolatility',(semi*100).toFixed(2)+'%');
+  // ---- calculation block (full period, engine-exact)
+  const D=DATA, money=(u,e)=>_priv?MASK:(_ccy==='EUR'&&e!=null?fmtE(e):fmtUsd(u));
+  const full=(DATA.chartPP||[]);
+  const init={v:full[0].v,e:full[0].e}, fin={v:full[full.length-1].v,e:full[full.length-1].e};
+  const rows=[
+    ['Initial value ('+full[0].d+')', money(init.v,init.e),''],
+    ['+ Capital gains (unrealized)', money(D.ppUnrealizedUsd,D.ppUnrealizedEur),'up'],
+    ['+ Realized capital gains', money(D.ppRealizedUsd,D.ppRealizedEur),'up'],
+    ['+ Earnings (dividends, interest)', money(D.ppEarningsUsd,D.ppEarningsEur),'up'],
+    ['− Fees', money(D.ppFeesUsd,D.ppFeesEur),'down'],
+    ['− Taxes', money(D.ppTaxesUsd,D.ppTaxesEur),'down'],
+    ['+ Performance-neutral transfers', money(D.ppNetContribUsd,D.ppNetContribEur),''],
+    ['= Final value ('+full[full.length-1].d+')', money(fin.v,fin.e),'']
+  ];
+  document.getElementById('pf-calc').innerHTML=rows.map(([l,v,c],i)=>
+    `<div style="display:flex;justify-content:space-between;gap:12px;padding:7px 2px;font-size:13.5px;
+      ${i===0||i===rows.length-1?'font-weight:700;':''}${i===rows.length-1?'border-top:1px solid var(--line);':i>0?'border-top:1px solid var(--grid);':''}">
+      <span>${l}</span><span class="tnum ${c}">${v}</span></div>`).join('');
+  // ---- monthly heatmap (full history)
+  const byM={};
+  for(let i=1;i<full.length;i++){
+    const m=full[i].d.slice(0,7);
+    if(!(m in byM)) byM[m]={start:full[i-1].r,end:full[i].r};
+    else byM[m].end=full[i].r;
+  }
+  const years=[...new Set(Object.keys(byM).map(m=>m.slice(0,4)))].sort();
+  const MN=['J','F','M','A','M','J','J','A','S','O','N','D'];
+  const cellCol=v=>{ const x=Math.max(-15,Math.min(15,v));
+    return v>=0?`hsl(145 65% ${isDarkTheme()?22+ (15-x)*1.4:88-x*2.4}%)`:`hsl(0 70% ${isDarkTheme()?24+(15+x)*1.2:88+x*2.2}%)`; };
+  let heat='<table style="border-collapse:separate;border-spacing:3px;font-size:12px;min-width:640px"><tr><th></th>'+
+    MN.map(m=>`<th style="color:var(--muted);font-weight:650;padding:2px 6px">${m}</th>`).join('')+'</tr>';
+  years.forEach(y=>{
+    heat+=`<tr><td style="color:var(--muted);font-weight:650;padding:2px 8px">${y.slice(2)}</td>`;
+    for(let m=1;m<=12;m++){
+      const k=y+'-'+String(m).padStart(2,'0'), e=byM[k];
+      if(!e){ heat+='<td></td>'; continue; }
+      const v=((1+e.end)/(1+e.start)-1)*100;
+      heat+=`<td class="tnum" style="background:${cellCol(v)};color:var(--ink);padding:5px 8px;border-radius:6px;text-align:center;font-weight:640">${v.toFixed(1)}</td>`;
+    }
+    heat+='</tr>';
+  });
+  document.getElementById('pf-heat').innerHTML=heat+'</table>';
+  // ---- yearly table incl. active benchmarks
+  const activeB=[...pfBench].filter(s=>(DATA.bench||{})[s]);
+  let yr='<table style="border-collapse:separate;border-spacing:3px;font-size:12.5px"><tr><th></th>'+
+    `<th style="color:var(--muted);font-weight:650;padding:2px 10px">Portfolio</th>`+
+    activeB.map(s=>`<th style="color:${BENCH_META[s].col};font-weight:650;padding:2px 10px">${BENCH_META[s].label}</th>`).join('')+'</tr>';
+  years.forEach(y=>{
+    const yPts=full.filter(p=>p.d.slice(0,4)===y);
+    const prev=full[full.indexOf(yPts[0])-1]||yPts[0];
+    const pv=((1+yPts[yPts.length-1].r)/(1+prev.r)-1)*100;
+    yr+=`<tr><td style="color:var(--muted);font-weight:650;padding:2px 8px">${y.slice(2)}</td>`+
+      `<td class="tnum" style="background:${cellCol(pv)};padding:5px 12px;border-radius:6px;text-align:center;font-weight:660">${pv.toFixed(1)}</td>`;
+    activeB.forEach(s=>{
+      const raw=DATA.bench[s].filter(x=>x[0].slice(0,4)===y);
+      const pre=DATA.bench[s].filter(x=>x[0]<y+'-01-01').pop();
+      if(raw.length<2){ yr+='<td></td>'; return; }
+      const b=((raw[raw.length-1][1]/(pre?pre[1]:raw[0][1]))-1)*100;
+      yr+=`<td class="tnum" style="background:${cellCol(b)};padding:5px 12px;border-radius:6px;text-align:center">${b.toFixed(1)}</td>`;
+    });
+    yr+='</tr>';
+  });
+  document.getElementById('pf-years').innerHTML=yr+'</table>';
+  renderPerfChart(pts);
+}
+function renderPerfChart(pts){
+  const svg=document.getElementById('pf-chart'), tip=document.getElementById('pf-tip');
+  const W=svg.getBoundingClientRect().width||900, H=250, pad={t:14,b:22};
+  const r0=pts[0].r;
+  const port=pts.map(p=>({d:p.d, y:((1+p.r)/(1+r0)-1)*100}));
+  const lines=[{name:'Portfolio', col:cvar('--ink'), pts:port, w:2.4}];
+  [...pfBench].forEach(s=>{ const b=benchSeries(s,pts);
+    if(b) lines.push({name:BENCH_META[s].label, col:BENCH_META[s].col, pts:b.map(p=>({d:p.d,y:p.r*100})), w:1.8}); });
+  const all=lines.flatMap(l=>l.pts.map(p=>p.y));
+  const ymin=Math.min(0,...all), ymax=Math.max(0,...all);
+  const T=d=>new Date(d).getTime();
+  const t0=T(pts[0].d), t1=T(pts[pts.length-1].d), ts=(t1-t0)||1;
+  const X=d=>(T(d)-t0)/ts*W, Y=v=>pad.t+(1-(v-ymin)/(ymax-ymin||1))*(H-pad.t-pad.b);
+  const gc=cvar('--grid'), mc=cvar('--muted');
+  let grid='';
+  const span=ymax-ymin, step=[10,20,25,50,100,200,400].find(s=>span/s<=6)||400;
+  for(let v=Math.ceil(ymin/step)*step; v<=ymax; v+=step){
+    grid+=`<line x1="0" y1="${Y(v).toFixed(1)}" x2="${W}" y2="${Y(v).toFixed(1)}" stroke="${gc}" stroke-width="${v===0?1.6:1}"/>`+
+      `<text x="4" y="${(Y(v)-4).toFixed(1)}" fill="${mc}" font-size="10.5" font-family="system-ui">${v>0?'+':''}${v}%</text>`;
+  }
+  svg.setAttribute('viewBox',`0 0 ${W} ${H}`);
+  svg.innerHTML=grid+lines.map(l=>{
+    const d=l.pts.map((p,i)=>`${i?'L':'M'}${X(p.d).toFixed(1)},${Y(p.y).toFixed(1)}`).join(' ');
+    return `<path d="${d}" fill="none" stroke="${l.col}" stroke-width="${l.w}" stroke-linejoin="round" stroke-linecap="round"/>`;
+  }).join('')+`<line class="cross" id="pfcx" x1="0" y1="${pad.t}" x2="0" y2="${H-pad.b}" style="opacity:0"/>`;
+  document.getElementById('pf-legend').innerHTML=lines.map(l=>{
+    const last=l.pts[l.pts.length-1];
+    return `<span><span style="display:inline-block;width:16px;height:3px;background:${l.col};border-radius:2px;vertical-align:3px;margin-right:6px"></span>${esc(l.name)} <b class="tnum ${last.y>=0?'up':'down'}">${fmtPct(last.y)}</b></span>`;
+  }).join('');
+  const cx=svg.querySelector('#pfcx');
+  const move=e=>{
+    const rct=svg.getBoundingClientRect();
+    const fx=(e.touches?e.touches[0].clientX:e.clientX)-rct.left;
+    const targ=t0+Math.max(0,Math.min(1,fx/rct.width))*ts;
+    const px=(targ-t0)/ts*W;
+    cx.setAttribute('x1',px); cx.setAttribute('x2',px); cx.style.opacity=1;
+    const dstr=new Date(targ).toISOString().slice(0,10);
+    const vals=lines.map(l=>{ let best=l.pts[0];
+      for(const p of l.pts){ if(T(p.d)<=targ) best=p; else break; }
+      return `${esc(l.name)}: <b>${fmtPct(best.y)}</b>`; });
+    tip.style.opacity=1; tip.style.left=(px/W*rct.width)+'px'; tip.style.top='16px';
+    tip.innerHTML=dstr+'<br>'+vals.join('<br>');
+  };
+  svg.addEventListener('mousemove',move);
+  svg.addEventListener('touchmove',move,{passive:true});
+  svg.addEventListener('mouseleave',()=>{cx.style.opacity=0;tip.style.opacity=0;});
 }
 
 /* ===== start: public build boots instantly; private build gates on Google sign-in ===== */

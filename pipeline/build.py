@@ -286,6 +286,13 @@ data = {
     # net deposits since 2022 (PP "performance neutral transfers") — auto-updates on new deposits
     "ppNetContribUsd": pp.get("netContribUsd") if pp else None,
     "ppNetContribEur": pp.get("netContribEur") if pp else None,
+    # PP Calculation rows (verified vs the app to the cent)
+    "ppEarningsUsd": pp.get("earningsUsd") if pp else None, "ppEarningsEur": pp.get("earningsEur") if pp else None,
+    "ppFeesUsd": pp.get("feesUsd") if pp else None, "ppFeesEur": pp.get("feesEur") if pp else None,
+    "ppTaxesUsd": pp.get("taxesUsd") if pp else None, "ppTaxesEur": pp.get("taxesEur") if pp else None,
+    # benchmark daily closes for the Performance tab (bench_fetch.py, cloud)
+    "bench": (lambda: (json.load(open(os.path.join(ROOT, "bench.json")))
+                       if os.path.exists(os.path.join(ROOT, "bench.json")) else {}))(),
     "usdPerEur": usd_per_eur if pp else 1.14,
     # PP net-worth curve (daily EUR value + cum TTWROR) — replaces Parqet's wrong chart
     "chartPP": pp.get("series", []) if pp else [],
