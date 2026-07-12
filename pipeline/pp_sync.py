@@ -261,8 +261,27 @@ irr_flows=[]
 # net contributions ("Performance neutral Transfers" in PP's Calculation tab):
 # deposits + inbound deliveries minus removals + outbound deliveries, at tx-date FX
 contrib_eur=0.0;contrib_usd=0.0
+earn_eur=earn_usd=fees_eur=fees_usd=tax_eur=tax_usd=0.0   # PP Calculation rows (gross)
 for t in txs.values():
     d=t["date"];ty=t["type"];a=t["amount"];ccy=t["ccy"]
+    if d>START:
+        fe,tx_=t.get("fee",0.0),t.get("tax",0.0)
+        if fe: fees_eur+=to_eur(fe,ccy,d);fees_usd+=to_usd(fe,ccy,d)
+        if tx_: tax_eur+=to_eur(tx_,ccy,d);tax_usd+=to_usd(tx_,ccy,d)
+        if t["kind"]=="acc":
+            if ty in ("DIVIDENDS","INTEREST"):
+                g=a+tx_   # gross: PP zeigt Steuern separat
+                earn_eur+=to_eur(g,ccy,d);earn_usd+=to_usd(g,ccy,d)
+            elif ty=="INTEREST_CHARGE":
+                earn_eur-=to_eur(a,ccy,d);earn_usd-=to_usd(a,ccy,d)
+            elif ty=="FEES":
+                fees_eur+=to_eur(a,ccy,d);fees_usd+=to_usd(a,ccy,d)
+            elif ty=="FEES_REFUND":
+                fees_eur-=to_eur(a,ccy,d);fees_usd-=to_usd(a,ccy,d)
+            elif ty=="TAXES":
+                tax_eur+=to_eur(a,ccy,d);tax_usd+=to_usd(a,ccy,d)
+            elif ty=="TAX_REFUND":
+                tax_eur-=to_eur(a,ccy,d);tax_usd-=to_usd(a,ccy,d)
     if t["kind"]=="port":
         if ty in PADD: pos_ev[d].append((t["sec"],t["shares"]))
         elif ty in PSUB: pos_ev[d].append((t["sec"],-t["shares"]))
@@ -304,7 +323,8 @@ def valuation(d):
 V0=valuation(START)
 open_sh=dict(shares)   # opening positions at START (basis for FIFO capital gains)
 series={START:0.0};acc_ret=0.0;prevV=V0
-daily=[{"d":START,"v":round(V0*fx_rate("USD",START)),"e":round(V0),"r":0.0}]   # PP net-worth curve: v=USD, e=EUR (daily FX)
+cum_c_eur=cum_c_usd=0.0
+daily=[{"d":START,"v":round(V0*fx_rate("USD",START)),"e":round(V0),"r":0.0,"c":0,"k":0}]   # PP net-worth curve: v=USD, e=EUR (daily FX)
 day=datetime.date.fromisoformat(START)+datetime.timedelta(days=1)
 endd=datetime.date.fromisoformat(END)
 while day<=endd:
@@ -316,7 +336,10 @@ while day<=endd:
     delta=0.0 if abs(prevV+inb)<1e-9 else (V+outb)/(prevV+inb)-1
     acc_ret=(acc_ret+1)*(delta+1)-1
     series[d]=acc_ret;prevV=V
-    daily.append({"d":d,"v":round(V*fx_rate("USD",d)),"e":round(V),"r":round(acc_ret,6)})
+    cum_c_eur+=inflow.get(d,0.0)-outflow.get(d,0.0)
+    cum_c_usd+=(inflow.get(d,0.0)-outflow.get(d,0.0))*fx_rate("USD",d)
+    daily.append({"d":d,"v":round(V*fx_rate("USD",d)),"e":round(V),"r":round(acc_ret,6),
+                  "c":round(cum_c_usd),"k":round(cum_c_eur)})
     day+=datetime.timedelta(days=1)
 Vend=prevV
 
@@ -459,6 +482,9 @@ out={"fileDate":datetime.datetime.fromtimestamp(os.path.getmtime(DEPOT)).strftim
      "unrealizedUsd":round(unrealized_usd),
      "netContribEur":round(contrib_eur),
      "netContribUsd":round(contrib_usd),
+     "earningsEur":round(earn_eur,2),"earningsUsd":round(earn_usd),
+     "feesEur":round(fees_eur,2),"feesUsd":round(fees_usd),
+     "taxesEur":round(tax_eur,2),"taxesUsd":round(tax_usd),
      "series":daily,
      "securities":[{"isin":s["isin"],"ticker":s["tk"],"name":s["name"]}
                    for s in SEC if s["isin"]],
