@@ -738,6 +738,23 @@ async function loadConfig(){
   applyName(); applyVisibility();
   const i=document.getElementById('pnamein'); if(i) i.value=_cfg.name;
 }
+/* poll Firestore for the minute-fresh snapshot the cloud loop uploads — visitors get
+   new engine data (~60s old) without waiting for a GitHub Pages redeploy */
+async function fsDataPoll(){
+  try{
+    const c=await fsGet(isOwner());
+    if(!c.data) return;
+    const fresh=JSON.parse(c.data);
+    if(fresh && fresh.generated && (!DATA.generated || fresh.generated>DATA.generated)){
+      const live={};                             // keep client-side live enrichments
+      DATA.holdings.forEach(h=>{ live[h.ticker]={lp:h.livePrice,dc:h.dayChange,hi:h.hi52,lo:h.lo52,sp:h.spark,pos:h.pos52}; });
+      DATA=fresh;
+      DATA.holdings.forEach(h=>{ const l=live[h.ticker]; if(l){ h.livePrice=l.lp; h.dayChange=l.dc; h.hi52=l.hi; h.lo52=l.lo; h.spark=l.sp; h.pos52=l.pos; } });
+      Object.assign(_cfg,{name:c.name,public:c.public,owner:c.owner});
+      renderKpis(); rerender(); applyName(); applyVisibility();
+    }
+  }catch(e){}
+}
 async function fsLoadData(){
   try{
     const c=await fsGet(true);
@@ -1475,6 +1492,7 @@ function startLive(){
   setInterval(()=>refreshSocial().catch(()=>{}), 90000);    // social sweep (Stocktwits) every 90s
   setInterval(()=>refreshSEC().catch(()=>{}), 90000);       // SEC EDGAR filing watch every 90s
   setInterval(()=>refreshNews().catch(()=>{}), 900000);     // news (GDELT) every 15 min
+  setInterval(()=>fsDataPoll().catch(()=>{}), 60000);       // minute-fresh engine data from Firestore
 }
 
 function boot(){
