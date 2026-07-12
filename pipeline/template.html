@@ -66,10 +66,7 @@
     padding:8px 18px;border-radius:9px;cursor:pointer;transition:background .12s,color .12s}
   .tabbar button:hover{color:var(--ink)}
   .tabbar button.on{background:var(--accent);color:#fff}
-  [data-tab]{display:none}
-  [data-tab].tabon{display:block}
-  .kpis[data-tab].tabon{display:grid}
-  .cols[data-tab].tabon{display:grid}
+  [data-tab]:not(.tabon){display:none!important}   /* .tabon keeps the element's own display */
 
   .kpis{display:grid;grid-template-columns:repeat(4,1fr);gap:14px;margin-bottom:20px}
   .tile{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);

@@ -18,7 +18,7 @@ jobs:
         with:
           python-version: '3.12'
       - name: deps
-        run: pip -q install google-auth requests
+        run: pip -q install google-auth requests yfinance
       - name: service-account key
         env:
           GCP_SA_KEY: ${{ secrets.GCP_SA_KEY }}
