@@ -279,7 +279,7 @@
   <div class="breaking" id="breaking"></div>
   <header class="top">
     <div>
-      <div class="title"><span class="dot"></span>Rafael's Portfolio</div>
+      <div class="title"><span class="dot"></span><span id="ptitle">Rafael's Portfolio</span></div>
       <div class="sub"><span id="livebadge" class="badge snap">Snapshot</span> As of <b id="asof"></b> · <span id="hcount"></span> positions</div>
     </div>
     <div style="position:relative;display:flex;align-items:center;gap:8px">
@@ -649,10 +649,20 @@ function renderHoldingsTable(){
   }));
 }
 function refreshAllMoney(){ renderKpis(); rerender(); renderActivities(); }
+let _pname = localStorage.getItem('pc-name') || "Rafael's Portfolio";
+function applyName(){
+  const el=document.getElementById('ptitle'); if(el) el.textContent=_pname;
+  document.title=_pname;
+}
 function initAppSettings(){
   const btn=document.getElementById('appset'), pop=document.getElementById('apppop');
   if(!btn||!pop) return;
+  applyName();
   const draw=()=>{ pop.innerHTML=`
+    <div style="font-size:11px;text-transform:uppercase;letter-spacing:.6px;color:var(--muted);font-weight:660;margin-bottom:6px">Portfolio name</div>
+    <input type="text" id="pnamein" value="${esc(_pname)}" maxlength="40" style="width:200px;margin-bottom:12px;
+      background:var(--surface-2);border:1px solid var(--border);border-radius:8px;padding:7px 10px;
+      font:inherit;font-size:13px;color:var(--ink);outline:none">
     <div style="font-size:11px;text-transform:uppercase;letter-spacing:.6px;color:var(--muted);font-weight:660;margin-bottom:7px">Currency</div>
     <div class="tfsel" style="margin-bottom:12px">
       <button data-c="USD" class="${_ccy==='USD'?'on':''}">USD</button>
@@ -666,6 +676,12 @@ function initAppSettings(){
     pop.querySelector('#privchk').addEventListener('change',e=>{
       _priv=e.target.checked; localStorage.setItem('pc-priv',_priv?'1':'0'); refreshAllMoney();
     });
+    const nameIn=pop.querySelector('#pnamein');
+    nameIn.addEventListener('input',()=>{
+      _pname=nameIn.value.trim()||"Rafael's Portfolio";
+      localStorage.setItem('pc-name',nameIn.value.trim()); applyName();
+    });
+    nameIn.addEventListener('click',e=>e.stopPropagation());
   };
   draw();
   btn.addEventListener('click',e=>{e.stopPropagation(); pop.style.display=pop.style.display==='none'?'':'none';});
