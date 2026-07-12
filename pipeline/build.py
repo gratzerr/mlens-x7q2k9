@@ -246,6 +246,9 @@ data = {
     # engine-exact EUR twins + current FX for the currency toggle
     "ppRealizedEur": pp.get("realizedEur") if pp else None,
     "ppUnrealizedEur": pp.get("unrealizedEur") if pp else None,
+    # net deposits since 2022 (PP "performance neutral transfers") — auto-updates on new deposits
+    "ppNetContribUsd": pp.get("netContribUsd") if pp else None,
+    "ppNetContribEur": pp.get("netContribEur") if pp else None,
     "usdPerEur": usd_per_eur if pp else 1.14,
     # PP net-worth curve (daily EUR value + cum TTWROR) — replaces Parqet's wrong chart
     "chartPP": pp.get("series", []) if pp else [],

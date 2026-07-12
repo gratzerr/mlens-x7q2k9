@@ -401,12 +401,12 @@ function renderKpis(){
   const un=d.ppUnrealizedUsd!=null?d.ppUnrealizedUsd:d.netGainUnrealized;
   const rl=d.ppRealizedUsd!=null?d.ppRealizedUsd:d.realizedAllTime;
   const gn=(un||0)>=0, rz=(rl||0)>=0;
-  const invested=d.holdings.filter(h=>h.assetType!=='cash').reduce((s,h)=>s+(h.ppBasisUsd||0),0);
-  // gains: in EUR mode use the engine-exact EUR figures (verified vs the PP app), not FX-converted USD
+  // in EUR mode use the engine-exact EUR figures (verified vs the PP app), not FX-converted USD
   const money=(usd,eur)=>_priv?MASK:(_ccy==='EUR'&&eur!=null?fmtE(eur):fmtUsd(usd));
   const tiles=[
     {lab:'Portfolio Value', val:fmtUsd(d.totalValue),
-     note:_ccy+' · '+(d.holdings.length-1)+' positions<br>invested capital '+fmtUsd(invested)+' · net cash '+fmtUsd(d.cashValue)},
+     note:_ccy+' · '+(d.holdings.length-1)+' positions · net cash '+fmtUsd(d.cashValue)
+       +(d.ppNetContribUsd!=null?'<br>invested capital '+money(d.ppNetContribUsd,d.ppNetContribEur):'')},
     {lab:'Unrealized Gain', val:money(un,d.ppUnrealizedEur), note:'current holdings · FIFO vs cost', cls:gn?'up':'down'},
     {lab:'Realized Gain', val:money(rl,d.ppRealizedEur), note:'booked from sells since 2022', cls:rz?'up':'down'},
     {lab:'Return YTD', val:fmtPct(d.ttwrorYtd||0), note:'since inception (2022) '+fmtPct(d.since2022!=null?d.since2022:(d.pp&&d.pp.ppReferenceTtwror)||0)+'<br>IRR '+(d.izf||0).toFixed(1)+'%', cls:(d.ttwrorYtd||0)>=0?'up':'down'},
