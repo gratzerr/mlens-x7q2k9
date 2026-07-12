@@ -68,7 +68,7 @@ def sec_cik_map(holdings):
     if stale:
         try:
             subprocess.run(["curl", "-s", "-m", "20", "-H",
-                "User-Agent: PortfolioCockpit rafael.gratzer@gmail.com",
+                "User-Agent: PortfolioCockpit contact@portfolio-cockpit.app",
                 "https://www.sec.gov/files/company_tickers.json", "-o", f], check=True)
             json.load(open(f))  # validate
         except Exception:
@@ -87,6 +87,34 @@ def sec_cik_map(holdings):
     return out
 
 sec_cik = sec_cik_map(port["holdings"])
+
+# ---- PRIVACY: restrict the security name map to ISINs that actually appear in the
+# displayed (Parqet biotech) portfolio's activities. depot.xml also contains a separate
+# dividend depot (Swissquote); its security names must NOT be exposed on the page. ----
+def displayed_isins():
+    import subprocess
+    isins, off = set(), 0
+    try:
+        while off < 4000:
+            r = subprocess.run(["curl", "-s", "-m", "20",
+                f"https://api.parqet.com/v1/activities?portfolioIds={port.get('portfolioId','66e18c9426cf62020ccc7ee7')}&limit=100&offset={off}"],
+                capture_output=True, text=True)
+            j = json.loads(r.stdout or "{}")
+            acts = j.get("activities", [])
+            if not acts:
+                break
+            for a in acts:
+                i = a.get("isin") or (a.get("asset") or {}).get("identifier")
+                if i:
+                    isins.add(i)
+            off += len(acts)
+            if off >= j.get("totalCount", 0):
+                break
+    except Exception:
+        return None       # on failure, keep the full map (page still works)
+    return isins or None
+
+_shown_isins = displayed_isins()
 
 # class-action / law-firm noise is never wanted — not as news, not as "catalysts"
 import re
@@ -252,9 +280,11 @@ data = {
     "usdPerEur": usd_per_eur if pp else 1.14,
     # PP net-worth curve (daily EUR value + cum TTWROR) — replaces Parqet's wrong chart
     "chartPP": pp.get("series", []) if pp else [],
-    # every security ever traded (isin -> ticker/name) so sold positions render in Activities
+    # security name map for Activities — ONLY ISINs shown in this portfolio (dividend
+    # depot names filtered out; if the ISIN lookup failed, _shown_isins is None -> keep all)
     "secByIsin": {s["isin"]: {"tk": s["ticker"], "name": s["name"]}
-                  for s in (pp.get("securities", []) if pp else [])},
+                  for s in (pp.get("securities", []) if pp else [])
+                  if _shown_isins is None or s["isin"] in _shown_isins},
     "isinByTicker": {h["ticker"]: h["isin"] for h in (pp.get("holdings", []) if pp else [])
                      if h.get("isin")},
     "cashValue": port["cashValue"],
