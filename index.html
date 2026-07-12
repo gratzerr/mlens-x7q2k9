@@ -649,20 +649,56 @@ function renderHoldingsTable(){
   }));
 }
 function refreshAllMoney(){ renderKpis(); rerender(); renderActivities(); }
+/* global site name lives in config.json in the Pages repo — every visitor loads it.
+   The owner can rewrite it straight from the page via a fine-grained GitHub token
+   (stored ONLY in the owner's browser, never in the page/repo). */
+const GH_REPO='gratzerr/mlens-x7q2k9', GH_BRANCH='main';
+let _gname=null;   // global name from config.json
 let _pname = localStorage.getItem('pc-name') || "Rafael's Portfolio";
+function effName(){ return localStorage.getItem('pc-name') || _gname || "Rafael's Portfolio"; }
 function applyName(){
-  const el=document.getElementById('ptitle'); if(el) el.textContent=_pname;
-  document.title=_pname;
+  const el=document.getElementById('ptitle'); if(el) el.textContent=effName();
+  document.title=effName();
+}
+async function loadGlobalName(){
+  try{ const r=await fetch('config.json?ts='+Date.now(),{cache:'no-store'});
+    if(r.ok){ const c=await r.json(); if(c&&c.name){ _gname=c.name; applyName();
+      const i=document.getElementById('pnamein'); if(i&&!localStorage.getItem('pc-name')) i.value=_gname; } }
+  }catch(e){}
+}
+async function saveGlobalName(name,tok,statusEl){
+  const api=`https://api.github.com/repos/${GH_REPO}/contents/config.json`;
+  const hdr={'Authorization':'Bearer '+tok,'Accept':'application/vnd.github+json'};
+  statusEl.textContent='saving…';
+  try{
+    const cur=await fetch(api+'?ref='+GH_BRANCH,{headers:hdr});
+    const sha=cur.ok?(await cur.json()).sha:undefined;
+    const body={message:'rename portfolio (from cockpit settings)',branch:GH_BRANCH,
+      content:btoa(unescape(encodeURIComponent(JSON.stringify({name})))), ...(sha?{sha}:{})};
+    const w=await fetch(api,{method:'PUT',headers:{...hdr,'Content-Type':'application/json'},body:JSON.stringify(body)});
+    if(!w.ok) throw new Error('HTTP '+w.status);
+    _gname=name; localStorage.removeItem('pc-name'); applyName();
+    statusEl.textContent='✓ live for everyone (~1 min)'; statusEl.style.color='var(--up)';
+  }catch(e){ statusEl.textContent='failed: '+e.message+' — check token'; statusEl.style.color='var(--down)'; }
 }
 function initAppSettings(){
   const btn=document.getElementById('appset'), pop=document.getElementById('apppop');
   if(!btn||!pop) return;
   applyName();
-  const draw=()=>{ pop.innerHTML=`
+  const draw=()=>{ const tok=localStorage.getItem('pc-ghtok')||''; pop.innerHTML=`
     <div style="font-size:11px;text-transform:uppercase;letter-spacing:.6px;color:var(--muted);font-weight:660;margin-bottom:6px">Portfolio name</div>
-    <input type="text" id="pnamein" value="${esc(_pname)}" maxlength="40" style="width:200px;margin-bottom:12px;
+    <input type="text" id="pnamein" value="${esc(effName())}" maxlength="40" style="width:210px;margin-bottom:7px;
       background:var(--surface-2);border:1px solid var(--border);border-radius:8px;padding:7px 10px;
       font:inherit;font-size:13px;color:var(--ink);outline:none">
+    <div style="display:flex;align-items:center;gap:8px;margin-bottom:4px">
+      <button id="pnamesave" class="secbtn" style="margin:0;padding:5px 10px;font-size:12px">Save for everyone</button>
+      <span id="pnamestat" style="font-size:11.5px;color:var(--muted)"></span>
+    </div>
+    <div id="ownerrow" style="margin-bottom:12px">
+      <input type="password" id="ghtok" placeholder="owner key (GitHub token)" value="${esc(tok)}" style="width:210px;margin-top:4px;
+        background:var(--surface-2);border:1px solid var(--border);border-radius:8px;padding:6px 10px;
+        font:inherit;font-size:12px;color:var(--ink);outline:none">
+    </div>
     <div style="font-size:11px;text-transform:uppercase;letter-spacing:.6px;color:var(--muted);font-weight:660;margin-bottom:7px">Currency</div>
     <div class="tfsel" style="margin-bottom:12px">
       <button data-c="USD" class="${_ccy==='USD'?'on':''}">USD</button>
@@ -678,10 +714,20 @@ function initAppSettings(){
     });
     const nameIn=pop.querySelector('#pnamein');
     nameIn.addEventListener('input',()=>{
-      _pname=nameIn.value.trim()||"Rafael's Portfolio";
-      localStorage.setItem('pc-name',nameIn.value.trim()); applyName();
+      const v=nameIn.value.trim();
+      if(v) localStorage.setItem('pc-name',v); else localStorage.removeItem('pc-name');
+      applyName();
     });
-    nameIn.addEventListener('click',e=>e.stopPropagation());
+    const tokIn=pop.querySelector('#ghtok');
+    tokIn.addEventListener('input',()=>{ localStorage.setItem('pc-ghtok',tokIn.value.trim()); });
+    pop.querySelector('#pnamesave').addEventListener('click',e=>{
+      e.stopPropagation();
+      const t=(tokIn.value||'').trim(), stat=pop.querySelector('#pnamestat');
+      const name=nameIn.value.trim()||"Rafael's Portfolio";
+      if(!t){ stat.textContent='paste your owner key below first'; stat.style.color='var(--down)'; return; }
+      saveGlobalName(name,t,stat);
+    });
+    pop.querySelectorAll('input').forEach(i=>i.addEventListener('click',e=>e.stopPropagation()));
   };
   draw();
   btn.addEventListener('click',e=>{e.stopPropagation(); pop.style.display=pop.style.display==='none'?'':'none';});
@@ -1311,6 +1357,6 @@ document.getElementById('asof').textContent=new Date(DATA.asOf).toLocaleDateStri
 document.getElementById('hcount').textContent=DATA.holdings.filter(h=>h.assetType!=='cash').length;
 document.getElementById('foot').innerHTML='Snapshot built '+esc(DATA.generated)+
   ' · When hosted live, prices refresh every 3 min (Yahoo) and headlines every 15 min (GDELT), computed in your browser · Curated news &amp; catalysts refreshed twice daily · Not investment advice.<br>Green dot = confirmed date, amber dot = estimated.';
-initTheme(); loadSocialCache(); renderKpis(); renderTfSel(); renderSocial(); rerender(); initSecAlerts(); initHtSettings(); initAppSettings(); startLive();
+initTheme(); loadSocialCache(); renderKpis(); renderTfSel(); renderSocial(); rerender(); initSecAlerts(); initHtSettings(); initAppSettings(); loadGlobalName(); startLive();
 window.addEventListener('resize',()=>{clearTimeout(window._rz);window._rz=setTimeout(()=>{renderChart();hydrateSparks();},150);});
 </script>
