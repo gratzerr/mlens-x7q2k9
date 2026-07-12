@@ -230,6 +230,20 @@ for h in port["holdings"]:
         h["ppRealizedUsd"] = px.get("realizedUsd")
         h["ppPrice"] = px["price"]
         h["ppCcy"] = px["ccy"]
+        h["byPort"] = px.get("byPort")          # shares per broker (SQ / IBKR)
+
+# ---- closed trades (FIFO round-trips) for the trading-record widget ----
+# same privacy filter as activities; logos resolve via the trade's own ISIN
+for tr in (pp.get("trades", []) if pp else []):
+    if tr.get("isin") and tr["ticker"] not in isin_by_ticker:
+        isin_by_ticker[tr["ticker"]] = tr["isin"]
+# NOT filtered by displayed_isins: trades come from Rafael's own portfolio txs by
+# construction, and dropping any would break "sum == verified realized gains"
+pp_trades, trade_logos = [], {}
+for tr in (pp.get("trades", []) if pp else []):
+    pp_trades.append({k: v for k, v in tr.items() if k != "isin"})
+    if tr["ticker"] not in trade_logos:          # one logo set per ticker, not per row
+        trade_logos[tr["ticker"]] = logo_candidates(tr)
 
 # Attach research + market to each holding; compute allocation
 total = port["totalValue"]
@@ -296,6 +310,8 @@ data = {
     "usdPerEur": usd_per_eur if pp else 1.14,
     # PP net-worth curve (daily EUR value + cum TTWROR) — replaces Parqet's wrong chart
     "chartPP": pp.get("series", []) if pp else [],
+    "trades": pp_trades,
+    "tradeLogos": trade_logos,
     # security name map for Activities — ONLY ISINs shown in this portfolio (dividend
     # depot names filtered out; if the ISIN lookup failed, _shown_isins is None -> keep all)
     "secByIsin": {s["isin"]: {"tk": s["ticker"], "name": s["name"]}

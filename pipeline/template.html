@@ -357,6 +357,7 @@
   <div class="panel" data-tab="portfolio" style="position:relative">
     <h2>Holdings <button class="gearbtn" id="htgear" title="columns"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="14" height="14" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 1 1-2.83 2.83l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 1 1-4 0v-.09a1.65 1.65 0 0 0-1-1.51 1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 1 1-2.83-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 1 1 0-4h.09a1.65 1.65 0 0 0 1.51-1 1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 1 1 2.83-2.83l.06.06a1.65 1.65 0 0 0 1.82.33h.01a1.65 1.65 0 0 0 1-1.51V3a2 2 0 1 1 4 0v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 1 1 2.83 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82v.01a1.65 1.65 0 0 0 1.51 1H21a2 2 0 1 1 0 4h-.09a1.65 1.65 0 0 0-1.51 1Z"/></svg></button></h2>
     <div class="htpop" id="htpop" style="display:none"></div>
+    <div id="htports" style="display:flex;gap:6px;flex-wrap:wrap;margin:2px 0 10px"></div>
     <div style="overflow-x:auto"><table class="htable" id="holdingstable"></table></div>
   </div>
 
@@ -656,20 +657,46 @@ function hydrateSparks(){
 let _hsort={key:'value',dir:-1};
 const _HCOLS_DEF={shares:true,entry:true,price:true,day:true,gain:true,realized:false,value:true};
 let _hcols=(()=>{try{return Object.assign({},_HCOLS_DEF,JSON.parse(localStorage.getItem('pc-htcols')||'{}'));}catch(e){return {..._HCOLS_DEF};}})();
+let _hport=(()=>{try{return localStorage.getItem('pc-hport')||'ALL';}catch(e){return 'ALL';}})();
+function _htPorts(){   // brokers that currently hold positions, biggest first
+  const v={};
+  DATA.holdings.forEach(h=>{ if(h.byPort&&h.ppShares) Object.entries(h.byPort).forEach(([p,sh])=>{ v[p]=(v[p]||0)+sh/h.ppShares*(h.value||0); }); });
+  return Object.entries(v).sort((a,b)=>b[1]-a[1]).map(x=>x[0]);
+}
 function _htRows(){
-  return DATA.holdings.filter(h=>h.assetType!=='cash').map(h=>{
+  let rows=DATA.holdings.filter(h=>h.assetType!=='cash').map(h=>{
     const sym=h.ppCcy==='CAD'?'C$':'$';
     const price=(h.livePrice!=null&&h.assetType!=='option')?h.livePrice:h.ppPrice;
-    const basis=h.ppBasisUsd||0;
-    const gain=basis?h.value-basis:null;
-    return {h, sym, shares:h.ppShares, avg:h.ppAvgCost, basis, price,
+    /* broker view: scale the position by that broker's share count; entry price and
+       gain-% stay identical (global FIFO basis), realized stays in the All view */
+    const frac=_hport==='ALL'?1:((h.byPort||{})[_hport]||0)/(h.ppShares||1);
+    if(_hport!=='ALL'&&frac<1e-9) return null;
+    const basis=(h.ppBasisUsd||0)*frac;
+    const value=(h.value||0)*frac;
+    const gain=basis?value-basis:null;
+    return {h, sym, shares:h.ppShares!=null?h.ppShares*frac:null, avg:h.ppAvgCost, basis, price,
       day:(h.dayChange!=null?h.dayChange:null), gain,
       gainPct:(gain!=null&&basis)?gain/basis*100:null,
-      value:h.value, weight:h.alloc, realized:h.ppRealizedUsd};
-  });
+      value, weight:_hport==='ALL'?h.alloc:null, realized:_hport==='ALL'?h.ppRealizedUsd:null};
+  }).filter(Boolean);
+  if(_hport!=='ALL'){ const tot=rows.reduce((a,r)=>a+r.value,0);
+    rows.forEach(r=>{ r.weight=tot?r.value/tot*100:null; }); }
+  return rows;
 }
 function renderHoldingsTable(){
   const el=document.getElementById('holdingstable'); if(!el) return;
+  /* broker chips: All | IBKR | SQ … (only when more than one broker holds positions) */
+  const pc=document.getElementById('htports');
+  if(pc){ const ports=_htPorts();
+    if(ports.length<2){ pc.innerHTML=''; if(_hport!=='ALL') _hport='ALL'; }
+    else{
+      if(_hport!=='ALL'&&!ports.includes(_hport)) _hport='ALL';
+      pc.innerHTML=['ALL',...ports].map(p=>`<button data-hport="${p}" class="secbtn" style="margin:0;padding:5px 12px;font-size:12px;${p===_hport?'background:var(--accent);color:#fff;border-color:var(--accent)':''}">${p==='ALL'?'All':esc(p)}</button>`).join('');
+      pc.querySelectorAll('[data-hport]').forEach(b=>b.addEventListener('click',()=>{
+        _hport=b.dataset.hport; try{localStorage.setItem('pc-hport',_hport);}catch(e){}
+        renderHoldingsTable();
+      }));
+    } }
   const rows=_htRows();
   const k=_hsort.key, d=_hsort.dir;
   rows.sort((a,b)=>d*(((a[k]==null)-(b[k]==null)) || (a[k]>b[k]?1:a[k]<b[k]?-1:0)));
@@ -701,7 +728,7 @@ function renderHoldingsTable(){
       return '<tr>'+cells.join('')+'</tr>';
     }).join('')
     +(()=>{const c=DATA.holdings.find(x=>x.assetType==='cash');
-      if(!c) return '';
+      if(!c||_hport!=='ALL') return '';   // cash accounts aren't attributed to a broker
       const mid=cols.length-1-(_hcols.value?1:0);
       return `<tr class="cashrow"><td><div class="hname"><span class="llogo" style="visibility:hidden"></span><div><div class="c1">Cash</div><div class="nm2">net (margin)</div></div></div></td>${mid>0?`<td colspan="${mid}"></td>`:''}${_hcols.value?`<td><div class="c1 ${c.value>=0?'':'down'}">${fmtUsd(c.value)}</div></td>`:''}</tr>`;})()
     +'</tbody>';
@@ -1470,11 +1497,19 @@ function actIsin(a){ return a.isin||(a.asset&&a.asset.identifier)||''; }
 function actSec(a){ return DATA.secByIsin&&DATA.secByIsin[actIsin(a)]; }   // any security ever traded (depot.xml)
 /* ---- company logos: <img> with a fallback chain (Parqet CDN -> favicon -> hide) ---- */
 window._lerr=function(el){ const a=(el.dataset.alt||'').split('|').filter(Boolean);
-  if(a.length){ el.src=a.shift(); el.dataset.alt=a.join('|'); } else el.style.visibility='hidden'; };
-function logoImg(cands,cls){
-  if(!cands||!cands.length) return `<span class="${cls}" style="visibility:hidden"></span>`;
+  if(a.length){ el.src=a.shift(); el.dataset.alt=a.join('|'); }
+  else if(el.dataset.tk){ /* all candidates failed: ticker-initials tile */
+    const s=document.createElement('span'); s.className=el.className;
+    s.style.cssText='display:inline-flex;align-items:center;justify-content:center;background:var(--surface-2);color:var(--muted);font-weight:700;font-size:9.5px;letter-spacing:.3px';
+    s.textContent=el.dataset.tk.slice(0,2); el.replaceWith(s);
+  } else el.style.visibility='hidden'; };
+function logoImg(cands,cls,tk){
+  if(!cands||!cands.length){
+    if(tk) return `<span class="${cls}" style="display:inline-flex;align-items:center;justify-content:center;background:var(--surface-2);color:var(--muted);font-weight:700;font-size:9.5px;letter-spacing:.3px">${esc(tk.slice(0,2))}</span>`;
+    return `<span class="${cls}" style="visibility:hidden"></span>`;
+  }
   return `<img class="${cls}" src="${esc(cands[0])}" alt="" loading="lazy"
-    data-alt="${esc(cands.slice(1).join('|'))}" onerror="window._lerr(this)">`;
+    data-alt="${esc(cands.slice(1).join('|'))}" ${tk?`data-tk="${esc(tk)}"`:''} onerror="window._lerr(this)">`;
 }
 function tickerLogos(tk){ const h=DATA.holdings.find(x=>x.ticker===tk); return (h&&h.logos)||[]; }
 function actTicker(a){
@@ -1844,6 +1879,41 @@ const PF_WIDGETS={
         h+=`<td class="tnum" style="background:${heatColor(w.scheme||'classic',b)};padding:5px 12px;border-radius:6px;text-align:center">${b.toFixed(1)}</td>`; });
       h+='</tr>'; });
     return h+'</table></div>';}},
+  trades:{lab:'Trading record',big:1,opts:[],render:w=>{
+    const all=DATA.trades||[]; if(!all.length) return '<div style="color:var(--muted);font-size:13px">no closed trades yet</div>';
+    const pts=pfSliceP(PF_P);
+    const d0=pts.length?pts[0].d:'0000', d1=pts.length?pts[pts.length-1].d:'9999';
+    const list=all.filter(t=>t.sell>=d0&&t.sell<=d1);
+    if(!list.length) return '<div style="color:var(--muted);font-size:13px">no closed trades in this period</div>';
+    const wins=list.filter(t=>(t.gainUsd||0)>0).length;
+    const sumU=list.reduce((a,t)=>a+(t.gainUsd||0),0), sumE=list.reduce((a,t)=>a+(t.gainEur||0),0);
+    const avgD=Math.round(list.reduce((a,t)=>a+(t.days||0),0)/list.length);
+    const best=list.reduce((a,t)=>(t.gainUsd>a.gainUsd?t:a)), worst=list.reduce((a,t)=>(t.gainUsd<a.gainUsd?t:a));
+    const stat=(l,v,c)=>`<div style="min-width:96px"><div style="font-size:10.5px;text-transform:uppercase;letter-spacing:.5px;color:var(--muted);font-weight:660">${l}</div><div class="tnum ${c||''}" style="font-size:16px;font-weight:680">${v}</div></div>`;
+    let h=`<div style="display:flex;gap:22px;flex-wrap:wrap;padding:2px 2px 12px">
+      ${stat('Trades',list.length)}
+      ${stat('Win rate',Math.round(wins/list.length*100)+'%',wins/list.length>=0.5?'up':'down')}
+      ${stat('Realized',money(sumU,sumE),sumU>=0?'up':'down')}
+      ${stat('Ø holding',avgD+'d')}
+      ${stat('Best · '+esc(best.ticker),money(best.gainUsd,best.gainEur),'up')}
+      ${stat('Worst · '+esc(worst.ticker),money(worst.gainUsd,worst.gainEur),'down')}
+    </div>`;
+    const show=w.exp?list:list.slice(0,12);
+    h+='<div style="overflow-x:auto"><table style="border-collapse:collapse;font-size:13px;width:100%;min-width:560px">'+
+      `<tr>${['Position','Broker','Sold','Held','Return','Gain'].map((c,i)=>`<th style="text-align:${i>1?'right':'left'};color:var(--muted);font-weight:650;font-size:11.5px;padding:4px 8px 6px;border-bottom:1px solid var(--line)">${c}</th>`).join('')}</tr>`+
+      show.map(t=>{const up=(t.gainUsd||0)>=0;
+        return `<tr>
+          <td style="padding:6px 8px;border-top:1px solid var(--grid)"><div class="hname">${logoImg((DATA.tradeLogos||{})[t.ticker]||[],'llogo',t.ticker)}<span style="font-weight:650">${esc(t.ticker)}</span></div></td>
+          <td style="padding:6px 8px;border-top:1px solid var(--grid)"><span style="font-size:11px;background:var(--surface-2);border:1px solid var(--border);border-radius:6px;padding:2px 7px;color:var(--muted);font-weight:640">${esc(t.port||'—')}</span></td>
+          <td class="tnum" style="text-align:right;padding:6px 8px;border-top:1px solid var(--grid);color:var(--muted)">${t.sell}</td>
+          <td class="tnum" style="text-align:right;padding:6px 8px;border-top:1px solid var(--grid)">${t.days}d</td>
+          <td class="tnum ${t.ret==null?'':(t.ret>=0?'up':'down')}" style="text-align:right;padding:6px 8px;border-top:1px solid var(--grid)">${t.ret==null?'—':fmtPct(t.ret)}</td>
+          <td class="tnum ${up?'up':'down'}" style="text-align:right;padding:6px 8px;border-top:1px solid var(--grid);font-weight:650">${money(t.gainUsd,t.gainEur)}</td>
+        </tr>`;}).join('')+'</table></div>';
+    if(list.length>12) h+=`<button class="secbtn" data-texp style="margin-top:10px">${w.exp?'Show fewer':'Show all '+list.length+' trades'}</button>`;
+    return h;},
+    after:(w,card)=>{const b=card.querySelector('[data-texp]');
+      if(b) b.addEventListener('click',()=>{ w.exp=!w.exp; pfSave(); renderPerf(); });}},
   contrib:{lab:'Top contributors',big:1,opts:[],render:()=>{
     const hs=DATA.holdings.filter(h=>h.assetType!=='cash'&&h.totalGainNet!=null)
       .sort((a,b)=>(b.totalGainNet||0)-(a.totalGainNet||0));
@@ -1856,13 +1926,13 @@ const PF_WIDGETS={
 /* canonical layout order — new widgets are inserted at their logical place */
 const PF_ORDER=['chart','ttwror','ttwror_ann','irr','lastday','abs','delta','invested',
   'earnings','fees','taxes','total','maxdd','curdd','dddur','vola','semivola','sharpe',
-  'calc','years','heat','contrib','ddchart'];
+  'calc','years','heat','trades','contrib','ddchart'];
 const PF_DEFAULT=[{t:'chart',p:'all',bench:['SPY']},
   {t:'ttwror',p:'all'},{t:'ttwror_ann',p:'all'},{t:'irr'},{t:'lastday'},
   {t:'abs',p:'all'},{t:'delta',p:'all'},{t:'invested'},{t:'total',p:'all'},
   {t:'maxdd',p:'all'},{t:'dddur',p:'all'},{t:'vola',p:'all'},{t:'semivola',p:'all'},
   {t:'calc'},{t:'years',bench:['SPY'],scheme:'traffic'},
-  {t:'heat',p:'all',scheme:'traffic'},{t:'ddchart',p:'all'}];
+  {t:'heat',p:'all',scheme:'traffic'},{t:'trades'},{t:'ddchart',p:'all'}];
 let PF_P=(()=>{try{const p=JSON.parse(localStorage.getItem('pc-pfperiod')||'null');return p&&p.k?p:{k:'rel',v:'all'};}catch(e){return {k:'rel',v:'all'};}})();
 function renderPeriodBar(){
   const bar=document.getElementById('pf-period'); if(!bar) return;
@@ -1923,6 +1993,15 @@ try{if(!localStorage.getItem('pc-schemev2')){
 try{if(!localStorage.getItem('pc-orderv2')){
   pfW.sort((a,b)=>PF_ORDER.indexOf(a.t)-PF_ORDER.indexOf(b.t));
   localStorage.setItem('pc-orderv2','1');localStorage.setItem('pc-pfw',JSON.stringify(pfW));}}catch(e){}
+/* one-time: the trading-record widget is new — add it to existing layouts at its
+   canonical spot (Rafael asked for it; removable like any widget) */
+try{if(!localStorage.getItem('pc-tradesv1')){
+  if(!pfW.some(x=>x.t==='trades')){
+    const rk=s=>{const r=PF_ORDER.indexOf(s);return r<0?PF_ORDER.length:r;};
+    let at=0; pfW.forEach((e,i)=>{ if(rk(e.t)<=rk('trades')) at=i+1; });
+    pfW.splice(at,0,{t:'trades'});
+  }
+  localStorage.setItem('pc-tradesv1','1');localStorage.setItem('pc-pfw',JSON.stringify(pfW));}}catch(e){}
 const pfSave=()=>{try{localStorage.setItem('pc-pfw',JSON.stringify(pfW));}catch(e){}};
 /* instant benchmark series fetched in the browser (CORS proxy → Yahoo chart API);
    the cloud series (yfinance, adjusted closes) replaces it within ~1 minute */

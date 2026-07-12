@@ -367,12 +367,13 @@ annualized=((1+acc_ret)**(365.0/ndays)-1)*100
 # Inner portfolio transfers are neutral (skipped); deliveries move basis without realizing
 # (PP books deliveries under "transfers", not capital gains).
 from collections import deque
-lots=defaultdict(deque)   # sec -> deque of [shares, basis_eur, basis_usd]
+lots=defaultdict(deque)   # sec -> deque of [shares, basis_eur, basis_usd, buy_date]
 for s,sh in open_sh.items():
     if sh>1e-9:
         v=sh*sec_price(s,START)
-        lots[s].append([sh, to_eur(v,SEC[s]["ccy"],START), to_usd(v,SEC[s]["ccy"],START)])
+        lots[s].append([sh, to_eur(v,SEC[s]["ccy"],START), to_usd(v,SEC[s]["ccy"],START), START])
 realized_eur=0.0;realized_usd=0.0
+trades=[]   # every SELL as a closed FIFO round-trip (for the trading-record widget)
 rz_usd_by_sec=defaultdict(float)   # per-security realized (USD) for the holdings table
 rz_day=defaultdict(lambda:[0.0,0.0])   # d -> [eur, usd] realized that day (for period calc)
 # same-date ordering: process adds (BUY/inbound) BEFORE removes, otherwise a same-day
@@ -390,20 +391,33 @@ for t in ptx:
     else: g=t["amount"]
     eur=to_eur(g,t["ccy"],t["date"]);usd=to_usd(g,t["ccy"],t["date"])
     if ty in ("BUY","DELIVERY_INBOUND"):
-        lots[s].append([sh,eur,usd])
+        lots[s].append([sh,eur,usd,t["date"]])
     elif ty in ("SELL","DELIVERY_OUTBOUND"):
         rem=sh;basis=0.0;basis_u=0.0;q=lots[s]
+        first_buy=None;wdays=0.0;taken=0.0
+        sell_dt=datetime.date.fromisoformat(t["date"])
         while rem>1e-9 and q:
             l=q[0];take=min(l[0],rem)
             frac=take/l[0] if l[0]>1e-12 else 0.0
             basis+=l[1]*frac;l[1]-=l[1]*frac
             basis_u+=l[2]*frac;l[2]-=l[2]*frac
+            if first_buy is None or l[3]<first_buy: first_buy=l[3]
+            wdays+=take*(sell_dt-datetime.date.fromisoformat(l[3])).days
+            taken+=take
             l[0]-=take;rem-=take
             if l[0]<=1e-9: q.popleft()
         if ty=="SELL":
             realized_eur+=eur-basis;realized_usd+=usd-basis_u
             rz_usd_by_sec[s]+=usd-basis_u
             rz_day[t["date"]][0]+=eur-basis;rz_day[t["date"]][1]+=usd-basis_u
+            trades.append({"sec":s,
+                "port":(portfolios.get(t["owner"]) or {}).get("name"),
+                "buy":first_buy,"sell":t["date"],
+                "days":round(wdays/taken) if taken>1e-9 else 0,
+                "sh":round(sh,4),
+                "proceedsUsd":round(usd),"basisUsd":round(basis_u),
+                "gainUsd":round(usd-basis_u),"gainEur":round(eur-basis),
+                "ret":round((usd-basis_u)/basis_u*100,1) if basis_u>1e-6 else None})
 # attach cumulative Calculation rows to the daily series: q/Q realized, g/G earnings,
 # f/F fees, t/T taxes (USD/EUR) — lets the calc widget report any reporting period
 _re=_ru=_ge=_gu=_fe=_fu=_te=_tu=0.0
@@ -460,6 +474,15 @@ for t in txs.values():
         a["net"]+=t["shares"]
         if t["type"]=="BUY": a["buyAmt"]+=t["amount"];a["buySh"]+=t["shares"]
     elif t["type"] in PSUB: a["net"]-=t["shares"]
+# current shares per broker portfolio (SC / IBKR): replay ALL portfolio txs with
+# their owner — transfer legs each carry their own portfolio, so moves between
+# brokers net out correctly
+sh_by_port=defaultdict(lambda:defaultdict(float))   # sec -> {portName: shares}
+for t in txs.values():
+    if t["kind"]=="port" and t["sec"] is not None:
+        pn=(portfolios.get(t["owner"]) or {}).get("name") or "?"
+        if t["type"] in PADD: sh_by_port[t["sec"]][pn]+=t["shares"]
+        elif t["type"] in PSUB: sh_by_port[t["sec"]][pn]-=t["shares"]
 holdings=[]
 tot_sec_eur=0.0
 for si,a in posagg.items():
@@ -473,7 +496,9 @@ for si,a in posagg.items():
     veur=to_eur(val,s["ccy"],END)
     tot_sec_eur+=veur
     basis_usd=sum(l[2] for l in lots.get(si,[]))   # FIFO remaining cost basis (USD, tx-date FX)
+    byport={n:round(v,4) for n,v in sh_by_port.get(si,{}).items() if v>1e-6}
     holdings.append({"account":"ALL","ticker":s["tk"] or (s["name"] or "")[:10],"name":s["name"],
+        "byPort":byport,
         "isin":s["isin"],"ccy":s["ccy"],"shares":round(a["net"],4),"price":px,
         "value":round(val,2),"valueEur":round(veur),
         "valueUsd":round(to_usd(val,s["ccy"],END)),
@@ -505,6 +530,12 @@ out={"fileDate":datetime.datetime.fromtimestamp(os.path.getmtime(DEPOT)).strftim
      "feesEur":round(fees_eur,2),"feesUsd":round(fees_usd),
      "taxesEur":round(tax_eur,2),"taxesUsd":round(tax_usd),
      "series":daily,
+     "ports":sorted({(portfolios.get(t["owner"]) or {}).get("name") for t in txs.values()
+                     if t["kind"]=="port" and t["owner"]} - {None}),
+     "trades":sorted(({**{k:v for k,v in tr.items() if k!="sec"},
+                       "ticker":SEC[tr["sec"]]["tk"] or (SEC[tr["sec"]]["name"] or "")[:10],
+                       "name":SEC[tr["sec"]]["name"],"isin":SEC[tr["sec"]]["isin"]}
+                      for tr in trades), key=lambda x:x["sell"], reverse=True),
      "securities":[{"isin":s["isin"],"ticker":s["tk"],"name":s["name"]}
                    for s in SEC if s["isin"]],
      # legacy keys kept for template compatibility (now = the exact numbers)
