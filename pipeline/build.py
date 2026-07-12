@@ -116,6 +116,15 @@ def displayed_isins():
 
 _shown_isins = displayed_isins()
 
+# Persist the privacy filter INTO pp.json itself, so the copy that lands in the public
+# repo's pipeline/ (and the cloud rebuild, which has no web egress to re-fetch) never
+# carries the separate depots' security names. Only when the fetch succeeded.
+if pp and _shown_isins is not None and pp.get("securities"):
+    kept = [s for s in pp["securities"] if s.get("isin") in _shown_isins]
+    if kept and len(kept) < len(pp["securities"]):
+        pp["securities"] = kept
+        json.dump(pp, open(os.path.join(ROOT, "pp.json"), "w"), ensure_ascii=False, indent=1)
+
 # class-action / law-firm noise is never wanted — not as news, not as "catalysts"
 import re
 JUNK_RE = re.compile(
