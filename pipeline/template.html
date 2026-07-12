@@ -746,20 +746,21 @@ async function fsLoadData(){
       document.querySelector('.wrap').style.display=''; boot(); }
   }catch(e){}
 }
-async function saveConfig(statusEl){
-  if(!_user){ statusEl.textContent='sign in with Google first'; statusEl.style.color='var(--down)'; return; }
-  statusEl.textContent='saving…'; statusEl.style.color='var(--muted)';
+async function saveConfig(statusEl,name,pub){
+  if(!_user){ statusEl.textContent='sign in with Google to save name/sharing'; statusEl.style.color='var(--down)'; return false; }
   try{
-    const body={fields:{name:{stringValue:_cfg.name},public:{booleanValue:_cfg.public!==false}}};
+    const body={fields:{name:{stringValue:name},public:{booleanValue:pub!==false}}};
     const r=await fetch(FS_DOC+'?updateMask.fieldPaths=name&updateMask.fieldPaths=public&key='+FB_CFG.apiKey,
       {method:'PATCH',headers:{'Content-Type':'application/json','Authorization':'Bearer '+await _user.getIdToken()},
        body:JSON.stringify(body)});
     if(!r.ok) throw new Error('HTTP '+r.status);
+    _cfg.name=name; _cfg.public=pub!==false;
     applyName(); applyVisibility();
-    statusEl.textContent='✓ saved — live for everyone'; statusEl.style.color='var(--up)';
+    return true;
   }catch(e){
     statusEl.textContent=String(e.message).includes('403')?'not the owner account':'failed: '+e.message;
     statusEl.style.color='var(--down)';
+    return false;
   }
 }
 function initAppSettings(){
@@ -767,15 +768,17 @@ function initAppSettings(){
   if(!btn||!pop) return;
   applyName();
   const shareUrl='https://gratzerr.github.io/mlens-x7q2k9/';
-  const draw=()=>{ pop.innerHTML=`
+  let P=null;
+  const seed=()=>({name:_cfg.name, pub:_cfg.public!==false, ccy:_ccy, priv:_priv});
+  const draw=()=>{ if(!P) P=seed(); pop.innerHTML=`
     <div style="font-size:11px;text-transform:uppercase;letter-spacing:.6px;color:var(--muted);font-weight:660;margin-bottom:6px">Portfolio name</div>
-    <input type="text" id="pnamein" value="${esc(_cfg.name)}" maxlength="40" style="width:230px;margin-bottom:12px;
+    <input type="text" id="pnamein" value="${esc(P.name)}" maxlength="40" style="width:230px;margin-bottom:12px;
       background:var(--surface-2);border:1px solid var(--border);border-radius:8px;padding:7px 10px;
       font:inherit;font-size:13px;color:var(--ink);outline:none">
     <div style="font-size:11px;text-transform:uppercase;letter-spacing:.6px;color:var(--muted);font-weight:660;margin-bottom:7px">Sharing</div>
     <div class="tfsel" style="margin-bottom:8px">
-      <button data-vis="1" class="${_cfg.public!==false?'on':''}">Public</button>
-      <button data-vis="0" class="${_cfg.public===false?'on':''}">Private</button>
+      <button data-vis="1" class="${P.pub?'on':''}">Public</button>
+      <button data-vis="0" class="${!P.pub?'on':''}">Private</button>
     </div>
     <div style="display:flex;gap:6px;margin-bottom:12px">
       <input type="text" readonly value="${shareUrl}" id="sharein" style="flex:1;min-width:150px;
@@ -783,17 +786,13 @@ function initAppSettings(){
         font:inherit;font-size:11.5px;color:var(--muted);outline:none">
       <button id="sharecopy" class="secbtn" style="margin:0;padding:5px 11px;font-size:12px">Copy</button>
     </div>
-    <div style="display:flex;align-items:center;gap:8px;margin-bottom:12px">
-      <button id="cfgsave" class="secbtn" style="margin:0;padding:6px 12px;font-size:12.5px;font-weight:650">Save</button>
-      <span id="cfgstat" style="font-size:11.5px;color:var(--muted)"></span>
-    </div>
     <div style="font-size:11px;text-transform:uppercase;letter-spacing:.6px;color:var(--muted);font-weight:660;margin-bottom:7px">Currency</div>
     <div class="tfsel" style="margin-bottom:12px">
-      <button data-c="USD" class="${_ccy==='USD'?'on':''}">USD</button>
-      <button data-c="EUR" class="${_ccy==='EUR'?'on':''}">EUR</button>
+      <button data-c="USD" class="${P.ccy==='USD'?'on':''}">USD</button>
+      <button data-c="EUR" class="${P.ccy==='EUR'?'on':''}">EUR</button>
     </div>
     <div style="font-size:11px;text-transform:uppercase;letter-spacing:.6px;color:var(--muted);font-weight:660;margin-bottom:5px">Privacy</div>
-    <label style="margin-bottom:10px"><input type="checkbox" id="privchk" ${_priv?'checked':''}> Hide amounts (this device)</label>
+    <label style="margin-bottom:10px"><input type="checkbox" id="privchk" ${P.priv?'checked':''}> Hide amounts (this device)</label>
     <div style="font-size:11px;text-transform:uppercase;letter-spacing:.6px;color:var(--muted);font-weight:660;margin:2px 0 6px">Owner</div>
     ${_user
       ? `<div style="font-size:12.5px;display:flex;align-items:center;gap:8px">
@@ -801,18 +800,22 @@ function initAppSettings(){
            <span>${esc(_user.email)}${isOwner()?'':' (not the owner)'}</span>
            <button id="fbout" class="secbtn" style="margin:0;padding:3px 9px;font-size:11.5px">Sign out</button></div>`
       : `<button id="fbin" class="secbtn" style="margin:0;padding:6px 12px;font-size:12.5px">
-           <svg viewBox="0 0 24 24" width="13" height="13" style="vertical-align:-2px;margin-right:6px"><path fill="#4285F4" d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92a5.06 5.06 0 0 1-2.2 3.32v2.77h3.57c2.08-1.92 3.27-4.74 3.27-8.1z"/><path fill="#34A853" d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84A11 11 0 0 0 12 23z"/><path fill="#FBBC05" d="M5.84 14.1a6.6 6.6 0 0 1 0-4.2V7.06H2.18a11 11 0 0 0 0 9.88l3.66-2.84z"/><path fill="#EA4335" d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15A11 11 0 0 0 12 1 11 11 0 0 0 2.18 7.06l3.66 2.84c.87-2.6 3.3-4.52 6.16-4.52z"/></svg>Sign in with Google</button>`}`;
-    pop.querySelectorAll('[data-c]').forEach(b=>b.addEventListener('click',()=>{
-      _ccy=b.dataset.c; localStorage.setItem('pc-ccy',_ccy); draw(); refreshAllMoney();
+           <svg viewBox="0 0 24 24" width="13" height="13" style="vertical-align:-2px;margin-right:6px"><path fill="#4285F4" d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92a5.06 5.06 0 0 1-2.2 3.32v2.77h3.57c2.08-1.92 3.27-4.74 3.27-8.1z"/><path fill="#34A853" d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84A11 11 0 0 0 12 23z"/><path fill="#FBBC05" d="M5.84 14.1a6.6 6.6 0 0 1 0-4.2V7.06H2.18a11 11 0 0 0 0 9.88l3.66-2.84z"/><path fill="#EA4335" d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15A11 11 0 0 0 12 1 11 11 0 0 0 2.18 7.06l3.66 2.84c.87-2.6 3.3-4.52 6.16-4.52z"/></svg>Sign in with Google</button>`}
+    <div style="display:flex;align-items:center;gap:8px;margin-top:14px;padding-top:12px;border-top:1px solid var(--grid)">
+      <button id="cfgsave" class="secbtn" style="margin:0;padding:7px 16px;font-size:12.5px;font-weight:650">Save</button>
+      <span id="cfgstat" style="font-size:11.5px;color:var(--muted)"></span>
+    </div>`;
+    // NOTHING applies immediately — every control just edits the pending state P;
+    // the single Save button at the bottom commits all of it at once.
+    pop.querySelectorAll('[data-c]').forEach(b=>b.addEventListener('click',e=>{
+      e.stopPropagation(); P.ccy=b.dataset.c;
+      pop.querySelectorAll('[data-c]').forEach(x=>x.classList.toggle('on',x.dataset.c===P.ccy));
     }));
-    pop.querySelector('#privchk').addEventListener('change',e=>{
-      _priv=e.target.checked; localStorage.setItem('pc-priv',_priv?'1':'0'); refreshAllMoney();
-    });
-    const nameIn=pop.querySelector('#pnamein');
-    nameIn.addEventListener('input',()=>{ _cfg.name=nameIn.value.trim()||"Rafael's Portfolio"; applyName(); });
+    pop.querySelector('#privchk').addEventListener('change',e=>{ P.priv=e.target.checked; });
+    pop.querySelector('#pnamein').addEventListener('input',e=>{ P.name=e.target.value.trim()||"Rafael's Portfolio"; });
     pop.querySelectorAll('[data-vis]').forEach(b=>b.addEventListener('click',e=>{
-      e.stopPropagation(); _cfg.public=b.dataset.vis==='1';
-      pop.querySelectorAll('[data-vis]').forEach(x=>x.classList.toggle('on',x===b));
+      e.stopPropagation(); P.pub=b.dataset.vis==='1';
+      pop.querySelectorAll('[data-vis]').forEach(x=>x.classList.toggle('on',(x.dataset.vis==='1')===P.pub));
     }));
     pop.querySelector('#sharecopy').addEventListener('click',async e=>{
       e.stopPropagation();
@@ -824,14 +827,33 @@ function initAppSettings(){
     if(fbin) fbin.addEventListener('click',e=>{ e.stopPropagation(); ownerSignIn(); });
     const fbout=pop.querySelector('#fbout');
     if(fbout) fbout.addEventListener('click',e=>{ e.stopPropagation(); ownerSignOut(); });
-    pop.querySelector('#cfgsave').addEventListener('click',e=>{
-      e.stopPropagation(); saveConfig(pop.querySelector('#cfgstat'));
+    pop.querySelector('#cfgsave').addEventListener('click',async e=>{
+      e.stopPropagation();
+      const stat=pop.querySelector('#cfgstat');
+      stat.textContent='saving…'; stat.style.color='var(--muted)';
+      // device settings (currency, hide amounts) — always saveable, no login needed
+      _ccy=P.ccy; localStorage.setItem('pc-ccy',_ccy);
+      _priv=P.priv; localStorage.setItem('pc-priv',_priv?'1':'0');
+      refreshAllMoney();
+      // portfolio settings (name, sharing) — only when changed; needs the owner login
+      const remoteChanged = P.name!==_cfg.name || P.pub!==(_cfg.public!==false);
+      if(remoteChanged){
+        const ok=await saveConfig(stat,P.name,P.pub);
+        if(!ok) return;                      // stat already shows why
+        stat.textContent='✓ saved — live for everyone'; stat.style.color='var(--up)';
+      } else {
+        stat.textContent='✓ saved'; stat.style.color='var(--up)';
+      }
     });
     pop.querySelectorAll('input').forEach(i=>i.addEventListener('click',e=>e.stopPropagation()));
   };
   window._drawAppSettings=draw;
   draw();
-  btn.addEventListener('click',e=>{e.stopPropagation(); pop.style.display=pop.style.display==='none'?'':'none';});
+  btn.addEventListener('click',e=>{e.stopPropagation();
+    const opening=pop.style.display==='none';
+    if(opening){ P=seed(); draw(); }         // fresh pending state on every open
+    pop.style.display=opening?'':'none';
+  });
   document.addEventListener('click',e=>{ if(!pop.contains(e.target)&&e.target!==btn) pop.style.display='none'; });
 }
 function initHtSettings(){
