@@ -7,7 +7,7 @@ warnings.filterwarnings("ignore")
 
 ROOT = os.path.dirname(os.path.abspath(__file__))
 OUT = os.path.join(ROOT, "bench.json")
-BASE = ["SPY", "QQQ", "XBI", "VWCE.DE"]
+BASE = ["SPY", "QQQ", "VWCE.DE"]
 def all_syms():
     syms = list(BASE)
     try:
