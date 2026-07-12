@@ -1766,16 +1766,40 @@ const PF_WIDGETS={
   ddchart:{lab:'Drawdown chart',big:1,opts:[],render:()=>`<div class="chartbox"><svg class="line pfw-chart" preserveAspectRatio="none" style="height:180px"></svg><div class="tip"></div></div>`,
     after:(w,el)=>drawDDChart(w,el)},
   calc:{lab:'Calculation',big:1,opts:[],render:()=>{
-    const full=(DATA.chartPP||[]); if(full.length<2) return '—';
-    const D=DATA, rows=[
-      ['Initial value ('+full[0].d+')',money(full[0].v,full[0].e),''],
-      ['+ Capital gains (unrealized)',money(D.ppUnrealizedUsd,D.ppUnrealizedEur),'up'],
-      ['+ Realized capital gains',money(D.ppRealizedUsd,D.ppRealizedEur),'up'],
-      ['+ Earnings',money(D.ppEarningsUsd,D.ppEarningsEur),'up'],
-      ['− Fees',money(D.ppFeesUsd,D.ppFeesEur),'down'],
-      ['− Taxes',money(D.ppTaxesUsd,D.ppTaxesEur),'down'],
-      ['+ Performance-neutral transfers',money(D.ppNetContribUsd,D.ppNetContribEur),''],
-      ['= Final value ('+full[full.length-1].d+')',money(full[full.length-1].v,full[full.length-1].e),'']];
+    const pts=pfSliceP(PF_P), D=DATA; if(pts.length<2) return '—';
+    const a=pts[0], b=pts[pts.length-1];
+    const whole=(DATA.chartPP||[]);
+    /* full period -> the engine's PP-verified totals; sub-period -> series deltas
+       (the USD residual drifts ~1% from the engine number via daily-vs-txdate FX) */
+    const isFull=a.d===whole[0].d&&b.d===whole[whole.length-1].d;
+    let rows;
+    if(!isFull&&a.q!=null&&b.q!=null){ /* period-aware: cumulative rows baked into the series */
+      const dus=k=>(b[k]||0)-(a[k]||0);
+      /* unrealized Δ is the identity residual, so the table always sums exactly
+         (Δvalue = transfers + realized + earnings − fees − taxes + unrealized Δ) */
+      const unU=(b.v-a.v)-dus('c')-dus('q')-dus('g')+dus('f')+dus('t');
+      const unE=(b.e-a.e)-dus('k')-dus('Q')-dus('G')+dus('F')+dus('T');
+      rows=[
+        ['Initial value ('+a.d+')',money(a.v,a.e),''],
+        ['+ Capital gains (unrealized)',money(unU,unE),unU>=0?'up':'down'],
+        ['+ Realized capital gains',money(dus('q'),dus('Q')),dus('q')>=0?'up':'down'],
+        ['+ Earnings',money(dus('g'),dus('G')),'up'],
+        ['− Fees',money(dus('f'),dus('F')),'down'],
+        ['− Taxes',money(dus('t'),dus('T')),'down'],
+        ['+ Performance-neutral transfers',money(dus('c'),dus('k')),''],
+        ['= Final value ('+b.d+')',money(b.v,b.e),'']];
+    } else { /* older data without cumulative rows: engine totals, whole period */
+      const full=(DATA.chartPP||[]);
+      rows=[
+        ['Initial value ('+full[0].d+')',money(full[0].v,full[0].e),''],
+        ['+ Capital gains (unrealized)',money(D.ppUnrealizedUsd,D.ppUnrealizedEur),'up'],
+        ['+ Realized capital gains',money(D.ppRealizedUsd,D.ppRealizedEur),'up'],
+        ['+ Earnings',money(D.ppEarningsUsd,D.ppEarningsEur),'up'],
+        ['− Fees',money(D.ppFeesUsd,D.ppFeesEur),'down'],
+        ['− Taxes',money(D.ppTaxesUsd,D.ppTaxesEur),'down'],
+        ['+ Performance-neutral transfers',money(D.ppNetContribUsd,D.ppNetContribEur),''],
+        ['= Final value ('+full[full.length-1].d+')',money(full[full.length-1].v,full[full.length-1].e),'']];
+    }
     return rows.map(([l,v,c],i)=>`<div style="display:flex;justify-content:space-between;gap:12px;padding:7px 2px;font-size:13.5px;
       ${i===0||i===rows.length-1?'font-weight:700;':''}${i===rows.length-1?'border-top:1px solid var(--line);':i>0?'border-top:1px solid var(--grid);':''}">
       <span>${l}</span><span class="tnum ${c}">${v}</span></div>`).join('');}},
@@ -1796,22 +1820,25 @@ const PF_WIDGETS={
       h+='</tr>'; });
     return h+'</table></div>';}},
   years:{lab:'Yearly returns',big:1,opts:['bench','scheme'],render:w=>{
-    const full=(DATA.chartPP||[]); if(full.length<2) return '—';
-    const years=[...new Set(full.map(p=>p.d.slice(0,4)))].sort();
+    const pts=pfSliceP(PF_P); if(pts.length<2) return '—';
+    const years=[...new Set(pts.map(p=>p.d.slice(0,4)))].sort();
+    const d0=pts[0].d, d1=pts[pts.length-1].d;
     const BM=benchMeta();
     const activeB=(w.bench||[]).filter(s=>(DATA.bench||{})[s]&&BM[s]);
     let h='<div style="overflow-x:auto"><table style="border-collapse:separate;border-spacing:3px;font-size:12.5px"><tr><th></th>'+
       `<th style="color:var(--muted);font-weight:650;padding:2px 10px">Portfolio</th>`+
       activeB.map(s=>`<th style="color:${BM[s].col};font-weight:650;padding:2px 10px">${esc(BM[s].label)}</th>`).join('')+'</tr>';
     years.forEach(y=>{
-      const yPts=full.filter(p=>p.d.slice(0,4)===y);
-      const prev=full[full.indexOf(yPts[0])-1]||yPts[0];
+      const yPts=pts.filter(p=>p.d.slice(0,4)===y);
+      if(yPts.length<2) return;   // the slice anchor (day before period start) is not a year
+      const prev=pts[pts.indexOf(yPts[0])-1]||yPts[0];
       const pv=((1+yPts[yPts.length-1].r)/(1+prev.r)-1)*100;
       h+=`<tr><td style="color:var(--muted);font-weight:650;padding:2px 8px">${y.slice(2)}</td>`+
         `<td class="tnum" style="background:${heatColor(w.scheme||'classic',pv)};padding:5px 12px;border-radius:6px;text-align:center;font-weight:660">${pv.toFixed(1)}</td>`;
       activeB.forEach(s=>{
-        const raw=DATA.bench[s].filter(x=>x[0].slice(0,4)===y);
-        const pre=DATA.bench[s].filter(x=>x[0]<y+'-01-01').pop();
+        const ser=DATA.bench[s].filter(x=>x[0]>=d0&&x[0]<=d1);   // same window as the portfolio
+        const raw=ser.filter(x=>x[0].slice(0,4)===y);
+        const pre=ser.filter(x=>x[0]<y+'-01-01').pop();
         if(raw.length<2){ h+='<td></td>'; return; }
         const b=((raw[raw.length-1][1]/(pre?pre[1]:raw[0][1]))-1)*100;
         h+=`<td class="tnum" style="background:${heatColor(w.scheme||'classic',b)};padding:5px 12px;border-radius:6px;text-align:center">${b.toFixed(1)}</td>`; });
@@ -1884,6 +1911,9 @@ function renderPeriodBar(){
 let pfW=(()=>{try{const w=JSON.parse(localStorage.getItem('pc-pfw')||'null');
   return Array.isArray(w)&&w.length?w.filter(x=>PF_WIDGETS[x.t]):JSON.parse(JSON.stringify(PF_DEFAULT));}
   catch(e){return JSON.parse(JSON.stringify(PF_DEFAULT));}})();
+/* every widget type is a singleton — old layouts may carry duplicates from the
+   pre-filter add picker */
+pfW=pfW.filter((w,i)=>pfW.findIndex(x=>x.t===w.t)===i);
 /* one-time: saved layouts predate the nuanced palettes — move them to the new default once */
 try{if(!localStorage.getItem('pc-schemev2')){
   pfW.forEach(w=>{if(w.scheme==='classic')w.scheme='traffic';});

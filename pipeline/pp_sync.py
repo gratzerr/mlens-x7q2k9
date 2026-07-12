@@ -262,26 +262,31 @@ irr_flows=[]
 # deposits + inbound deliveries minus removals + outbound deliveries, at tx-date FX
 contrib_eur=0.0;contrib_usd=0.0
 earn_eur=earn_usd=fees_eur=fees_usd=tax_eur=tax_usd=0.0   # PP Calculation rows (gross)
+# per-day versions of the same rows, so the calc widget can report any sub-period
+earn_day=defaultdict(lambda:[0.0,0.0])   # d -> [eur, usd]
+fees_day=defaultdict(lambda:[0.0,0.0])
+tax_day=defaultdict(lambda:[0.0,0.0])
+def _bump(m,d,e,u): m[d][0]+=e;m[d][1]+=u
 for t in txs.values():
     d=t["date"];ty=t["type"];a=t["amount"];ccy=t["ccy"]
     if d>START:
         fe,tx_=t.get("fee",0.0),t.get("tax",0.0)
-        if fe: fees_eur+=to_eur(fe,ccy,d);fees_usd+=to_usd(fe,ccy,d)
-        if tx_: tax_eur+=to_eur(tx_,ccy,d);tax_usd+=to_usd(tx_,ccy,d)
+        if fe: e=to_eur(fe,ccy,d);u=to_usd(fe,ccy,d);fees_eur+=e;fees_usd+=u;_bump(fees_day,d,e,u)
+        if tx_: e=to_eur(tx_,ccy,d);u=to_usd(tx_,ccy,d);tax_eur+=e;tax_usd+=u;_bump(tax_day,d,e,u)
         if t["kind"]=="acc":
             if ty in ("DIVIDENDS","INTEREST"):
                 g=a+tx_   # gross: PP zeigt Steuern separat
-                earn_eur+=to_eur(g,ccy,d);earn_usd+=to_usd(g,ccy,d)
+                e=to_eur(g,ccy,d);u=to_usd(g,ccy,d);earn_eur+=e;earn_usd+=u;_bump(earn_day,d,e,u)
             elif ty=="INTEREST_CHARGE":
-                earn_eur-=to_eur(a,ccy,d);earn_usd-=to_usd(a,ccy,d)
+                e=to_eur(a,ccy,d);u=to_usd(a,ccy,d);earn_eur-=e;earn_usd-=u;_bump(earn_day,d,-e,-u)
             elif ty=="FEES":
-                fees_eur+=to_eur(a,ccy,d);fees_usd+=to_usd(a,ccy,d)
+                e=to_eur(a,ccy,d);u=to_usd(a,ccy,d);fees_eur+=e;fees_usd+=u;_bump(fees_day,d,e,u)
             elif ty=="FEES_REFUND":
-                fees_eur-=to_eur(a,ccy,d);fees_usd-=to_usd(a,ccy,d)
+                e=to_eur(a,ccy,d);u=to_usd(a,ccy,d);fees_eur-=e;fees_usd-=u;_bump(fees_day,d,-e,-u)
             elif ty=="TAXES":
-                tax_eur+=to_eur(a,ccy,d);tax_usd+=to_usd(a,ccy,d)
+                e=to_eur(a,ccy,d);u=to_usd(a,ccy,d);tax_eur+=e;tax_usd+=u;_bump(tax_day,d,e,u)
             elif ty=="TAX_REFUND":
-                tax_eur-=to_eur(a,ccy,d);tax_usd-=to_usd(a,ccy,d)
+                e=to_eur(a,ccy,d);u=to_usd(a,ccy,d);tax_eur-=e;tax_usd-=u;_bump(tax_day,d,-e,-u)
     if t["kind"]=="port":
         if ty in PADD: pos_ev[d].append((t["sec"],t["shares"]))
         elif ty in PSUB: pos_ev[d].append((t["sec"],-t["shares"]))
@@ -369,6 +374,7 @@ for s,sh in open_sh.items():
         lots[s].append([sh, to_eur(v,SEC[s]["ccy"],START), to_usd(v,SEC[s]["ccy"],START)])
 realized_eur=0.0;realized_usd=0.0
 rz_usd_by_sec=defaultdict(float)   # per-security realized (USD) for the holdings table
+rz_day=defaultdict(lambda:[0.0,0.0])   # d -> [eur, usd] realized that day (for period calc)
 # same-date ordering: process adds (BUY/inbound) BEFORE removes, otherwise a same-day
 # round-trip sells from an empty lot queue (full proceeds booked as "gain") and leaves
 # a ghost lot behind (caused +99k realized / +20k unrealized drift vs the PP app)
@@ -397,6 +403,19 @@ for t in ptx:
         if ty=="SELL":
             realized_eur+=eur-basis;realized_usd+=usd-basis_u
             rz_usd_by_sec[s]+=usd-basis_u
+            rz_day[t["date"]][0]+=eur-basis;rz_day[t["date"]][1]+=usd-basis_u
+# attach cumulative Calculation rows to the daily series: q/Q realized, g/G earnings,
+# f/F fees, t/T taxes (USD/EUR) — lets the calc widget report any reporting period
+_re=_ru=_ge=_gu=_fe=_fu=_te=_tu=0.0
+for p in daily:
+    d=p["d"]
+    if d in rz_day:   _re+=rz_day[d][0];  _ru+=rz_day[d][1]
+    if d in earn_day: _ge+=earn_day[d][0];_gu+=earn_day[d][1]
+    if d in fees_day: _fe+=fees_day[d][0];_fu+=fees_day[d][1]
+    if d in tax_day:  _te+=tax_day[d][0]; _tu+=tax_day[d][1]
+    p["q"]=round(_ru);p["Q"]=round(_re);p["g"]=round(_gu);p["G"]=round(_ge)
+    p["f"]=round(_fu);p["F"]=round(_fe);p["t"]=round(_tu);p["T"]=round(_te)
+assert abs(_ru-realized_usd)<1 and abs(_gu-earn_usd)<1 and abs(_fu-fees_usd)<1 and abs(_tu-tax_usd)<1, "daily cums drifted from verified totals"
 unrealized_eur=0.0;unrealized_usd=0.0
 for s,q in lots.items():
     rsh=sum(l[0] for l in q)
