@@ -255,6 +255,26 @@ for tr in (pp.get("trades", []) if pp else []):
     if tr["ticker"] not in trade_logos:          # one logo set per ticker, not per row
         trade_logos[tr["ticker"]] = logo_candidates(tr)
 
+# ---- payments ledger for the Payments tab ----
+# tiles/charts use the EXACT monthly aggregate (every booking); the journal drops
+# sub-$0.50 noise (savings-plan micro fees) to protect the Firestore 1MB budget
+_pays = pp.get("payments", []) if pp else []
+pay_monthly = {}
+for p in _pays:
+    a = pay_monthly.setdefault(p["d"][:7], {}).setdefault(p["k"], [0.0, 0.0])
+    a[0] += p["eur"]; a[1] += p["usd"]
+pay_monthly = {ym: {k: [round(v[0], 2), round(v[1], 2)] for k, v in kv.items()}
+               for ym, kv in pay_monthly.items()}
+pay_journal = [[p["d"], p["k"], p["tk"], p["eur"], p["usd"]]
+               for p in _pays if abs(p["usd"]) >= 0.5]
+# exact per-security dividend totals (the journal drops micro entries, this must not)
+pay_div_sec = {}
+for p in _pays:
+    if p["k"] == "dividend" and p.get("tk"):
+        a = pay_div_sec.setdefault(p["tk"], [0.0, 0.0, 0])
+        a[0] += p["eur"]; a[1] += p["usd"]; a[2] += 1
+pay_div_sec = {tk: [round(v[0], 2), round(v[1], 2), v[2]] for tk, v in pay_div_sec.items()}
+
 # Attach research + market to each holding; compute allocation
 total = port["totalValue"]
 for h in port["holdings"]:
@@ -327,6 +347,9 @@ data = {
     "chartPP": pp.get("series", []) if pp else [],
     "trades": pp_trades,
     "tradeLogos": trade_logos,
+    "payMonthly": pay_monthly,
+    "payments": pay_journal,
+    "payDivSec": pay_div_sec,
     # security name map for Activities — ONLY ISINs shown in this portfolio (dividend
     # depot names filtered out; if the ISIN lookup failed, _shown_isins is None -> keep all)
     "secByIsin": {s["isin"]: {"tk": s["ticker"], "name": s["name"]}

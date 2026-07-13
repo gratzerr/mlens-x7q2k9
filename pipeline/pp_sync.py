@@ -267,26 +267,39 @@ earn_day=defaultdict(lambda:[0.0,0.0])   # d -> [eur, usd]
 fees_day=defaultdict(lambda:[0.0,0.0])
 tax_day=defaultdict(lambda:[0.0,0.0])
 def _bump(m,d,e,u): m[d][0]+=e;m[d][1]+=u
+payments=[]   # payment ledger for the Payments tab (every cash-relevant booking since START)
+def _pay(d,k,sec,e,u):
+    tk=(SEC[sec]["tk"] or (SEC[sec]["name"] or "")[:10]) if sec is not None else None
+    payments.append({"d":d,"k":k,"tk":tk,"eur":round(e,2),"usd":round(u,2)})
 for t in txs.values():
     d=t["date"];ty=t["type"];a=t["amount"];ccy=t["ccy"]
     if d>START:
         fe,tx_=t.get("fee",0.0),t.get("tax",0.0)
-        if fe: e=to_eur(fe,ccy,d);u=to_usd(fe,ccy,d);fees_eur+=e;fees_usd+=u;_bump(fees_day,d,e,u)
-        if tx_: e=to_eur(tx_,ccy,d);u=to_usd(tx_,ccy,d);tax_eur+=e;tax_usd+=u;_bump(tax_day,d,e,u)
+        if fe: e=to_eur(fe,ccy,d);u=to_usd(fe,ccy,d);fees_eur+=e;fees_usd+=u;_bump(fees_day,d,e,u);_pay(d,'fee',t.get("sec"),e,u)
+        if tx_: e=to_eur(tx_,ccy,d);u=to_usd(tx_,ccy,d);tax_eur+=e;tax_usd+=u;_bump(tax_day,d,e,u);_pay(d,'tax',t.get("sec"),e,u)
         if t["kind"]=="acc":
             if ty in ("DIVIDENDS","INTEREST"):
                 g=a+tx_   # gross: PP zeigt Steuern separat
                 e=to_eur(g,ccy,d);u=to_usd(g,ccy,d);earn_eur+=e;earn_usd+=u;_bump(earn_day,d,e,u)
+                _pay(d,'dividend' if ty=="DIVIDENDS" else 'interest',t.get("sec"),e,u)
             elif ty=="INTEREST_CHARGE":
                 e=to_eur(a,ccy,d);u=to_usd(a,ccy,d);earn_eur-=e;earn_usd-=u;_bump(earn_day,d,-e,-u)
+                _pay(d,'interest',t.get("sec"),-e,-u)
             elif ty=="FEES":
-                e=to_eur(a,ccy,d);u=to_usd(a,ccy,d);fees_eur+=e;fees_usd+=u;_bump(fees_day,d,e,u)
+                e=to_eur(a,ccy,d);u=to_usd(a,ccy,d);fees_eur+=e;fees_usd+=u;_bump(fees_day,d,e,u);_pay(d,'fee',t.get("sec"),e,u)
             elif ty=="FEES_REFUND":
-                e=to_eur(a,ccy,d);u=to_usd(a,ccy,d);fees_eur-=e;fees_usd-=u;_bump(fees_day,d,-e,-u)
+                e=to_eur(a,ccy,d);u=to_usd(a,ccy,d);fees_eur-=e;fees_usd-=u;_bump(fees_day,d,-e,-u);_pay(d,'fee',t.get("sec"),-e,-u)
             elif ty=="TAXES":
-                e=to_eur(a,ccy,d);u=to_usd(a,ccy,d);tax_eur+=e;tax_usd+=u;_bump(tax_day,d,e,u)
+                e=to_eur(a,ccy,d);u=to_usd(a,ccy,d);tax_eur+=e;tax_usd+=u;_bump(tax_day,d,e,u);_pay(d,'tax',t.get("sec"),e,u)
             elif ty=="TAX_REFUND":
-                e=to_eur(a,ccy,d);u=to_usd(a,ccy,d);tax_eur-=e;tax_usd-=u;_bump(tax_day,d,-e,-u)
+                e=to_eur(a,ccy,d);u=to_usd(a,ccy,d);tax_eur-=e;tax_usd-=u;_bump(tax_day,d,-e,-u);_pay(d,'tax',t.get("sec"),-e,-u)
+            elif ty=="DEPOSIT":
+                _pay(d,'deposit',None,to_eur(a,ccy,d),to_usd(a,ccy,d))
+            elif ty=="REMOVAL":
+                _pay(d,'withdrawal',None,to_eur(a,ccy,d),to_usd(a,ccy,d))
+        elif t["kind"]=="port":
+            if ty=="DELIVERY_INBOUND": _pay(d,'deposit',t.get("sec"),to_eur(a,ccy,d),to_usd(a,ccy,d))
+            elif ty=="DELIVERY_OUTBOUND": _pay(d,'withdrawal',t.get("sec"),to_eur(a,ccy,d),to_usd(a,ccy,d))
     if t["kind"]=="port":
         if ty in PADD: pos_ev[d].append((t["sec"],t["shares"]))
         elif ty in PSUB: pos_ev[d].append((t["sec"],-t["shares"]))
@@ -530,6 +543,7 @@ out={"fileDate":datetime.datetime.fromtimestamp(os.path.getmtime(DEPOT)).strftim
      "feesEur":round(fees_eur,2),"feesUsd":round(fees_usd),
      "taxesEur":round(tax_eur,2),"taxesUsd":round(tax_usd),
      "series":daily,
+     "payments":sorted(payments,key=lambda p:p["d"],reverse=True),
      "ports":sorted({(portfolios.get(t["owner"]) or {}).get("name") for t in txs.values()
                      if t["kind"]=="port" and t["owner"]} - {None}),
      "trades":sorted(({**{k:v for k,v in tr.items() if k!="sec"},

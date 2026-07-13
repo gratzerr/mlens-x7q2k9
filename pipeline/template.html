@@ -339,6 +339,7 @@
     <button data-tabbtn="portfolio" class="on">Portfolio</button>
     <button data-tabbtn="news">News</button>
     <button data-tabbtn="performance">Performance</button>
+    <button data-tabbtn="payments">Payments</button>
     <button data-tabbtn="watchlist">Watchlist</button>
   </nav>
 
@@ -414,6 +415,23 @@
       </div>
     </div>
     <div id="pf-grid"></div>
+  </div>
+
+  <!-- ============ PAYMENTS TAB — dividends, interest, fees, taxes, deposits (PP "Zahlungen") ============ -->
+  <div data-tab="payments">
+    <div id="pay-years" style="display:flex;gap:6px;flex-wrap:wrap;margin-bottom:14px"></div>
+    <div class="kpis" id="pay-tiles" style="display:grid"></div>
+    <div class="panel" style="margin-top:16px">
+      <div style="display:flex;justify-content:space-between;align-items:center;gap:10px;flex-wrap:wrap">
+        <h2 style="margin:0">Monthly flows</h2>
+        <div id="pay-cats" style="display:flex;gap:6px;flex-wrap:wrap"></div>
+      </div>
+      <div style="overflow-x:auto"><svg id="pay-chart" style="width:100%;height:210px;min-width:560px"></svg></div>
+    </div>
+    <div class="cols eq" style="margin-top:16px">
+      <div class="panel"><h2>Dividends by security</h2><div id="pay-divsec"></div></div>
+      <div class="panel"><h2>Journal</h2><div id="pay-journal"></div></div>
+    </div>
   </div>
 
   <!-- ============ WATCHLIST TAB — tickers on the radar, quotes like holdings ============ -->
@@ -1269,7 +1287,7 @@ function pfBusy(){
   if(document.getElementById('pfw-addpop')) return true;
   return [...document.querySelectorAll('.pfw-pop')].some(p=>p.style.display&&p.style.display!=='none');
 }
-function rerender(){ renderFeed(); renderChart(); renderHoldingsTable(); renderAlloc(); renderPerfBars(); renderTimeline(); renderNextCat(); renderHoldings(); if(_tab==='performance'&&!pfBusy()) renderPerf(); if(_tab==='watchlist') renderWatchlist(); }
+function rerender(){ renderFeed(); renderChart(); renderHoldingsTable(); renderAlloc(); renderPerfBars(); renderTimeline(); renderNextCat(); renderHoldings(); if(_tab==='performance'&&!pfBusy()) renderPerf(); if(_tab==='watchlist') renderWatchlist(); if(_tab==='payments') renderPayments(); }
 
 /* ===== LIVE DATA LAYER =====================================================
    Works on GitHub Pages (fetch allowed). Inside the Claude artifact the CSP
@@ -1728,12 +1746,13 @@ function switchTab(t){
   if(t==='portfolio'){ renderChart(); hydrateSparks(); }
   if(t==='performance'){ renderPerf(); }
   if(t==='watchlist'){ renderWatchlist(); }
+  if(t==='payments'){ renderPayments(); }
   if(changed) window.scrollTo({top:0});
 }
 function initTabs(){
   document.querySelectorAll('[data-tabbtn]').forEach(b=>b.addEventListener('click',()=>switchTab(b.dataset.tabbtn)));
   const h=(location.hash||'').replace('#','');
-  switchTab(['portfolio','news','performance','watchlist'].includes(h)?h:'portfolio');
+  switchTab(['portfolio','news','performance','payments','watchlist'].includes(h)?h:'portfolio');
 }
 
 /* ===================== PERFORMANCE TAB (formulas replicated from PP source: Risk.java) ===================== */
@@ -2134,6 +2153,97 @@ async function saveBenchList(list){
     if(r.ok){ _cfg.benchmarks=list; return true; }
   }catch(e){}
   return false;
+}
+/* ===================== PAYMENTS TAB (PP "Zahlungen") ===================== */
+const PAY_KINDS={dividend:{lab:'Dividends',flow:1},interest:{lab:'Interest',flow:1},
+  fee:{lab:'Fees',flow:-1},tax:{lab:'Taxes',flow:-1},
+  deposit:{lab:'Deposits',flow:0},withdrawal:{lab:'Withdrawals',flow:0}};
+let _payY=(()=>{try{return localStorage.getItem('pc-payyear')||'all';}catch(e){return 'all';}})();
+let _payK=(()=>{try{return localStorage.getItem('pc-paycat')||'dividend';}catch(e){return 'dividend';}})();
+let _payExp=false;
+function paySum(kind,year){   // exact, from the full monthly aggregate: [eur, usd]
+  let e=0,u=0;
+  Object.entries(DATA.payMonthly||{}).forEach(([ym,kv])=>{
+    if(year!=='all'&&ym.slice(0,4)!==year) return;
+    const v=kv[kind]; if(v){ e+=v[0]; u+=v[1]; }
+  });
+  return [e,u];
+}
+function payChip(lab,on,attr,val){
+  return `<button ${attr}="${val}" class="secbtn" style="margin:0;padding:5px 12px;font-size:12px;${on?'background:var(--accent);color:#fff;border-color:var(--accent)':''}">${lab}</button>`;
+}
+function renderPayments(){
+  const tiles=document.getElementById('pay-tiles'); if(!tiles) return;
+  const PM=DATA.payMonthly||{};
+  const years=[...new Set(Object.keys(PM).map(m=>m.slice(0,4)))].sort();
+  if(_payY!=='all'&&!years.includes(_payY)) _payY='all';
+  /* year chips */
+  document.getElementById('pay-years').innerHTML=
+    ['all',...years].map(y=>payChip(y==='all'?'All':y,_payY===y,'data-payy',y)).join('');
+  /* summary tiles (exact sums) */
+  tiles.innerHTML=Object.entries(PAY_KINDS).map(([k,def])=>{
+    const [e,u]=paySum(k,_payY);
+    const cls=def.flow===1?(u>=0?'up':'down'):def.flow===-1?(u>0?'down':'up'):'';
+    return `<div class="tile"><div class="lab">${def.lab}${_payY==='all'?'':' '+_payY}</div>
+      <div class="val ${cls}" style="font-size:23px">${money(u,e)}</div></div>`;
+  }).join('');
+  /* category chips for chart + journal */
+  document.getElementById('pay-cats').innerHTML=
+    Object.entries(PAY_KINDS).map(([k,d])=>payChip(d.lab,_payK===k,'data-payk',k)).join('');
+  /* monthly bar chart */
+  const svg=document.getElementById('pay-chart');
+  const months=(_payY==='all'
+    ?Object.keys(PM).sort()
+    :Array.from({length:12},(_,i)=>_payY+'-'+String(i+1).padStart(2,'0')));
+  const pairs=months.map(m=>(PM[m]||{})[_payK]||[0,0]);   // [eur, usd] per month
+  const vals=pairs.map(v=>_ccy==='EUR'?v[0]:v[1]);
+  const W=Math.max(560,svg.getBoundingClientRect().width||900), H=210, padB=24, padT=14;
+  const mx=Math.max(...vals.map(Math.abs),1);
+  const bw=Math.max(4,Math.min(46,W/months.length-4));
+  const def=PAY_KINDS[_payK];
+  let bars='',labels='';
+  months.forEach((m,i)=>{
+    const v=vals[i], x=(i+0.5)*(W/months.length);
+    const h=Math.abs(v)/mx*(H-padB-padT);
+    const col=def.flow===1?(v>=0?cvar('--up'):cvar('--down')):def.flow===-1?cvar('--down'):cvar('--accent');
+    if(v) bars+=`<rect x="${(x-bw/2).toFixed(1)}" y="${(H-padB-h).toFixed(1)}" width="${bw.toFixed(1)}" height="${Math.max(2,h).toFixed(1)}" rx="3" fill="${col}" opacity="0.85"><title>${m}: ${money(pairs[i][1],pairs[i][0])}</title></rect>`;
+    const every=months.length>18?3:1;
+    if(i%every===0) labels+=`<text x="${x.toFixed(1)}" y="${H-7}" text-anchor="middle" font-size="10" fill="${cvar('--muted')}" font-family="system-ui">${months.length>13?m.slice(2).replace('-','/'):['J','F','M','A','M','J','J','A','S','O','N','D'][+m.slice(5,7)-1]}</text>`;
+  });
+  svg.setAttribute('viewBox',`0 0 ${W} ${H}`);
+  svg.innerHTML=`<line x1="0" y1="${H-padB}" x2="${W}" y2="${H-padB}" stroke="${cvar('--grid')}"/>`+bars+labels;
+  /* dividends by security (exact) */
+  const ds=Object.entries(DATA.payDivSec||{}).sort((a,b)=>b[1][1]-a[1][1]);
+  document.getElementById('pay-divsec').innerHTML=ds.length?ds.map(([tk,v])=>
+    `<div style="display:flex;align-items:center;gap:9px;padding:6px 2px;border-top:1px solid var(--grid);font-size:13px">
+      ${logoImg(tickerLogos(tk),'llogo',tk)}<span style="font-weight:650">${esc(tk)}</span>
+      <span style="color:var(--muted);font-size:11.5px">${v[2]}×</span>
+      <span class="tnum up" style="margin-left:auto">${money(v[1],v[0])}</span></div>`).join('')
+    :'<div style="color:var(--muted);font-size:13px">no dividends recorded</div>';
+  /* journal */
+  const rows=(DATA.payments||[]).filter(p=>(_payY==='all'||p[0].slice(0,4)===_payY)&&p[1]===_payK);
+  const show=_payExp?rows:rows.slice(0,20);
+  document.getElementById('pay-journal').innerHTML=(show.length?show.map(p=>{
+    const [d,k,tk,e,u]=p, flow=PAY_KINDS[k].flow;
+    /* ledger stores fees/taxes/withdrawals as positive outflows — show them signed */
+    const signed=flow===-1||k==='withdrawal'?-u:u;
+    const cls=flow===0?'':(signed>=0?'up':'down');
+    const amt=(signed>=0?'+':'−')+money(Math.abs(u),Math.abs(e)).replace(/^[-−]/,'');
+    return `<div style="display:flex;align-items:center;gap:9px;padding:6px 2px;border-top:1px solid var(--grid);font-size:13px">
+      <span class="tnum" style="color:var(--muted);width:78px;flex:none">${d}</span>
+      <span style="font-size:10.5px;text-transform:uppercase;letter-spacing:.4px;background:var(--surface-2);border:1px solid var(--border);border-radius:6px;padding:2px 7px;color:var(--muted);font-weight:650;flex:none">${PAY_KINDS[k].lab.replace(/s$/,'')}</span>
+      ${tk?logoImg(tickerLogos(tk),'llogo',tk)+`<span style="font-weight:650">${esc(tk)}</span>`:''}
+      <span class="tnum ${cls}" style="margin-left:auto">${amt}</span>
+    </div>`;
+  }).join(''):'<div style="color:var(--muted);font-size:13px">no bookings for this selection</div>')+
+  (rows.length>20?`<button class="secbtn" data-payexp style="margin-top:10px">${_payExp?'Show fewer':'Show all '+rows.length}</button>`:'');
+  /* wiring */
+  document.querySelectorAll('[data-payy]').forEach(b=>b.addEventListener('click',()=>{
+    _payY=b.dataset.payy; try{localStorage.setItem('pc-payyear',_payY);}catch(e){} _payExp=false; renderPayments(); }));
+  document.querySelectorAll('[data-payk]').forEach(b=>b.addEventListener('click',()=>{
+    _payK=b.dataset.payk; try{localStorage.setItem('pc-paycat',_payK);}catch(e){} _payExp=false; renderPayments(); }));
+  const xb=document.querySelector('[data-payexp]');
+  if(xb) xb.addEventListener('click',()=>{ _payExp=!_payExp; renderPayments(); });
 }
 /* ===================== WATCHLIST TAB ===================== */
 async function saveWatchList(list){
