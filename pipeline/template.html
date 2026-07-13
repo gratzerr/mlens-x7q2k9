@@ -427,6 +427,7 @@
     <div id="wl-empty" style="display:none;color:var(--muted);font-size:13.5px;padding:8px 0 4px">
       Nothing on the radar yet — the owner can add tickers to watch here.</div>
     <div style="overflow-x:auto"><table class="htable" id="watchtable"></table></div>
+    <div id="wl-news"></div>
   </div>
 
   <div class="foot" id="foot"></div>
@@ -516,8 +517,10 @@ function renderPP(){
 /* ---- latest news feed (live GDELT if available, else curated research) ---- */
 function renderFeed(){
   const live = liveState.news && liveState.news.length;
-  // SEC filings (just-filed) always pinned on top, then live GDELT / curated
-  const source = [...(liveState.secNews||[]), ...(live ? liveState.news : DATA.latestNews)];
+  // SEC filings (just-filed) always pinned on top, then live GDELT / curated.
+  // Positions only — watchlist headlines & filings render on the Watchlist tab.
+  const hold=new Set(DATA.holdings.map(h=>h.ticker));
+  const source = [...(liveState.secNews||[]).filter(n=>hold.has(n.ticker)), ...(live ? liveState.news : DATA.latestNews)];
   const el=document.getElementById('feed'); el.classList.add('feedmax');
   el.innerHTML = source.map(n=>{
     const hd=n.url?`<a href="${esc(n.url)}" target="_blank" rel="noopener">${esc(n.headline)}</a>`:esc(n.headline);
@@ -846,6 +849,9 @@ async function loadConfig(){
   }
   applyName(); applyVisibility();
   const i=document.getElementById('pnamein'); if(i) i.value=_cfg.name;
+  /* the Firestore lists may replace the baked fallback — repaint if user is looking */
+  if(_tab==='watchlist') renderWatchlist();
+  refreshWatch().catch(()=>{});
 }
 /* poll Firestore for the minute-fresh snapshot the cloud loop uploads — visitors get
    new engine data (~60s old) without waiting for a GitHub Pages redeploy */
@@ -1375,31 +1381,36 @@ async function fetchGdelt(q){
 const NEWS_JUNK=/shareholder (notice|alert|rights|deadline)|reminds (investors|shareholders)|class action|claimsfiler|faruqi|rosen law|pomerantz|bragar|kaskela|levi\s*&|encourages investors|investigation (on behalf|of)|lead plaintiff|law offices|deadline alert|lawsuit|investor alert|morning (medical )?update|roundup|weekly recap|week in review/i;
 async function refreshNews(){
   const secs=DATA.holdings.filter(h=>h.assetType!=='cash');
-  const all=[];
-  const harvest=(ticker,first,a)=>{
+  const all=[], wlAll=[];
+  const harvest=(arr,ticker,first,a)=>{
     a.forEach(art=>{
       const dom=(art.domain||'').replace(/^www\./,'');
       if(!NEWS_DOMAINS.has(dom)) return;
       const title=(art.title||'').trim(); if(title.length<15) return;
       if(NEWS_JUNK.test(title)) return;
       if(first && !title.toLowerCase().includes(first)) return;   // company must appear in the headline
-      all.push({ticker, headline:title, url:art.url, source:dom, date:gdeltDate(art.seendate)});
+      arr.push({ticker, headline:title, url:art.url, source:dom, date:gdeltDate(art.seendate)});
     });
   };
   const results=await Promise.allSettled(secs.map(h=>fetchGdelt(h.gquery).then(a=>({h,a}))));
   results.forEach(r=>{ if(r.status!=='fulfilled')return; const {h,a}=r.value;
-    harvest(h.ticker,((h.gquery||h.name||h.ticker).split(' ')[0]||'').toLowerCase(),a);
+    harvest(all,h.ticker,((h.gquery||h.name||h.ticker).split(' ')[0]||'').toLowerCase(),a);
   });
-  /* watchlist tickers get the same sweep — the company name comes from the Yahoo
-     quote (loaded by refreshWatch); tickers without a name yet join the next cycle */
+  /* watchlist tickers get the same sweep, but their headlines live ON the watchlist
+     tab — the News tab stays positions-only */
   const wl=wlSyms().filter(s=>!secs.some(h=>h.ticker===s)&&((window._watchLive[s]||{}).name||'').trim());
   const wlRes=await Promise.allSettled(wl.map(s=>{
     const nm=window._watchLive[s].name.trim();
     return fetchGdelt('"'+nm.replace(/[,.]/g,'')+'"').then(a=>({s,nm,a}));
   }));
   wlRes.forEach(r=>{ if(r.status!=='fulfilled')return; const {s,nm,a}=r.value;
-    harvest(s,(nm.split(/[ ,]+/)[0]||'').toLowerCase(),a);
+    harvest(wlAll,s,(nm.split(/[ ,]+/)[0]||'').toLowerCase(),a);
   });
+  wlAll.sort((a,b)=>(b.date||'').localeCompare(a.date||''));
+  const wseen=new Set();
+  liveState.wlNews=wlAll.filter(n=>{const k=(n.headline||'').slice(0,55).toLowerCase().replace(/[^a-z0-9]/g,'');
+    if(!k||wseen.has(k))return false; wseen.add(k); return true;}).slice(0,12);
+  if(_tab==='watchlist') renderWatchlist();
   // Merge fresh GDELT headlines on top of the curated research feed (curated is
   // always substantive; GDELT adds whatever is newer). Dedupe by title, newest first.
   const combined=[...all, ...DATA.latestNews];
@@ -2203,6 +2214,22 @@ function renderWatchlist(){
       renderWatchlist();
     }
   }));
+  /* headlines & SEC filings for watched tickers — same feeds as holdings, own home */
+  const nel=document.getElementById('wl-news');
+  if(nel){
+    const wset=new Set(syms);
+    const items=[...(liveState.secNews||[]).filter(n=>wset.has(n.ticker)),
+                 ...(liveState.wlNews||[]).filter(n=>wset.has(n.ticker))];
+    nel.innerHTML=`<h2 style="margin:22px 0 10px">News & filings</h2>`+
+      (items.length?`<div class="feed">${items.map(n=>{
+        const hd=n.url?`<a href="${esc(n.url)}" target="_blank" rel="noopener">${esc(n.headline)}</a>`:esc(n.headline);
+        return `<div class="fi">
+          <div class="fd">${n._sec?'<span style="color:var(--down)">SEC</span>':enDate(n.date)}</div>
+          <div><div class="ft">${logoImg(wlLogos(n.ticker),'nlogo',n.ticker)}<span class="tkr ${n._sec?'sec':'neutral'}">${esc(n.ticker)}</span> ${hd}</div>
+          <div class="fm">${esc(n.source)}</div></div></div>`;
+      }).join('')}</div>`
+      :`<div style="color:var(--muted);font-size:13px">No fresh headlines or filings for the watched tickers yet — new ones appear here automatically.</div>`);
+  }
 }
 function initWatchlist(){
   const inp=document.getElementById('wl-new'); if(!inp||inp._hooked) return; inp._hooked=true;
