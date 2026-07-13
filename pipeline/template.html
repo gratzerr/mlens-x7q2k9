@@ -419,7 +419,7 @@
 
   <!-- ============ PAYMENTS TAB — dividends, interest, fees, taxes, deposits (PP "Zahlungen") ============ -->
   <div data-tab="payments">
-    <div id="pay-years" style="display:flex;gap:6px;flex-wrap:wrap;margin-bottom:14px"></div>
+    <div id="pay-period" style="display:flex;gap:8px;align-items:center;flex-wrap:wrap;margin-bottom:14px"></div>
     <div class="kpis" id="pay-tiles" style="display:grid"></div>
     <div class="panel" style="margin-top:16px">
       <div style="display:flex;justify-content:space-between;align-items:center;gap:10px;flex-wrap:wrap">
@@ -2158,44 +2158,94 @@ async function saveBenchList(list){
 const PAY_KINDS={dividend:{lab:'Dividends',flow:1},interest:{lab:'Interest',flow:1},
   fee:{lab:'Fees',flow:-1},tax:{lab:'Taxes',flow:-1},
   deposit:{lab:'Deposits',flow:0},withdrawal:{lab:'Withdrawals',flow:0}};
-let _payY=(()=>{try{return localStorage.getItem('pc-payyear')||'all';}catch(e){return 'all';}})();
+let PAY_P=(()=>{try{const p=JSON.parse(localStorage.getItem('pc-payperiod')||'null');return p&&p.k?p:{k:'rel',v:'all'};}catch(e){return {k:'rel',v:'all'};}})();
 let _payK=(()=>{try{return localStorage.getItem('pc-paycat')||'dividend';}catch(e){return 'dividend';}})();
 let _payExp=false;
-function paySum(kind,year){   // exact, from the full monthly aggregate: [eur, usd]
-  let e=0,u=0;
-  Object.entries(DATA.payMonthly||{}).forEach(([ym,kv])=>{
-    if(year!=='all'&&ym.slice(0,4)!==year) return;
-    const v=kv[kind]; if(v){ e+=v[0]; u+=v[1]; }
-  });
-  return [e,u];
+function payRange(p){   // [from, to] ISO dates for a PF-style reporting period
+  p=normP(p);
+  const s=DATA.chartPP||[]; if(!s.length) return ['0000-01-01','9999-12-31'];
+  const last=s[s.length-1].d;
+  let from=s[0].d, to=last;
+  if(p.k==='rel'&&p.v!=='all'){
+    if(p.v==='ytd') from=last.slice(0,4)+'-01-01';
+    else{ const days={'1m':30,'3m':91,'6m':182,'1y':365,'2y':730,'3y':1095,'5y':1825}[p.v]||0;
+      from=new Date(new Date(last).getTime()-days*86400000).toISOString().slice(0,10); }
+  } else if(p.k==='year'){ from=p.y+'-01-01'; to=p.y+'-12-31'; }
+  else if(p.k==='since'){ from=p.from; }
+  else if(p.k==='range'){ from=p.from; to=p.to; }
+  return [from,to];
+}
+/* same reporting-period bar as the Performance tab — with the same protections:
+   never rebuild while focused, prefilled date fields, half-typed years ignored */
+function renderPayPeriodBar(){
+  const bar=document.getElementById('pay-period'); if(!bar) return;
+  if(bar.contains(document.activeElement)&&document.activeElement!==bar) return;
+  const p=normP(PAY_P);
+  const yearsAvail=[...new Set((DATA.chartPP||[]).map(x=>x.d.slice(0,4)))];
+  bar.innerHTML=`<span style="font-size:11px;text-transform:uppercase;letter-spacing:.6px;color:var(--muted);font-weight:660">Reporting period</span>
+    <select id="pay-psel" style="background:var(--surface);border:1px solid var(--border);border-radius:9px;padding:7px 10px;font:inherit;font-size:13px;color:var(--ink);box-shadow:var(--shadow)">
+      <optgroup label="Relative">${PF_REL.map(([k,l])=>`<option value="rel:${k}" ${p.k==='rel'&&p.v===k?'selected':''}>${l}</option>`).join('')}</optgroup>
+      <optgroup label="Year">${yearsAvail.map(y=>`<option value="year:${y}" ${p.k==='year'&&String(p.y)===y?'selected':''}>Year ${y}</option>`).join('')}</optgroup>
+      <optgroup label="Custom"><option value="since" ${p.k==='since'?'selected':''}>Since date…</option>
+      <option value="range" ${p.k==='range'?'selected':''}>From – to…</option></optgroup>
+    </select>
+    <input type="date" id="pay-from" value="${p.from||''}" style="display:${p.k==='since'||p.k==='range'?'inline-block':'none'};background:var(--surface);border:1px solid var(--border);border-radius:9px;padding:6px 9px;font:inherit;font-size:12.5px;color:var(--ink)">
+    <input type="date" id="pay-to" value="${p.to||''}" style="display:${p.k==='range'?'inline-block':'none'};background:var(--surface);border:1px solid var(--border);border-radius:9px;padding:6px 9px;font:inherit;font-size:12.5px;color:var(--ink)">`;
+  const sel=document.getElementById('pay-psel'), from=document.getElementById('pay-from'), to=document.getElementById('pay-to');
+  const d0=(DATA.chartPP&&DATA.chartPP[0]||{}).d||'2021-12-30', d1=(DATA.chartPP&&DATA.chartPP[DATA.chartPP.length-1]||{}).d||'';
+  [from,to].forEach(x=>{x.min=d0; if(d1)x.max=d1;});
+  const okDate=s=>s&&s>=d0.slice(0,4)+'-01-01'&&(!d1||s<=d1);
+  const apply=()=>{
+    const v=sel.value;
+    if(v.startsWith('rel:')) PAY_P={k:'rel',v:v.slice(4)};
+    else if(v.startsWith('year:')) PAY_P={k:'year',y:+v.slice(5)};
+    else if(v==='since'){ from.style.display='inline-block'; to.style.display='none';
+      if(!from.value){ from.value=d0; from.focus(); }
+      if(!okDate(from.value)) return; PAY_P={k:'since',from:from.value}; }
+    else if(v==='range'){ from.style.display='inline-block'; to.style.display='inline-block';
+      if(!from.value){ from.value=d0; from.focus(); }
+      if(!to.value){ to.value=d1||d0; }
+      if(!okDate(from.value)||!okDate(to.value)||from.value>to.value) return;
+      PAY_P={k:'range',from:from.value,to:to.value}; }
+    try{localStorage.setItem('pc-payperiod',JSON.stringify(PAY_P));}catch(e){}
+    _payExp=false; renderPayments();
+  };
+  sel.addEventListener('change',apply);
+  const dApply=()=>{clearTimeout(window._payDeb);window._payDeb=setTimeout(apply,350);};
+  from.addEventListener('change',dApply);
+  to.addEventListener('change',dApply);
 }
 function payChip(lab,on,attr,val){
   return `<button ${attr}="${val}" class="secbtn" style="margin:0;padding:5px 12px;font-size:12px;${on?'background:var(--accent);color:#fff;border-color:var(--accent)':''}">${lab}</button>`;
 }
 function renderPayments(){
   const tiles=document.getElementById('pay-tiles'); if(!tiles) return;
-  const PM=DATA.payMonthly||{};
-  const years=[...new Set(Object.keys(PM).map(m=>m.slice(0,4)))].sort();
-  if(_payY!=='all'&&!years.includes(_payY)) _payY='all';
-  /* year chips */
-  document.getElementById('pay-years').innerHTML=
-    ['all',...years].map(y=>payChip(y==='all'?'All':y,_payY===y,'data-payy',y)).join('');
-  /* summary tiles (exact sums) */
+  renderPayPeriodBar();
+  const [pd0,pd1]=payRange(PAY_P);
+  const inRange=(DATA.payments||[]).filter(p=>p[0]>=pd0&&p[0]<=pd1);
+  /* summary tiles — day-exact sums from the complete journal */
+  const sums={}; Object.keys(PAY_KINDS).forEach(k=>sums[k]=[0,0]);
+  inRange.forEach(p=>{ const s=sums[p[1]]; if(s){ s[0]+=p[3]; s[1]+=p[4]; } });
   tiles.innerHTML=Object.entries(PAY_KINDS).map(([k,def])=>{
-    const [e,u]=paySum(k,_payY);
+    const [e,u]=sums[k];
     const cls=def.flow===1?(u>=0?'up':'down'):def.flow===-1?(u>0?'down':'up'):'';
-    return `<div class="tile"><div class="lab">${def.lab}${_payY==='all'?'':' '+_payY}</div>
+    return `<div class="tile"><div class="lab">${def.lab}</div>
       <div class="val ${cls}" style="font-size:23px">${money(u,e)}</div></div>`;
   }).join('');
   /* category chips for chart + journal */
   document.getElementById('pay-cats').innerHTML=
     Object.entries(PAY_KINDS).map(([k,d])=>payChip(d.lab,_payK===k,'data-payk',k)).join('');
-  /* monthly bar chart */
+  /* monthly bar chart over the selected period */
   const svg=document.getElementById('pay-chart');
-  const months=(_payY==='all'
-    ?Object.keys(PM).sort()
-    :Array.from({length:12},(_,i)=>_payY+'-'+String(i+1).padStart(2,'0')));
-  const pairs=months.map(m=>(PM[m]||{})[_payK]||[0,0]);   // [eur, usd] per month
+  const months=[];
+  for(let ym=pd0.slice(0,7);ym<=pd1.slice(0,7);){
+    months.push(ym);
+    let y=+ym.slice(0,4),m=+ym.slice(5,7)+1; if(m>12){y++;m=1;}
+    ym=y+'-'+String(m).padStart(2,'0');
+  }
+  const byM={}; inRange.forEach(p=>{ if(p[1]!==_payK) return;
+    const a=byM[p[0].slice(0,7)]=byM[p[0].slice(0,7)]||[0,0]; a[0]+=p[3]; a[1]+=p[4]; });
+  const pairs=months.map(m=>byM[m]||[0,0]);   // [eur, usd] per month
   const vals=pairs.map(v=>_ccy==='EUR'?v[0]:v[1]);
   const W=Math.max(560,svg.getBoundingClientRect().width||900), H=210, padB=24, padT=14;
   const mx=Math.max(...vals.map(Math.abs),1);
@@ -2212,16 +2262,19 @@ function renderPayments(){
   });
   svg.setAttribute('viewBox',`0 0 ${W} ${H}`);
   svg.innerHTML=`<line x1="0" y1="${H-padB}" x2="${W}" y2="${H-padB}" stroke="${cvar('--grid')}"/>`+bars+labels;
-  /* dividends by security (exact) */
-  const ds=Object.entries(DATA.payDivSec||{}).sort((a,b)=>b[1][1]-a[1][1]);
+  /* dividends by security — within the selected period */
+  const divsec={};
+  inRange.forEach(p=>{ if(p[1]!=='dividend'||!p[2]) return;
+    const a=divsec[p[2]]=divsec[p[2]]||[0,0,0]; a[0]+=p[3]; a[1]+=p[4]; a[2]++; });
+  const ds=Object.entries(divsec).sort((a,b)=>b[1][1]-a[1][1]);
   document.getElementById('pay-divsec').innerHTML=ds.length?ds.map(([tk,v])=>
     `<div style="display:flex;align-items:center;gap:9px;padding:6px 2px;border-top:1px solid var(--grid);font-size:13px">
       ${logoImg(tickerLogos(tk),'llogo',tk)}<span style="font-weight:650">${esc(tk)}</span>
       <span style="color:var(--muted);font-size:11.5px">${v[2]}×</span>
       <span class="tnum up" style="margin-left:auto">${money(v[1],v[0])}</span></div>`).join('')
-    :'<div style="color:var(--muted);font-size:13px">no dividends recorded</div>';
+    :'<div style="color:var(--muted);font-size:13px">no dividends in this period</div>';
   /* journal */
-  const rows=(DATA.payments||[]).filter(p=>(_payY==='all'||p[0].slice(0,4)===_payY)&&p[1]===_payK);
+  const rows=inRange.filter(p=>p[1]===_payK);
   const show=_payExp?rows:rows.slice(0,20);
   document.getElementById('pay-journal').innerHTML=(show.length?show.map(p=>{
     const [d,k,tk,e,u]=p, flow=PAY_KINDS[k].flow;
@@ -2238,8 +2291,6 @@ function renderPayments(){
   }).join(''):'<div style="color:var(--muted);font-size:13px">no bookings for this selection</div>')+
   (rows.length>20?`<button class="secbtn" data-payexp style="margin-top:10px">${_payExp?'Show fewer':'Show all '+rows.length}</button>`:'');
   /* wiring */
-  document.querySelectorAll('[data-payy]').forEach(b=>b.addEventListener('click',()=>{
-    _payY=b.dataset.payy; try{localStorage.setItem('pc-payyear',_payY);}catch(e){} _payExp=false; renderPayments(); }));
   document.querySelectorAll('[data-payk]').forEach(b=>b.addEventListener('click',()=>{
     _payK=b.dataset.payk; try{localStorage.setItem('pc-paycat',_payK);}catch(e){} _payExp=false; renderPayments(); }));
   const xb=document.querySelector('[data-payexp]');
