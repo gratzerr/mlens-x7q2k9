@@ -1876,8 +1876,9 @@ function heatColor(scheme,v){
   const dark=isDarkTheme();
   /* nonlinear ramp: typical monthly moves (±2–3%) must already differ visibly */
   const m=Math.sign(v)*Math.sqrt(Math.min(Math.abs(v),15)/15), a=Math.abs(m);
-  if(scheme==='traffic'){ /* PP-style continuum: deep red → orange → yellow → green */
-    const h=60+m*60, s=62+a*26, l=dark?44-a*10:72-a*22;
+  if(scheme==='traffic'){ /* PP's actual scale: vivid, saturates fast — ±5% is full red/green */
+    const c=Math.max(-1,Math.min(1,v/5));
+    const h=60+c*60, s=80, l=dark?42-Math.abs(c)*6:58-Math.abs(c)*8;
     return `hsl(${h} ${s}% ${l}%)`;
   }
   if(scheme==='blue') return v>=0?`hsl(${218-a*10} ${45+a*40}% ${dark?26+(1-a)*14:92-a*30}%)`
