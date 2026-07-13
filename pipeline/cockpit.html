@@ -1296,11 +1296,19 @@ function setBadge(){
 async function fetchYahoo(sym){
   // BARE path (no query string) — jina reliably proxies this; querystring URLs get
   // rate-blocked. Default range is 1d intraday, so we get a live today-sparkline +
-  // meta.chartPreviousClose for the day-change.
-  const url=JINA+"https://query1.finance.yahoo.com/v8/finance/chart/"+sym;
-  const r=await fetch(url); const t=await r.text();
-  const j=t.indexOf('{"chart"'); if(j<0) throw new Error('nojson');
-  const d=JSON.parse(t.slice(j)); const res=d.chart.result[0]; const m=res.meta;
+  // meta.chartPreviousClose for the day-change. When jina throttles, corsproxy is
+  // the fallback route (it handles querystring URLs fine).
+  const parse=t=>{ const j=t.indexOf('{"chart"'); if(j<0) throw new Error('nojson'); return JSON.parse(t.slice(j)); };
+  let d;
+  try{
+    const r=await fetch(JINA+"https://query1.finance.yahoo.com/v8/finance/chart/"+sym);
+    d=parse(await r.text());
+  }catch(e){
+    const y="https://query1.finance.yahoo.com/v8/finance/chart/"+encodeURIComponent(sym)+"?range=1d&interval=5m";
+    const r=await fetch("https://corsproxy.io/?url="+encodeURIComponent(y));
+    d=parse(await r.text());
+  }
+  const res=d.chart.result[0]; const m=res.meta;
   const cl=(res.indicators.quote[0].close||[]).filter(x=>x!=null);
   const step=Math.max(1,Math.floor(cl.length/40));
   const spark=[]; for(let k=0;k<cl.length;k+=step) spark.push(+cl[k].toFixed(4));
@@ -2172,15 +2180,20 @@ function wlLogos(sym){
 }
 function wlRow(sym){
   const live=window._watchLive[sym], ser=(DATA.watch||{})[sym]||[];
+  const lastD=ser.length?ser[ser.length-1][0]:null;
+  const today=new Date().toISOString().slice(0,10);
   const price=live?live.price:(ser.length?ser[ser.length-1][1]:null);
-  const prev=live?(live.prevClose||price):(ser.length>1?ser[ser.length-2][1]:null);
-  const day=(price!=null&&prev)?((price/prev-1)*100):null;
-  const tail=(live&&live.spark&&live.spark.length>1)?live.spark:ser.slice(-30).map(x=>x[1]);
+  /* "Today" only when it IS today: live quote, or a series that already has
+     today's bar — otherwise Friday's move would masquerade as today's */
+  let day=null;
+  if(live&&live.prevClose) day=(live.price/live.prevClose-1)*100;
+  else if(ser.length>1&&lastD===today) day=(ser[ser.length-1][1]/ser[ser.length-2][1]-1)*100;
+  const tail=ser.slice(-30).map(x=>x[1]);   // column header says 30 days — keep it true
   const yr=ser.slice(-252).map(x=>x[1]);
   const hi=live&&live.hi52?live.hi52:(yr.length?Math.max(...yr):null);
   const lo=live&&live.lo52?live.lo52:(yr.length?Math.min(...yr):null);
   const pos=(price!=null&&hi&&lo&&hi>lo)?((price-lo)/(hi-lo)*100):null;
-  return {sym,price,day,tail,hi,lo,pos};
+  return {sym,price,day,tail,hi,lo,pos,asof:live?null:lastD};
 }
 function wlSpark(tail,up){
   if(!tail||tail.length<2) return '';
@@ -2199,13 +2212,13 @@ function renderWatchlist(){
   const fmtP=p=>p==null?'—':'$'+(+p).toLocaleString('en-US',{minimumFractionDigits:p<1?4:2,maximumFractionDigits:p<1?4:2});
   el.innerHTML='<thead><tr>'+['Ticker','Price','Today','30 days','52-week range',own?'':null].filter(x=>x!=null).map(c=>`<th>${c}</th>`).join('')+'</tr></thead><tbody>'+
     rows.map(r=>{
-      const up=(r.day||0)>=0;
+      const up=r.day!=null?(r.day>=0):(r.tail.length>1?r.tail[r.tail.length-1]>=r.tail[0]:true);
       const range=(r.pos!=null)?`<div style="min-width:120px"><div style="position:relative;height:5px;border-radius:3px;background:var(--surface-2)">
           <div style="position:absolute;left:${r.pos.toFixed(1)}%;top:-2.5px;width:10px;height:10px;margin-left:-5px;border-radius:50%;background:${up?cvar('--up'):cvar('--down')};border:2px solid var(--surface)"></div></div>
         <div style="display:flex;justify-content:space-between;font-size:10.5px;color:var(--muted);margin-top:4px"><span>${fmtP(r.lo)}</span><span>${fmtP(r.hi)}</span></div></div>`:'—';
       return `<tr>
         <td><div class="hname">${logoImg(wlLogos(r.sym),'llogo',r.sym)}<div class="c1">${esc(r.sym)}</div></div></td>
-        <td><div class="c1">${fmtP(r.price)}</div></td>
+        <td><div class="c1">${fmtP(r.price)}</div>${r.asof?`<div class="c2">close ${esc(r.asof.slice(5))}</div>`:''}</td>
         <td><div class="c1 ${r.day==null?'':(up?'up':'down')}">${r.day==null?'—':fmtPct(r.day)}</div></td>
         <td>${wlSpark(r.tail,up)}</td>
         <td>${range}</td>
