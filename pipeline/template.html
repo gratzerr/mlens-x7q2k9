@@ -14,7 +14,7 @@
     --accent:#3468d6;
     --chip:#eef2f7; --chip-ink:#3d4757;
     --confirmed:#10b981; --tentative:#a98600;
-    --radius:16px;
+    --radius:16px; --z-modal:200;
     --shadow:0 2px 4px rgba(30,41,59,.04),0 14px 44px rgba(30,41,59,.08);
   }
   :root[data-theme="dark"]{ color-scheme:dark; }
@@ -318,8 +318,37 @@
     .sparkrow{flex-direction:column;align-items:stretch;gap:8px}
     .rng{width:auto}
   }
+  /* ---- security detail overlay (Parqet-style) ---- */
+  .secov{position:fixed;inset:0;z-index:var(--z-modal);background:rgba(15,19,28,.55);backdrop-filter:blur(3px);
+    display:none;align-items:flex-start;justify-content:center;overflow-y:auto;padding:34px 16px}
+  .secov.on{display:flex}
+  .secmodal{background:var(--plane);border:1px solid var(--line);border-radius:20px;box-shadow:var(--shadow);
+    width:100%;max-width:760px;overflow:hidden;animation:secpop .18s ease}
+  @keyframes secpop{from{opacity:0;transform:translateY(10px) scale(.99)}to{opacity:1;transform:none}}
+  .sechd{display:flex;align-items:center;gap:13px;padding:20px 22px 14px}
+  .sechd .sd-logo{width:38px;height:38px;border-radius:10px;object-fit:contain;background:var(--surface);flex:none}
+  .sd-tk{font-size:19px;font-weight:800;letter-spacing:-.01em}
+  .sd-nm{font-size:12.5px;color:var(--muted);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+  .sd-px{margin-left:auto;text-align:right}
+  .sd-px .p{font-size:20px;font-weight:760;font-variant-numeric:tabular-nums}
+  .sd-x{border:0;background:var(--surface);color:var(--muted);width:32px;height:32px;border-radius:9px;cursor:pointer;font-size:17px;flex:none;box-shadow:var(--shadow)}
+  .sd-x:hover{color:var(--ink)}
+  .sd-ranges{display:flex;gap:5px;padding:0 22px 8px;flex-wrap:wrap}
+  .sd-ranges button{border:1px solid var(--border);background:var(--surface);color:var(--muted);border-radius:8px;
+    padding:5px 12px;font:inherit;font-size:12px;font-weight:650;cursor:pointer}
+  .sd-ranges button.on{background:var(--accent);color:#fff;border-color:var(--accent)}
+  .sd-chart{padding:0 12px}
+  .sd-body{padding:8px 22px 22px}
+  .sd-stats{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:10px;margin:6px 0 4px}
+  .sd-stat{background:var(--surface);border-radius:12px;padding:10px 12px}
+  .sd-stat .l{font-size:10.5px;text-transform:uppercase;letter-spacing:.5px;color:var(--muted);font-weight:660}
+  .sd-stat .v{font-size:15px;font-weight:720;font-variant-numeric:tabular-nums;margin-top:2px}
+  .sd-sec{font-size:11px;text-transform:uppercase;letter-spacing:.6px;color:var(--muted);font-weight:700;margin:18px 0 8px;padding-bottom:5px;border-bottom:1px solid var(--line)}
+  .sd-clk{cursor:pointer}
+  @media(max-width:560px){ .sd-stats{grid-template-columns:repeat(2,minmax(0,1fr))} .secov{padding:0} .secmodal{border-radius:0;min-height:100vh;max-width:none} }
 </style>
 
+<div class="secov" id="secov"><div class="secmodal" id="secmodal"></div></div>
 <div class="wrap">
   <div class="breaking" id="breaking"></div>
   <header class="top">
@@ -751,7 +780,7 @@ function renderHoldingsTable(){
   el.innerHTML='<thead><tr>'+cols.map(c=>`<th data-k="${c.key==='name'?'value':c.key}">${c.lab}${arrow(c)}</th>`).join('')+'</tr></thead>'
     +'<tbody>'+rows.map(r=>{
       const cells=[];
-      cells.push(`<td><div class="hname">${logoImg(r.h.logos,'llogo')}<div style="min-width:0"><div class="c1">${esc(r.h.ticker)}</div><div class="nm2">${esc(r.h.name)}</div></div></div></td>`);
+      cells.push(`<td><div class="hname sd-clk" data-sd="${esc(r.h.ticker)}">${logoImg(r.h.logos,'llogo')}<div style="min-width:0"><div class="c1">${esc(r.h.ticker)}</div><div class="nm2">${esc(r.h.name)}</div></div></div></td>`);
       if(_hcols.shares) cells.push(`<td><div class="c1">${r.shares!=null?maskable((+r.shares).toLocaleString('en-US')):'—'}</div></td>`);
       if(_hcols.entry) cells.push(`<td><div class="c1">${r.avg!=null?maskable(r.sym+fmt2(r.avg,r.avg<1?4:2)):'—'}</div><div class="c2">${r.basis?fmtUsd(r.basis):''}</div></td>`);
       if(_hcols.price) cells.push(`<td><div class="c1">${r.price!=null?r.sym+fmt2(r.price,r.price<1?4:2):'—'}</div><div class="c2">&nbsp;</div></td>`);
@@ -773,6 +802,7 @@ function renderHoldingsTable(){
     if(_hsort.key===key) _hsort.dir*=-1; else _hsort={key,dir:-1};
     renderHoldingsTable();
   }));
+  el.querySelectorAll('[data-sd]').forEach(c=>c.addEventListener('click',()=>openSecDetail(c.dataset.sd)));
 }
 function refreshAllMoney(){ renderKpis(); rerender(); renderActivities(); }
 /* Parqet-style ownership, backed by Firebase:
@@ -1226,7 +1256,7 @@ function renderHoldings(){
     }
     const spark=sparkSvg(h);
     return `<div class="card">
-      <div class="chead">
+      <div class="chead sd-clk" data-sd="${esc(h.ticker)}">
         <div class="cname">${logoImg(h.logos,'hlogo')}
           <div style="min-width:0"><div class="tk">${esc(h.ticker)}</div><div class="nm">${esc(h.name)}</div></div>
         </div>
@@ -1250,6 +1280,7 @@ function renderHoldings(){
     b.previousElementSibling.querySelectorAll('li').forEach(li=>li.style.display='');
     b.remove();
   }));
+  document.querySelectorAll('#holdings [data-sd]').forEach(c=>c.addEventListener('click',()=>openSecDetail(c.dataset.sd)));
   hydrateSparks();
 }
 
@@ -2155,6 +2186,155 @@ async function saveBenchList(list){
   }catch(e){}
   return false;
 }
+/* ===================== SECURITY DETAIL OVERLAY (Parqet-style) ===================== */
+const _secChartCache={};   // {sym|range: [[ts,close],...]}
+async function fetchYahooChart(sym,range,interval){
+  const key=sym+'|'+range;
+  if(_secChartCache[key]) return _secChartCache[key];
+  const y=`https://query1.finance.yahoo.com/v8/finance/chart/${encodeURIComponent(sym)}?range=${range}&interval=${interval}`;
+  let j;
+  try{ j=await (await fetch('https://corsproxy.io/?url='+encodeURIComponent(y))).json(); }
+  catch(e){ j=await (await fetch('https://api.allorigins.win/raw?url='+encodeURIComponent(y))).json(); }
+  const q=j.chart.result[0], ts=q.timestamp||[], cl=q.indicators.quote[0].close||[];
+  const out=[];
+  for(let i=0;i<ts.length;i++){ if(cl[i]!=null) out.push([ts[i],+cl[i].toFixed(4)]); }
+  if(out.length<2) throw new Error('no data');
+  _secChartCache[key]=out; return out;
+}
+const SEC_RANGES=[['1mo','1h','1M'],['6mo','1d','6M'],['1y','1d','1Y'],['5y','1wk','5Y'],['max','1mo','Max']];
+let _secTk=null, _secRange='1y';
+function drawSecChart(pts){
+  const svg=document.getElementById('sd-chart-svg'); if(!svg||!pts||pts.length<2) return;
+  const W=svg.getBoundingClientRect().width||700, H=200, pad={t:10,b:18,l:0,r:0};
+  const xs=pts.map(p=>p[0]), ys=pts.map(p=>p[1]);
+  const t0=xs[0], t1=xs[xs.length-1], ts=(t1-t0)||1;
+  const mn=Math.min(...ys), mx=Math.max(...ys), sp=(mx-mn)||1;
+  const X=t=>(t-t0)/ts*W, Y=v=>pad.t+(1-(v-mn)/sp)*(H-pad.t-pad.b);
+  const up=ys[ys.length-1]>=ys[0];
+  const col=up?cvar('--up'):cvar('--down'), gc=cvar('--grid'), mc=cvar('--muted');
+  const line=pts.map((p,i)=>`${i?'L':'M'}${X(p[0]).toFixed(1)},${Y(p[1]).toFixed(1)}`).join(' ');
+  const area=line+` L${W},${Y(mn)} L0,${Y(mn)} Z`;
+  const fmtP=v=>'$'+(+v).toLocaleString('en-US',{minimumFractionDigits:2,maximumFractionDigits:2});
+  let grid='';
+  [mx,(mx+mn)/2,mn].forEach(v=>{ grid+=`<line x1="0" y1="${Y(v).toFixed(1)}" x2="${W}" y2="${Y(v).toFixed(1)}" stroke="${gc}"/>`+
+    `<text x="4" y="${(Y(v)-4).toFixed(1)}" font-size="10" fill="${mc}" font-family="system-ui">${fmtP(v)}</text>`; });
+  svg.setAttribute('viewBox',`0 0 ${W} ${H}`);
+  svg.innerHTML=`<defs><linearGradient id="sdg" x1="0" x2="0" y1="0" y2="1">
+      <stop offset="0" stop-color="${col}" stop-opacity="0.16"/><stop offset="1" stop-color="${col}" stop-opacity="0"/></linearGradient></defs>`+
+    grid+`<path d="${area}" fill="url(#sdg)"/><path d="${line}" fill="none" stroke="${col}" stroke-width="2" stroke-linejoin="round"/>`+
+    `<circle cx="${X(t1).toFixed(1)}" cy="${Y(ys[ys.length-1]).toFixed(1)}" r="3.2" fill="${col}"/>`+
+    `<line class="cross" id="sd-cx" x1="0" y1="${pad.t}" x2="0" y2="${H-pad.b}" style="opacity:0"/>`;
+  const tip=document.getElementById('sd-tip'), cx=document.getElementById('sd-cx');
+  const move=e=>{ const rct=svg.getBoundingClientRect();
+    const fx=(e.touches?e.touches[0].clientX:e.clientX)-rct.left;
+    const targ=t0+Math.max(0,Math.min(1,fx/rct.width))*ts;
+    let best=pts[0]; for(const p of pts){ if(p[0]<=targ) best=p; else break; }
+    const px=X(best[0]); cx.setAttribute('x1',px); cx.setAttribute('x2',px); cx.style.opacity=1;
+    tip.style.opacity=1; tip.innerHTML=`<b>${fmtP(best[1])}</b> · ${new Date(best[0]*1000).toLocaleDateString('en-US',{year:'numeric',month:'short',day:'numeric'})}`;
+  };
+  svg.onmousemove=move; svg.ontouchmove=e=>{move(e);};
+  svg.onmouseleave=()=>{cx.style.opacity=0;tip.style.opacity=0;};
+}
+async function loadSecChart(){
+  const svgWrap=document.getElementById('sd-chartwrap'); if(!svgWrap) return;
+  const rc=SEC_RANGES.find(r=>r[0]===_secRange)||SEC_RANGES[2];
+  try{ const pts=await fetchYahooChart(_secTk,rc[0],rc[1]); if(_secTk) drawSecChart(pts); }
+  catch(e){ const t=document.getElementById('sd-tip'); if(t) t.textContent='chart unavailable'; }
+}
+function openSecDetail(tk){
+  if(!tk) return;
+  _secTk=tk; _secRange='1y';
+  const h=DATA.holdings.find(x=>x.ticker===tk && x.assetType!=='cash');
+  const live=(window._watchLive||{})[tk];
+  const wm=(DATA.watchMeta||{})[tk]||{};
+  const name=h?h.name:(wlName?wlName(tk,live):(live&&live.name)||tk);
+  const price=h?((h.livePrice!=null&&h.assetType!=='option')?h.livePrice:h.ppPrice):(live?live.price:(((DATA.watch||{})[tk]||[]).slice(-1)[0]||[])[1]);
+  const day=h?(h.dayChange):(live&&live.prevClose?((live.price/live.prevClose-1)*100):null);
+  const sym=h?h.ySym||tk:tk;
+  const dcls=day==null?'':(day>=0?'up':'down');
+  const logos=tickerLogos(tk);
+  const fmtP=v=>v==null?'—':'$'+(+v).toLocaleString('en-US',{minimumFractionDigits:2,maximumFractionDigits:2});
+  /* position block (held only) */
+  let stats='';
+  if(h){
+    const basis=h.ppBasisUsd||0, gain=basis?h.value-basis:null, gpct=(gain!=null&&basis)?gain/basis*100:null;
+    const cell=(l,v,c)=>`<div class="sd-stat"><div class="l">${l}</div><div class="v ${c||''}">${v}</div></div>`;
+    stats=`<div class="sd-sec">Your position</div><div class="sd-stats">
+      ${cell('Shares',h.ppShares!=null?maskable((+h.ppShares).toLocaleString('en-US')):'—')}
+      ${cell('Avg cost',h.ppAvgCost!=null?fmtP(h.ppAvgCost):'—')}
+      ${cell('Value',money(h.valueUsd!=null?h.valueUsd:h.value,h.value))}
+      ${cell('Weight',(h.alloc||0).toFixed(2)+'%')}
+      ${cell('Unreal. gain',gain==null?'—':money(gain,null),gain>=0?'up':'down')}
+      ${cell('Unreal. %',gpct==null?'—':fmtPct(gpct),gpct>=0?'up':'down')}
+      ${cell('Realized',h.ppRealizedUsd==null?'—':money(h.ppRealizedUsd,null),(h.ppRealizedUsd||0)>=0?'up':'down')}
+      ${cell('52w pos',h.pos52!=null?h.pos52.toFixed(0)+'%':'—')}</div>`;
+  } else {
+    const cell=(l,v)=>`<div class="sd-stat"><div class="l">${l}</div><div class="v">${v}</div></div>`;
+    stats=`<div class="sd-sec">Snapshot</div><div class="sd-stats">
+      ${cell('Volume',fmtBig((live&&live.vol)||wm.vol))}
+      ${cell('Avg vol',fmtBig(wm.avgVol))}
+      ${cell('Mkt cap',wm.mcap!=null?'$'+fmtBig(wm.mcap):'—')}
+      ${cell('52w high',fmtP((live&&live.hi52)||wm.hi52))}</div>
+      <div style="font-size:12.5px;color:var(--muted);margin-top:8px">On your watchlist — not currently held.</div>`;
+  }
+  /* research: catalysts + news for this ticker (holdings only) */
+  const r=(h&&h.research)||{};
+  const cats=(r.catalysts||[]).slice().sort((a,b)=>catKey(a.when).localeCompare(catKey(b.when)));
+  const catHtml=cats.length?`<div class="sd-sec">Catalysts</div>`+cats.map(c=>{
+    const cf=c.confirmed?cvar('--confirmed'):cvar('--tentative');
+    return `<div style="display:flex;gap:8px;padding:6px 0;border-top:1px solid var(--grid);font-size:13px">
+      <span class="cf" style="background:${cf};margin-top:5px;flex:none"></span>
+      <div><b>${esc(c.when)}</b> · ${esc(c.label)}<div style="color:var(--muted);font-size:12px;margin-top:2px">${esc(c.detail)}</div></div></div>`;
+  }).join(''):'';
+  const news=(r.news||[]);
+  const newsHtml=news.length?`<div class="sd-sec">News</div>`+news.map(n=>{
+    const hd=n.url?`<a href="${esc(n.url)}" target="_blank" rel="noopener">${esc(n.headline)}</a>`:esc(n.headline);
+    return `<div style="padding:7px 0;border-top:1px solid var(--grid);font-size:13px">
+      <div><span style="color:var(--muted);font-size:11.5px">${enDate(n.date)}</span> ${hd}</div>
+      ${n.summary?`<div style="color:var(--muted);font-size:12px;margin-top:2px">${esc(n.summary)}</div>`:''}
+      <div style="color:var(--muted);font-size:11px;margin-top:2px">${esc(n.source)}</div></div>`;
+  }).join(''):'';
+  const lk=(h&&h.links)||{};
+  const links=[['Stocktwits',lk.stocktwits],['X / Twitter',lk.x],['Investor Relations',lk.ir],['Finviz',lk.finviz]]
+    .filter(x=>x[1]).map(x=>`<a class="lk" href="${esc(x[1])}" target="_blank" rel="noopener">${x[0]} &#8599;</a>`).join('');
+  document.getElementById('secmodal').innerHTML=`
+    <div class="sechd">
+      ${logoImg(logos,'sd-logo',tk)}
+      <div style="min-width:0"><div class="sd-tk">${esc(tk)}</div><div class="sd-nm">${esc(name)}</div></div>
+      <div class="sd-px"><div class="p">${fmtP(price)}</div>${day!=null?`<div class="tnum ${dcls}" style="font-size:12.5px">${fmtPct(day)} today</div>`:''}</div>
+      <button class="sd-x" id="sd-close" title="close">✕</button>
+    </div>
+    <div class="sd-ranges">${SEC_RANGES.map(r=>`<button data-range="${r[0]}" class="${r[0]===_secRange?'on':''}">${r[2]}</button>`).join('')}</div>
+    <div class="sd-chart"><div id="sd-chartwrap" style="position:relative">
+      <div id="sd-tip" style="position:absolute;top:2px;left:0;font-size:12px;color:var(--muted);opacity:0;pointer-events:none"></div>
+      <svg id="sd-chart-svg" style="width:100%;height:200px;display:block"></svg></div></div>
+    <div class="sd-body">
+      ${h&&h.thesis?`<div style="font-size:13.5px;color:var(--ink);margin:4px 0 2px">${esc(h.thesis)}</div>`:''}
+      ${h&&r.pulse?`<div style="font-size:12.5px;color:var(--muted);margin-bottom:4px">${esc(r.pulse)}</div>`:''}
+      ${stats}${catHtml}${newsHtml}
+      ${links?`<div class="links" style="margin-top:14px">${links}</div>`:''}
+    </div>`;
+  document.getElementById('secov').classList.add('on');
+  document.body.style.overflow='hidden';
+  document.getElementById('sd-close').onclick=closeSecDetail;
+  document.querySelectorAll('#secmodal [data-range]').forEach(b=>b.addEventListener('click',()=>{
+    _secRange=b.dataset.range;
+    document.querySelectorAll('#secmodal [data-range]').forEach(x=>x.classList.toggle('on',x===b));
+    loadSecChart();
+  }));
+  loadSecChart();
+}
+function closeSecDetail(){
+  _secTk=null;
+  document.getElementById('secov').classList.remove('on');
+  document.body.style.overflow='';
+}
+/* backdrop click + ESC close (wired once) */
+(function(){
+  const ov=document.getElementById('secov');
+  if(ov) ov.addEventListener('click',e=>{ if(e.target===ov) closeSecDetail(); });
+  document.addEventListener('keydown',e=>{ if(e.key==='Escape'&&_secTk) closeSecDetail(); });
+})();
 /* ===================== PAYMENTS TAB (PP "Zahlungen") ===================== */
 const PAY_KINDS={dividend:{lab:'Dividends',flow:1},interest:{lab:'Interest',flow:1},
   fee:{lab:'Fees',flow:-1},tax:{lab:'Taxes',flow:-1},
@@ -2374,7 +2554,7 @@ function renderWatchlist(){
           <div style="display:flex;justify-content:space-between;font-size:10.5px;color:var(--muted);margin-top:6px"><span>${fmtP(r.lo)}</span><span>${fmtP(r.hi)}</span></div>
         </div></div>`:'—';
       return `<tr>
-        <td><div class="hname">${logoImg(wlLogos(r.sym),'llogo',r.sym)}<div style="min-width:0"><div class="c1">${esc(r.sym)}</div>${r.name?`<div class="nm2">${esc(r.name)}</div>`:''}</div></div></td>
+        <td><div class="hname sd-clk" data-sd="${esc(r.sym)}">${logoImg(wlLogos(r.sym),'llogo',r.sym)}<div style="min-width:0"><div class="c1">${esc(r.sym)}</div>${r.name?`<div class="nm2">${esc(r.name)}</div>`:''}</div></div></td>
         <td><div class="c1">${fmtP(r.price)}</div>${r.asof?`<div class="c2">close ${esc(r.asof.slice(5))}</div>`:''}</td>
         <td><div class="c1 ${r.day==null?'':(up?'up':'down')}">${r.day==null?'—':fmtPct(r.day)}</div>${r.chg!=null?`<div class="c2 ${up?'up':'down'}">${(r.chg>=0?'+':'−')+'$'+Math.abs(r.chg).toFixed(2)}</div>`:''}</td>
         <td><div class="c1">${fmtBig(r.vol)}</div></td>
@@ -2385,6 +2565,7 @@ function renderWatchlist(){
         ${own?`<td><button data-wldel="${esc(r.sym)}" style="border:0;background:none;color:var(--muted);cursor:pointer;font-size:15px">×</button></td>`:''}
       </tr>`;
     }).join('')+'</tbody>';
+  el.querySelectorAll('[data-sd]').forEach(c=>c.addEventListener('click',()=>openSecDetail(c.dataset.sd)));
   el.querySelectorAll('[data-wldel]').forEach(b=>b.addEventListener('click',async()=>{
     const sym=b.dataset.wldel;
     if(await saveWatchList(wlSyms().filter(s=>s!==sym))){
