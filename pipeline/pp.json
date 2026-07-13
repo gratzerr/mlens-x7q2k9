@@ -1,6 +1,6 @@
 {
- "fileDate": "2026-07-13 13:37",
- "generated": "2026-07-13 13:58",
+ "fileDate": "2026-07-13 14:22",
+ "generated": "2026-07-13 14:44",
  "engine": "pp-exact (verified vs PP app 2026-07-11)",
  "totalSecuritiesEur": 2184440,
  "cashEur": -90923.38,
@@ -31,10 +31,10 @@
   }
  ],
  "totalEur": 2093516,
- "ttwrorSince2022": 434.7,
- "ttwrorYtd": 112.3,
- "ttwrorAnnualized": 44.8,
- "izf": 75.8,
+ "ttwrorSince2022": 434.65,
+ "ttwrorYtd": 112.29,
+ "ttwrorAnnualized": 44.77,
+ "izf": 75.84,
  "yearlyReturns": {
   "2022": 3.3,
   "2023": 11.8,
@@ -26552,7 +26552,7 @@
    "basisUsd": 46380,
    "gainUsd": 26120,
    "gainEur": 22613,
-   "ret": 56.3,
+   "ret": 56.32,
    "ticker": "ABVX",
    "name": "ABIVAX SA-ADR",
    "isin": "US00370M1036"
@@ -26567,7 +26567,7 @@
    "basisUsd": 156775,
    "gainUsd": 156900,
    "gainEur": 139012,
-   "ret": 100.1,
+   "ret": 100.08,
    "ticker": "ABVX.PA",
    "name": "ABIVAX SA",
    "isin": "FR0012333284"
@@ -26582,7 +26582,7 @@
    "basisUsd": 53530,
    "gainUsd": 75981,
    "gainEur": 67832,
-   "ret": 141.9,
+   "ret": 141.94,
    "ticker": "ETON",
    "name": "ETON PHARMACEUTICALS INC",
    "isin": "US29772L1089"
@@ -26597,7 +26597,7 @@
    "basisUsd": 53128,
    "gainUsd": 76372,
    "gainEur": 68418,
-   "ret": 143.7,
+   "ret": 143.75,
    "ticker": "ETON",
    "name": "ETON PHARMACEUTICALS INC",
    "isin": "US29772L1089"
@@ -26612,7 +26612,7 @@
    "basisUsd": 194282,
    "gainUsd": 16138,
    "gainEur": 15483,
-   "ret": 8.3,
+   "ret": 8.31,
    "ticker": "AXTI",
    "name": "AXT INC",
    "isin": "US00246W1036"
@@ -26627,7 +26627,7 @@
    "basisUsd": 64967,
    "gainUsd": 33,
    "gainEur": 509,
-   "ret": 0.1,
+   "ret": 0.05,
    "ticker": "SNWV",
    "name": "SANUWAVE Health, Inc.",
    "isin": "US80303D3052"
@@ -26642,7 +26642,7 @@
    "basisUsd": 65004,
    "gainUsd": 596,
    "gainEur": 992,
-   "ret": 0.9,
+   "ret": 0.92,
    "ticker": "SNWV",
    "name": "SANUWAVE Health, Inc.",
    "isin": "US80303D3052"
@@ -26657,7 +26657,7 @@
    "basisUsd": 66236,
    "gainUsd": -17626,
    "gainEur": -14544,
-   "ret": -26.6,
+   "ret": -26.61,
    "ticker": "BFRI",
    "name": "Biofrontera Inc.",
    "isin": "US09077D2099"
@@ -26672,7 +26672,7 @@
    "basisUsd": 290,
    "gainUsd": -50,
    "gainEur": -41,
-   "ret": -17.3,
+   "ret": -17.27,
    "ticker": "BFRI",
    "name": "Biofrontera Inc.",
    "isin": "US09077D2099"
@@ -26687,7 +26687,7 @@
    "basisUsd": 48320,
    "gainUsd": -8130,
    "gainEur": -6597,
-   "ret": -16.8,
+   "ret": -16.82,
    "ticker": "BFRI",
    "name": "Biofrontera Inc.",
    "isin": "US09077D2099"
@@ -26702,7 +26702,7 @@
    "basisUsd": 207073,
    "gainUsd": -40633,
    "gainEur": -36332,
-   "ret": -19.6,
+   "ret": -19.62,
    "ticker": "HROW",
    "name": "HARROW INC",
    "isin": "US4158581094"
@@ -26717,7 +26717,7 @@
    "basisUsd": 101100,
    "gainUsd": 19200,
    "gainEur": 14452,
-   "ret": 19.0,
+   "ret": 18.99,
    "ticker": "ATAI",
    "name": "ATAIBECKLEY INC",
    "isin": "US04650F1012"
@@ -26732,7 +26732,7 @@
    "basisUsd": 190403,
    "gainUsd": -38894,
    "gainEur": -32763,
-   "ret": -20.4,
+   "ret": -20.43,
    "ticker": "HROW",
    "name": "HARROW INC",
    "isin": "US4158581094"
@@ -26747,7 +26747,7 @@
    "basisUsd": 208614,
    "gainUsd": -54345,
    "gainEur": -46214,
-   "ret": -26.1,
+   "ret": -26.05,
    "ticker": "NKTR",
    "name": "NEKTAR THERAPEUTICS",
    "isin": "US6402683063"
@@ -26762,7 +26762,7 @@
    "basisUsd": 279021,
    "gainUsd": -15823,
    "gainEur": -14709,
-   "ret": -5.7,
+   "ret": -5.67,
    "ticker": "DUOL",
    "name": "DUOLINGO",
    "isin": "US26603R1068"
@@ -26777,7 +26777,7 @@
    "basisUsd": 119274,
    "gainUsd": 205374,
    "gainEur": 174185,
-   "ret": 172.2,
+   "ret": 172.19,
    "ticker": "NBIS",
    "name": "NEBIUS GROUP NV",
    "isin": "NL0009805522"
@@ -26792,7 +26792,7 @@
    "basisUsd": 43252,
    "gainUsd": 22498,
    "gainEur": 19275,
-   "ret": 52.0,
+   "ret": 52.02,
    "ticker": "POET",
    "name": "POET Technologies Inc.",
    "isin": "CA73044W3021"
@@ -26822,7 +26822,7 @@
    "basisUsd": 80897,
    "gainUsd": 1678,
    "gainEur": 1424,
-   "ret": 2.1,
+   "ret": 2.07,
    "ticker": "HIMS",
    "name": "Hims & Hers Health, Inc.",
    "isin": "US4330001060"
@@ -26837,7 +26837,7 @@
    "basisUsd": 265914,
    "gainUsd": 739,
    "gainEur": 626,
-   "ret": 0.3,
+   "ret": 0.28,
    "ticker": "AAOI",
    "name": "APPLIED OPTOELECTRONICS INC",
    "isin": "US03823U1025"
@@ -26852,7 +26852,7 @@
    "basisUsd": 109026,
    "gainUsd": 43,
    "gainEur": -1588,
-   "ret": 0.0,
+   "ret": 0.04,
    "ticker": "PSNL",
    "name": "PERSONALIS INC",
    "isin": "US71535D1063"
@@ -26867,7 +26867,7 @@
    "basisUsd": 110465,
    "gainUsd": -9218,
    "gainEur": -6244,
-   "ret": -8.3,
+   "ret": -8.34,
    "ticker": "ATAI",
    "name": "ATAIBECKLEY INC",
    "isin": "US04650F1012"
@@ -26912,7 +26912,7 @@
    "basisUsd": 82967,
    "gainUsd": 11379,
    "gainEur": 11119,
-   "ret": 13.7,
+   "ret": 13.71,
    "ticker": "OMDA",
    "name": "OMADA HEALTH INC",
    "isin": "US68170A1088"
@@ -26927,7 +26927,7 @@
    "basisUsd": 98838,
    "gainUsd": 11487,
    "gainEur": 11837,
-   "ret": 11.6,
+   "ret": 11.62,
    "ticker": "QURE",
    "name": "UNIQURE NV",
    "isin": "NL0010696654"
@@ -26942,7 +26942,7 @@
    "basisUsd": 37739,
    "gainUsd": 99827,
    "gainEur": 85181,
-   "ret": 264.5,
+   "ret": 264.52,
    "ticker": "AMPX",
    "name": "AMPRIUS TECHNOLOGIES INC",
    "isin": "US03214Q1085"
@@ -26957,7 +26957,7 @@
    "basisUsd": 144342,
    "gainUsd": -47081,
    "gainEur": -37695,
-   "ret": -32.6,
+   "ret": -32.62,
    "ticker": "CLPT",
    "name": "CLEARPOINT NEURO INC",
    "isin": "US18507C1036"
@@ -26972,7 +26972,7 @@
    "basisUsd": 17933,
    "gainUsd": 3732,
    "gainEur": 2916,
-   "ret": 20.8,
+   "ret": 20.81,
    "ticker": "ARDX",
    "name": "ARDELYX INC",
    "isin": "US0396971071"
@@ -26987,7 +26987,7 @@
    "basisUsd": 136074,
    "gainUsd": -16091,
    "gainEur": -14943,
-   "ret": -11.8,
+   "ret": -11.83,
    "ticker": "WIX",
    "name": "WIX.COM LTD",
    "isin": "IL0011301780"
@@ -27002,7 +27002,7 @@
    "basisUsd": 69626,
    "gainUsd": 10618,
    "gainEur": 8028,
-   "ret": 15.2,
+   "ret": 15.25,
    "ticker": "ARDX",
    "name": "ARDELYX INC",
    "isin": "US0396971071"
@@ -27017,7 +27017,7 @@
    "basisUsd": 99858,
    "gainUsd": 10142,
    "gainEur": 8628,
-   "ret": 10.2,
+   "ret": 10.16,
    "ticker": "CRCL",
    "name": "CIRCLE INTERNET GROUP INC",
    "isin": "US1725731079"
@@ -27032,7 +27032,7 @@
    "basisUsd": 9983,
    "gainUsd": -9075,
    "gainEur": -7727,
-   "ret": -90.9,
+   "ret": -90.91,
    "ticker": "CALC",
    "name": "CALCIMEDICA INC",
    "isin": "US38942Q2021"
@@ -27047,7 +27047,7 @@
    "basisUsd": 10759,
    "gainUsd": -1224,
    "gainEur": -1202,
-   "ret": -11.4,
+   "ret": -11.38,
    "ticker": "CLPT",
    "name": "CLEARPOINT NEURO INC",
    "isin": "US18507C1036"
@@ -27062,7 +27062,7 @@
    "basisUsd": 76116,
    "gainUsd": -8799,
    "gainEur": -8632,
-   "ret": -11.6,
+   "ret": -11.56,
    "ticker": "CLPT",
    "name": "CLEARPOINT NEURO INC",
    "isin": "US18507C1036"
@@ -27077,7 +27077,7 @@
    "basisUsd": 19879,
    "gainUsd": -2879,
    "gainEur": -2825,
-   "ret": -14.5,
+   "ret": -14.48,
    "ticker": "PALI",
    "name": "PALISADE BIO INC",
    "isin": "US6963894026"
@@ -27092,7 +27092,7 @@
    "basisUsd": 11724,
    "gainUsd": 250849,
    "gainEur": 208414,
-   "ret": 2139.6,
+   "ret": 2139.62,
    "ticker": "RKLB",
    "name": "ROCKET LAB USA INC",
    "isin": "US7731221062"
@@ -27107,7 +27107,7 @@
    "basisUsd": 17850,
    "gainUsd": -2336,
    "gainEur": -1930,
-   "ret": -13.1,
+   "ret": -13.08,
    "ticker": "DUOL",
    "name": "DUOLINGO",
    "isin": "US26603R1068"
@@ -27122,7 +27122,7 @@
    "basisUsd": 71137,
    "gainUsd": -8336,
    "gainEur": -6854,
-   "ret": -11.7,
+   "ret": -11.72,
    "ticker": "DUOL",
    "name": "DUOLINGO",
    "isin": "US26603R1068"
@@ -27152,7 +27152,7 @@
    "basisUsd": 76123,
    "gainUsd": -2980,
    "gainEur": -2398,
-   "ret": -3.9,
+   "ret": -3.91,
    "ticker": "ETON",
    "name": "ETON PHARMACEUTICALS INC",
    "isin": "US29772L1089"
@@ -27167,7 +27167,7 @@
    "basisUsd": 12144,
    "gainUsd": -817,
    "gainEur": -646,
-   "ret": -6.7,
+   "ret": -6.72,
    "ticker": "ETON",
    "name": "ETON PHARMACEUTICALS INC",
    "isin": "US29772L1089"
@@ -27182,7 +27182,7 @@
    "basisUsd": 85047,
    "gainUsd": -3287,
    "gainEur": -2889,
-   "ret": -3.9,
+   "ret": -3.86,
    "ticker": "CLPT",
    "name": "CLEARPOINT NEURO INC",
    "isin": "US18507C1036"
@@ -27197,7 +27197,7 @@
    "basisUsd": 56743,
    "gainUsd": 84882,
    "gainEur": 70671,
-   "ret": 149.6,
+   "ret": 149.59,
    "ticker": "RDDT",
    "name": "Reddit, Inc.",
    "isin": "US75734B1008"
@@ -27212,7 +27212,7 @@
    "basisUsd": 85500,
    "gainUsd": -712,
    "gainEur": -100,
-   "ret": -0.8,
+   "ret": -0.83,
    "ticker": "DUOL",
    "name": "DUOLINGO",
    "isin": "US26603R1068"
@@ -27227,7 +27227,7 @@
    "basisUsd": 7390,
    "gainUsd": -140,
    "gainEur": -246,
-   "ret": -1.9,
+   "ret": -1.89,
    "ticker": "DUOL",
    "name": "DUOLINGO",
    "isin": "US26603R1068"
@@ -27242,7 +27242,7 @@
    "basisUsd": 16600,
    "gainUsd": 17481,
    "gainEur": 13928,
-   "ret": 105.3,
+   "ret": 105.31,
    "ticker": "HIMS",
    "name": "Hims & Hers Health, Inc.",
    "isin": "US4330001060"
@@ -27257,7 +27257,7 @@
    "basisUsd": 32395,
    "gainUsd": -1789,
    "gainEur": -2108,
-   "ret": -5.5,
+   "ret": -5.52,
    "ticker": "NBIS270115C00080000",
    "name": "NBIS 15JAN27 80 C",
    "isin": ""
@@ -27272,7 +27272,7 @@
    "basisUsd": 75439,
    "gainUsd": -2134,
    "gainEur": -3016,
-   "ret": -2.8,
+   "ret": -2.83,
    "ticker": "DUOL",
    "name": "DUOLINGO",
    "isin": "US26603R1068"
@@ -27287,7 +27287,7 @@
    "basisUsd": 50407,
    "gainUsd": 17713,
    "gainEur": 11760,
-   "ret": 35.1,
+   "ret": 35.14,
    "ticker": "HIMS",
    "name": "Hims & Hers Health, Inc.",
    "isin": "US4330001060"
@@ -27317,7 +27317,7 @@
    "basisUsd": 59196,
    "gainUsd": -4850,
    "gainEur": -4622,
-   "ret": -8.2,
+   "ret": -8.19,
    "ticker": "PRCT",
    "name": "PROCEPT BIOROBOTICS CORP",
    "isin": "US74276L1052"
@@ -27332,7 +27332,7 @@
    "basisUsd": 78400,
    "gainUsd": 26283,
    "gainEur": 22565,
-   "ret": 33.5,
+   "ret": 33.52,
    "ticker": "UNH",
    "name": "UnitedHealth Group Inc. Registered Shares DL -,01",
    "isin": "US91324P1021"
@@ -27347,7 +27347,7 @@
    "basisUsd": 11516,
    "gainUsd": 34550,
    "gainEur": 29426,
-   "ret": 300.0,
+   "ret": 300.01,
    "ticker": "NBIS",
    "name": "NEBIUS GROUP NV",
    "isin": "NL0009805522"
@@ -27362,7 +27362,7 @@
    "basisUsd": 63440,
    "gainUsd": -6072,
    "gainEur": -4801,
-   "ret": -9.6,
+   "ret": -9.57,
    "ticker": "HROW",
    "name": "HARROW INC",
    "isin": "US4158581094"
@@ -27377,7 +27377,7 @@
    "basisUsd": 59625,
    "gainUsd": -1125,
    "gainEur": -1164,
-   "ret": -1.9,
+   "ret": -1.89,
    "ticker": "ROOT",
    "name": "Root, Inc.",
    "isin": "US77664L2079"
@@ -27392,7 +27392,7 @@
    "basisUsd": 127019,
    "gainUsd": -35019,
    "gainEur": -29882,
-   "ret": -27.6,
+   "ret": -27.57,
    "ticker": "DUOL",
    "name": "DUOLINGO",
    "isin": "US26603R1068"
@@ -27407,7 +27407,7 @@
    "basisUsd": 60116,
    "gainUsd": -3234,
    "gainEur": -1946,
-   "ret": -5.4,
+   "ret": -5.38,
    "ticker": "PRCT",
    "name": "PROCEPT BIOROBOTICS CORP",
    "isin": "US74276L1052"
@@ -27422,7 +27422,7 @@
    "basisUsd": 39272,
    "gainUsd": 9728,
    "gainEur": 9094,
-   "ret": 24.8,
+   "ret": 24.77,
    "ticker": "POET",
    "name": "POET Technologies Inc.",
    "isin": "CA73044W3021"
@@ -27437,7 +27437,7 @@
    "basisUsd": 57681,
    "gainUsd": 7081,
    "gainEur": 5874,
-   "ret": 12.3,
+   "ret": 12.28,
    "ticker": "IOT",
    "name": "SAMSARA INC-CL A",
    "isin": "US79589L1061"
@@ -27452,7 +27452,7 @@
    "basisUsd": 47162,
    "gainUsd": -2117,
    "gainEur": -1795,
-   "ret": -4.5,
+   "ret": -4.49,
    "ticker": "PRCT",
    "name": "PROCEPT BIOROBOTICS CORP",
    "isin": "US74276L1052"
@@ -27467,7 +27467,7 @@
    "basisUsd": 24400,
    "gainUsd": 31225,
    "gainEur": 25100,
-   "ret": 128.0,
+   "ret": 127.97,
    "ticker": "NET",
    "name": "CLOUDFLARE INC - CLASS A",
    "isin": "US18915M1071"
@@ -27482,7 +27482,7 @@
    "basisUsd": 38025,
    "gainUsd": 11475,
    "gainEur": 9323,
-   "ret": 30.2,
+   "ret": 30.18,
    "ticker": "BMNR",
    "name": "BitMine Immersion Technologies,",
    "isin": "US09175A2069"
@@ -27497,7 +27497,7 @@
    "basisUsd": 37916,
    "gainUsd": 7164,
    "gainEur": 5415,
-   "ret": 18.9,
+   "ret": 18.89,
    "ticker": "IOT",
    "name": "SAMSARA INC-CL A",
    "isin": "US79589L1061"
@@ -27512,7 +27512,7 @@
    "basisUsd": 32230,
    "gainUsd": -2730,
    "gainEur": -2466,
-   "ret": -8.5,
+   "ret": -8.47,
    "ticker": "DUOL",
    "name": "DUOLINGO",
    "isin": "US26603R1068"
@@ -27542,7 +27542,7 @@
    "basisUsd": 32555,
    "gainUsd": -10357,
    "gainEur": -12285,
-   "ret": -31.8,
+   "ret": -31.81,
    "ticker": "MNDY",
    "name": "monday.com Ltd.",
    "isin": "IL0011762130"
@@ -27557,7 +27557,7 @@
    "basisUsd": 20120,
    "gainUsd": -7776,
    "gainEur": -7037,
-   "ret": -38.6,
+   "ret": -38.65,
    "ticker": "NTI.OL",
    "name": "NORSK TITANIUM AS",
    "isin": "NO0010969108"
@@ -27572,7 +27572,7 @@
    "basisUsd": 40800,
    "gainUsd": -1500,
    "gainEur": -1298,
-   "ret": -3.7,
+   "ret": -3.68,
    "ticker": "DUOL",
    "name": "DUOLINGO",
    "isin": "US26603R1068"
@@ -27587,7 +27587,7 @@
    "basisUsd": 116287,
    "gainUsd": -45298,
    "gainEur": -38242,
-   "ret": -39.0,
+   "ret": -38.95,
    "ticker": "EOLS",
    "name": "EVOLUS INC",
    "isin": "US30052C1071"
@@ -27632,7 +27632,7 @@
    "basisUsd": 215812,
    "gainUsd": -105811,
    "gainEur": -92251,
-   "ret": -49.0,
+   "ret": -49.03,
    "ticker": "SRPT",
    "name": "Sarepta Therapeutics, Inc.",
    "isin": null
@@ -27647,7 +27647,7 @@
    "basisUsd": 50910,
    "gainUsd": 24578,
    "gainEur": 15673,
-   "ret": 48.3,
+   "ret": 48.28,
    "ticker": "UBER",
    "name": "UBER TECHNOLOGIES INC",
    "isin": "US90353T1007"
@@ -27662,7 +27662,7 @@
    "basisUsd": 44110,
    "gainUsd": 16665,
    "gainEur": 13247,
-   "ret": 37.8,
+   "ret": 37.78,
    "ticker": "META",
    "name": "Meta Platforms, Inc.",
    "isin": "US30303M1027"
@@ -27677,7 +27677,7 @@
    "basisUsd": 16450,
    "gainUsd": 100,
    "gainEur": 89,
-   "ret": 0.6,
+   "ret": 0.61,
    "ticker": "CLBT",
    "name": "CELLEBRITE DI LTD",
    "isin": "IL0011794802"
@@ -27692,7 +27692,7 @@
    "basisUsd": 42692,
    "gainUsd": 8183,
    "gainEur": 6368,
-   "ret": 19.2,
+   "ret": 19.17,
    "ticker": "AMZN",
    "name": "AMAZON.COM INC",
    "isin": "US0231351067"
@@ -27707,7 +27707,7 @@
    "basisUsd": 5188,
    "gainUsd": 4312,
    "gainEur": 3892,
-   "ret": 83.1,
+   "ret": 83.13,
    "ticker": "NBIS",
    "name": "NEBIUS GROUP NV",
    "isin": "NL0009805522"
@@ -27737,7 +27737,7 @@
    "basisUsd": 4150,
    "gainUsd": 2150,
    "gainEur": 2025,
-   "ret": 51.8,
+   "ret": 51.81,
    "ticker": "NBIS",
    "name": "NEBIUS GROUP NV",
    "isin": "NL0009805522"
@@ -27752,7 +27752,7 @@
    "basisUsd": 6225,
    "gainUsd": 3525,
    "gainEur": 3307,
-   "ret": 56.6,
+   "ret": 56.63,
    "ticker": "NBIS",
    "name": "NEBIUS GROUP NV",
    "isin": "NL0009805522"
@@ -27767,7 +27767,7 @@
    "basisUsd": 3585,
    "gainUsd": 2264,
    "gainEur": 1676,
-   "ret": 63.1,
+   "ret": 63.15,
    "ticker": "ABEA.F",
    "name": "Alphabet Inc. Reg. Shs Cl. A",
    "isin": "US02079K3059"
@@ -27782,7 +27782,7 @@
    "basisUsd": 32042,
    "gainUsd": -3242,
    "gainEur": -4332,
-   "ret": -10.1,
+   "ret": -10.12,
    "ticker": "GOOGL",
    "name": "Alphabet Inc. Reg. Shs Cl. A",
    "isin": "US02079K3059"
@@ -27797,7 +27797,7 @@
    "basisUsd": 174,
    "gainUsd": -24,
    "gainEur": -34,
-   "ret": -13.9,
+   "ret": -13.91,
    "ticker": "GOOGL",
    "name": "Alphabet Inc. Reg. Shs Cl. A",
    "isin": "US02079K3059"
@@ -27812,7 +27812,7 @@
    "basisUsd": 11320,
    "gainUsd": -970,
    "gainEur": -1500,
-   "ret": -8.6,
+   "ret": -8.57,
    "ticker": "GOOGL",
    "name": "Alphabet Inc. Reg. Shs Cl. A",
    "isin": "US02079K3059"
@@ -27827,7 +27827,7 @@
    "basisUsd": 796,
    "gainUsd": 23,
    "gainEur": -4,
-   "ret": 2.9,
+   "ret": 2.86,
    "ticker": "GOOGL",
    "name": "Alphabet Inc. Reg. Shs Cl. A",
    "isin": "US02079K3059"
@@ -27842,7 +27842,7 @@
    "basisUsd": 815,
    "gainUsd": 5,
    "gainEur": -14,
-   "ret": 0.6,
+   "ret": 0.62,
    "ticker": "GOOGL",
    "name": "Alphabet Inc. Reg. Shs Cl. A",
    "isin": "US02079K3059"
@@ -27857,7 +27857,7 @@
    "basisUsd": 28211,
    "gainUsd": 10619,
    "gainEur": 8610,
-   "ret": 37.6,
+   "ret": 37.64,
    "ticker": "RBRK",
    "name": "RUBRIK INC-A",
    "isin": "US7811541090"
@@ -27887,7 +27887,7 @@
    "basisUsd": 10840,
    "gainUsd": -634,
    "gainEur": -958,
-   "ret": -5.8,
+   "ret": -5.85,
    "ticker": "TTD",
    "name": "THE TRADE DESK INC",
    "isin": "US88339J1051"
@@ -27902,7 +27902,7 @@
    "basisUsd": 38979,
    "gainUsd": -3836,
    "gainEur": -5372,
-   "ret": -9.8,
+   "ret": -9.84,
    "ticker": "META",
    "name": "Meta Platforms, Inc.",
    "isin": "US30303M1027"
@@ -27917,7 +27917,7 @@
    "basisUsd": 2479,
    "gainUsd": -154,
    "gainEur": -231,
-   "ret": -6.2,
+   "ret": -6.19,
    "ticker": "GOOGL",
    "name": "Alphabet Inc. Reg. Shs Cl. A",
    "isin": "US02079K3059"
@@ -27932,7 +27932,7 @@
    "basisUsd": 12195,
    "gainUsd": -832,
    "gainEur": -1198,
-   "ret": -6.8,
+   "ret": -6.83,
    "ticker": "TTD",
    "name": "THE TRADE DESK INC",
    "isin": "US88339J1051"
@@ -27947,7 +27947,7 @@
    "basisUsd": 6775,
    "gainUsd": -650,
    "gainEur": -830,
-   "ret": -9.6,
+   "ret": -9.59,
    "ticker": "TTD",
    "name": "THE TRADE DESK INC",
    "isin": "US88339J1051"
@@ -27962,7 +27962,7 @@
    "basisUsd": 19620,
    "gainUsd": -7620,
    "gainEur": -8172,
-   "ret": -38.8,
+   "ret": -38.84,
    "ticker": "RDDT",
    "name": "Reddit, Inc.",
    "isin": "US75734B1008"
@@ -27977,7 +27977,7 @@
    "basisUsd": 18870,
    "gainUsd": -6714,
    "gainEur": -7181,
-   "ret": -35.6,
+   "ret": -35.58,
    "ticker": "RDDT",
    "name": "Reddit, Inc.",
    "isin": "US75734B1008"
@@ -28007,7 +28007,7 @@
    "basisUsd": 15000,
    "gainUsd": -4898,
    "gainEur": -4625,
-   "ret": -32.7,
+   "ret": -32.65,
    "ticker": "ELF",
    "name": "ELF BEAUTY INC",
    "isin": "US26856L1035"
@@ -28022,7 +28022,7 @@
    "basisUsd": 15477,
    "gainUsd": -327,
    "gainEur": -483,
-   "ret": -2.1,
+   "ret": -2.11,
    "ticker": "MA",
    "name": "MASTERCARD INC - A",
    "isin": "US57636Q1040"
@@ -28037,7 +28037,7 @@
    "basisUsd": 13979,
    "gainUsd": 571,
    "gainEur": 589,
-   "ret": 4.1,
+   "ret": 4.09,
    "ticker": "MA",
    "name": "MASTERCARD INC - A",
    "isin": "US57636Q1040"
@@ -28052,7 +28052,7 @@
    "basisUsd": 18037,
    "gainUsd": -733,
    "gainEur": -711,
-   "ret": -4.1,
+   "ret": -4.06,
    "ticker": "AMZN",
    "name": "AMAZON.COM INC",
    "isin": "US0231351067"
@@ -28067,7 +28067,7 @@
    "basisUsd": 25121,
    "gainUsd": -3495,
    "gainEur": -3946,
-   "ret": -13.9,
+   "ret": -13.91,
    "ticker": "AMZN",
    "name": "AMAZON.COM INC",
    "isin": "US0231351067"
@@ -28082,7 +28082,7 @@
    "basisUsd": 27164,
    "gainUsd": -3740,
    "gainEur": -3964,
-   "ret": -13.8,
+   "ret": -13.77,
    "ticker": "NET",
    "name": "CLOUDFLARE INC - CLASS A",
    "isin": "US18915M1071"
@@ -28112,7 +28112,7 @@
    "basisUsd": 26381,
    "gainUsd": -814,
    "gainEur": -2074,
-   "ret": -3.1,
+   "ret": -3.09,
    "ticker": "NET",
    "name": "CLOUDFLARE INC - CLASS A",
    "isin": "US18915M1071"
@@ -28127,7 +28127,7 @@
    "basisUsd": 9141,
    "gainUsd": 1963,
    "gainEur": 2017,
-   "ret": 21.5,
+   "ret": 21.48,
    "ticker": "V",
    "name": "VISA Inc. Reg. Shares Class A",
    "isin": "US92826C8394"
@@ -28142,7 +28142,7 @@
    "basisUsd": 8518,
    "gainUsd": 2720,
    "gainEur": 2425,
-   "ret": 31.9,
+   "ret": 31.94,
    "ticker": "V",
    "name": "VISA Inc. Reg. Shares Class A",
    "isin": "US92826C8394"
@@ -28157,7 +28157,7 @@
    "basisUsd": 2774,
    "gainUsd": 1962,
    "gainEur": 1651,
-   "ret": 70.7,
+   "ret": 70.73,
    "ticker": "3V64.F",
    "name": "VISA Inc. Reg. Shares Class A",
    "isin": "US92826C8394"
@@ -28172,7 +28172,7 @@
    "basisUsd": 26267,
    "gainUsd": 3974,
    "gainEur": 4070,
-   "ret": 15.1,
+   "ret": 15.13,
    "ticker": "EOLS",
    "name": "EVOLUS INC",
    "isin": "US30052C1071"
@@ -28187,7 +28187,7 @@
    "basisUsd": 33505,
    "gainUsd": 1739,
    "gainEur": 1744,
-   "ret": 5.2,
+   "ret": 5.19,
    "ticker": "GMAB.CO",
    "name": "GENMAB AS",
    "isin": "DK0010272202"
@@ -28202,7 +28202,7 @@
    "basisUsd": 27285,
    "gainUsd": -897,
    "gainEur": -298,
-   "ret": -3.3,
+   "ret": -3.29,
    "ticker": "CFLT",
    "name": "Confluent, Inc.",
    "isin": "US20717M1036"
@@ -28217,7 +28217,7 @@
    "basisUsd": 24154,
    "gainUsd": -622,
    "gainEur": -661,
-   "ret": -2.6,
+   "ret": -2.58,
    "ticker": "ZS",
    "name": "ZSCALER INC",
    "isin": "US98980G1022"
@@ -28232,7 +28232,7 @@
    "basisUsd": 12181,
    "gainUsd": -364,
    "gainEur": -399,
-   "ret": -3.0,
+   "ret": -2.99,
    "ticker": "ZS",
    "name": "ZSCALER INC",
    "isin": "US98980G1022"
@@ -28247,7 +28247,7 @@
    "basisUsd": 13843,
    "gainUsd": -2815,
    "gainEur": -2247,
-   "ret": -20.3,
+   "ret": -20.34,
    "ticker": "NU",
    "name": "NU HOLDINGS ",
    "isin": "KYG6683N1034"
@@ -28277,7 +28277,7 @@
    "basisUsd": 912,
    "gainUsd": 986,
    "gainEur": 963,
-   "ret": 108.1,
+   "ret": 108.06,
    "ticker": "IBKR",
    "name": "Interactive Brokers Group",
    "isin": "US45841N1072"
@@ -28292,7 +28292,7 @@
    "basisUsd": 45535,
    "gainUsd": -6879,
    "gainEur": -5453,
-   "ret": -15.1,
+   "ret": -15.11,
    "ticker": "UBER",
    "name": "UBER TECHNOLOGIES INC",
    "isin": "US90353T1007"
@@ -28307,7 +28307,7 @@
    "basisUsd": 4898,
    "gainUsd": 3954,
    "gainEur": 3658,
-   "ret": 80.7,
+   "ret": 80.71,
    "ticker": "MSF.F",
    "name": "Microsoft Corp. Registered Shares DL-,00000625",
    "isin": "US5949181045"
@@ -28322,7 +28322,7 @@
    "basisUsd": 25192,
    "gainUsd": 312,
    "gainEur": 1396,
-   "ret": 1.2,
+   "ret": 1.24,
    "ticker": "MEDP",
    "name": "MEDPACE HOLDINGS INC",
    "isin": "US58506Q1094"
@@ -28337,7 +28337,7 @@
    "basisUsd": 8925,
    "gainUsd": 6135,
    "gainEur": 6165,
-   "ret": 68.7,
+   "ret": 68.73,
    "ticker": "VRT",
    "name": "Vertiv Holdings, LLC",
    "isin": "US92537N1081"
@@ -28352,7 +28352,7 @@
    "basisUsd": 23100,
    "gainUsd": -5040,
    "gainEur": -4036,
-   "ret": -21.8,
+   "ret": -21.82,
    "ticker": "EOLS",
    "name": "EVOLUS INC",
    "isin": "US30052C1071"
@@ -28367,7 +28367,7 @@
    "basisUsd": 22665,
    "gainUsd": -345,
    "gainEur": -295,
-   "ret": -1.5,
+   "ret": -1.52,
    "ticker": "VITL",
    "name": "Vital Farms, Inc.",
    "isin": "US92847W1036"
@@ -28382,7 +28382,7 @@
    "basisUsd": 23393,
    "gainUsd": -593,
    "gainEur": 105,
-   "ret": -2.5,
+   "ret": -2.53,
    "ticker": "CELH",
    "name": "Celsius Holdings, Inc.",
    "isin": "US15118V2079"
@@ -28397,7 +28397,7 @@
    "basisUsd": 1779,
    "gainUsd": -219,
    "gainEur": -167,
-   "ret": -12.3,
+   "ret": -12.31,
    "ticker": "MEDP",
    "name": "MEDPACE HOLDINGS INC",
    "isin": "US58506Q1094"
@@ -28412,7 +28412,7 @@
    "basisUsd": 21378,
    "gainUsd": -478,
    "gainEur": -359,
-   "ret": -2.2,
+   "ret": -2.24,
    "ticker": "PLMR",
    "name": "PALOMAR HOLDINGS INC",
    "isin": "US69753M1053"
@@ -28427,7 +28427,7 @@
    "basisUsd": 12107,
    "gainUsd": -257,
    "gainEur": -126,
-   "ret": -2.1,
+   "ret": -2.12,
    "ticker": "IDXX",
    "name": "IDEXX LABORATORIES INC",
    "isin": "US45168D1046"
@@ -28457,7 +28457,7 @@
    "basisUsd": 18414,
    "gainUsd": 186,
    "gainEur": 306,
-   "ret": 1.0,
+   "ret": 1.01,
    "ticker": "QLYS",
    "name": "QUALYS INC",
    "isin": "US74758T3032"
@@ -28472,7 +28472,7 @@
    "basisUsd": 7462,
    "gainUsd": 491,
    "gainEur": 300,
-   "ret": 6.6,
+   "ret": 6.58,
    "ticker": "XEON.SW",
    "name": "X EUR OVERNIGHT RATE SWAP 1C",
    "isin": "LU0290358497"
@@ -28487,7 +28487,7 @@
    "basisUsd": 6571,
    "gainUsd": 512,
    "gainEur": 509,
-   "ret": 7.8,
+   "ret": 7.79,
    "ticker": "VEEV",
    "name": "Veeva Systems Inc.",
    "isin": "US9224751084"
@@ -28502,7 +28502,7 @@
    "basisUsd": 8397,
    "gainUsd": 1112,
    "gainEur": 780,
-   "ret": 13.2,
+   "ret": 13.24,
    "ticker": "VICI",
    "name": "VICI PROPERTIES INC",
    "isin": "US9256521090"
@@ -28517,7 +28517,7 @@
    "basisUsd": 4271,
    "gainUsd": 669,
    "gainEur": 539,
-   "ret": 15.7,
+   "ret": 15.66,
    "ticker": "VICI",
    "name": "VICI PROPERTIES INC",
    "isin": "US9256521090"
@@ -28532,7 +28532,7 @@
    "basisUsd": 3351,
    "gainUsd": 70,
    "gainEur": 72,
-   "ret": 2.1,
+   "ret": 2.08,
    "ticker": "ADBE",
    "name": "ADOBE INC",
    "isin": "US00724F1012"
@@ -28547,7 +28547,7 @@
    "basisUsd": 7490,
    "gainUsd": -520,
    "gainEur": -447,
-   "ret": -6.9,
+   "ret": -6.94,
    "ticker": "MEDP",
    "name": "MEDPACE HOLDINGS INC",
    "isin": "US58506Q1094"
@@ -28562,7 +28562,7 @@
    "basisUsd": 5709,
    "gainUsd": 22,
    "gainEur": -63,
-   "ret": 0.4,
+   "ret": 0.39,
    "ticker": "RIO.L",
    "name": "Rio Tinto PLC Registered Shares LS -,10",
    "isin": "GB0007188757"
@@ -28577,7 +28577,7 @@
    "basisUsd": 9532,
    "gainUsd": 2107,
    "gainEur": 1672,
-   "ret": 22.1,
+   "ret": 22.11,
    "ticker": "UNH",
    "name": "UnitedHealth Group Inc. Registered Shares DL -,01",
    "isin": "US91324P1021"
@@ -28607,7 +28607,7 @@
    "basisUsd": 1483,
    "gainUsd": 258,
    "gainEur": 167,
-   "ret": 17.4,
+   "ret": 17.37,
    "ticker": "UNH.F",
    "name": "UnitedHealth Group Inc. Registered Shares DL -,01",
    "isin": "US91324P1021"
@@ -28637,7 +28637,7 @@
    "basisUsd": 5556,
    "gainUsd": 399,
    "gainEur": 150,
-   "ret": 7.2,
+   "ret": 7.18,
    "ticker": "PEP",
    "name": "PepsiCo Inc. Registered Shares DL -,0166",
    "isin": "US7134481081"
@@ -28667,7 +28667,7 @@
    "basisUsd": 4691,
    "gainUsd": 922,
    "gainEur": 601,
-   "ret": 19.7,
+   "ret": 19.65,
    "ticker": "UNP.F",
    "name": "Union Pacific Corp. Registered Shares DL 2,50",
    "isin": "US9078181081"
@@ -28682,7 +28682,7 @@
    "basisUsd": 5780,
    "gainUsd": 1474,
    "gainEur": 1031,
-   "ret": 25.5,
+   "ret": 25.51,
    "ticker": "DAP.F",
    "name": "Danaher Corp. Registered Shares DL -,01",
    "isin": "US2358511028"
@@ -28697,7 +28697,7 @@
    "basisUsd": 1456,
    "gainUsd": 3421,
    "gainEur": 2913,
-   "ret": 235.0,
+   "ret": 235.01,
    "ticker": "1YD.F",
    "name": "Broadcom Inc. Registered Shares DL -,001",
    "isin": "US11135F1012"
@@ -28712,7 +28712,7 @@
    "basisUsd": 303,
    "gainUsd": 590,
    "gainEur": 515,
-   "ret": 195.0,
+   "ret": 194.99,
    "ticker": "1YD.F",
    "name": "Broadcom Inc. Registered Shares DL -,001",
    "isin": "US11135F1012"
@@ -28727,7 +28727,7 @@
    "basisUsd": 9594,
    "gainUsd": 1615,
    "gainEur": 1222,
-   "ret": 16.8,
+   "ret": 16.83,
    "ticker": "AWK",
    "name": "AMERICAN WATER WORKS CO INC",
    "isin": "US0304201033"
@@ -28742,7 +28742,7 @@
    "basisUsd": 9272,
    "gainUsd": 673,
    "gainEur": 328,
-   "ret": 7.3,
+   "ret": 7.25,
    "ticker": "JNJ",
    "name": "Johnson & Johnson Registered Shares DL 1",
    "isin": "US4781601046"
@@ -28757,7 +28757,7 @@
    "basisUsd": 4471,
    "gainUsd": 982,
    "gainEur": 824,
-   "ret": 22.0,
+   "ret": 21.95,
    "ticker": "IOC.F",
    "name": "ITOCHU Corp. Registered Shares o.N.",
    "isin": "JP3143600009"
@@ -28772,7 +28772,7 @@
    "basisUsd": 2914,
    "gainUsd": -28,
    "gainEur": -138,
-   "ret": -1.0,
+   "ret": -0.97,
    "ticker": "JNJ.F",
    "name": "Johnson & Johnson Registered Shares DL 1",
    "isin": "US4781601046"
@@ -28787,7 +28787,7 @@
    "basisUsd": 3618,
    "gainUsd": 763,
    "gainEur": 601,
-   "ret": 21.1,
+   "ret": 21.08,
    "ticker": "BATS.L",
    "name": "British American Tobacco PLC Registered Shares LS -,25",
    "isin": "GB0002875804"
@@ -28802,7 +28802,7 @@
    "basisUsd": 947,
    "gainUsd": 422,
    "gainEur": 349,
-   "ret": 44.5,
+   "ret": 44.53,
    "ticker": "ABBV",
    "name": "AbbVie Inc. Registered Shares DL -,01",
    "isin": "US00287Y1091"
@@ -28817,7 +28817,7 @@
    "basisUsd": 12286,
    "gainUsd": -512,
    "gainEur": -782,
-   "ret": -4.2,
+   "ret": -4.17,
    "ticker": "NKE",
    "name": "NIKE Inc. Registered Shares Class B o.N.",
    "isin": "US6541061031"
@@ -28832,7 +28832,7 @@
    "basisUsd": 8951,
    "gainUsd": 828,
    "gainEur": 564,
-   "ret": 9.3,
+   "ret": 9.26,
    "ticker": "O",
    "name": "Realty Income Corp. Registered Shares DL 1",
    "isin": "US7561091049"
@@ -28847,7 +28847,7 @@
    "basisUsd": 7952,
    "gainUsd": 246,
    "gainEur": -43,
-   "ret": 3.1,
+   "ret": 3.09,
    "ticker": "BMT.F",
    "name": "British American Tobacco PLC Registered Shares LS -,25",
    "isin": "GB0002875804"
@@ -28862,7 +28862,7 @@
    "basisUsd": 5359,
    "gainUsd": 1861,
    "gainEur": 1598,
-   "ret": 34.7,
+   "ret": 34.72,
    "ticker": "4AB.F",
    "name": "AbbVie Inc. Registered Shares DL -,01",
    "isin": "US00287Y1091"
@@ -28877,7 +28877,7 @@
    "basisUsd": 1815,
    "gainUsd": -326,
    "gainEur": -341,
-   "ret": -17.9,
+   "ret": -17.94,
    "ticker": "NKE.F",
    "name": "NIKE Inc. Registered Shares Class B o.N.",
    "isin": "US6541061031"
@@ -28892,7 +28892,7 @@
    "basisUsd": 7641,
    "gainUsd": -43,
    "gainEur": -158,
-   "ret": -0.6,
+   "ret": -0.57,
    "ticker": "RY6.F",
    "name": "Realty Income Corp. Registered Shares DL 1",
    "isin": "US7561091049"
@@ -28907,7 +28907,7 @@
    "basisUsd": 3642,
    "gainUsd": 2227,
    "gainEur": 1830,
-   "ret": 61.1,
+   "ret": 61.14,
    "ticker": "APC.F",
    "name": "Apple Inc. Registered Shares o.N.",
    "isin": "US0378331005"
@@ -28922,7 +28922,7 @@
    "basisUsd": 2674,
    "gainUsd": 742,
    "gainEur": 640,
-   "ret": 27.7,
+   "ret": 27.75,
    "ticker": "ULVR.L",
    "name": "Unilever PLC Registered Shares LS -,031111",
    "isin": "GB00B10RZP78"
@@ -28937,7 +28937,7 @@
    "basisUsd": 1841,
    "gainUsd": 764,
    "gainEur": 614,
-   "ret": 41.5,
+   "ret": 41.48,
    "ticker": "BLK",
    "name": "Blackrock Inc. Reg. Shares Class A DL -,01",
    "isin": "US09247X1019"
@@ -28952,7 +28952,7 @@
    "basisUsd": 1701,
    "gainUsd": 480,
    "gainEur": 370,
-   "ret": 28.2,
+   "ret": 28.23,
    "ticker": "HD",
    "name": "Home Depot Inc., The Registered Shares DL -,05",
    "isin": "US4370761029"
@@ -28967,7 +28967,7 @@
    "basisUsd": 9652,
    "gainUsd": 1299,
    "gainEur": 978,
-   "ret": 13.5,
+   "ret": 13.46,
    "ticker": "MCD",
    "name": "McDonald's Corp. Registered Shares DL-,01",
    "isin": "US5801351017"
@@ -28982,7 +28982,7 @@
    "basisUsd": 9514,
    "gainUsd": 2552,
    "gainEur": 2147,
-   "ret": 26.8,
+   "ret": 26.82,
    "ticker": "SBUX",
    "name": "Starbucks Corp. Reg. Shares ",
    "isin": "US8552441094"
@@ -28997,7 +28997,7 @@
    "basisUsd": 2980,
    "gainUsd": 814,
    "gainEur": 635,
-   "ret": 27.3,
+   "ret": 27.33,
    "ticker": "TXN",
    "name": "Texas Instruments Inc. Registered Shares DL 1",
    "isin": "US8825081040"
@@ -29012,7 +29012,7 @@
    "basisUsd": 5145,
    "gainUsd": 1196,
    "gainEur": 956,
-   "ret": 23.2,
+   "ret": 23.24,
    "ticker": "UNVB.F",
    "name": "Unilever PLC Registered Shares LS -,031111",
    "isin": "GB00B10RZP78"
@@ -29027,7 +29027,7 @@
    "basisUsd": 3328,
    "gainUsd": 667,
    "gainEur": 552,
-   "ret": 20.0,
+   "ret": 20.05,
    "ticker": "TII.F",
    "name": "Texas Instruments Inc. Registered Shares DL 1",
    "isin": "US8825081040"
@@ -29042,7 +29042,7 @@
    "basisUsd": 1247,
    "gainUsd": 187,
    "gainEur": 144,
-   "ret": 15.0,
+   "ret": 14.97,
    "ticker": "MDO.F",
    "name": "McDonald's Corp. Registered Shares DL-,01",
    "isin": "US5801351017"
@@ -29057,7 +29057,7 @@
    "basisUsd": 2985,
    "gainUsd": 251,
    "gainEur": 115,
-   "ret": 8.4,
+   "ret": 8.41,
    "ticker": "SRB.F",
    "name": "Starbucks Corp. Reg. Shares DL -,001",
    "isin": "US8552441094"
@@ -29072,7 +29072,7 @@
    "basisUsd": 4462,
    "gainUsd": 1585,
    "gainEur": 1231,
-   "ret": 35.5,
+   "ret": 35.51,
    "ticker": "BLQA.F",
    "name": "Blackrock Inc. Reg. Shares Class A DL -,01",
    "isin": "US09247X1019"
@@ -29087,7 +29087,7 @@
    "basisUsd": 5915,
    "gainUsd": 1312,
    "gainEur": 979,
-   "ret": 22.2,
+   "ret": 22.18,
    "ticker": "HDI.F",
    "name": "Home Depot Inc., The Registered Shares DL -,05",
    "isin": "US4370761029"
@@ -29102,7 +29102,7 @@
    "basisUsd": 3015,
    "gainUsd": 422,
    "gainEur": 371,
-   "ret": 14.0,
+   "ret": 13.99,
    "ticker": "BNZL.L",
    "name": "BUNZL PLC",
    "isin": "GB00B0744B38"
@@ -29117,7 +29117,7 @@
    "basisUsd": 2868,
    "gainUsd": 196,
    "gainEur": 136,
-   "ret": 6.8,
+   "ret": 6.83,
    "ticker": "DIP.F",
    "name": "KDDI Corp. Registered Shares o.N.",
    "isin": "JP3496400007"
@@ -29132,7 +29132,7 @@
    "basisUsd": 2079,
    "gainUsd": 416,
    "gainEur": 337,
-   "ret": 20.0,
+   "ret": 20.01,
    "ticker": "RYC.F",
    "name": "Royal Bank of Canada Registered Shares o.N.",
    "isin": "CA7800871021"
@@ -29162,7 +29162,7 @@
    "basisUsd": 923,
    "gainUsd": 147,
    "gainEur": 122,
-   "ret": 15.9,
+   "ret": 15.87,
    "ticker": "TROW",
    "name": "T. Rowe Price Group Inc. Registered Shares DL -,20",
    "isin": "US74144T1088"
@@ -29177,7 +29177,7 @@
    "basisUsd": 6377,
    "gainUsd": -327,
    "gainEur": -406,
-   "ret": -5.1,
+   "ret": -5.14,
    "ticker": "TR1.F",
    "name": "T. Rowe Price Group Inc. Registered Shares DL -,20",
    "isin": "US74144T1088"
@@ -29192,7 +29192,7 @@
    "basisUsd": 3710,
    "gainUsd": 94,
    "gainEur": 81,
-   "ret": 2.5,
+   "ret": 2.52,
    "ticker": "LGEN.L",
    "name": "Legal & General Group Plc",
    "isin": "GB0005603997"
@@ -29207,7 +29207,7 @@
    "basisUsd": 295,
    "gainUsd": 41,
    "gainEur": 39,
-   "ret": 13.8,
+   "ret": 13.82,
    "ticker": "PG",
    "name": "Procter & Gamble Co., The Registered Shares o.N.",
    "isin": "US7427181091"
@@ -29222,7 +29222,7 @@
    "basisUsd": 1917,
    "gainUsd": 432,
    "gainEur": 295,
-   "ret": 22.5,
+   "ret": 22.54,
    "ticker": "PRG.F",
    "name": "Procter & Gamble Co., The Registered Shares o.N.",
    "isin": "US7427181091"
@@ -29237,7 +29237,7 @@
    "basisUsd": 1573,
    "gainUsd": -40,
    "gainEur": -46,
-   "ret": -2.5,
+   "ret": -2.54,
    "ticker": "LGI.F",
    "name": "Legal & General Group Plc",
    "isin": "GB0005603997"
@@ -29252,7 +29252,7 @@
    "basisUsd": 1413,
    "gainUsd": -210,
    "gainEur": -202,
-   "ret": -14.9,
+   "ret": -14.85,
    "ticker": "NKE",
    "name": "NIKE Inc. Registered Shares Class B o.N.",
    "isin": "US6541061031"
@@ -29267,7 +29267,7 @@
    "basisUsd": 6077,
    "gainUsd": 165,
    "gainEur": -94,
-   "ret": 2.7,
+   "ret": 2.72,
    "ticker": "BAC.F",
    "name": "Verizon Communications Inc. Registered Shares DL -,10",
    "isin": "US92343V1044"
@@ -29282,7 +29282,7 @@
    "basisUsd": 2020,
    "gainUsd": 451,
    "gainEur": 451,
-   "ret": 22.3,
+   "ret": 22.31,
    "ticker": "VZ",
    "name": "Verizon Communications Inc. Registered Shares DL -,10",
    "isin": "US92343V1044"
@@ -29297,7 +29297,7 @@
    "basisUsd": 10720,
    "gainUsd": -1520,
    "gainEur": -1375,
-   "ret": -14.2,
+   "ret": -14.18,
    "ticker": "SBUX",
    "name": "Starbucks Corp. Reg. Shares ",
    "isin": "US8552441094"
@@ -29312,7 +29312,7 @@
    "basisUsd": 4155,
    "gainUsd": 405,
    "gainEur": 302,
-   "ret": 9.8,
+   "ret": 9.76,
    "ticker": "LMT",
    "name": "LOCKHEED MARTIN CORP",
    "isin": "US5398301094"
@@ -29327,7 +29327,7 @@
    "basisUsd": 3,
    "gainUsd": 0,
    "gainEur": 0,
-   "ret": -1.6,
+   "ret": -1.61,
    "ticker": "UNVB.F",
    "name": "Unilever PLC Registered Shares LS -,031111",
    "isin": "GB00B10RZP78"
@@ -29342,7 +29342,7 @@
    "basisUsd": 1,
    "gainUsd": 0,
    "gainEur": 0,
-   "ret": -16.0,
+   "ret": -16.02,
    "ticker": "RY6.F",
    "name": "Realty Income Corp. Registered Shares DL 1",
    "isin": "US7561091049"
@@ -29357,7 +29357,7 @@
    "basisUsd": 3,
    "gainUsd": 0,
    "gainEur": 0,
-   "ret": -9.7,
+   "ret": -9.68,
    "ticker": "APC.F",
    "name": "Apple Inc. Registered Shares o.N.",
    "isin": "US0378331005"
@@ -29372,7 +29372,7 @@
    "basisUsd": 5,
    "gainUsd": -1,
    "gainEur": 0,
-   "ret": -15.6,
+   "ret": -15.62,
    "ticker": "TII.F",
    "name": "Texas Instruments Inc. Registered Shares DL 1",
    "isin": "US8825081040"
@@ -29387,7 +29387,7 @@
    "basisUsd": 5,
    "gainUsd": -1,
    "gainEur": -1,
-   "ret": -12.7,
+   "ret": -12.67,
    "ticker": "NKE.F",
    "name": "NIKE Inc. Registered Shares Class B o.N.",
    "isin": "US6541061031"
@@ -29402,7 +29402,7 @@
    "basisUsd": 6,
    "gainUsd": 0,
    "gainEur": 0,
-   "ret": -8.4,
+   "ret": -8.39,
    "ticker": "JNJ.F",
    "name": "Johnson & Johnson Registered Shares DL 1",
    "isin": "US4781601046"
@@ -29417,7 +29417,7 @@
    "basisUsd": 5,
    "gainUsd": 1,
    "gainEur": 1,
-   "ret": 24.1,
+   "ret": 24.14,
    "ticker": "ABEA.F",
    "name": "Alphabet Inc. Reg. Shs Cl. A",
    "isin": "US02079K3059"
@@ -29447,7 +29447,7 @@
    "basisUsd": 9,
    "gainUsd": 0,
    "gainEur": 0,
-   "ret": -3.6,
+   "ret": -3.63,
    "ticker": "PRG.F",
    "name": "Procter & Gamble Co., The Registered Shares o.N.",
    "isin": "US7427181091"
@@ -29462,7 +29462,7 @@
    "basisUsd": 8,
    "gainUsd": 3,
    "gainEur": 3,
-   "ret": 32.4,
+   "ret": 32.42,
    "ticker": "4AB.F",
    "name": "AbbVie Inc. Registered Shares DL -,01",
    "isin": "US00287Y1091"
@@ -29477,7 +29477,7 @@
    "basisUsd": 14,
    "gainUsd": 4,
    "gainEur": 4,
-   "ret": 27.8,
+   "ret": 27.77,
    "ticker": "3V64.F",
    "name": "VISA Inc. Reg. Shares Class A",
    "isin": "US92826C8394"
@@ -29492,7 +29492,7 @@
    "basisUsd": 16,
    "gainUsd": 2,
    "gainEur": 3,
-   "ret": 15.0,
+   "ret": 15.03,
    "ticker": "HDI.F",
    "name": "Home Depot Inc., The Registered Shares DL -,05",
    "isin": "US4370761029"
@@ -29507,7 +29507,7 @@
    "basisUsd": 22,
    "gainUsd": -1,
    "gainEur": 0,
-   "ret": -3.6,
+   "ret": -3.61,
    "ticker": "PEP.F",
    "name": "PepsiCo Inc. Registered Shares DL -,0166",
    "isin": "US7134481081"
@@ -29522,7 +29522,7 @@
    "basisUsd": 19,
    "gainUsd": 7,
    "gainEur": 7,
-   "ret": 37.5,
+   "ret": 37.51,
    "ticker": "IOC.F",
    "name": "ITOCHU Corp. Registered Shares o.N.",
    "isin": "JP3143600009"
@@ -29537,7 +29537,7 @@
    "basisUsd": 32,
    "gainUsd": -4,
    "gainEur": -3,
-   "ret": -13.6,
+   "ret": -13.56,
    "ticker": "BLQA.F",
    "name": "Blackrock Inc. Reg. Shares Class A DL -,01",
    "isin": "US09247X1019"
@@ -29552,7 +29552,7 @@
    "basisUsd": 44,
    "gainUsd": -1,
    "gainEur": 1,
-   "ret": -2.2,
+   "ret": -2.15,
    "ticker": "UNP.F",
    "name": "Union Pacific Corp. Registered Shares DL 2,50",
    "isin": "US9078181081"
@@ -29582,7 +29582,7 @@
    "basisUsd": 70,
    "gainUsd": 6,
    "gainEur": 9,
-   "ret": 8.3,
+   "ret": 8.31,
    "ticker": "MDO.F",
    "name": "McDonald's Corp. Registered Shares DL-,01",
    "isin": "US5801351017"
@@ -29597,7 +29597,7 @@
    "basisUsd": 78,
    "gainUsd": 5,
    "gainEur": 8,
-   "ret": 6.3,
+   "ret": 6.32,
    "ticker": "UNH.F",
    "name": "UnitedHealth Group Inc. Registered Shares DL -,01",
    "isin": "US91324P1021"
@@ -29612,7 +29612,7 @@
    "basisUsd": 79,
    "gainUsd": 19,
    "gainEur": 21,
-   "ret": 23.9,
+   "ret": 23.93,
    "ticker": "MSF.F",
    "name": "Microsoft Corp. Registered Shares DL-,00000625",
    "isin": "US5949181045"
@@ -29627,7 +29627,7 @@
    "basisUsd": 649,
    "gainUsd": -54,
    "gainEur": -51,
-   "ret": -8.3,
+   "ret": -8.28,
    "ticker": "RZ2.F",
    "name": "VERALTO CORP.",
    "isin": "US92338C1036"
@@ -29642,7 +29642,7 @@
    "basisUsd": 6409,
    "gainUsd": -1219,
    "gainEur": -1100,
-   "ret": -19.0,
+   "ret": -19.02,
    "ticker": "MMM.F",
    "name": "3M Co. Registered Shares DL -,01",
    "isin": "US88579Y1010"
@@ -29657,7 +29657,7 @@
    "basisUsd": 5035,
    "gainUsd": -853,
    "gainEur": -974,
-   "ret": -16.9,
+   "ret": -16.95,
    "ticker": "DYH.F",
    "name": "TARGET CORP.  DL-,0833",
    "isin": "US87612E1064"
@@ -29672,7 +29672,7 @@
    "basisUsd": 553,
    "gainUsd": -17,
    "gainEur": -12,
-   "ret": -3.2,
+   "ret": -3.16,
    "ticker": "DGE.L",
    "name": "DIAGEO PLC LS-,28935185",
    "isin": "GB0002374006"
@@ -29687,7 +29687,7 @@
    "basisUsd": 527,
    "gainUsd": 239,
    "gainEur": 233,
-   "ret": 45.4,
+   "ret": 45.36,
    "ticker": "MUV2.F",
    "name": "Münchener Rückvers.-Ges. AG vink.Namens-Aktien o.N.",
    "isin": "DE0008430026"
@@ -29732,7 +29732,7 @@
    "basisUsd": 1293,
    "gainUsd": 254,
    "gainEur": 214,
-   "ret": 19.6,
+   "ret": 19.63,
    "ticker": "PZX.F",
    "name": "Ping An Insurance(Grp)Co.China Registered Shares H YC 1",
    "isin": "CNE1000003X6"
@@ -29747,7 +29747,7 @@
    "basisUsd": 334,
    "gainUsd": -23,
    "gainEur": -10,
-   "ret": -7.0,
+   "ret": -6.97,
    "ticker": "HDI.F",
    "name": "Home Depot Inc., The Registered Shares DL -,05",
    "isin": "US4370761029"
@@ -29777,7 +29777,7 @@
    "basisUsd": 440,
    "gainUsd": -70,
    "gainEur": -37,
-   "ret": -16.0,
+   "ret": -15.95,
    "ticker": "2RR.F",
    "name": "Alibaba Group Holding Ltd. Registered Shares o.N.",
    "isin": "KYG017191142"
@@ -29792,7 +29792,7 @@
    "basisUsd": 510,
    "gainUsd": -88,
    "gainEur": -49,
-   "ret": -17.2,
+   "ret": -17.18,
    "ticker": "NNND.F",
    "name": "Tencent Holdings Ltd. Reg. Shares HD -,00002",
    "isin": "KYG875721634"
@@ -29807,7 +29807,7 @@
    "basisUsd": 501,
    "gainUsd": -10,
    "gainEur": 12,
-   "ret": -2.0,
+   "ret": -1.98,
    "ticker": "AQE.F",
    "name": "Anhui Conch Cement Co. Ltd. Registered Shares H YC 1",
    "isin": "CNE1000001W2"
@@ -30445,9 +30445,9 @@
    "name": "CARIBOU BIOSCIENCES INC"
   }
  ],
- "ppReferenceTtwror": 434.7,
+ "ppReferenceTtwror": 434.65,
  "ppReferenceDate": "2026-07-13",
- "ttwrorApproxSince2022": 434.7,
+ "ttwrorApproxSince2022": 434.65,
  "yearlyReturnsApprox": {
   "2022": 3.3,
   "2023": 11.8,
