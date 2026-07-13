@@ -1,8 +1,8 @@
 {
- "fileDate": "2026-07-13 15:08",
- "generated": "2026-07-13 15:29",
+ "fileDate": "2026-07-13 15:30",
+ "generated": "2026-07-13 15:51",
  "engine": "pp-exact (verified vs PP app 2026-07-11)",
- "totalSecuritiesEur": 2184440,
+ "totalSecuritiesEur": 2143596,
  "cashEur": -90923.38,
  "cashByAccount": [
   {
@@ -30,22 +30,22 @@
    "eur": 137.81
   }
  ],
- "totalEur": 2093516,
- "ttwrorSince2022": 434.65,
- "ttwrorYtd": 112.29,
- "ttwrorAnnualized": 44.77,
- "izf": 75.84,
+ "totalEur": 2052672,
+ "ttwrorSince2022": 424.22,
+ "ttwrorYtd": 108.15,
+ "ttwrorAnnualized": 44.14,
+ "izf": 74.45,
  "yearlyReturns": {
   "2022": 3.3,
   "2023": 11.8,
   "2024": 45.2,
   "2025": 50.2,
-  "2026": 112.3
+  "2026": 108.1
  },
  "realizedEur": 699185,
- "unrealizedEur": 723345,
+ "unrealizedEur": 682501,
  "realizedUsd": 855901,
- "unrealizedUsd": 803490,
+ "unrealizedUsd": 756805,
  "netContribEur": 666772,
  "netContribUsd": 738607,
  "earningsEur": 13297.85,
@@ -26521,9 +26521,9 @@
   },
   {
    "d": "2026-07-13",
-   "v": 2392889,
-   "e": 2093516,
-   "r": 4.346517,
+   "v": 2346204,
+   "e": 2052672,
+   "r": 4.242208,
    "c": 738607,
    "k": 666772,
    "q": 855901,
@@ -45574,15 +45574,15 @@
    "name": "CARIBOU BIOSCIENCES INC"
   }
  ],
- "ppReferenceTtwror": 434.65,
+ "ppReferenceTtwror": 424.22,
  "ppReferenceDate": "2026-07-13",
- "ttwrorApproxSince2022": 434.65,
+ "ttwrorApproxSince2022": 424.22,
  "yearlyReturnsApprox": {
   "2022": 3.3,
   "2023": 11.8,
   "2024": 45.2,
   "2025": 50.2,
-  "2026": 112.3
+  "2026": 108.1
  },
  "holdings": [
   {
@@ -45595,15 +45595,15 @@
    "isin": "NL0010696654",
    "ccy": "USD",
    "shares": 10000.0,
-   "price": 42.63,
-   "value": 426300.0,
-   "valueEur": 372966,
-   "valueUsd": 426300,
+   "price": 40.75999832,
+   "value": 407599.98,
+   "valueEur": 356605,
+   "valueUsd": 407600,
    "basisUsd": 91996,
    "realizedUsd": 11487,
    "avgCost": 12.7255,
-   "unrealRet": 235.0,
-   "priceDate": "2026-07-10"
+   "unrealRet": 220.3,
+   "priceDate": "2026-07-13"
   },
   {
    "account": "ALL",
@@ -45615,15 +45615,15 @@
    "isin": "US81663L2007",
    "ccy": "USD",
    "shares": 5000.0,
-   "price": 65.64,
-   "value": 328200.0,
-   "valueEur": 287139,
-   "valueUsd": 328200,
+   "price": 65.48999786,
+   "value": 327449.99,
+   "valueEur": 286483,
+   "valueUsd": 327450,
    "basisUsd": 183278,
    "realizedUsd": 0,
    "avgCost": 36.6597,
-   "unrealRet": 79.1,
-   "priceDate": "2026-07-10"
+   "unrealRet": 78.6,
+   "priceDate": "2026-07-13"
   },
   {
    "account": "ALL",
@@ -45635,15 +45635,15 @@
    "isin": "US18507C1036",
    "ccy": "USD",
    "shares": 17500.0,
-   "price": 17.5,
-   "value": 306250.0,
-   "valueEur": 267935,
-   "valueUsd": 306250,
+   "price": 16.80999946,
+   "value": 294174.99,
+   "valueEur": 257371,
+   "valueUsd": 294175,
    "basisUsd": 168705,
    "realizedUsd": -60391,
    "avgCost": 12.0988,
-   "unrealRet": 44.6,
-   "priceDate": "2026-07-10"
+   "unrealRet": 38.9,
+   "priceDate": "2026-07-13"
   },
   {
    "account": "ALL",
@@ -45656,15 +45656,15 @@
    "isin": "CA71385D1078",
    "ccy": "CAD",
    "shares": 1000000.0,
-   "price": 0.33,
-   "value": 330000.0,
-   "valueEur": 203993,
-   "valueUsd": 233164,
+   "price": 0.34,
+   "value": 340000.0,
+   "valueEur": 210175,
+   "valueUsd": 240230,
    "basisUsd": 229612,
    "realizedUsd": 0,
    "avgCost": 0.3173,
-   "unrealRet": 4.0,
-   "priceDate": "2026-07-10"
+   "unrealRet": 7.2,
+   "priceDate": "2026-07-13"
   },
   {
    "account": "ALL",
@@ -45676,15 +45676,15 @@
    "isin": "US24661P8077",
    "ccy": "USD",
    "shares": 17000.0,
-   "price": 13.01,
-   "value": 221170.0,
-   "valueEur": 193500,
-   "valueUsd": 221170,
+   "price": 13.06499958,
+   "value": 222104.99,
+   "valueEur": 194318,
+   "valueUsd": 222105,
    "basisUsd": 156329,
    "realizedUsd": -16090,
    "avgCost": 9.6139,
-   "unrealRet": 35.3,
-   "priceDate": "2026-07-10"
+   "unrealRet": 35.9,
+   "priceDate": "2026-07-13"
   },
   {
    "account": "ALL",
@@ -45696,15 +45696,15 @@
    "isin": "US64134X2018",
    "ccy": "USD",
    "shares": 30000.0,
-   "price": 7.14,
-   "value": 214200.0,
-   "valueEur": 187402,
-   "valueUsd": 214200,
+   "price": 7.23999977,
+   "value": 217199.99,
+   "valueEur": 190026,
+   "valueUsd": 217200,
    "basisUsd": 163566,
    "realizedUsd": 0,
    "avgCost": 5.4548,
-   "unrealRet": 30.9,
-   "priceDate": "2026-07-10"
+   "unrealRet": 32.7,
+   "priceDate": "2026-07-13"
   },
   {
    "account": "ALL",
@@ -45716,15 +45716,15 @@
    "isin": "US6402683063",
    "ccy": "USD",
    "shares": 3000.0,
-   "price": 70.36,
-   "value": 211080.0,
-   "valueEur": 184672,
-   "valueUsd": 211080,
+   "price": 68.44000244,
+   "value": 205320.01,
+   "valueEur": 179633,
+   "valueUsd": 205320,
    "basisUsd": 193331,
    "realizedUsd": -54345,
    "avgCost": 80.4296,
-   "unrealRet": -12.5,
-   "priceDate": "2026-07-10"
+   "unrealRet": -14.9,
+   "priceDate": "2026-07-13"
   },
   {
    "account": "ALL",
@@ -45736,15 +45736,15 @@
    "isin": "US52886X1072",
    "ccy": "USD",
    "shares": 40000.0,
-   "price": 4.82,
-   "value": 192800.0,
-   "valueEur": 168679,
-   "valueUsd": 192800,
+   "price": 4.69000005,
+   "value": 187600.0,
+   "valueEur": 164129,
+   "valueUsd": 187600,
    "basisUsd": 199200,
    "realizedUsd": 0,
    "avgCost": 4.985,
-   "unrealRet": -3.3,
-   "priceDate": "2026-07-10"
+   "unrealRet": -5.9,
+   "priceDate": "2026-07-13"
   },
   {
    "account": "ALL",
@@ -45756,15 +45756,15 @@
    "isin": "US1420381089",
    "ccy": "USD",
    "shares": 90000.0,
-   "price": 1.925,
-   "value": 173250.0,
-   "valueEur": 151575,
-   "valueUsd": 173250,
+   "price": 1.80499994,
+   "value": 162449.99,
+   "valueEur": 142126,
+   "valueUsd": 162450,
    "basisUsd": 167527,
    "realizedUsd": 0,
    "avgCost": 1.8654,
-   "unrealRet": 3.2,
-   "priceDate": "2026-07-10"
+   "unrealRet": -3.2,
+   "priceDate": "2026-07-13"
   },
   {
    "account": "ALL",
@@ -45796,15 +45796,15 @@
    "isin": "US88032L6056",
    "ccy": "USD",
    "shares": 4000.0,
-   "price": 17.55,
-   "value": 70200.0,
-   "valueEur": 61417,
-   "valueUsd": 70200,
+   "price": 16.45000076,
+   "value": 65800.0,
+   "valueEur": 57568,
+   "valueUsd": 65800,
    "basisUsd": 43298,
    "realizedUsd": 0,
    "avgCost": 10.8275,
-   "unrealRet": 62.1,
-   "priceDate": "2026-07-10"
+   "unrealRet": 51.9,
+   "priceDate": "2026-07-13"
   }
  ]
 }
