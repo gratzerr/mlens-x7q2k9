@@ -255,6 +255,41 @@ if _bad:
 CREDIT={"DEPOSIT","DIVIDENDS","FEES_REFUND","INTEREST","SELL","TRANSFER_IN","TAX_REFUND"}
 DEBIT={"REMOVAL","FEES","INTEREST_CHARGE","TAXES","TRANSFER_OUT","BUY"}
 PADD={"BUY","DELIVERY_INBOUND","TRANSFER_IN"};PSUB={"SELL","DELIVERY_OUTBOUND","TRANSFER_OUT"}
+
+# ---- LIVE QUOTE OVERLAY ----------------------------------------------------
+# depot.xml quotes are only as fresh as the last time PP refreshed them on the Mac.
+# The site must be current: overlay today's live prices (yfinance) onto LATEST for
+# currently-held securities, so TODAY's valuation/TTWROR/YTD move with the market.
+# History stays untouched (sec_price uses file history for all past days).
+def live_overlay():
+    net=defaultdict(float)
+    for t in txs.values():
+        if t["kind"]=="port" and t["sec"] is not None:
+            if t["type"] in PADD: net[t["sec"]]+=t["shares"]
+            elif t["type"] in PSUB: net[t["sec"]]-=t["shares"]
+    held=[si for si,sh in net.items() if sh>1e-6]
+    if not held: return
+    try:
+        import warnings; warnings.filterwarnings("ignore")
+        import yfinance as yf
+    except Exception:
+        return
+    today=datetime.date.today().isoformat()
+    ok=0
+    for si in held:
+        tk=SEC[si]["tk"]
+        if not tk or len(tk)>10: continue          # options etc.: keep file quotes
+        try:
+            px=float(yf.Ticker(tk).fast_info["last_price"])
+        except Exception:
+            continue
+        if px>0:
+            la=LATEST[si]
+            if la is None or today>=la[0]:
+                LATEST[si]=(today, int(px*1e8)); ok+=1
+    print(f"live overlay: {ok}/{len(held)} held securities quoted live")
+if os.environ.get("LIVE_QUOTES","1")=="1":
+    live_overlay()
 pos_ev=defaultdict(list);cash_ev=defaultdict(list)
 inflow=defaultdict(float);outflow=defaultdict(float)
 irr_flows=[]

@@ -295,7 +295,9 @@ for h in port["holdings"]:
 all_news.sort(key=lambda n: n.get("date", ""), reverse=True)
 
 data = {
-    "asOf": port["asOf"],
+    # with the live-quote overlay the engine series ends TODAY — the header date
+    # should say so instead of the depot-file date
+    "asOf": (pp["series"][-1]["d"] if pp and pp.get("series") else port["asOf"]),
     "generated": datetime.datetime.now().strftime("%Y-%m-%d %H:%M"),
     "currency": port.get("currency", "EUR"),
     "portfolioId": port.get("portfolioId", "66e18c9426cf62020ccc7ee7"),
