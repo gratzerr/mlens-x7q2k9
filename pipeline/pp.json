@@ -1,8 +1,8 @@
 {
- "fileDate": "2026-07-13 17:45",
- "generated": "2026-07-13 18:06",
+ "fileDate": "2026-07-13 18:30",
+ "generated": "2026-07-13 18:51",
  "engine": "pp-exact (verified vs PP app 2026-07-11)",
- "totalSecuritiesEur": 2115807,
+ "totalSecuritiesEur": 2116592,
  "cashEur": -90923.38,
  "cashByAccount": [
   {
@@ -30,22 +30,22 @@
    "eur": 137.81
   }
  ],
- "totalEur": 2024883,
- "ttwrorSince2022": 417.12,
- "ttwrorYtd": 105.33,
- "ttwrorAnnualized": 43.71,
- "izf": 73.49,
+ "totalEur": 2025668,
+ "ttwrorSince2022": 417.32,
+ "ttwrorYtd": 105.41,
+ "ttwrorAnnualized": 43.72,
+ "izf": 73.52,
  "yearlyReturns": {
   "2022": 3.3,
   "2023": 11.8,
   "2024": 45.2,
   "2025": 50.2,
-  "2026": 105.3
+  "2026": 105.4
  },
  "realizedEur": 699185,
- "unrealizedEur": 654712,
+ "unrealizedEur": 655497,
  "realizedUsd": 855901,
- "unrealizedUsd": 725042,
+ "unrealizedUsd": 725940,
  "netContribEur": 666772,
  "netContribUsd": 738607,
  "earningsEur": 13297.85,
@@ -26521,9 +26521,9 @@
   },
   {
    "d": "2026-07-13",
-   "v": 2314441,
-   "e": 2024883,
-   "r": 4.171239,
+   "v": 2315339,
+   "e": 2025668,
+   "r": 4.173244,
    "c": 738607,
    "k": 666772,
    "q": 855901,
@@ -44944,6 +44944,16 @@
  ],
  "securities": [
   {
+   "isin": "CNE1000001W2",
+   "ticker": "AQE.F",
+   "name": "Anhui Conch Cement Co. Ltd. Registered Shares H YC 1"
+  },
+  {
+   "isin": "KYG017191142",
+   "ticker": "2RR.F",
+   "name": "Alibaba Group Holding Ltd. Registered Shares o.N."
+  },
+  {
    "isin": "US5949181045",
    "ticker": "MSF.F",
    "name": "Microsoft Corp. Registered Shares DL-,00000625"
@@ -44977,6 +44987,16 @@
    "isin": "US0378331005",
    "ticker": "APC.F",
    "name": "Apple Inc. Registered Shares o.N."
+  },
+  {
+   "isin": "KYG875721634",
+   "ticker": "NNND.F",
+   "name": "Tencent Holdings Ltd. Reg. Shares HD -,00002"
+  },
+  {
+   "isin": "CNE1000003X6",
+   "ticker": "PZX.F",
+   "name": "Ping An Insurance(Grp)Co.China Registered Shares H YC 1"
   },
   {
    "isin": "US91324P1021",
@@ -45019,6 +45039,11 @@
    "name": "T. Rowe Price Group Inc. Registered Shares DL -,20"
   },
   {
+   "isin": "US88579Y1010",
+   "ticker": "MMM.F",
+   "name": "3M Co. Registered Shares DL -,01"
+  },
+  {
    "isin": "US00287Y1091",
    "ticker": "4AB.F",
    "name": "AbbVie Inc. Registered Shares DL -,01"
@@ -45039,9 +45064,19 @@
    "name": "British American Tobacco PLC Registered Shares LS -,25"
   },
   {
+   "isin": "DE0008430026",
+   "ticker": "MUV2.F",
+   "name": "Münchener Rückvers.-Ges. AG vink.Namens-Aktien o.N."
+  },
+  {
    "isin": "US8552441094",
    "ticker": "SRB.F",
    "name": "Starbucks Corp. Reg. Shares DL -,001"
+  },
+  {
+   "isin": "KYG8208B1014",
+   "ticker": null,
+   "name": "JD.com Inc. Registered Shares A o.N."
   },
   {
    "isin": "US02079K3059",
@@ -45059,6 +45094,11 @@
    "name": "Verizon Communications Inc. Registered Shares DL -,10"
   },
   {
+   "isin": "US8545021011",
+   "ticker": "SWF.F",
+   "name": "Stanley Black & Decker Inc. Registered Shares DL 2,50"
+  },
+  {
    "isin": "US7561091049",
    "ticker": "RY6.F",
    "name": "Realty Income Corp. Registered Shares DL 1"
@@ -45069,6 +45109,11 @@
    "name": "Royal Bank of Canada Registered Shares o.N."
   },
   {
+   "isin": "US87612E1064",
+   "ticker": "DYH.F",
+   "name": "TARGET CORP.  DL-,0833"
+  },
+  {
    "isin": "JP3143600009",
    "ticker": "IOC.F",
    "name": "ITOCHU Corp. Registered Shares o.N."
@@ -45077,6 +45122,11 @@
    "isin": "US6541061031",
    "ticker": "NKE.F",
    "name": "NIKE Inc. Registered Shares Class B o.N."
+  },
+  {
+   "isin": "GB0002374006",
+   "ticker": "GUI.F",
+   "name": "DIAGEO PLC LS-,28935185"
   },
   {
    "isin": "US00287Y1091",
@@ -45107,6 +45157,11 @@
    "isin": "US7561091049",
    "ticker": "O",
    "name": "Realty Income Corp. Registered Shares DL 1"
+  },
+  {
+   "isin": "GB0002374006",
+   "ticker": "DGE.L",
+   "name": "DIAGEO PLC LS-,28935185"
   },
   {
    "isin": "GB0005603997",
@@ -45187,6 +45242,11 @@
    "isin": "US4370761029",
    "ticker": "HD",
    "name": "Home Depot Inc., The Registered Shares DL -,05"
+  },
+  {
+   "isin": "US92338C1036",
+   "ticker": "RZ2.F",
+   "name": "VERALTO CORP."
   },
   {
    "isin": "US2358511028",
@@ -45514,15 +45574,15 @@
    "name": "CARIBOU BIOSCIENCES INC"
   }
  ],
- "ppReferenceTtwror": 417.12,
+ "ppReferenceTtwror": 417.32,
  "ppReferenceDate": "2026-07-13",
- "ttwrorApproxSince2022": 417.12,
+ "ttwrorApproxSince2022": 417.32,
  "yearlyReturnsApprox": {
   "2022": 3.3,
   "2023": 11.8,
   "2024": 45.2,
   "2025": 50.2,
-  "2026": 105.3
+  "2026": 105.4
  },
  "holdings": [
   {
@@ -45535,14 +45595,14 @@
    "isin": "NL0010696654",
    "ccy": "USD",
    "shares": 10000.0,
-   "price": 40.52999877,
-   "value": 405299.99,
-   "valueEur": 354593,
-   "valueUsd": 405300,
+   "price": 41.0,
+   "value": 410000.0,
+   "valueEur": 358705,
+   "valueUsd": 410000,
    "basisUsd": 91996,
    "realizedUsd": 11487,
    "avgCost": 12.7255,
-   "unrealRet": 218.5,
+   "unrealRet": 222.2,
    "priceDate": "2026-07-13"
   },
   {
@@ -45555,14 +45615,14 @@
    "isin": "US81663L2007",
    "ccy": "USD",
    "shares": 5000.0,
-   "price": 63.74000167,
-   "value": 318700.01,
-   "valueEur": 278828,
-   "valueUsd": 318700,
+   "price": 63.36999893,
+   "value": 316849.99,
+   "valueEur": 277209,
+   "valueUsd": 316850,
    "basisUsd": 183278,
    "realizedUsd": 0,
    "avgCost": 36.6597,
-   "unrealRet": 73.9,
+   "unrealRet": 72.9,
    "priceDate": "2026-07-13"
   },
   {
@@ -45575,14 +45635,14 @@
    "isin": "US18507C1036",
    "ccy": "USD",
    "shares": 17500.0,
-   "price": 16.5550003,
-   "value": 289712.51,
-   "valueEur": 253467,
-   "valueUsd": 289713,
+   "price": 16.5,
+   "value": 288750.0,
+   "valueEur": 252625,
+   "valueUsd": 288750,
    "basisUsd": 168705,
    "realizedUsd": -60391,
    "avgCost": 12.0988,
-   "unrealRet": 36.8,
+   "unrealRet": 36.4,
    "priceDate": "2026-07-13"
   },
   {
@@ -45616,14 +45676,14 @@
    "isin": "US24661P8077",
    "ccy": "USD",
    "shares": 17000.0,
-   "price": 12.97000026,
-   "value": 220490.0,
-   "valueEur": 192905,
-   "valueUsd": 220490,
+   "price": 12.93500041,
+   "value": 219895.01,
+   "valueEur": 192384,
+   "valueUsd": 219895,
    "basisUsd": 156329,
    "realizedUsd": -16090,
    "avgCost": 9.6139,
-   "unrealRet": 34.9,
+   "unrealRet": 34.5,
    "priceDate": "2026-07-13"
   },
   {
@@ -45636,14 +45696,14 @@
    "isin": "US64134X2018",
    "ccy": "USD",
    "shares": 30000.0,
-   "price": 7.15000009,
-   "value": 214500.0,
-   "valueEur": 187664,
-   "valueUsd": 214500,
+   "price": 7.11149978,
+   "value": 213344.99,
+   "valueEur": 186654,
+   "valueUsd": 213345,
    "basisUsd": 163566,
    "realizedUsd": 0,
    "avgCost": 5.4548,
-   "unrealRet": 31.1,
+   "unrealRet": 30.4,
    "priceDate": "2026-07-13"
   },
   {
@@ -45656,14 +45716,14 @@
    "isin": "US6402683063",
    "ccy": "USD",
    "shares": 3000.0,
-   "price": 67.91000366,
-   "value": 203730.01,
-   "valueEur": 178241,
-   "valueUsd": 203730,
+   "price": 67.56999969,
+   "value": 202710.0,
+   "valueEur": 177349,
+   "valueUsd": 202710,
    "basisUsd": 193331,
    "realizedUsd": -54345,
    "avgCost": 80.4296,
-   "unrealRet": -15.6,
+   "unrealRet": -16.0,
    "priceDate": "2026-07-13"
   },
   {
@@ -45676,14 +45736,14 @@
    "isin": "US52886X1072",
    "ccy": "USD",
    "shares": 40000.0,
-   "price": 4.67000007,
-   "value": 186800.0,
-   "valueEur": 163430,
-   "valueUsd": 186800,
+   "price": 4.6550002,
+   "value": 186200.01,
+   "valueEur": 162905,
+   "valueUsd": 186200,
    "basisUsd": 199200,
    "realizedUsd": 0,
    "avgCost": 4.985,
-   "unrealRet": -6.3,
+   "unrealRet": -6.6,
    "priceDate": "2026-07-13"
   },
   {
@@ -45696,14 +45756,14 @@
    "isin": "US1420381089",
    "ccy": "USD",
    "shares": 90000.0,
-   "price": 1.78499996,
-   "value": 160650.0,
-   "valueEur": 140551,
-   "valueUsd": 160650,
+   "price": 1.81500005,
+   "value": 163350.0,
+   "valueEur": 142913,
+   "valueUsd": 163350,
    "basisUsd": 167527,
    "realizedUsd": 0,
    "avgCost": 1.8654,
-   "unrealRet": -4.3,
+   "unrealRet": -2.7,
    "priceDate": "2026-07-13"
   },
   {
@@ -45736,14 +45796,14 @@
    "isin": "US88032L6056",
    "ccy": "USD",
    "shares": 4000.0,
-   "price": 16.28000068,
-   "value": 65120.0,
-   "valueEur": 56973,
-   "valueUsd": 65120,
+   "price": 16.20000076,
+   "value": 64800.0,
+   "valueEur": 56693,
+   "valueUsd": 64800,
    "basisUsd": 43298,
    "realizedUsd": 0,
    "avgCost": 10.8275,
-   "unrealRet": 50.4,
+   "unrealRet": 49.6,
    "priceDate": "2026-07-13"
   }
  ]
