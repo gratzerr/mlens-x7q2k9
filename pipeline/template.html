@@ -1898,9 +1898,15 @@ const PF_WIDGETS={
       ${stat('Best · '+esc(best.ticker),money(best.gainUsd,best.gainEur),'up')}
       ${stat('Worst · '+esc(worst.ticker),money(worst.gainUsd,worst.gainEur),'down')}
     </div>`;
-    const show=w.exp?list:list.slice(0,12);
+    const srt=w.sort||{key:'sell',dir:-1};
+    const sorted=[...list].sort((a,b)=>{
+      const va=a[srt.key], vb=b[srt.key];
+      return srt.dir*(((va==null)-(vb==null)) || (va>vb?1:va<vb?-1:0));
+    });
+    const show=w.exp?sorted:sorted.slice(0,12);
+    const TCOLS=[['ticker','Position'],['port','Broker'],['sell','Sold'],['days','Held'],['ret','Return'],['gainUsd','Gain']];
     h+='<div style="overflow-x:auto"><table style="border-collapse:collapse;font-size:13px;width:100%;min-width:560px">'+
-      `<tr>${['Position','Broker','Sold','Held','Return','Gain'].map((c,i)=>`<th style="text-align:${i>1?'right':'left'};color:var(--muted);font-weight:650;font-size:11.5px;padding:4px 8px 6px;border-bottom:1px solid var(--line)">${c}</th>`).join('')}</tr>`+
+      `<tr>${TCOLS.map(([k,c],i)=>`<th data-tsort="${k}" style="cursor:pointer;text-align:${i>1?'right':'left'};color:var(--muted);font-weight:650;font-size:11.5px;padding:4px 8px 6px;border-bottom:1px solid var(--line)">${c}${srt.key===k?(srt.dir<0?' ▾':' ▴'):''}</th>`).join('')}</tr>`+
       show.map(t=>{const up=(t.gainUsd||0)>=0;
         return `<tr>
           <td style="padding:6px 8px;border-top:1px solid var(--grid)"><div class="hname">${logoImg((DATA.tradeLogos||{})[t.ticker]||[],'llogo',t.ticker)}<span style="font-weight:650">${esc(t.ticker)}</span></div></td>
@@ -1913,7 +1919,12 @@ const PF_WIDGETS={
     if(list.length>12) h+=`<button class="secbtn" data-texp style="margin-top:10px">${w.exp?'Show fewer':'Show all '+list.length+' trades'}</button>`;
     return h;},
     after:(w,card)=>{const b=card.querySelector('[data-texp]');
-      if(b) b.addEventListener('click',()=>{ w.exp=!w.exp; pfSave(); renderPerf(); });}},
+      if(b) b.addEventListener('click',()=>{ w.exp=!w.exp; pfSave(); renderPerf(); });
+      card.querySelectorAll('[data-tsort]').forEach(th=>th.addEventListener('click',()=>{
+        const k=th.dataset.tsort, s=w.sort||{key:'sell',dir:-1};
+        w.sort=s.key===k?{key:k,dir:-s.dir}:{key:k,dir:-1};
+        pfSave(); renderPerf();
+      }));}},
   contrib:{lab:'Top contributors',big:1,opts:[],render:()=>{
     const hs=DATA.holdings.filter(h=>h.assetType!=='cash'&&h.totalGainNet!=null)
       .sort((a,b)=>(b.totalGainNet||0)-(a.totalGainNet||0));
