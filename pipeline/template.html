@@ -1891,7 +1891,7 @@ const PF_WIDGETS={
     const best=list.reduce((a,t)=>(t.gainUsd>a.gainUsd?t:a)), worst=list.reduce((a,t)=>(t.gainUsd<a.gainUsd?t:a));
     const stat=(l,v,c)=>`<div style="min-width:96px"><div style="font-size:10.5px;text-transform:uppercase;letter-spacing:.5px;color:var(--muted);font-weight:660">${l}</div><div class="tnum ${c||''}" style="font-size:16px;font-weight:680">${v}</div></div>`;
     let h=`<div style="display:flex;gap:22px;flex-wrap:wrap;padding:2px 2px 12px">
-      ${stat('Trades',list.length)}
+      ${stat('Trades',list.length<all.length?list.length+' <span style="color:var(--muted);font-size:12px;font-weight:600">of '+all.length+'</span>':list.length)}
       ${stat('Win rate',Math.round(wins/list.length*100)+'%',wins/list.length>=0.5?'up':'down')}
       ${stat('Realized',money(sumU,sumE),sumU>=0?'up':'down')}
       ${stat('Ø holding',avgD+'d')}
@@ -1917,6 +1917,7 @@ const PF_WIDGETS={
           <td class="tnum ${up?'up':'down'}" style="text-align:right;padding:6px 8px;border-top:1px solid var(--grid);font-weight:650">${money(t.gainUsd,t.gainEur)}</td>
         </tr>`;}).join('')+'</table></div>';
     if(list.length>12) h+=`<button class="secbtn" data-texp style="margin-top:10px">${w.exp?'Show fewer':'Show all '+list.length+' trades'}</button>`;
+    if(list.length<all.length) h+=`<div style="font-size:11.5px;color:var(--muted);margin-top:8px">${all.length-list.length} older trades are outside the selected reporting period — set it to “Max” to see everything</div>`;
     return h;},
     after:(w,card)=>{const b=card.querySelector('[data-texp]');
       if(b) b.addEventListener('click',()=>{ w.exp=!w.exp; pfSave(); renderPerf(); });
