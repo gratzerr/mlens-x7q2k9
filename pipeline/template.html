@@ -1397,7 +1397,9 @@ async function refreshNews(){
     harvest(all,h.ticker,((h.gquery||h.name||h.ticker).split(' ')[0]||'').toLowerCase(),a);
   });
   /* watchlist tickers get the same sweep, but their headlines live ON the watchlist
-     tab — the News tab stays positions-only */
+     tab — the News tab stays positions-only. Small gap: GDELT rate-limits bursts,
+     and the holdings sweep just fired a dozen queries */
+  await new Promise(r=>setTimeout(r,4000));
   const wl=wlSyms().filter(s=>!secs.some(h=>h.ticker===s)&&((window._watchLive[s]||{}).name||'').trim());
   const wlRes=await Promise.allSettled(wl.map(s=>{
     /* strip legal suffixes — GDELT phrase search with "Inc" matches nothing
