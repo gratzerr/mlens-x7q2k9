@@ -29,6 +29,33 @@ def fetch(sym):
             out.append([idx.strftime("%Y-%m-%d"), round(float(c), 4)])
     return out
 
+WATCH_OUT = os.path.join(ROOT, "watch.json")
+def watch_syms():
+    try:
+        return [s.strip().upper() for s in
+                json.load(open(os.path.join(ROOT, "site_state.json"))).get("watchlist", []) if s.strip()]
+    except Exception:
+        return []
+
+def fetch_watch(missing_only):
+    """Watchlist quotes live in their own file so they never show up as benchmark chips."""
+    old = {}
+    try: old = json.load(open(WATCH_OUT))
+    except Exception: pass
+    syms = watch_syms()
+    if missing_only:
+        syms = [s for s in syms if len(old.get(s, [])) < 20]
+        if not syms: return
+    res = {k: v for k, v in old.items() if k in watch_syms()}   # drop removed tickers
+    for sym in syms:
+        try: s = fetch(sym)
+        except Exception: s = []
+        if len(s) > 20: res[sym] = s
+        elif sym in old and len(old[sym]) > 20: res[sym] = old[sym]
+        else: print(f"watch: {sym} FAILED")
+    json.dump(res, open(WATCH_OUT, "w"))
+    if res: print("watch.json:", {k: len(v) for k, v in res.items()})
+
 def main():
     old = {}
     try: old = json.load(open(OUT))
@@ -58,3 +85,4 @@ def main():
 
 if __name__ == "__main__":
     main()
+    fetch_watch(os.environ.get("MISSING_ONLY") == "1")

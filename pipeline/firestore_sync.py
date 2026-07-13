@@ -45,9 +45,10 @@ def pull():
         print("firestore: created portfolios/main")
     f = j["fields"]
     bench = [v.get("stringValue","") for v in f.get("benchmarks",{}).get("arrayValue",{}).get("values",[]) if v.get("stringValue")]
+    watch = [v.get("stringValue","") for v in f.get("watchlist",{}).get("arrayValue",{}).get("values",[]) if v.get("stringValue")]
     state = {"name": f.get("name",{}).get("stringValue","Rafael's Portfolio"),
              "public": f.get("public",{}).get("booleanValue", True),
-             "benchmarks": bench}
+             "benchmarks": bench, "watchlist": watch}
     json.dump(state, open(os.path.join(ROOT,"site_state.json"),"w"))
     print(f"firestore pull: name={state['name']!r} public={state['public']}")
 

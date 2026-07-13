@@ -339,9 +339,12 @@
     <button data-tabbtn="portfolio" class="on">Portfolio</button>
     <button data-tabbtn="news">News</button>
     <button data-tabbtn="performance">Performance</button>
+    <button data-tabbtn="watchlist">Watchlist</button>
   </nav>
 
   <div class="kpis" id="kpis" data-tab="portfolio"></div>
+
+  <div class="panel" data-tab="portfolio" id="nextcat" style="display:none;padding:12px 18px"></div>
 
   <div class="panel" data-tab="portfolio">
     <div class="chart-head">
@@ -411,6 +414,19 @@
       </div>
     </div>
     <div id="pf-grid"></div>
+  </div>
+
+  <!-- ============ WATCHLIST TAB — tickers on the radar, quotes like holdings ============ -->
+  <div class="panel" data-tab="watchlist">
+    <h2>Watchlist</h2>
+    <div id="wl-owner" style="display:none;gap:8px;align-items:center;margin:2px 0 12px">
+      <input type="text" id="wl-new" placeholder="+ ticker (e.g. CRSP, MRNA…)" maxlength="12"
+        style="background:var(--surface-2);border:1px solid var(--border);border-radius:9px;padding:7px 10px;font:inherit;font-size:13px;color:var(--ink);width:220px">
+      <span id="wl-msg" style="font-size:12px;color:var(--muted)">press Enter to add</span>
+    </div>
+    <div id="wl-empty" style="display:none;color:var(--muted);font-size:13.5px;padding:8px 0 4px">
+      Nothing on the radar yet — the owner can add tickers to watch here.</div>
+    <div style="overflow-x:auto"><table class="htable" id="watchtable"></table></div>
   </div>
 
   <div class="foot" id="foot"></div>
@@ -801,10 +817,17 @@ async function onAuthChange(){
 /* ---- Firestore REST (reads work anonymously while public; owner uses idToken) ---- */
 function fsParse(j){
   const f=(j&&j.fields)||{};
+  const arr=k=>f[k]?((f[k].arrayValue||{}).values||[]).map(v=>v.stringValue).filter(Boolean):null;
   return { name:f.name?f.name.stringValue:_cfg.name,
            public:f.public?f.public.booleanValue!==false:true,
            owner:f.owner?f.owner.stringValue:'',
+           benchmarks:arr('benchmarks'),
+           watchlist:arr('watchlist'),
            data:f.data?f.data.stringValue:'' };
+}
+function cfgLists(c){ /* only overwrite when the doc actually has the field */
+  if(c.benchmarks) _cfg.benchmarks=c.benchmarks;
+  if(c.watchlist) _cfg.watchlist=c.watchlist;
 }
 async function fsGet(withAuth){
   const h={};
@@ -816,7 +839,7 @@ async function fsGet(withAuth){
 async function loadConfig(){
   try{
     const c=await fsGet(false);
-    Object.assign(_cfg,{name:c.name,public:c.public,owner:c.owner});
+    Object.assign(_cfg,{name:c.name,public:c.public,owner:c.owner}); cfgLists(c);
   }catch(e){
     if(String(e.message).includes('403')){ _cfg.public=false; }   // private -> rules deny anon reads
     else return;                                                   // offline/CSP -> keep defaults
@@ -842,7 +865,7 @@ async function fsDataPoll(){
         if(DATA.bench[s]&&DATA.bench[s].length>20) delete window._benchPreview[s];
         else DATA.bench[s]=ser;
       });
-      Object.assign(_cfg,{name:c.name,public:c.public,owner:c.owner});
+      Object.assign(_cfg,{name:c.name,public:c.public,owner:c.owner}); cfgLists(c);
       renderKpis(); rerender(); applyName(); applyVisibility();
     }
   }catch(e){}
@@ -850,7 +873,7 @@ async function fsDataPoll(){
 async function fsLoadData(){
   try{
     const c=await fsGet(true);
-    Object.assign(_cfg,{name:c.name,public:c.public,owner:c.owner});
+    Object.assign(_cfg,{name:c.name,public:c.public,owner:c.owner}); cfgLists(c);
     if(c.data){ DATA=JSON.parse(c.data); applyName(); applyVisibility();
       document.querySelector('.wrap').style.display=''; boot(); }
   }catch(e){}
@@ -1083,20 +1106,67 @@ function catKey(w){
   }
   return '99999999';
 }
-function renderTimeline(){
+/* readable calendar bucket for a fuzzy "when" (month / quarter / half / year) */
+const CAL_MN=['January','February','March','April','May','June','July','August','September','October','November','December'];
+function catBucket(w){
+  const s=(w||'').toLowerCase(); let m;
+  if(m=s.match(/(20\d{2})-(\d{2})(?!\d)/)) return CAL_MN[+m[2]-1]+' '+m[1];
+  if(m=s.match(/(20\d{2})[ -]*q([1-4])/)) return 'Q'+m[2]+' '+m[1];
+  if(m=s.match(/q([1-4])[ -]*(20\d{2})/)) return 'Q'+m[1]+' '+m[2];
+  if(m=s.match(/(20\d{2})[ -]*h([12])/)) return 'H'+m[2]+' '+m[1];
+  if(m=s.match(/h([12])[ -]*(20\d{2})/)) return 'H'+m[1]+' '+m[2];
+  const yr=(s.match(/(20\d{2})/)||[])[1];
+  return yr||'Unscheduled';
+}
+/* approximate countdown from the catKey midpoint; ≈ marks fuzzy dates */
+function catCountdown(w){
+  const k=catKey(w); if(k==='99999999') return '';
+  const d=new Date(k.slice(0,4)+'-'+k.slice(4,6)+'-'+k.slice(6,8)+'T00:00:00Z');
+  const days=Math.round((d-Date.now())/86400000);
+  if(days<0) return '';
+  const exact=/20\d{2}-\d{2}-\d{2}/.test(w);
+  const lab=days<=1?'now':days<=70?`in ${days}d`:`in ${Math.round(days/30.4)} mo`;
+  return `<span style="margin-left:auto;font-size:11px;font-weight:660;background:var(--accent);color:#fff;border-radius:999px;padding:2px 9px;white-space:nowrap">${exact?'':'≈ '}${lab}</span>`;
+}
+function catUpcoming(){
   const today=new Date().toISOString().slice(0,10).replace(/-/g,'');
-  const cats=[...DATA.catalysts]
+  return [...DATA.catalysts]
     .filter(c=>catKey(c.when)>=today)                    // upcoming only — past readouts drop off
     .sort((a,b)=>catKey(a.when).localeCompare(catKey(b.when)));
-  document.getElementById('timeline').innerHTML = cats.map(c=>{
-    const cf=c.confirmed?cvar('--confirmed'):cvar('--tentative');
-    return `<div class="tl-item">
-      <div class="tl-when"><span class="cf" style="background:${cf}"></span>${esc(c.when)}</div>
-      <div class="tl-body">
-        <div class="lb">${logoImg(tickerLogos(c.ticker),'nlogo')}<span class="tkr neutral">${esc(c.ticker)}</span> ${esc(c.label)}</div>
-        <div class="dt">${esc(c.detail)}</div>
-      </div></div>`;
-  }).join('');
+}
+function renderTimeline(){
+  const cats=catUpcoming();
+  /* group stably: "August 2026" and "H2 2026" share the same sort midpoint and
+     would interleave if we only broke on label change */
+  const groups=[], idx={};
+  cats.forEach(c=>{ const b=catBucket(c.when);
+    if(!(b in idx)){ idx[b]=groups.length; groups.push({b,items:[]}); }
+    groups[idx[b]].items.push(c); });
+  document.getElementById('timeline').innerHTML=groups.map((g,gi)=>
+    `<div style="font-size:11px;text-transform:uppercase;letter-spacing:.7px;color:var(--muted);font-weight:700;margin:${gi?'16px':'2px'} 0 8px;padding-bottom:5px;border-bottom:1px solid var(--line)">${esc(g.b)}</div>`+
+    g.items.map(c=>{
+      const cf=c.confirmed?cvar('--confirmed'):cvar('--tentative');
+      return `<div class="tl-item">
+        <div class="tl-when"><span class="cf" style="background:${cf}"></span>${esc(c.when)}</div>
+        <div class="tl-body">
+          <div class="lb" style="display:flex;align-items:center;gap:6px">${logoImg(tickerLogos(c.ticker),'nlogo')}<span class="tkr neutral" style="white-space:nowrap;flex-shrink:0">${esc(c.ticker)}</span> <span style="min-width:0">${esc(c.label)}</span>${catCountdown(c.when)}</div>
+          <div class="dt">${esc(c.detail)}</div>
+        </div></div>`;
+    }).join('')).join('');
+}
+/* slim strip on the Portfolio tab: the next few things that matter */
+function renderNextCat(){
+  const el=document.getElementById('nextcat'); if(!el) return;
+  const next=catUpcoming().slice(0,3);
+  if(!next.length){ el.style.display='none'; return; }
+  el.style.display='';
+  el.innerHTML=`<div style="display:flex;gap:18px;flex-wrap:wrap;align-items:center">
+    <span style="font-size:11px;text-transform:uppercase;letter-spacing:.6px;color:var(--muted);font-weight:700">Next catalysts</span>
+    ${next.map(c=>`<a href="#news" onclick="switchTab('news');return false" style="display:flex;align-items:center;gap:7px;text-decoration:none;color:var(--ink);font-size:13px;min-width:0">
+      ${logoImg(tickerLogos(c.ticker),'nlogo')}<b>${esc(c.ticker)}</b>
+      <span style="color:var(--muted);white-space:nowrap;overflow:hidden;text-overflow:ellipsis;max-width:220px">${esc(c.label)}</span>
+      ${catCountdown(c.when)}</a>`).join('')}
+  </div>`;
 }
 
 /* ---- holdings cards ---- */
@@ -1193,7 +1263,7 @@ function pfBusy(){
   if(document.getElementById('pfw-addpop')) return true;
   return [...document.querySelectorAll('.pfw-pop')].some(p=>p.style.display&&p.style.display!=='none');
 }
-function rerender(){ renderFeed(); renderChart(); renderHoldingsTable(); renderAlloc(); renderPerfBars(); renderTimeline(); renderHoldings(); if(_tab==='performance'&&!pfBusy()) renderPerf(); }
+function rerender(){ renderFeed(); renderChart(); renderHoldingsTable(); renderAlloc(); renderPerfBars(); renderTimeline(); renderNextCat(); renderHoldings(); if(_tab==='performance'&&!pfBusy()) renderPerf(); if(_tab==='watchlist') renderWatchlist(); }
 
 /* ===== LIVE DATA LAYER =====================================================
    Works on GitHub Pages (fetch allowed). Inside the Claude artifact the CSP
@@ -1596,13 +1666,14 @@ async function loadMoreActivities(){
 function startLive(){
   // initial pulls + intervals; each guarded so one failure never breaks the page
   refreshParqet().catch(()=>{});
-  refreshPrices().catch(()=>{}); refreshNews().catch(()=>{}); refreshSocial().catch(()=>{});
+  refreshPrices().catch(()=>{}); refreshNews().catch(()=>{}); refreshSocial().catch(()=>{}); refreshWatch().catch(()=>{});
   refreshSEC().catch(()=>{});                                // SEC baseline, then watch
   refreshActivities().catch(()=>{});
   setInterval(()=>refreshActivities().catch(()=>{}), 180000); // activities every 3 min
   const amb=document.getElementById('actmore'); if(amb) amb.addEventListener('click',()=>loadMoreActivities());
   setInterval(()=>refreshParqet().catch(()=>{}), 120000);   // portfolio (Parqet) every 2 min
   setInterval(()=>refreshPrices().catch(()=>{}), 180000);   // intraday prices (Yahoo) every 3 min
+  setInterval(()=>refreshWatch().catch(()=>{}), 180000);    // watchlist quotes on the same cadence
   setInterval(()=>refreshSocial().catch(()=>{}), 90000);    // social sweep (Stocktwits) every 90s
   setInterval(()=>refreshSEC().catch(()=>{}), 90000);       // SEC EDGAR filing watch every 90s
   setInterval(()=>refreshNews().catch(()=>{}), 900000);     // news (GDELT) every 15 min
@@ -1615,7 +1686,7 @@ function boot(){
   document.getElementById('hcount').textContent=DATA.holdings.filter(h=>h.assetType!=='cash').length;
   document.getElementById('foot').innerHTML='Snapshot built '+esc(DATA.generated)+
     ' · When hosted live, prices refresh every 3 min (Yahoo) and headlines every 15 min (GDELT), computed in your browser · Curated news &amp; catalysts refreshed twice daily · Not investment advice.<br>Green dot = confirmed date, amber dot = estimated.';
-  initTheme(); applyName(); initTabs(); pfInitToolbar(); loadConfig(); loadSocialCache(); renderKpis(); renderTfSel(); renderSocial(); rerender(); initSecAlerts(); initHtSettings(); initAppSettings(); startLive();
+  initTheme(); applyName(); initTabs(); pfInitToolbar(); initWatchlist(); loadConfig(); loadSocialCache(); renderKpis(); renderTfSel(); renderSocial(); rerender(); initSecAlerts(); initHtSettings(); initAppSettings(); startLive();
   window._lastW=window.innerWidth;
   window.addEventListener('resize',()=>{clearTimeout(window._rz);window._rz=setTimeout(()=>{
     if(window.innerWidth===window._lastW) return; /* height-only = mobile keyboard, keep focused inputs alive */
@@ -1633,12 +1704,13 @@ function switchTab(t){
   try{ history.replaceState(null,'','#'+t); }catch(e){}
   if(t==='portfolio'){ renderChart(); hydrateSparks(); }
   if(t==='performance'){ renderPerf(); }
+  if(t==='watchlist'){ renderWatchlist(); }
   if(changed) window.scrollTo({top:0});
 }
 function initTabs(){
   document.querySelectorAll('[data-tabbtn]').forEach(b=>b.addEventListener('click',()=>switchTab(b.dataset.tabbtn)));
   const h=(location.hash||'').replace('#','');
-  switchTab(['portfolio','news','performance'].includes(h)?h:'portfolio');
+  switchTab(['portfolio','news','performance','watchlist'].includes(h)?h:'portfolio');
 }
 
 /* ===================== PERFORMANCE TAB (formulas replicated from PP source: Risk.java) ===================== */
@@ -2039,6 +2111,100 @@ async function saveBenchList(list){
     if(r.ok){ _cfg.benchmarks=list; return true; }
   }catch(e){}
   return false;
+}
+/* ===================== WATCHLIST TAB ===================== */
+async function saveWatchList(list){
+  if(!_user) return false;
+  try{
+    const body={fields:{watchlist:{arrayValue:{values:list.map(s=>({stringValue:s}))}}}};
+    const r=await fetch(FS_DOC+'?updateMask.fieldPaths=watchlist&key='+FB_CFG.apiKey,
+      {method:'PATCH',headers:{'Content-Type':'application/json','Authorization':'Bearer '+await _user.getIdToken()},
+       body:JSON.stringify(body)});
+    if(r.ok){ _cfg.watchlist=list; return true; }
+  }catch(e){}
+  return false;
+}
+window._watchLive={};   // client-side Yahoo quotes (survive the minute poll)
+function wlSyms(){
+  const c=_cfg.watchlist;
+  return (c&&c.length)?c:Object.keys(DATA.watch||{});
+}
+function wlLogos(sym){
+  const base=sym.split('.')[0].toUpperCase();
+  return [`https://assets.parqet.com/logos/symbol/${encodeURIComponent(base)}?format=png&size=64`];
+}
+function wlRow(sym){
+  const live=window._watchLive[sym], ser=(DATA.watch||{})[sym]||[];
+  const price=live?live.price:(ser.length?ser[ser.length-1][1]:null);
+  const prev=live?(live.prevClose||price):(ser.length>1?ser[ser.length-2][1]:null);
+  const day=(price!=null&&prev)?((price/prev-1)*100):null;
+  const tail=(live&&live.spark&&live.spark.length>1)?live.spark:ser.slice(-30).map(x=>x[1]);
+  const yr=ser.slice(-252).map(x=>x[1]);
+  const hi=live&&live.hi52?live.hi52:(yr.length?Math.max(...yr):null);
+  const lo=live&&live.lo52?live.lo52:(yr.length?Math.min(...yr):null);
+  const pos=(price!=null&&hi&&lo&&hi>lo)?((price-lo)/(hi-lo)*100):null;
+  return {sym,price,day,tail,hi,lo,pos};
+}
+function wlSpark(tail,up){
+  if(!tail||tail.length<2) return '';
+  const w=110,h=30,mn=Math.min(...tail),mx=Math.max(...tail),sp=(mx-mn)||1;
+  const pts=tail.map((v,i)=>`${(i/(tail.length-1)*w).toFixed(1)},${(h-3-(v-mn)/sp*(h-6)).toFixed(1)}`).join(' ');
+  return `<svg width="${w}" height="${h}" viewBox="0 0 ${w} ${h}" style="display:block"><polyline points="${pts}" fill="none" stroke="${up?cvar('--up'):cvar('--down')}" stroke-width="1.8" stroke-linejoin="round" stroke-linecap="round"/></svg>`;
+}
+function renderWatchlist(){
+  const el=document.getElementById('watchtable'); if(!el) return;
+  const own=isOwner();
+  const ob=document.getElementById('wl-owner'); if(ob) ob.style.display=own?'flex':'none';
+  const syms=wlSyms();
+  document.getElementById('wl-empty').style.display=syms.length?'none':'block';
+  if(!syms.length){ el.innerHTML=''; return; }
+  const rows=syms.map(wlRow);
+  const fmtP=p=>p==null?'—':'$'+(+p).toLocaleString('en-US',{minimumFractionDigits:p<1?4:2,maximumFractionDigits:p<1?4:2});
+  el.innerHTML='<thead><tr>'+['Ticker','Price','Today','30 days','52-week range',own?'':null].filter(x=>x!=null).map(c=>`<th>${c}</th>`).join('')+'</tr></thead><tbody>'+
+    rows.map(r=>{
+      const up=(r.day||0)>=0;
+      const range=(r.pos!=null)?`<div style="min-width:120px"><div style="position:relative;height:5px;border-radius:3px;background:var(--surface-2)">
+          <div style="position:absolute;left:${r.pos.toFixed(1)}%;top:-2.5px;width:10px;height:10px;margin-left:-5px;border-radius:50%;background:${up?cvar('--up'):cvar('--down')};border:2px solid var(--surface)"></div></div>
+        <div style="display:flex;justify-content:space-between;font-size:10.5px;color:var(--muted);margin-top:4px"><span>${fmtP(r.lo)}</span><span>${fmtP(r.hi)}</span></div></div>`:'—';
+      return `<tr>
+        <td><div class="hname">${logoImg(wlLogos(r.sym),'llogo',r.sym)}<div class="c1">${esc(r.sym)}</div></div></td>
+        <td><div class="c1">${fmtP(r.price)}</div></td>
+        <td><div class="c1 ${r.day==null?'':(up?'up':'down')}">${r.day==null?'—':fmtPct(r.day)}</div></td>
+        <td>${wlSpark(r.tail,up)}</td>
+        <td>${range}</td>
+        ${own?`<td><button data-wldel="${esc(r.sym)}" style="border:0;background:none;color:var(--muted);cursor:pointer;font-size:15px">×</button></td>`:''}
+      </tr>`;
+    }).join('')+'</tbody>';
+  el.querySelectorAll('[data-wldel]').forEach(b=>b.addEventListener('click',async()=>{
+    const sym=b.dataset.wldel;
+    if(await saveWatchList(wlSyms().filter(s=>s!==sym))){
+      if(DATA.watch) delete DATA.watch[sym];
+      delete window._watchLive[sym];
+      renderWatchlist();
+    }
+  }));
+}
+function initWatchlist(){
+  const inp=document.getElementById('wl-new'); if(!inp||inp._hooked) return; inp._hooked=true;
+  inp.addEventListener('keydown',async e=>{
+    if(e.key!=='Enter') return;
+    const sym=inp.value.trim().toUpperCase(); if(!sym) return;
+    const msg=document.getElementById('wl-msg');
+    if(wlSyms().includes(sym)){ msg.textContent=sym+' is already on the list'; return; }
+    msg.textContent='saving…';
+    if(await saveWatchList([...wlSyms(),sym])){
+      inp.value=''; msg.textContent='✓ added — loading quote…';
+      try{ window._watchLive[sym]=await fetchYahoo(sym); msg.textContent='✓ added'; }
+      catch(err){ msg.textContent='✓ added — data follows within a minute'; }
+      renderWatchlist();
+    } else msg.textContent='save failed — sign in as owner';
+  });
+}
+async function refreshWatch(){
+  const syms=wlSyms(); if(!syms.length) return;
+  const rs=await Promise.allSettled(syms.map(s=>fetchYahoo(s)));
+  rs.forEach((r,i)=>{ if(r.status==='fulfilled'&&r.value.price) window._watchLive[syms[i]]=r.value; });
+  if(_tab==='watchlist') renderWatchlist();
 }
 function renderPerf(){
   const grid=document.getElementById('pf-grid'); if(!grid) return;
