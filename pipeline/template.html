@@ -865,6 +865,7 @@ async function fsDataPoll(){
         if(DATA.bench[s]&&DATA.bench[s].length>20) delete window._benchPreview[s];
         else DATA.bench[s]=ser;
       });
+      if(DATA.secCik) SEC_CIK=DATA.secCik;   // newly watched tickers join SEC alerts without a reload
       Object.assign(_cfg,{name:c.name,public:c.public,owner:c.owner}); cfgLists(c);
       renderKpis(); rerender(); applyName(); applyVisibility();
     }
@@ -1299,7 +1300,8 @@ async function fetchYahoo(sym){
   const spark=[]; for(let k=0;k<cl.length;k+=step) spark.push(+cl[k].toFixed(4));
   if(cl.length && spark[spark.length-1]!==+cl[cl.length-1].toFixed(4)) spark.push(+cl[cl.length-1].toFixed(4));
   return {price:m.regularMarketPrice, prevClose:m.chartPreviousClose,
-          hi52:m.fiftyTwoWeekHigh, lo52:m.fiftyTwoWeekLow, spark, ccy:m.currency};
+          hi52:m.fiftyTwoWeekHigh, lo52:m.fiftyTwoWeekLow, spark, ccy:m.currency,
+          name:m.shortName||m.longName||''};
 }
 
 async function refreshPrices(){
@@ -1373,18 +1375,30 @@ async function fetchGdelt(q){
 const NEWS_JUNK=/shareholder (notice|alert|rights|deadline)|reminds (investors|shareholders)|class action|claimsfiler|faruqi|rosen law|pomerantz|bragar|kaskela|levi\s*&|encourages investors|investigation (on behalf|of)|lead plaintiff|law offices|deadline alert|lawsuit|investor alert|morning (medical )?update|roundup|weekly recap|week in review/i;
 async function refreshNews(){
   const secs=DATA.holdings.filter(h=>h.assetType!=='cash');
-  const results=await Promise.allSettled(secs.map(h=>fetchGdelt(h.gquery).then(a=>({h,a}))));
   const all=[];
-  results.forEach(r=>{ if(r.status!=='fulfilled')return; const {h,a}=r.value;
-    const first=((h.gquery||h.name||h.ticker).split(' ')[0]||'').toLowerCase();
+  const harvest=(ticker,first,a)=>{
     a.forEach(art=>{
       const dom=(art.domain||'').replace(/^www\./,'');
       if(!NEWS_DOMAINS.has(dom)) return;
       const title=(art.title||'').trim(); if(title.length<15) return;
       if(NEWS_JUNK.test(title)) return;
       if(first && !title.toLowerCase().includes(first)) return;   // company must appear in the headline
-      all.push({ticker:h.ticker, headline:title, url:art.url, source:dom, date:gdeltDate(art.seendate)});
+      all.push({ticker, headline:title, url:art.url, source:dom, date:gdeltDate(art.seendate)});
     });
+  };
+  const results=await Promise.allSettled(secs.map(h=>fetchGdelt(h.gquery).then(a=>({h,a}))));
+  results.forEach(r=>{ if(r.status!=='fulfilled')return; const {h,a}=r.value;
+    harvest(h.ticker,((h.gquery||h.name||h.ticker).split(' ')[0]||'').toLowerCase(),a);
+  });
+  /* watchlist tickers get the same sweep — the company name comes from the Yahoo
+     quote (loaded by refreshWatch); tickers without a name yet join the next cycle */
+  const wl=wlSyms().filter(s=>!secs.some(h=>h.ticker===s)&&((window._watchLive[s]||{}).name||'').trim());
+  const wlRes=await Promise.allSettled(wl.map(s=>{
+    const nm=window._watchLive[s].name.trim();
+    return fetchGdelt('"'+nm.replace(/[,.]/g,'')+'"').then(a=>({s,nm,a}));
+  }));
+  wlRes.forEach(r=>{ if(r.status!=='fulfilled')return; const {s,nm,a}=r.value;
+    harvest(s,(nm.split(/[ ,]+/)[0]||'').toLowerCase(),a);
   });
   // Merge fresh GDELT headlines on top of the curated research feed (curated is
   // always substantive; GDELT adds whatever is newer). Dedupe by title, newest first.
@@ -1581,7 +1595,13 @@ function logoImg(cands,cls,tk){
   return `<img class="${cls}" src="${esc(cands[0])}" alt="" loading="lazy"
     data-alt="${esc(cands.slice(1).join('|'))}" ${tk?`data-tk="${esc(tk)}"`:''} onerror="window._lerr(this)">`;
 }
-function tickerLogos(tk){ const h=DATA.holdings.find(x=>x.ticker===tk); return (h&&h.logos)||[]; }
+function tickerLogos(tk){
+  const h=DATA.holdings.find(x=>x.ticker===tk);
+  if(h&&h.logos&&h.logos.length) return h.logos;
+  if(DATA.tradeLogos&&DATA.tradeLogos[tk]&&DATA.tradeLogos[tk].length) return DATA.tradeLogos[tk];
+  if(typeof wlSyms==='function'&&wlSyms().includes(tk)) return wlLogos(tk);
+  return [];
+}
 function actTicker(a){
   const byPid=DATA.holdings.find(h=>h.pid===a.holding);
   if(byPid) return byPid.ticker;
@@ -2194,7 +2214,8 @@ function initWatchlist(){
     msg.textContent='saving…';
     if(await saveWatchList([...wlSyms(),sym])){
       inp.value=''; msg.textContent='✓ added — loading quote…';
-      try{ window._watchLive[sym]=await fetchYahoo(sym); msg.textContent='✓ added'; }
+      try{ window._watchLive[sym]=await fetchYahoo(sym); msg.textContent='✓ added';
+        refreshNews().catch(()=>{}); }               // pull its headlines right away
       catch(err){ msg.textContent='✓ added — data follows within a minute'; }
       renderWatchlist();
     } else msg.textContent='save failed — sign in as owner';
@@ -2205,6 +2226,10 @@ async function refreshWatch(){
   const rs=await Promise.allSettled(syms.map(s=>fetchYahoo(s)));
   rs.forEach((r,i)=>{ if(r.status==='fulfilled'&&r.value.price) window._watchLive[syms[i]]=r.value; });
   if(_tab==='watchlist') renderWatchlist();
+  /* first quotes just delivered the company names — pull their headlines right away */
+  if(!window._wlNewsKick&&syms.some(s=>((window._watchLive[s]||{}).name||'').trim())){
+    window._wlNewsKick=1; refreshNews().catch(()=>{});
+  }
 }
 function renderPerf(){
   const grid=document.getElementById('pf-grid'); if(!grid) return;

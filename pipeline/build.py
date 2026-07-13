@@ -61,7 +61,7 @@ if pp:
     port["totalValue"] = sum(h["value"] for h in port["holdings"])
 
 # ---- SEC CIK auto-resolution (so a NEWLY bought US ticker auto-gets instant SEC alerts) ----
-def sec_cik_map(holdings):
+def sec_cik_map(holdings, extra=()):
     import subprocess, time
     f = os.path.join(ROOT, "sec_tickers.json")
     stale = (not os.path.exists(f)) or (time.time() - os.path.getmtime(f) > 7*86400)
@@ -84,9 +84,19 @@ def sec_cik_map(holdings):
             cik = by_ticker.get((h["ticker"] or "").upper())
             if cik:
                 out[h["ticker"]] = cik
+    for tk in extra:                           # watchlist tickers get the same SEC alerts
+        tk = (tk or "").upper()
+        if tk and tk not in out and by_ticker.get(tk):
+            out[tk] = by_ticker[tk]
     return out
 
-sec_cik = sec_cik_map(port["holdings"])
+def _watch_syms():
+    try:
+        return json.load(open(os.path.join(ROOT, "site_state.json"))).get("watchlist", [])
+    except Exception:
+        return []
+
+sec_cik = sec_cik_map(port["holdings"], _watch_syms())
 
 # ---- PRIVACY: restrict the security name map to ISINs that actually appear in the
 # displayed (Parqet biotech) portfolio's activities. depot.xml also contains a separate
