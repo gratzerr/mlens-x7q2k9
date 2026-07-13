@@ -2185,9 +2185,14 @@ function wlRow(sym){
 const fmtBig=n=>n==null?'—':n>=1e12?(n/1e12).toFixed(2)+'T':n>=1e9?(n/1e9).toFixed(2)+'B':n>=1e6?(n/1e6).toFixed(1)+'M':n>=1e3?(n/1e3).toFixed(1)+'k':String(Math.round(n));
 function wlSpark(tail,up){
   if(!tail||tail.length<2) return '';
-  const w=110,h=30,mn=Math.min(...tail),mx=Math.max(...tail),sp=(mx-mn)||1;
-  const pts=tail.map((v,i)=>`${(i/(tail.length-1)*w).toFixed(1)},${(h-3-(v-mn)/sp*(h-6)).toFixed(1)}`).join(' ');
-  return `<svg width="${w}" height="${h}" viewBox="0 0 ${w} ${h}" style="display:block"><polyline points="${pts}" fill="none" stroke="${up?cvar('--up'):cvar('--down')}" stroke-width="1.8" stroke-linejoin="round" stroke-linecap="round"/></svg>`;
+  const w=110,h=32,mn=Math.min(...tail),mx=Math.max(...tail),sp=(mx-mn)||1;
+  const col=up?cvar('--up'):cvar('--down');
+  const P=(v,i)=>`${(i/(tail.length-1)*w).toFixed(1)},${(h-4-(v-mn)/sp*(h-9)).toFixed(1)}`;
+  const pts=tail.map((v,i)=>P(v,i)).join(' ');
+  return `<svg width="${w}" height="${h}" viewBox="0 0 ${w} ${h}" style="display:block">
+    <polygon points="0,${h} ${pts} ${w},${h}" fill="${col}" opacity="0.09"/>
+    <polyline points="${pts}" fill="none" stroke="${col}" stroke-width="1.8" stroke-linejoin="round" stroke-linecap="round"/>
+    <circle cx="${w}" cy="${P(tail[tail.length-1],tail.length-1).split(',')[1]}" r="2.6" fill="${col}"/></svg>`;
 }
 function renderWatchlist(){
   const el=document.getElementById('watchtable'); if(!el) return;
@@ -2201,9 +2206,11 @@ function renderWatchlist(){
   el.innerHTML='<thead><tr>'+['Ticker','Price','Today','Volume','Avg vol','Mkt cap','30 days','52-week range',own?'':null].filter(x=>x!=null).map(c=>`<th>${c}</th>`).join('')+'</tr></thead><tbody>'+
     rows.map(r=>{
       const up=r.day!=null?(r.day>=0):(r.tail.length>1?r.tail[r.tail.length-1]>=r.tail[0]:true);
-      const range=(r.pos!=null)?`<div style="min-width:120px"><div style="position:relative;height:5px;border-radius:3px;background:var(--surface-2)">
-          <div style="position:absolute;left:${r.pos.toFixed(1)}%;top:-2.5px;width:10px;height:10px;margin-left:-5px;border-radius:50%;background:${up?cvar('--up'):cvar('--down')};border:2px solid var(--surface)"></div></div>
-        <div style="display:flex;justify-content:space-between;font-size:10.5px;color:var(--muted);margin-top:4px"><span>${fmtP(r.lo)}</span><span>${fmtP(r.hi)}</span></div></div>`:'—';
+      const range=(r.pos!=null)?`<div style="display:flex;justify-content:flex-end"><div style="width:140px;padding-top:6px">
+          <div style="position:relative;height:5px;border-radius:3px;background:var(--surface-2)">
+            <div style="position:absolute;left:${Math.max(3,Math.min(97,r.pos)).toFixed(1)}%;top:-2.5px;width:10px;height:10px;margin-left:-5px;border-radius:50%;background:${up?cvar('--up'):cvar('--down')};border:2px solid var(--surface);box-shadow:var(--shadow)"></div></div>
+          <div style="display:flex;justify-content:space-between;font-size:10.5px;color:var(--muted);margin-top:6px"><span>${fmtP(r.lo)}</span><span>${fmtP(r.hi)}</span></div>
+        </div></div>`:'—';
       return `<tr>
         <td><div class="hname">${logoImg(wlLogos(r.sym),'llogo',r.sym)}<div style="min-width:0"><div class="c1">${esc(r.sym)}</div>${r.name?`<div class="nm2">${esc(r.name)}</div>`:''}</div></div></td>
         <td><div class="c1">${fmtP(r.price)}</div>${r.asof?`<div class="c2">close ${esc(r.asof.slice(5))}</div>`:''}</td>
@@ -2211,7 +2218,7 @@ function renderWatchlist(){
         <td><div class="c1">${fmtBig(r.vol)}</div></td>
         <td><div class="c1" style="color:var(--muted)">${fmtBig(r.avgVol)}</div></td>
         <td><div class="c1">${r.mcap!=null?'$'+fmtBig(r.mcap):'—'}</div></td>
-        <td>${wlSpark(r.tail,up)}</td>
+        <td><div style="display:flex;justify-content:flex-end">${wlSpark(r.tail,up)}</div></td>
         <td>${range}</td>
         ${own?`<td><button data-wldel="${esc(r.sym)}" style="border:0;background:none;color:var(--muted);cursor:pointer;font-size:15px">×</button></td>`:''}
       </tr>`;
