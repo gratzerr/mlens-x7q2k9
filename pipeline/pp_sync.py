@@ -417,7 +417,7 @@ for t in ptx:
                 "sh":round(sh,4),
                 "proceedsUsd":round(usd),"basisUsd":round(basis_u),
                 "gainUsd":round(usd-basis_u),"gainEur":round(eur-basis),
-                "ret":round((usd-basis_u)/basis_u*100,1) if basis_u>1e-6 else None})
+                "ret":round((usd-basis_u)/basis_u*100,2) if basis_u>1e-6 else None})
 # attach cumulative Calculation rows to the daily series: q/Q realized, g/G earnings,
 # f/F fees, t/T taxes (USD/EUR) — lets the calc widget report any reporting period
 _re=_ru=_ge=_gu=_fe=_fu=_te=_tu=0.0
@@ -515,10 +515,10 @@ out={"fileDate":datetime.datetime.fromtimestamp(os.path.getmtime(DEPOT)).strftim
      "cashEur":PP_CASH_EUR,
      "cashByAccount":cash_by_acc,
      "totalEur":round(tot_sec_eur+net_cash_eur),
-     "ttwrorSince2022":round(acc_ret*100,1),
-     "ttwrorYtd":round(ytd,1),
-     "ttwrorAnnualized":round(annualized,1),
-     "izf":round(izf,1) if izf is not None else None,
+     "ttwrorSince2022":round(acc_ret*100,2),
+     "ttwrorYtd":round(ytd,2),
+     "ttwrorAnnualized":round(annualized,2),
+     "izf":round(izf,2) if izf is not None else None,
      "yearlyReturns":yearly,
      "realizedEur":round(realized_eur),
      "unrealizedEur":round(unrealized_eur),
@@ -539,9 +539,9 @@ out={"fileDate":datetime.datetime.fromtimestamp(os.path.getmtime(DEPOT)).strftim
      "securities":[{"isin":s["isin"],"ticker":s["tk"],"name":s["name"]}
                    for s in SEC if s["isin"]],
      # legacy keys kept for template compatibility (now = the exact numbers)
-     "ppReferenceTtwror":round(acc_ret*100,1),
+     "ppReferenceTtwror":round(acc_ret*100,2),
      "ppReferenceDate":datetime.date.today().isoformat(),
-     "ttwrorApproxSince2022":round(acc_ret*100,1),
+     "ttwrorApproxSince2022":round(acc_ret*100,2),
      "yearlyReturnsApprox":yearly,
      "holdings":holdings}
 json.dump(out,open(os.path.join(ROOT,"pp.json"),"w"),ensure_ascii=False,indent=1)

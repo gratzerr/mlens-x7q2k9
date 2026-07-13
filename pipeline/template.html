@@ -462,7 +462,7 @@ const fmtUsd = n => { if(_priv) return MASK; const v=inCcy(n);
   return (v<0?'-':'')+curSym()+Math.abs(Math.round(v)).toLocaleString('en-US'); };
 const fmtEur = fmtUsd; // alias
 const fmtE = n => (n<0?'-':'')+'€'+Math.abs(Math.round(n)).toLocaleString('en-US'); // raw EUR (engine figures)
-const fmtPct = n => (n>0?'+':'')+n.toFixed(1)+'%';
+const fmtPct = n => (n>0?'+':'')+n.toFixed(2)+'%';   // 2 decimals like PP/Parqet (Rafael)
 const fmtShort = n => { if(_priv) return '•••'; const v=inCcy(n); const a=Math.abs(v), s=v<0?'-':'';
   return a>=1e6? s+curSym()+(a/1e6).toFixed(2).replace(/\.?0+$/,'')+'M' : a>=1e3? s+curSym()+Math.round(a/1e3)+'k' : s+curSym()+Math.round(a); };
 const maskable = s => _priv ? MASK : s;   // for native-currency strings (prices, activity amounts)
@@ -485,7 +485,7 @@ function renderKpis(){
        +(d.ppNetContribUsd!=null?'<br>invested capital '+money(d.ppNetContribUsd,d.ppNetContribEur):'')},
     {lab:'Unrealized Gain', val:money(un,d.ppUnrealizedEur), note:'current holdings · FIFO vs cost', cls:gn?'up':'down'},
     {lab:'Realized Gain', val:money(rl,d.ppRealizedEur), note:'booked from sells since 2022', cls:rz?'up':'down'},
-    {lab:'Return YTD', val:fmtPct(d.ttwrorYtd||0), note:'since inception (2022) '+fmtPct(d.since2022!=null?d.since2022:(d.pp&&d.pp.ppReferenceTtwror)||0)+'<br>IRR '+(d.izf||0).toFixed(1)+'%', cls:(d.ttwrorYtd||0)>=0?'up':'down'},
+    {lab:'Return YTD', val:fmtPct(d.ttwrorYtd||0), note:'since inception (2022) '+fmtPct(d.since2022!=null?d.since2022:(d.pp&&d.pp.ppReferenceTtwror)||0)+'<br>IRR '+(d.izf||0).toFixed(2)+'%', cls:(d.ttwrorYtd||0)>=0?'up':'down'},
   ];
   document.getElementById('kpis').innerHTML = tiles.map(t=>
     `<div class="tile"><div class="lab">${t.lab}</div>
@@ -506,7 +506,7 @@ function renderPP(){
   document.getElementById('ppcontent').innerHTML=`
     <div class="ppstat"><div class="lab">Total securities</div><div class="val">${fmtE(p.totalSecuritiesEur)}</div>
       <div class="note">${p.holdings.length} positions · both accounts</div></div>
-    <div class="ppstat"><div class="lab">TTWROR since 2022</div><div class="val up">+${p.ppReferenceTtwror.toFixed(1)}%</div>
+    <div class="ppstat"><div class="lab">TTWROR since 2022</div><div class="val up">+${p.ppReferenceTtwror.toFixed(2)}%</div>
       <div class="note">PP app ${esc(p.ppReferenceDate)} · auto-approx ${fmtPct(p.ttwrorApproxSince2022)}</div></div>
     <div class="ppstat"><div class="lab">Dividend sleeve (SQ)</div><div class="val">${fmtE(sqVal)}</div>
       <div class="note">${sq.length} positions</div></div>
