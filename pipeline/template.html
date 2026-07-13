@@ -427,7 +427,6 @@
     <div id="wl-empty" style="display:none;color:var(--muted);font-size:13.5px;padding:8px 0 4px">
       Nothing on the radar yet — the owner can add tickers to watch here.</div>
     <div style="overflow-x:auto"><table class="htable" id="watchtable"></table></div>
-    <div id="wl-news"></div>
   </div>
 
   <div class="foot" id="foot"></div>
@@ -1315,7 +1314,7 @@ async function fetchYahoo(sym){
   if(cl.length && spark[spark.length-1]!==+cl[cl.length-1].toFixed(4)) spark.push(+cl[cl.length-1].toFixed(4));
   return {price:m.regularMarketPrice, prevClose:m.chartPreviousClose,
           hi52:m.fiftyTwoWeekHigh, lo52:m.fiftyTwoWeekLow, spark, ccy:m.currency,
-          name:m.shortName||m.longName||''};
+          vol:m.regularMarketVolume, name:m.shortName||m.longName||''};
 }
 
 async function refreshPrices(){
@@ -1389,7 +1388,7 @@ async function fetchGdelt(q){
 const NEWS_JUNK=/shareholder (notice|alert|rights|deadline)|reminds (investors|shareholders)|class action|claimsfiler|faruqi|rosen law|pomerantz|bragar|kaskela|levi\s*&|encourages investors|investigation (on behalf|of)|lead plaintiff|law offices|deadline alert|lawsuit|investor alert|morning (medical )?update|roundup|weekly recap|week in review/i;
 async function refreshNews(){
   const secs=DATA.holdings.filter(h=>h.assetType!=='cash');
-  const all=[], wlAll=[];
+  const all=[];
   const harvest=(arr,ticker,first,a)=>{
     a.forEach(art=>{
       const dom=(art.domain||'').replace(/^www\./,'');
@@ -1404,27 +1403,6 @@ async function refreshNews(){
   results.forEach(r=>{ if(r.status!=='fulfilled')return; const {h,a}=r.value;
     harvest(all,h.ticker,((h.gquery||h.name||h.ticker).split(' ')[0]||'').toLowerCase(),a);
   });
-  /* watchlist tickers get the same sweep, but their headlines live ON the watchlist
-     tab — the News tab stays positions-only. Small gap: GDELT rate-limits bursts,
-     and the holdings sweep just fired a dozen queries */
-  await new Promise(r=>setTimeout(r,4000));
-  const wl=wlSyms().filter(s=>!secs.some(h=>h.ticker===s)&&((window._watchLive[s]||{}).name||'').trim());
-  const wlRes=await Promise.allSettled(wl.map(s=>{
-    /* strip legal suffixes — GDELT phrase search with "Inc" matches nothing
-       (fetchGdelt adds the quotes itself) */
-    const nm=window._watchLive[s].name.replace(/[,.]/g,'')
-      .replace(/\b(incorporated|inc|corp|corporation|ltd|plc|ag|nv|sa|holdings?)\b/gi,'')
-      .replace(/\s+/g,' ').trim();
-    return fetchGdelt(nm).then(a=>({s,nm,a}));
-  }));
-  wlRes.forEach(r=>{ if(r.status!=='fulfilled')return; const {s,nm,a}=r.value;
-    harvest(wlAll,s,(nm.split(/[ ,]+/)[0]||'').toLowerCase(),a);
-  });
-  wlAll.sort((a,b)=>(b.date||'').localeCompare(a.date||''));
-  const wseen=new Set();
-  liveState.wlNews=wlAll.filter(n=>{const k=(n.headline||'').slice(0,55).toLowerCase().replace(/[^a-z0-9]/g,'');
-    if(!k||wseen.has(k))return false; wseen.add(k); return true;}).slice(0,12);
-  if(_tab==='watchlist') renderWatchlist();
   // Merge fresh GDELT headlines on top of the curated research feed (curated is
   // always substantive; GDELT adds whatever is newer). Dedupe by title, newest first.
   const combined=[...all, ...DATA.latestNews];
@@ -2178,23 +2156,33 @@ function wlLogos(sym){
   const base=sym.split('.')[0].toUpperCase();
   return [`https://assets.parqet.com/logos/symbol/${encodeURIComponent(base)}?format=png&size=64`];
 }
+const _wlNames=(()=>{try{return JSON.parse(localStorage.getItem('pc-wlnames')||'{}');}catch(e){return {};}})();
+function wlName(sym,live){
+  const nm=(live&&live.name||'').trim();
+  if(nm&&_wlNames[sym]!==nm){ _wlNames[sym]=nm; try{localStorage.setItem('pc-wlnames',JSON.stringify(_wlNames));}catch(e){} }
+  return nm||_wlNames[sym]||'';
+}
 function wlRow(sym){
   const live=window._watchLive[sym], ser=(DATA.watch||{})[sym]||[];
+  const meta=(DATA.watchMeta||{})[sym]||{};
   const lastD=ser.length?ser[ser.length-1][0]:null;
   const today=new Date().toISOString().slice(0,10);
   const price=live?live.price:(ser.length?ser[ser.length-1][1]:null);
   /* "Today" only when it IS today: live quote, or a series that already has
      today's bar — otherwise Friday's move would masquerade as today's */
-  let day=null;
-  if(live&&live.prevClose) day=(live.price/live.prevClose-1)*100;
-  else if(ser.length>1&&lastD===today) day=(ser[ser.length-1][1]/ser[ser.length-2][1]-1)*100;
+  let day=null,chg=null;
+  if(live&&live.prevClose){ day=(live.price/live.prevClose-1)*100; chg=live.price-live.prevClose; }
+  else if(ser.length>1&&lastD===today){ day=(ser[ser.length-1][1]/ser[ser.length-2][1]-1)*100; chg=ser[ser.length-1][1]-ser[ser.length-2][1]; }
   const tail=ser.slice(-30).map(x=>x[1]);   // column header says 30 days — keep it true
   const yr=ser.slice(-252).map(x=>x[1]);
-  const hi=live&&live.hi52?live.hi52:(yr.length?Math.max(...yr):null);
-  const lo=live&&live.lo52?live.lo52:(yr.length?Math.min(...yr):null);
+  const hi=(live&&live.hi52)||meta.hi52||(yr.length?Math.max(...yr):null);
+  const lo=(live&&live.lo52)||meta.lo52||(yr.length?Math.min(...yr):null);
   const pos=(price!=null&&hi&&lo&&hi>lo)?((price-lo)/(hi-lo)*100):null;
-  return {sym,price,day,tail,hi,lo,pos,asof:live?null:lastD};
+  return {sym,name:wlName(sym,live),price,day,chg,tail,hi,lo,pos,
+    vol:(live&&live.vol)||meta.vol||null, avgVol:meta.avgVol||null, mcap:meta.mcap||null,
+    asof:live?null:lastD};
 }
+const fmtBig=n=>n==null?'—':n>=1e12?(n/1e12).toFixed(2)+'T':n>=1e9?(n/1e9).toFixed(2)+'B':n>=1e6?(n/1e6).toFixed(1)+'M':n>=1e3?(n/1e3).toFixed(1)+'k':String(Math.round(n));
 function wlSpark(tail,up){
   if(!tail||tail.length<2) return '';
   const w=110,h=30,mn=Math.min(...tail),mx=Math.max(...tail),sp=(mx-mn)||1;
@@ -2209,17 +2197,20 @@ function renderWatchlist(){
   document.getElementById('wl-empty').style.display=syms.length?'none':'block';
   if(!syms.length){ el.innerHTML=''; return; }
   const rows=syms.map(wlRow);
-  const fmtP=p=>p==null?'—':'$'+(+p).toLocaleString('en-US',{minimumFractionDigits:p<1?4:2,maximumFractionDigits:p<1?4:2});
-  el.innerHTML='<thead><tr>'+['Ticker','Price','Today','30 days','52-week range',own?'':null].filter(x=>x!=null).map(c=>`<th>${c}</th>`).join('')+'</tr></thead><tbody>'+
+  const fmtP=p=>p==null?'—':'$'+(+p).toLocaleString('en-US',{minimumFractionDigits:2,maximumFractionDigits:2});
+  el.innerHTML='<thead><tr>'+['Ticker','Price','Today','Volume','Avg vol','Mkt cap','30 days','52-week range',own?'':null].filter(x=>x!=null).map(c=>`<th>${c}</th>`).join('')+'</tr></thead><tbody>'+
     rows.map(r=>{
       const up=r.day!=null?(r.day>=0):(r.tail.length>1?r.tail[r.tail.length-1]>=r.tail[0]:true);
       const range=(r.pos!=null)?`<div style="min-width:120px"><div style="position:relative;height:5px;border-radius:3px;background:var(--surface-2)">
           <div style="position:absolute;left:${r.pos.toFixed(1)}%;top:-2.5px;width:10px;height:10px;margin-left:-5px;border-radius:50%;background:${up?cvar('--up'):cvar('--down')};border:2px solid var(--surface)"></div></div>
         <div style="display:flex;justify-content:space-between;font-size:10.5px;color:var(--muted);margin-top:4px"><span>${fmtP(r.lo)}</span><span>${fmtP(r.hi)}</span></div></div>`:'—';
       return `<tr>
-        <td><div class="hname">${logoImg(wlLogos(r.sym),'llogo',r.sym)}<div class="c1">${esc(r.sym)}</div></div></td>
+        <td><div class="hname">${logoImg(wlLogos(r.sym),'llogo',r.sym)}<div style="min-width:0"><div class="c1">${esc(r.sym)}</div>${r.name?`<div class="nm2">${esc(r.name)}</div>`:''}</div></div></td>
         <td><div class="c1">${fmtP(r.price)}</div>${r.asof?`<div class="c2">close ${esc(r.asof.slice(5))}</div>`:''}</td>
-        <td><div class="c1 ${r.day==null?'':(up?'up':'down')}">${r.day==null?'—':fmtPct(r.day)}</div></td>
+        <td><div class="c1 ${r.day==null?'':(up?'up':'down')}">${r.day==null?'—':fmtPct(r.day)}</div>${r.chg!=null?`<div class="c2 ${up?'up':'down'}">${(r.chg>=0?'+':'−')+'$'+Math.abs(r.chg).toFixed(2)}</div>`:''}</td>
+        <td><div class="c1">${fmtBig(r.vol)}</div></td>
+        <td><div class="c1" style="color:var(--muted)">${fmtBig(r.avgVol)}</div></td>
+        <td><div class="c1">${r.mcap!=null?'$'+fmtBig(r.mcap):'—'}</div></td>
         <td>${wlSpark(r.tail,up)}</td>
         <td>${range}</td>
         ${own?`<td><button data-wldel="${esc(r.sym)}" style="border:0;background:none;color:var(--muted);cursor:pointer;font-size:15px">×</button></td>`:''}
@@ -2233,22 +2224,6 @@ function renderWatchlist(){
       renderWatchlist();
     }
   }));
-  /* headlines & SEC filings for watched tickers — same feeds as holdings, own home */
-  const nel=document.getElementById('wl-news');
-  if(nel){
-    const wset=new Set(syms);
-    const items=[...(liveState.secNews||[]).filter(n=>wset.has(n.ticker)),
-                 ...(liveState.wlNews||[]).filter(n=>wset.has(n.ticker))];
-    nel.innerHTML=`<h2 style="margin:22px 0 10px">News & filings</h2>`+
-      (items.length?`<div class="feed">${items.map(n=>{
-        const hd=n.url?`<a href="${esc(n.url)}" target="_blank" rel="noopener">${esc(n.headline)}</a>`:esc(n.headline);
-        return `<div class="fi">
-          <div class="fd">${n._sec?'<span style="color:var(--down)">SEC</span>':enDate(n.date)}</div>
-          <div><div class="ft">${logoImg(wlLogos(n.ticker),'nlogo',n.ticker)}<span class="tkr ${n._sec?'sec':'neutral'}">${esc(n.ticker)}</span> ${hd}</div>
-          <div class="fm">${esc(n.source)}</div></div></div>`;
-      }).join('')}</div>`
-      :`<div style="color:var(--muted);font-size:13px">No fresh headlines or filings for the watched tickers yet — new ones appear here automatically.</div>`);
-  }
 }
 function initWatchlist(){
   const inp=document.getElementById('wl-new'); if(!inp||inp._hooked) return; inp._hooked=true;
@@ -2260,8 +2235,7 @@ function initWatchlist(){
     msg.textContent='saving…';
     if(await saveWatchList([...wlSyms(),sym])){
       inp.value=''; msg.textContent='✓ added — loading quote…';
-      try{ window._watchLive[sym]=await fetchYahoo(sym); msg.textContent='✓ added';
-        refreshNews().catch(()=>{}); }               // pull its headlines right away
+      try{ window._watchLive[sym]=await fetchYahoo(sym); msg.textContent='✓ added'; }
       catch(err){ msg.textContent='✓ added — data follows within a minute'; }
       renderWatchlist();
     } else msg.textContent='save failed — sign in as owner';
@@ -2272,10 +2246,6 @@ async function refreshWatch(){
   const rs=await Promise.allSettled(syms.map(s=>fetchYahoo(s)));
   rs.forEach((r,i)=>{ if(r.status==='fulfilled'&&r.value.price) window._watchLive[syms[i]]=r.value; });
   if(_tab==='watchlist') renderWatchlist();
-  /* first quotes just delivered the company names — pull their headlines right away */
-  if(!window._wlNewsKick&&syms.some(s=>((window._watchLive[s]||{}).name||'').trim())){
-    window._wlNewsKick=1; refreshNews().catch(()=>{});
-  }
 }
 function renderPerf(){
   const grid=document.getElementById('pf-grid'); if(!grid) return;

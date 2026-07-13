@@ -320,6 +320,8 @@ data = {
     # watchlist quotes (separate from bench so they never appear as benchmark chips)
     "watch": (lambda: (json.load(open(os.path.join(ROOT, "watch.json")))
                        if os.path.exists(os.path.join(ROOT, "watch.json")) else {}))(),
+    "watchMeta": (lambda: (json.load(open(os.path.join(ROOT, "watch_meta.json")))
+                           if os.path.exists(os.path.join(ROOT, "watch_meta.json")) else {}))(),
     "usdPerEur": usd_per_eur if pp else 1.14,
     # PP net-worth curve (daily EUR value + cum TTWROR) — replaces Parqet's wrong chart
     "chartPP": pp.get("series", []) if pp else [],

@@ -37,23 +37,46 @@ def watch_syms():
     except Exception:
         return []
 
+WATCH_META = os.path.join(ROOT, "watch_meta.json")
+def _fast_meta(sym):
+    """Fundamentals for the watchlist row (Seeking-Alpha-style columns)."""
+    import yfinance as yf
+    fi = yf.Ticker(sym).fast_info
+    def g(k):
+        try:
+            v = fi[k]
+            return round(float(v), 4) if v is not None else None
+        except Exception:
+            return None
+    return {"mcap": g("market_cap"), "vol": g("last_volume"),
+            "avgVol": g("three_month_average_volume"), "shares": g("shares"),
+            "hi52": g("year_high"), "lo52": g("year_low")}
+
 def fetch_watch(missing_only):
     """Watchlist quotes live in their own file so they never show up as benchmark chips."""
     old = {}
     try: old = json.load(open(WATCH_OUT))
     except Exception: pass
-    syms = watch_syms()
+    meta = {}
+    try: meta = json.load(open(WATCH_META))
+    except Exception: pass
+    want = watch_syms()
+    syms = want
     if missing_only:
-        syms = [s for s in syms if len(old.get(s, [])) < 20]
+        syms = [s for s in want if len(old.get(s, [])) < 20]
         if not syms: return
-    res = {k: v for k, v in old.items() if k in watch_syms()}   # drop removed tickers
+    res = {k: v for k, v in old.items() if k in want}   # drop removed tickers
+    meta = {k: v for k, v in meta.items() if k in want}
     for sym in syms:
         try: s = fetch(sym)
         except Exception: s = []
         if len(s) > 20: res[sym] = s
         elif sym in old and len(old[sym]) > 20: res[sym] = old[sym]
         else: print(f"watch: {sym} FAILED")
+        try: meta[sym] = _fast_meta(sym)
+        except Exception: pass
     json.dump(res, open(WATCH_OUT, "w"))
+    json.dump(meta, open(WATCH_META, "w"))
     if res: print("watch.json:", {k: len(v) for k, v in res.items()})
 
 def main():
