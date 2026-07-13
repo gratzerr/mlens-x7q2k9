@@ -330,6 +330,9 @@ data = {
                        if os.path.exists(os.path.join(ROOT, "watch.json")) else {}))(),
     "watchMeta": (lambda: (json.load(open(os.path.join(ROOT, "watch_meta.json")))
                            if os.path.exists(os.path.join(ROOT, "watch_meta.json")) else {}))(),
+    "fund": (lambda: (json.load(open(os.path.join(ROOT, "fund.json")))
+                      if os.path.exists(os.path.join(ROOT, "fund.json")) else {}))(),
+    "buysByTicker": pp.get("buysByTicker", {}) if pp else {},
     "usdPerEur": usd_per_eur if pp else 1.14,
     # PP net-worth curve (daily EUR value + cum TTWROR) — replaces Parqet's wrong chart
     "chartPP": pp.get("series", []) if pp else [],

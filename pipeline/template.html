@@ -2203,7 +2203,7 @@ async function fetchYahooChart(sym,range,interval){
 }
 const SEC_RANGES=[['1mo','1h','1M'],['6mo','1d','6M'],['1y','1d','1Y'],['5y','1wk','5Y'],['max','1mo','Max']];
 let _secTk=null, _secRange='1y';
-function drawSecChart(pts){
+function drawSecChart(pts,buys){
   const svg=document.getElementById('sd-chart-svg'); if(!svg||!pts||pts.length<2) return;
   const W=svg.getBoundingClientRect().width||700, H=200, pad={t:10,b:18,l:0,r:0};
   const xs=pts.map(p=>p[0]), ys=pts.map(p=>p[1]);
@@ -2218,12 +2218,26 @@ function drawSecChart(pts){
   let grid='';
   [mx,(mx+mn)/2,mn].forEach(v=>{ grid+=`<line x1="0" y1="${Y(v).toFixed(1)}" x2="${W}" y2="${Y(v).toFixed(1)}" stroke="${gc}"/>`+
     `<text x="4" y="${(Y(v)-4).toFixed(1)}" font-size="10" fill="${mc}" font-family="system-ui">${fmtP(v)}</text>`; });
+  /* buy markers: snap to the price line at the buy date, tooltip on hover */
+  const bcol=cvar('--accent'); let marks='';
+  (buys||[]).forEach(b=>{
+    const bt=Date.parse(b[0])/1000; if(bt<t0-86400||bt>t1+86400) return;
+    let py=ys[0]; for(let i=0;i<pts.length;i++){ if(pts[i][0]<=bt) py=pts[i][1]; else break; }
+    const cx=X(bt), cy=Y(py);
+    marks+=`<g class="sd-buy" data-bt="${bt}" data-info="Bought ${b[1].toLocaleString('en-US')} @ ${fmtP(b[2])} · ${b[0]}">
+      <circle cx="${cx.toFixed(1)}" cy="${cy.toFixed(1)}" r="7" fill="${bcol}" opacity="0.16"/>
+      <circle cx="${cx.toFixed(1)}" cy="${cy.toFixed(1)}" r="4" fill="${bcol}" stroke="${cvar('--surface')}" stroke-width="1.6"/></g>`;
+  });
   svg.setAttribute('viewBox',`0 0 ${W} ${H}`);
   svg.innerHTML=`<defs><linearGradient id="sdg" x1="0" x2="0" y1="0" y2="1">
       <stop offset="0" stop-color="${col}" stop-opacity="0.16"/><stop offset="1" stop-color="${col}" stop-opacity="0"/></linearGradient></defs>`+
     grid+`<path d="${area}" fill="url(#sdg)"/><path d="${line}" fill="none" stroke="${col}" stroke-width="2" stroke-linejoin="round"/>`+
-    `<circle cx="${X(t1).toFixed(1)}" cy="${Y(ys[ys.length-1]).toFixed(1)}" r="3.2" fill="${col}"/>`+
+    `<circle cx="${X(t1).toFixed(1)}" cy="${Y(ys[ys.length-1]).toFixed(1)}" r="3.2" fill="${col}"/>`+marks+
     `<line class="cross" id="sd-cx" x1="0" y1="${pad.t}" x2="0" y2="${H-pad.b}" style="opacity:0"/>`;
+  svg.querySelectorAll('.sd-buy').forEach(g=>{
+    g.style.cursor='pointer';
+    g.addEventListener('mouseenter',()=>{ const t=document.getElementById('sd-tip'); if(t){t.style.opacity=1;t.innerHTML='🔵 '+g.dataset.info;} });
+  });
   const tip=document.getElementById('sd-tip'), cx=document.getElementById('sd-cx');
   const move=e=>{ const rct=svg.getBoundingClientRect();
     const fx=(e.touches?e.touches[0].clientX:e.clientX)-rct.left;
@@ -2238,7 +2252,8 @@ function drawSecChart(pts){
 async function loadSecChart(){
   const svgWrap=document.getElementById('sd-chartwrap'); if(!svgWrap) return;
   const rc=SEC_RANGES.find(r=>r[0]===_secRange)||SEC_RANGES[2];
-  try{ const pts=await fetchYahooChart(_secTk,rc[0],rc[1]); if(_secTk) drawSecChart(pts); }
+  const buys=(DATA.buysByTicker||{})[_secTk]||[];
+  try{ const pts=await fetchYahooChart(_secTk,rc[0],rc[1]); if(_secTk) drawSecChart(pts,buys); }
   catch(e){ const t=document.getElementById('sd-tip'); if(t) t.textContent='chart unavailable'; }
 }
 function openSecDetail(tk){
@@ -2294,6 +2309,23 @@ function openSecDetail(tk){
       ${n.summary?`<div style="color:var(--muted);font-size:12px;margin-top:2px">${esc(n.summary)}</div>`:''}
       <div style="color:var(--muted);font-size:11px;margin-top:2px">${esc(n.source)}</div></div>`;
   }).join(''):'';
+  /* fundamentals (Yahoo, refreshed a few times a day) — no beta, EV instead of P/B */
+  const fd=(DATA.fund||{})[tk];
+  let fundHtml='';
+  if(fd){
+    const rr=v=>v==null?'—':(+v).toFixed(2);
+    const div=(fd.divRate||fd.divYield)?`Yes${fd.divYield?' ('+(fd.divYield*100).toFixed(2)+'%)':''}`:'No';
+    const fc=(l,v)=>`<div class="sd-stat"><div class="l">${l}</div><div class="v">${v}</div></div>`;
+    fundHtml=`<div class="sd-sec">Fundamentals</div><div class="sd-stats">
+      ${fc('Market cap',fd.mcap!=null?'$'+fmtBig(fd.mcap):'—')}
+      ${fc('Shares out',fmtBig(fd.shares))}
+      ${fc('52w range',fd.lo52!=null&&fd.hi52!=null?'$'+(+fd.lo52).toFixed(2)+' – $'+(+fd.hi52).toFixed(2):'—')}
+      ${fc('Dividend',div)}
+      ${fc('P/E (KGV)',rr(fd.pe))}
+      ${fc('PEG (KGWV)',rr(fd.peg))}
+      ${fc('P/S (KUV)',rr(fd.ps))}
+      ${fc('Enterprise value',fd.ev!=null?'$'+fmtBig(fd.ev):'—')}</div>`;
+  }
   const lk=(h&&h.links)||{};
   const links=[['Stocktwits',lk.stocktwits],['X / Twitter',lk.x],['Investor Relations',lk.ir],['Finviz',lk.finviz]]
     .filter(x=>x[1]).map(x=>`<a class="lk" href="${esc(x[1])}" target="_blank" rel="noopener">${x[0]} &#8599;</a>`).join('');
@@ -2311,7 +2343,7 @@ function openSecDetail(tk){
     <div class="sd-body">
       ${h&&h.thesis?`<div style="font-size:13.5px;color:var(--ink);margin:4px 0 2px">${esc(h.thesis)}</div>`:''}
       ${h&&r.pulse?`<div style="font-size:12.5px;color:var(--muted);margin-bottom:4px">${esc(r.pulse)}</div>`:''}
-      ${stats}${catHtml}${newsHtml}
+      ${stats}${fundHtml}${catHtml}${newsHtml}
       ${links?`<div class="links" style="margin-top:14px">${links}</div>`:''}
     </div>`;
   document.getElementById('secov').classList.add('on');

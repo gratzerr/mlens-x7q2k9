@@ -79,6 +79,47 @@ def fetch_watch(missing_only):
     json.dump(meta, open(WATCH_META, "w"))
     if res: print("watch.json:", {k: len(v) for k, v in res.items()})
 
+FUND_OUT = os.path.join(ROOT, "fund.json")
+def _fundamentals(sym):
+    import yfinance as yf
+    info = yf.Ticker(sym).info
+    def g(*keys):
+        for k in keys:
+            v = info.get(k)
+            if v not in (None, "", 0): return v
+        return None
+    return {"mcap": g("marketCap"), "shares": g("sharesOutstanding"),
+            "hi52": g("fiftyTwoWeekHigh"), "lo52": g("fiftyTwoWeekLow"),
+            "pe": g("trailingPE", "forwardPE"), "peg": g("trailingPegRatio", "pegRatio"),
+            "ps": g("priceToSalesTrailing12Months"), "ev": g("enterpriseValue"),
+            "divRate": g("dividendRate"), "divYield": g("dividendYield")}
+
+def fund_tickers():
+    syms = set(watch_syms())
+    try:
+        for h in json.load(open(os.path.join(ROOT, "pp.json"))).get("holdings", []):
+            tk = (h.get("tk") or h.get("ticker") or "").strip().upper()
+            if tk and len(tk) <= 10: syms.add(tk)   # skip option OCC symbols
+    except Exception: pass
+    return sorted(syms)
+
+def fetch_fund():
+    """Slow-moving fundamentals (PE/PEG/PS/EV/mcap/dividend). Refresh only when
+    fund.json is missing or >6h old — .info is heavy and rate-limited."""
+    import time
+    if os.path.exists(FUND_OUT) and time.time() - os.path.getmtime(FUND_OUT) < 6*3600:
+        return
+    old = {}
+    try: old = json.load(open(FUND_OUT))
+    except Exception: pass
+    res = dict(old)
+    for sym in fund_tickers():
+        try: res[sym] = _fundamentals(sym)
+        except Exception: pass
+    if res:
+        json.dump(res, open(FUND_OUT, "w"))
+        print("fund.json:", len(res), "tickers")
+
 def main():
     old = {}
     try: old = json.load(open(OUT))
@@ -109,3 +150,5 @@ def main():
 if __name__ == "__main__":
     main()
     fetch_watch(os.environ.get("MISSING_ONLY") == "1")
+    try: fetch_fund()
+    except Exception as e: print("fund fetch skipped:", e)

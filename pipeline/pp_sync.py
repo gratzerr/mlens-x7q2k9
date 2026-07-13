@@ -422,6 +422,7 @@ for s,sh in open_sh.items():
         lots[s].append([sh, to_eur(v,SEC[s]["ccy"],START), to_usd(v,SEC[s]["ccy"],START), START])
 realized_eur=0.0;realized_usd=0.0
 trades=[]   # every SELL as a closed FIFO round-trip (for the trading-record widget)
+buys_by_sec=defaultdict(lambda: defaultdict(lambda:[0.0,0.0]))  # sec -> date -> [shares, cost_native] for chart markers
 rz_usd_by_sec=defaultdict(float)   # per-security realized (USD) for the holdings table
 rz_day=defaultdict(lambda:[0.0,0.0])   # d -> [eur, usd] realized that day (for period calc)
 # same-date ordering: process adds (BUY/inbound) BEFORE removes, otherwise a same-day
@@ -440,6 +441,8 @@ for t in ptx:
     eur=to_eur(g,t["ccy"],t["date"]);usd=to_usd(g,t["ccy"],t["date"])
     if ty in ("BUY","DELIVERY_INBOUND"):
         lots[s].append([sh,eur,usd,t["date"]])
+        if sh>1e-9:
+            b=buys_by_sec[s][t["date"]]; b[0]+=sh; b[1]+=(t["amount"]-t["fee"]-t["tax"])  # native cost ex-fee
     elif ty in ("SELL","DELIVERY_OUTBOUND"):
         rem=sh;basis=0.0;basis_u=0.0;q=lots[s]
         first_buy=None;wdays=0.0;taken=0.0
@@ -579,6 +582,12 @@ out={"fileDate":datetime.datetime.fromtimestamp(os.path.getmtime(DEPOT)).strftim
      "taxesEur":round(tax_eur,2),"taxesUsd":round(tax_usd),
      "series":daily,
      "payments":sorted(payments,key=lambda p:p["d"],reverse=True),
+     # buy markers per ticker for the detail chart (held securities only, one entry
+     # per day: [date, shares, avg price paid ex-fee in native ccy])
+     "buysByTicker":{ (SEC[si]["tk"] or (SEC[si]["name"] or "")[:10]):
+         [[d, round(v[0],2), round(v[1]/v[0],4)] for d,v in sorted(dm.items()) if v[0]>1e-9]
+         for si,dm in buys_by_sec.items()
+         if sum(l[0] for l in lots.get(si,[]))>1e-6 },
      "ports":sorted({(portfolios.get(t["owner"]) or {}).get("name") for t in txs.values()
                      if t["kind"]=="port" and t["owner"]} - {None}),
      "trades":sorted(({**{k:v for k,v in tr.items() if k!="sec"},
