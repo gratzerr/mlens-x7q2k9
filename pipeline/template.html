@@ -2229,11 +2229,24 @@ async function rsCik(tk){
   }
   return window._cikMap[tk.toUpperCase()]||null;
 }
+/* concurrency gate: ~20 concepts fire per ticker — an unthrottled burst gets the
+   proxy rate-limited and half the charts silently come back empty */
+let _rsSlots=4;const _rsWait=[];
+const _rsGate=()=>_rsSlots>0?(_rsSlots--,Promise.resolve()):new Promise(res=>_rsWait.push(res));
+const _rsFree=()=>{const n=_rsWait.shift(); if(n) n(); else _rsSlots++;};
 async function rsFetchConcept(cik,tax,tag){
   const u=`https://data.sec.gov/api/xbrl/companyconcept/CIK${String(cik).padStart(10,'0')}/${tax}/${tag}.json`;
-  const r=await fetch('https://corsproxy.io/?url='+encodeURIComponent(u));
-  const t=await r.text(); if(t[0]!=='{') throw new Error('bad');
-  return JSON.parse(t);
+  const via=async p=>{ const r=await fetch(p+encodeURIComponent(u));
+    const t=await r.text(); if(t[0]!=='{') throw new Error('bad'); return JSON.parse(t); };
+  await _rsGate();
+  try{
+    try{ return await via('https://corsproxy.io/?url='); }
+    catch(e1){
+      await new Promise(r=>setTimeout(r,500));
+      try{ return await via('https://corsproxy.io/?url='); }      // retry once (throttle recovers fast)
+      catch(e2){ return await via('https://api.allorigins.win/raw?url='); }
+    }
+  } finally { _rsFree(); }
 }
 /* build {q:[[yyyyQn,val]], a:[[yyyy,val]]} from RAW SEC entries (not frames — small
    filers barely get frames, and cash-flow items are reported YTD only). Quarterly =

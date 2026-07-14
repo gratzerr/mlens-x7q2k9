@@ -63,7 +63,9 @@ def fetch_watch(missing_only):
     want = watch_syms()
     syms = want
     if missing_only:
-        syms = [s for s in want if len(old.get(s, [])) < 20]
+        # a symbol is "missing" if its series OR its meta is absent — a failed
+        # fast_info call would otherwise never be retried
+        syms = [s for s in want if len(old.get(s, [])) < 20 or s not in meta]
         if not syms: return
     res = {k: v for k, v in old.items() if k in want}   # drop removed tickers
     meta = {k: v for k, v in meta.items() if k in want}
