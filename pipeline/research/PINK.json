@@ -1,1 +1,67 @@
-{"ticker":"PINK","news":[{"date":"2026-07-06","headline":"Paradigm Capital names Perimeter and maintains Profound as healthcare Top Picks","source":"BioTuesdays","url":"https://biotuesdays.com/2026/07/06/paradigm-capital-names-perimeter-and-maintains-profound-as-healthcare-top-picks/","summary":"Paradigm Capital initiated Perimeter as a healthcare Top Pick with a Speculative Buy and a C$0.95 price target (stock at C$0.275 on July 3). The analyst frames the March FDA approval of Claire as the accelerant for U.S. commercialization and flags M&A optionality, noting the stock trades at ~2.3x 2027e revenue versus ~10.3x average for comparable MedTech takeouts."},{"date":"2026-06-15","headline":"Perimeter Medical Imaging AI to Participate in the Planet MicroCap Showcase in Las Vegas","source":"Perimeter IR / PR Newswire","url":"https://ir.perimetermed.com/news-events/press-releases/detail/212/","summary":"CEO Adrian Mendes presented Perimeter's post-FDA commercialization strategy and upcoming milestones at the Planet MicroCap Showcase on June 17. The appearance underscores the push for broader small-cap investor visibility following Claire's approval."},{"date":"2026-06-09","headline":"Perimeter Selected for INOVAIT Pilot Fund to Advance AI for Breast Cancer Surgery","source":"Perimeter IR / PR Newswire","url":"https://ir.perimetermed.com/news-events/press-releases/detail/211/","summary":"Perimeter secured up to ~C$148,000 from Canada's INOVAIT Pilot Fund plus C$100,000 in Mitacs funding to develop the next AI generation for Claire alongside the University of Toronto. The amount is small, but it is non-dilutive external validation of the AI platform."},{"date":"2026-06-08","headline":"Perimeter Medical Imaging AI Closes Final Tranche of Non-Brokered Private Placement","source":"Perimeter IR / PR Newswire","url":"https://ir.perimetermed.com/news-events/press-releases/detail/210/","summary":"Perimeter closed the final tranche of its convertible-debenture placement, bringing the total to C$6.04M. Insider alignment is strong: CEO Mendes subscribed C$2.76M and Chamath Palihapitiya's SC Master Holdings (Social Capital) C$2.78M, though the notes add potential dilution."},{"date":"2026-05-28","headline":"Perimeter Announces First Quarter 2026 Financial Results","source":"Perimeter IR / PR Newswire","url":"https://ir.perimetermed.com/news-events/press-releases/detail/209/","summary":"Q1 recurring revenue rose ~14% YoY to roughly $385k, operating expenses fell ~30% to $3.2M and the net loss narrowed to ~$3.0M. Cash at end of March was only ~$421k (before the ~$7.5M LIFE offering in May); Perimeter reported its first two commercial Claire placements and a funnel of ~50 qualified leads."},{"date":"2026-05-05","headline":"Perimeter Medical Imaging AI Closes LIFE Offering (~$7.5M)","source":"Perimeter IR / PR Newswire","url":"https://ir.perimetermed.com/news-events/press-releases/detail/207/","summary":"Perimeter closed its LIFE offering for roughly $7.5M in gross proceeds, shoring up a nearly empty balance sheet and funding the U.S. launch of Claire. Combined with the convertible notes, the near-term liquidity crunch is addressed at the cost of further dilution."}],"catalysts":[{"when":"2026-Q3","label":"Q2 2026 financial results","detail":"Next quarterly report (expected August) covering the first full quarter of Claire commercialization; watch new placements from the ~50-lead funnel and cash burn versus the May/June financings.","confirmed":false},{"when":"2026-H2","label":"Claire rollout / new clinic deals","detail":"Additional commercial Claire placements at U.S. hospitals expected, with more than a dozen leads in active Prospecting/Developing/Validating/Contracting stages.","confirmed":false},{"when":"2026","label":"Medicare reimbursement decision","detail":"Per Paradigm Capital, a reimbursement determination expected around year-end would be the most important driver of Claire adoption economics.","confirmed":false},{"when":"2026","label":"Possible Nasdaq up-listing","detail":"Cited by Paradigm Capital as a potential catalyst to broaden U.S. investor access; no official timeline announced.","confirmed":false}],"pulse":"As of July 13, 2026, Perimeter remains in early Claire commercialization mode following March's FDA PMA, with no material company news since the July 6 sell-side coverage; the ~50-lead sales funnel and pace of new hospital placements remain the key things to watch into Q2 results (expected August). The May LIFE offering (~$7.5M) and June's C$6.04M convertible-note placement, heavily subscribed by CEO Mendes and Chamath Palihapitiya's Social Capital, stabilized a previously thin cash position, and Paradigm Capital's July 6 Top Pick call (Speculative Buy, C$0.95 target vs. ~C$0.275 spot) has kept sentiment constructive. The stock remains a speculative micro-cap awaiting evidence of real commercial traction, with a possible year-end Medicare reimbursement decision and a talked-about Nasdaq up-listing as the next major catalysts."}
+{
+  "ticker": "PINK",
+  "news": [
+    {
+      "date": "2026-07-06",
+      "headline": "Paradigm Capital Names Perimeter Medical Imaging a New Healthcare Top Pick",
+      "source": "BioTuesdays",
+      "url": "https://biotuesdays.com/2026/07/06/paradigm-capital-names-perimeter-and-maintains-profound-as-healthcare-top-picks/",
+      "summary": "Paradigm Capital analyst Scott McAuley named Perimeter (TSXV:PINK; OTCQX:PYNKF) a new Top Pick with a speculative buy rating, raising his price target to C$0.95 from C$0.70 based on 9x projected 2027 revenue and recent M&A comparables in breast-cancer surgery devices. Shares closed at C$0.275 on July 3, well below the new target."
+    },
+    {
+      "date": "2026-06-15",
+      "headline": "Perimeter Medical Imaging AI to Participate in the Planet MicroCap Showcase in Las Vegas",
+      "source": "PR Newswire",
+      "url": "https://www.prnewswire.com/news-releases/perimeter-medical-imaging-ai-to-participate-in-the-planet-microcap-showcase-in-las-vegas-302800736.html",
+      "summary": "Perimeter announced CEO Adrian Mendes would present a company update on commercial strategy and upcoming milestones at the Planet MicroCap Showcase on June 17, 2026, with a live and archived webcast available to investors."
+    },
+    {
+      "date": "2026-06-09",
+      "headline": "Perimeter Selected for INOVAIT Pilot Fund to Advance AI for Breast Cancer Surgery",
+      "source": "PR Newswire",
+      "url": "https://www.prnewswire.com/news-releases/perimeter-selected-for-inovait-pilot-fund-to-advance-ai-for-breast-cancer-surgery-302795289.html",
+      "summary": "Perimeter was selected for a Government of Canada-backed INOVAIT Pilot Fund contribution of up to roughly C$148,000, plus a C$100,000 Mitacs award, to advance next-generation AI capabilities for its FDA-approved Claire breast-cancer margin assessment device."
+    },
+    {
+      "date": "2026-06-08",
+      "headline": "Perimeter Medical Imaging AI Closes Final Tranche of Non-Brokered Private Placement",
+      "source": "PR Newswire / Perimeter IR",
+      "url": "https://ir.perimetermed.com/news-events/press-releases/detail/210/perimeter-medical-imaging-ai-closes-final-tranche-of",
+      "summary": "Perimeter closed the second and final CDN$3.28 million tranche of its non-brokered convertible debenture private placement, bringing the total raise to CDN$6.04 million, with major shareholder Social Capital and CEO Adrian Mendes participating."
+    },
+    {
+      "date": "2026-05-28",
+      "headline": "Perimeter Announces First Quarter 2026 Financial Results",
+      "source": "PR Newswire",
+      "url": "https://www.prnewswire.com/news-releases/perimeter-announces-first-quarter-2026-financial-results-302785009.html",
+      "summary": "Perimeter reported Q1 2026 recurring revenue of about $385,000, a 30% cut in operating expenses to $3.2 million, a 31% narrower net loss of $3.0 million, and a 41% reduction in cash used in operations to $2.2 million, reflecting early commercial traction following the March 2026 FDA approval of Claire."
+    }
+  ],
+  "catalysts": [
+    {
+      "when": "H2 2026 (effective date targeted Jan 1, 2027; possibly Oct 1, 2026)",
+      "label": "CMS Medicare reimbursement decision for Claire",
+      "detail": "Management is filing a CMS application via the MEARIS quarterly process with the goal of securing a national reimbursement determination for Claire, which would take effect January 1, 2027 (an earlier October 1, 2026 effective date is possible but considered unlikely); a positive decision would likely be followed by commercial payer policy reviews (UnitedHealth, Anthem, Cigna, Aetna) in Q1-Q2 2027.",
+      "confirmed": false
+    },
+    {
+      "when": "Expected ~August 2026",
+      "label": "Q2 2026 financial results",
+      "detail": "Next scheduled quarterly earnings release covering Claire's early U.S. commercial rollout post-FDA approval; exact date not yet announced.",
+      "confirmed": false
+    },
+    {
+      "when": "Unspecified / under evaluation",
+      "label": "Potential Nasdaq uplisting",
+      "detail": "Management has publicly discussed a possible move from OTC/TSX-V to Nasdaq to broaden the capital markets pool for the stock, but no formal application or timeline has been confirmed.",
+      "confirmed": false
+    },
+    {
+      "when": "Ongoing through 2026",
+      "label": "Additional health-system adoption agreements for S-Series OCT / Claire",
+      "detail": "Following the systemwide Intermountain Health agreement and FDA PMA for Claire, Perimeter is pursuing further hospital-system rollout deals to expand recurring procedure revenue.",
+      "confirmed": false
+    }
+  ],
+  "pulse": "Since Claire's landmark March 2026 FDA PMA approval as the first AI-enabled intraoperative breast-cancer margin device, Perimeter has stacked supportive developments: non-dilutive INOVAIT/Mitacs funding, a closed C$6.04M convertible debenture financing to fund U.S. commercialization, and a fresh Paradigm Capital Top Pick call (C$0.95 target) even as shares trade near C$0.28. The key re-rating catalyst ahead is the CMS Medicare reimbursement decision for Claire, targeted for a January 1, 2027 effective date, alongside continued hospital-system rollout and a still-unconfirmed potential Nasdaq uplisting."
+}

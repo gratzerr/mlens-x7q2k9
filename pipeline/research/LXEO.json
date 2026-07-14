@@ -1,1 +1,73 @@
-{"ticker":"LXEO","news":[{"date":"2026-07-07","headline":"Stifel maintains Lexeo Therapeutics (LXEO) at Buy, $17 price target","source":"Futu / Moomoo","url":"https://www.stocktitan.net/news/LXEO/","summary":"Stifel reiterated a Buy rating with a $17 price target, more than triple the ~$5 share price, signaling continued sell-side conviction in the LX2006 accelerated-approval path after the June regulatory update. It adds to a post-catalyst chorus of bullish analyst reiterations."},{"date":"2026-07-03","headline":"Have insiders sold Lexeo Therapeutics shares recently?","source":"Simply Wall St","url":"https://simplywall.st/stocks/us/pharmaceuticals-biotech/nasdaq-lxeo/lexeo-therapeutics","summary":"A cluster of early-July Form 4 filings showed CEO Richard Townsend and CFO Louis Tamayo selling shares (25,947 and 4,641 shares respectively, at ~$4.48-4.49) tied to RSU-vesting tax withholding after June 29 restricted-stock grants. The sizes were modest and largely automatic tax-cover sales, but insider selling right after a positive catalyst drew retail attention and is a mild sentiment negative."},{"date":"2026-06-25","headline":"J.P. Morgan maintains Lexeo Therapeutics at Overweight, $9 price target","source":"Moomoo","url":"https://www.moomoo.com/news","summary":"JPMorgan reaffirmed Overweight (Buy) but trimmed its target to $9 (from $12) following the JAMA publication and pivotal trial-design finalization. The bulge-bracket endorsement reinforces confidence in the LX2006 regulatory pathway despite the lower target."},{"date":"2026-06-17","headline":"Lexeo publishes Phase I/II LX2006 Friedreich ataxia data in JAMA Cardiology","source":"GlobeNewswire","url":"https://www.globenewswire.com/news-release/2026/06/17/3313795/0/en/lexeo-therapeutics-announces-publication-in-jama-cardiology-of-phase-i-ii-data-for-lx2006-in-friedreich-ataxia.html","summary":"Peer-reviewed JAMA Cardiology publication of pooled Phase I/II data (17 patients) showed roughly 28-33% left ventricular mass index improvement in abnormal-baseline cardiac cohorts, increased frataxin expression in all biopsied patients, and mFARS neurologic stabilization. This is the clinical foundation validating the pivotal cardiac program."},{"date":"2026-06-15","headline":"Lexeo announces FDA regulatory update and finalized SUNRISE-FA 2 registrational trial design","source":"GlobeNewswire","url":"https://www.globenewswire.com/news-release/2026/06/15/3311662/0/en/lexeo-therapeutics-announces-regulatory-update-and-registrational-trial-design-for-lx2006-gene-therapy-in-friedreich-ataxia.html","summary":"The pivotal catalyst: Lexeo finalized the open-label SUNRISE-FA 2 protocol and statistical analysis plan (13 high-dose LX2006 patients plus 13 untreated controls, LVMI by cardiac MRI at 6 months as primary endpoint) with FDA aligned on an accelerated-approval BLA in 1H 2028. FDA confirmed no additional nonclinical bridging studies are needed and commercial-scale drug product is ready, materially de-risking the path to registration; management guided topline data to 2H 2027."},{"date":"2026-05-11","headline":"Lexeo reports Q1 2026 financial results and operational highlights","source":"GlobeNewswire","url":"https://ir.lexeotx.com/news-releases/news-release-details/lexeo-therapeutics-reports-first-quarter-2026-financial-results","summary":"Q1 2026 EPS of -$0.25 beat consensus (-$0.31) and shares rose ~5%. The update reiterated cash runway into 2028 and pipeline timelines, noting the SUNRISE-FA 2 protocol and SAP had been submitted to FDA and that Phase I/II interim data continued to show statistically significant mFARS improvement versus a propensity-matched control cohort."}],"catalysts":[{"when":"2026-Q3","label":"SUNRISE-FA 2 enrollment ramp / first patients dosed","detail":"Company guided to enrolling the first patient in the registrational LX2006 trial by end of June 2026, with commercial-scale drug product already available. Enrollment pace across the 13 treated / 13 control cohort is the key near-term operational catalyst.","confirmed":true},{"when":"2026-08-19","label":"Q2 2026 earnings report","detail":"Next quarterly results and pipeline update; cash-runway commentary and SUNRISE-FA 2 enrollment progress will be watched given ongoing cash burn.","confirmed":false},{"when":"2026-Q4","label":"HEROIC-PKP2 (LX2020) 12-month high-dose data update","detail":"Twelve-month follow-up data for all high-dose participants in the Phase I/II HEROIC-PKP2 trial of LX2020 for PKP2-associated arrhythmogenic cardiomyopathy, plus expected FDA regulatory engagement on the program in 2026.","confirmed":true},{"when":"2027-H2","label":"SUNRISE-FA 2 topline data","detail":"Pivotal readout of LX2006 in Friedreich ataxia cardiomyopathy (LVMI at 6 months), the key value-driving event ahead of a BLA.","confirmed":true},{"when":"2028-H1","label":"LX2006 BLA submission (accelerated approval)","detail":"Planned Biologics License Application to FDA under the accelerated-approval pathway based on SUNRISE-FA 2 evidence.","confirmed":true},{"when":"2026-H2","label":"LX1001 APOE4 Alzheimer's program updates","detail":"Continued development and enrollment updates for the APOE4-homozygous Alzheimer's gene therapy, a secondary pipeline catalyst.","confirmed":false}],"pulse":"As of July 13, 2026 the story remains anchored on the mid-June regulatory reset: FDA alignment on the finalized SUNRISE-FA 2 pivotal design (accelerated-approval BLA targeted 1H 2028) and a peer-reviewed JAMA Cardiology publication of strong LX2006 cardiac data drove a wave of bullish sell-side reiterations, including Stifel's $17 target on July 7, keeping consensus targets far above the depressed ~$5 share price. No incremental company news has emerged in the week since; the only fresh datapoint was routine, tax-driven insider selling by the CEO and CFO tied to RSU vesting, a mild but non-fundamental overhang. Attention now turns to SUNRISE-FA 2 enrollment progress, the August 19 Q2 print, and Q4 2026 12-month HEROIC-PKP2 (LX2020) data, with the pivotal LX2006 topline readout (2H 2027) remaining the key long-dated catalyst for this higher-beta, cash-burn-sensitive gene-therapy name."}
+{
+  "ticker": "LXEO",
+  "news": [
+    {
+      "date": "2026-07-01",
+      "headline": "Lexeo Therapeutics CFO Sells Shares to Cover RSU Tax Withholding",
+      "source": "StockTitan / SEC Form 4",
+      "url": "https://www.stocktitan.net/sec-filings/LXEO/form-4-lexeo-therapeutics-inc-insider-trading-activity-bb86ac059861.html",
+      "summary": "CFO Louis Edward Tamayo sold 4,641 shares at a weighted-average price of $4.49 following a June 29 RSU vesting, in a routine transaction to cover tax obligations, and continues to hold over 97,000 shares."
+    },
+    {
+      "date": "2026-06-25",
+      "headline": "JPMorgan Cuts Lexeo Therapeutics Price Target to $9 from $12, Keeps Overweight",
+      "source": "Insider Monkey / Yahoo Finance",
+      "url": "https://www.insidermonkey.com/blog/is-lexeo-therapeutics-inc-lxeo-stock-still-a-gene-therapy-opportunity-after-analyst-valuation-update-1793955/",
+      "summary": "JPMorgan lowered its price target on Lexeo to $9 from $12 while maintaining an Overweight rating, citing an updated valuation model following recent clinical and regulatory developments. The revision came shortly after Lexeo finalized its pivotal SUNRISE-FA 2 trial design."
+    },
+    {
+      "date": "2026-06-25",
+      "headline": "Lexeo Shareholders Reelect Directors, Ratify KPMG as Auditor at Annual Meeting",
+      "source": "TipRanks",
+      "url": "https://www.tipranks.com/news/company-announcements/lexeo-shareholders-reelect-directors-ratify-kpmg-auditor",
+      "summary": "At its virtual 2026 annual meeting, Lexeo stockholders reelected three Class III directors, including CEO R. Nolan Townsend, and ratified KPMG LLP as the company's independent auditor for fiscal 2026."
+    },
+    {
+      "date": "2026-06-17",
+      "headline": "Lexeo Therapeutics Announces Publication in JAMA Cardiology of Phase I/II Data for LX2006 in Friedreich Ataxia",
+      "source": "GlobeNewswire",
+      "url": "https://www.globenewswire.com/news-release/2026/06/17/3313795/0/en/lexeo-therapeutics-announces-publication-in-jama-cardiology-of-phase-i-ii-data-for-lx2006-in-friedreich-ataxia.html",
+      "summary": "Pooled data from 17 Friedreich ataxia cardiomyopathy patients across two independent studies of LX2006 showed sustained cardiac and neurologic improvements with a generally well-tolerated safety profile, as published in JAMA Cardiology. The results reinforce Lexeo's rationale for advancing LX2006 into its pivotal trial."
+    },
+    {
+      "date": "2026-06-15",
+      "headline": "Lexeo Therapeutics Announces Regulatory Update and Registrational Trial Design for LX2006 Gene Therapy in Friedreich Ataxia",
+      "source": "GlobeNewswire / BioSpace",
+      "url": "https://www.globenewswire.com/news-release/2026/06/15/3311662/0/en/lexeo-therapeutics-announces-regulatory-update-and-registrational-trial-design-for-lx2006-gene-therapy-in-friedreich-ataxia.html",
+      "summary": "Lexeo finalized the protocol and statistical analysis plan for SUNRISE-FA 2, a pivotal open-label trial of high-dose LX2006 in Friedreich ataxia cardiomyopathy, after the FDA confirmed no additional nonclinical bridging studies are required. The company guided to a topline readout in 2H 2027 and a BLA submission in 1H 2028 under the accelerated approval pathway; shares rose on the news."
+    }
+  ],
+  "catalysts": [
+    {
+      "when": "Q4 2026",
+      "label": "LX2020 12-month high-dose cohort data update (PKP2-ACM)",
+      "detail": "Lexeo plans to report 12-month follow-up data for all high-dose participants in the HEROIC PKP2 Phase 1/2 trial of LX2020 in PKP2-associated arrhythmogenic cardiomyopathy.",
+      "confirmed": true
+    },
+    {
+      "when": "2026 (unspecified)",
+      "label": "FDA regulatory engagement on LX2020/PKP2-ACM registrational path",
+      "detail": "Company has guided to further FDA discussions in 2026 regarding a potential registrational path for LX2020.",
+      "confirmed": false
+    },
+    {
+      "when": "~August 2026 (estimated)",
+      "label": "Q2 2026 earnings report",
+      "detail": "Consensus estimates point to Lexeo reporting second-quarter 2026 financial and operational results around August 19, 2026; the company has not yet officially confirmed the date.",
+      "confirmed": false
+    },
+    {
+      "when": "2H 2027",
+      "label": "SUNRISE-FA 2 topline efficacy readout (LX2006)",
+      "detail": "Topline 6-month efficacy data (left ventricular mass index) from the pivotal SUNRISE-FA 2 trial of LX2006 in Friedreich ataxia cardiomyopathy is expected in the second half of 2027.",
+      "confirmed": true
+    },
+    {
+      "when": "1H 2028",
+      "label": "Planned BLA submission for LX2006",
+      "detail": "Lexeo intends to submit a Biologics License Application to the FDA seeking accelerated approval of LX2006 for Friedreich ataxia cardiomyopathy, contingent on SUNRISE-FA 2 results.",
+      "confirmed": false
+    }
+  ],
+  "pulse": "Lexeo's lead program, LX2006 for Friedreich ataxia cardiomyopathy, gained momentum in June 2026 as the company finalized its pivotal SUNRISE-FA 2 trial design with FDA input and published supportive Phase I/II data in JAMA Cardiology, targeting a 2H 2027 topline readout and a 1H 2028 accelerated-approval BLA filing. Despite that clinical progress, the stock has drifted down to the $4.50-$4.90 range in July, and JPMorgan trimmed its price target to $9 from $12, though most sell-side coverage retains Buy/Overweight ratings with double-digit targets. The earlier-stage PKP2-ACM program (LX2020) is the next major near-term catalyst, with a 12-month high-dose data update expected in Q4 2026."
+}

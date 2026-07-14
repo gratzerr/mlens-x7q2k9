@@ -1,1 +1,73 @@
-{"ticker":"DCTH","news":[{"date":"2026-07-10","headline":"Analysts Maintain Delcath Systems Buy Ratings with $21 Target","source":"Moomoo / The Globe and Mail","url":"https://www.theglobeandmail.com/investing/markets/stocks/DCTH/pressreleases/35236095/craig-hallum-remains-a-buy-on-delcath-systems-dcth/","summary":"Craig-Hallum reaffirmed a Buy rating on DCTH with a price target around $21, well above the current share price. Continued sell-side confidence rests on the HEPZATO commercial ramp and pipeline expansion."},{"date":"2026-07-09","headline":"Delcath Systems Announces First Patient Dosed in Phase 2 Clinical Trial of HEPZATO in Liver-Dominant Metastatic Breast Cancer","source":"Business Wire / BioSpace","url":"https://www.businesswire.com/news/home/20260709141093/en/Delcath-Systems-Announces-First-Patient-Dosed-in-Phase-2-Clinical-Trial-of-HEPZATO-in-Liver-Dominant-Metastatic-Breast-Cancer","summary":"First patient dosed at the European Institute of Oncology in Milan in the ~90-patient randomized DELUMA trial (NCT06875128) evaluating HEPZATO plus standard of care in HER2-negative liver-dominant metastatic breast cancer. This is the key pipeline expansion beyond uveal melanoma into a much larger indication, with hepatic PFS data expected around end of 2028."},{"date":"2026-07-07","headline":"Delcath Systems (NASDAQ:DCTH) Stock Rating Upgraded by Zacks Research","source":"Ticker Report","url":"https://www.tickerreport.com/banking-finance/13499040/delcath-systems-nasdaqdcth-stock-rating-upgraded-by-zacks-research.html","summary":"Zacks Research upgraded DCTH from a \"strong sell\" rating to a \"hold\" rating, part of a broader mix of analyst views (average rating \"Moderate Buy\", average target near $22.50) as the stock trades near its 52-week highs."},{"date":"2026-06-28","headline":"Delcath Systems Added to Russell 2000 Value, 2500 Value, 3000 Value and Microcap Value Benchmarks","source":"MarketScreener","url":"https://www.marketscreener.com/quote/stock/DELCATH-SYSTEMS-INC-10396/","summary":"DCTH was included in several Russell value benchmarks (Russell 2000 Value, 2500 Value, 3000 Value, Microcap Value and 2000 Defensive) in the annual reconstitution. Index membership broadens passive-fund ownership, visibility and liquidity for the small-cap name."},{"date":"2026-05-26","headline":"Delcath Systems Announces Two ASCO 2026 Investigator Initiated Trials-in-Progress Abstracts","source":"Business Wire / BioSpace","url":"https://www.stocktitan.net/news/DCTH/delcath-systems-announces-two-asco-2026-investigator-initiated-dp5wpwdiapnc.html","summary":"Two investigator-initiated trials-in-progress abstracts featuring HEPZATO were presented at the 2026 ASCO annual meeting, expanding clinical evidence and physician engagement. Reinforces the growing academic base supporting HEPZATO across indications."},{"date":"2026-05-07","headline":"Delcath Systems Reports First Quarter 2026 Results: $25M Revenue, $100M+ Full-Year Outlook Reiterated","source":"Business Wire / StockTitan","url":"https://www.stocktitan.net/news/DCTH/delcath-systems-reports-first-quarter-2026-results-and-business-y0arusiukibw.html","summary":"Q1 2026 revenue rose to $25.0M (from $19.8M a year earlier) with HEPZATO KIT contributing $23.3M at ~85% gross margin and ~36% HEPZATO volume growth; the company held $89.3M cash with no debt and reiterated at least $100M full-year 2026 revenue guidance."}],"catalysts":[{"when":"2026-08-05 (est.)","label":"Q2 2026 earnings","detail":"Second-quarter results are broadly estimated around early August (earnings-calendar trackers point to roughly August 5; Q2 2025 was reported August 6, 2025); as of mid-July 2026 the company has not yet announced a specific call date. It is the key test of the $100M+ full-year revenue guidance and HEPZATO KIT volume growth after a strong Q1.","confirmed":false},{"when":"2026","label":"$100M+ revenue target","detail":"Full-year 2026 guidance of at least $100M revenue implies substantial HEPZATO KIT volume growth over 2025; execution against this is the primary near-term driver.","confirmed":true},{"when":"2026-2027","label":"DELUMA breast cancer trial ramp","detail":"Phase 2 HEPZATO metastatic breast cancer trial (NCT06875128, ~90 patients) now dosing after first patient in Milan on July 9; US/EU site activation and enrollment updates expected ahead, with hepatic PFS data anticipated around end of 2028.","confirmed":true},{"when":"late 2027 (expected)","label":"mCRC Phase 2 interim data / indication expansion","detail":"Ongoing colorectal-cancer Phase 2 trial (site activation continuing toward ~26 targeted centers) plus CHOPIN combination data (Lancet Oncology publication showed improved PFS with HEPZATO plus immunotherapy) underpin further label/indication expansion potential.","confirmed":false}],"pulse":"As of mid-July 2026, Delcath's story remains one of steady execution: Q1 revenue of $25M at ~85% gross margin, ~36% HEPZATO volume growth, $89M cash with no debt, and reiterated $100M+ 2026 guidance, while the DELUMA breast cancer trial has now dosed its first patient, marking the move beyond uveal melanoma into a far larger market. Russell value-index inclusion, a Zacks upgrade to hold, and a reaffirmed Craig-Hallum Buy/$21 target underscore sell-side confidence even as the stock trades near 52-week highs with analyst price targets spanning roughly $18-$30. No major new catalysts have emerged since July 10; the next key event is the Q2 2026 print estimated for early August (around August 5), which will be the first real test of full-year guidance."}
+{
+  "ticker": "DCTH",
+  "news": [
+    {
+      "date": "2026-07-09",
+      "headline": "Delcath Systems Announces First Patient Dosed in Phase 2 Clinical Trial of HEPZATO in Liver-Dominant Metastatic Breast Cancer",
+      "source": "BusinessWire",
+      "url": "https://www.businesswire.com/news/home/20260709141093/en/Delcath-Systems-Announces-First-Patient-Dosed-in-Phase-2-Clinical-Trial-of-HEPZATO-in-Liver-Dominant-Metastatic-Breast-Cancer",
+      "summary": "Delcath dosed the first patient, at the European Institute of Oncology in Milan, in its global randomized Phase 2 DELUMA trial testing HEPZATO plus standard of care versus standard of care alone in liver-dominant HER2-negative metastatic breast cancer. The roughly 90-patient trial is planned to run at more than 20 sites across the US and Europe."
+    },
+    {
+      "date": "2026-05-26",
+      "headline": "Delcath Systems Announces Two ASCO 2026 Investigator Initiated Trials-in-Progress Abstracts",
+      "source": "BioSpace",
+      "url": "https://www.biospace.com/press-releases/delcath-systems-announces-two-asco-2026-investigator-initiated-trials-in-progress-abstracts",
+      "summary": "Two investigator-initiated trial-in-progress abstracts combining Delcath's percutaneous hepatic perfusion (PHP) with newer systemic therapies -- sequential PHP followed by tebentafusp in metastatic uveal melanoma, and PHP plus nivolumab/relatlimab in liver-metastatic melanoma -- were accepted as posters at the 2026 ASCO Annual Meeting in Chicago. The studies aim to show how liver-directed PHP can be sequenced or combined with modern immunotherapy regimens."
+    },
+    {
+      "date": "2026-05-07",
+      "headline": "Delcath Systems Reports First Quarter 2026 Results and Business Highlights",
+      "source": "BusinessWire",
+      "url": "https://www.businesswire.com/news/home/20260507125922/en/Delcath-Systems-Reports-First-Quarter-2026-Results-and-Business-Highlights",
+      "summary": "Q1 2026 revenue rose to $25.0 million from $19.8 million a year earlier, driven by roughly 36% growth in HEPZATO KIT volume and four new center activations, and the company reiterated full-year 2026 revenue guidance of at least $100 million. Delcath ended the quarter with $89.3 million in cash and a narrow $1.1 million net loss."
+    },
+    {
+      "date": "2026-05-07",
+      "headline": "Delcath Systems Announces Presentation of New Data on Percutaneous Hepatic Perfusion with Melphalan in Liver-Dominant Metastatic Breast Cancer at ESMO Breast Cancer 2026",
+      "source": "Investing News Network",
+      "url": "https://investingnews.com/delcath-systems-announces-presentation-of-new-data-on-percutaneous-hepatic-perfusion-with-melphalan-in-liver-dominant-metastatic-breast-cancer-at-esmo-breast-cancer-2026/",
+      "summary": "Independent European investigators presented a retrospective analysis of 15 liver-dominant metastatic breast cancer patients treated with Delcath's CHEMOSAT (M-PHP) at the ESMO Breast Cancer 2026 congress in Berlin, reporting hepatic partial responses in 9 of 15 patients. The data helped build the rationale behind the newly launched Phase 2 DELUMA breast cancer trial."
+    },
+    {
+      "date": "2026-04-06",
+      "headline": "Delcath Systems Announces Inclusion of CHEMOSAT Hepatic Delivery System for Melphalan as a Recommended Liver-Directed Regional Therapy Option in the ESMO-EURACAN Clinical Practice Guidelines for Uveal Melanoma",
+      "source": "BioSpace",
+      "url": "https://www.biospace.com/press-releases/delcath-systems-inc-announces-inclusion-of-chemosat-hepatic-delivery-system-for-melphalan-as-a-recommended-liver-directed-regional-therapy-option-in-the-esmo-euracan-clinical-practice-guidelines-for-uveal-melanoma",
+      "summary": "Delcath's CHEMOSAT Hepatic Delivery System was named the first-listed regional treatment option for multifocal liver-only uveal melanoma metastases in the newly published ESMO-EURACAN Clinical Practice Guideline. The guideline cites two Phase 3 trials showing improved hepatic and overall progression-free survival versus best alternative care."
+    }
+  ],
+  "catalysts": [
+    {
+      "when": "Early August 2026 (estimated)",
+      "label": "Q2 2026 earnings report",
+      "detail": "Next quarterly results are expected roughly three months after the May 7, 2026 Q1 print; management will likely update HEPZATO volume growth, site-activation pace and progress toward the $100M+ FY2026 revenue guidance.",
+      "confirmed": false
+    },
+    {
+      "when": "FY2026",
+      "label": "Full-year 2026 revenue guidance of at least $100 million",
+      "detail": "Reiterated on the Q1 2026 call, implying at least 20% growth in HEPZATO KIT volume over 2025; delivery against this target is a key near-term proof point.",
+      "confirmed": true
+    },
+    {
+      "when": "By year-end 2026 / Q1 2027",
+      "label": "HEPZATO active treatment center expansion to ~40 sites",
+      "detail": "Management guided to 37 active US centers by year-end 2026 and 40 by Q1 2027 (slower than earlier targets), a key driver of continued HEPZATO volume growth.",
+      "confirmed": true
+    },
+    {
+      "when": "Ongoing, 2026-2027",
+      "label": "Phase 2 DELUMA trial in liver-dominant metastatic breast cancer",
+      "detail": "First patient was dosed July 9, 2026 in the ~90-patient randomized trial of HEPZATO plus standard of care vs. standard of care alone; enrollment across 20+ US/European sites is the near-term milestone, with efficacy data still to come.",
+      "confirmed": true
+    },
+    {
+      "when": "Ongoing, 2026-2027",
+      "label": "Phase 2 trial in liver-dominant metastatic colorectal cancer",
+      "detail": "Randomized ~90-patient study of HEPZATO plus trifluridine-tipiracil/bevacizumab vs. that regimen alone in third-line colorectal cancer patients; continued site activation and enrollment progress are the near-term catalysts.",
+      "confirmed": true
+    }
+  ],
+  "pulse": "Delcath's commercial ramp continues: Q1 2026 revenue grew to $25.0 million on ~36% HEPZATO volume growth, and management reiterated full-year 2026 guidance of at least $100 million in revenue. The clinical pipeline is broadening beyond melanoma, with the first patient now dosed in the Phase 2 DELUMA trial testing HEPZATO in liver-dominant metastatic breast cancer, alongside an ongoing colorectal cancer Phase 2 study and growing guideline recognition (ESMO-EURACAN) for CHEMOSAT in uveal melanoma. News flow has been relatively quiet since late May, with the stock trading near 52-week highs (around $12-14) heading into the next earnings report expected in early August."
+}
