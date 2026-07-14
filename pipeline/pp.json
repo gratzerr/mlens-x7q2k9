@@ -1,8 +1,8 @@
 {
- "fileDate": "2026-07-14 15:58",
- "generated": "2026-07-14 16:19",
+ "fileDate": "2026-07-14 16:21",
+ "generated": "2026-07-14 16:42",
  "engine": "pp-exact (verified vs PP app 2026-07-11)",
- "totalSecuritiesEur": 2093473,
+ "totalSecuritiesEur": 2096459,
  "cashEur": -90923.38,
  "cashByAccount": [
   {
@@ -30,22 +30,22 @@
    "eur": 137.81
   }
  ],
- "totalEur": 2002550,
- "ttwrorSince2022": 411.42,
- "ttwrorYtd": 103.06,
- "ttwrorAnnualized": 43.32,
- "izf": 72.61,
+ "totalEur": 2005536,
+ "ttwrorSince2022": 412.18,
+ "ttwrorYtd": 103.37,
+ "ttwrorAnnualized": 43.37,
+ "izf": 72.71,
  "yearlyReturns": {
   "2022": 3.3,
   "2023": 11.8,
   "2024": 45.2,
   "2025": 50.2,
-  "2026": 103.1
+  "2026": 103.4
  },
  "realizedEur": 699185,
- "unrealizedEur": 632379,
+ "unrealizedEur": 635364,
  "realizedUsd": 855901,
- "unrealizedUsd": 699515,
+ "unrealizedUsd": 702928,
  "netContribEur": 666772,
  "netContribUsd": 738607,
  "earningsEur": 13297.85,
@@ -26537,9 +26537,9 @@
   },
   {
    "d": "2026-07-14",
-   "v": 2288915,
-   "e": 2002550,
-   "r": 4.114203,
+   "v": 2292327,
+   "e": 2005536,
+   "r": 4.121828,
    "c": 738607,
    "k": 666772,
    "q": 855901,
@@ -45849,15 +45849,15 @@
    "name": "CARIBOU BIOSCIENCES INC"
   }
  ],
- "ppReferenceTtwror": 411.42,
+ "ppReferenceTtwror": 412.18,
  "ppReferenceDate": "2026-07-14",
- "ttwrorApproxSince2022": 411.42,
+ "ttwrorApproxSince2022": 412.18,
  "yearlyReturnsApprox": {
   "2022": 3.3,
   "2023": 11.8,
   "2024": 45.2,
   "2025": 50.2,
-  "2026": 103.1
+  "2026": 103.4
  },
  "holdings": [
   {
@@ -45870,14 +45870,14 @@
    "isin": "NL0010696654",
    "ccy": "USD",
    "shares": 10000.0,
-   "price": 42.81999969,
-   "value": 428200.0,
-   "valueEur": 374628,
-   "valueUsd": 428200,
+   "price": 42.63999938,
+   "value": 426399.99,
+   "valueEur": 373053,
+   "valueUsd": 426400,
    "basisUsd": 91996,
    "realizedUsd": 11487,
    "avgCost": 12.7255,
-   "unrealRet": 236.5,
+   "unrealRet": 235.1,
    "priceDate": "2026-07-14"
   },
   {
@@ -45890,14 +45890,14 @@
    "isin": "US81663L2007",
    "ccy": "USD",
    "shares": 5000.0,
-   "price": 61.88449859,
-   "value": 309422.49,
-   "valueEur": 270711,
-   "valueUsd": 309422,
+   "price": 62.20999908,
+   "value": 311050.0,
+   "valueEur": 272135,
+   "valueUsd": 311050,
    "basisUsd": 183278,
    "realizedUsd": 0,
    "avgCost": 36.6597,
-   "unrealRet": 68.8,
+   "unrealRet": 69.7,
    "priceDate": "2026-07-14"
   },
   {
@@ -45910,14 +45910,14 @@
    "isin": "US18507C1036",
    "ccy": "USD",
    "shares": 17500.0,
-   "price": 15.97999954,
-   "value": 279649.99,
-   "valueEur": 244663,
-   "valueUsd": 279650,
+   "price": 16.17000007,
+   "value": 282975.0,
+   "valueEur": 247572,
+   "valueUsd": 282975,
    "basisUsd": 168705,
    "realizedUsd": -60391,
    "avgCost": 12.0988,
-   "unrealRet": 32.1,
+   "unrealRet": 33.6,
    "priceDate": "2026-07-14"
   },
   {
@@ -45930,14 +45930,14 @@
    "isin": "US24661P8077",
    "ccy": "USD",
    "shares": 17000.0,
-   "price": 12.88000011,
-   "value": 218960.0,
-   "valueEur": 191566,
-   "valueUsd": 218960,
+   "price": 12.89999961,
+   "value": 219299.99,
+   "valueEur": 191864,
+   "valueUsd": 219300,
    "basisUsd": 156329,
    "realizedUsd": -16090,
    "avgCost": 9.6139,
-   "unrealRet": 34.0,
+   "unrealRet": 34.2,
    "priceDate": "2026-07-14"
   },
   {
@@ -45963,26 +45963,6 @@
   },
   {
    "account": "ALL",
-   "ticker": "NKTR",
-   "name": "NEKTAR THERAPEUTICS",
-   "byPort": {
-    "SQ": 3000.0
-   },
-   "isin": "US6402683063",
-   "ccy": "USD",
-   "shares": 3000.0,
-   "price": 69.02999877,
-   "value": 207090.0,
-   "valueEur": 181181,
-   "valueUsd": 207090,
-   "basisUsd": 193331,
-   "realizedUsd": -54345,
-   "avgCost": 80.4296,
-   "unrealRet": -14.2,
-   "priceDate": "2026-07-14"
-  },
-  {
-   "account": "ALL",
    "ticker": "NRXS",
    "name": "NEURAXIS INC",
    "byPort": {
@@ -45991,14 +45971,34 @@
    "isin": "US64134X2018",
    "ccy": "USD",
    "shares": 30000.0,
-   "price": 6.88999986,
-   "value": 206700.0,
-   "valueEur": 180840,
-   "valueUsd": 206700,
+   "price": 6.90000009,
+   "value": 207000.0,
+   "valueEur": 181102,
+   "valueUsd": 207000,
    "basisUsd": 163566,
    "realizedUsd": 0,
    "avgCost": 5.4548,
-   "unrealRet": 26.3,
+   "unrealRet": 26.5,
+   "priceDate": "2026-07-14"
+  },
+  {
+   "account": "ALL",
+   "ticker": "NKTR",
+   "name": "NEKTAR THERAPEUTICS",
+   "byPort": {
+    "SQ": 3000.0
+   },
+   "isin": "US6402683063",
+   "ccy": "USD",
+   "shares": 3000.0,
+   "price": 68.88999938,
+   "value": 206670.0,
+   "valueEur": 180814,
+   "valueUsd": 206670,
+   "basisUsd": 193331,
+   "realizedUsd": -54345,
+   "avgCost": 80.4296,
+   "unrealRet": -14.3,
    "priceDate": "2026-07-14"
   },
   {
@@ -46011,14 +46011,14 @@
    "isin": "US52886X1072",
    "ccy": "USD",
    "shares": 40000.0,
-   "price": 4.6999998,
-   "value": 187999.99,
-   "valueEur": 164479,
-   "valueUsd": 188000,
+   "price": 4.71999979,
+   "value": 188799.99,
+   "valueEur": 165179,
+   "valueUsd": 188800,
    "basisUsd": 199200,
    "realizedUsd": 0,
    "avgCost": 4.985,
-   "unrealRet": -5.7,
+   "unrealRet": -5.3,
    "priceDate": "2026-07-14"
   },
   {
@@ -46071,14 +46071,14 @@
    "isin": "US88032L6056",
    "ccy": "USD",
    "shares": 4000.0,
-   "price": 15.5,
-   "value": 62000.0,
-   "valueEur": 54243,
-   "valueUsd": 62000,
+   "price": 15.31000041,
+   "value": 61240.0,
+   "valueEur": 53578,
+   "valueUsd": 61240,
    "basisUsd": 43298,
    "realizedUsd": 0,
    "avgCost": 10.8275,
-   "unrealRet": 43.2,
+   "unrealRet": 41.4,
    "priceDate": "2026-07-14"
   }
  ]
