@@ -2385,12 +2385,12 @@ async function rsLoad(tk){
     });
   });
 }
-const RS_CARDS=[   // key, label, fmt, color (Qualtrim-style: every chart its own hue)
-  ['price','Price',null,null],['revenue','Revenue','$','#e8a63b'],['grossProfit','Gross Profit','$','#4db6ac'],
-  ['opInc','Operating Income','$','#8f7ad6'],['netInc','Net Income','$','#e3c84a'],['eps','EPS (diluted)','eps','#d98e4a'],
-  ['ocf','Operating Cash Flow','$','#5d9fc9'],['fcf','Free Cash Flow','$','#e0784f'],['margins','Margins %','%',null],
-  ['rnd','R&D Expense','$','#6d92c4'],['sga','SG&A Expense','$','#9a86c9'],['cash','Cash','$','#7a9d54'],
-  ['shares','Shares Outstanding','n','#4da6a0'],['roc','Return of Capital','$','#bd7fb0']];
+const RS_CARDS=[   // key, label, fmt, color — Qualtrim palette: bars keep the card hue even when negative
+  ['price','Price',null,null],['revenue','Revenue','$','#f5bd5a'],['grossProfit','Gross Profit','$','#5fb8b2'],
+  ['opInc','Operating Income','$','#a08ee0'],['netInc','Net Income','$','#f5c08a'],['eps','EPS (diluted)','eps','#f0d060'],
+  ['ocf','Operating Cash Flow','$','#9dc6e8'],['fcf','Free Cash Flow','$','#f0952e'],['margins','Margins %','%',null],
+  ['rnd','R&D Expense','$','#7ba7d9'],['sga','SG&A Expense','$','#b39ddb'],['cash','Cash','$','#8fbc6f'],
+  ['shares','Shares Outstanding','n','#63b5ae'],['roc','Return of Capital','$','#d391c4']];
 function rsGet(key){   // series in current mode
   if(!RS.data||!RS.data[key]) return [];
   const s=RS.data[key];
@@ -2417,7 +2417,7 @@ function rsBars(elId,ser,fmt,H,color){
     const x=(i+0.5)*(W/ser.length);
     const bh=Math.abs(v)*scale;
     const y=v>=0?zero-bh:zero;
-    const col=v>=0?(color||cvar('--up')):cvar('--down');
+    const col=color||(v>=0?cvar('--up'):cvar('--down'));   // QT style: the axis tells the sign
     h+=`<rect x="${(x-bw/2).toFixed(1)}" y="${y.toFixed(1)}" width="${bw.toFixed(1)}" height="${Math.max(1.5,bh).toFixed(1)}" rx="2" fill="${col}" opacity="0.85"><title>${k}: ${rsFmtV(v,fmt)}</title></rect>`;
     const every=Math.ceil(ser.length/8);
     if(i%every===0) h+=`<text x="${x.toFixed(1)}" y="${H-8}" text-anchor="middle" font-size="9.5" fill="${cvar('--muted')}" font-family="system-ui" transform="rotate(-38 ${x.toFixed(1)} ${H-8})">${k}</text>`;
@@ -2548,7 +2548,7 @@ function drawRsPrice(svg,pts){
   const up=ys[ys.length-1]>=ys[0],col=up?cvar('--up'):cvar('--down');
   const line=pts.map((p,i)=>`${i?'L':'M'}${((p[0]-t0)/ts*W).toFixed(1)},${(6+(1-(p[1]-mn)/sp)*(H-14)).toFixed(1)}`).join(' ');
   svg.setAttribute('viewBox',`0 0 ${W} ${H}`);
-  svg.innerHTML=`<path d="${line} L${W},${H} L0,${H} Z" fill="${col}" opacity="0.08"/><path d="${line}" fill="none" stroke="${col}" stroke-width="1.8"/>`;
+  svg.innerHTML=`<path d="${line} L${W},${H} L0,${H} Z" fill="${col}" opacity="0.30"/><path d="${line}" fill="none" stroke="${col}" stroke-width="2"/>`;
 }
 function rsCagrChips(ser){   // ser = annual or ttm series of [key,val]
   if(!ser||ser.length<2) return '';
