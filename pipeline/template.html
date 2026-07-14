@@ -2375,7 +2375,8 @@ async function rsLoad(tk){
       rsDerive(data);
       rsDrawCard(key);
       if(key==='ocf'||key==='capex') rsDrawCard('fcf');
-      if(['revenue','costRev','grossProfit','opInc','netInc'].includes(key)){ rsDrawCard('grossProfit'); rsDrawCard('margins'); }
+      if(['revenue','costRev','grossProfit','opInc','netInc'].includes(key)){ rsDrawCard('grossProfit'); rsDrawCard('margins'); rsDrawCard('grossMargin'); }
+      if(['eps','revenue','shares'].includes(key)) rsDrawCard('valuation');
       if(key==='divPaid'||key==='buyback') rsDrawCard('roc');
       rsStats();
     })().catch(()=>{}).finally(()=>{
@@ -2389,6 +2390,7 @@ const RS_CARDS=[   // key, label, fmt, color — Qualtrim palette: bars keep the
   ['price','Price',null,null],['revenue','Revenue','$','#f5bd5a'],['grossProfit','Gross Profit','$','#5fb8b2'],
   ['opInc','Operating Income','$','#a08ee0'],['netInc','Net Income','$','#f5c08a'],['eps','EPS (diluted)','eps','#f0d060'],
   ['ocf','Operating Cash Flow','$','#9dc6e8'],['fcf','Free Cash Flow','$','#f0952e'],['margins','Margins %','%',null],
+  ['grossMargin','Gross Margin %','%','#5fb8b2'],['valuation','Valuation (P/E · P/S)',null,null],
   ['rnd','R&D Expense','$','#7ba7d9'],['sga','SG&A Expense','$','#b39ddb'],['cash','Cash','$','#8fbc6f'],
   ['shares','Shares Outstanding','n','#63b5ae'],['roc','Return of Capital','$','#d391c4']];
 function rsGet(key){   // series in current mode
@@ -2449,6 +2451,25 @@ function rsMargins(){
     return {name,color,pts:ser.filter(([k,v])=>rev[k]).map(([k,v])=>[k,v/rev[k]*100])}; };
   return [mk('grossProfit','Gross','#4db6ac'),mk('opInc','Operating','#8f7ad6'),mk('netInc','Net','#c9a227')].filter(s=>s.pts.length);
 }
+function rsRatioSeries(numKey,denKey){   // e.g. gross margin % in the current mode
+  const d=RS.data||{}; if(!d[numKey]||!d[denKey]) return [];
+  const get=k=>RS.mode==='a'?d[k].a:RS.mode==='ttm'?rsTtm(d[k].q):d[k].q;
+  const den=Object.fromEntries(get(denKey));
+  return get(numKey).filter(([k,v])=>den[k]).map(([k,v])=>[k,v/den[k]*100]);
+}
+function rsValuation(){   // quarterly P/E and P/S from TTM values + monthly price history
+  const d=RS.data||{}; if(!RS.pxHist) return null;
+  const epsT=rsTtm(((d.eps||{}).q)||[]), revT=rsTtm(((d.revenue||{}).q)||[]);
+  const shQ=((d.shares||{}).q)||[];
+  const priceAt=k=>{ const y=+k.slice(0,4), q=+k.slice(5);
+    const end=Date.UTC(y,q*3,1)/1000;
+    let best=null; for(const p of RS.pxHist){ if(p[0]<=end) best=p[1]; else break; } return best; };
+  const sharesAt=k=>{ let best=null; for(const [sk,sv] of shQ){ if(sk<=k) best=sv; else break; } return best; };
+  const pe=epsT.filter(([k,v])=>v>0).map(([k,v])=>{ const p=priceAt(k); return p?[k,p/v]:null; }).filter(Boolean);
+  const ps=revT.filter(([k,v])=>v>0).map(([k,v])=>{ const p=priceAt(k), sh=sharesAt(k);
+    return (p&&sh)?[k,p*sh/v]:null; }).filter(Boolean);
+  return {pe,ps};
+}
 function rsStatsStrip(){
   const d=RS.data||{}, q=RS.quote||{};
   const price=q.price;
@@ -2493,12 +2514,32 @@ function rsDrawCard(k){
   const card=RS_CARDS.find(c=>c[0]===k); if(!card) return;
   const el=document.getElementById('rs-c-'+k); if(!el) return;
   const [key,lab,fmt,col]=card;
+  const tkAt=RS.tk;
   if(k==='price'){
     if(el._done) return; el._done=1;
     el.innerHTML='<svg id="rs-price-svg" style="width:100%;height:150px;display:block"></svg>';
     fetchYahooChart(RS.tk,'1y','1d').then(pts=>{ const svg=document.getElementById('rs-price-svg'); if(svg) drawRsPrice(svg,pts); })
       .catch(()=>{ el.innerHTML='<div style="color:var(--muted);font-size:12px;padding:24px 8px">chart unavailable</div>'; });
     return;
+  }
+  if(k==='grossMargin'){
+    const ser=rsRatioSeries('grossProfit','revenue');
+    if(!ser.length){ el.innerHTML=RS.loading?RS_LOADING:'<div style="color:var(--muted);font-size:12px;padding:24px 8px">no data</div>'; return; }
+    rsBars('rs-c-'+k,ser.slice(RS.mode==='a'?-15:-24),'%',150,col); return;
+  }
+  if(k==='valuation'){
+    if(!RS.pxHist){
+      el.innerHTML=RS_LOADING;
+      fetchYahooChart(RS.tk,'max','1mo').then(pts=>{ if(RS.tk!==tkAt) return; RS.pxHist=pts; rsDrawCard('valuation'); })
+        .catch(()=>{ if(RS.tk===tkAt) el.innerHTML='<div style="color:var(--muted);font-size:12px;padding:24px 8px">no data</div>'; });
+      return;
+    }
+    const v=rsValuation();
+    const lines=[];
+    if(v&&v.pe.length>1) lines.push({name:'P/E',color:'#f5bd5a',pts:v.pe});
+    if(v&&v.ps.length>1) lines.push({name:'P/S',color:'#9dc6e8',pts:v.ps});
+    if(!lines.length){ el.innerHTML=RS.loading?RS_LOADING:'<div style="color:var(--muted);font-size:12px;padding:24px 8px">no data (negative earnings & no revenue)</div>'; return; }
+    rsLines('rs-c-'+k,lines); return;
   }
   if(k==='margins'){
     const m=rsMargins();
@@ -2585,6 +2626,19 @@ function openRsChart(key){
   if(key==='margins'){
     document.getElementById('rs-big').id='rs-big-m';
     rsLines('rs-big-m',rsMargins(),300);
+    return;
+  }
+  if(key==='grossMargin'){
+    document.getElementById('rs-big').id='rs-big-b';
+    rsBars('rs-big-b',rsRatioSeries('grossProfit','revenue'),'%',300,card[3]);
+    return;
+  }
+  if(key==='valuation'){
+    document.getElementById('rs-big').id='rs-big-m';
+    const v=rsValuation(); const lines=[];
+    if(v&&v.pe.length>1) lines.push({name:'P/E',color:'#f5bd5a',pts:v.pe});
+    if(v&&v.ps.length>1) lines.push({name:'P/S',color:'#9dc6e8',pts:v.ps});
+    if(lines.length) rsLines('rs-big-m',lines,300);
     return;
   }
   const full=rsGet(key);   // FULL history in current mode
