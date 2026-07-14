@@ -2234,20 +2234,29 @@ async function rsCik(tk){
 let _rsSlots=4;const _rsWait=[];
 const _rsGate=()=>_rsSlots>0?(_rsSlots--,Promise.resolve()):new Promise(res=>_rsWait.push(res));
 const _rsFree=()=>{const n=_rsWait.shift(); if(n) n(); else _rsSlots++;};
+const RS_PROXIES=[
+  u=>'https://corsproxy.io/?url='+encodeURIComponent(u),
+  u=>JINA+u,
+  u=>'https://api.allorigins.win/raw?url='+encodeURIComponent(u)];
+let _rsRot=0;
 async function rsFetchConcept(cik,tax,tag){
   const u=`https://data.sec.gov/api/xbrl/companyconcept/CIK${String(cik).padStart(10,'0')}/${tax}/${tag}.json`;
-  const via=async(p,ms)=>{ const c=new AbortController(); const to=setTimeout(()=>c.abort(),ms);
-    try{ const r=await fetch(p+encodeURIComponent(u),{signal:c.signal});
-      const t=await r.text(); if(t[0]!=='{') throw new Error('bad'); return JSON.parse(t);
+  const via=async(mk,ms)=>{ const c=new AbortController(); const to=setTimeout(()=>c.abort(),ms);
+    try{ const r=await fetch(mk(u),{signal:c.signal});
+      const t=await r.text(); const i=t.indexOf('{"'); if(i<0) throw new Error('bad');
+      const j=JSON.parse(t.slice(i));
+      if(!j.units) throw new Error('noconcept');   // proxy error-JSON masquerading as data
+      return j;
     } finally { clearTimeout(to); } };
   await _rsGate();
   try{
-    try{ return await via('https://corsproxy.io/?url=',6000); }
-    catch(e1){
-      await new Promise(r=>setTimeout(r,350));
-      try{ return await via('https://corsproxy.io/?url=',6000); }
-      catch(e2){ return await via('https://api.allorigins.win/raw?url=',8000); }
+    const start=(_rsRot++)%RS_PROXIES.length;   // spread load across proxies
+    let lastErr;
+    for(let k=0;k<RS_PROXIES.length;k++){
+      try{ return await via(RS_PROXIES[(start+k)%RS_PROXIES.length],6500); }
+      catch(e){ lastErr=e; await new Promise(r=>setTimeout(r,250)); }
     }
+    throw lastErr;
   } finally { _rsFree(); }
 }
 /* build {q:[[yyyyQn,val]], a:[[yyyy,val]]} from RAW SEC entries (not frames — small
@@ -2360,7 +2369,9 @@ async function rsLoad(tk){
         return rsFetchConcept(cik,tx,tag);
       }));
       if(RS.tk!==tk) return;
-      data[key]=rsMerge(parts.filter(p=>p.status==='fulfilled').map(p=>rsSeries(p.value,unit,inst,kind==='avg')));
+      const ok=parts.filter(p=>p.status==='fulfilled');
+      data[key]=ok.length?rsMerge(ok.map(p=>rsSeries(p.value,unit,inst,kind==='avg')))
+                         :{q:[],a:[],err:1};   // transport failed -> offer retry
       rsDerive(data);
       rsDrawCard(key);
       if(key==='ocf'||key==='capex') rsDrawCard('fcf');
@@ -2368,7 +2379,8 @@ async function rsLoad(tk){
       if(key==='divPaid'||key==='buyback') rsDrawCard('roc');
       rsStats();
     })().catch(()=>{}).finally(()=>{
-      if(--pending===0&&RS.tk===tk){ RS.loading=false; _rsCache[tk]=data; rsCacheSet(tk,data);
+      if(--pending===0&&RS.tk===tk){ RS.loading=false; _rsCache[tk]=data;
+        if(!Object.values(data).some(v=>v&&v.err)) rsCacheSet(tk,data);
         RS_CARDS.forEach(([k])=>rsDrawCard(k)); rsStats(); }
     });
   });
@@ -2491,7 +2503,13 @@ function rsDrawCard(k){
     rsLines('rs-c-'+k,m); return;
   }
   const ser=rsGet(k);
-  if(!ser.length){ el.innerHTML=RS.loading?RS_LOADING:'<div style="color:var(--muted);font-size:12px;padding:24px 8px">no data</div>'; return; }
+  if(!ser.length){
+    if(!RS.loading&&RS.data[k]&&RS.data[k].err){
+      el.innerHTML='<div style="padding:18px 8px"><button class="secbtn" data-rsretry="'+k+'" style="margin:0;font-size:12px">↻ retry</button></div>';
+      el.querySelector('[data-rsretry]').addEventListener('click',()=>rsRetryKey(k));
+    } else el.innerHTML=RS.loading?RS_LOADING:'<div style="color:var(--muted);font-size:12px;padding:24px 8px">no data</div>';
+    return;
+  }
   rsBars('rs-c-'+k,ser.slice(RS.mode==='a'?-15:-24),fmt,150,col);
 }
 function renderResearch(){
@@ -2572,6 +2590,21 @@ function openRsChart(key){
   /* CAGR on annual values (or TTM if annual sparse) */
   const annual=(RS.data[key]&&RS.data[key].a&&RS.data[key].a.length>1)?RS.data[key].a:(rsTtm((RS.data[key]||{}).q||[]));
   document.getElementById('rs-cagr').innerHTML=rsCagrChips(annual);
+}
+async function rsRetryKey(key){
+  const tk=RS.tk, def=RS_CONCEPTS[key]; if(!tk||!def) return;
+  const el=document.getElementById('rs-c-'+key); if(el) el.innerHTML=RS_LOADING;
+  const cik=await rsCik(tk); if(!cik||RS.tk!==tk) return;
+  const [tax,tags,unit,inst,kind]=def;
+  const parts=await Promise.allSettled(tags.map(t=>{
+    const [tx,tag]=t.includes(':')?t.split(':'):[tax,t];
+    return rsFetchConcept(cik,tx,tag);
+  }));
+  if(RS.tk!==tk) return;
+  const ok=parts.filter(p=>p.status==='fulfilled');
+  RS.data[key]=ok.length?rsMerge(ok.map(p=>rsSeries(p.value,unit,inst,kind==='avg')))
+                        :{q:[],a:[],err:1};
+  rsDerive(RS.data); rsDrawCard(key); rsStats();
 }
 /* search + recents */
 function rsInit(){
