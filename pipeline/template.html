@@ -2442,14 +2442,18 @@ function rsLines(elId,series,H){   // margins: [{name,color,pts:[[k,v]]}]
   const every=Math.ceil(keys.length/8);
   keys.forEach((k,i)=>{ if(i%every===0) h+=`<text x="${X(k).toFixed(1)}" y="${H-6}" text-anchor="middle" font-size="9.5" fill="${cvar('--muted')}" font-family="system-ui" transform="rotate(-38 ${X(k).toFixed(1)} ${H-6})">${k}</text>`; });
   el.innerHTML=`<svg viewBox="0 0 ${W} ${H}" style="width:100%;height:${H}px;display:block">${h}</svg>`+
-    `<div style="display:flex;gap:12px;font-size:11px;color:var(--muted);padding:2px 4px">${series.map(s=>`<span><span style="display:inline-block;width:12px;height:3px;background:${s.color};border-radius:2px;vertical-align:2px"></span> ${s.name}</span>`).join('')}</div>`;
+    `<div style="display:flex;gap:12px;font-size:11px;color:var(--muted);padding:2px 4px;flex-wrap:wrap">${series.map(s=>{
+      const lv=s.pts.length?s.pts[s.pts.length-1][1]:null;
+      const shown=lv==null?'':' <b class="tnum" style="color:var(--ink)">'+(s.fmtV?s.fmtV(lv):lv.toFixed(1))+'</b>';
+      return `<span><span style="display:inline-block;width:12px;height:3px;background:${s.color};border-radius:2px;vertical-align:2px"></span> ${s.name}${shown}</span>`;}).join('')}</div>`;
 }
 function rsMargins(){
   if(!RS.data||!RS.data.revenue) return [];
   const rev=Object.fromEntries(RS.mode==='a'?RS.data.revenue.a:RS.mode==='ttm'?rsTtm(RS.data.revenue.q):RS.data.revenue.q);
   const mk=(key,name,color)=>{ const ser=rsGet(key);
     return {name,color,pts:ser.filter(([k,v])=>rev[k]).map(([k,v])=>[k,v/rev[k]*100])}; };
-  return [mk('grossProfit','Gross','#4db6ac'),mk('opInc','Operating','#8f7ad6'),mk('netInc','Net','#c9a227')].filter(s=>s.pts.length);
+  return [mk('grossProfit','Gross','#4db6ac'),mk('opInc','Operating','#8f7ad6'),mk('netInc','Net','#c9a227')]
+    .map(s=>({...s,fmtV:v=>v.toFixed(1)+'%'})).filter(s=>s.pts.length);
 }
 /* one shared time window for the WHOLE grid — every card starts at the same key,
    so margin/valuation lines no longer show a different axis than the bar cards */
@@ -2502,7 +2506,7 @@ function rsStatsStrip(){
     ${cell('P/E (TTM)',(mcap&&niT&&niT>0)?(mcap/niT).toFixed(1):(epsT&&price&&epsT>0?(price/epsT).toFixed(1):'—'))}
     ${cell('P/S (TTM)',(mcap&&revT)?(mcap/revT).toFixed(2):null)}
     ${cell('FCF yield',(mcap&&fcfT!=null)?( (fcfT/mcap*100).toFixed(2)+'%'):null)}
-    ${cell('Gross margin',revT&&gpT!=null?pct(gpT/revT*100):null)}
+    ${cell('Gross margin',(()=>{const t=rsRatioSeries('grossProfit','revenue','ttm');if(t.length)return pct(t[t.length-1][1]);const qq=rsRatioSeries('grossProfit','revenue','q');return qq.length?pct(qq[qq.length-1][1]):null;})())}
     ${cell('Op margin',revT&&opT!=null?pct(opT/revT*100):null)}
     ${cell('Net margin',revT&&niT!=null?pct(niT/revT*100):null)}
     ${cell('Revenue YoY',yoy!=null?fmtPct(yoy):null)}
@@ -2529,10 +2533,13 @@ function rsDrawCard(k){
   const el=document.getElementById('rs-c-'+k); if(!el) return;
   const [key,lab,fmt,col]=card;
   const tkAt=RS.tk;
+  const setV=html=>{ const v=document.getElementById('rs-v-'+k); if(v) v.innerHTML=html; };
   if(k==='price'){
     if(el._done) return; el._done=1;
     el.innerHTML='<svg id="rs-price-svg" style="width:100%;height:150px;display:block"></svg>';
-    fetchYahooChart(RS.tk,'1y','1d').then(pts=>{ const svg=document.getElementById('rs-price-svg'); if(svg) drawRsPrice(svg,pts); })
+    fetchYahooChart(RS.tk,'1y','1d').then(pts=>{ const svg=document.getElementById('rs-price-svg'); if(svg) drawRsPrice(svg,pts);
+        const l=pts[pts.length-1][1], f=pts[0][1], ch=(l/f-1)*100;
+        setV(`$${l.toFixed(2)} <span class="${ch>=0?'up':'down'}" style="font-size:11.5px">${fmtPct(ch)} 1y</span>`); })
       .catch(()=>{ el.innerHTML='<div style="color:var(--muted);font-size:12px;padding:24px 8px">chart unavailable</div>'; });
     return;
   }
@@ -2543,6 +2550,7 @@ function rsDrawCard(k){
       if(qser.length){ ser=qser; note=`<div style="font-size:10.5px;color:var(--muted);padding:0 4px">filer tags this only since ${esc(String(qser[0][0]))} — showing quarterly</div>`; }
     }
     if(!ser.length){ el.innerHTML=RS.loading?RS_LOADING:'<div style="color:var(--muted);font-size:12px;padding:24px 8px">no data</div>'; return; }
+    setV(ser[ser.length-1][1].toFixed(1)+'%');
     rsBars('rs-c-'+k,ser,'%',150,col); el.insertAdjacentHTML('beforeend',note); return;
   }
   if(k==='valuation'){
@@ -2554,10 +2562,11 @@ function rsDrawCard(k){
     }
     const v=rsValuation();
     const lines=[];
-    if(v&&v.pe.length>1) lines.push({name:'P/E',color:'#f5bd5a',pts:rsClip(v.pe)});
-    if(v&&v.ps.length>1) lines.push({name:'P/S',color:'#9dc6e8',pts:rsClip(v.ps)});
+    if(v&&v.pe.length>1) lines.push({name:'P/E',color:'#f5bd5a',pts:rsClip(v.pe),fmtV:x=>x.toFixed(1)});
+    if(v&&v.ps.length>1) lines.push({name:'P/S',color:'#9dc6e8',pts:rsClip(v.ps),fmtV:x=>x.toFixed(1)});
     const live=lines.filter(l=>l.pts.length>1);
     if(!live.length){ el.innerHTML=RS.loading?RS_LOADING:'<div style="color:var(--muted);font-size:12px;padding:24px 8px">no data (negative earnings & no revenue)</div>'; return; }
+    setV(live.map(l=>l.name+' <b>'+l.pts[l.pts.length-1][1].toFixed(1)+'</b>').join(' · '));
     rsLines('rs-c-'+k,live); return;
   }
   if(k==='margins'){
@@ -2566,6 +2575,11 @@ function rsDrawCard(k){
     rsLines('rs-c-'+k,m); return;
   }
   const ser=rsGet(k);
+  if(ser.length){
+    const lv=ser[ser.length-1][1];
+    const cls=(fmt==='$'||fmt==='eps')?(lv>=0?'up':'down'):'';
+    setV(`<span class="${cls}">${rsFmtV(lv,fmt)}</span>`);
+  }
   if(!ser.length){
     if(!RS.loading&&RS.data[k]&&RS.data[k].err){
       el.innerHTML='<div style="padding:18px 8px"><button class="secbtn" data-rsretry="'+k+'" style="margin:0;font-size:12px">↻ retry</button></div>';
@@ -2589,8 +2603,9 @@ function renderResearch(){
     <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:14px">
       ${RS_CARDS.map(([k,lab])=>
         `<div class="panel" style="padding:14px 14px 8px">
-          <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:6px">
+          <div style="display:flex;align-items:center;gap:8px;margin-bottom:6px">
             <h2 style="margin:0;font-size:13px">${lab}</h2>
+            <span id="rs-v-${k}" class="tnum" style="margin-left:auto;font-size:13px;font-weight:720"></span>
             <button data-rsexp="${k}" title="expand" style="border:0;background:none;color:var(--muted);cursor:pointer;font-size:14px">⤢</button>
           </div>
           <div id="rs-c-${k}"></div>
