@@ -2438,31 +2438,44 @@ function rsBars(elId,ser,fmt,H,color){
   });
   el.innerHTML=`<svg viewBox="0 0 ${W} ${H}" style="width:100%;height:${H}px;display:block">${grid}${h}</svg>`;
 }
-function rsLines(elId,series,H){   // margins: [{name,color,pts:[[k,v]]}]
+window._rsHide=window._rsHide||{};   // per-chart hidden series names
+function rsLines(elId,series,H){
   const el=document.getElementById(elId); if(!el) return;
-  const all=series.flatMap(s=>s.pts.map(p=>p[1]));
-  if(!all.length){ el.innerHTML='<div style="color:var(--muted);font-size:12px;padding:24px 8px">no data</div>'; return; }
+  const hidden=window._rsHide[elId]=window._rsHide[elId]||new Set();
+  const vis=series.filter(s=>!hidden.has(s.name)&&s.pts.length);
   H=H||150;
-  const W=el.getBoundingClientRect().width||300, padB=28, padT=8;
-  const keys=[...new Set(series.flatMap(s=>s.pts.map(p=>p[0])))].sort();
+  const W=el.getBoundingClientRect().width||300, padB=28, padT=8, padL=44;
+  const legend=`<div style="display:flex;gap:14px;font-size:12px;color:var(--muted);padding:4px 4px 0;flex-wrap:wrap">${series.map(s=>{
+      const off=hidden.has(s.name);
+      const lv=s.pts.length?s.pts[s.pts.length-1][1]:null;
+      const shown=lv==null?'':' <b class="tnum" style="color:var(--ink)">'+(s.fmtV?s.fmtV(lv):lv.toFixed(1))+'</b>';
+      return `<span data-lt="${esc(s.name)}" title="click to toggle" style="cursor:pointer;user-select:none;${off?'opacity:.35':''}">`+
+        `<span style="display:inline-block;width:14px;height:3px;background:${s.color};border-radius:2px;vertical-align:2px"></span> `+
+        `<span style="color:var(--ink);font-weight:640">${esc(s.name)}</span>${shown}</span>`;}).join('')}</div>`;
+  if(!vis.length){ el.innerHTML=`<div style="color:var(--muted);font-size:12px;padding:24px 8px;height:${H-30}px">all series hidden — click a name to show it</div>`+legend; bindLeg(); return; }
+  const all=vis.flatMap(s=>s.pts.map(p=>p[1]));
+  const keys=[...new Set(vis.flatMap(s=>s.pts.map(p=>p[0])))].sort();
   const mn=Math.min(...all,0), mx=Math.max(...all,0), sp=(mx-mn)||1;
-  const padL=40;
   const X=k=>padL+((keys.indexOf(k)+0.5)/keys.length)*(W-padL), Y=v=>padT+(1-(v-mn)/sp)*(H-padB-padT);
-  const lFmt=(series[0]&&series[0].fmtV)||(v=>v.toFixed(1));
+  const lFmt=(vis[0]&&vis[0].fmtV)||(v=>v.toFixed(1));
   let h='';
   [mx,(mx+mn)/2,mn].forEach(v=>{ h+=`<line x1="${padL}" y1="${Y(v).toFixed(1)}" x2="${W}" y2="${Y(v).toFixed(1)}" stroke="${cvar('--grid')}"/>`+
     `<text x="${padL-5}" y="${(Y(v)+3).toFixed(1)}" text-anchor="end" font-size="9.5" fill="${cvar('--muted')}" font-family="system-ui">${lFmt(v)}</text>`; });
   if(mn<0&&mx>0) h+=`<line x1="${padL}" y1="${Y(0).toFixed(1)}" x2="${W}" y2="${Y(0).toFixed(1)}" stroke="${cvar('--grid')}" stroke-width="1.4"/>`;
-  series.forEach(s=>{ if(!s.pts.length) return;
-    h+=`<polyline points="${s.pts.map(p=>X(p[0]).toFixed(1)+','+Y(p[1]).toFixed(1)).join(' ')}" fill="none" stroke="${s.color}" stroke-width="1.8" stroke-linejoin="round"/>`;
+  vis.forEach(s=>{
+    h+=`<polyline points="${s.pts.filter(p=>keys.includes(p[0])).map(p=>X(p[0]).toFixed(1)+','+Y(p[1]).toFixed(1)).join(' ')}" fill="none" stroke="${s.color}" stroke-width="1.8" stroke-linejoin="round"/>`;
   });
   const every=Math.ceil(keys.length/8);
   keys.forEach((k,i)=>{ if(i%every===0) h+=`<text x="${X(k).toFixed(1)}" y="${H-6}" text-anchor="middle" font-size="9.5" fill="${cvar('--muted')}" font-family="system-ui" transform="rotate(-38 ${X(k).toFixed(1)} ${H-6})">${k}</text>`; });
-  el.innerHTML=`<svg viewBox="0 0 ${W} ${H}" style="width:100%;height:${H}px;display:block">${h}</svg>`+
-    `<div style="display:flex;gap:12px;font-size:11px;color:var(--muted);padding:2px 4px;flex-wrap:wrap">${series.map(s=>{
-      const lv=s.pts.length?s.pts[s.pts.length-1][1]:null;
-      const shown=lv==null?'':' <b class="tnum" style="color:var(--ink)">'+(s.fmtV?s.fmtV(lv):lv.toFixed(1))+'</b>';
-      return `<span><span style="display:inline-block;width:12px;height:3px;background:${s.color};border-radius:2px;vertical-align:2px"></span> ${s.name}${shown}</span>`;}).join('')}</div>`;
+  el.innerHTML=`<svg viewBox="0 0 ${W} ${H}" style="width:100%;height:${H}px;display:block">${h}</svg>`+legend;
+  bindLeg();
+  function bindLeg(){
+    el.querySelectorAll('[data-lt]').forEach(sp=>sp.addEventListener('click',()=>{
+      const n=sp.dataset.lt;
+      hidden.has(n)?hidden.delete(n):hidden.add(n);
+      rsLines(elId,series,H);
+    }));
+  }
 }
 function rsMargins(){
   if(!RS.data||!RS.data.revenue) return [];
@@ -2634,13 +2647,19 @@ function renderResearch(){
   document.querySelectorAll('[data-rsexp]').forEach(b=>b.addEventListener('click',()=>openRsChart(b.dataset.rsexp)));
 }
 function drawRsPrice(svg,pts){
-  const W=svg.getBoundingClientRect().width||300,H=150;
+  const W=svg.getBoundingClientRect().width||300,H=parseFloat(svg.style.height)||150;
+  const padL=44,padT=6,padB=16;
   const ys=pts.map(p=>p[1]),mn=Math.min(...ys),mx=Math.max(...ys),sp=(mx-mn)||1;
   const t0=pts[0][0],t1=pts[pts.length-1][0],ts=(t1-t0)||1;
+  const X=t=>padL+((t-t0)/ts)*(W-padL), Y=v=>padT+(1-(v-mn)/sp)*(H-padT-padB);
   const up=ys[ys.length-1]>=ys[0],col=up?cvar('--up'):cvar('--down');
-  const line=pts.map((p,i)=>`${i?'L':'M'}${((p[0]-t0)/ts*W).toFixed(1)},${(6+(1-(p[1]-mn)/sp)*(H-14)).toFixed(1)}`).join(' ');
+  const fmtP=v=>'$'+(v>=100?v.toFixed(0):v.toFixed(2));
+  let grid='';
+  [mx,(mx+mn)/2,mn].forEach(v=>{ grid+=`<line x1="${padL}" y1="${Y(v).toFixed(1)}" x2="${W}" y2="${Y(v).toFixed(1)}" stroke="${cvar('--grid')}"/>`+
+    `<text x="${padL-5}" y="${(Y(v)+3).toFixed(1)}" text-anchor="end" font-size="9.5" fill="${cvar('--muted')}" font-family="system-ui">${fmtP(v)}</text>`; });
+  const line=pts.map((p,i)=>`${i?'L':'M'}${X(p[0]).toFixed(1)},${Y(p[1]).toFixed(1)}`).join(' ');
   svg.setAttribute('viewBox',`0 0 ${W} ${H}`);
-  svg.innerHTML=`<path d="${line} L${W},${H} L0,${H} Z" fill="${col}" opacity="0.30"/><path d="${line}" fill="none" stroke="${col}" stroke-width="2"/>`;
+  svg.innerHTML=grid+`<path d="${line} L${W},${(H-padB).toFixed(1)} L${padL},${(H-padB).toFixed(1)} Z" fill="${col}" opacity="0.25"/><path d="${line}" fill="none" stroke="${col}" stroke-width="2"/>`;
 }
 function rsCagrChips(ser){   // ser = annual or ttm series of [key,val]
   if(!ser||ser.length<2) return '';
