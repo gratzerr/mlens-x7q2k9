@@ -2451,9 +2451,23 @@ function rsMargins(){
     return {name,color,pts:ser.filter(([k,v])=>rev[k]).map(([k,v])=>[k,v/rev[k]*100])}; };
   return [mk('grossProfit','Gross','#4db6ac'),mk('opInc','Operating','#8f7ad6'),mk('netInc','Net','#c9a227')].filter(s=>s.pts.length);
 }
-function rsRatioSeries(numKey,denKey){   // e.g. gross margin % in the current mode
+/* one shared time window for the WHOLE grid — every card starts at the same key,
+   so margin/valuation lines no longer show a different axis than the bar cards */
+function rsCutoff(){
+  const d=RS.data||{}; let last=null;
+  Object.values(d).forEach(s=>{ if(!s||!s.q) return;
+    const arr=RS.mode==='a'?s.a:s.q;
+    if(arr&&arr.length){ const k=arr[arr.length-1][0]; if(!last||k>last) last=k; } });
+  if(!last) return '';
+  if(RS.mode==='a') return String(+last-14);
+  const idx=(+last.slice(0,4))*4+(+last.slice(5))-1-23;
+  return Math.floor(idx/4)+'Q'+(idx%4+1);
+}
+const rsClip=ser=>{ const c=rsCutoff(); return c?ser.filter(([k])=>String(k)>=c):ser; };
+function rsRatioSeries(numKey,denKey,mode){   // e.g. gross margin % — TTM = sum/sum
   const d=RS.data||{}; if(!d[numKey]||!d[denKey]) return [];
-  const get=k=>RS.mode==='a'?d[k].a:RS.mode==='ttm'?rsTtm(d[k].q):d[k].q;
+  const m=mode||RS.mode;
+  const get=k=>m==='a'?d[k].a:m==='ttm'?rsTtm(d[k].q):d[k].q;
   const den=Object.fromEntries(get(denKey));
   return get(numKey).filter(([k,v])=>den[k]).map(([k,v])=>[k,v/den[k]*100]);
 }
@@ -2523,9 +2537,13 @@ function rsDrawCard(k){
     return;
   }
   if(k==='grossMargin'){
-    const ser=rsRatioSeries('grossProfit','revenue');
+    let ser=rsClip(rsRatioSeries('grossProfit','revenue')), note='';
+    if(!ser.length){   // filer only recently tags GP (RPID) -> show the quarters that exist
+      const qser=rsRatioSeries('grossProfit','revenue','q');
+      if(qser.length){ ser=qser; note=`<div style="font-size:10.5px;color:var(--muted);padding:0 4px">filer tags this only since ${esc(String(qser[0][0]))} — showing quarterly</div>`; }
+    }
     if(!ser.length){ el.innerHTML=RS.loading?RS_LOADING:'<div style="color:var(--muted);font-size:12px;padding:24px 8px">no data</div>'; return; }
-    rsBars('rs-c-'+k,ser.slice(RS.mode==='a'?-15:-24),'%',150,col); return;
+    rsBars('rs-c-'+k,ser,'%',150,col); el.insertAdjacentHTML('beforeend',note); return;
   }
   if(k==='valuation'){
     if(!RS.pxHist){
@@ -2536,14 +2554,15 @@ function rsDrawCard(k){
     }
     const v=rsValuation();
     const lines=[];
-    if(v&&v.pe.length>1) lines.push({name:'P/E',color:'#f5bd5a',pts:v.pe});
-    if(v&&v.ps.length>1) lines.push({name:'P/S',color:'#9dc6e8',pts:v.ps});
-    if(!lines.length){ el.innerHTML=RS.loading?RS_LOADING:'<div style="color:var(--muted);font-size:12px;padding:24px 8px">no data (negative earnings & no revenue)</div>'; return; }
-    rsLines('rs-c-'+k,lines); return;
+    if(v&&v.pe.length>1) lines.push({name:'P/E',color:'#f5bd5a',pts:rsClip(v.pe)});
+    if(v&&v.ps.length>1) lines.push({name:'P/S',color:'#9dc6e8',pts:rsClip(v.ps)});
+    const live=lines.filter(l=>l.pts.length>1);
+    if(!live.length){ el.innerHTML=RS.loading?RS_LOADING:'<div style="color:var(--muted);font-size:12px;padding:24px 8px">no data (negative earnings & no revenue)</div>'; return; }
+    rsLines('rs-c-'+k,live); return;
   }
   if(k==='margins'){
-    const m=rsMargins();
-    if(!m.length||!m.some(x=>x.pts.length)){ el.innerHTML=RS.loading?RS_LOADING:'<div style="color:var(--muted);font-size:12px;padding:24px 8px">no data</div>'; return; }
+    const m=rsMargins().map(x=>({...x,pts:rsClip(x.pts)})).filter(x=>x.pts.length);
+    if(!m.length){ el.innerHTML=RS.loading?RS_LOADING:'<div style="color:var(--muted);font-size:12px;padding:24px 8px">no data</div>'; return; }
     rsLines('rs-c-'+k,m); return;
   }
   const ser=rsGet(k);
@@ -2554,7 +2573,7 @@ function rsDrawCard(k){
     } else el.innerHTML=RS.loading?RS_LOADING:'<div style="color:var(--muted);font-size:12px;padding:24px 8px">no data</div>';
     return;
   }
-  rsBars('rs-c-'+k,ser.slice(RS.mode==='a'?-15:-24),fmt,150,col);
+  rsBars('rs-c-'+k,rsClip(ser),fmt,150,col);
 }
 function renderResearch(){
   const body=document.getElementById('rs-body'); if(!body||!RS.tk) return;
