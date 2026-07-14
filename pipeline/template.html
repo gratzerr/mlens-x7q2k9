@@ -2564,7 +2564,8 @@ function rsStats(){
   if(RS.noSec){ el.innerHTML='<div style="color:var(--muted);font-size:13px;margin-top:10px">No SEC filing data for this symbol (US filers only) — price chart only.</div>'; return; }
   el.innerHTML=(RS.data&&Object.keys(RS.data).length)?rsStatsStrip():'';
 }
-const RS_LOADING='<div style="color:var(--muted);font-size:12px;padding:24px 8px"><span style="display:inline-block;width:9px;height:9px;border-radius:50%;background:var(--accent);animation:pulse 1.1s infinite;vertical-align:-1px"></span> loading…</div>';
+const RS_LOADING='<div style="display:flex;align-items:flex-end;gap:6px;height:120px;padding:12px 8px 18px;animation:pulse 1.4s ease-in-out infinite">'+
+  [38,66,50,84,58,92,72,100].map(h=>`<span style="flex:1;height:${h}%;background:var(--surface-2);border-radius:3px"></span>`).join('')+'</div>';
 function rsDrawCard(k){
   const card=RS_CARDS.find(c=>c[0]===k); if(!card) return;
   const el=document.getElementById('rs-c-'+k); if(!el) return;
@@ -2717,12 +2718,18 @@ function openRsChart(key){
   document.getElementById('sd-close').onclick=closeSecDetail;
   if(key==='price'){
     document.getElementById('rs-big').innerHTML='<svg id="rs-big-svg" style="width:100%;height:300px;display:block"></svg>';
-    fetchYahooChart(RS.tk,'max','1mo').then(pts=>{ const s=document.getElementById('rs-big-svg'); if(s){ s.style.height='300px'; drawRsPrice(s,pts); s.setAttribute('viewBox',s.getAttribute('viewBox')); } });
+    let pr={'3y':['3y','1wk'],'5y':['5y','1wk'],'10y':['10y','1mo'],'all':['max','1mo']}[RS_RANGE];
+    if(!pr){ const since=String(RS_RANGE).startsWith('s:')?RS_RANGE.slice(2):null;
+      const n=since?Math.max(1,(Date.now()-Date.parse(since))/31557600000):5;
+      pr=n<=1?['1y','1d']:n<=2?['2y','1wk']:n<=5?['5y','1wk']:n<=10?['10y','1mo']:['max','1mo']; }
+    fetchYahooChart(RS.tk,pr[0],pr[1]).then(pts=>{
+      if(String(RS_RANGE).startsWith('s:')){ const cut=Date.parse(RS_RANGE.slice(2))/1000; pts=pts.filter(p=>p[0]>=cut); }
+      const sv=document.getElementById('rs-big-svg'); if(sv) drawRsPrice(sv,pts); });
     return;
   }
   if(key==='margins'){
     document.getElementById('rs-big').id='rs-big-m';
-    rsLines('rs-big-m',rsMargins(),300);
+    rsLines('rs-big-m',rsMargins().map(x=>({...x,pts:rsClip(x.pts)})).filter(x=>x.pts.length),300);
     return;
   }
   if(key==='grossMargin'){
@@ -2733,16 +2740,17 @@ function openRsChart(key){
   if(key==='valuation'){
     document.getElementById('rs-big').id='rs-big-m';
     const v=rsValuation(); const lines=[];
-    if(v&&v.pe.length>1) lines.push({name:'P/E',color:'#f5bd5a',pts:v.pe});
-    if(v&&v.ps.length>1) lines.push({name:'P/S',color:'#9dc6e8',pts:v.ps});
-    if(lines.length) rsLines('rs-big-m',lines,300);
+    if(v&&v.pe.length>1) lines.push({name:'P/E',color:'#f5bd5a',pts:rsClip(v.pe),fmtV:x=>x.toFixed(1)});
+    if(v&&v.ps.length>1) lines.push({name:'P/S',color:'#9dc6e8',pts:rsClip(v.ps),fmtV:x=>x.toFixed(1)});
+    const live=lines.filter(l=>l.pts.length>1);
+    if(live.length) rsLines('rs-big-m',live,300);
     return;
   }
-  const full=rsGet(key);   // FULL history in current mode
+  const full=rsClip(rsGet(key));   // the big view respects the selected horizon
   document.getElementById('rs-big').id='rs-big-b';
   rsBars('rs-big-b',full,card[2],300,card[3]);
-  /* CAGR on annual values (or TTM if annual sparse) */
-  const annual=(RS.data[key]&&RS.data[key].a&&RS.data[key].a.length>1)?RS.data[key].a:(rsTtm((RS.data[key]||{}).q||[]));
+  /* CAGR within the selected horizon (chips for windows that don't fit vanish) */
+  const annual=rsClip((RS.data[key]&&RS.data[key].a&&RS.data[key].a.length>1)?RS.data[key].a:(rsTtm((RS.data[key]||{}).q||[])));
   document.getElementById('rs-cagr').innerHTML=rsCagrChips(annual);
 }
 async function rsRetryKey(key){
