@@ -2406,17 +2406,29 @@ function rsBars(elId,ser,fmt,H,color){
   const el=document.getElementById(elId); if(!el) return;
   if(!ser.length){ el.innerHTML='<div style="color:var(--muted);font-size:12px;padding:24px 8px">no data</div>'; return; }
   H=H||150;
-  const W=el.getBoundingClientRect().width||300, padB=30, padT=8;
+  const W=el.getBoundingClientRect().width||300, padB=30, padT=8, padL=46;
   const vals=ser.map(s=>s[1]);
-  /* zero line splits the plot proportionally — an all-negative series (loss-making
-     biotech) gets the FULL height below zero, not 1.5px dashes */
   const maxPos=Math.max(...vals,0), maxNeg=Math.max(...vals.map(v=>v<0?-v:0),0);
   const scale=(H-padB-padT)/((maxPos+maxNeg)||1);
   const zero=padT+maxPos*scale;
-  const bw=Math.max(2.5,Math.min(30,W/ser.length-2.5));
+  const Y=v=>zero-v*scale;
+  /* y-axis: nice ticks like Qualtrim */
+  const nice=r=>{ const raw=r/4||1, p=Math.pow(10,Math.floor(Math.log10(raw))), c=raw/p;
+    return (c<=1?1:c<=2?2:c<=5?5:10)*p; };
+  const step=nice(maxPos+maxNeg);
+  const axFmt=v=>fmt==='%'?v.toFixed(0)+'%':fmt==='eps'?'$'+(+v.toFixed(2)):fmt==='n'?fmtBig(v):(v<0?'-$':'$')+fmtBig(Math.abs(v));
+  let grid='';
+  for(let v=Math.ceil(-maxNeg/step)*step; v<=maxPos+step*0.01; v+=step){
+    const y=Y(v);
+    if(y<padT-1||y>H-padB+1) continue;
+    grid+=`<line x1="${padL}" y1="${y.toFixed(1)}" x2="${W}" y2="${y.toFixed(1)}" stroke="${cvar('--grid')}" stroke-width="${Math.abs(v)<step*0.01?1.4:1}"/>`+
+      `<text x="${padL-5}" y="${(y+3).toFixed(1)}" text-anchor="end" font-size="9.5" fill="${cvar('--muted')}" font-family="system-ui">${axFmt(v)}</text>`;
+  }
+  const plotW=W-padL;
+  const bw=Math.max(2.5,Math.min(30,plotW/ser.length-2.5));
   let h='';
   ser.forEach(([k,v],i)=>{
-    const x=(i+0.5)*(W/ser.length);
+    const x=padL+(i+0.5)*(plotW/ser.length);
     const bh=Math.abs(v)*scale;
     const y=v>=0?zero-bh:zero;
     const col=color||(v>=0?cvar('--up'):cvar('--down'));   // QT style: the axis tells the sign
@@ -2424,7 +2436,7 @@ function rsBars(elId,ser,fmt,H,color){
     const every=Math.ceil(ser.length/8);
     if(i%every===0) h+=`<text x="${x.toFixed(1)}" y="${H-8}" text-anchor="middle" font-size="9.5" fill="${cvar('--muted')}" font-family="system-ui" transform="rotate(-38 ${x.toFixed(1)} ${H-8})">${k}</text>`;
   });
-  el.innerHTML=`<svg viewBox="0 0 ${W} ${H}" style="width:100%;height:${H}px;display:block"><line x1="0" y1="${zero.toFixed(1)}" x2="${W}" y2="${zero.toFixed(1)}" stroke="${cvar('--grid')}"/>${h}</svg>`;
+  el.innerHTML=`<svg viewBox="0 0 ${W} ${H}" style="width:100%;height:${H}px;display:block">${grid}${h}</svg>`;
 }
 function rsLines(elId,series,H){   // margins: [{name,color,pts:[[k,v]]}]
   const el=document.getElementById(elId); if(!el) return;
@@ -2434,8 +2446,13 @@ function rsLines(elId,series,H){   // margins: [{name,color,pts:[[k,v]]}]
   const W=el.getBoundingClientRect().width||300, padB=28, padT=8;
   const keys=[...new Set(series.flatMap(s=>s.pts.map(p=>p[0])))].sort();
   const mn=Math.min(...all,0), mx=Math.max(...all,0), sp=(mx-mn)||1;
-  const X=k=>((keys.indexOf(k)+0.5)/keys.length)*W, Y=v=>padT+(1-(v-mn)/sp)*(H-padB-padT);
-  let h=`<line x1="0" y1="${Y(0).toFixed(1)}" x2="${W}" y2="${Y(0).toFixed(1)}" stroke="${cvar('--grid')}"/>`;
+  const padL=40;
+  const X=k=>padL+((keys.indexOf(k)+0.5)/keys.length)*(W-padL), Y=v=>padT+(1-(v-mn)/sp)*(H-padB-padT);
+  const lFmt=(series[0]&&series[0].fmtV)||(v=>v.toFixed(1));
+  let h='';
+  [mx,(mx+mn)/2,mn].forEach(v=>{ h+=`<line x1="${padL}" y1="${Y(v).toFixed(1)}" x2="${W}" y2="${Y(v).toFixed(1)}" stroke="${cvar('--grid')}"/>`+
+    `<text x="${padL-5}" y="${(Y(v)+3).toFixed(1)}" text-anchor="end" font-size="9.5" fill="${cvar('--muted')}" font-family="system-ui">${lFmt(v)}</text>`; });
+  if(mn<0&&mx>0) h+=`<line x1="${padL}" y1="${Y(0).toFixed(1)}" x2="${W}" y2="${Y(0).toFixed(1)}" stroke="${cvar('--grid')}" stroke-width="1.4"/>`;
   series.forEach(s=>{ if(!s.pts.length) return;
     h+=`<polyline points="${s.pts.map(p=>X(p[0]).toFixed(1)+','+Y(p[1]).toFixed(1)).join(' ')}" fill="none" stroke="${s.color}" stroke-width="1.8" stroke-linejoin="round"/>`;
   });
