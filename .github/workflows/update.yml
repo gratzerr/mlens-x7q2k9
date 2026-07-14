@@ -51,6 +51,7 @@ jobs:
             python build.py | tail -1 || true
             python firestore_sync.py push || true
             cp -f cockpit.html ../index.html
+            cp -f cik.json ../cik.json 2>/dev/null || true
             el=$(( $(date +%s) - t0 )); [ $el -lt 60 ] && sleep $((60 - el))
           done
       - name: commit & push (einmal pro Job — schont GitHub-Pages-Limits)

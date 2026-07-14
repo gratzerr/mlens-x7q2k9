@@ -370,6 +370,7 @@
     <button data-tabbtn="performance">Performance</button>
     <button data-tabbtn="payments">Payments</button>
     <button data-tabbtn="watchlist">Watchlist</button>
+    <button data-tabbtn="research">Research</button>
   </nav>
 
   <div class="kpis" id="kpis" data-tab="portfolio"></div>
@@ -461,6 +462,19 @@
       <div class="panel"><h2>Dividends by security</h2><div id="pay-divsec"></div></div>
       <div class="panel"><h2>Journal</h2><div id="pay-journal"></div></div>
     </div>
+  </div>
+
+  <!-- ============ RESEARCH TAB — Qualtrim-style deep dive for any ticker ============ -->
+  <div data-tab="research">
+    <div class="panel" style="padding:16px 18px">
+      <div style="position:relative;max-width:420px">
+        <input type="text" id="rs-search" placeholder="Search any ticker or company… (e.g. NVDA)" autocomplete="off"
+          style="width:100%;background:var(--surface-2);border:1px solid var(--border);border-radius:11px;padding:11px 14px;font:inherit;font-size:14px;color:var(--ink)">
+        <div id="rs-sugg" class="htpop" style="display:none;position:absolute;left:0;right:0;top:46px;z-index:70;max-height:280px;overflow-y:auto"></div>
+      </div>
+      <div id="rs-recent" style="display:flex;gap:6px;flex-wrap:wrap;margin-top:10px"></div>
+    </div>
+    <div id="rs-body" style="margin-top:16px"></div>
   </div>
 
   <!-- ============ WATCHLIST TAB — tickers on the radar, quotes like holdings ============ -->
@@ -1778,12 +1792,13 @@ function switchTab(t){
   if(t==='performance'){ renderPerf(); }
   if(t==='watchlist'){ renderWatchlist(); }
   if(t==='payments'){ renderPayments(); }
+  if(t==='research'){ rsInit(); }
   if(changed) window.scrollTo({top:0});
 }
 function initTabs(){
   document.querySelectorAll('[data-tabbtn]').forEach(b=>b.addEventListener('click',()=>switchTab(b.dataset.tabbtn)));
   const h=(location.hash||'').replace('#','');
-  switchTab(['portfolio','news','performance','payments','watchlist'].includes(h)?h:'portfolio');
+  switchTab(['portfolio','news','performance','payments','watchlist','research'].includes(h)?h:'portfolio');
 }
 
 /* ===================== PERFORMANCE TAB (formulas replicated from PP source: Risk.java) ===================== */
@@ -2185,6 +2200,336 @@ async function saveBenchList(list){
     if(r.ok){ _cfg.benchmarks=list; return true; }
   }catch(e){}
   return false;
+}
+/* ===================== RESEARCH TAB (Qualtrim-style, SEC XBRL + Yahoo) ===================== */
+const RS_CONCEPTS={   // group -> [taxonomy, [tag fallbacks], unit, instant?]
+  revenue:['us-gaap',['RevenueFromContractWithCustomerExcludingAssessedTax','Revenues','SalesRevenueNet'],'USD',0],
+  grossProfit:['us-gaap',['GrossProfit'],'USD',0],
+  opInc:['us-gaap',['OperatingIncomeLoss'],'USD',0],
+  netInc:['us-gaap',['NetIncomeLoss'],'USD',0],
+  eps:['us-gaap',['EarningsPerShareDiluted','EarningsPerShareBasicAndDiluted'],'USD/shares',0],
+  ocf:['us-gaap',['NetCashProvidedByUsedInOperatingActivities','NetCashProvidedByUsedInOperatingActivitiesContinuingOperations'],'USD',0],
+  capex:['us-gaap',['PaymentsToAcquirePropertyPlantAndEquipment','PaymentsToAcquireProductiveAssets'],'USD',0],
+  rnd:['us-gaap',['ResearchAndDevelopmentExpense'],'USD',0],
+  sga:['us-gaap',['SellingGeneralAndAdministrativeExpense','GeneralAndAdministrativeExpense'],'USD',0],
+  cash:['us-gaap',['CashAndCashEquivalentsAtCarryingValue','CashCashEquivalentsRestrictedCashAndRestrictedCashEquivalents'],'USD',1],
+  shares:['dei',['EntityCommonStockSharesOutstanding'],'shares',1],
+  divPaid:['us-gaap',['PaymentsOfDividends','PaymentsOfDividendsCommonStock'],'USD',0],
+  buyback:['us-gaap',['PaymentsForRepurchaseOfCommonStock'],'USD',0]};
+const _rsCache={};   // ticker -> {q:{}, a:{}}
+let RS={tk:null,name:'',mode:'q',data:null,quote:null};
+async function rsCik(tk){
+  const local=(DATA.secCik||{})[tk]; if(local) return +local;
+  if(!window._cikMap){
+    try{ window._cikMap=await (await fetch('cik.json',{cache:'force-cache'})).json(); }
+    catch(e){ window._cikMap={}; }
+  }
+  return window._cikMap[tk.toUpperCase()]||null;
+}
+async function rsFetchConcept(cik,tax,tag){
+  const u=`https://data.sec.gov/api/xbrl/companyconcept/CIK${String(cik).padStart(10,'0')}/${tax}/${tag}.json`;
+  const r=await fetch('https://corsproxy.io/?url='+encodeURIComponent(u));
+  const t=await r.text(); if(t[0]!=='{') throw new Error('bad');
+  return JSON.parse(t);
+}
+/* build {q:[[CYyyyyQn,val]], a:[[yyyy,val]]} from SEC frames; derive missing Q4 = FY − Q1..Q3 */
+function rsSeries(json,unit,instant){
+  const arr=(json.units&&(json.units[unit]||json.units[Object.keys(json.units)[0]]))||[];
+  const q={},a={};
+  arr.forEach(e=>{
+    if(!e.frame) return;
+    let m;
+    if(m=e.frame.match(/^CY(\d{4})Q(\d)I?$/)){ if(instant===!!e.frame.endsWith('I')||instant) q[m[1]+'Q'+m[2]]=e.val; else q[m[1]+'Q'+m[2]]=e.val; }
+    else if(m=e.frame.match(/^CY(\d{4})$/)){ a[m[1]]=e.val; }
+  });
+  if(instant){ /* annual = Q4 snapshot */
+    Object.keys(q).forEach(k=>{ if(k.endsWith('Q4')) a[k.slice(0,4)]=q[k]; });
+  } else {
+    Object.keys(a).forEach(y=>{ const k=y+'Q4';
+      if(q[k]==null&&q[y+'Q1']!=null&&q[y+'Q2']!=null&&q[y+'Q3']!=null)
+        q[k]=a[y]-q[y+'Q1']-q[y+'Q2']-q[y+'Q3'];
+    });
+  }
+  return {q:Object.entries(q).sort((x,y)=>x[0]<y[0]?-1:1), a:Object.entries(a).sort((x,y)=>x[0]<y[0]?-1:1)};
+}
+function rsMerge(list){   // merge several tag-series (first tag wins per frame)
+  const q={},a={};
+  list.forEach(s=>{ if(!s) return;
+    s.q.forEach(([k,v])=>{ if(q[k]==null) q[k]=v; });
+    s.a.forEach(([k,v])=>{ if(a[k]==null) a[k]=v; });
+  });
+  return {q:Object.entries(q).sort((x,y)=>x[0]<y[0]?-1:1), a:Object.entries(a).sort((x,y)=>x[0]<y[0]?-1:1)};
+}
+function rsTtm(qser){   // rolling 4-quarter sum over contiguous quarters
+  const out=[];
+  const idx=k=>+k.slice(0,4)*4+(+k.slice(5)-1);
+  for(let i=3;i<qser.length;i++){
+    const w=qser.slice(i-3,i+1);
+    if(idx(w[3][0])-idx(w[0][0])===3) out.push([w[3][0],w.reduce((s,x)=>s+x[1],0)]);
+  }
+  return out;
+}
+async function rsLoad(tk){
+  tk=tk.toUpperCase();
+  const body=document.getElementById('rs-body');
+  body.innerHTML=`<div class="panel" style="padding:26px;text-align:center;color:var(--muted)">
+    <div style="font-size:15px;font-weight:650;color:var(--ink)">Loading ${esc(tk)}…</div>
+    <div style="font-size:12.5px;margin-top:6px">price + full SEC filing history</div></div>`;
+  RS={tk,name:'',mode:RS.mode||'q',data:null,quote:null};
+  try{ RS.quote=await fetchYahoo(tk); RS.name=RS.quote.name||tk; }catch(e){}
+  if(RS.tk!==tk) return;
+  if(_rsCache[tk]){ RS.data=_rsCache[tk]; renderResearch(); return; }
+  const cik=await rsCik(tk);
+  if(!cik){
+    renderResearch();   // price-only view with hint
+    return;
+  }
+  const jobs=Object.entries(RS_CONCEPTS).map(async([key,[tax,tags,unit,inst]])=>{
+    const parts=await Promise.allSettled(tags.map(t=>rsFetchConcept(cik,tax,t)));
+    const ser=rsMerge(parts.filter(p=>p.status==='fulfilled').map(p=>rsSeries(p.value,unit,inst)));
+    return [key,ser];
+  });
+  const res=await Promise.allSettled(jobs);
+  if(RS.tk!==tk) return;
+  const data={};
+  res.forEach(r=>{ if(r.status==='fulfilled') data[r.value[0]]=r.value[1]; });
+  /* derived series */
+  const sub=(A,B)=>{ const bm=Object.fromEntries(B); return A.filter(([k])=>bm[k]!=null).map(([k,v])=>[k,v-bm[k]]); };
+  if(data.ocf&&data.capex) data.fcf={q:sub(data.ocf.q,data.capex.q),a:sub(data.ocf.a,data.capex.a)};
+  if(data.divPaid||data.buyback){
+    const add=(A=[],B=[])=>{ const m={}; A.forEach(([k,v])=>m[k]=(m[k]||0)+v); B.forEach(([k,v])=>m[k]=(m[k]||0)+v);
+      return Object.entries(m).sort((x,y)=>x[0]<y[0]?-1:1); };
+    data.roc={q:add((data.divPaid||{}).q,(data.buyback||{}).q),a:add((data.divPaid||{}).a,(data.buyback||{}).a)};
+  }
+  _rsCache[tk]=data; RS.data=data;
+  renderResearch();
+}
+const RS_CARDS=[
+  ['price','Price',null],['revenue','Revenue','$'],['grossProfit','Gross Profit','$'],
+  ['opInc','Operating Income','$'],['netInc','Net Income','$'],['eps','EPS (diluted)','eps'],
+  ['ocf','Operating Cash Flow','$'],['fcf','Free Cash Flow','$'],['margins','Margins %','%'],
+  ['rnd','R&D Expense','$'],['sga','SG&A Expense','$'],['cash','Cash','$'],
+  ['shares','Shares Outstanding','n'],['roc','Return of Capital','$']];
+function rsGet(key){   // series in current mode
+  if(!RS.data||!RS.data[key]) return [];
+  const s=RS.data[key];
+  if(RS.mode==='a') return s.a;
+  if(RS.mode==='ttm') return RS_CONCEPTS[key]&&RS_CONCEPTS[key][3]?s.q:rsTtm(s.q);   // instants: plain quarters
+  return s.q;
+}
+const rsFmtV=(v,f)=>f==='%'?v.toFixed(1)+'%':f==='eps'?'$'+v.toFixed(2):f==='n'?fmtBig(v):(v<0?'-$':'$')+fmtBig(Math.abs(v));
+function rsBars(elId,ser,fmt,H){
+  const el=document.getElementById(elId); if(!el) return;
+  if(!ser.length){ el.innerHTML='<div style="color:var(--muted);font-size:12px;padding:24px 8px">no data</div>'; return; }
+  H=H||150;
+  const W=el.getBoundingClientRect().width||300, padB=30, padT=8;
+  const vals=ser.map(s=>s[1]), mx=Math.max(...vals.map(Math.abs),1e-9);
+  const hasNeg=vals.some(v=>v<0);
+  const zero=hasNeg?(padT+(H-padB-padT)*Math.max(...vals,0)/(Math.max(...vals,0)-Math.min(...vals,0)||1)):H-padB;
+  const bw=Math.max(2.5,Math.min(30,W/ser.length-2.5));
+  let h='';
+  ser.forEach(([k,v],i)=>{
+    const x=(i+0.5)*(W/ser.length);
+    const bh=Math.abs(v)/mx*(hasNeg?Math.min(zero-padT,H-padB-zero):(H-padB-padT));
+    const y=v>=0?zero-bh:zero;
+    const col=v>=0?cvar('--up'):cvar('--down');
+    h+=`<rect x="${(x-bw/2).toFixed(1)}" y="${y.toFixed(1)}" width="${bw.toFixed(1)}" height="${Math.max(1.5,bh).toFixed(1)}" rx="2" fill="${col}" opacity="0.85"><title>${k}: ${rsFmtV(v,fmt)}</title></rect>`;
+    const every=Math.ceil(ser.length/8);
+    if(i%every===0) h+=`<text x="${x.toFixed(1)}" y="${H-8}" text-anchor="middle" font-size="9.5" fill="${cvar('--muted')}" font-family="system-ui" transform="rotate(-38 ${x.toFixed(1)} ${H-8})">${k}</text>`;
+  });
+  el.innerHTML=`<svg viewBox="0 0 ${W} ${H}" style="width:100%;height:${H}px;display:block"><line x1="0" y1="${zero.toFixed(1)}" x2="${W}" y2="${zero.toFixed(1)}" stroke="${cvar('--grid')}"/>${h}</svg>`;
+}
+function rsLines(elId,series,H){   // margins: [{name,color,pts:[[k,v]]}]
+  const el=document.getElementById(elId); if(!el) return;
+  const all=series.flatMap(s=>s.pts.map(p=>p[1]));
+  if(!all.length){ el.innerHTML='<div style="color:var(--muted);font-size:12px;padding:24px 8px">no data</div>'; return; }
+  H=H||150;
+  const W=el.getBoundingClientRect().width||300, padB=28, padT=8;
+  const keys=[...new Set(series.flatMap(s=>s.pts.map(p=>p[0])))].sort();
+  const mn=Math.min(...all,0), mx=Math.max(...all,0), sp=(mx-mn)||1;
+  const X=k=>((keys.indexOf(k)+0.5)/keys.length)*W, Y=v=>padT+(1-(v-mn)/sp)*(H-padB-padT);
+  let h=`<line x1="0" y1="${Y(0).toFixed(1)}" x2="${W}" y2="${Y(0).toFixed(1)}" stroke="${cvar('--grid')}"/>`;
+  series.forEach(s=>{ if(!s.pts.length) return;
+    h+=`<polyline points="${s.pts.map(p=>X(p[0]).toFixed(1)+','+Y(p[1]).toFixed(1)).join(' ')}" fill="none" stroke="${s.color}" stroke-width="1.8" stroke-linejoin="round"/>`;
+  });
+  const every=Math.ceil(keys.length/8);
+  keys.forEach((k,i)=>{ if(i%every===0) h+=`<text x="${X(k).toFixed(1)}" y="${H-6}" text-anchor="middle" font-size="9.5" fill="${cvar('--muted')}" font-family="system-ui" transform="rotate(-38 ${X(k).toFixed(1)} ${H-6})">${k}</text>`; });
+  el.innerHTML=`<svg viewBox="0 0 ${W} ${H}" style="width:100%;height:${H}px;display:block">${h}</svg>`+
+    `<div style="display:flex;gap:12px;font-size:11px;color:var(--muted);padding:2px 4px">${series.map(s=>`<span><span style="display:inline-block;width:12px;height:3px;background:${s.color};border-radius:2px;vertical-align:2px"></span> ${s.name}</span>`).join('')}</div>`;
+}
+function rsMargins(){
+  if(!RS.data||!RS.data.revenue) return [];
+  const rev=Object.fromEntries(RS.mode==='a'?RS.data.revenue.a:RS.mode==='ttm'?rsTtm(RS.data.revenue.q):RS.data.revenue.q);
+  const mk=(key,name,color)=>{ const ser=rsGet(key);
+    return {name,color,pts:ser.filter(([k,v])=>rev[k]).map(([k,v])=>[k,v/rev[k]*100])}; };
+  return [mk('grossProfit','Gross','#4db6ac'),mk('opInc','Operating','#8f7ad6'),mk('netInc','Net','#c9a227')].filter(s=>s.pts.length);
+}
+function rsStatsStrip(){
+  const d=RS.data||{}, q=RS.quote||{};
+  const price=q.price;
+  const last=ser=>ser&&ser.q.length?ser.q[ser.q.length-1][1]:null;
+  const ttmSum=ser=>{ if(!ser) return null; const t=rsTtm(ser.q); return t.length?t[t.length-1][1]:null; };
+  const shares=last(d.shares), revT=ttmSum(d.revenue), niT=ttmSum(d.netInc), epsT=ttmSum(d.eps), fcfT=ttmSum(d.fcf);
+  const mcap=(price&&shares)?price*shares:null;
+  const cell=(l,v)=>`<div class="sd-stat"><div class="l">${l}</div><div class="v">${v==null?'—':v}</div></div>`;
+  const pct=v=>v==null?'—':v.toFixed(1)+'%';
+  const gpT=ttmSum(d.grossProfit), opT=ttmSum(d.opInc);
+  const revQ=d.revenue&&d.revenue.q||[];
+  let yoy=null;
+  if(revQ.length>4){ const [lk,lv]=revQ[revQ.length-1]; const prior=Object.fromEntries(revQ)[(+lk.slice(0,4)-1)+lk.slice(4)]; if(prior) yoy=(lv/prior-1)*100; }
+  return `<div class="sd-stats" style="grid-template-columns:repeat(4,minmax(0,1fr))">
+    ${cell('Market cap',mcap!=null?'$'+fmtBig(mcap):null)}
+    ${cell('P/E (TTM)',(mcap&&niT&&niT>0)?(mcap/niT).toFixed(1):(epsT&&price&&epsT>0?(price/epsT).toFixed(1):'—'))}
+    ${cell('P/S (TTM)',(mcap&&revT)?(mcap/revT).toFixed(2):null)}
+    ${cell('FCF yield',(mcap&&fcfT!=null)?( (fcfT/mcap*100).toFixed(2)+'%'):null)}
+    ${cell('Gross margin',revT&&gpT!=null?pct(gpT/revT*100):null)}
+    ${cell('Op margin',revT&&opT!=null?pct(opT/revT*100):null)}
+    ${cell('Net margin',revT&&niT!=null?pct(niT/revT*100):null)}
+    ${cell('Revenue YoY',yoy!=null?fmtPct(yoy):null)}
+  </div>`;
+}
+function renderResearch(){
+  const body=document.getElementById('rs-body'); if(!body||!RS.tk) return;
+  const q=RS.quote||{};
+  const day=(q.price&&q.prevClose)?((q.price/q.prevClose-1)*100):null;
+  const fmtP=v=>v==null?'—':'$'+(+v).toLocaleString('en-US',{minimumFractionDigits:2,maximumFractionDigits:2});
+  const hasSec=RS.data&&Object.keys(RS.data).length>0;
+  body.innerHTML=`
+    <div class="panel">
+      <div style="display:flex;align-items:center;gap:13px;flex-wrap:wrap">
+        ${logoImg(wlLogos(RS.tk),'sd-logo',RS.tk)}
+        <div style="min-width:0"><div class="sd-tk">${esc(RS.tk)}</div><div class="sd-nm">${esc(RS.name||'')}</div></div>
+        <div class="sd-px" style="margin-left:auto"><div class="p">${fmtP(q.price)}</div>
+          ${day!=null?`<div class="tnum ${day>=0?'up':'down'}" style="font-size:12.5px">${fmtPct(day)} today</div>`:''}</div>
+      </div>
+      ${hasSec?rsStatsStrip():`<div style="color:var(--muted);font-size:13px;margin-top:10px">No SEC filing data for this symbol (only US filers) — price chart only.</div>`}
+    </div>
+    <div style="display:flex;gap:6px;justify-content:center;margin:16px 0">
+      ${[['q','Quarterly'],['ttm','Quarterly (TTM)'],['a','Annually']].map(([k,l])=>
+        `<button data-rsmode="${k}" class="secbtn" style="margin:0;padding:6px 14px;font-size:12.5px;${RS.mode===k?'background:var(--accent);color:#fff;border-color:var(--accent)':''}">${l}</button>`).join('')}
+    </div>
+    <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:14px">
+      ${RS_CARDS.filter(([k])=>k==='price'||(hasSec&&(k==='margins'?RS.data.revenue:RS.data[k]))).map(([k,lab])=>
+        `<div class="panel" style="padding:14px 14px 8px">
+          <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:6px">
+            <h2 style="margin:0;font-size:13px">${lab}</h2>
+            <button data-rsexp="${k}" title="expand" style="border:0;background:none;color:var(--muted);cursor:pointer;font-size:14px">⤢</button>
+          </div>
+          <div id="rs-c-${k}"></div>
+        </div>`).join('')}
+    </div>`;
+  /* draw all cards */
+  RS_CARDS.forEach(([k,lab,fmt])=>{
+    const el=document.getElementById('rs-c-'+k); if(!el) return;
+    if(k==='price'){
+      el.innerHTML='<svg id="rs-price-svg" style="width:100%;height:150px;display:block"></svg>';
+      fetchYahooChart(RS.tk,'1y','1d').then(pts=>{ const svg=document.getElementById('rs-price-svg');
+        if(!svg) return; const hold=svg.parentElement;
+        hold.innerHTML=''; const w=document.createElement('div'); w.id='sd-chartwrap-rs'; hold.appendChild(w);
+        w.innerHTML='<svg id="rs-price-svg" style="width:100%;height:150px;display:block"></svg>';
+        const tmp=document.getElementById('rs-price-svg');
+        drawRsPrice(tmp,pts);
+      }).catch(()=>{ el.innerHTML='<div style="color:var(--muted);font-size:12px;padding:24px 8px">chart unavailable</div>'; });
+    }
+    else if(k==='margins') rsLines('rs-c-'+k,rsMargins());
+    else rsBars('rs-c-'+k,rsGet(k).slice(RS.mode==='a'?-15:-24),fmt);
+  });
+  document.querySelectorAll('[data-rsmode]').forEach(b=>b.addEventListener('click',()=>{ RS.mode=b.dataset.rsmode; renderResearch(); }));
+  document.querySelectorAll('[data-rsexp]').forEach(b=>b.addEventListener('click',()=>openRsChart(b.dataset.rsexp)));
+}
+function drawRsPrice(svg,pts){
+  const W=svg.getBoundingClientRect().width||300,H=150;
+  const ys=pts.map(p=>p[1]),mn=Math.min(...ys),mx=Math.max(...ys),sp=(mx-mn)||1;
+  const t0=pts[0][0],t1=pts[pts.length-1][0],ts=(t1-t0)||1;
+  const up=ys[ys.length-1]>=ys[0],col=up?cvar('--up'):cvar('--down');
+  const line=pts.map((p,i)=>`${i?'L':'M'}${((p[0]-t0)/ts*W).toFixed(1)},${(6+(1-(p[1]-mn)/sp)*(H-14)).toFixed(1)}`).join(' ');
+  svg.setAttribute('viewBox',`0 0 ${W} ${H}`);
+  svg.innerHTML=`<path d="${line} L${W},${H} L0,${H} Z" fill="${col}" opacity="0.08"/><path d="${line}" fill="none" stroke="${col}" stroke-width="1.8"/>`;
+}
+function rsCagrChips(ser){   // ser = annual or ttm series of [key,val]
+  if(!ser||ser.length<2) return '';
+  const yearOf=k=>+String(k).slice(0,4);
+  const lastV=ser[ser.length-1][1], lastY=yearOf(ser[ser.length-1][0]);
+  const chip=n=>{
+    const tgt=ser.filter(([k])=>yearOf(k)<=lastY-n).pop();
+    if(!tgt||tgt[1]<=0||lastV<=0) return '';
+    const yrs=lastY-yearOf(tgt[0]); if(yrs<n*0.8) return '';
+    const c=(Math.pow(lastV/tgt[1],1/yrs)-1)*100;
+    return `<span style="font-size:11.5px;font-weight:660;background:var(--surface-2);border:1px solid var(--border);border-radius:999px;padding:3px 10px">${n}Y: ${c>=0?'+':''}${c.toFixed(1)}%</span>`;
+  };
+  const chips=[1,3,5,10].map(chip).filter(Boolean).join(' ');
+  return chips?`<div style="display:flex;gap:8px;justify-content:center;flex-wrap:wrap;padding:10px 0 2px">${chips}</div>`:'';
+}
+function openRsChart(key){
+  const card=RS_CARDS.find(c=>c[0]===key); if(!card) return;
+  _secTk='__rs__';   // reuse the overlay shell + ESC handling
+  const modal=document.getElementById('secmodal');
+  modal.innerHTML=`<div class="sechd">
+      ${logoImg(wlLogos(RS.tk),'sd-logo',RS.tk)}
+      <div style="min-width:0"><div class="sd-tk">${esc(card[1])}</div><div class="sd-nm">${esc(RS.tk)} · ${esc(RS.name||'')}</div></div>
+      <button class="sd-x" id="sd-close" title="close">✕</button></div>
+    <div class="sd-body" style="padding-top:4px">
+      <div id="rs-big"></div><div id="rs-cagr"></div></div>`;
+  document.getElementById('secov').classList.add('on');
+  document.body.style.overflow='hidden';
+  document.getElementById('sd-close').onclick=closeSecDetail;
+  if(key==='price'){
+    document.getElementById('rs-big').innerHTML='<svg id="rs-big-svg" style="width:100%;height:300px;display:block"></svg>';
+    fetchYahooChart(RS.tk,'max','1mo').then(pts=>{ const s=document.getElementById('rs-big-svg'); if(s){ s.style.height='300px'; drawRsPrice(s,pts); s.setAttribute('viewBox',s.getAttribute('viewBox')); } });
+    return;
+  }
+  if(key==='margins'){
+    document.getElementById('rs-big').id='rs-big-m';
+    rsLines('rs-big-m',rsMargins(),300);
+    return;
+  }
+  const full=rsGet(key);   // FULL history in current mode
+  document.getElementById('rs-big').id='rs-big-b';
+  rsBars('rs-big-b',full,card[2],300);
+  /* CAGR on annual values (or TTM if annual sparse) */
+  const annual=(RS.data[key]&&RS.data[key].a&&RS.data[key].a.length>1)?RS.data[key].a:(rsTtm((RS.data[key]||{}).q||[]));
+  document.getElementById('rs-cagr').innerHTML=rsCagrChips(annual);
+}
+/* search + recents */
+function rsInit(){
+  const inp=document.getElementById('rs-search'); if(!inp||inp._hooked) return; inp._hooked=true;
+  const sug=document.getElementById('rs-sugg');
+  const recents=()=>{try{return JSON.parse(localStorage.getItem('pc-rsrecent')||'[]');}catch(e){return [];}};
+  const renderRecents=()=>{
+    const list=recents();
+    document.getElementById('rs-recent').innerHTML=list.length?
+      '<span style="font-size:11px;text-transform:uppercase;letter-spacing:.5px;color:var(--muted);font-weight:660;align-self:center">Recent</span> '+
+      list.map(t=>`<button data-rsr="${esc(t)}" class="secbtn" style="margin:0;padding:4px 11px;font-size:12px">${esc(t)}</button>`).join(''):'';
+    document.querySelectorAll('[data-rsr]').forEach(b=>b.addEventListener('click',()=>pick(b.dataset.rsr)));
+  };
+  const pick=tk=>{
+    sug.style.display='none'; inp.value='';
+    const list=[tk,...recents().filter(x=>x!==tk)].slice(0,8);
+    try{localStorage.setItem('pc-rsrecent',JSON.stringify(list));}catch(e){}
+    renderRecents(); rsLoad(tk);
+  };
+  window._rsPick=pick;
+  let deb;
+  inp.addEventListener('input',()=>{
+    clearTimeout(deb);
+    const qq=inp.value.trim(); if(qq.length<1){ sug.style.display='none'; return; }
+    deb=setTimeout(async()=>{
+      try{
+        const u='https://query1.finance.yahoo.com/v1/finance/search?q='+encodeURIComponent(qq)+'&quotesCount=7&newsCount=0';
+        const j=await (await fetch('https://corsproxy.io/?url='+encodeURIComponent(u))).json();
+        const qs=(j.quotes||[]).filter(x=>x.symbol&&(x.quoteType==='EQUITY'||x.quoteType==='ETF'));
+        sug.innerHTML=qs.length?qs.map(x=>`<div class="pfw-additem" data-rss="${esc(x.symbol)}" style="display:flex;gap:8px;align-items:center">
+            <b style="min-width:56px">${esc(x.symbol)}</b><span style="color:var(--muted);font-size:12px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis">${esc(x.shortname||x.longname||'')}</span>
+            <span style="margin-left:auto;color:var(--muted);font-size:10.5px">${esc(x.exchDisp||'')}</span></div>`).join('')
+          :'<div style="padding:8px;color:var(--muted);font-size:12.5px">no matches</div>';
+        sug.style.display='block';
+        sug.querySelectorAll('[data-rss]').forEach(d=>d.addEventListener('click',()=>pick(d.dataset.rss)));
+      }catch(e){ sug.innerHTML='<div style="padding:8px;color:var(--muted);font-size:12.5px">search unavailable</div>'; sug.style.display='block'; }
+    },300);
+  });
+  inp.addEventListener('keydown',e=>{ if(e.key==='Enter'&&inp.value.trim()) pick(inp.value.trim().toUpperCase()); });
+  document.addEventListener('click',e=>{ if(!sug.contains(e.target)&&e.target!==inp) sug.style.display='none'; });
+  renderRecents();
 }
 /* ===================== SECURITY DETAIL OVERLAY (Parqet-style) ===================== */
 const _secChartCache={};   // {sym|range: [[ts,close],...]}

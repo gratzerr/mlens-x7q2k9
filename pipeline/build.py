@@ -98,6 +98,17 @@ def _watch_syms():
 
 sec_cik = sec_cik_map(port["holdings"], _watch_syms())
 
+# compact ticker->CIK map as a STATIC site file (research tab resolves any US ticker;
+# kept out of data.json to protect the Firestore budget)
+def write_cik_map():
+    try:
+        raw = json.load(open(os.path.join(ROOT, "sec_tickers.json")))
+        m = {v["ticker"].upper(): int(v["cik_str"]) for v in raw.values()}
+        json.dump(m, open(os.path.join(ROOT, "cik.json"), "w"), separators=(",", ":"))
+    except Exception:
+        pass
+write_cik_map()
+
 # ---- PRIVACY: restrict the security name map to ISINs that actually appear in the
 # displayed (Parqet biotech) portfolio's activities. depot.xml also contains a separate
 # dividend depot (Swissquote); its security names must NOT be exposed on the page. ----
