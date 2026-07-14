@@ -1,8 +1,8 @@
 {
- "fileDate": "2026-07-14 19:43",
- "generated": "2026-07-14 20:04",
+ "fileDate": "2026-07-14 20:05",
+ "generated": "2026-07-14 20:26",
  "engine": "pp-exact (verified vs PP app 2026-07-11)",
- "totalSecuritiesEur": 2083797,
+ "totalSecuritiesEur": 2087734,
  "cashEur": -90923.38,
  "cashByAccount": [
   {
@@ -30,22 +30,22 @@
    "eur": 137.81
   }
  ],
- "totalEur": 1992874,
- "ttwrorSince2022": 408.95,
- "ttwrorYtd": 102.08,
- "ttwrorAnnualized": 43.17,
- "izf": 72.27,
+ "totalEur": 1996811,
+ "ttwrorSince2022": 409.95,
+ "ttwrorYtd": 102.48,
+ "ttwrorAnnualized": 43.23,
+ "izf": 72.41,
  "yearlyReturns": {
   "2022": 3.3,
   "2023": 11.8,
   "2024": 45.2,
   "2025": 50.2,
-  "2026": 102.1
+  "2026": 102.5
  },
  "realizedEur": 699185,
- "unrealizedEur": 622703,
+ "unrealizedEur": 626640,
  "realizedUsd": 855901,
- "unrealizedUsd": 688456,
+ "unrealizedUsd": 692956,
  "netContribEur": 666772,
  "netContribUsd": 738607,
  "earningsEur": 13297.85,
@@ -26521,9 +26521,9 @@
   },
   {
    "d": "2026-07-13",
-   "v": 2392889,
-   "e": 2093516,
-   "r": 4.346517,
+   "v": 2303418,
+   "e": 2015239,
+   "r": 4.146609,
    "c": 738607,
    "k": 666772,
    "q": 855901,
@@ -26537,9 +26537,9 @@
   },
   {
    "d": "2026-07-14",
-   "v": 2277855,
-   "e": 1992874,
-   "r": 4.089492,
+   "v": 2282355,
+   "e": 1996811,
+   "r": 4.099547,
    "c": 738607,
    "k": 666772,
    "q": 855901,
@@ -45849,15 +45849,15 @@
    "name": "CARIBOU BIOSCIENCES INC"
   }
  ],
- "ppReferenceTtwror": 408.95,
+ "ppReferenceTtwror": 409.95,
  "ppReferenceDate": "2026-07-14",
- "ttwrorApproxSince2022": 408.95,
+ "ttwrorApproxSince2022": 409.95,
  "yearlyReturnsApprox": {
   "2022": 3.3,
   "2023": 11.8,
   "2024": 45.2,
   "2025": 50.2,
-  "2026": 102.1
+  "2026": 102.5
  },
  "holdings": [
   {
@@ -45971,14 +45971,14 @@
    "isin": "US64134X2018",
    "ccy": "USD",
    "shares": 30000.0,
-   "price": 7.0,
-   "value": 210000.0,
-   "valueEur": 183727,
-   "valueUsd": 210000,
+   "price": 7.15000009,
+   "value": 214500.0,
+   "valueEur": 187664,
+   "valueUsd": 214500,
    "basisUsd": 163566,
    "realizedUsd": 0,
    "avgCost": 5.4548,
-   "unrealRet": 28.3,
+   "unrealRet": 31.1,
    "priceDate": "2026-07-14"
   },
   {
