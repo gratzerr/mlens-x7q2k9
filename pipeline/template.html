@@ -2620,10 +2620,24 @@ function rsDrawCard(k){
   }
   let ser=rsGet(k), note='';
   if(!ser.length&&RS.data[k]&&RS.data[k].q&&RS.data[k].q.length){
-    /* filer tags this concept too sparsely for TTM/annual (RPID gross profit) —
-       show the quarters that exist instead of an empty card */
-    ser=RS.data[k].q;
-    note=`<div style="font-size:10.5px;color:var(--muted);padding:0 4px">sparse tagging — showing quarterly since ${esc(String(ser[0][0]))}</div>`;
+    const q=RS.data[k].q, def=RS_CONCEPTS[k]||[];
+    if(RS.mode==='a'){
+      /* annual view must show YEARS: sum complete 4-quarter sets (instants take
+         the year-end value, averages the mean) — never quarter labels here */
+      const by={}; q.forEach(([kk,v])=>{(by[kk.slice(0,4)]=by[kk.slice(0,4)]||[]).push(v);});
+      ser=Object.entries(by).filter(([y,a])=>a.length===4).map(([y,a])=>
+        [y, def[3]?a[a.length-1] : def[4]==='avg'?a.reduce((x,b)=>x+b,0)/4 : a.reduce((x,b)=>x+b,0)]);
+      if(ser.length) note=`<div style="font-size:10.5px;color:var(--muted);padding:0 4px">years built from quarterly filings</div>`;
+      else{
+        setV('');
+        el.innerHTML=`<div style="color:var(--muted);font-size:12px;padding:24px 8px">no full year tagged yet (since ${esc(String(q[0][0]))}) — switch to Quarterly</div>`;
+        return;
+      }
+    } else {
+      /* TTM impossible on <4 contiguous quarters — show what exists */
+      ser=q;
+      note=`<div style="font-size:10.5px;color:var(--muted);padding:0 4px">sparse tagging — showing quarterly since ${esc(String(q[0][0]))}</div>`;
+    }
   }
   if(ser.length){
     setV(rsFmtV(ser[ser.length-1][1],fmt));   // neutral by request — the chart tells the story
