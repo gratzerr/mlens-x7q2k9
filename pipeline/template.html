@@ -2405,14 +2405,17 @@ function rsBars(elId,ser,fmt,H,color){
   if(!ser.length){ el.innerHTML='<div style="color:var(--muted);font-size:12px;padding:24px 8px">no data</div>'; return; }
   H=H||150;
   const W=el.getBoundingClientRect().width||300, padB=30, padT=8;
-  const vals=ser.map(s=>s[1]), mx=Math.max(...vals.map(Math.abs),1e-9);
-  const hasNeg=vals.some(v=>v<0);
-  const zero=hasNeg?(padT+(H-padB-padT)*Math.max(...vals,0)/(Math.max(...vals,0)-Math.min(...vals,0)||1)):H-padB;
+  const vals=ser.map(s=>s[1]);
+  /* zero line splits the plot proportionally — an all-negative series (loss-making
+     biotech) gets the FULL height below zero, not 1.5px dashes */
+  const maxPos=Math.max(...vals,0), maxNeg=Math.max(...vals.map(v=>v<0?-v:0),0);
+  const scale=(H-padB-padT)/((maxPos+maxNeg)||1);
+  const zero=padT+maxPos*scale;
   const bw=Math.max(2.5,Math.min(30,W/ser.length-2.5));
   let h='';
   ser.forEach(([k,v],i)=>{
     const x=(i+0.5)*(W/ser.length);
-    const bh=Math.abs(v)/mx*(hasNeg?Math.min(zero-padT,H-padB-zero):(H-padB-padT));
+    const bh=Math.abs(v)*scale;
     const y=v>=0?zero-bh:zero;
     const col=v>=0?(color||cvar('--up')):cvar('--down');
     h+=`<rect x="${(x-bw/2).toFixed(1)}" y="${y.toFixed(1)}" width="${bw.toFixed(1)}" height="${Math.max(1.5,bh).toFixed(1)}" rx="2" fill="${col}" opacity="0.85"><title>${k}: ${rsFmtV(v,fmt)}</title></rect>`;
