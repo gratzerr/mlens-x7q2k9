@@ -2236,15 +2236,17 @@ const _rsGate=()=>_rsSlots>0?(_rsSlots--,Promise.resolve()):new Promise(res=>_rs
 const _rsFree=()=>{const n=_rsWait.shift(); if(n) n(); else _rsSlots++;};
 async function rsFetchConcept(cik,tax,tag){
   const u=`https://data.sec.gov/api/xbrl/companyconcept/CIK${String(cik).padStart(10,'0')}/${tax}/${tag}.json`;
-  const via=async p=>{ const r=await fetch(p+encodeURIComponent(u));
-    const t=await r.text(); if(t[0]!=='{') throw new Error('bad'); return JSON.parse(t); };
+  const via=async(p,ms)=>{ const c=new AbortController(); const to=setTimeout(()=>c.abort(),ms);
+    try{ const r=await fetch(p+encodeURIComponent(u),{signal:c.signal});
+      const t=await r.text(); if(t[0]!=='{') throw new Error('bad'); return JSON.parse(t);
+    } finally { clearTimeout(to); } };
   await _rsGate();
   try{
-    try{ return await via('https://corsproxy.io/?url='); }
+    try{ return await via('https://corsproxy.io/?url=',6000); }
     catch(e1){
-      await new Promise(r=>setTimeout(r,500));
-      try{ return await via('https://corsproxy.io/?url='); }      // retry once (throttle recovers fast)
-      catch(e2){ return await via('https://api.allorigins.win/raw?url='); }
+      await new Promise(r=>setTimeout(r,350));
+      try{ return await via('https://corsproxy.io/?url=',6000); }
+      catch(e2){ return await via('https://api.allorigins.win/raw?url=',8000); }
     }
   } finally { _rsFree(); }
 }
@@ -2305,47 +2307,71 @@ function rsTtm(qser){   // rolling 4-quarter sum over contiguous quarters
   }
   return out;
 }
-async function rsLoad(tk){
-  tk=tk.toUpperCase();
-  const body=document.getElementById('rs-body');
-  body.innerHTML=`<div class="panel" style="padding:26px;text-align:center;color:var(--muted)">
-    <div style="font-size:15px;font-weight:650;color:var(--ink)">Loading ${esc(tk)}…</div>
-    <div style="font-size:12.5px;margin-top:6px">price + full SEC filing history</div></div>`;
-  RS={tk,name:'',mode:RS.mode||'q',data:null,quote:null};
-  try{ RS.quote=await fetchYahoo(tk); RS.name=RS.quote.name||tk; }catch(e){}
-  if(RS.tk!==tk) return;
-  if(_rsCache[tk]){ RS.data=_rsCache[tk]; renderResearch(); return; }
-  const cik=await rsCik(tk);
-  if(!cik){
-    renderResearch();   // price-only view with hint
-    return;
-  }
-  const jobs=Object.entries(RS_CONCEPTS).map(async([key,[tax,tags,unit,inst,kind]])=>{
-    const parts=await Promise.allSettled(tags.map(t=>{
-      const [tx,tag]=t.includes(':')?t.split(':'):[tax,t];   // tags may carry their own taxonomy
-      return rsFetchConcept(cik,tx,tag);
-    }));
-    const ser=rsMerge(parts.filter(p=>p.status==='fulfilled').map(p=>rsSeries(p.value,unit,inst,kind==='avg')));
-    return [key,ser];
-  });
-  const res=await Promise.allSettled(jobs);
-  if(RS.tk!==tk) return;
-  const data={};
-  res.forEach(r=>{ if(r.status==='fulfilled') data[r.value[0]]=r.value[1]; });
-  /* derived series */
+function rsCacheGet(tk){ try{ const c=JSON.parse(localStorage.getItem('pc-rs-'+tk)||'null');
+  if(c&&Date.now()-c.t<86400000) return c.d; }catch(e){} return null; }
+function rsCacheSet(tk,d){
+  const w=()=>localStorage.setItem('pc-rs-'+tk,JSON.stringify({t:Date.now(),d}));
+  try{ w(); }catch(e){ try{ Object.keys(localStorage).filter(k=>k.startsWith('pc-rs-')).forEach(k=>localStorage.removeItem(k)); w(); }catch(e2){} }
+}
+function rsDerive(data){
   const sub=(A,B)=>{ const bm=Object.fromEntries(B); return A.filter(([k])=>bm[k]!=null).map(([k,v])=>[k,v-bm[k]]); };
   if(data.ocf&&data.capex&&data.capex.q.length) data.fcf={q:sub(data.ocf.q,data.capex.q),a:sub(data.ocf.a,data.capex.a)};
-  else if(data.ocf) data.fcf=data.ocf;   // no capex tag filed -> FCF ≈ OCF (typical pre-revenue biotech)
-  /* many filers (esp. biotech) don't tag GrossProfit — derive from revenue − cost of revenue */
-  if((!data.grossProfit||data.grossProfit.q.length<4)&&data.revenue&&data.costRev)
+  else if(data.ocf) data.fcf=data.ocf;   // no capex tag filed -> FCF = OCF (pre-revenue biotech)
+  if((!data.grossProfit||data.grossProfit.q.length<4)&&data.revenue&&data.costRev&&data.costRev.q.length)
     data.grossProfit={q:sub(data.revenue.q,data.costRev.q),a:sub(data.revenue.a,data.costRev.a)};
   if(data.divPaid||data.buyback){
     const add=(A=[],B=[])=>{ const m={}; A.forEach(([k,v])=>m[k]=(m[k]||0)+v); B.forEach(([k,v])=>m[k]=(m[k]||0)+v);
       return Object.entries(m).sort((x,y)=>x[0]<y[0]?-1:1); };
     data.roc={q:add((data.divPaid||{}).q,(data.buyback||{}).q),a:add((data.divPaid||{}).a,(data.buyback||{}).a)};
   }
-  _rsCache[tk]=data; RS.data=data;
+}
+/* PROGRESSIVE loader: skeleton renders instantly, price arrives in ~1s, each SEC
+   card fills the moment its concept lands; full result cached 24h in localStorage
+   so revisits are instant. Nothing ever blocks on the slowest request. */
+async function rsLoad(tk){
+  tk=tk.toUpperCase();
+  const cached=_rsCache[tk]||rsCacheGet(tk);
+  RS={tk,name:((window._watchLive||{})[tk]||{}).name||'',mode:RS.mode||'q',data:cached||{},quote:null,loading:!cached,noSec:false};
   renderResearch();
+  fetchYahoo(tk).then(q=>{ if(RS.tk!==tk) return; RS.quote=q; RS.name=q.name||RS.name||tk;
+    rsHeader(); rsStats(); }).catch(()=>{});
+  if(cached){ _rsCache[tk]=cached; return; }
+  /* cloud prefetch: holdings + watchlist tickers open with ZERO SEC round-trips */
+  try{
+    if(window._rsPre===undefined){
+      try{ window._rsPre=await (await fetch('rs_prefetch.json',{cache:'no-store'})).json(); }
+      catch(e){ window._rsPre=null; }
+    }
+    if(window._rsPre&&window._rsPre[tk]&&RS.tk===tk){
+      const d=JSON.parse(JSON.stringify(window._rsPre[tk]));
+      rsDerive(d); RS.data=d; RS.loading=false; _rsCache[tk]=d;
+      renderResearch(); return;
+    }
+  }catch(e){}
+  const cik=await rsCik(tk);
+  if(RS.tk!==tk) return;
+  if(!cik){ RS.loading=false; RS.noSec=true; renderResearch(); return; }
+  const data=RS.data;
+  let pending=Object.keys(RS_CONCEPTS).length;
+  Object.entries(RS_CONCEPTS).forEach(([key,[tax,tags,unit,inst,kind]])=>{
+    (async()=>{
+      const parts=await Promise.allSettled(tags.map(t=>{
+        const [tx,tag]=t.includes(':')?t.split(':'):[tax,t];
+        return rsFetchConcept(cik,tx,tag);
+      }));
+      if(RS.tk!==tk) return;
+      data[key]=rsMerge(parts.filter(p=>p.status==='fulfilled').map(p=>rsSeries(p.value,unit,inst,kind==='avg')));
+      rsDerive(data);
+      rsDrawCard(key);
+      if(key==='ocf'||key==='capex') rsDrawCard('fcf');
+      if(['revenue','costRev','grossProfit','opInc','netInc'].includes(key)){ rsDrawCard('grossProfit'); rsDrawCard('margins'); }
+      if(key==='divPaid'||key==='buyback') rsDrawCard('roc');
+      rsStats();
+    })().catch(()=>{}).finally(()=>{
+      if(--pending===0&&RS.tk===tk){ RS.loading=false; _rsCache[tk]=data; rsCacheSet(tk,data);
+        RS_CARDS.forEach(([k])=>rsDrawCard(k)); rsStats(); }
+    });
+  });
 }
 const RS_CARDS=[   // key, label, fmt, color (Qualtrim-style: every chart its own hue)
   ['price','Price',null,null],['revenue','Revenue','$','#e8a63b'],['grossProfit','Gross Profit','$','#4db6ac'],
@@ -2432,28 +2458,55 @@ function rsStatsStrip(){
     ${cell('Revenue YoY',yoy!=null?fmtPct(yoy):null)}
   </div>`;
 }
-function renderResearch(){
-  const body=document.getElementById('rs-body'); if(!body||!RS.tk) return;
+function rsHeader(){
+  const el=document.getElementById('rs-head'); if(!el||!RS.tk) return;
   const q=RS.quote||{};
   const day=(q.price&&q.prevClose)?((q.price/q.prevClose-1)*100):null;
   const fmtP=v=>v==null?'—':'$'+(+v).toLocaleString('en-US',{minimumFractionDigits:2,maximumFractionDigits:2});
-  const hasSec=RS.data&&Object.keys(RS.data).length>0;
+  el.innerHTML=`${logoImg(wlLogos(RS.tk),'sd-logo',RS.tk)}
+    <div style="min-width:0"><div class="sd-tk">${esc(RS.tk)}</div><div class="sd-nm">${esc(RS.name||'')}</div></div>
+    <div class="sd-px" style="margin-left:auto"><div class="p">${fmtP(q.price)}</div>
+      ${day!=null?`<div class="tnum ${day>=0?'up':'down'}" style="font-size:12.5px">${fmtPct(day)} today</div>`:''}</div>`;
+}
+function rsStats(){
+  const el=document.getElementById('rs-stats'); if(!el) return;
+  if(RS.noSec){ el.innerHTML='<div style="color:var(--muted);font-size:13px;margin-top:10px">No SEC filing data for this symbol (US filers only) — price chart only.</div>'; return; }
+  el.innerHTML=(RS.data&&Object.keys(RS.data).length)?rsStatsStrip():'';
+}
+const RS_LOADING='<div style="color:var(--muted);font-size:12px;padding:24px 8px"><span style="display:inline-block;width:9px;height:9px;border-radius:50%;background:var(--accent);animation:pulse 1.1s infinite;vertical-align:-1px"></span> loading…</div>';
+function rsDrawCard(k){
+  const card=RS_CARDS.find(c=>c[0]===k); if(!card) return;
+  const el=document.getElementById('rs-c-'+k); if(!el) return;
+  const [key,lab,fmt,col]=card;
+  if(k==='price'){
+    if(el._done) return; el._done=1;
+    el.innerHTML='<svg id="rs-price-svg" style="width:100%;height:150px;display:block"></svg>';
+    fetchYahooChart(RS.tk,'1y','1d').then(pts=>{ const svg=document.getElementById('rs-price-svg'); if(svg) drawRsPrice(svg,pts); })
+      .catch(()=>{ el.innerHTML='<div style="color:var(--muted);font-size:12px;padding:24px 8px">chart unavailable</div>'; });
+    return;
+  }
+  if(k==='margins'){
+    const m=rsMargins();
+    if(!m.length||!m.some(x=>x.pts.length)){ el.innerHTML=RS.loading?RS_LOADING:'<div style="color:var(--muted);font-size:12px;padding:24px 8px">no data</div>'; return; }
+    rsLines('rs-c-'+k,m); return;
+  }
+  const ser=rsGet(k);
+  if(!ser.length){ el.innerHTML=RS.loading?RS_LOADING:'<div style="color:var(--muted);font-size:12px;padding:24px 8px">no data</div>'; return; }
+  rsBars('rs-c-'+k,ser.slice(RS.mode==='a'?-15:-24),fmt,150,col);
+}
+function renderResearch(){
+  const body=document.getElementById('rs-body'); if(!body||!RS.tk) return;
   body.innerHTML=`
     <div class="panel">
-      <div style="display:flex;align-items:center;gap:13px;flex-wrap:wrap">
-        ${logoImg(wlLogos(RS.tk),'sd-logo',RS.tk)}
-        <div style="min-width:0"><div class="sd-tk">${esc(RS.tk)}</div><div class="sd-nm">${esc(RS.name||'')}</div></div>
-        <div class="sd-px" style="margin-left:auto"><div class="p">${fmtP(q.price)}</div>
-          ${day!=null?`<div class="tnum ${day>=0?'up':'down'}" style="font-size:12.5px">${fmtPct(day)} today</div>`:''}</div>
-      </div>
-      ${hasSec?rsStatsStrip():`<div style="color:var(--muted);font-size:13px;margin-top:10px">No SEC filing data for this symbol (only US filers) — price chart only.</div>`}
+      <div id="rs-head" style="display:flex;align-items:center;gap:13px;flex-wrap:wrap"></div>
+      <div id="rs-stats"></div>
     </div>
     <div style="display:flex;gap:6px;justify-content:center;margin:16px 0">
       ${[['q','Quarterly'],['ttm','Quarterly (TTM)'],['a','Annually']].map(([k,l])=>
         `<button data-rsmode="${k}" class="secbtn" style="margin:0;padding:6px 14px;font-size:12.5px;${RS.mode===k?'background:var(--accent);color:#fff;border-color:var(--accent)':''}">${l}</button>`).join('')}
     </div>
     <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:14px">
-      ${RS_CARDS.filter(([k])=>k==='price'||(hasSec&&(k==='margins'?RS.data.revenue:RS.data[k]))).map(([k,lab])=>
+      ${RS_CARDS.map(([k,lab])=>
         `<div class="panel" style="padding:14px 14px 8px">
           <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:6px">
             <h2 style="margin:0;font-size:13px">${lab}</h2>
@@ -2462,22 +2515,8 @@ function renderResearch(){
           <div id="rs-c-${k}"></div>
         </div>`).join('')}
     </div>`;
-  /* draw all cards */
-  RS_CARDS.forEach(([k,lab,fmt,col])=>{
-    const el=document.getElementById('rs-c-'+k); if(!el) return;
-    if(k==='price'){
-      el.innerHTML='<svg id="rs-price-svg" style="width:100%;height:150px;display:block"></svg>';
-      fetchYahooChart(RS.tk,'1y','1d').then(pts=>{ const svg=document.getElementById('rs-price-svg');
-        if(!svg) return; const hold=svg.parentElement;
-        hold.innerHTML=''; const w=document.createElement('div'); w.id='sd-chartwrap-rs'; hold.appendChild(w);
-        w.innerHTML='<svg id="rs-price-svg" style="width:100%;height:150px;display:block"></svg>';
-        const tmp=document.getElementById('rs-price-svg');
-        drawRsPrice(tmp,pts);
-      }).catch(()=>{ el.innerHTML='<div style="color:var(--muted);font-size:12px;padding:24px 8px">chart unavailable</div>'; });
-    }
-    else if(k==='margins') rsLines('rs-c-'+k,rsMargins());
-    else rsBars('rs-c-'+k,rsGet(k).slice(RS.mode==='a'?-15:-24),fmt,150,col);
-  });
+  rsHeader(); rsStats();
+  RS_CARDS.forEach(([k])=>rsDrawCard(k));
   document.querySelectorAll('[data-rsmode]').forEach(b=>b.addEventListener('click',()=>{ RS.mode=b.dataset.rsmode; renderResearch(); }));
   document.querySelectorAll('[data-rsexp]').forEach(b=>b.addEventListener('click',()=>openRsChart(b.dataset.rsexp)));
 }
@@ -2941,8 +2980,10 @@ function wlRow(sym){
   const hi=(live&&live.hi52)||meta.hi52||(yr.length?Math.max(...yr):null);
   const lo=(live&&live.lo52)||meta.lo52||(yr.length?Math.min(...yr):null);
   const pos=(price!=null&&hi&&lo&&hi>lo)?((price-lo)/(hi-lo)*100):null;
-  return {sym,name:wlName(sym,live),price,day,chg,tail,hi,lo,pos,
-    vol:(live&&live.vol)||meta.vol||null, avgVol:meta.avgVol||null, mcap:meta.mcap||null,
+  const fnd=(DATA.fund||{})[sym]||{};   // fundamentals as fallback when watch_meta lags
+  return {sym,name:wlName(sym,live),price,day,chg,tail,hi:hi||fnd.hi52,lo:lo||fnd.lo52,pos,
+    vol:(live&&live.vol)||meta.vol||null, avgVol:meta.avgVol||null,
+    mcap:meta.mcap||fnd.mcap||((price&&fnd.shares)?price*fnd.shares:null),
     asof:live?null:lastD};
 }
 const fmtBig=n=>n==null?'—':n>=1e12?(n/1e12).toFixed(2)+'T':n>=1e9?(n/1e9).toFixed(2)+'B':n>=1e6?(n/1e6).toFixed(1)+'M':n>=1e3?(n/1e3).toFixed(1)+'k':String(Math.round(n));

@@ -45,6 +45,7 @@ jobs:
             python drive_fetch.py /tmp/depot.xml || true
             python firestore_sync.py pull || true
             MISSING_ONLY=1 python bench_fetch.py || true
+            python sec_prefetch.py || true
             python pp_sync.py >/dev/null 2>&1 || true
             if [ $((i % 5)) -eq 1 ]; then python social_sync.py || true; fi
             if [ $((i % 2)) -eq 1 ]; then python ir_sweep.py || true; fi
@@ -52,6 +53,7 @@ jobs:
             python firestore_sync.py push || true
             cp -f cockpit.html ../index.html
             cp -f cik.json ../cik.json 2>/dev/null || true
+            cp -f rs_prefetch.json ../rs_prefetch.json 2>/dev/null || true
             el=$(( $(date +%s) - t0 )); [ $el -lt 60 ] && sleep $((60 - el))
           done
       - name: commit & push (einmal pro Job — schont GitHub-Pages-Limits)
