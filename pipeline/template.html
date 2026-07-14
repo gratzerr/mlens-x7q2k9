@@ -2203,7 +2203,8 @@ async function saveBenchList(list){
 }
 /* ===================== RESEARCH TAB (Qualtrim-style, SEC XBRL + Yahoo) ===================== */
 const RS_CONCEPTS={   // group -> [taxonomy, [tag fallbacks], unit, instant?]
-  revenue:['us-gaap',['RevenueFromContractWithCustomerExcludingAssessedTax','Revenues','SalesRevenueNet'],'USD',0],
+  revenue:['us-gaap',['RevenueFromContractWithCustomerExcludingAssessedTax','Revenues','RevenueFromContractWithCustomerIncludingAssessedTax','SalesRevenueNet'],'USD',0],
+  costRev:['us-gaap',['CostOfRevenue','CostOfGoodsAndServicesSold','CostOfGoodsSold'],'USD',0],
   grossProfit:['us-gaap',['GrossProfit'],'USD',0],
   opInc:['us-gaap',['OperatingIncomeLoss'],'USD',0],
   netInc:['us-gaap',['NetIncomeLoss'],'USD',0],
@@ -2213,7 +2214,9 @@ const RS_CONCEPTS={   // group -> [taxonomy, [tag fallbacks], unit, instant?]
   rnd:['us-gaap',['ResearchAndDevelopmentExpense'],'USD',0],
   sga:['us-gaap',['SellingGeneralAndAdministrativeExpense','GeneralAndAdministrativeExpense'],'USD',0],
   cash:['us-gaap',['CashAndCashEquivalentsAtCarryingValue','CashCashEquivalentsRestrictedCashAndRestrictedCashEquivalents'],'USD',1],
-  shares:['dei',['EntityCommonStockSharesOutstanding'],'shares',1],
+  /* weighted-average shares: the EPS denominator, tagged in every single 10-Q/K —
+     dei:EntityCommonStockSharesOutstanding 404s on the companyconcept API */
+  shares:['us-gaap',['WeightedAverageNumberOfDilutedSharesOutstanding','WeightedAverageNumberOfSharesOutstandingBasic'],'shares',0,'avg'],
   divPaid:['us-gaap',['PaymentsOfDividends','PaymentsOfDividendsCommonStock'],'USD',0],
   buyback:['us-gaap',['PaymentsForRepurchaseOfCommonStock'],'USD',0]};
 const _rsCache={};   // ticker -> {q:{}, a:{}}
@@ -2232,23 +2235,43 @@ async function rsFetchConcept(cik,tax,tag){
   const t=await r.text(); if(t[0]!=='{') throw new Error('bad');
   return JSON.parse(t);
 }
-/* build {q:[[CYyyyyQn,val]], a:[[yyyy,val]]} from SEC frames; derive missing Q4 = FY − Q1..Q3 */
-function rsSeries(json,unit,instant){
-  const arr=(json.units&&(json.units[unit]||json.units[Object.keys(json.units)[0]]))||[];
+/* build {q:[[yyyyQn,val]], a:[[yyyy,val]]} from RAW SEC entries (not frames — small
+   filers barely get frames, and cash-flow items are reported YTD only). Quarterly =
+   true 3-month durations, plus quarters DERIVED by differencing YTD chains. */
+function rsSeries(json,unit,instant,noDerive){
+  const uarr=(json.units&&(json.units[unit]||json.units[Object.keys(json.units)[0]]))||[];
+  const best={};   // latest filing wins per (start,end) — restatements override
+  uarr.forEach(e=>{ if(e.val==null||!e.end) return;
+    const k=(e.start||'I')+'|'+e.end;
+    if(!best[k]||(e.filed||'')>(best[k].filed||'')) best[k]=e; });
+  const entries=Object.values(best);
+  const qk=d=>d.slice(0,4)+'Q'+Math.ceil(+d.slice(5,7)/3);
   const q={},a={};
-  arr.forEach(e=>{
-    if(!e.frame) return;
-    let m;
-    if(m=e.frame.match(/^CY(\d{4})Q(\d)I?$/)){ if(instant===!!e.frame.endsWith('I')||instant) q[m[1]+'Q'+m[2]]=e.val; else q[m[1]+'Q'+m[2]]=e.val; }
-    else if(m=e.frame.match(/^CY(\d{4})$/)){ a[m[1]]=e.val; }
-  });
-  if(instant){ /* annual = Q4 snapshot */
-    Object.keys(q).forEach(k=>{ if(k.endsWith('Q4')) a[k.slice(0,4)]=q[k]; });
+  if(instant){
+    const seen={};
+    entries.forEach(e=>{ const k=qk(e.end); if(!seen[k]||e.end>seen[k].end) seen[k]=e; });
+    Object.entries(seen).forEach(([k,e])=>{ q[k]=e.val; });
+    Object.keys(q).sort().forEach(k=>{ a[k.slice(0,4)]=q[k]; });   // last snapshot of the year
   } else {
-    Object.keys(a).forEach(y=>{ const k=y+'Q4';
-      if(q[k]==null&&q[y+'Q1']!=null&&q[y+'Q2']!=null&&q[y+'Q3']!=null)
-        q[k]=a[y]-q[y+'Q1']-q[y+'Q2']-q[y+'Q3'];
+    const dur=e=>(Date.parse(e.end)-Date.parse(e.start))/86400000;
+    entries.forEach(e=>{ const d=dur(e);
+      if(d>75&&d<100) q[qk(e.end)]=e.val;
+      else if(d>340&&d<380) a[e.end.slice(0,4)]=e.val;
     });
+    /* YTD chains: same start date, growing end dates -> diff neighbours
+       (never for averages like weighted shares — diffs of averages are garbage) */
+    if(!noDerive){
+      const byStart={};
+      entries.forEach(e=>{ const d=dur(e); if(d>75&&d<380)(byStart[e.start]=byStart[e.start]||[]).push(e); });
+      Object.values(byStart).forEach(list=>{
+        list.sort((x,y)=>x.end<y.end?-1:1);
+        for(let i=1;i<list.length;i++){
+          const k=qk(list[i].end); if(q[k]!=null) continue;
+          const span=(Date.parse(list[i].end)-Date.parse(list[i-1].end))/86400000;
+          if(span>75&&span<100) q[k]=list[i].val-list[i-1].val;
+        }
+      });
+    }
   }
   return {q:Object.entries(q).sort((x,y)=>x[0]<y[0]?-1:1), a:Object.entries(a).sort((x,y)=>x[0]<y[0]?-1:1)};
 }
@@ -2284,9 +2307,12 @@ async function rsLoad(tk){
     renderResearch();   // price-only view with hint
     return;
   }
-  const jobs=Object.entries(RS_CONCEPTS).map(async([key,[tax,tags,unit,inst]])=>{
-    const parts=await Promise.allSettled(tags.map(t=>rsFetchConcept(cik,tax,t)));
-    const ser=rsMerge(parts.filter(p=>p.status==='fulfilled').map(p=>rsSeries(p.value,unit,inst)));
+  const jobs=Object.entries(RS_CONCEPTS).map(async([key,[tax,tags,unit,inst,kind]])=>{
+    const parts=await Promise.allSettled(tags.map(t=>{
+      const [tx,tag]=t.includes(':')?t.split(':'):[tax,t];   // tags may carry their own taxonomy
+      return rsFetchConcept(cik,tx,tag);
+    }));
+    const ser=rsMerge(parts.filter(p=>p.status==='fulfilled').map(p=>rsSeries(p.value,unit,inst,kind==='avg')));
     return [key,ser];
   });
   const res=await Promise.allSettled(jobs);
@@ -2295,7 +2321,11 @@ async function rsLoad(tk){
   res.forEach(r=>{ if(r.status==='fulfilled') data[r.value[0]]=r.value[1]; });
   /* derived series */
   const sub=(A,B)=>{ const bm=Object.fromEntries(B); return A.filter(([k])=>bm[k]!=null).map(([k,v])=>[k,v-bm[k]]); };
-  if(data.ocf&&data.capex) data.fcf={q:sub(data.ocf.q,data.capex.q),a:sub(data.ocf.a,data.capex.a)};
+  if(data.ocf&&data.capex&&data.capex.q.length) data.fcf={q:sub(data.ocf.q,data.capex.q),a:sub(data.ocf.a,data.capex.a)};
+  else if(data.ocf) data.fcf=data.ocf;   // no capex tag filed -> FCF ≈ OCF (typical pre-revenue biotech)
+  /* many filers (esp. biotech) don't tag GrossProfit — derive from revenue − cost of revenue */
+  if((!data.grossProfit||data.grossProfit.q.length<4)&&data.revenue&&data.costRev)
+    data.grossProfit={q:sub(data.revenue.q,data.costRev.q),a:sub(data.revenue.a,data.costRev.a)};
   if(data.divPaid||data.buyback){
     const add=(A=[],B=[])=>{ const m={}; A.forEach(([k,v])=>m[k]=(m[k]||0)+v); B.forEach(([k,v])=>m[k]=(m[k]||0)+v);
       return Object.entries(m).sort((x,y)=>x[0]<y[0]?-1:1); };
@@ -2304,21 +2334,22 @@ async function rsLoad(tk){
   _rsCache[tk]=data; RS.data=data;
   renderResearch();
 }
-const RS_CARDS=[
-  ['price','Price',null],['revenue','Revenue','$'],['grossProfit','Gross Profit','$'],
-  ['opInc','Operating Income','$'],['netInc','Net Income','$'],['eps','EPS (diluted)','eps'],
-  ['ocf','Operating Cash Flow','$'],['fcf','Free Cash Flow','$'],['margins','Margins %','%'],
-  ['rnd','R&D Expense','$'],['sga','SG&A Expense','$'],['cash','Cash','$'],
-  ['shares','Shares Outstanding','n'],['roc','Return of Capital','$']];
+const RS_CARDS=[   // key, label, fmt, color (Qualtrim-style: every chart its own hue)
+  ['price','Price',null,null],['revenue','Revenue','$','#e8a63b'],['grossProfit','Gross Profit','$','#4db6ac'],
+  ['opInc','Operating Income','$','#8f7ad6'],['netInc','Net Income','$','#e3c84a'],['eps','EPS (diluted)','eps','#d98e4a'],
+  ['ocf','Operating Cash Flow','$','#5d9fc9'],['fcf','Free Cash Flow','$','#e0784f'],['margins','Margins %','%',null],
+  ['rnd','R&D Expense','$','#6d92c4'],['sga','SG&A Expense','$','#9a86c9'],['cash','Cash','$','#7a9d54'],
+  ['shares','Shares Outstanding','n','#4da6a0'],['roc','Return of Capital','$','#bd7fb0']];
 function rsGet(key){   // series in current mode
   if(!RS.data||!RS.data[key]) return [];
   const s=RS.data[key];
   if(RS.mode==='a') return s.a;
-  if(RS.mode==='ttm') return RS_CONCEPTS[key]&&RS_CONCEPTS[key][3]?s.q:rsTtm(s.q);   // instants: plain quarters
+  if(RS.mode==='ttm'){ const c=RS_CONCEPTS[key];
+    return (c&&(c[3]||c[4]==='avg'))?s.q:rsTtm(s.q); }   // instants & averages: plain quarters, never summed
   return s.q;
 }
 const rsFmtV=(v,f)=>f==='%'?v.toFixed(1)+'%':f==='eps'?'$'+v.toFixed(2):f==='n'?fmtBig(v):(v<0?'-$':'$')+fmtBig(Math.abs(v));
-function rsBars(elId,ser,fmt,H){
+function rsBars(elId,ser,fmt,H,color){
   const el=document.getElementById(elId); if(!el) return;
   if(!ser.length){ el.innerHTML='<div style="color:var(--muted);font-size:12px;padding:24px 8px">no data</div>'; return; }
   H=H||150;
@@ -2332,7 +2363,7 @@ function rsBars(elId,ser,fmt,H){
     const x=(i+0.5)*(W/ser.length);
     const bh=Math.abs(v)/mx*(hasNeg?Math.min(zero-padT,H-padB-zero):(H-padB-padT));
     const y=v>=0?zero-bh:zero;
-    const col=v>=0?cvar('--up'):cvar('--down');
+    const col=v>=0?(color||cvar('--up')):cvar('--down');
     h+=`<rect x="${(x-bw/2).toFixed(1)}" y="${y.toFixed(1)}" width="${bw.toFixed(1)}" height="${Math.max(1.5,bh).toFixed(1)}" rx="2" fill="${col}" opacity="0.85"><title>${k}: ${rsFmtV(v,fmt)}</title></rect>`;
     const every=Math.ceil(ser.length/8);
     if(i%every===0) h+=`<text x="${x.toFixed(1)}" y="${H-8}" text-anchor="middle" font-size="9.5" fill="${cvar('--muted')}" font-family="system-ui" transform="rotate(-38 ${x.toFixed(1)} ${H-8})">${k}</text>`;
@@ -2419,7 +2450,7 @@ function renderResearch(){
         </div>`).join('')}
     </div>`;
   /* draw all cards */
-  RS_CARDS.forEach(([k,lab,fmt])=>{
+  RS_CARDS.forEach(([k,lab,fmt,col])=>{
     const el=document.getElementById('rs-c-'+k); if(!el) return;
     if(k==='price'){
       el.innerHTML='<svg id="rs-price-svg" style="width:100%;height:150px;display:block"></svg>';
@@ -2432,7 +2463,7 @@ function renderResearch(){
       }).catch(()=>{ el.innerHTML='<div style="color:var(--muted);font-size:12px;padding:24px 8px">chart unavailable</div>'; });
     }
     else if(k==='margins') rsLines('rs-c-'+k,rsMargins());
-    else rsBars('rs-c-'+k,rsGet(k).slice(RS.mode==='a'?-15:-24),fmt);
+    else rsBars('rs-c-'+k,rsGet(k).slice(RS.mode==='a'?-15:-24),fmt,150,col);
   });
   document.querySelectorAll('[data-rsmode]').forEach(b=>b.addEventListener('click',()=>{ RS.mode=b.dataset.rsmode; renderResearch(); }));
   document.querySelectorAll('[data-rsexp]').forEach(b=>b.addEventListener('click',()=>openRsChart(b.dataset.rsexp)));
@@ -2485,7 +2516,7 @@ function openRsChart(key){
   }
   const full=rsGet(key);   // FULL history in current mode
   document.getElementById('rs-big').id='rs-big-b';
-  rsBars('rs-big-b',full,card[2],300);
+  rsBars('rs-big-b',full,card[2],300,card[3]);
   /* CAGR on annual values (or TTM if annual sparse) */
   const annual=(RS.data[key]&&RS.data[key].a&&RS.data[key].a.length>1)?RS.data[key].a:(rsTtm((RS.data[key]||{}).q||[]));
   document.getElementById('rs-cagr').innerHTML=rsCagrChips(annual);
