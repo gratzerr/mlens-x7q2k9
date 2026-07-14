@@ -33,8 +33,8 @@
  "totalEur": 2015239,
  "ttwrorSince2022": 414.66,
  "ttwrorYtd": 104.35,
- "ttwrorAnnualized": 43.55,
- "izf": 73.16,
+ "ttwrorAnnualized": 43.52,
+ "izf": 73.05,
  "yearlyReturns": {
   "2022": 3.3,
   "2023": 11.8,
@@ -26521,6 +26521,22 @@
   },
   {
    "d": "2026-07-13",
+   "v": 2392889,
+   "e": 2093516,
+   "r": 4.346517,
+   "c": 738607,
+   "k": 666772,
+   "q": 855901,
+   "Q": 699185,
+   "g": 14376,
+   "G": 13298,
+   "f": 9136,
+   "F": 8004,
+   "t": 1907,
+   "T": 1717
+  },
+  {
+   "d": "2026-07-14",
    "v": 2303418,
    "e": 2015239,
    "r": 4.146609,
@@ -45834,7 +45850,7 @@
   }
  ],
  "ppReferenceTtwror": 414.66,
- "ppReferenceDate": "2026-07-13",
+ "ppReferenceDate": "2026-07-14",
  "ttwrorApproxSince2022": 414.66,
  "yearlyReturnsApprox": {
   "2022": 3.3,
@@ -45862,7 +45878,7 @@
    "realizedUsd": 11487,
    "avgCost": 12.7255,
    "unrealRet": 223.0,
-   "priceDate": "2026-07-13"
+   "priceDate": "2026-07-14"
   },
   {
    "account": "ALL",
@@ -45882,7 +45898,7 @@
    "realizedUsd": 0,
    "avgCost": 36.6597,
    "unrealRet": 74.2,
-   "priceDate": "2026-07-13"
+   "priceDate": "2026-07-14"
   },
   {
    "account": "ALL",
@@ -45902,7 +45918,7 @@
    "realizedUsd": -60391,
    "avgCost": 12.0988,
    "unrealRet": 36.5,
-   "priceDate": "2026-07-13"
+   "priceDate": "2026-07-14"
   },
   {
    "account": "ALL",
@@ -45923,7 +45939,7 @@
    "realizedUsd": 0,
    "avgCost": 0.3173,
    "unrealRet": 0.9,
-   "priceDate": "2026-07-13"
+   "priceDate": "2026-07-14"
   },
   {
    "account": "ALL",
@@ -45943,7 +45959,7 @@
    "realizedUsd": -16090,
    "avgCost": 9.6139,
    "unrealRet": 33.9,
-   "priceDate": "2026-07-13"
+   "priceDate": "2026-07-14"
   },
   {
    "account": "ALL",
@@ -45963,7 +45979,7 @@
    "realizedUsd": 0,
    "avgCost": 5.4548,
    "unrealRet": 26.1,
-   "priceDate": "2026-07-13"
+   "priceDate": "2026-07-14"
   },
   {
    "account": "ALL",
@@ -45983,7 +45999,7 @@
    "realizedUsd": -54345,
    "avgCost": 80.4296,
    "unrealRet": -15.1,
-   "priceDate": "2026-07-13"
+   "priceDate": "2026-07-14"
   },
   {
    "account": "ALL",
@@ -46003,7 +46019,7 @@
    "realizedUsd": 0,
    "avgCost": 4.985,
    "unrealRet": -6.8,
-   "priceDate": "2026-07-13"
+   "priceDate": "2026-07-14"
   },
   {
    "account": "ALL",
@@ -46023,7 +46039,7 @@
    "realizedUsd": 0,
    "avgCost": 1.8654,
    "unrealRet": -3.5,
-   "priceDate": "2026-07-13"
+   "priceDate": "2026-07-14"
   },
   {
    "account": "ALL",
@@ -46063,7 +46079,7 @@
    "realizedUsd": 0,
    "avgCost": 10.8275,
    "unrealRet": 47.6,
-   "priceDate": "2026-07-13"
+   "priceDate": "2026-07-14"
   }
  ]
 }
