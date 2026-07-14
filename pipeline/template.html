@@ -2618,7 +2618,13 @@ function rsDrawCard(k){
     if(!m.length){ el.innerHTML=RS.loading?RS_LOADING:'<div style="color:var(--muted);font-size:12px;padding:24px 8px">no data</div>'; return; }
     rsLines('rs-c-'+k,m); return;
   }
-  const ser=rsGet(k);
+  let ser=rsGet(k), note='';
+  if(!ser.length&&RS.data[k]&&RS.data[k].q&&RS.data[k].q.length){
+    /* filer tags this concept too sparsely for TTM/annual (RPID gross profit) —
+       show the quarters that exist instead of an empty card */
+    ser=RS.data[k].q;
+    note=`<div style="font-size:10.5px;color:var(--muted);padding:0 4px">sparse tagging — showing quarterly since ${esc(String(ser[0][0]))}</div>`;
+  }
   if(ser.length){
     setV(rsFmtV(ser[ser.length-1][1],fmt));   // neutral by request — the chart tells the story
   }
@@ -2630,6 +2636,7 @@ function rsDrawCard(k){
     return;
   }
   rsBars('rs-c-'+k,rsClip(ser),fmt,150,col);
+  if(note) el.insertAdjacentHTML('beforeend',note);
 }
 function renderResearch(){
   const body=document.getElementById('rs-body'); if(!body||!RS.tk) return;

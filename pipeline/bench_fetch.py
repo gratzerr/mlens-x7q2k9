@@ -2,7 +2,7 @@
 """Fetch daily close series for the benchmark ETFs (SPY, QQQ, XBI, All-World).
 Uses yfinance (handles Yahoo's cookie/crumb handshake — plain HTTP gets blocked).
 Keeps the old bench.json entries on failure. Output: {SYM: [[date, close], ...]}."""
-import json, os, warnings
+import json, os, warnings, datetime
 warnings.filterwarnings("ignore")
 
 ROOT = os.path.dirname(os.path.abspath(__file__))
@@ -21,13 +21,31 @@ SINCE = "2021-12-30"
 
 def fetch(sym):
     import yfinance as yf
-    d = yf.download(sym, start=SINCE, interval="1d", progress=False, auto_adjust=True)
     out = []
-    closes = d["Close"][sym] if hasattr(d["Close"], "columns") else d["Close"]
-    for idx, c in closes.items():
-        if c == c:  # not NaN
-            out.append([idx.strftime("%Y-%m-%d"), round(float(c), 4)])
-    return out
+    try:
+        d = yf.download(sym, start=SINCE, interval="1d", progress=False, auto_adjust=True)
+        closes = d["Close"][sym] if hasattr(d["Close"], "columns") else d["Close"]
+        for idx, c in closes.items():
+            if c == c:  # not NaN
+                out.append([idx.strftime("%Y-%m-%d"), round(float(c), 4)])
+    except Exception:
+        pass
+    if len(out) > 20:
+        return out
+    # bulk download can fail silently for DAYS (runner throttling) -> Ticker.history
+    h = yf.Ticker(sym).history(start=SINCE, interval="1d", auto_adjust=True)["Close"]
+    return [[i.strftime("%Y-%m-%d"), round(float(c), 4)] for i, c in h.items() if c == c]
+
+def _tail_merge(sym, old_ser):
+    """Freshen a stale series cheaply: append the last ~10 daily closes."""
+    import yfinance as yf
+    h = yf.Ticker(sym).history(period="10d", auto_adjust=True)["Close"]
+    ser = list(old_ser); last = ser[-1][0] if ser else "0000"
+    for i, c in h.items():
+        d = i.strftime("%Y-%m-%d")
+        if d > last and c == c:
+            ser.append([d, round(float(c), 4)])
+    return ser
 
 WATCH_OUT = os.path.join(ROOT, "watch.json")
 def watch_syms():
@@ -131,10 +149,29 @@ def main():
     missing_only = os.environ.get("MISSING_ONLY") == "1"
     syms = all_syms()
     if missing_only:
-        syms = [s for s in syms if len(old.get(s, [])) < 20]
+        want = syms
+        syms = [s for s in want if len(old.get(s, [])) < 20]
+        # freshen series older than the last US trading day (incl. today's partial
+        # bar once the market opened — keeps benchmarks in sync with the live engine)
+        now = datetime.datetime.utcnow(); d = now.date()
+        if now.hour * 60 + now.minute < 13 * 60 + 35: d -= datetime.timedelta(days=1)
+        while d.weekday() >= 5: d -= datetime.timedelta(days=1)
+        stale_before = d.isoformat()
+        res = dict(old); changed = False
+        for s2 in want:
+            ser = old.get(s2, [])
+            if len(ser) >= 20 and ser[-1][0] < stale_before:
+                try:
+                    ns = _tail_merge(s2, ser)
+                    if ns != ser: res[s2] = ns; changed = True
+                except Exception: pass
         if not syms:
+            if changed:
+                json.dump(res, open(OUT, "w"))
+                print("bench tail-merged:", {k: v[-1][0] for k, v in res.items()})
             return
-    res = dict(old) if missing_only else {}
+    else:
+        res = {}
     for sym in syms:
         try:
             s = fetch(sym)

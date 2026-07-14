@@ -261,6 +261,15 @@ PADD={"BUY","DELIVERY_INBOUND","TRANSFER_IN"};PSUB={"SELL","DELIVERY_OUTBOUND","
 # The site must be current: overlay today's live prices (yfinance) onto LATEST for
 # currently-held securities, so TODAY's valuation/TTWROR/YTD move with the market.
 # History stays untouched (sec_price uses file history for all past days).
+def us_eff_date():
+    """Last US trading day with (at least partial) prices: weekends roll back to
+    Friday; before ~market open (13:35 UTC) the previous trading day counts."""
+    now=datetime.datetime.utcnow()
+    d=now.date()
+    if now.hour*60+now.minute < 13*60+35: d-=datetime.timedelta(days=1)
+    while d.weekday()>=5: d-=datetime.timedelta(days=1)
+    return d.isoformat()
+
 def live_overlay():
     net=defaultdict(float)
     for t in txs.values():
@@ -274,20 +283,29 @@ def live_overlay():
         import yfinance as yf
     except Exception:
         return
-    today=datetime.date.today().isoformat()
+    eff=us_eff_date()
     ok=0
     for si in held:
         tk=SEC[si]["tk"]
         if not tk or len(tk)>10: continue          # options etc.: keep file quotes
         try:
-            px=float(yf.Ticker(tk).fast_info["last_price"])
+            hist=yf.Ticker(tk).history(period="10d")["Close"]
         except Exception:
             continue
-        if px>0:
+        if hist is None or not len(hist): continue
+        ds,vs=PRICES[si]
+        last_file=ds[-1] if ds else "0000"
+        added=False
+        for idx,px in hist.items():
+            d=idx.strftime("%Y-%m-%d")
+            if d<=last_file or d>eff or px!=px or px<=0: continue
+            ds.append(d); vs.append(int(float(px)*1e8)); added=True
+        if added or True:
+            lastq=float(hist.iloc[-1])
             la=LATEST[si]
-            if la is None or today>=la[0]:
-                LATEST[si]=(today, int(px*1e8)); ok+=1
-    print(f"live overlay: {ok}/{len(held)} held securities quoted live")
+            if lastq>0 and (la is None or eff>=la[0]):
+                LATEST[si]=(eff,int(lastq*1e8)); ok+=1
+    print(f"live overlay: {ok}/{len(held)} held securities quoted live (gap-filled to {eff})")
 if os.environ.get("LIVE_QUOTES","1")=="1":
     live_overlay()
 pos_ev=defaultdict(list);cash_ev=defaultdict(list)
@@ -360,7 +378,7 @@ for t in txs.values():
 
 # ---------------- daily total-wealth series + TTWROR chain ----------------
 TODAY=datetime.date.today().isoformat()
-END=TODAY
+END=us_eff_date() if os.environ.get("LIVE_QUOTES","1")=="1" else TODAY
 shares=defaultdict(float);cash=defaultdict(float)
 for d in sorted(set(list(pos_ev)+list(cash_ev))):
     if d>START: break
