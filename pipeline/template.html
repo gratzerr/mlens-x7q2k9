@@ -2393,7 +2393,7 @@ const RS_CARDS=[   // key, label, fmt, color, sentiment ('n' = neutral: green wo
   ['ocf','Operating Cash Flow','$','#9dc6e8'],['fcf','Free Cash Flow','$','#f0952e'],
   ['rnd','R&D Expense','$','#7ba7d9','n'],['sga','SG&A Expense','$','#b39ddb','n'],['cash','Cash','$','#8fbc6f'],
   ['shares','Shares Outstanding','n','#63b5ae','n'],['roc','Return of Capital','$','#d391c4'],
-  ['margins','Margins %','%',null],['grossMargin','Gross Margin %','%','#5fb8b2'],['valuation','Valuation (P/E · P/S)',null,null]];
+  ['margins','Margins %','%',null],['valuation','Valuation (P/E · P/S)',null,null]];
 function rsGet(key){   // series in current mode
   if(!RS.data||!RS.data[key]) return [];
   const s=RS.data[key];
@@ -2450,8 +2450,8 @@ function rsLines(elId,series,H){
       const off=hidden.has(s.name);
       const lv=s.pts.length?s.pts[s.pts.length-1][1]:null;
       const shown=lv==null?'':' <b class="tnum" style="color:var(--ink)">'+(s.fmtV?s.fmtV(lv):lv.toFixed(1))+'</b>';
-      return `<span data-lt="${esc(s.name)}" title="click to toggle" style="cursor:pointer;user-select:none;${off?'opacity:.35':''}">`+
-        `<span style="display:inline-block;width:14px;height:3px;background:${s.color};border-radius:2px;vertical-align:2px"></span> `+
+      return `<span data-lt="${esc(s.name)}" title="click to show/hide" style="cursor:pointer;user-select:none;display:inline-flex;align-items:center;gap:6px;padding:3px 10px;border:1px solid var(--border);border-radius:8px;background:var(--surface-2);${off?'opacity:.35;text-decoration:line-through':''}">`+
+        `<span style="display:inline-block;width:14px;height:3px;background:${s.color};border-radius:2px"></span>`+
         `<span style="color:var(--ink);font-weight:640">${esc(s.name)}</span>${shown}</span>`;}).join('')}</div>`;
   if(!vis.length){ el.innerHTML=`<div style="color:var(--muted);font-size:12px;padding:24px 8px;height:${H-30}px">all series hidden — click a name to show it</div>`+legend; bindLeg(); return; }
   const all=vis.flatMap(s=>s.pts.map(p=>p[1]));
@@ -2490,7 +2490,7 @@ function rsMargins(){
    so margin/valuation lines no longer show a different axis than the bar cards */
 function rsCutoff(){
   if(RS_RANGE==='all') return '';
-  const yrs={'3y':3,'5y':5,'10y':10}[RS_RANGE]||5;
+  const yrs=String(RS_RANGE).startsWith('c')?(+RS_RANGE.slice(1)||5):({'3y':3,'5y':5,'10y':10}[RS_RANGE]||5);
   const d=RS.data||{}; let last=null;
   Object.values(d).forEach(s=>{ if(!s||!s.q) return;
     const arr=RS.mode==='a'?s.a:s.q;
@@ -2569,10 +2569,15 @@ function rsDrawCard(k){
   const setV=html=>{ const v=document.getElementById('rs-v-'+k); if(v) v.innerHTML=html; };
   if(k==='price'){
     el.innerHTML='<svg id="rs-price-svg" style="width:100%;height:150px;display:block"></svg>';
-    const pr={'3y':['3y','1wk'],'5y':['5y','1wk'],'10y':['10y','1mo'],'all':['max','1mo']}[RS_RANGE]||['5y','1wk'];
-    fetchYahooChart(RS.tk,pr[0],pr[1]).then(pts=>{ const svg=document.getElementById('rs-price-svg'); if(svg) drawRsPrice(svg,pts);
+    let pr={'3y':['3y','1wk'],'5y':['5y','1wk'],'10y':['10y','1mo'],'all':['max','1mo']}[RS_RANGE];
+    if(!pr){ const n=String(RS_RANGE).startsWith('c')?(+RS_RANGE.slice(1)||5):5;
+      pr=n<=1?['1y','1d']:n<=2?['2y','1wk']:n<=5?['5y','1wk']:n<=10?['10y','1mo']:['max','1mo']; }
+    fetchYahooChart(RS.tk,pr[0],pr[1]).then(pts=>{
+        if(String(RS_RANGE).startsWith('c')){ const n=+RS_RANGE.slice(1)||5;
+          const cut=Date.now()/1000-n*31557600; pts=pts.filter(p=>p[0]>=cut); }
+        const svg=document.getElementById('rs-price-svg'); if(svg) drawRsPrice(svg,pts);
         const l=pts[pts.length-1][1], f=pts[0][1], ch=(l/f-1)*100;
-        setV(`$${l.toFixed(2)} <span class="${ch>=0?'up':'down'}" style="font-size:11.5px">${fmtPct(ch)} ${RS_RANGE==='all'?'max':RS_RANGE.toUpperCase()}</span>`); })
+        setV(`$${l.toFixed(2)} <span style="font-size:11.5px;color:var(--muted)">${fmtPct(ch)} ${String(RS_RANGE).startsWith('c')?RS_RANGE.slice(1)+'y':(RS_RANGE==='all'?'max':RS_RANGE.toUpperCase())}</span>`); })
       .catch(()=>{ el.innerHTML='<div style="color:var(--muted);font-size:12px;padding:24px 8px">chart unavailable</div>'; });
     return;
   }
@@ -2609,10 +2614,7 @@ function rsDrawCard(k){
   }
   const ser=rsGet(k);
   if(ser.length){
-    const lv=ser[ser.length-1][1];
-    const neutral=card[4]==='n';   // expenses & share count: green ≠ good
-    const cls=(!neutral&&(fmt==='$'||fmt==='eps'))?(lv>=0?'up':'down'):'';
-    setV(`<span class="${cls}">${rsFmtV(lv,fmt)}</span>`);
+    setV(rsFmtV(ser[ser.length-1][1],fmt));   // neutral by request — the chart tells the story
   }
   if(!ser.length){
     if(!RS.loading&&RS.data[k]&&RS.data[k].err){
@@ -2636,6 +2638,9 @@ function renderResearch(){
       <span style="width:14px"></span>
       ${[['3y','3Y'],['5y','5Y'],['10y','10Y'],['all','Max']].map(([k,l])=>
         `<button data-rsrange="${k}" class="secbtn" style="margin:0;padding:6px 12px;font-size:12.5px;${RS_RANGE===k?'background:var(--accent);color:#fff;border-color:var(--accent)':''}">${l}</button>`).join('')}
+      <input type="number" id="rs-cyrs" min="1" max="30" placeholder="yrs" value="${String(RS_RANGE).startsWith('c')?RS_RANGE.slice(1):''}"
+        title="custom horizon in years"
+        style="width:58px;background:var(--surface);border:1px solid ${String(RS_RANGE).startsWith('c')?'var(--accent)':'var(--border)'};border-radius:9px;padding:6px 8px;font:inherit;font-size:12.5px;color:var(--ink);text-align:center">
     </div>
     <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:14px">
       ${RS_CARDS.map(([k,lab])=>
@@ -2653,6 +2658,9 @@ function renderResearch(){
   document.querySelectorAll('[data-rsmode]').forEach(b=>b.addEventListener('click',()=>{ RS.mode=b.dataset.rsmode; renderResearch(); }));
   document.querySelectorAll('[data-rsrange]').forEach(b=>b.addEventListener('click',()=>{ RS_RANGE=b.dataset.rsrange;
     try{localStorage.setItem('pc-rsrange',RS_RANGE);}catch(e){} renderResearch(); }));
+  const cy=document.getElementById('rs-cyrs');
+  if(cy) cy.addEventListener('change',()=>{ const n=Math.max(1,Math.min(30,+cy.value||0));
+    if(n){ RS_RANGE='c'+n; try{localStorage.setItem('pc-rsrange',RS_RANGE);}catch(e){} renderResearch(); } });
   document.querySelectorAll('[data-rsexp]').forEach(b=>b.addEventListener('click',()=>openRsChart(b.dataset.rsexp)));
 }
 function drawRsPrice(svg,pts){
