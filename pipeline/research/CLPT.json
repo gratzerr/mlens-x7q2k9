@@ -9,11 +9,25 @@
       "summary": "EpilepsyGTx will use ClearPoint's SmartFlow Cannula and Navigation System to deliver its gene therapy candidate EPY201 in an upcoming first-in-human Phase 1/2a trial for focal refractory epilepsy, expected to start in the UK/Europe by end of 2026."
     },
     {
+      "date": "2026-07-02",
+      "headline": "ClearPoint Neuro (NASDAQ:CLPT) Shares Down 7.5% – What's Next?",
+      "source": "The Cerbat Gem",
+      "url": "https://www.thecerbatgem.com/2026/07/02/clearpoint-neuro-nasdaqclpt-shares-down-7-5-whats-next.html",
+      "summary": "CLPT shares fell 7.5% in early July as investors weighed persistent margin pressure and continued cash burn against the company's revenue-growth story, a pullback following the stock's roughly doubling after the mid-June uniQure/FDA news."
+    },
+    {
       "date": "2026-06-29",
       "headline": "ClearPoint Neuro CEO Burnett Sells $387,600 in Company Shares",
       "source": "Investing.com",
       "url": "https://www.investing.com/news/insider-trading-news/clearpoint-neuro-ceo-burnett-sells-387600-in-company-shares-93CH-4771973",
       "summary": "CEO Joseph Burnett sold 20,000 shares at a weighted average price of $19.38 under a pre-established Rule 10b5-1 trading plan, following exercise of options at $2.50 per share."
+    },
+    {
+      "date": "2026-06-18",
+      "headline": "B. Riley raises ClearPoint Neuro price target to $30 from $20, maintains Buy",
+      "source": "TipRanks / The Globe and Mail",
+      "url": "https://www.theglobeandmail.com/investing/markets/markets-news/Tipranks/2593955/analysts-are-bullish-on-top-healthcare-stocks-clearpoint-neuro-clpt-uniqure-qure/",
+      "summary": "B. Riley analyst Anderson Schock raised his price target on ClearPoint Neuro to $30 from $20 while keeping a Buy rating, citing the improved regulatory outlook for partner uniQure's AMT-130 gene therapy, which is delivered using ClearPoint's navigation platform."
     },
     {
       "date": "2026-06-17",
@@ -23,30 +37,16 @@
       "summary": "CLPT shares jumped roughly 26-32% after partner uniQure said the FDA agreed that 3-year Phase I/II data for AMT-130 (delivered via ClearPoint's navigation platform and SmartFlow cannula) can support a BLA for accelerated approval, with submission planned for Q3 2026."
     },
     {
-      "date": "2026-05-27",
-      "headline": "ClearPoint Neuro Enters into 10-Year Focused Ultrasound Development Partnership with Sungkyunkwan University, South Korea",
-      "source": "BioSpace",
-      "url": "https://www.biospace.com/press-releases/clearpoint-neuro-enters-into-10-year-focused-ultrasound-development-partnership-with-sungkyunkwan-university-south-korea-further-expanding-our-drug-delivery-ecosystem-and-global-footprint",
-      "summary": "ClearPoint agreed to a decade-long R&D collaboration with Sungkyunkwan University's SONOCARELAB after demonstrating blood-brain-barrier tracer delivery in a preclinical model, extending its drug-delivery ecosystem into focused ultrasound."
-    },
-    {
-      "date": "2026-05-13",
-      "headline": "ClearPoint Neuro Reports First Quarter 2026 Results",
-      "source": "BioSpace / AccessNewswire",
-      "url": "https://www.biospace.com/press-releases/clearpoint-neuro-reports-first-quarter-2026-results",
-      "summary": "Q1 2026 revenue grew 43% year-over-year to $12.1 million (including $2.3 million of IRRAflow revenue) with 64% gross margin, and the company reaffirmed full-year 2026 revenue guidance of $52-56 million."
-    },
-    {
-      "date": "2026-05-13",
-      "headline": "ClearPoint Neuro Announces CE Marking of Velocity Alpha MR High Speed Surgical Drill System",
-      "source": "AccessNewswire",
-      "url": "https://www.accessnewswire.com/newsroom/en/biotechnology/clearpoint-neuro-announces-ce-marking-of-velocity-alpha-mr-high-speed-surgical-drill-1166637",
-      "summary": "The Velocity Alpha MR high-speed surgical drill, previously FDA-cleared in the U.S., received CE Marking, expanding its commercial availability into European markets as part of ClearPoint's broader drug-delivery ecosystem."
+      "date": "2026-06-09",
+      "headline": "Stifel reiterates ClearPoint Neuro stock rating on neurosurgery platform",
+      "source": "Investing.com",
+      "url": "https://www.investing.com/news/analyst-ratings/stifel-reiterates-clearpoint-neuro-stock-rating-on-neurosurgery-platform-93CH-4733334",
+      "summary": "Following the biennial American Society for Stereotactic and Functional Neurosurgery meeting, Stifel reiterated a Buy rating and $16 price target on ClearPoint Neuro, highlighting the company's combined platform spanning drug delivery, brain-computer interfaces and its newly announced focused-ultrasound capability."
     }
   ],
   "catalysts": [
     {
-      "when": "2026-08-11",
+      "when": "2026-08-11 (estimated)",
       "label": "Q2 2026 earnings release",
       "detail": "ClearPoint Neuro is expected to report second-quarter 2026 financial results, with the market watching for progress against the $52-56M full-year revenue guidance; exact date not yet formally announced.",
       "confirmed": false
@@ -54,8 +54,8 @@
     {
       "when": "Q3 2026",
       "label": "uniQure BLA submission for AMT-130 (Huntington's disease)",
-      "detail": "Partner uniQure plans to file a Biologics License Application with the FDA for AMT-130, delivered via ClearPoint's navigation platform and SmartFlow cannula, using 3-year Phase I/II data following supportive Type B FDA meeting feedback.",
-      "confirmed": false
+      "detail": "Partner uniQure plans to file a Biologics License Application with the FDA for AMT-130, delivered via ClearPoint's navigation platform and SmartFlow cannula, using 3-year Phase I/II data following supportive Type B FDA meeting feedback -- the single biggest near-term revenue catalyst for ClearPoint's biologics/drug-delivery business.",
+      "confirmed": true
     },
     {
       "when": "By year-end 2026",
@@ -76,5 +76,5 @@
       "confirmed": false
     }
   ],
-  "pulse": "ClearPoint Neuro's momentum builds around its partners' pipelines: uniQure's supportive June FDA feedback on AMT-130 (delivered via ClearPoint's platform) drove a sharp CLPT rally and sets up a targeted Q3 2026 BLA filing, while a new EpilepsyGTx delivery partnership and a 10-year focused-ultrasound R&D deal with Sungkyunkwan University broaden the drug-delivery ecosystem. Underlying fundamentals are improving too, with Q1 2026 revenue up 43% to $12.1 million and full-year guidance of $52-56 million reaffirmed as IRRAS integration progresses. The stock remains high-beta and partner-dependent, with the next major checkpoints being ClearPoint's own Q2 2026 earnings (expected mid-August) and further clarity on uniQure's BLA timeline."
+  "pulse": "ClearPoint Neuro's momentum builds around its partners' pipelines: uniQure's supportive June FDA feedback on AMT-130 (delivered via ClearPoint's platform) drove a sharp CLPT rally toward a 52-week high near $30, and a new EpilepsyGTx delivery partnership announced July 14 broadens the drug-delivery ecosystem further. Underlying fundamentals are improving too, with Q1 2026 revenue up 43% to $12.1 million and full-year guidance of $52-56 million reaffirmed as IRRAS integration progresses, though shares have since pulled back to around $16-19 on lingering margin and cash-burn concerns even as B. Riley (PT $30) and Stifel (PT $16) both maintain Buy ratings. The stock remains high-beta and partner-dependent, with the next major checkpoints being ClearPoint's own Q2 2026 earnings (expected mid-August) and further clarity on uniQure's BLA timeline."
 }
