@@ -343,6 +343,8 @@ data = {
                            if os.path.exists(os.path.join(ROOT, "watch_meta.json")) else {}))(),
     "fund": (lambda: (json.load(open(os.path.join(ROOT, "fund.json")))
                       if os.path.exists(os.path.join(ROOT, "fund.json")) else {}))(),
+    "estimates": (lambda: (json.load(open(os.path.join(ROOT, "estimates.json")))
+                           if os.path.exists(os.path.join(ROOT, "estimates.json")) else {}))(),
     "buysByTicker": pp.get("buysByTicker", {}) if pp else {},
     "usdPerEur": usd_per_eur if pp else 1.14,
     # PP net-worth curve (daily EUR value + cum TTWROR) — replaces Parqet's wrong chart

@@ -19,6 +19,20 @@ def all_syms():
     return syms
 SINCE = "2021-12-30"
 
+def _fresh(path, hours):
+    """Freshness via an in-file timestamp — file mtimes are useless on CI checkouts."""
+    try:
+        import time
+        ts = json.load(open(path)).get("_ts")
+        return ts and time.time() - ts < hours * 3600
+    except Exception:
+        return False
+
+def _stamp(d):
+    import time
+    d["_ts"] = int(time.time()); return d
+
+
 def fetch(sym):
     import yfinance as yf
     out = []
@@ -126,8 +140,7 @@ def fund_tickers():
 def fetch_fund():
     """Slow-moving fundamentals (PE/PEG/PS/EV/mcap/dividend). Refresh only when
     fund.json is missing or >6h old — .info is heavy and rate-limited."""
-    import time
-    if os.path.exists(FUND_OUT) and time.time() - os.path.getmtime(FUND_OUT) < 6*3600:
+    if _fresh(FUND_OUT, 6):
         return
     old = {}
     try: old = json.load(open(FUND_OUT))
@@ -137,8 +150,48 @@ def fetch_fund():
         try: res[sym] = _fundamentals(sym)
         except Exception: pass
     if res:
-        json.dump(res, open(FUND_OUT, "w"))
+        json.dump(_stamp(res), open(FUND_OUT, "w"))
         print("fund.json:", len(res), "tickers")
+
+EST_OUT = os.path.join(ROOT, "estimates.json")
+def _estimates(sym):
+    import yfinance as yf
+    t = yf.Ticker(sym)
+    out = {}
+    def df2d(df, keep):
+        d = {}
+        for per in ("0q", "+1q", "0y", "+1y"):
+            if per in df.index:
+                row = df.loc[per]
+                d[per] = {k: (None if row.get(k) != row.get(k) else round(float(row[k]), 4))
+                          for k in keep if k in row}
+        return d
+    try: out["rev"] = df2d(t.revenue_estimate, ["avg", "low", "high", "growth", "numberOfAnalysts"])
+    except Exception: pass
+    try: out["eps"] = df2d(t.earnings_estimate, ["avg", "low", "high", "growth", "numberOfAnalysts"])
+    except Exception: pass
+    try:
+        pt = t.analyst_price_targets
+        out["tgt"] = {k: round(float(v), 2) for k, v in pt.items() if v is not None}
+    except Exception: pass
+    return out
+
+def fetch_estimates():
+    """Analyst consensus (current + next FY — all Yahoo offers for free). 12h gate."""
+    if _fresh(EST_OUT, 12):
+        return
+    old = {}
+    try: old = json.load(open(EST_OUT))
+    except Exception: pass
+    res = dict(old)
+    for sym in fund_tickers():
+        try:
+            e = _estimates(sym)
+            if e: res[sym] = e
+        except Exception: pass
+    if res:
+        json.dump(_stamp(res), open(EST_OUT, "w"))
+        print("estimates.json:", len(res), "tickers")
 
 def main():
     old = {}
@@ -191,3 +244,5 @@ if __name__ == "__main__":
     fetch_watch(os.environ.get("MISSING_ONLY") == "1")
     try: fetch_fund()
     except Exception as e: print("fund fetch skipped:", e)
+    try: fetch_estimates()
+    except Exception as e: print("estimates skipped:", e)

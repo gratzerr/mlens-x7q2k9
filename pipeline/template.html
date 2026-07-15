@@ -2218,6 +2218,11 @@ const RS_CONCEPTS={   // group -> [taxonomy, [tag fallbacks], unit, instant?]
      dei:EntityCommonStockSharesOutstanding 404s on the companyconcept API */
   shares:['us-gaap',['WeightedAverageNumberOfDilutedSharesOutstanding','WeightedAverageNumberOfSharesOutstandingBasic'],'shares',0,'avg'],
   divPaid:['us-gaap',['PaymentsOfDividends','PaymentsOfDividendsCommonStock'],'USD',0],
+  receivables:['us-gaap',['AccountsReceivableNetCurrent','ReceivablesNetCurrent'],'USD',1],
+  inventory:['us-gaap',['InventoryNet'],'USD',1],
+  totalAssets:['us-gaap',['Assets'],'USD',1],
+  totalLiab:['us-gaap',['Liabilities'],'USD',1],
+  ltDebt:['us-gaap',['LongTermDebtNoncurrent','LongTermDebt'],'USD',1],
   buyback:['us-gaap',['PaymentsForRepurchaseOfCommonStock'],'USD',0]};
 const _rsCache={};   // ticker -> {q:{}, a:{}}
 let RS={tk:null,name:'',mode:'q',data:null,quote:null};
@@ -2383,7 +2388,7 @@ async function rsLoad(tk){
     })().catch(()=>{}).finally(()=>{
       if(--pending===0&&RS.tk===tk){ RS.loading=false; _rsCache[tk]=data;
         if(!Object.values(data).some(v=>v&&v.err)) rsCacheSet(tk,data);
-        RS_CARDS.forEach(([k])=>rsDrawCard(k)); rsStats(); }
+        RS_CARDS.forEach(([k])=>rsDrawCard(k)); rsStats(); rsStatements(); }
     });
   });
 }
@@ -2679,8 +2684,10 @@ function renderResearch(){
           </div>
           <div id="rs-c-${k}"></div>
         </div>`).join('')}
-    </div>`;
-  rsHeader(); rsStats();
+    </div>
+    <div class="panel" id="rs-est" style="margin-top:14px;display:none"></div>
+    <div class="panel" id="rs-stmt" style="margin-top:14px"></div>`;
+  rsHeader(); rsStats(); rsEstimates(); rsStatements();
   RS_CARDS.forEach(([k])=>rsDrawCard(k));
   document.querySelectorAll('[data-rsmode]').forEach(b=>b.addEventListener('click',()=>{ RS.mode=b.dataset.rsmode; renderResearch(); }));
   document.querySelectorAll('[data-rsrange]').forEach(b=>b.addEventListener('click',()=>{ RS_RANGE=b.dataset.rsrange;
@@ -2709,6 +2716,104 @@ function drawRsPrice(svg,pts){
   const line=pts.map((p,i)=>`${i?'L':'M'}${X(p[0]).toFixed(1)},${Y(p[1]).toFixed(1)}`).join(' ');
   svg.setAttribute('viewBox',`0 0 ${W} ${H}`);
   svg.innerHTML=grid+`<path d="${line} L${W},${(H-padB).toFixed(1)} L${padL},${(H-padB).toFixed(1)} Z" fill="${col}" opacity="0.25"/><path d="${line}" fill="none" stroke="${col}" stroke-width="2"/>`;
+}
+/* ---- Financial statements table (Seeking-Alpha style, latest on the left) ---- */
+let RS_ST={tab:'inc',view:'abs'};
+const RS_ST_ROWS={
+  inc:[['revenue','Revenue','$','b'],['costRev','Cost of Revenue','$'],['grossProfit','Gross Profit','$','b'],
+       ['rnd','R&D Expenses','$'],['sga','SG&A Expenses','$'],['opInc','Operating Income','$','b'],
+       ['netInc','Net Income','$','b'],['eps','EPS (diluted)','eps'],['shares','Diluted Shares (wa)','n']],
+  cf:[['ocf','Operating Cash Flow','$','b'],['capex','Capital Expenditures','$'],['fcf','Free Cash Flow','$','b'],
+      ['divPaid','Dividends Paid','$'],['buyback','Share Buybacks','$'],['roc','Return of Capital','$','b']],
+  bal:[['cash','Cash & Equivalents','$','b'],['receivables','Accounts Receivable','$'],['inventory','Inventory','$'],
+       ['totalAssets','Total Assets','$','b'],['ltDebt','Long-Term Debt','$'],['totalLiab','Total Liabilities','$','b']]};
+function rsRowSpark(vals){
+  if(vals.length<2) return '';
+  const w=44,h=15,mn=Math.min(...vals,0),mx=Math.max(...vals,0),sp=(mx-mn)||1;
+  const bw=Math.max(1.4,w/vals.length-1);
+  return `<svg width="${w}" height="${h}" viewBox="0 0 ${w} ${h}" style="vertical-align:middle;opacity:.7">${vals.map((v,i)=>{
+    const zero=h*(mx/sp)||h, bh=Math.max(1,Math.abs(v)/sp*h);
+    const y=v>=0?Math.max(0,zero-bh):zero;
+    return `<rect x="${(i*(w/vals.length)).toFixed(1)}" y="${y.toFixed(1)}" width="${bw.toFixed(1)}" height="${bh.toFixed(1)}" fill="${cvar('--muted')}"/>`;
+  }).join('')}</svg>`;
+}
+function rsStatements(){
+  const el=document.getElementById('rs-stmt'); if(!el) return;
+  if(!RS.data||!Object.keys(RS.data).length){ el.style.display='none'; return; }
+  el.style.display='';
+  const rows=RS_ST_ROWS[RS_ST.tab];
+  const mode=RS.mode==='a'?'a':'q';    // TTM view maps to quarterly columns here
+  const get=k=>{ const d=RS.data[k]; if(!d) return []; return mode==='a'?d.a:d.q; };
+  const keys=[...new Set(rows.flatMap(([k])=>rsClip(get(k)).map(p=>String(p[0]))))].sort().reverse().slice(0,14);
+  if(!keys.length){ el.style.display='none'; return; }
+  const yoyPrior=k=>mode==='a'?String(+k-1):(()=>{const i=(+k.slice(0,4))*4+(+k.slice(5))-1-4;return Math.floor(i/4)+'Q'+(i%4+1);})();
+  const tabBtn=(id,lab)=>`<button data-sttab="${id}" class="secbtn" style="margin:0;padding:5px 12px;font-size:12px;${RS_ST.tab===id?'background:var(--accent);color:#fff;border-color:var(--accent)':''}">${lab}</button>`;
+  const viewBtn=(id,lab)=>`<button data-stview="${id}" class="secbtn" style="margin:0;padding:5px 12px;font-size:12px;${RS_ST.view===id?'background:var(--accent);color:#fff;border-color:var(--accent)':''}">${lab}</button>`;
+  let html=`<div style="display:flex;justify-content:space-between;align-items:center;gap:10px;flex-wrap:wrap;margin-bottom:10px">
+    <h2 style="margin:0">Financial Statements</h2>
+    <div style="display:flex;gap:6px;flex-wrap:wrap">${tabBtn('inc','Income')}${tabBtn('cf','Cash Flow')}${tabBtn('bal','Balance')}
+      <span style="width:10px"></span>${viewBtn('abs','Absolute')}${viewBtn('yoy','YoY Growth')}</div></div>
+    <div style="overflow-x:auto"><table style="border-collapse:collapse;font-size:12.5px;width:100%;min-width:${140+keys.length*86}px">
+    <tr><th style="text-align:left;position:sticky;left:0;background:var(--surface);color:var(--muted);font-weight:650;font-size:11px;padding:4px 8px"></th><th></th>${keys.map(k=>`<th class="tnum" style="text-align:right;color:var(--muted);font-weight:650;font-size:11px;padding:4px 8px;border-bottom:1px solid var(--line)">${k}</th>`).join('')}</tr>`;
+  rows.forEach(([k,lab,fmt,bold])=>{
+    const ser=get(k); if(!ser.length) return;
+    const m=Object.fromEntries(ser.map(([kk,v])=>[String(kk),v]));
+    const spark=rsRowSpark(rsClip(ser).slice(-14).map(p=>p[1]));
+    html+=`<tr><td style="text-align:left;position:sticky;left:0;background:var(--surface);padding:6px 8px;white-space:nowrap;${bold?'font-weight:700':'color:var(--muted)'}">${lab}</td><td style="padding:0 4px">${spark}</td>`;
+    keys.forEach(kk=>{
+      const v=m[kk];
+      let cell='—', cls='';
+      if(v!=null){
+        if(RS_ST.view==='yoy'){
+          const p=m[yoyPrior(kk)];
+          if(p!=null&&Math.abs(p)>1e-9){ const g=(v/p-1)*100*(p<0?-1:1);
+            cell=(g<0?'(':'')+Math.abs(g).toFixed(1)+'%'+(g<0?')':''); cls=g<0?'down':''; }
+        } else cell=rsFmtV(v,fmt);
+      }
+      html+=`<td class="tnum ${cls}" style="text-align:right;padding:6px 8px;border-top:1px solid var(--grid);${bold?'font-weight:660':''}">${cell}</td>`;
+    });
+    html+='</tr>';
+  });
+  el.innerHTML=html+'</table></div>';
+  el.querySelectorAll('[data-sttab]').forEach(b=>b.addEventListener('click',()=>{ RS_ST.tab=b.dataset.sttab; rsStatements(); }));
+  el.querySelectorAll('[data-stview]').forEach(b=>b.addEventListener('click',()=>{ RS_ST.view=b.dataset.stview; rsStatements(); }));
+}
+/* ---- Analyst consensus (Yahoo: current + next quarter/FY) ---- */
+function rsEstimates(){
+  const el=document.getElementById('rs-est'); if(!el) return;
+  const e=(DATA.estimates||{})[RS.tk];
+  if(!e){ el.style.display='none'; return; }
+  el.style.display='';
+  const P=['0q','+1q','0y','+1y'], PL={'0q':'Current Q','+1q':'Next Q','0y':'FY (current)','+1y':'FY (next)'};
+  const fmt$=v=>v==null?'—':'$'+fmtBig(v);
+  const g=v=>v==null?'':` <span class="${v>=0?'up':'down'}" style="font-size:10.5px">${fmtPct(v*100)}</span>`;
+  const row=(lab,d,f)=>`<tr><td style="text-align:left;padding:6px 8px;font-weight:650;white-space:nowrap">${lab}</td>${P.map(p=>{
+    const x=d&&d[p];
+    return `<td class="tnum" style="text-align:right;padding:6px 8px;border-top:1px solid var(--grid)">${x&&x.avg!=null?f(x.avg)+g(x.growth):'—'}
+      ${x&&x.low!=null&&x.high!=null?`<div style="font-size:10px;color:var(--muted)">${f(x.low)} – ${f(x.high)}</div>`:''}</td>`;}).join('')}</tr>`;
+  const t=e.tgt||{};
+  let tgt='';
+  if(t.mean!=null&&t.low!=null&&t.high!=null&&t.high>t.low){
+    const pos=Math.max(2,Math.min(98,((t.current||t.mean)-t.low)/(t.high-t.low)*100));
+    const upside=t.current?((t.mean/t.current-1)*100):null;
+    tgt=`<div style="display:flex;align-items:center;gap:14px;flex-wrap:wrap;margin:4px 0 12px;font-size:12.5px">
+      <span style="color:var(--muted)">Price target</span>
+      <b class="tnum">$${t.mean.toFixed(2)}</b>
+      ${upside!=null?`<span class="tnum ${upside>=0?'up':'down'}">${fmtPct(upside)} vs current</span>`:''}
+      <div style="flex:1;min-width:160px;max-width:320px"><div style="position:relative;height:5px;border-radius:3px;background:var(--surface-2)">
+        <div style="position:absolute;left:${pos.toFixed(1)}%;top:-2.5px;width:10px;height:10px;margin-left:-5px;border-radius:50%;background:var(--accent);border:2px solid var(--surface)"></div></div>
+        <div style="display:flex;justify-content:space-between;font-size:10px;color:var(--muted);margin-top:3px"><span>$${t.low.toFixed(2)}</span><span>$${t.high.toFixed(2)}</span></div></div>
+    </div>`;
+  }
+  const nA=(e.eps&&e.eps['0y']&&e.eps['0y'].numberOfAnalysts)||(e.rev&&e.rev['0y']&&e.rev['0y'].numberOfAnalysts);
+  el.innerHTML=`<div style="display:flex;justify-content:space-between;align-items:center;gap:10px;flex-wrap:wrap;margin-bottom:6px">
+      <h2 style="margin:0">Analyst Estimates</h2>${nA?`<span style="font-size:11.5px;color:var(--muted)">${nA} analysts · Yahoo consensus</span>`:''}</div>
+    ${tgt}
+    <div style="overflow-x:auto"><table style="border-collapse:collapse;font-size:12.5px;width:100%;min-width:520px">
+      <tr><th></th>${P.map(p=>`<th class="tnum" style="text-align:right;color:var(--muted);font-weight:650;font-size:11px;padding:4px 8px;border-bottom:1px solid var(--line)">${PL[p]}</th>`).join('')}</tr>
+      ${row('Revenue est.',e.rev,fmt$)}
+      ${row('EPS est.',e.eps,v=>'$'+(+v).toFixed(2))}
+    </table></div>`;
 }
 function rsCagrChips(ser){   // ser = annual or ttm series of [key,val]
   if(!ser||ser.length<2) return '';

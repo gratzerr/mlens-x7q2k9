@@ -29,6 +29,11 @@ CONCEPTS = {  # group -> (taxonomy, [tag fallbacks], unit, instant, kind)
     "shares": ("us-gaap", ["WeightedAverageNumberOfDilutedSharesOutstanding",
                            "WeightedAverageNumberOfSharesOutstandingBasic"], "shares", 0, "avg"),
     "divPaid": ("us-gaap", ["PaymentsOfDividends", "PaymentsOfDividendsCommonStock"], "USD", 0, ""),
+    "receivables": ("us-gaap", ["AccountsReceivableNetCurrent", "ReceivablesNetCurrent"], "USD", 1, ""),
+    "inventory": ("us-gaap", ["InventoryNet"], "USD", 1, ""),
+    "totalAssets": ("us-gaap", ["Assets"], "USD", 1, ""),
+    "totalLiab": ("us-gaap", ["Liabilities"], "USD", 1, ""),
+    "ltDebt": ("us-gaap", ["LongTermDebtNoncurrent", "LongTermDebt"], "USD", 1, ""),
     "buyback": ("us-gaap", ["PaymentsForRepurchaseOfCommonStock"], "USD", 0, ""),
 }
 
@@ -110,8 +115,10 @@ def merge(sers):
     return {"q": [[k, q[k]] for k in sorted(q)], "a": [[k, a[k]] for k in sorted(a)]}
 
 def main():
-    if os.path.exists(OUT) and time.time() - os.path.getmtime(OUT) < 12 * 3600:
-        return
+    try:
+        ts = json.load(open(OUT)).get("_ts")
+        if ts and time.time() - ts < 12 * 3600: return
+    except Exception: pass
     old = {}
     try: old = json.load(open(OUT))
     except Exception: pass
@@ -136,6 +143,7 @@ def main():
         elif tk in old:
             res[tk] = old[tk]
     if res:
+        res["_ts"] = int(time.time())
         json.dump(res, open(OUT, "w"), separators=(",", ":"))
         print(f"rs_prefetch.json: {len(res)} tickers, {os.path.getsize(OUT)//1024}KB")
 
