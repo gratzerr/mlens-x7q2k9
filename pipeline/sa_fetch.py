@@ -90,8 +90,11 @@ def ticker_id(sym, ids, key, b):
         print(f"sa_fetch: no ticker_id for {sym}")
     return tid
 
-def _by_year(payload, tid, metric):
-    """metric dict {rel:[{dataitemvalue, period.fiscalyear}]} -> {year: float}"""
+MON = ["", "Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"]
+
+def _by_year(payload, tid, metric, ends=None):
+    """metric dict {rel:[{dataitemvalue, period.fiscalyear}]} -> {year: float};
+    optionally records the fiscal period END label (SA shows 'Jan 2027' for NVDA)."""
     out = {}
     for arr in (payload.get("estimates", {}).get(str(tid), {}).get(metric, {}) or {}).values():
         for e in arr:
@@ -99,10 +102,16 @@ def _by_year(payload, tid, metric):
                 y = int(e["period"]["fiscalyear"]); v = float(e["dataitemvalue"])
             except (KeyError, TypeError, ValueError): continue
             out[y] = v
+            if ends is not None:
+                try:
+                    d = str(e["period"]["periodenddate"])
+                    ends[y] = MON[int(d[5:7])] + " " + d[:4]
+                except (KeyError, TypeError, ValueError, IndexError): pass
     return out
 
 def _table(payload, tid, prefix):
-    mean = _by_year(payload, tid, prefix + "_consensus_mean")
+    ends = {}
+    mean = _by_year(payload, tid, prefix + "_consensus_mean", ends)
     low = _by_year(payload, tid, prefix + "_consensus_low")
     high = _by_year(payload, tid, prefix + "_consensus_high")
     num = _by_year(payload, tid, prefix + "_num_of_estimates")
@@ -115,7 +124,7 @@ def _table(payload, tid, prefix):
         if base is not None and base < 0 and mean[y] is not None:
             yoy = round((mean[y] - base) / abs(base) * 100, 2)   # loss shrinking = improvement
         n = num.get(y)
-        rows.append(["Dec %d" % y, round(mean[y], 4), yoy, None,
+        rows.append([ends.get(y, "Dec %d" % y), round(mean[y], 4), yoy, None,
                      low.get(y), high.get(y), int(n) if n is not None else None])
     return rows
 
