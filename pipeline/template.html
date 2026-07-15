@@ -2372,7 +2372,7 @@ async function rsLoad(tk){
   RS={tk,name:((window._watchLive||{})[tk]||{}).name||'',mode:RS.mode||'q',data:cached||{},quote:null,loading:!cached,noSec:false};
   renderResearch();
   fetchYahoo(tk).then(q=>{ if(RS.tk!==tk) return; RS.quote=q; RS.name=q.name||RS.name||tk;
-    rsHeader(); rsStats(); }).catch(()=>{});
+    rsHeader(); rsStats(); rsEstimates(); }).catch(()=>{});   // fwd PE/PS need the live price
   if(cached){ _rsCache[tk]=cached; return; }
   /* cloud prefetch: holdings + watchlist tickers open with ZERO SEC round-trips */
   try{
@@ -2405,7 +2405,7 @@ async function rsLoad(tk){
       rsDrawCard(key);
       if(key==='ocf'||key==='capex') rsDrawCard('fcf');
       if(['revenue','costRev','grossProfit','opInc','netInc'].includes(key)){ rsDrawCard('grossProfit'); rsDrawCard('margins'); rsDrawCard('grossMargin'); }
-      if(['eps','revenue','shares'].includes(key)) rsDrawCard('valuation');
+      if(['eps','revenue','shares'].includes(key)){ rsDrawCard('valuation'); if(key==='shares') rsEstimates(); }   // FWD P/S needs shares
       if(key==='divPaid'||key==='buyback') rsDrawCard('roc');
       rsStats();
     })().catch(()=>{}).finally(()=>{
@@ -2841,28 +2841,37 @@ function rsEstimates(){
     ${tbl('Consensus Revenue Estimates',e.rev,v=>'$'+fmtBig(v))}
     ${tbl('Consensus EPS Estimates',e.eps,v=>'$'+(+v).toFixed(2))}`;
 }
-/* Multi-year SA tables — rows [label, est, yoyPct, fwd, low, high, n] */
+/* Multi-year SA tables — rows [label, est, yoyPct, fwdSeed, low, high, n].
+   Forward PE / FWD Price/Sales are computed LIVE (current price / mcap vs the
+   estimate, like SA does); the scraped seed value is only the offline fallback. */
 function rsEstimatesSA(el,sa){
   el.style.display='';
-  const tbl=(title,rows,f)=>{
+  const q=RS.quote||{};
+  const usd=!q.ccy||q.ccy==='USD';   // don't mix a CAD price into USD estimates
+  const price=usd?q.price:null;
+  const shares=(RS.data&&RS.data.shares&&RS.data.shares.q.length)?RS.data.shares.q[RS.data.shares.q.length-1][1]:null;
+  const mcap=(price&&shares)?price*shares:null;
+  const tbl=(title,rows,f,fwdLabel,fwdOf)=>{
     if(!rows||!rows.length) return '';
     return `<div class="sd-sec">${title}</div>
-      <div style="overflow-x:auto"><table style="border-collapse:collapse;font-size:12.5px;width:100%;min-width:520px">
-      <tr>${['Fiscal Period Ending','Estimate','YoY Growth','Low','High','# of Analysts'].map((c,i)=>
+      <div style="overflow-x:auto"><table style="border-collapse:collapse;font-size:12.5px;width:100%;min-width:560px">
+      <tr>${['Fiscal Period Ending','Estimate','YoY Growth',fwdLabel,'Low','High','# of Analysts'].map((c,i)=>
         `<th style="text-align:${i?'right':'left'};color:var(--muted);font-weight:650;font-size:11px;padding:4px 8px;border-bottom:1px solid var(--line)">${c}</th>`).join('')}</tr>
-      ${rows.map(r=>{ const [lab,est,yoy,_fwd,low,high,n]=r;
+      ${rows.map(r=>{ const [lab,est,yoy,fwdSeed,low,high,n]=r;
+        const fwd=est?fwdOf(est):null, fv=fwd!=null?fwd:fwdSeed;
         return `<tr>
           <td style="padding:7px 8px;font-weight:650;white-space:nowrap">${lab}</td>
           <td class="tnum" style="text-align:right;padding:7px 8px;border-top:1px solid var(--grid);font-weight:660">${est!=null?f(est):'—'}</td>
           <td class="tnum ${yoy!=null?(yoy>=0?'up':'down'):''}" style="text-align:right;padding:7px 8px;border-top:1px solid var(--grid)">${yoy!=null?fmtPct(yoy):'—'}</td>
+          <td class="tnum" style="text-align:right;padding:7px 8px;border-top:1px solid var(--grid)">${fv!=null?(+fv).toFixed(2):'—'}</td>
           <td class="tnum" style="text-align:right;padding:7px 8px;border-top:1px solid var(--grid);color:var(--muted)">${low!=null?f(low):'—'}</td>
           <td class="tnum" style="text-align:right;padding:7px 8px;border-top:1px solid var(--grid);color:var(--muted)">${high!=null?f(high):'—'}</td>
           <td class="tnum" style="text-align:right;padding:7px 8px;border-top:1px solid var(--grid);color:var(--muted)">${n!=null?n:'—'}</td>
         </tr>`;}).join('')}</table></div>`;
   };
   el.innerHTML=`<h2 style="margin:0 0 4px">Analyst Estimates <span style="font-size:11.5px;color:var(--muted);font-weight:500">annual consensus · Seeking Alpha</span></h2>
-    ${tbl('Consensus Revenue Estimates',sa.rev,v=>'$'+fmtBig(v))}
-    ${tbl('Consensus EPS Estimates',sa.eps,v=>'$'+(+v).toFixed(2))}`;
+    ${tbl('Consensus Revenue Estimates',sa.rev,v=>'$'+fmtBig(v),'FWD Price/Sales',est=>mcap?mcap/est:null)}
+    ${tbl('Consensus EPS Estimates',sa.eps,v=>'$'+(+v).toFixed(2),'Forward PE',est=>price?price/est:null)}`;
 }
 function rsCagrChips(ser){   // ser = annual or ttm series of [key,val]
   if(!ser||ser.length<2) return '';
