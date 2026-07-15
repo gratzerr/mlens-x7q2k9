@@ -35,6 +35,7 @@ jobs:
           SA_KEY: /tmp/sa.json
           DEPOT_XML: /tmp/depot.xml
           NO_PUSH: '1'
+          RAPIDAPI_KEY: ${{ secrets.RAPIDAPI_KEY }}
         working-directory: pipeline
         run: |
           for i in $(seq 1 22); do
@@ -46,6 +47,7 @@ jobs:
             python firestore_sync.py pull || true
             MISSING_ONLY=1 python bench_fetch.py || true
             python sec_prefetch.py || true
+            python sa_fetch.py || true
             python pp_sync.py >/dev/null 2>&1 || true
             if [ $((i % 5)) -eq 1 ]; then python social_sync.py || true; fi
             if [ $((i % 2)) -eq 1 ]; then python ir_sweep.py || true; fi

@@ -887,11 +887,13 @@ function fsParse(j){
            owner:f.owner?f.owner.stringValue:'',
            benchmarks:arr('benchmarks'),
            watchlist:arr('watchlist'),
+           saReq:arr('saReq'),
            data:f.data?f.data.stringValue:'' };
 }
 function cfgLists(c){ /* only overwrite when the doc actually has the field */
   if(c.benchmarks) _cfg.benchmarks=c.benchmarks;
   if(c.watchlist) _cfg.watchlist=c.watchlist;
+  if(c.saReq) _cfg.saReq=c.saReq;
 }
 async function fsGet(withAuth){
   const h={};
@@ -2201,6 +2203,20 @@ async function saveBenchList(list){
   }catch(e){}
   return false;
 }
+/* owner: queue a research ticker for the weekly SA-estimates fetch (cloud drains it) */
+async function requestSaEst(tk){
+  if(!_user||!tk) return;
+  const cur=_cfg.saReq||[];
+  if(cur.includes(tk)||(DATA.saEst||{})[tk]) return;
+  const list=[...cur,tk].slice(-25);
+  try{
+    const body={fields:{saReq:{arrayValue:{values:list.map(s=>({stringValue:s}))}}}};
+    const r=await fetch(FS_DOC+'?updateMask.fieldPaths=saReq&key='+FB_CFG.apiKey,
+      {method:'PATCH',headers:{'Content-Type':'application/json','Authorization':'Bearer '+await _user.getIdToken()},
+       body:JSON.stringify(body)});
+    if(r.ok) _cfg.saReq=list;
+  }catch(e){}
+}
 /* ===================== RESEARCH TAB (Qualtrim-style, SEC XBRL + Yahoo) ===================== */
 const RS_CONCEPTS={   // group -> [taxonomy, [tag fallbacks], unit, instant?]
   revenue:['us-gaap',['RevenueFromContractWithCustomerExcludingAssessedTax','Revenues','RevenueFromContractWithCustomerIncludingAssessedTax','SalesRevenueNet'],'USD',0],
@@ -2785,9 +2801,13 @@ function rsStatements(){
   el.querySelectorAll('[data-stview]').forEach(b=>b.addEventListener('click',()=>{ RS_ST.view=b.dataset.stview; rsStatements(); }));
   el.querySelectorAll('[data-stper]').forEach(b=>b.addEventListener('click',()=>{ RS_ST.per=b.dataset.stper; rsStatements(); }));
 }
-/* ---- Analyst consensus (Yahoo: current + next quarter/FY) — SA-style tables ---- */
+/* ---- Analyst consensus — SA-style tables. Multi-year (Seeking Alpha, saEst)
+   preferred; Yahoo (current + next FY) as fallback for tickers without SA data ---- */
 function rsEstimates(){
   const el=document.getElementById('rs-est'); if(!el) return;
+  const sa=(DATA.saEst||{})[RS.tk];
+  if(sa&&((sa.rev&&sa.rev.length)||(sa.eps&&sa.eps.length))){ rsEstimatesSA(el,sa); return; }
+  requestSaEst(RS.tk);   // owner: queue for the cloud SA fetch (shows up on the next build)
   const e=(DATA.estimates||{})[RS.tk];
   if(!e||(!e.rev&&!e.eps)){ el.style.display='none'; return; }
   el.style.display='';
@@ -2814,6 +2834,29 @@ function rsEstimates(){
   el.innerHTML=`<h2 style="margin:0 0 4px">Analyst Estimates <span style="font-size:11.5px;color:var(--muted);font-weight:500">annual consensus</span></h2>
     ${tbl('Consensus Revenue Estimates',e.rev,v=>'$'+fmtBig(v))}
     ${tbl('Consensus EPS Estimates',e.eps,v=>'$'+(+v).toFixed(2))}`;
+}
+/* Multi-year SA tables — rows [label, est, yoyPct, fwd, low, high, n] */
+function rsEstimatesSA(el,sa){
+  el.style.display='';
+  const tbl=(title,rows,f)=>{
+    if(!rows||!rows.length) return '';
+    return `<div class="sd-sec">${title}</div>
+      <div style="overflow-x:auto"><table style="border-collapse:collapse;font-size:12.5px;width:100%;min-width:520px">
+      <tr>${['Fiscal Period Ending','Estimate','YoY Growth','Low','High','# of Analysts'].map((c,i)=>
+        `<th style="text-align:${i?'right':'left'};color:var(--muted);font-weight:650;font-size:11px;padding:4px 8px;border-bottom:1px solid var(--line)">${c}</th>`).join('')}</tr>
+      ${rows.map(r=>{ const [lab,est,yoy,_fwd,low,high,n]=r;
+        return `<tr>
+          <td style="padding:7px 8px;font-weight:650;white-space:nowrap">${lab}</td>
+          <td class="tnum" style="text-align:right;padding:7px 8px;border-top:1px solid var(--grid);font-weight:660">${est!=null?f(est):'—'}</td>
+          <td class="tnum ${yoy!=null?(yoy>=0?'up':'down'):''}" style="text-align:right;padding:7px 8px;border-top:1px solid var(--grid)">${yoy!=null?fmtPct(yoy):'—'}</td>
+          <td class="tnum" style="text-align:right;padding:7px 8px;border-top:1px solid var(--grid);color:var(--muted)">${low!=null?f(low):'—'}</td>
+          <td class="tnum" style="text-align:right;padding:7px 8px;border-top:1px solid var(--grid);color:var(--muted)">${high!=null?f(high):'—'}</td>
+          <td class="tnum" style="text-align:right;padding:7px 8px;border-top:1px solid var(--grid);color:var(--muted)">${n!=null?n:'—'}</td>
+        </tr>`;}).join('')}</table></div>`;
+  };
+  el.innerHTML=`<h2 style="margin:0 0 4px">Analyst Estimates <span style="font-size:11.5px;color:var(--muted);font-weight:500">annual consensus · Seeking Alpha</span></h2>
+    ${tbl('Consensus Revenue Estimates',sa.rev,v=>'$'+fmtBig(v))}
+    ${tbl('Consensus EPS Estimates',sa.eps,v=>'$'+(+v).toFixed(2))}`;
 }
 function rsCagrChips(ser){   // ser = annual or ttm series of [key,val]
   if(!ser||ser.length<2) return '';

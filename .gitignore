@@ -1,5 +1,8 @@
 sa_key.json
 sa*.json
+!sa_estimates.json
+!sa_ids.json
+!sa_budget.json
 *.key
 pipeline/data.json
 pipeline/site_state.json

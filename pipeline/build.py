@@ -345,6 +345,10 @@ data = {
                       if os.path.exists(os.path.join(ROOT, "fund.json")) else {}))(),
     "estimates": (lambda: (json.load(open(os.path.join(ROOT, "estimates.json")))
                            if os.path.exists(os.path.join(ROOT, "estimates.json")) else {}))(),
+    # multi-year analyst consensus (Seeking Alpha via sa_fetch.py / seed scrape);
+    # preferred over the 2-year Yahoo "estimates" when a ticker is present here
+    "saEst": (lambda: (json.load(open(os.path.join(ROOT, "sa_estimates.json")))
+                       if os.path.exists(os.path.join(ROOT, "sa_estimates.json")) else {}))(),
     "buysByTicker": pp.get("buysByTicker", {}) if pp else {},
     "usdPerEur": usd_per_eur if pp else 1.14,
     # PP net-worth curve (daily EUR value + cum TTWROR) — replaces Parqet's wrong chart
