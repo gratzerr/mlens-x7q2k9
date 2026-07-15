@@ -2746,8 +2746,7 @@ function rsStatements(){
   const rows=RS_ST_ROWS[RS_ST.tab];
   const mode=RS_ST.per;    // statements have their OWN period selector (SA-style)
   const get=k=>{ const d=RS.data[k]; if(!d) return []; return mode==='a'?d.a:d.q; };
-  let keys=[...new Set(rows.flatMap(([k])=>rsClip(get(k),mode).map(p=>String(p[0]))))].sort().reverse().slice(0,14);
-  if(RS_ST.order==='right') keys=keys.slice().reverse();
+  const keys=[...new Set(rows.flatMap(([k])=>rsClip(get(k),mode).map(p=>String(p[0]))))].sort().reverse().slice(0,14);
   if(!keys.length){ el.style.display='none'; return; }
   const yoyPrior=k=>mode==='a'?String(+k-1):(()=>{const i=(+k.slice(0,4))*4+(+k.slice(5))-1-4;return Math.floor(i/4)+'Q'+(i%4+1);})();
   const seg=(attr,id,lab,cur)=>`<button data-${attr}="${id}" class="secbtn" style="margin:0;padding:5px 12px;font-size:12px;${cur===id?'background:var(--accent);color:#fff;border-color:var(--accent)':''}">${lab}</button>`;
@@ -2759,8 +2758,6 @@ function rsStatements(){
       ${seg('stper','a','Annual',RS_ST.per)}${seg('stper','q','Quarterly',RS_ST.per)}
       <span style="width:8px"></span>
       ${seg('stview','abs','Absolute',RS_ST.view)}${seg('stview','yoy','YoY Growth',RS_ST.view)}
-      <span style="width:8px"></span>
-      ${seg('storder','left','Latest left',RS_ST.order)}${seg('storder','right','Latest right',RS_ST.order)}
     </div></div>
     <div style="overflow-x:auto"><table style="border-collapse:collapse;font-size:12.5px;width:100%;min-width:${140+keys.length*86}px">
     <tr><th style="text-align:left;position:sticky;left:0;background:var(--surface);color:var(--muted);font-weight:650;font-size:11px;padding:4px 8px"></th><th></th>${keys.map(k=>`<th class="tnum" style="text-align:right;color:var(--muted);font-weight:650;font-size:11px;padding:4px 8px;border-bottom:1px solid var(--line)">${k}</th>`).join('')}</tr>`;
@@ -2787,7 +2784,6 @@ function rsStatements(){
   el.querySelectorAll('[data-sttab]').forEach(b=>b.addEventListener('click',()=>{ RS_ST.tab=b.dataset.sttab; rsStatements(); }));
   el.querySelectorAll('[data-stview]').forEach(b=>b.addEventListener('click',()=>{ RS_ST.view=b.dataset.stview; rsStatements(); }));
   el.querySelectorAll('[data-stper]').forEach(b=>b.addEventListener('click',()=>{ RS_ST.per=b.dataset.stper; rsStatements(); }));
-  el.querySelectorAll('[data-storder]').forEach(b=>b.addEventListener('click',()=>{ RS_ST.order=b.dataset.storder; rsStatements(); }));
 }
 /* ---- Analyst consensus (Yahoo: current + next quarter/FY) — SA-style tables ---- */
 function rsEstimates(){
@@ -2795,26 +2791,27 @@ function rsEstimates(){
   const e=(DATA.estimates||{})[RS.tk];
   if(!e||(!e.rev&&!e.eps)){ el.style.display='none'; return; }
   el.style.display='';
-  const P=['0q','+1q','0y','+1y'], PL={'0q':'Current Quarter','+1q':'Next Quarter','0y':'Current Fiscal Year','+1y':'Next Fiscal Year'};
+  const yNow=new Date().getFullYear();
+  const P=[['0y','Dec '+yNow],['+1y','Dec '+(yNow+1)]];   // annual only — free sources stop here
   const tbl=(title,d,f)=>{
     if(!d) return '';
-    const rows=P.filter(p=>d[p]&&d[p].avg!=null);
+    const rows=P.filter(([p])=>d[p]&&d[p].avg!=null);
     if(!rows.length) return '';
     return `<div class="sd-sec">${title}</div>
       <div style="overflow-x:auto"><table style="border-collapse:collapse;font-size:12.5px;width:100%;min-width:520px">
-      <tr>${['Fiscal Period','Estimate','YoY Growth','Low','High','# Analysts'].map((c,i)=>
+      <tr>${['Fiscal Period Ending','Estimate','YoY Growth','Low','High','# of Analysts'].map((c,i)=>
         `<th style="text-align:${i?'right':'left'};color:var(--muted);font-weight:650;font-size:11px;padding:4px 8px;border-bottom:1px solid var(--line)">${c}</th>`).join('')}</tr>
-      ${rows.map(p=>{ const x=d[p];
+      ${rows.map(([p,lab])=>{ const x=d[p];
         return `<tr>
-          <td style="padding:6px 8px;font-weight:650;white-space:nowrap">${PL[p]}</td>
-          <td class="tnum" style="text-align:right;padding:6px 8px;border-top:1px solid var(--grid);font-weight:660">${f(x.avg)}</td>
-          <td class="tnum ${x.growth!=null?(x.growth>=0?'up':'down'):''}" style="text-align:right;padding:6px 8px;border-top:1px solid var(--grid)">${x.growth!=null?fmtPct(x.growth*100):'—'}</td>
-          <td class="tnum" style="text-align:right;padding:6px 8px;border-top:1px solid var(--grid);color:var(--muted)">${x.low!=null?f(x.low):'—'}</td>
-          <td class="tnum" style="text-align:right;padding:6px 8px;border-top:1px solid var(--grid);color:var(--muted)">${x.high!=null?f(x.high):'—'}</td>
-          <td class="tnum" style="text-align:right;padding:6px 8px;border-top:1px solid var(--grid);color:var(--muted)">${x.numberOfAnalysts!=null?x.numberOfAnalysts:'—'}</td>
+          <td style="padding:7px 8px;font-weight:650;white-space:nowrap">${lab}</td>
+          <td class="tnum" style="text-align:right;padding:7px 8px;border-top:1px solid var(--grid);font-weight:660">${f(x.avg)}</td>
+          <td class="tnum ${x.growth!=null?(x.growth>=0?'up':'down'):''}" style="text-align:right;padding:7px 8px;border-top:1px solid var(--grid)">${x.growth!=null?fmtPct(x.growth*100):'—'}</td>
+          <td class="tnum" style="text-align:right;padding:7px 8px;border-top:1px solid var(--grid);color:var(--muted)">${x.low!=null?f(x.low):'—'}</td>
+          <td class="tnum" style="text-align:right;padding:7px 8px;border-top:1px solid var(--grid);color:var(--muted)">${x.high!=null?f(x.high):'—'}</td>
+          <td class="tnum" style="text-align:right;padding:7px 8px;border-top:1px solid var(--grid);color:var(--muted)">${x.numberOfAnalysts!=null?x.numberOfAnalysts:'—'}</td>
         </tr>`;}).join('')}</table></div>`;
   };
-  el.innerHTML=`<h2 style="margin:0 0 4px">Analyst Estimates <span style="font-size:11.5px;color:var(--muted);font-weight:500">Yahoo consensus</span></h2>
+  el.innerHTML=`<h2 style="margin:0 0 4px">Analyst Estimates <span style="font-size:11.5px;color:var(--muted);font-weight:500">annual consensus</span></h2>
     ${tbl('Consensus Revenue Estimates',e.rev,v=>'$'+fmtBig(v))}
     ${tbl('Consensus EPS Estimates',e.eps,v=>'$'+(+v).toFixed(2))}`;
 }
