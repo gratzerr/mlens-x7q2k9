@@ -2494,23 +2494,24 @@ function rsMargins(){
 }
 /* one shared time window for the WHOLE grid — every card starts at the same key,
    so margin/valuation lines no longer show a different axis than the bar cards */
-function rsCutoff(){
+function rsCutoff(mode){
+  mode=mode||RS.mode;
   if(RS_RANGE==='all') return '';
   if(String(RS_RANGE).startsWith('s:')){
     const d=RS_RANGE.slice(2);
-    return RS.mode==='a'?d.slice(0,4):d.slice(0,4)+'Q'+Math.ceil(+d.slice(5,7)/3);
+    return mode==='a'?d.slice(0,4):d.slice(0,4)+'Q'+Math.ceil(+d.slice(5,7)/3);
   }
   const yrs={'3y':3,'5y':5,'10y':10}[RS_RANGE]||5;
   const d=RS.data||{}; let last=null;
   Object.values(d).forEach(s=>{ if(!s||!s.q) return;
-    const arr=RS.mode==='a'?s.a:s.q;
+    const arr=mode==='a'?s.a:s.q;
     if(arr&&arr.length){ const k=arr[arr.length-1][0]; if(!last||k>last) last=k; } });
   if(!last) return '';
-  if(RS.mode==='a') return String(+last-(yrs-1));
+  if(mode==='a') return String(+last-(yrs-1));
   const idx=(+last.slice(0,4))*4+(+last.slice(5))-1-(yrs*4-1);
   return Math.floor(idx/4)+'Q'+(idx%4+1);
 }
-const rsClip=ser=>{ const c=rsCutoff(); return c?ser.filter(([k])=>String(k)>=c):ser; };
+const rsClip=(ser,mode)=>{ const c=rsCutoff(mode); return c?ser.filter(([k])=>String(k)>=c):ser; };
 function rsRatioSeries(numKey,denKey,mode){   // e.g. gross margin % — TTM = sum/sum
   const d=RS.data||{}; if(!d[numKey]||!d[denKey]) return [];
   const m=mode||RS.mode;
@@ -2719,7 +2720,7 @@ function drawRsPrice(svg,pts){
   svg.innerHTML=grid+`<path d="${line} L${W},${(H-padB).toFixed(1)} L${padL},${(H-padB).toFixed(1)} Z" fill="${col}" opacity="0.25"/><path d="${line}" fill="none" stroke="${col}" stroke-width="2"/>`;
 }
 /* ---- Financial statements table (Seeking-Alpha style, latest on the left) ---- */
-let RS_ST={tab:'inc',view:'abs'};
+let RS_ST={tab:'inc',view:'abs',per:'a',order:'left'};
 const RS_ST_ROWS={
   inc:[['revenue','Revenue','$','b'],['costRev','Cost of Revenue','$'],['grossProfit','Gross Profit','$','b'],
        ['rnd','R&D Expenses','$'],['sga','SG&A Expenses','$'],['opInc','Operating Income','$','b'],
@@ -2743,23 +2744,30 @@ function rsStatements(){
   if(!RS.data||!Object.keys(RS.data).length){ el.style.display='none'; return; }
   el.style.display='';
   const rows=RS_ST_ROWS[RS_ST.tab];
-  const mode=RS.mode==='a'?'a':'q';    // TTM view maps to quarterly columns here
+  const mode=RS_ST.per;    // statements have their OWN period selector (SA-style)
   const get=k=>{ const d=RS.data[k]; if(!d) return []; return mode==='a'?d.a:d.q; };
-  const keys=[...new Set(rows.flatMap(([k])=>rsClip(get(k)).map(p=>String(p[0]))))].sort().reverse().slice(0,14);
+  let keys=[...new Set(rows.flatMap(([k])=>rsClip(get(k),mode).map(p=>String(p[0]))))].sort().reverse().slice(0,14);
+  if(RS_ST.order==='right') keys=keys.slice().reverse();
   if(!keys.length){ el.style.display='none'; return; }
   const yoyPrior=k=>mode==='a'?String(+k-1):(()=>{const i=(+k.slice(0,4))*4+(+k.slice(5))-1-4;return Math.floor(i/4)+'Q'+(i%4+1);})();
-  const tabBtn=(id,lab)=>`<button data-sttab="${id}" class="secbtn" style="margin:0;padding:5px 12px;font-size:12px;${RS_ST.tab===id?'background:var(--accent);color:#fff;border-color:var(--accent)':''}">${lab}</button>`;
-  const viewBtn=(id,lab)=>`<button data-stview="${id}" class="secbtn" style="margin:0;padding:5px 12px;font-size:12px;${RS_ST.view===id?'background:var(--accent);color:#fff;border-color:var(--accent)':''}">${lab}</button>`;
+  const seg=(attr,id,lab,cur)=>`<button data-${attr}="${id}" class="secbtn" style="margin:0;padding:5px 12px;font-size:12px;${cur===id?'background:var(--accent);color:#fff;border-color:var(--accent)':''}">${lab}</button>`;
   let html=`<div style="display:flex;justify-content:space-between;align-items:center;gap:10px;flex-wrap:wrap;margin-bottom:10px">
     <h2 style="margin:0">Financial Statements</h2>
-    <div style="display:flex;gap:6px;flex-wrap:wrap">${tabBtn('inc','Income')}${tabBtn('cf','Cash Flow')}${tabBtn('bal','Balance')}
-      <span style="width:10px"></span>${viewBtn('abs','Absolute')}${viewBtn('yoy','YoY Growth')}</div></div>
+    <div style="display:flex;gap:6px;flex-wrap:wrap;align-items:center">
+      ${seg('sttab','inc','Income',RS_ST.tab)}${seg('sttab','cf','Cash Flow',RS_ST.tab)}${seg('sttab','bal','Balance',RS_ST.tab)}
+      <span style="width:8px"></span>
+      ${seg('stper','a','Annual',RS_ST.per)}${seg('stper','q','Quarterly',RS_ST.per)}
+      <span style="width:8px"></span>
+      ${seg('stview','abs','Absolute',RS_ST.view)}${seg('stview','yoy','YoY Growth',RS_ST.view)}
+      <span style="width:8px"></span>
+      ${seg('storder','left','Latest left',RS_ST.order)}${seg('storder','right','Latest right',RS_ST.order)}
+    </div></div>
     <div style="overflow-x:auto"><table style="border-collapse:collapse;font-size:12.5px;width:100%;min-width:${140+keys.length*86}px">
     <tr><th style="text-align:left;position:sticky;left:0;background:var(--surface);color:var(--muted);font-weight:650;font-size:11px;padding:4px 8px"></th><th></th>${keys.map(k=>`<th class="tnum" style="text-align:right;color:var(--muted);font-weight:650;font-size:11px;padding:4px 8px;border-bottom:1px solid var(--line)">${k}</th>`).join('')}</tr>`;
   rows.forEach(([k,lab,fmt,bold])=>{
     const ser=get(k); if(!ser.length) return;
     const m=Object.fromEntries(ser.map(([kk,v])=>[String(kk),v]));
-    const spark=rsRowSpark(rsClip(ser).slice(-14).map(p=>p[1]));
+    const spark=rsRowSpark(rsClip(ser,mode).slice(-14).map(p=>p[1]));
     html+=`<tr><td style="text-align:left;position:sticky;left:0;background:var(--surface);padding:6px 8px;white-space:nowrap;${bold?'font-weight:700':'color:var(--muted)'}">${lab}</td><td style="padding:0 4px">${spark}</td>`;
     keys.forEach(kk=>{
       const v=m[kk];
@@ -2778,6 +2786,8 @@ function rsStatements(){
   el.innerHTML=html+'</table></div>';
   el.querySelectorAll('[data-sttab]').forEach(b=>b.addEventListener('click',()=>{ RS_ST.tab=b.dataset.sttab; rsStatements(); }));
   el.querySelectorAll('[data-stview]').forEach(b=>b.addEventListener('click',()=>{ RS_ST.view=b.dataset.stview; rsStatements(); }));
+  el.querySelectorAll('[data-stper]').forEach(b=>b.addEventListener('click',()=>{ RS_ST.per=b.dataset.stper; rsStatements(); }));
+  el.querySelectorAll('[data-storder]').forEach(b=>b.addEventListener('click',()=>{ RS_ST.order=b.dataset.storder; rsStatements(); }));
 }
 /* ---- Analyst consensus (Yahoo: current + next quarter/FY) — SA-style tables ---- */
 function rsEstimates(){
