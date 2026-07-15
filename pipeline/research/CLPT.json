@@ -9,11 +9,18 @@
       "summary": "EpilepsyGTx will use ClearPoint's SmartFlow Cannula and Navigation System to deliver its gene therapy candidate EPY201 in an upcoming first-in-human Phase 1/2a trial for focal refractory epilepsy, expected to start in the UK/Europe by end of 2026."
     },
     {
+      "date": "2026-06-29",
+      "headline": "ClearPoint Neuro CEO Burnett Sells $387,600 in Company Shares",
+      "source": "Investing.com",
+      "url": "https://www.investing.com/news/insider-trading-news/clearpoint-neuro-ceo-burnett-sells-387600-in-company-shares-93CH-4771973",
+      "summary": "CEO Joseph Burnett sold 20,000 shares at a weighted average price of $19.38 under a pre-established Rule 10b5-1 trading plan, following exercise of options at $2.50 per share."
+    },
+    {
       "date": "2026-06-17",
       "headline": "ClearPoint Neuro Stock Surges on Partner uniQure's Favorable FDA Path for Huntington's Gene Therapy",
       "source": "Investing.com",
       "url": "https://www.investing.com/news/stock-market-news/clearpoint-neuro-stock-surges-on-peers-fda-approval-plan-93CH-4747019",
-      "summary": "CLPT shares jumped roughly 26-50% after partner uniQure said the FDA agreed that 3-year Phase I/II data for AMT-130 (delivered via ClearPoint's navigation platform and SmartFlow cannula) can support a BLA for accelerated approval, with submission planned for Q3 2026."
+      "summary": "CLPT shares jumped roughly 26-32% after partner uniQure said the FDA agreed that 3-year Phase I/II data for AMT-130 (delivered via ClearPoint's navigation platform and SmartFlow cannula) can support a BLA for accelerated approval, with submission planned for Q3 2026."
     },
     {
       "date": "2026-05-27",
@@ -39,20 +46,20 @@
   ],
   "catalysts": [
     {
-      "when": "Q3 2026",
-      "label": "uniQure BLA submission for AMT-130",
-      "detail": "Partner uniQure plans to file a Biologics License Application with the FDA for AMT-130 (Huntington's disease gene therapy delivered via ClearPoint's navigation platform and SmartFlow cannula) using 3-year Phase I/II data, following supportive Type B FDA meeting feedback in June 2026.",
+      "when": "2026-08-11",
+      "label": "Q2 2026 earnings release",
+      "detail": "ClearPoint Neuro is expected to report second-quarter 2026 financial results, with the market watching for progress against the $52-56M full-year revenue guidance; exact date not yet formally announced.",
       "confirmed": false
     },
     {
-      "when": "Mid-August 2026 (exact date not yet announced)",
-      "label": "Q2 2026 earnings report",
-      "detail": "ClearPoint Neuro is expected to report second-quarter 2026 financial results, consistent with prior-year timing (Q2 2025 was reported August 12, 2025); the company had not formally announced the date as of mid-July 2026.",
+      "when": "Q3 2026",
+      "label": "uniQure BLA submission for AMT-130 (Huntington's disease)",
+      "detail": "Partner uniQure plans to file a Biologics License Application with the FDA for AMT-130, delivered via ClearPoint's navigation platform and SmartFlow cannula, using 3-year Phase I/II data following supportive Type B FDA meeting feedback.",
       "confirmed": false
     },
     {
       "when": "By year-end 2026",
-      "label": "EpilepsyGTx first-in-human trial start",
+      "label": "EpilepsyGTx first-in-human trial start (EPY201)",
       "detail": "EpilepsyGTx plans to begin a first-in-human Phase 1/2a trial of EPY201 for focal refractory epilepsy in the UK/Europe using ClearPoint's SmartFlow Cannula and Navigation System, enrolling up to 30 adults.",
       "confirmed": false
     },
@@ -60,6 +67,12 @@
       "when": "Second half of 2026",
       "label": "IRRAS integration synergies / reduced cash burn",
       "detail": "Company guidance calls for cost synergies from the IRRAS acquisition to begin reducing cash burn in H2 2026, supporting the path to the $52-56 million full-year revenue target.",
+      "confirmed": false
+    },
+    {
+      "when": "H2 2026",
+      "label": "CE Mark decisions for PRISM Laser Therapy systems",
+      "detail": "Both the 1.5T and 3.0T PRISM Laser Therapy systems have been submitted for CE Mark approval in Europe, expected in the second half of 2026.",
       "confirmed": false
     }
   ],

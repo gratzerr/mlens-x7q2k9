@@ -3,53 +3,59 @@
   "news": [
     {
       "date": "2026-07-01",
-      "headline": "GeneDx (NASDAQ:WGS) Downgraded by Zacks Research to \"Strong Sell\"",
-      "source": "Zacks Research (via The Cerbat Gem)",
-      "url": "https://www.thecerbatgem.com/2026/07/01/genedx-nasdaqwgs-downgraded-by-zacks-research-to-strong-sell.html",
-      "summary": "Zacks Research cut its rating on GeneDx to Strong Sell, citing continued near-term earnings and reimbursement risk following the company's Q1 2026 guidance cut. The downgrade added to a mixed analyst picture even as other firms raised price targets the same month."
+      "headline": "GeneDx Downgraded by Zacks Research to \"Strong Sell\"",
+      "source": "MarketBeat",
+      "url": "https://www.marketbeat.com/instant-alerts/genedx-nasdaqwgs-downgraded-by-zacks-research-to-strong-sell-2026-07-01/",
+      "summary": "Zacks Research cut its rating on GeneDx from Hold to Strong Sell in a note to investors, a notably more bearish call than most other analysts covering the stock. The downgrade adds to a mixed analyst picture following the company's May guidance cut."
     },
     {
       "date": "2026-06-29",
-      "headline": "Guggenheim Raises GeneDx (WGS) Price Target, Maintains Buy",
-      "source": "Insider Monkey",
+      "headline": "Guggenheim Raises GeneDx (WGS) Price Target, Maintaining a Buy Rating",
+      "source": "Insider Monkey / Yahoo Finance",
       "url": "https://www.insidermonkey.com/blog/guggenheim-raises-genedx-wgs-price-target-maintaining-a-buy-rating-1562211/",
-      "summary": "Guggenheim raised its price target on GeneDx to $74 from $70 while reiterating a Buy rating. The move reflected growing analyst confidence in a reimbursement recovery following recent payer coverage changes."
+      "summary": "Guggenheim raised its price target on GeneDx to $74 from $70 while reiterating a Buy rating, citing the company's long-term positioning in genomic diagnostics. The move follows a string of target cuts by other analysts earlier in the quarter."
     },
     {
       "date": "2026-06-23",
       "headline": "Piper Sandler Raises GeneDx Price Target on Carelon Coverage Policy",
       "source": "Investing.com",
       "url": "https://www.investing.com/news/analyst-ratings/piper-sandler-raises-genedx-stock-price-target-on-coverage-policy-93CH-4755836",
-      "summary": "Piper Sandler lifted its GeneDx price target to $63 from $50, calling Carelon's newly expanded outpatient whole-genome-sequencing coverage policy a potential structural average-selling-price de-risking event. The firm estimated the policy could add roughly $100 to ASP by the second half of 2027; shares rallied over 5% on the news."
+      "summary": "Piper Sandler lifted its GeneDx price target to $63 from $50, calling Carelon's newly expanded outpatient whole-genome-sequencing coverage policy a potential structural average-selling-price de-risking event, estimating it could add roughly $100 to ASP by H2 2027; shares rallied over 5% on the news."
     },
     {
       "date": "2026-06-16",
       "headline": "GeneDx Names Mark Gardner President to Lead Its Next Phase of Scale and Growth",
-      "source": "Business Wire",
-      "url": "https://www.businesswire.com/news/home/20260616791724/en/GeneDx-Names-Mark-Gardner-President-to-Lead-Its-Next-Phase-of-Scale-and-Growth",
-      "summary": "GeneDx appointed Mark Gardner, a former Quest Diagnostics genomics and oncology executive, as President effective June 15, 2026, reporting to CEO Katherine Stueland. He will oversee commercial and lab operations as the company works to strengthen execution after its Q1 2026 guidance cut."
+      "source": "Business Wire / GeneDx IR",
+      "url": "https://ir.genedx.com/news-releases/news-release-details/genedx-names-mark-gardner-president-lead-its-next-phase-scale",
+      "summary": "GeneDx appointed Mark Gardner, a former Quest Diagnostics and OmniSeq executive, as President effective June 15, 2026, to lead commercial and operations teams and strengthen execution. He reports directly to CEO Katherine Stueland."
     },
     {
       "date": "2026-06-14",
       "headline": "Carelon Updates Clinical Guidelines, Expanding Medically-Necessary Criteria for Outpatient Whole Genome Sequencing",
       "source": "Carelon Medical Benefits Management",
       "url": "https://guidelines.carelonmedicalbenefitsmanagement.com/whole-exome-sequencing-and-whole-genome-sequencing-2026-06-14-updated-2026-07-01/",
-      "summary": "Carelon, a major lab benefit manager, updated its clinical appropriateness guidelines to broaden when outpatient whole genome sequencing is considered medically necessary. Analysts flagged the policy as a potential tailwind for GeneDx's genome test mix and reimbursement rates."
+      "summary": "Carelon, a major lab benefit manager, updated its clinical appropriateness guidelines to broaden when outpatient whole genome sequencing is considered medically necessary, flagged by analysts as a potential tailwind for GeneDx's genome test mix and reimbursement rates."
     },
     {
-      "date": "2026-06-05",
-      "headline": "Casdin Capital Funds Buy Additional GeneDx Shares in Open Market",
-      "source": "StockTitan (SEC Form 4 filing)",
-      "url": "https://www.stocktitan.net/sec-filings/WGS/form-4-gene-dx-holdings-corp-insider-trading-activity-fac2966182ba.html",
-      "summary": "Casdin Partners Master Fund made further open-market purchases of GeneDx shares in early June, adding to a wave of insider and large-holder buying (including director Keith Meister/Corvex Management's ~$46.8M purchase in May) following the stock's post-earnings collapse."
+      "date": "2026-06-11",
+      "headline": "Hedge Funder Eli Casdin Is Loading Up on GeneDx Shares",
+      "source": "The Motley Fool",
+      "url": "https://www.fool.com/coverage/filings/2026/06/11/hedge-funder-eli-casdin-is-loading-up-on-genedx-shares/",
+      "summary": "GeneDx board member Eli Casdin's fund Casdin Capital made further open-market purchases of GeneDx shares in early June (about $11.1 million), adding to roughly $21.5 million bought in May, after the stock fell sharply following its Q1 2026 guidance cut."
     }
   ],
   "catalysts": [
     {
       "when": "Early August 2026 (estimated)",
       "label": "Q2 2026 earnings report",
-      "detail": "GeneDx has not yet confirmed a Q2 2026 report date; based on the prior quarter's cadence (Q1 reported May 4, 2026), results are expected in early August. Investors will watch exome/genome volume growth, gross margin trends, and any further revision to full-year guidance after May's cut.",
+      "detail": "GeneDx has not yet confirmed a Q2 2026 report date; based on the prior quarter's cadence, results are expected in early August. Investors will watch exome/genome volume growth, gross margin trends, and any further revision to full-year guidance ($540-555M revenue) after May's cut.",
       "confirmed": false
+    },
+    {
+      "when": "2026-07-22",
+      "label": "WGSWW warrant expiration",
+      "detail": "GeneDx Holdings' publicly traded equity warrants (WGSWW) are set to expire, which could affect share count/dilution dynamics depending on exercise activity.",
+      "confirmed": true
     },
     {
       "when": "H2 2027 (analyst estimate)",
@@ -58,17 +64,17 @@
       "confirmed": false
     },
     {
-      "when": "Ongoing / TBD",
-      "label": "Additional payer coverage policy updates",
-      "detail": "Other major payers (e.g., UnitedHealthcare currently deems outpatient rWGS 'unproven') could follow Carelon's lead in expanding whole-genome-sequencing coverage; any such moves would be a further reimbursement catalyst for GeneDx.",
-      "confirmed": false
+      "when": "2026-10-15 to 2026-10-16",
+      "label": "ASHG 2026 Annual Meeting data presentations",
+      "detail": "GeneDx plans to showcase 14 research studies drawn from its GeneDx Infinity dataset (~1 million exomes/genomes) at the American Society of Human Genetics annual meeting, including newborn screening (GUARDIAN study) and neurodevelopmental disorder genetics findings.",
+      "confirmed": true
     },
     {
-      "when": "Fall 2026",
-      "label": "Participation in fall investor conferences",
-      "detail": "GeneDx has announced management will participate in fall 2026 investor conferences, with webcasts to be posted on its investor relations site; specific conference dates were not yet detailed.",
+      "when": "H2 2026 (ongoing)",
+      "label": "BEACONS multi-state newborn genomic screening enrollment",
+      "detail": "GeneDx is a sequencing partner in the NIH-funded BEACONS initiative and Florida's Sunshine Genetics Network, aiming to enroll up to 30,000 newborns across up to 10 states; continued enrollment and any new state partnerships could expand genome-sequencing volume.",
       "confirmed": true
     }
   ],
-  "pulse": "GeneDx shares remain depressed after the May 2026 Q1 report exposed a reimbursement-driven margin miss and a Fabric Genomics impairment, triggering a sharp one-day stock collapse. Since then management has moved to stabilize the story, hiring former Quest Diagnostics executive Mark Gardner as President (effective June 15) while insiders and large holders (Casdin Capital, director Keith Meister/Corvex) bought stock on the dip. Sentiment has been further supported by Carelon's expanded outpatient whole-genome-sequencing coverage policy, which prompted Piper Sandler and Guggenheim to raise price targets on hopes of an ASP recovery, even as Zacks downgraded shares to Strong Sell and the market awaits Q2 2026 results for confirmation that volume growth (still 30%+ YoY) is translating back into margin improvement."
+  "pulse": "GeneDx shares remain depressed after the May 2026 Q1 report exposed a reimbursement-driven margin miss and a Fabric Genomics impairment, triggering a sharp one-day stock collapse. Since then management has moved to stabilize the story, hiring former Quest Diagnostics executive Mark Gardner as President while insiders and large holders (Casdin Capital, director Keith Meister/Corvex) bought stock on the dip. Sentiment has been further supported by Carelon's expanded outpatient whole-genome-sequencing coverage policy, which prompted Piper Sandler and Guggenheim to raise price targets on hopes of an ASP recovery, even as Zacks downgraded shares to Strong Sell and the market awaits Q2 2026 results for confirmation that volume growth is translating back into margin improvement."
 }
