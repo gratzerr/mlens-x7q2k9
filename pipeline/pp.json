@@ -1,8 +1,8 @@
 {
- "fileDate": "2026-07-15 03:35",
- "generated": "2026-07-15 03:56",
+ "fileDate": "2026-07-15 03:57",
+ "generated": "2026-07-15 04:18",
  "engine": "pp-exact (verified vs PP app 2026-07-11)",
- "totalSecuritiesEur": 2087734,
+ "totalSecuritiesEur": 2101495,
  "cashEur": -90923.38,
  "cashByAccount": [
   {
@@ -30,22 +30,22 @@
    "eur": 137.81
   }
  ],
- "totalEur": 1996811,
- "ttwrorSince2022": 409.95,
- "ttwrorYtd": 102.48,
- "ttwrorAnnualized": 43.23,
- "izf": 72.41,
+ "totalEur": 2010572,
+ "ttwrorSince2022": 413.47,
+ "ttwrorYtd": 103.88,
+ "ttwrorAnnualized": 43.45,
+ "izf": 72.89,
  "yearlyReturns": {
   "2022": 3.3,
   "2023": 11.8,
   "2024": 45.2,
   "2025": 50.2,
-  "2026": 102.5
+  "2026": 103.9
  },
  "realizedEur": 699185,
- "unrealizedEur": 626640,
+ "unrealizedEur": 640400,
  "realizedUsd": 855901,
- "unrealizedUsd": 692956,
+ "unrealizedUsd": 708684,
  "netContribEur": 666772,
  "netContribUsd": 738607,
  "earningsEur": 13297.85,
@@ -26537,9 +26537,9 @@
   },
   {
    "d": "2026-07-14",
-   "v": 2282355,
-   "e": 1996811,
-   "r": 4.099547,
+   "v": 2298083,
+   "e": 2010572,
+   "r": 4.134689,
    "c": 738607,
    "k": 666772,
    "q": 855901,
@@ -45849,15 +45849,15 @@
    "name": "CARIBOU BIOSCIENCES INC"
   }
  ],
- "ppReferenceTtwror": 409.95,
+ "ppReferenceTtwror": 413.47,
  "ppReferenceDate": "2026-07-15",
- "ttwrorApproxSince2022": 409.95,
+ "ttwrorApproxSince2022": 413.47,
  "yearlyReturnsApprox": {
   "2022": 3.3,
   "2023": 11.8,
   "2024": 45.2,
   "2025": 50.2,
-  "2026": 102.5
+  "2026": 103.9
  },
  "holdings": [
   {
@@ -45922,6 +45922,27 @@
   },
   {
    "account": "ALL",
+   "ticker": "PINK.V",
+   "name": "PERIMETER MEDICAL IMAGING AI",
+   "byPort": {
+    "IBKR": 500000.0,
+    "SQ": 500000.0
+   },
+   "isin": "CA71385D1078",
+   "ccy": "CAD",
+   "shares": 1000000.0,
+   "price": 0.31999999,
+   "value": 319999.99,
+   "valueEur": 197812,
+   "valueUsd": 226099,
+   "basisUsd": 229612,
+   "realizedUsd": 0,
+   "avgCost": 0.3173,
+   "unrealRet": 0.9,
+   "priceDate": "2026-07-10"
+  },
+  {
+   "account": "ALL",
    "ticker": "DCTH",
    "name": "Delcath Systems, Inc.",
    "byPort": {
@@ -45938,27 +45959,6 @@
    "realizedUsd": -16090,
    "avgCost": 9.6139,
    "unrealRet": 36.7,
-   "priceDate": "2026-07-14"
-  },
-  {
-   "account": "ALL",
-   "ticker": "PINK.V",
-   "name": "PERIMETER MEDICAL IMAGING AI",
-   "byPort": {
-    "IBKR": 500000.0,
-    "SQ": 500000.0
-   },
-   "isin": "CA71385D1078",
-   "ccy": "CAD",
-   "shares": 1000000.0,
-   "price": 0.305,
-   "value": 305000.0,
-   "valueEur": 188539,
-   "valueUsd": 215500,
-   "basisUsd": 229612,
-   "realizedUsd": 0,
-   "avgCost": 0.3173,
-   "unrealRet": -3.9,
    "priceDate": "2026-07-14"
   },
   {
@@ -45991,15 +45991,15 @@
    "isin": "US6402683063",
    "ccy": "USD",
    "shares": 3000.0,
-   "price": 67.16999816,
-   "value": 201509.99,
-   "valueEur": 176299,
-   "valueUsd": 201510,
+   "price": 68.31999969,
+   "value": 204960.0,
+   "valueEur": 179318,
+   "valueUsd": 204960,
    "basisUsd": 193331,
    "realizedUsd": -54345,
    "avgCost": 80.4296,
-   "unrealRet": -16.5,
-   "priceDate": "2026-07-14"
+   "unrealRet": -15.1,
+   "priceDate": "2026-07-10"
   },
   {
    "account": "ALL",
@@ -46071,15 +46071,15 @@
    "isin": "US88032L6056",
    "ccy": "USD",
    "shares": 4000.0,
-   "price": 15.56000041,
-   "value": 62240.0,
-   "valueEur": 54453,
-   "valueUsd": 62240,
+   "price": 15.97999954,
+   "value": 63920.0,
+   "valueEur": 55923,
+   "valueUsd": 63920,
    "basisUsd": 43298,
    "realizedUsd": 0,
    "avgCost": 10.8275,
-   "unrealRet": 43.7,
-   "priceDate": "2026-07-14"
+   "unrealRet": 47.6,
+   "priceDate": "2026-07-10"
   }
  ]
 }
