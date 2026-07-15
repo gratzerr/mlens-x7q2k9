@@ -1,6 +1,15 @@
 #!/usr/bin/env python3
 """Multi-year analyst estimates via RapidAPI "Seeking Alpha Finance" (Tipsters).
-Writes sa_estimates.json {TK:{eps:[[label,est,yoyPct,None,low,high,n]],rev:[...]},_ts}.
+Writes sa_estimates.json {TK:{eps:[[label,est,yoyPct,None,low,high,n]],rev:[...]},_ts}
+— the exact shape rsEstimatesSA() renders (SA-style annual consensus tables).
+
+Endpoints (verified live 2026-07-15):
+  /v1/search/searches?query=TK                       -> symbols[].id (ticker_id)
+  /v1/symbols/estimated/estimates?estimates_type=
+      estimates_annual_consensus_eps_estimates       -> eps mean/low/high/#analysts per fiscalyear
+      estimates_annual_consensus_revenue_estimates   -> revenue mean/low/high/#analysts
+  Payload: {"estimates":{"<tid>":{"<metric>":{"<rel>":[{"dataitemvalue":..,"period":{"fiscalyear":..}}]}}}}
+  Transient "424 General client error, try again" happens -> retry.
 
 Call discipline (Basic plan = 500 req/month HARD limit):
   - weekly full refresh of holdings+watchlist+saReq (7d gate via in-file _ts)
@@ -13,31 +22,39 @@ ROOT = os.path.dirname(os.path.abspath(__file__))
 OUT = os.path.join(ROOT, "sa_estimates.json")
 IDS = os.path.join(ROOT, "sa_ids.json")          # SYM -> SA ticker_id (static, cached forever)
 BUDGET = os.path.join(ROOT, "sa_budget.json")    # {"month":"YYYY-MM","used":N}
-DEBUG_RAW = os.path.join(ROOT, "sa_api_raw.json")  # last unparseable payload, for diagnosis
 HOST = "seeking-alpha-finance.p.rapidapi.com"
 MAX_CALLS_PER_MONTH = 400                        # head-room under the 500 hard limit
 REFRESH_DAYS = 7
 ALIAS = {"PINK.V": "PYNKF"}                      # portfolio symbol -> SA symbol
 
-def _budget_left():
+def _budget():
     m = datetime.datetime.utcnow().strftime("%Y-%m")
     b = {"month": m, "used": 0}
     try:
         j = json.load(open(BUDGET))
         if j.get("month") == m: b = j
     except Exception: pass
-    return b, MAX_CALLS_PER_MONTH - b.get("used", 0)
+    return b
 
-def _spend(b, n=1):
-    b["used"] = b.get("used", 0) + n
+def _spend(b):
+    b["used"] = b.get("used", 0) + 1
     json.dump(b, open(BUDGET, "w"))
 
-def _get(path, params, key):
+def _get(path, params, key, b, tries=3):
     import requests
-    r = requests.get(f"https://{HOST}{path}", params=params, timeout=20,
-                     headers={"x-rapidapi-host": HOST, "x-rapidapi-key": key})
-    r.raise_for_status()
-    return r.json()
+    for i in range(tries):
+        _spend(b)
+        try:
+            r = requests.get(f"https://{HOST}{path}", params=params, timeout=60,
+                             headers={"x-rapidapi-host": HOST, "x-rapidapi-key": key})
+            if r.status_code == 200:
+                return r.json()
+            if r.status_code in (401, 403, 429):   # auth/quota: retrying won't help
+                raise RuntimeError(f"HTTP {r.status_code}")
+        except Exception:
+            if i == tries - 1: raise
+        time.sleep(3)
+    raise RuntimeError("no 200 after retries")
 
 def wanted():
     out = []
@@ -54,28 +71,18 @@ def wanted():
     except Exception: pass
     return out
 
-def ticker_id(sym, ids, b, key):
+def ticker_id(sym, ids, key, b):
     if sym in ids: return ids[sym]
-    _, left = _budget_left()
-    j = _get("/v1/search/searches", {"query": sym}, key); _spend(b)
-    # scan the payload for a symbol entry matching `sym` with a numeric id
-    def scan(o):
-        if isinstance(o, dict):
-            name = str(o.get("name") or o.get("slug") or o.get("symbol") or "").upper()
-            oid = o.get("id")
-            typ = str(o.get("type") or "").lower()
-            if name == sym.upper() and oid is not None and ("symbol" in typ or "ticker" in typ or typ == ""):
-                try: return int(oid)
-                except (TypeError, ValueError): pass
-            for v in o.values():
-                r = scan(v)
-                if r: return r
-        elif isinstance(o, list):
-            for v in o:
-                r = scan(v)
-                if r: return r
-        return None
-    tid = scan(j)
+    j = _get("/v1/search/searches", {"query": sym}, key, b)
+    tid = None
+    # symbols[]: {"id":578851,"type":"symbol","url":"/symbol/ONDS","slug":"onds",
+    #             "name":"<b>ONDS</b>"} — match via slug/url, name carries HTML tags
+    for s in (j.get("symbols") or []):
+        if str(s.get("type")) != "symbol" or s.get("id") is None: continue
+        if (str(s.get("slug") or "").upper() == sym.upper()
+                or str(s.get("url") or "").upper() == "/SYMBOL/" + sym.upper()):
+            try: tid = int(s["id"]); break
+            except (TypeError, ValueError): pass
     if tid:
         ids[sym] = tid
         json.dump(ids, open(IDS, "w"))
@@ -83,68 +90,34 @@ def ticker_id(sym, ids, b, key):
         print(f"sa_fetch: no ticker_id for {sym}")
     return tid
 
-def parse_estimates(j):
-    """Shape-tolerant: collect (metric, fiscalyear, value) from nested payloads where
-    leaf objects carry a period/fiscalyear plus a data item value."""
-    rows = {}   # (metric, year) -> value
-    def leaf_val(o):
-        for k in ("dataitemvalue", "value", "actual", "consensus"):
-            if k in o and isinstance(o[k], (int, float, str)):
-                try: return float(o[k])
-                except (TypeError, ValueError): return None
-        return None
-    def year_of(o):
-        p = o.get("period") if isinstance(o.get("period"), dict) else o
-        for k in ("fiscalyear", "fiscal_year", "calendaryear", "year"):
-            y = p.get(k)
+def _by_year(payload, tid, metric):
+    """metric dict {rel:[{dataitemvalue, period.fiscalyear}]} -> {year: float}"""
+    out = {}
+    for arr in (payload.get("estimates", {}).get(str(tid), {}).get(metric, {}) or {}).values():
+        for e in arr:
             try:
-                y = int(y)
-                if 2000 < y < 2100: return y
-            except (TypeError, ValueError): pass
-        return None
-    def ptype_ok(o):
-        p = o.get("period") if isinstance(o.get("period"), dict) else o
-        t = str(p.get("periodtypeid") or p.get("period_type") or "").lower()
-        return (not t) or ("annual" in t) or (t == "fy")
-    def walk(o, metric):
-        if isinstance(o, dict):
-            y, v = year_of(o), leaf_val(o)
-            if y and v is not None and ptype_ok(o):
-                rows.setdefault((metric, y), v)
-                return
-            for k, v2 in o.items():
-                nk = metric if (str(k).lstrip("-").isdigit() or k in ("period", "data", "attributes", "estimates")) else str(k)
-                walk(v2, nk)
-        elif isinstance(o, list):
-            for v2 in o: walk(v2, metric)
-    walk(j, "")
-    def series(*pats):
-        out = {}
-        for (m, y), v in rows.items():
-            ml = m.lower()
-            if any(p in ml for p in pats): out[y] = v
-        return out
-    def table(mean, low, high, num):
-        years = sorted(mean)
-        t, prev = [], None
-        for y in years:
-            est = mean[y]
-            yoy = None
-            if prev not in (None, 0): yoy = round((est / prev - 1) * 100, 2)
-            prev = est
-            n = num.get(y)
-            t.append(["Dec %d" % y, est, yoy, None, low.get(y), high.get(y),
-                      int(n) if n is not None else None])
-        return t
-    eps = table(series("eps_normalized_consensus_mean", "eps_consensus_mean", "eps_mean"),
-                series("eps_normalized_consensus_low", "eps_consensus_low", "eps_low"),
-                series("eps_normalized_consensus_high", "eps_consensus_high", "eps_high"),
-                series("eps_normalized_num_of_estimates", "eps_num"))
-    rev = table(series("revenue_consensus_mean", "revenue_mean"),
-                series("revenue_consensus_low", "revenue_low"),
-                series("revenue_consensus_high", "revenue_high"),
-                series("revenue_num_of_estimates", "revenue_num"))
-    return eps, rev
+                y = int(e["period"]["fiscalyear"]); v = float(e["dataitemvalue"])
+            except (KeyError, TypeError, ValueError): continue
+            out[y] = v
+    return out
+
+def _table(payload, tid, prefix):
+    mean = _by_year(payload, tid, prefix + "_consensus_mean")
+    low = _by_year(payload, tid, prefix + "_consensus_low")
+    high = _by_year(payload, tid, prefix + "_consensus_high")
+    num = _by_year(payload, tid, prefix + "_num_of_estimates")
+    actual = _by_year(payload, tid, prefix + "_actual")
+    y_now = datetime.date.today().year
+    rows = []
+    for y in sorted(y for y in mean if y >= y_now):
+        base = actual.get(y - 1, mean.get(y - 1))   # YoY vs prior actual, else prior estimate
+        yoy = round((mean[y] / base - 1) * 100, 2) if base not in (None, 0) and base * base > 0 else None
+        if base is not None and base < 0 and mean[y] is not None:
+            yoy = round((mean[y] - base) / abs(base) * 100, 2)   # loss shrinking = improvement
+        n = num.get(y)
+        rows.append(["Dec %d" % y, round(mean[y], 4), yoy, None,
+                     low.get(y), high.get(y), int(n) if n is not None else None])
+    return rows
 
 def main():
     key = os.environ.get("RAPIDAPI_KEY", "").strip()
@@ -153,42 +126,43 @@ def main():
     try: cur = json.load(open(OUT))
     except Exception: pass
     want = wanted()
-    ts = cur.get("_ts", 0)
-    stale = time.time() - ts > REFRESH_DAYS * 86400
+    stale = time.time() - cur.get("_ts", 0) > REFRESH_DAYS * 86400
     todo = want if stale else [t for t in want if t not in cur]
     if not todo: return
-    b, left = _budget_left()
-    if left <= 2:
-        print("sa_fetch: monthly call budget exhausted — skipping"); return
+    b = _budget()
     ids = {}
     try: ids = json.load(open(IDS))
     except Exception: pass
     changed = False
     for tk in todo:
-        b, left = _budget_left()
-        if left <= 2: print("sa_fetch: budget stop"); break
+        if MAX_CALLS_PER_MONTH - b.get("used", 0) < 3:
+            print("sa_fetch: monthly call budget exhausted — stopping"); break
         sa_sym = ALIAS.get(tk, tk)
         try:
-            tid = ticker_id(sa_sym, ids, b, key)
+            tid = ticker_id(sa_sym, ids, key, b)
             if not tid: continue
-            j = _get("/v1/symbols/estimated/estimates",
-                     {"estimates_type": "symbol_summary", "ticker_id": tid}, key); _spend(b)
-            eps, rev = parse_estimates(j)
+            eps_p = _get("/v1/symbols/estimated/estimates",
+                         {"estimates_type": "estimates_annual_consensus_eps_estimates",
+                          "ticker_id": tid}, key, b)
+            rev_p = _get("/v1/symbols/estimated/estimates",
+                         {"estimates_type": "estimates_annual_consensus_revenue_estimates",
+                          "ticker_id": tid}, key, b)
+            eps = _table(eps_p, tid, "eps_normalized")
+            rev = _table(rev_p, tid, "revenue")
             if eps or rev:
                 cur[tk] = {"eps": eps, "rev": rev}
                 if tk in ALIAS: cur[ALIAS[tk]] = cur[tk]
                 changed = True
                 print(f"sa_fetch: {tk} eps={len(eps)} rev={len(rev)}")
             else:
-                json.dump({tk: j}, open(DEBUG_RAW, "w"))
-                print(f"sa_fetch: {tk} UNPARSEABLE payload -> sa_api_raw.json (old data kept)")
+                print(f"sa_fetch: {tk} returned no annual rows (kept old data)")
         except Exception as e:
             print(f"sa_fetch: {tk} failed: {e}")
-        time.sleep(0.3)   # stay under 5 req/s
-    if changed or stale:
+        time.sleep(0.5)   # stay well under 5 req/s
+    if changed or (stale and todo):
         cur["_ts"] = int(time.time())
         json.dump(cur, open(OUT, "w"), separators=(",", ":"))
-        print(f"sa_estimates.json: {len([k for k in cur if not k.startswith('_')])} tickers")
+        print(f"sa_estimates.json: {len([k for k in cur if not k.startswith('_')])} tickers, budget used {b.get('used')}/{MAX_CALLS_PER_MONTH}")
 
 if __name__ == "__main__":
     main()
