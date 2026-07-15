@@ -3,14 +3,14 @@
   "news": [
     {
       "date": "2026-07-09",
-      "headline": "NeurAxis Declares Q2 2026 Stock Dividend on Series B Preferred",
-      "source": "TipRanks / SEC 8-K",
-      "url": "https://www.tipranks.com/news/company-announcements/neuraxis-declares-q2-stock-dividend-on-series-b",
-      "summary": "NeurAxis's board authorized a Q2 2026 stock dividend on its Series B Preferred Stock, to be paid in roughly 80,463 common shares rather than cash. The dividend is payable July 29, 2026 to holders of record as of July 21, 2026, based on a $2.38 conversion rate."
+      "headline": "NeurAxis Declares Q2 2026 Stock Dividend on Series B Preferred Stock",
+      "source": "StockTitan / SEC 8-K",
+      "url": "https://www.stocktitan.net/sec-filings/NRXS/8-k-neuraxis-inc-reports-material-event-4c97e7c4fea7.html",
+      "summary": "NeurAxis's board declared a Q2 2026 dividend on its Series B Preferred Stock payable entirely in roughly 80,463 shares of common stock (rather than cash) on July 29, 2026 to holders of record as of July 21, 2026. The equity-settled dividend conserves cash but modestly dilutes common shareholders."
     },
     {
       "date": "2026-06-12",
-      "headline": "NeurAxis Stockholders Approve Directors and Equity Compensation Plans",
+      "headline": "NeurAxis Stockholders Approve Directors and Expanded Equity Compensation Plans",
       "source": "StockTitan / SEC DEF 14A",
       "url": "https://www.stocktitan.net/sec-filings/NRXS/def-14a-neuraxis-inc-definitive-proxy-statement-6a0303e55ee1.html",
       "summary": "At its June 10, 2026 annual meeting, NeurAxis shareholders re-elected all six director nominees and approved expanding the 2022 Omnibus Incentive Plan's share pool from about 1.48 million to 3.4 million shares, plus a new 2025 Employee Stock Purchase Plan."
@@ -20,7 +20,14 @@
       "headline": "NeurAxis Reports Record First-Quarter 2026 Financial Results Driven by 80% Revenue Growth",
       "source": "GlobeNewswire",
       "url": "https://www.globenewswire.com/news-release/2026/05/12/3292697/0/en/neuraxis-reports-record-first-quarter-2026-financial-results-driven-by-80-year-over-year-revenue-growth.html",
-      "summary": "Q1 2026 revenue hit a record $1.6 million, up 80% year-over-year, with gross margin expanding to 86.4% and net loss narrowing to $1.8 million, beating consensus estimates. Management credited the new Category I CPT code for PENFS reimbursement and early VA Federal Supply Schedule adoption running ahead of plan."
+      "summary": "Q1 2026 revenue rose 80% year-over-year to $1.6 million on 35% higher unit deliveries, with gross margin expanding to 86.4% and operating loss improving 24%, largely reflecting the new AMA Category I CPT code for PENFS effective January 1, 2026. Cash stood at $7.1 million as of March 31, 2026, though the going-concern qualification from the FY2025 audit persisted."
+    },
+    {
+      "date": "2026-05-01",
+      "headline": "Bigger Capital Fund Discloses 6.56% Passive Stake in NeurAxis",
+      "source": "StockTitan / SEC Schedule 13G/A",
+      "url": "https://www.stocktitan.net/sec-filings/NRXS/schedule-13g-a-neuraxis-inc-amended-passive-investment-disclosure-2b0e08a6db82.html",
+      "summary": "Bigger Capital Fund, LP filed an amended Schedule 13G reporting beneficial ownership of 755,577 NRXS shares (about 6.56% of shares outstanding) as of May 1, 2026, reaffirming it as one of the company's larger institutional holders."
     },
     {
       "date": "2026-04-22",
@@ -28,6 +35,13 @@
       "source": "GlobeNewswire",
       "url": "https://www.globenewswire.com/news-release/2026/04/22/3278802/0/en/NeurAxis-Expands-Payer-Coverage-with-Four-New-Medical-Policies.html",
       "summary": "NeurAxis announced four additional insurer medical policies covering PENFS/IB-Stim, adding roughly 1.25 million covered lives across West Virginia, New Hampshire, South Carolina, Virginia and Florida. The move continues the company's push to broaden reimbursement access ahead of the Category I CPT code taking effect."
+    },
+    {
+      "date": "2026-04-10",
+      "headline": "NeurAxis Announces Preferred Stock Dividend",
+      "source": "GlobeNewswire / BioSpace",
+      "url": "https://www.biospace.com/press-releases/neuraxis-inc-announces-preferred-stock-dividend",
+      "summary": "The board declared the Q1 2026 stock dividend on Series B Preferred Stock, continuing the company's practice of settling preferred dividend obligations in common shares rather than cash to preserve liquidity ahead of the repeat declaration in July 2026."
     }
   ],
   "catalysts": [
@@ -44,17 +58,23 @@
       "confirmed": true
     },
     {
-      "when": "H2 2026",
-      "label": "Additional payer medical-policy wins",
-      "detail": "Company continues pursuing new insurer coverage decisions for PENFS/IB-Stim to further expand covered lives beyond current levels.",
+      "when": "H2 2026, ongoing",
+      "label": "Continued Medicaid/commercial payer coverage expansion",
+      "detail": "NeurAxis has been announcing new insurer medical policies roughly every 4-8 weeks since the AMA Category I CPT code took effect (Jan 1, 2026), pushing total covered lives past ~100 million; further state Medicaid fee-schedule additions and commercial payer policies are expected to keep expanding IB-Stim's addressable, reimbursable market.",
       "confirmed": false
     },
     {
-      "when": "2026 (ongoing)",
-      "label": "VA Federal Supply Schedule ramp",
-      "detail": "Continued scale-up of IB-Stim sales through the VA's Federal Supply Schedule contract, which management said is tracking ahead of initial expectations.",
+      "when": "Throughout 2026",
+      "label": "VA Federal Supply Schedule commercial ramp",
+      "detail": "Following its VA FSS contract (effective December 1, 2025), NeurAxis is scaling IB-Stim access within the Veterans Affairs system (~7 million patients); management has said even ~0.25% penetration in 2026 could add $2M+ in incremental revenue.",
+      "confirmed": true
+    },
+    {
+      "when": "2026 (target, timing unconfirmed)",
+      "label": "Path to cash-flow breakeven",
+      "detail": "Management has guided to roughly $1M or less in monthly cash burn for the remainder of 2026 and cited approximately $15 million in annualized revenue as the level needed for cash-flow breakeven; this remains a key milestone investors are tracking given the company's going-concern disclosure and reliance on ATM/warrant financing.",
       "confirmed": false
     }
   ],
-  "pulse": "NeurAxis continues to post strong top-line momentum from its IB-Stim/PENFS neuromodulation device, with Q1 2026 revenue up 80% year-over-year on expanding insurance reimbursement (new Category I CPT code) and VA Federal Supply Schedule adoption running ahead of plan. The stock trades in the $7 area (52-week range roughly $2.20-$9.33, market cap near $85 million), well below Craig-Hallum's $13 price target, as losses narrow toward management's targeted sub-$1 million quarterly cash burn. Near-term news flow has been incremental (routine Series B dividend, June annual-meeting governance approvals, payer coverage expansions), with the next major catalyst being Q2 2026 earnings on September 17."
+  "pulse": "NeurAxis (NYSE American: NRXS) is a small-cap medtech commercializing IB-Stim, an FDA-cleared PENFS neuromodulation device for pediatric functional abdominal pain/IBS and functional dyspepsia, riding a new AMA Category I CPT code (effective January 1, 2026) that has rapidly expanded insurance coverage and driven strong revenue growth (Q1 2026 revenue +80% YoY to $1.6M, gross margin 86.4%). The company remains pre-profitability with a going-concern qualification and depends on ATM equity sales, warrant exercises and Series B preferred financing (settled in stock, most recently July 29) to fund operations, though cash burn has been narrowing and analysts (Craig-Hallum, Buy, $13 PT) are increasingly bullish on VA Federal Supply Schedule and Medicaid channel expansion. Near-term, the stock's trajectory into the Q2 2026 earnings call (scheduled September 17) will be the next test of whether reimbursement-driven growth can carry the company toward its self-described ~$15M revenue cash-flow-breakeven target."
 }
