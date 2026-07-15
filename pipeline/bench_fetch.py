@@ -135,6 +135,11 @@ def fund_tickers():
             tk = (h.get("tk") or h.get("ticker") or "").strip().upper()
             if tk and len(tk) <= 10: syms.add(tk)   # skip option OCC symbols
     except Exception: pass
+    try:  # research tickers the owner looked up (saReq queue) get estimates too
+        for s in json.load(open(os.path.join(ROOT, "site_state.json"))).get("saReq", []):
+            s = s.strip().upper()
+            if s and len(s) <= 10: syms.add(s)
+    except Exception: pass
     return sorted(syms)
 
 def fetch_fund():
@@ -177,14 +182,18 @@ def _estimates(sym):
     return out
 
 def fetch_estimates():
-    """Analyst consensus (current + next FY — all Yahoo offers for free). 12h gate."""
-    if _fresh(EST_OUT, 12):
-        return
+    """Analyst consensus (current + next FY — all Yahoo offers for free). 12h gate;
+    tickers still missing from the file (fresh saReq research lookups) skip the gate."""
     old = {}
     try: old = json.load(open(EST_OUT))
     except Exception: pass
+    want = fund_tickers()
+    fresh = _fresh(EST_OUT, 12)
+    syms = [s for s in want if s not in old] if fresh else want
+    if not syms:
+        return
     res = dict(old)
-    for sym in fund_tickers():
+    for sym in syms:
         try:
             e = _estimates(sym)
             if e: res[sym] = e
