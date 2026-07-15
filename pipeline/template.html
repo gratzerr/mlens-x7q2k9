@@ -937,6 +937,7 @@ async function fsDataPoll(){
       if(DATA.secCik) SEC_CIK=DATA.secCik;   // newly watched tickers join SEC alerts without a reload
       Object.assign(_cfg,{name:c.name,public:c.public,owner:c.owner}); cfgLists(c);
       renderKpis(); rerender(); applyName(); applyVisibility();
+      if(_tab==='research'&&window.RS&&RS.tk) rsEstimates();   // fresh saEst tables reach an open ticker
     }
   }catch(e){}
 }
