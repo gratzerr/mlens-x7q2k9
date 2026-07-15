@@ -2850,7 +2850,12 @@ function rsEstimatesSA(el,sa){
   const q=RS.quote||{};
   const usd=!q.ccy||q.ccy==='USD';   // don't mix a CAD price into USD estimates
   const price=usd?q.price:null;
-  const shares=(RS.data&&RS.data.shares&&RS.data.shares.q.length)?RS.data.shares.q[RS.data.shares.q.length-1][1]:null;
+  // share count: SA's own (fully diluted — matches their FWD P/S; Yahoo outstanding
+  // is materially lower for multi-class caps like WGS) > Yahoo > SEC weighted avg
+  const shares=sa.sh
+    ||((DATA.fund||{})[RS.tk]||{}).shares
+    ||((DATA.watchMeta||{})[RS.tk]||{}).shares
+    ||((RS.data&&RS.data.shares&&RS.data.shares.q.length)?RS.data.shares.q[RS.data.shares.q.length-1][1]:null);
   const mcap=(price&&shares)?price*shares:null;
   const tbl=(title,rows,f,fwdLabel,fwdOf)=>{
     if(!rows||!rows.length) return '';

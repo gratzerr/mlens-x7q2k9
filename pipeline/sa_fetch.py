@@ -22,6 +22,7 @@ ROOT = os.path.dirname(os.path.abspath(__file__))
 OUT = os.path.join(ROOT, "sa_estimates.json")
 IDS = os.path.join(ROOT, "sa_ids.json")          # SYM -> SA ticker_id (static, cached forever)
 BUDGET = os.path.join(ROOT, "sa_budget.json")    # {"month":"YYYY-MM","used":N}
+DEBUG_RAW = os.path.join(ROOT, "sa_api_raw.json")  # last unparseable payload, for diagnosis
 HOST = "seeking-alpha-finance.p.rapidapi.com"
 MAX_CALLS_PER_MONTH = 400                        # head-room under the 500 hard limit
 REFRESH_DAYS = 7
@@ -128,6 +129,25 @@ def _table(payload, tid, prefix):
                      low.get(y), high.get(y), int(n) if n is not None else None])
     return rows
 
+def _sa_shares(sym, key, b):
+    """SA's own share count (fully diluted — what their FWD Price/Sales uses;
+    Yahoo 'sharesOutstanding' is materially lower for multi-class caps like WGS)."""
+    j = _get("/v1/symbols/metrics", {"category": "shares", "ticker_slug": sym.lower()}, key, b)
+    best = None
+    def scan(o):
+        nonlocal best
+        if isinstance(o, dict):
+            v = o.get("value")
+            if isinstance(v, (int, float)) and 1e5 < v < 1e13 and best is None:
+                best = float(v)
+            for x in o.values(): scan(x)
+        elif isinstance(o, list):
+            for x in o: scan(x)
+    scan(j)
+    if best is None:
+        json.dump({sym + ":shares": j}, open(DEBUG_RAW, "w"))
+    return best
+
 def main():
     key = os.environ.get("RAPIDAPI_KEY", "").strip()
     if not key: return
@@ -144,7 +164,7 @@ def main():
     except Exception: pass
     changed = False
     for tk in todo:
-        if MAX_CALLS_PER_MONTH - b.get("used", 0) < 3:
+        if MAX_CALLS_PER_MONTH - b.get("used", 0) < 5:
             print("sa_fetch: monthly call budget exhausted — stopping"); break
         sa_sym = ALIAS.get(tk, tk)
         try:
@@ -160,9 +180,13 @@ def main():
             rev = _table(rev_p, tid, "revenue")
             if eps or rev:
                 cur[tk] = {"eps": eps, "rev": rev}
+                try:
+                    sh = _sa_shares(sa_sym, key, b)
+                    if sh: cur[tk]["sh"] = sh
+                except Exception: pass
                 if tk in ALIAS: cur[ALIAS[tk]] = cur[tk]
                 changed = True
-                print(f"sa_fetch: {tk} eps={len(eps)} rev={len(rev)}")
+                print(f"sa_fetch: {tk} eps={len(eps)} rev={len(rev)} sh={cur[tk].get('sh')}")
             else:
                 print(f"sa_fetch: {tk} returned no annual rows (kept old data)")
         except Exception as e:
