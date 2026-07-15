@@ -3,72 +3,72 @@
   "news": [
     {
       "date": "2026-06-30",
-      "headline": "Caribou Biosciences CEO Highlights Off-the-Shelf CAR-T Progress at H.C. Wainwright Cell Therapy Conference",
+      "headline": "H.C. Wainwright reiterates Caribou Biosciences stock rating at Buy",
+      "source": "Investing.com",
+      "url": "https://www.investing.com/news/analyst-ratings/hc-wainwright-reiterates-caribou-biosciences-stock-rating-at-buy-93CH-4744535",
+      "summary": "H.C. Wainwright analyst Robert Burns reiterated a Buy rating and $11.00 price target on Caribou Biosciences following the updated ANTLER/CaMMouflage data presented at EHA 2026. The reiteration reflects growing analyst confidence in the vispa-cel and CB-011 clinical pipeline."
+    },
+    {
+      "date": "2026-06-17",
+      "headline": "Caribou Biosciences Shareholders Decide Key Governance Matters",
+      "source": "The Globe and Mail (GlobeNewswire)",
+      "url": "https://www.theglobeandmail.com/investing/markets/stocks/CRBU/pressreleases/2561547/caribou-biosciences-shareholders-decide-key-governance-matters/",
+      "summary": "At its June 17, 2026 virtual annual meeting, Caribou stockholders elected three Class II directors (Andrew Guggenhime, David Johnson, Nancy Whiting) and ratified Deloitte & Touche as auditor for fiscal 2026. Stockholders rejected a proposal to expand officer exculpation protections."
+    },
+    {
+      "date": "2026-06-14",
+      "headline": "Caribou Biosciences Reports Dose Escalation Durability Data for CB-011 at the 2026 European Hematology Association (EHA) Annual Meeting",
       "source": "GlobeNewswire",
-      "url": "https://www.globenewswire.com/news-release/2026/06/29/3318882/0/en/Caribou-Biosciences-to-Participate-in-the-H-C-Wainwright-4th-Annual-Cell-Therapy-Virtual-Conference.html",
-      "summary": "President and CEO Rachel Haurwitz participated in a fireside chat at the H.C. Wainwright 4th Annual Cell Therapy Virtual Conference, discussing Caribou's progress toward commercializing its allogeneic CAR-T platform. She pointed to recent vispa-cel and CB-011 clinical data as evidence the off-the-shelf approach can match autologous CAR-T efficacy."
-    },
-    {
-      "date": "2026-06-11",
-      "headline": "Caribou Reports Dose Escalation Durability Data for CB-011 at EHA 2026",
-      "source": "GlobeNewswire / Caribou Biosciences investor relations",
       "url": "https://investor.cariboubio.com/news-releases/news-release-details/caribou-biosciences-reports-dose-escalation-durability-data-cb",
-      "summary": "A single dose of CB-011 produced deep, durable responses in heavily pretreated, BCMA-naive relapsed/refractory multiple myeloma patients, with an 83% complete response rate, 91% MRD negativity, and 50% of patients still in complete response at 15 months. Data were presented in an oral session at the EHA 2026 Annual Meeting in Stockholm."
+      "summary": "A single dose of CB-011, Caribou's off-the-shelf anti-BCMA CAR-T therapy, produced deep, durable responses in heavily pretreated, BCMA-naive multiple myeloma patients, with an 83% CR rate, 91% MRD negativity, and 50% of patients in complete response at 15 months. Initial dose-expansion data in BCMA-naive and BCMA-exposed patients is expected in H2 2026."
     },
     {
       "date": "2026-06-11",
-      "headline": "Caribou Reports Long-Term Vispa-cel (CB-010) Data in Second-Line Large B-Cell Lymphoma at EHA 2026",
+      "headline": "Caribou Biosciences Reports Long-Term Vispa-cel Data in Second-line Large B Cell Lymphoma at EHA 2026",
       "source": "GlobeNewswire",
       "url": "https://www.globenewswire.com/news-release/2026/06/11/3310427/0/en/caribou-biosciences-reports-long-term-vispa-cel-data-in-second-line-large-b-cell-lymphoma-at-eha-2026.html",
-      "summary": "Updated ANTLER Phase 1 data showed vispa-cel (formerly CB-010) achieved an 82% overall response rate, 67% complete response rate, and 17.1-month median progression-free survival in second-line LBCL patients. Caribou says the durability is on par with autologous CAR-T therapies, supporting its planned pivotal ANTLER-3 trial."
+      "summary": "A single dose of vispa-cel (formerly CB-010), Caribou's allogeneic anti-CD19 CAR-T therapy, produced durable responses in second-line large B-cell lymphoma patients: 82% ORR, 67% CR rate, and 17.1-month median progression-free survival, with a safety profile supporting outpatient and community-center administration. The data followed FDA alignment on the design of the pivotal ANTLER-3 phase 3 trial (~250 patients)."
     },
     {
       "date": "2026-06-04",
-      "headline": "Caribou Biosciences Presents at 2026 Jefferies Global Healthcare Conference",
-      "source": "Caribou Biosciences investor relations",
+      "headline": "Caribou Biosciences to Participate in the 2026 Jefferies Global Healthcare Conference",
+      "source": "GlobeNewswire",
       "url": "https://investor.cariboubio.com/news-releases/news-release-details/caribou-biosciences-participate-2026-jefferies-global-healthcare",
-      "summary": "CEO Rachel Haurwitz took part in a fireside chat at the Jefferies Global Healthcare Conference in New York, updating investors on the vispa-cel and CB-011 clinical programs. The appearance came ahead of key data readouts presented later that month at EHA."
+      "summary": "Caribou announced that President and CEO Rachel Haurwitz would participate in a fireside chat at the 2026 Jefferies Global Healthcare Conference in New York on June 4, 2026, discussing the company's oncology CAR-T pipeline."
     },
     {
-      "date": "2026-05-11",
-      "headline": "H.C. Wainwright Raises Caribou Biosciences Price Target to $11 After Q1 Results",
-      "source": "Investing.com / StreetInsider",
-      "url": "https://www.streetinsider.com/Corporate+News/Caribou+Biosciences+receives+FDA+RMAT+designation+for+CB-010+therapy/26245822.html",
-      "summary": "Analyst Robert Burns raised his price target on CRBU to $11 from $9 while maintaining a Buy rating, citing growing confidence in Caribou's allogeneic CAR-T pipeline following first-quarter results. The revision reflected encouraging early clinical trends across both the vispa-cel and CB-011 programs."
-    },
-    {
-      "date": "2026-05-07",
-      "headline": "Caribou Biosciences Reports First Quarter 2026 Results, Secures FDA Alignment on Pivotal ANTLER-3 Trial Design",
-      "source": "GlobeNewswire / Caribou Biosciences investor relations",
-      "url": "https://investor.cariboubio.com/news-releases/news-release-details/caribou-biosciences-reports-first-quarter-2026-financial-results",
-      "summary": "Caribou reported $118.6 million in cash, cash equivalents and marketable securities as of March 31, 2026, and said it aligned with the FDA on the design of the pivotal ANTLER-3 Phase 3 trial for vispa-cel in second-line LBCL, enrolling roughly 250 patients. The company said its cash runway extends into the second half of 2027, funding CB-011 dose expansion and vispa-cel pivotal trial start-up activities."
+      "date": "2026-05-12",
+      "headline": "Caribou Biosciences to Highlight Vispa-cel and CB-011 Programs During Oral Presentations at the 2026 European Hematology Association (EHA) Annual Meeting",
+      "source": "GlobeNewswire",
+      "url": "https://www.globenewswire.com/news-release/2026/05/12/3292995/0/en/Caribou-Biosciences-to-Highlight-Vispa-cel-and-CB-011-Programs-During-Oral-Presentations-at-the-2026-European-Hematology-Association-EHA-Annual-Meeting.html",
+      "summary": "Caribou announced that two abstracts on vispa-cel and CB-011 were accepted for oral presentation at the EHA 2026 Annual Meeting (June 11-14, Stockholm), setting up the subsequent data readouts. This set the stage for the positive ANTLER and CaMMouflage updates released in June."
     }
   ],
   "catalysts": [
     {
+      "when": "2026-08 (week of Aug 7-11, 2026, estimated)",
+      "label": "Q2 2026 earnings and business update",
+      "detail": "Caribou is expected to report second-quarter 2026 financial results and provide a pipeline/cash-runway update; consensus estimates point to a report around August 11, 2026, though the company has not yet confirmed an exact date.",
+      "confirmed": false
+    },
+    {
       "when": "H2 2026",
-      "label": "CaMMouflage Phase 1 dose-expansion data for CB-011",
-      "detail": "Initial dose-expansion data from the CaMMouflage Phase 1 trial of CB-011 in BCMA-naive and BCMA-exposed relapsed/refractory multiple myeloma patients is expected in the second half of 2026, building on the dose-escalation data presented at EHA.",
+      "label": "CB-011 dose-expansion data (CaMMouflage trial)",
+      "detail": "Initial dose-expansion data for CB-011 in BCMA-naive and BCMA-exposed relapsed/refractory multiple myeloma patients is expected in the second half of 2026.",
       "confirmed": true
     },
     {
-      "when": "~August 2026 (estimated, unconfirmed)",
-      "label": "Q2 2026 earnings and business update",
-      "detail": "Caribou is expected to report second-quarter 2026 financial results and provide a pipeline update, likely including further detail on ANTLER-3 trial start-up progress; the exact date has not yet been officially announced by the company.",
+      "when": "2026 (timing TBD)",
+      "label": "ANTLER-3 pivotal trial funding decision / initiation",
+      "detail": "Following FDA alignment on the ANTLER-3 pivotal phase 3 trial design for vispa-cel (~250 CD19-naive second-line LBCL patients vs. standard of care), Caribou is exploring options (including potential partnering) to fully fund and initiate the trial; cash runway is guided into 2H 2027.",
       "confirmed": false
     },
     {
-      "when": "2026-2027 (timing not yet finalized)",
-      "label": "Pivotal ANTLER-3 Phase 3 trial start-up for vispa-cel",
-      "detail": "Following FDA alignment on trial design (~250-patient randomized, controlled study in CD19-naive 2L LBCL), Caribou is funding start-up activities for the pivotal ANTLER-3 trial, with cash runway guided into 2H 2027; a formal trial initiation date has not been disclosed.",
-      "confirmed": false
-    },
-    {
-      "when": "H2 2026 (likely, based on historical pattern)",
-      "label": "Additional CB-010/CB-011 data at a major hematology conference (e.g., ASH)",
-      "detail": "Caribou has a pattern of presenting incremental follow-up data on vispa-cel and CB-011 at major medical conferences (ASH, ASCO, EHA, Tandem); further updates are plausible at ASH in December 2026, though not yet formally announced.",
+      "when": "2026 (ongoing)",
+      "label": "Additional vispa-cel and CB-011 follow-up data at future medical conferences",
+      "detail": "Company has signaled further longer-follow-up data updates for both vispa-cel (ANTLER) and CB-011 (CaMMouflage) programs at upcoming hematology/oncology conferences later in 2026.",
       "confirmed": false
     }
   ],
-  "pulse": "Caribou's two lead allogeneic CAR-T programs continue to post encouraging Phase 1 data: vispa-cel (CB-010) is showing durability on par with autologous CAR-T in second-line lymphoma, while CB-011 is delivering deep, durable responses in heavily pretreated myeloma patients, both highlighted at EHA 2026 in June. The company has FDA alignment on a pivotal ANTLER-3 trial for vispa-cel and cash guided into 2H 2027, and sell-side sentiment remains a Strong Buy consensus with rising price targets, even as the stock trades in the low single digits with the next catalyst being CB-011 dose-expansion data expected later in 2026."
+  "pulse": "Caribou Biosciences is a clinical-stage CRISPR allogeneic cell-therapy company that has narrowed its pipeline to two oncology CAR-T programs, vispa-cel (formerly CB-010) for large B-cell lymphoma and CB-011 for multiple myeloma, after 2025 restructuring and layoffs. Momentum has been building through mid-2026: strong long-term ANTLER data for vispa-cel (82% ORR, 67% CR, 17.1-month mPFS) and durable CaMMouflage data for CB-011 (83% CR, 91% MRD-negativity) were presented at EHA in June 2026, alongside FDA alignment on the pivotal ANTLER-3 phase 3 trial design, driving reiterated Buy ratings from covering analysts. Near-term focus is on securing funding/partnering for the ANTLER-3 pivotal trial, further CB-011 dose-expansion data expected in H2 2026, and the next quarterly update (Q2 2026 results expected around early-to-mid August), with cash runway currently guided into 2H 2027."
 }
