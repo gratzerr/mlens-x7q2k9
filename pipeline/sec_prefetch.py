@@ -45,7 +45,10 @@ def tickers():
             if tk and len(tk) <= 10: out.append(tk)
     except Exception: pass
     try:
-        for s in json.load(open(os.path.join(ROOT, "site_state.json"))).get("watchlist", []):
+        st = json.load(open(os.path.join(ROOT, "site_state.json")))
+        # saReq: research tickers the owner looked up — prefetching them makes
+        # their next visit instant instead of a minute of client proxy round-trips
+        for s in st.get("watchlist", []) + st.get("saReq", []):
             s = s.strip().upper()
             if s and s not in out: out.append(s)
     except Exception: pass
@@ -115,17 +118,22 @@ def merge(sers):
     return {"q": [[k, q[k]] for k in sorted(q)], "a": [[k, a[k]] for k in sorted(a)]}
 
 def main():
-    try:
-        ts = json.load(open(OUT)).get("_ts")
-        if ts and time.time() - ts < 12 * 3600: return
-    except Exception: pass
     old = {}
     try: old = json.load(open(OUT))
     except Exception: pass
-    res = {}
-    for tk in tickers():
+    want = tickers()
+    fresh = old.get("_ts") and time.time() - old["_ts"] < 12 * 3600
+    # "_skip" marks tickers known to yield nothing (IFRS filers like NVO, no CIK)
+    # so the minute loop doesn't hammer SEC retrying them; full refresh resets it
+    skip = old.get("_skip", {}) if fresh else {}
+    todo = [t for t in want if t not in old and t not in skip] if fresh else want
+    if not todo: return
+    res = {k: v for k, v in old.items() if k != "_ts"} if fresh else {}
+    res["_skip"] = skip
+    for tk in todo:
         cik = cik_of(tk)
         if not cik:
+            skip[tk] = 1
             continue
         data = {}
         for key, (tax, tags, unit, inst, kind) in CONCEPTS.items():
@@ -142,6 +150,8 @@ def main():
             res[tk] = data
         elif tk in old:
             res[tk] = old[tk]
+        else:
+            skip[tk] = 1
     if res:
         res["_ts"] = int(time.time())
         json.dump(res, open(OUT, "w"), separators=(",", ":"))

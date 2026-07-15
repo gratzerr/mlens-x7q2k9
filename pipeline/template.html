@@ -2261,6 +2261,10 @@ const RS_PROXIES=[
   u=>JINA+u,
   u=>'https://api.allorigins.win/raw?url='+encodeURIComponent(u)];
 let _rsRot=0;
+/* adaptive proxy: remember which one works on THIS device/network (a throttled
+   corsproxy otherwise costs a 6.5s timeout per tag before rotating -> minute-long loads) */
+let _rsBest=(()=>{ try{ const v=+localStorage.getItem('pc-rsproxy'); return v>=0&&v<RS_PROXIES.length?v:-1; }catch(e){ return -1; } })();
+function _rsRemember(p){ if(_rsBest!==p){ _rsBest=p; try{ localStorage.setItem('pc-rsproxy',String(p)); }catch(e){} } }
 async function rsFetchConcept(cik,tax,tag){
   const u=`https://data.sec.gov/api/xbrl/companyconcept/CIK${String(cik).padStart(10,'0')}/${tax}/${tag}.json`;
   const via=async(mk,ms)=>{ const c=new AbortController(); const to=setTimeout(()=>c.abort(),ms);
@@ -2273,10 +2277,12 @@ async function rsFetchConcept(cik,tax,tag){
   await _rsGate();
   try{
     const start=(_rsRot++)%RS_PROXIES.length;   // spread load across proxies
+    const order=[]; if(_rsBest>=0) order.push(_rsBest);
+    for(let k=0;k<RS_PROXIES.length;k++){ const p=(start+k)%RS_PROXIES.length; if(!order.includes(p)) order.push(p); }
     let lastErr;
-    for(let k=0;k<RS_PROXIES.length;k++){
-      try{ return await via(RS_PROXIES[(start+k)%RS_PROXIES.length],6500); }
-      catch(e){ lastErr=e; await new Promise(r=>setTimeout(r,250)); }
+    for(const p of order){
+      try{ const j=await via(RS_PROXIES[p],6500); _rsRemember(p); return j; }
+      catch(e){ lastErr=e; if(p===_rsBest&&String(e.message)!=='noconcept') _rsBest=-1; await new Promise(r=>setTimeout(r,250)); }
     }
     throw lastErr;
   } finally { _rsFree(); }
