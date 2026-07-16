@@ -16,6 +16,13 @@
       "summary": "At its virtual annual meeting, Caribou shareholders elected three Class II directors (Andrew Guggenhime, David Johnson, and Nancy Whiting) and ratified Deloitte & Touche as auditor for fiscal 2026. Investors rejected a proposed charter amendment that would have expanded exculpation protections for company officers under Delaware law."
     },
     {
+      "date": "2026-06-12",
+      "headline": "Caribou Boosts Case That Off-the-Shelf CAR-T Matches Autologous Drugs Ahead of Phase 3",
+      "source": "Fierce Biotech",
+      "url": "https://www.fiercebiotech.com/biotech/caribou-boosts-case-shelf-car-t-matches-autologous-drugs-ahead-phase-3",
+      "summary": "Ahead of its EHA 2026 oral presentation, Caribou disclosed that vispa-cel achieved a 17.1-month median progression-free survival in second-line lymphoma patients, bolstering the case that its allogeneic therapy can rival autologous CAR-T. The planned pivotal ANTLER-3 Phase 3 trial will target patients who are ineligible for autologous CAR-T or cannot access it, such as those living too far from treatment centers."
+    },
+    {
       "date": "2026-06-11",
       "headline": "Caribou Reports Dose Escalation Durability Data for CB-011 at EHA 2026",
       "source": "GlobeNewswire / Caribou Biosciences investor relations",
@@ -35,13 +42,6 @@
       "source": "Caribou Biosciences investor relations",
       "url": "https://investor.cariboubio.com/news-releases/news-release-details/caribou-biosciences-participate-2026-jefferies-global-healthcare",
       "summary": "CEO Rachel Haurwitz took part in a fireside chat at the Jefferies Global Healthcare Conference in New York, updating investors on the vispa-cel and CB-011 clinical programs. The appearance came just ahead of the key data readouts presented later that month at EHA."
-    },
-    {
-      "date": "2026-05-07",
-      "headline": "Caribou Biosciences Reports First Quarter 2026 Results, Secures FDA Alignment on Pivotal ANTLER-3 Trial Design",
-      "source": "GlobeNewswire / Caribou Biosciences investor relations",
-      "url": "https://investor.cariboubio.com/news-releases/news-release-details/caribou-biosciences-reports-first-quarter-2026-financial-results",
-      "summary": "Caribou reported $118.6 million in cash, cash equivalents and marketable securities as of March 31, 2026, and said it aligned with the FDA on the design of the pivotal ANTLER-3 Phase 3 trial for vispa-cel in second-line LBCL, enrolling roughly 250 patients. The company said its cash runway extends into the second half of 2027, funding CB-011 dose expansion and vispa-cel pivotal trial start-up activities."
     }
   ],
   "catalysts": [
@@ -52,9 +52,9 @@
       "confirmed": true
     },
     {
-      "when": "~August 2026 (estimated, unconfirmed)",
+      "when": "~August 11-12, 2026 (estimated, unconfirmed)",
       "label": "Q2 2026 earnings and business update",
-      "detail": "Caribou is expected to report second-quarter 2026 financial results and provide a pipeline update, likely including further detail on ANTLER-3 trial start-up progress and updated cash-runway guidance; the exact date has not yet been officially announced by the company.",
+      "detail": "Caribou is expected to report second-quarter 2026 financial results and provide a pipeline update around August 11-12, 2026 (per consensus earnings-calendar estimates), likely including further detail on ANTLER-3 trial start-up progress and updated cash-runway guidance; the company has not yet formally confirmed the exact date.",
       "confirmed": false
     },
     {
@@ -70,5 +70,5 @@
       "confirmed": false
     }
   ],
-  "pulse": "Caribou's two lead allogeneic CAR-T programs continue to post encouraging Phase 1 data: vispa-cel (CB-010) is showing durability on par with autologous CAR-T in second-line lymphoma, while CB-011 is delivering deep, durable responses in heavily pretreated myeloma patients, both highlighted at EHA 2026 in June, though the vispa-cel update also disclosed two treatment-related patient deaths that bear watching. The company has FDA alignment on a pivotal ANTLER-3 trial for vispa-cel, cash guided into 2H 2027, and cleared a June 17 annual meeting with routine director and auditor votes (shareholders rejected an officer-exculpation charter change). Sell-side sentiment remains a Strong Buy consensus even as the stock trades in the low single digits, with the next major catalyst being CB-011 dose-expansion data expected later in 2026."
+  "pulse": "Caribou has moved into a quieter stretch after its strong June run: the EHA 2026 data (vispa-cel durability in lymphoma, deep and durable CB-011 responses in myeloma) and the June 30 H.C. Wainwright fireside chat remain the dominant narrative, with no major company-specific news since then and the next scheduled catalyst being Q2 2026 earnings expected around August 11-12. The stock trades in the $1.80-$1.95 range (market cap roughly $170-190 million) even as sell-side consensus stays Strong Buy with price targets clustered well above the current share price, reflecting a persistent gap between analyst optimism about the allogeneic CAR-T platform and the market's skepticism given the company's small cash position and looming financing needs. Watch items into year-end include further CB-011 dose-expansion data, any update on pivotal ANTLER-3 trial start-up timing, and the company's cash-runway guidance at its next earnings report."
 }

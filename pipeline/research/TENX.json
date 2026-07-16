@@ -2,18 +2,18 @@
   "ticker": "TENX",
   "news": [
     {
+      "date": "2026-07-16",
+      "headline": "Tenax Therapeutics, Inc. Receives Consensus Recommendation of \"Moderate Buy\" from Analysts",
+      "source": "Markets Daily",
+      "url": "https://www.themarketsdaily.com/2026/07/16/tenax-therapeutics-inc-nasdaqtenx-receives-consensus-recommendation-of-moderate-buy-from-analysts.html",
+      "summary": "The seven analysts currently covering TENX give it a consensus \"Moderate Buy\" rating (five Buy, one Strong Buy, one Sell) with an average 12-month price target of $38, underscoring continued bullish sell-side positioning heading into the Phase 3 LEVEL data readout."
+    },
+    {
       "date": "2026-07-02",
       "headline": "Tenax Therapeutics Announces Late-Breaking Presentation of LEVEL Clinical Trial Data at ESC Congress 2026",
       "source": "GlobeNewswire",
       "url": "https://www.globenewswire.com/news-release/2026/07/02/3321224/12401/en/Tenax-Therapeutics-Announces-Late-Breaking-Presentation-of-LEVEL-Clinical-Trial-Data-at-ESC-Congress-2026.html",
       "summary": "Tenax will present Phase 3 LEVEL trial results for oral levosimendan (TNX-103) in a Late-Breaking Clinical Science session at ESC Congress 2026 in Munich on August 29, with topline data now expected in August 2026 ahead of database lock and statistical analysis."
-    },
-    {
-      "date": "2026-07-01",
-      "headline": "Tenax Therapeutics Announces Inducement Grants Under Nasdaq Listing Rule 5635(c)(4)",
-      "source": "GlobeNewswire",
-      "url": "https://www.globenewswire.com/news-release/2026/07/02/3321561/12401/en/Tenax-Therapeutics-Announces-Inducement-Grants-Under-Nasdaq-Listing-Rule-5635-c-4.html",
-      "summary": "Tenax granted inducement stock option awards to three newly hired non-executive employees in accounting, clinical operations, and CMC/product development roles as it staffs up ahead of a potential TNX-103 launch."
     },
     {
       "date": "2026-06-29",
@@ -48,13 +48,13 @@
     {
       "when": "August 2026",
       "label": "Phase 3 LEVEL topline data readout",
-      "detail": "Tenax now expects to report topline data from the registrational Phase 3 LEVEL trial of oral levosimendan (TNX-103) in PH-HFpEF in August 2026, pulled forward from prior Q3 2026 guidance.",
+      "detail": "Tenax expects to report topline data from the registrational Phase 3 LEVEL trial of oral levosimendan (TNX-103) in PH-HFpEF in August 2026, pulled forward from prior Q3 2026 guidance.",
       "confirmed": true
     },
     {
       "when": "2026-08-29",
       "label": "Late-breaking LEVEL data presentation at ESC Congress 2026",
-      "detail": "Full LEVEL trial results will be presented in a Late-Breaking Clinical Science session at the European Society of Cardiology Congress in Munich, presented by Prof. Sanjiv Shah, MD.",
+      "detail": "Full LEVEL trial results will be presented in a Late-Breaking Clinical Science session at the European Society of Cardiology Congress in Munich (Aug 28-31), presented by Prof. Sanjiv Shah, MD, Northwestern University, on Saturday Aug 29 at 11:15-11:30 CEST.",
       "confirmed": true
     },
     {
@@ -66,9 +66,9 @@
     {
       "when": "~2026-08-13",
       "label": "Q2 2026 financial results",
-      "detail": "Tenax's next quarterly earnings report and corporate update is estimated for mid-August 2026, likely alongside or shortly after the LEVEL topline data disclosure.",
+      "detail": "Tenax's next quarterly earnings report and corporate update is estimated for mid-August 2026 (Q1 2026 results were released May 12), likely alongside or shortly after the LEVEL topline data disclosure.",
       "confirmed": false
     }
   ],
-  "pulse": "Tenax Therapeutics is entering the pivotal stretch for oral levosimendan (TNX-103) in pulmonary hypertension due to HFpEF, with topline Phase 3 LEVEL data now pulled forward to August 2026 and a late-breaking full data presentation set for ESC Congress in Munich on August 29. The company has shored up its supply chain via a new long-term manufacturing deal with Orion, joined the Russell 2000/3000E indexes, and holds cash into Q1 2028, while sell-side sentiment has turned increasingly bullish with fresh price-target hikes (Piper Sandler to $50, Guggenheim to $40) and new coverage initiations ahead of the readout. The stock's near-term trajectory hinges almost entirely on whether the LEVEL trial hits its 6-minute-walk-distance primary endpoint, which would position TNX-103 as a potential first-in-class approved PH-HFpEF therapy."
+  "pulse": "Tenax Therapeutics is in the final run-up to the pivotal readout for oral levosimendan (TNX-103) in pulmonary hypertension due to HFpEF, with topline Phase 3 LEVEL data pulled forward to August 2026 and a late-breaking full data presentation set for ESC Congress in Munich on August 29. The company has shored up its supply chain via a long-term manufacturing deal with Orion, joined the Russell 2000/3000E indexes, and holds cash into Q1 2028, while sell-side sentiment remains firmly bullish (consensus \"Moderate Buy\", average $38 price target) following price-target hikes from Piper Sandler ($50), Guggenheim ($40) and Cantor Fitzgerald ($35). The stock's near-term trajectory hinges almost entirely on whether the LEVEL trial hits its 6-minute-walk-distance primary endpoint, which would position TNX-103 as a potential first-in-class approved PH-HFpEF therapy, though a miss could cut shares sharply given the binary nature of the catalyst."
 }

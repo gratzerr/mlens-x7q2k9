@@ -2,6 +2,13 @@
   "ticker": "WGS",
   "news": [
     {
+      "date": "2026-07-10",
+      "headline": "Florida's Sunshine Genetics Newborn Screening Program Launches at Tampa General Hospital With GeneDx as Sequencing Partner",
+      "source": "Florida State University News / Inside Precision Medicine",
+      "url": "https://news.fsu.edu/news/science-technology/2026/07/10/as-florida-launches-newborn-genetic-screening-program-fsu-institute-leads-statewide-effort-2/",
+      "summary": "The nation's first state-backed genomic newborn screening program went live this summer at Tampa General Hospital, offering free voluntary whole-genome sequencing that expands screening from about 60 conditions to nearly 900, with GeneDx providing end-to-end sequencing and clinical interpretation. The program is slated to expand to hospitals in Orlando and Miami later in 2026 ahead of a statewide, five-year rollout targeting up to 100,000 newborns."
+    },
+    {
       "date": "2026-07-01",
       "headline": "GeneDx Downgraded by Zacks Research to \"Strong Sell\"",
       "source": "MarketBeat",
@@ -30,13 +37,6 @@
       "summary": "GeneDx appointed Mark Gardner, a former Quest Diagnostics and OmniSeq executive, as President effective June 15, 2026, to lead commercial and operations teams and strengthen execution. He reports directly to CEO Katherine Stueland."
     },
     {
-      "date": "2026-06-14",
-      "headline": "Carelon Updates Clinical Guidelines, Expanding Medically-Necessary Criteria for Outpatient Whole Genome Sequencing",
-      "source": "Carelon Medical Benefits Management",
-      "url": "https://guidelines.carelonmedicalbenefitsmanagement.com/whole-exome-sequencing-and-whole-genome-sequencing-2026-06-14-updated-2026-07-01/",
-      "summary": "Carelon, a major lab benefit manager, updated its clinical appropriateness guidelines to broaden when outpatient whole genome sequencing is considered medically necessary, flagged by analysts as a potential tailwind for GeneDx's genome test mix and reimbursement rates."
-    },
-    {
       "date": "2026-06-11",
       "headline": "Hedge Funder Eli Casdin Is Loading Up on GeneDx Shares",
       "source": "The Motley Fool",
@@ -48,7 +48,7 @@
     {
       "when": "Early August 2026 (estimated)",
       "label": "Q2 2026 earnings report",
-      "detail": "GeneDx has not yet confirmed a Q2 2026 report date; based on the prior quarter's cadence, results are expected in early August. Investors will watch exome/genome volume growth, gross margin trends, and any further revision to full-year guidance ($475-490M revenue) after May's cut.",
+      "detail": "GeneDx has not yet confirmed a Q2 2026 report date; based on the prior quarter's cadence, results are expected in early August. Company guidance calls for Q2 revenue of $110-112 million on roughly 30,000 tests and ~70% adjusted gross margin; investors will watch whether volume growth is translating back into margin recovery after May's guidance cut.",
       "confirmed": false
     },
     {
@@ -65,16 +65,10 @@
     },
     {
       "when": "H2 2026 (ongoing)",
-      "label": "BEACONS multi-state newborn genomic screening enrollment",
-      "detail": "GeneDx is a sequencing partner in the NIH-funded BEACONS initiative and Florida's Sunshine Genetics Network, aiming to enroll up to 30,000 newborns across up to 10 states; continued enrollment and any new state partnerships could expand genome-sequencing volume.",
-      "confirmed": true
-    },
-    {
-      "when": "August 3, 2026",
-      "label": "Lead plaintiff deadline in securities class action",
-      "detail": "The court-set deadline for investors to seek lead plaintiff status in the consolidated securities fraud litigation over the May 2026 Fabric Genomics impairment and guidance cut; while not an operating catalyst, it marks the point at which the litigation's scope and lead counsel become clearer.",
+      "label": "Sunshine Genetics and BEACONS newborn genomic screening expansion",
+      "detail": "Having gone live at Tampa General Hospital in July 2026, Florida's Sunshine Genetics program is slated to expand to hospitals in Orlando and Miami later in 2026 en route to a statewide five-year rollout targeting up to 100,000 newborns; GeneDx is also a sequencing partner in the separate NIH-funded BEACONS multi-state initiative, aiming to enroll up to 30,000 newborns across up to 10 states. Continued site expansion could add incremental genome-sequencing volume.",
       "confirmed": true
     }
   ],
-  "pulse": "GeneDx shares remain depressed and under legal overhang more than two months after the May 2026 Q1 report exposed a reimbursement-driven margin miss and a Fabric Genomics impairment; multiple law firms have since filed securities class actions with an August 3, 2026 lead-plaintiff deadline, and short interest has continued to climb. Business-side news has been comparatively light since the July 1 Zacks downgrade to Strong Sell, with the last substantive positive catalysts being Carelon's expanded outpatient whole-genome-sequencing coverage policy (which drove Piper Sandler and Guggenheim price-target increases) and the June hiring of former Quest Diagnostics executive Mark Gardner as President. With no Q2 2026 earnings date yet confirmed, the market's next real test of whether volume growth is translating back into margin recovery is likely in early August."
+  "pulse": "GeneDx shares remain depressed more than two months after the May 2026 Q1 report exposed a reimbursement-driven margin miss and a Fabric Genomics impairment. Against that backdrop, the most tangible positive development has been operational rather than financial: GeneDx's Sunshine Genetics newborn whole-genome-sequencing program went live at Tampa General Hospital in July, the first real-world rollout of a state-backed genomic newborn screening program with GeneDx as sequencing partner, alongside Carelon's expanded outpatient coverage policy that has driven a string of analyst price-target increases (Piper Sandler, Guggenheim) even as others (Zacks) turned more bearish. With no Q2 2026 earnings date yet confirmed, the market's next real test of whether volume growth (guided ~30,000 tests, ~70% gross margin) is translating back into margin recovery is likely in early August."
 }

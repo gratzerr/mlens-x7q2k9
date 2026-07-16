@@ -20,7 +20,7 @@
       "headline": "NeurAxis Reports Record First-Quarter 2026 Financial Results Driven by 80% Revenue Growth",
       "source": "GlobeNewswire",
       "url": "https://www.globenewswire.com/news-release/2026/05/12/3292697/0/en/neuraxis-reports-record-first-quarter-2026-financial-results-driven-by-80-year-over-year-revenue-growth.html",
-      "summary": "Q1 2026 revenue hit a record $1.6 million, up 80% year-over-year, with gross margin expanding to 86.4% and net loss narrowing to $1.8 million, beating consensus estimates. Management credited the new Category I CPT code for PENFS reimbursement and early VA Federal Supply Schedule adoption running ahead of plan."
+      "summary": "Q1 2026 revenue hit a record $1.6 million, up 80% year-over-year, with gross margin expanding to 86.4% and net loss narrowing, beating consensus estimates. Management credited the new Category I CPT code for PENFS reimbursement and early VA Federal Supply Schedule adoption running ahead of plan; Craig-Hallum subsequently raised its price target to $13 on the beat, a level that still excludes VA revenue from its model."
     },
     {
       "date": "2026-04-22",
@@ -46,10 +46,10 @@
   ],
   "catalysts": [
     {
-      "when": "2026-09-17",
-      "label": "Q2 2026 earnings call",
-      "detail": "NeurAxis is scheduled to report second-quarter 2026 financial results and host a business update call.",
-      "confirmed": true
+      "when": "2026-08-11",
+      "label": "Q2 2026 earnings call (estimated)",
+      "detail": "NeurAxis has not yet issued a press release scheduling its Q2 2026 results call; based on its Q1 2026 reporting date (May 12) and historical cadence, analysts project the report around August 11, 2026.",
+      "confirmed": false
     },
     {
       "when": "2026-07-29",
@@ -60,15 +60,15 @@
     {
       "when": "H2 2026",
       "label": "Additional payer medical-policy wins",
-      "detail": "Company continues pursuing new insurer coverage decisions for PENFS/IB-Stim to further expand covered lives beyond current levels.",
+      "detail": "Company continues pursuing new insurer coverage decisions for PENFS/IB-Stim to further expand covered lives beyond current levels (roughly 100 million lives covered as of early 2026).",
       "confirmed": false
     },
     {
       "when": "2026 (ongoing)",
       "label": "VA Federal Supply Schedule ramp",
-      "detail": "Continued scale-up of IB-Stim sales through the VA's Federal Supply Schedule contract, which management said is tracking ahead of initial expectations.",
+      "detail": "Continued scale-up of IB-Stim sales through the VA's Federal Supply Schedule contract, which management said is tracking ahead of initial expectations; this revenue stream is not yet reflected in sell-side models (e.g., Craig-Hallum's $13 target).",
       "confirmed": false
     }
   ],
-  "pulse": "NeurAxis continues to post strong top-line momentum from its IB-Stim/PENFS neuromodulation device, with Q1 2026 revenue up 80% year-over-year on expanding insurance reimbursement (new Category I CPT code) and VA Federal Supply Schedule adoption running ahead of plan. Management and the board have backed that momentum with actions: the CEO and CFO both bought stock in the open market in April, the ATM facility was expanded to $11.5 million for balance-sheet flexibility, and shareholders approved a larger equity incentive pool at the June annual meeting. Recent news flow has otherwise been routine (a Q2 Series B stock dividend paying out July 29), with the next major catalyst being Q2 2026 earnings on September 17."
+  "pulse": "NeurAxis is in a quiet stretch between catalysts: since its record Q1 2026 print (revenue +80% YoY) and June 10 annual meeting, the only fresh corporate action has been the routine Q2 Series B preferred stock dividend declared July 9 (paying July 29). The underlying growth story remains intact and reimbursement-driven — the new Category I CPT code, ~100 million covered lives, and an ahead-of-plan VA Federal Supply Schedule ramp — with Wall Street's two covering analysts holding Strong Buy ratings and price targets of $9-$13 (median $11), none of which yet fully credit VA revenue. The next real catalyst is Q2 2026 earnings, expected around August 11 (not yet officially scheduled), which should show whether the CPT-code and VA tailwinds are still accelerating unit growth."
 }

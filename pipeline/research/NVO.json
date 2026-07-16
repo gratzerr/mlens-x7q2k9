@@ -2,6 +2,13 @@
   "ticker": "NVO",
   "news": [
     {
+      "date": "2026-07-15",
+      "headline": "Novo Nordisk receives European Commission approval of Wegovy pill as first oral GLP-1 for weight management in the EU; single, ready-to-use pen for higher dose 7.2 mg also approved",
+      "source": "GlobeNewswire (Novo Nordisk) / BioSpace",
+      "url": "https://www.globenewswire.com/news-release/2026/07/15/3327953/0/en/novo-nordisk-receives-european-commission-approval-of-wegovy-pill-as-first-oral-glp-1-for-weight-management-in-the-eu-single-ready-to-use-pen-for-higher-dose-7-2-mg-also-approved.html",
+      "summary": "The European Commission approved oral semaglutide 25 mg (Wegovy pill) for adults with obesity or overweight with a weight-related comorbidity across the EU, making it the first oral GLP-1 licensed for weight management in the bloc after the CHMP's positive opinion in May 2026; a single ready-to-use pen for the higher-dose 7.2 mg injectable was also cleared. NVO shares rose roughly 3% on the news, with commentary noting Eli Lilly still lacks an approved oral GLP-1 rival in Europe."
+    },
+    {
       "date": "2026-07-12",
       "headline": "Novo Nordisk's denecimig (Mim8) shows positive long-term data in Phase 3 FRONTIER4 hemophilia A study at ISTH 2026",
       "source": "PR Newswire / BioSpace",
@@ -10,17 +17,17 @@
     },
     {
       "date": "2026-07-07",
+      "headline": "Vivani Medical enters into agreement with Novo Nordisk to evaluate NPM-139, a miniature, ultra-long-acting semaglutide implant for chronic weight management",
+      "source": "GlobeNewswire / CNBC",
+      "url": "https://www.globenewswire.com/news-release/2026/07/07/3323068/0/en/vivani-medical-enters-into-agreement-with-novo-nordisk-to-evaluate-npm-139-a-miniature-ultra-long-acting-semaglutide-implant-for-chronic-weight-management.html",
+      "summary": "Novo Nordisk agreed to evaluate Vivani Medical's NPM-139, a miniature NanoPortal-based implant designed to deliver semaglutide for months via a once- or twice-yearly procedure, with no exclusivity granted under the non-binding deal. A first-in-human Phase 1 study versus Wegovy injections is expected to start mid-2026 with topline data by year-end, targeting the adherence and drop-out problems that limit real-world GLP-1 effectiveness."
+    },
+    {
+      "date": "2026-07-07",
       "headline": "Novo Nordisk withdraws CagriSema injection-device comparability study",
       "source": "TipRanks (company announcement) / ClinicalTrials.gov",
       "url": "https://www.tipranks.com/news/company-announcements/novo-nordisk-withdraws-cagrisema-device-study-nudging-investor-focus-back-to-core-obesity-assets",
       "summary": "Novo Nordisk changed the status of a placebo-controlled trial comparing two injection-device presentations of CagriSema in people with overweight/obesity to \"withdrawn\" as of July 7, 2026, without enrolling patients. The move slightly clouds the near-term outlook for the next-generation obesity platform even as Novo's core GLP-1 franchise remains strong, and shifts investor attention back to CagriSema's ongoing pivotal REDEFINE program."
-    },
-    {
-      "date": "2026-07-07",
-      "headline": "Novo Nordisk downgraded to Hold as competitive and margin pressures mount",
-      "source": "ad-hoc-news.de (analyst roundup)",
-      "url": "https://www.ad-hoc-news.de/boerse/news/ueberblick/novo-nordisk-consensus-shifts-after-analyst-moves-shares-trade-lower-in/69632351",
-      "summary": "Novo Nordisk shares traded lower in Europe after a fresh round of analyst rating changes cut the stock to Hold, citing an accounting-driven Q1 beat that masked declining underlying sales and EBIT, alongside eroding US market share and pricing pressure. Analysts flagged the shares as roughly fairly valued near 15x FY2027 earnings with limited near-term upside."
     },
     {
       "date": "2026-06-11",
@@ -35,13 +42,6 @@
       "source": "PR Newswire / FiercePharma",
       "url": "https://www.prnewswire.com/news-releases/wegovy-pill-prescriptions-surpass-3-million-1-filled-roughly-every-5-seconds-bringing-glp-1-therapy-to-people-with-obesity-previously-untreated-while-novo-nordisk-unveils-new-data-at-ada-2026-302793337.html",
       "summary": "Novo Nordisk announced that Wegovy (semaglutide) 25mg tablets surpassed 3 million US prescriptions in just over five months, with over 80% of new patients GLP-1-naive, making it one of the strongest US drug launches by volume on record. The milestone coincided with Novo presenting a broad new data package on Wegovy and CagriSema at the ADA 86th Scientific Sessions in New Orleans (5-8 June 2026)."
-    },
-    {
-      "date": "2026-06-05",
-      "headline": "Novo Nordisk presents CagriSema REIMAGINE Phase 3 data at ADA 2026, published in The Lancet",
-      "source": "PR Newswire",
-      "url": "https://www.prnewswire.com/news-releases/novo-nordisks-cagrisema-2-4-mg--2-4-mg-demonstrated-significant-reduction-in-hba1c-and-weight-across-multiple-studies-in-the-reimagine-program-presented-at-ada-2026--302793443.html",
-      "summary": "Novo Nordisk presented full REIMAGINE 1, 2 and 3 trial results at ADA 2026, with data simultaneously published in The Lancet and The Lancet Diabetes & Endocrinology, showing CagriSema 2.4mg/2.4mg delivered significant HbA1c and weight reductions in people with type 2 diabetes. The data package underpins the CagriSema regulatory filings as Novo seeks to shore up confidence in the drug after it missed a head-to-head weight-loss endpoint versus Eli Lilly's Zepbound earlier in 2026."
     }
   ],
   "catalysts": [
@@ -54,7 +54,7 @@
     {
       "when": "Q4 2026 (exact PDUFA date not yet public)",
       "label": "FDA decision on CagriSema for chronic weight management",
-      "detail": "CagriSema (cagrilintide/semaglutide) NDA was submitted in December 2025 based on REDEFINE 1/2 data; a standard review implies a decision around late 2026. Approval would give Novo a next-generation, higher-efficacy obesity drug to compete with Lilly's Zepbound/retatrutide franchise.",
+      "detail": "CagriSema (cagrilintide/semaglutide) NDA was submitted in December 2025 based on REDEFINE 1/2 data; a standard review implies a decision around late 2026. Approval would give Novo a next-generation, higher-efficacy obesity drug to compete with Lilly's Zepbound/orforglipron franchise.",
       "confirmed": false
     },
     {
@@ -64,9 +64,9 @@
       "confirmed": false
     },
     {
-      "when": "2026 (following June 2026 MHRA approval)",
-      "label": "Wegovy pill launch outside the US, including UK availability",
-      "detail": "Following MHRA approval on June 11, 2026, Novo Nordisk plans to make the oral Wegovy pill available via private prescription in the UK within weeks, with broader international launches (pending local regulatory approvals) targeted for H2 2026; NHS reimbursement still requires a separate NICE review.",
+      "when": "H2 2026",
+      "label": "Wegovy pill commercial roll-out across EU member states",
+      "detail": "Following the European Commission's July 15, 2026 marketing authorization (after the CHMP's May 2026 positive opinion), Novo Nordisk plans to launch the oral Wegovy pill commercially across EU countries through H2 2026, with pricing and reimbursement negotiated market-by-market; UK availability via private prescription began after the June 2026 MHRA approval, with NHS reimbursement still pending a separate NICE review.",
       "confirmed": true
     },
     {
@@ -76,17 +76,23 @@
       "confirmed": true
     },
     {
-      "when": "2027 (Phase 3 readouts)",
-      "label": "Amycretin Phase 3 obesity/diabetes data",
-      "detail": "Both subcutaneous and oral amycretin (GLP-1/amylin dual agonist) entered Phase 3 trials in obesity/overweight populations starting Q1 2026 after strong Phase 1b/2a results (up to 22% weight loss at 36 weeks); pivotal readouts are expected in 2027 and are viewed as key to Novo's next-generation obesity pipeline beyond CagriSema.",
+      "when": "H2 2026 start / 2027 readouts",
+      "label": "Amycretin (incl. zenagamtide) Phase 3 obesity and diabetes data",
+      "detail": "Subcutaneous and oral amycretin (GLP-1/amylin dual agonist) entered Phase 3 obesity/overweight trials starting Q1 2026 after strong Phase 1b/2a results, with pivotal readouts expected in 2027; a separate Phase 3 program for amycretin in type 2 diabetes (zenagamtide) is planned to begin in H2 2026 following positive Phase 2 data presented at ADA 2026. Both programs are viewed as key to Novo's next-generation pipeline beyond CagriSema.",
       "confirmed": false
     },
     {
       "when": "Ongoing through ~February 2027",
       "label": "DKK 15 billion share buyback programme",
-      "detail": "Novo Nordisk is executing a share repurchase programme of up to DKK 15 billion over a 12-month period that began February 4, 2026; weekly transaction updates (most recently confirming purchases through July 13, 2026) are reported to the market and factor into per-share capital return.",
+      "detail": "Novo Nordisk is executing a share repurchase programme of up to DKK 15 billion over a 12-month period that began February 4, 2026; the July 13, 2026 weekly update confirmed cumulative repurchases of roughly 24 million B shares (at an average price of ~DKK 272.45) since inception, with further weekly updates due through the programme's conclusion.",
       "confirmed": true
+    },
+    {
+      "when": "Mid-2026 start / results by year-end 2026",
+      "label": "Vivani Medical NPM-139 semaglutide implant Phase 1 study",
+      "detail": "Under the July 7, 2026 agreement with Vivani Medical, a first-in-human Phase 1 trial of the NPM-139 ultra-long-acting semaglutide implant (versus Wegovy injections) is expected to begin mid-2026, with topline safety/PK/tolerability results anticipated by year-end 2026 -- an early read on a potential twice-yearly dosing alternative to weekly injections.",
+      "confirmed": false
     }
   ],
-  "pulse": "Novo Nordisk remains in a tug-of-war between pipeline strength and eroding sentiment: the withdrawal of a minor CagriSema device-comparability study on July 7 and a fresh round of Hold downgrades underscore lingering doubts about the next-gen obesity franchise and US share losses to Eli Lilly, even as 2026 guidance points to declining sales/profit. Against that, commercial and regulatory momentum for the core franchise is real -- the Wegovy oral pill topped 3 million US prescriptions by June, won UK MHRA approval as the first licensed GLP-1 weight-loss tablet, and denecimig's hemophilia A data continues to build toward an FDA decision. The next major checkpoint is the August 5, 2026 Q2 earnings report, with CagriSema's FDA decision expected later in the year as the key overhang/catalyst for the long-dated call position."
+  "pulse": "Novo Nordisk notched a genuine regulatory win on July 15 when the European Commission approved the Wegovy pill as the first oral GLP-1 for weight management in the EU (alongside a higher-dose 7.2mg pen), sending shares up about 3% and widening Novo's lead over Eli Lilly in oral GLP-1s outside the US. That momentum sits alongside continued pipeline diversification -- a new Vivani Medical partnership to test a twice-yearly semaglutide implant, and fresh long-term denecimig hemophilia A data at ISTH -- even as a minor CagriSema device-study withdrawal on the same day as the Vivani deal keeps some doubt around the next-gen obesity franchise and US share losses to Lilly linger. The next major checkpoints are the August 5, 2026 Q2 earnings report and CagriSema's FDA decision expected later in the year, both key swing factors for the long-dated call position."
 }
