@@ -191,6 +191,10 @@ def main():
                 print(f"sa_fetch: {tk} returned no annual rows (kept old data)")
         except Exception as e:
             print(f"sa_fetch: {tk} failed: {e}")
+            if "429" in str(e):   # provider quota gone — poison the budget and stop wasting calls
+                b["used"] = MAX_CALLS_PER_MONTH
+                json.dump(b, open(BUDGET, "w"))
+                break
         time.sleep(0.5)   # stay well under 5 req/s
     if changed or (stale and todo):
         cur["_ts"] = int(time.time())

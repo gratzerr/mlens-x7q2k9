@@ -48,7 +48,7 @@ jobs:
             MISSING_ONLY=1 python bench_fetch.py || true
             python sec_prefetch.py || true
             python sa_fetch.py || true
-            python pp_sync.py >/dev/null 2>&1 || true
+            python pp_sync.py 2>&1 | tail -2 || true
             if [ $((i % 5)) -eq 1 ]; then python social_sync.py || true; fi
             if [ $((i % 2)) -eq 1 ]; then python ir_sweep.py || true; fi
             python build.py | tail -1 || true
@@ -59,6 +59,7 @@ jobs:
             el=$(( $(date +%s) - t0 )); [ $el -lt 60 ] && sleep $((60 - el))
           done
       - name: commit & push (einmal pro Job — schont GitHub-Pages-Limits)
+        if: always()   # auch bei Timeout committen — sonst gehen Zaehler (sa_budget) und Daten verloren
         run: |
           git config user.name "cockpit-bot"
           git config user.email "actions@users.noreply.github.com"
