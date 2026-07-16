@@ -3,10 +3,10 @@
   "news": [
     {
       "date": "2026-07-01",
-      "headline": "Lexeo Therapeutics CFO Sells Shares to Cover RSU Tax Withholding",
+      "headline": "Lexeo Therapeutics CFO and CEO Sell Shares to Cover RSU Tax Withholding",
       "source": "StockTitan / SEC Form 4",
       "url": "https://www.stocktitan.net/sec-filings/LXEO/form-4-lexeo-therapeutics-inc-insider-trading-activity-bb86ac059861.html",
-      "summary": "CFO Louis Edward Tamayo sold 4,641 shares at a weighted-average price of $4.49 following a June 29 RSU vesting, in a routine transaction to cover tax obligations, and continues to hold over 97,000 shares."
+      "summary": "Following performance RSU vesting on June 29, CFO Louis Edward Tamayo sold 4,641 shares at a weighted-average price of $4.49 and CEO R. Nolan Townsend sold 25,947 shares at $4.48, both routine transactions to cover tax obligations, with each executive retaining substantial remaining holdings."
     },
     {
       "date": "2026-06-25",
@@ -53,7 +53,7 @@
     {
       "when": "~August 2026 (estimated)",
       "label": "Q2 2026 earnings report",
-      "detail": "Consensus estimates point to Lexeo reporting second-quarter 2026 financial and operational results around August 19, 2026; the company has not yet officially confirmed the date.",
+      "detail": "Consensus estimates point to Lexeo reporting second-quarter 2026 financial and operational results around mid-to-late August 2026; the company has not yet officially confirmed the date.",
       "confirmed": false
     },
     {
@@ -69,5 +69,5 @@
       "confirmed": false
     }
   ],
-  "pulse": "Lexeo's lead program, LX2006 for Friedreich ataxia cardiomyopathy, gained momentum in June 2026 as the company finalized its pivotal SUNRISE-FA 2 trial design with FDA input and published supportive Phase I/II data in JAMA Cardiology, targeting a 2H 2027 topline readout and a 1H 2028 accelerated-approval BLA filing. Despite that clinical progress, the stock has drifted down to the $4.50-$4.90 range in July, and JPMorgan trimmed its price target to $9 from $12, though most sell-side coverage retains Buy/Overweight ratings with double-digit targets. The earlier-stage PKP2-ACM program (LX2020) is the next major near-term catalyst, with a 12-month high-dose data update expected in Q4 2026."
+  "pulse": "Lexeo's lead program, LX2006 for Friedreich ataxia cardiomyopathy, gained momentum in mid-June 2026 as the company finalized its pivotal SUNRISE-FA 2 trial design with FDA input and published supportive Phase I/II data in JAMA Cardiology, targeting a 2H 2027 topline readout and a 1H 2028 accelerated-approval BLA filing. Despite that clinical progress, the stock has drifted in the $4.50-$4.90 range through mid-July, and JPMorgan trimmed its price target to $9 from $12 in late June, though most sell-side coverage retains Buy/Overweight ratings with double-digit targets, and both the CEO and CFO's early-July share sales appear to be routine RSU tax transactions rather than signals. The earlier-stage PKP2-ACM program (LX2020) remains the next major near-term catalyst, with a 12-month high-dose data update expected in Q4 2026; no material company news has emerged since the July 1 insider filings."
 }

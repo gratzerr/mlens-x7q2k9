@@ -23,6 +23,13 @@
       "summary": "Tenax and Orion Corporation signed a five-year, auto-renewing supply agreement naming Orion the primary manufacturer of oral levosimendan (TNX-103), alongside a license amendment extending the deadline for U.S. regulatory approval to December 31, 2035."
     },
     {
+      "date": "2026-06-29",
+      "headline": "Tenax Therapeutics Added to Russell 2000 and Russell 3000E Indexes",
+      "source": "MarketScreener",
+      "url": "https://www.marketscreener.com/news/tenax-therapeutics-inc-nasdaqcm-tenx-added-to-russell-2000-index-ce7f5fdfda8df026",
+      "summary": "Tenax Therapeutics was added to the Russell 2000, Russell 3000E, and related Russell Microcap/Value benchmark indexes effective with FTSE Russell's June 2026 semi-annual US indexes reconstitution, broadening the stock's exposure to passive index-fund ownership ahead of the LEVEL data readout."
+    },
+    {
       "date": "2026-06-22",
       "headline": "Guggenheim Raises Tenax Therapeutics Price Target to $40 from $34",
       "source": "GuruFocus",
@@ -35,13 +42,6 @@
       "source": "GuruFocus",
       "url": "https://www.gurufocus.com/news/8914369/tenx-maintained-by-piper-sandler-price-target-raised-to-50",
       "summary": "Piper Sandler raised its TENX price target to $50 (Overweight) citing confidence in the upcoming LEVEL trial data, the same day Chardan Capital initiated coverage with a Buy rating and $27 target."
-    },
-    {
-      "date": "2026-06-02",
-      "headline": "Tenax Therapeutics Announces Results of 2026 Annual Meeting",
-      "source": "The Globe and Mail (press release)",
-      "url": "https://www.theglobeandmail.com/investing/markets/stocks/TENX/pressreleases/2332805/tenax-therapeutics-announces-results-of-2026-annual-meeting/",
-      "summary": "Stockholders re-elected all seven director nominees to one-year terms and ratified Cherry Bekaert LLP as the company's independent auditor for fiscal year 2026."
     }
   ],
   "catalysts": [
@@ -64,11 +64,11 @@
       "confirmed": true
     },
     {
-      "when": "~August 2026",
+      "when": "~2026-08-13",
       "label": "Q2 2026 financial results",
-      "detail": "Tenax's next quarterly earnings report and corporate update would typically follow in August 2026, likely alongside or shortly after the LEVEL data disclosure.",
+      "detail": "Tenax's next quarterly earnings report and corporate update is estimated for mid-August 2026, likely alongside or shortly after the LEVEL topline data disclosure.",
       "confirmed": false
     }
   ],
-  "pulse": "Tenax Therapeutics is entering the pivotal stretch for oral levosimendan (TNX-103) in pulmonary hypertension due to HFpEF, with topline Phase 3 LEVEL data now pulled forward to August 2026 and a late-breaking full data presentation set for ESC Congress in Munich on August 29. The company has shored up its supply chain via a new long-term manufacturing deal with Orion and holds cash into Q1 2028, while sell-side sentiment has turned increasingly bullish with fresh price-target hikes (Piper Sandler to $50, Guggenheim to $40) and new coverage initiations ahead of the readout. The stock's near-term trajectory hinges almost entirely on whether the LEVEL trial hits its 6-minute-walk-distance primary endpoint, which would position TNX-103 as a potential first-in-class approved PH-HFpEF therapy."
+  "pulse": "Tenax Therapeutics is entering the pivotal stretch for oral levosimendan (TNX-103) in pulmonary hypertension due to HFpEF, with topline Phase 3 LEVEL data now pulled forward to August 2026 and a late-breaking full data presentation set for ESC Congress in Munich on August 29. The company has shored up its supply chain via a new long-term manufacturing deal with Orion, joined the Russell 2000/3000E indexes, and holds cash into Q1 2028, while sell-side sentiment has turned increasingly bullish with fresh price-target hikes (Piper Sandler to $50, Guggenheim to $40) and new coverage initiations ahead of the readout. The stock's near-term trajectory hinges almost entirely on whether the LEVEL trial hits its 6-minute-walk-distance primary endpoint, which would position TNX-103 as a potential first-in-class approved PH-HFpEF therapy."
 }
