@@ -48,14 +48,8 @@
     {
       "when": "Early August 2026 (estimated)",
       "label": "Q2 2026 earnings report",
-      "detail": "GeneDx has not yet confirmed a Q2 2026 report date; based on the prior quarter's cadence, results are expected in early August. Investors will watch exome/genome volume growth, gross margin trends, and any further revision to full-year guidance ($540-555M revenue) after May's cut.",
+      "detail": "GeneDx has not yet confirmed a Q2 2026 report date; based on the prior quarter's cadence, results are expected in early August. Investors will watch exome/genome volume growth, gross margin trends, and any further revision to full-year guidance ($475-490M revenue) after May's cut.",
       "confirmed": false
-    },
-    {
-      "when": "2026-07-22",
-      "label": "WGSWW warrant expiration",
-      "detail": "GeneDx Holdings' publicly traded equity warrants (WGSWW) are set to expire, which could affect share count/dilution dynamics depending on exercise activity.",
-      "confirmed": true
     },
     {
       "when": "H2 2027 (analyst estimate)",
@@ -74,7 +68,13 @@
       "label": "BEACONS multi-state newborn genomic screening enrollment",
       "detail": "GeneDx is a sequencing partner in the NIH-funded BEACONS initiative and Florida's Sunshine Genetics Network, aiming to enroll up to 30,000 newborns across up to 10 states; continued enrollment and any new state partnerships could expand genome-sequencing volume.",
       "confirmed": true
+    },
+    {
+      "when": "August 3, 2026",
+      "label": "Lead plaintiff deadline in securities class action",
+      "detail": "The court-set deadline for investors to seek lead plaintiff status in the consolidated securities fraud litigation over the May 2026 Fabric Genomics impairment and guidance cut; while not an operating catalyst, it marks the point at which the litigation's scope and lead counsel become clearer.",
+      "confirmed": true
     }
   ],
-  "pulse": "GeneDx shares remain depressed after the May 2026 Q1 report exposed a reimbursement-driven margin miss and a Fabric Genomics impairment, triggering a sharp one-day stock collapse. Since then management has moved to stabilize the story, hiring former Quest Diagnostics executive Mark Gardner as President while insiders and large holders (Casdin Capital, director Keith Meister/Corvex) bought stock on the dip. Sentiment has been further supported by Carelon's expanded outpatient whole-genome-sequencing coverage policy, which prompted Piper Sandler and Guggenheim to raise price targets on hopes of an ASP recovery, even as Zacks downgraded shares to Strong Sell and the market awaits Q2 2026 results for confirmation that volume growth is translating back into margin improvement."
+  "pulse": "GeneDx shares remain depressed and under legal overhang more than two months after the May 2026 Q1 report exposed a reimbursement-driven margin miss and a Fabric Genomics impairment; multiple law firms have since filed securities class actions with an August 3, 2026 lead-plaintiff deadline, and short interest has continued to climb. Business-side news has been comparatively light since the July 1 Zacks downgrade to Strong Sell, with the last substantive positive catalysts being Carelon's expanded outpatient whole-genome-sequencing coverage policy (which drove Piper Sandler and Guggenheim price-target increases) and the June hiring of former Quest Diagnostics executive Mark Gardner as President. With no Q2 2026 earnings date yet confirmed, the market's next real test of whether volume growth is translating back into margin recovery is likely in early August."
 }

@@ -10,24 +10,24 @@
     },
     {
       "date": "2026-07-07",
+      "headline": "Novo Nordisk withdraws CagriSema injection-device comparability study",
+      "source": "TipRanks (company announcement) / ClinicalTrials.gov",
+      "url": "https://www.tipranks.com/news/company-announcements/novo-nordisk-withdraws-cagrisema-device-study-nudging-investor-focus-back-to-core-obesity-assets",
+      "summary": "Novo Nordisk changed the status of a placebo-controlled trial comparing two injection-device presentations of CagriSema in people with overweight/obesity to \"withdrawn\" as of July 7, 2026, without enrolling patients. The move slightly clouds the near-term outlook for the next-generation obesity platform even as Novo's core GLP-1 franchise remains strong, and shifts investor attention back to CagriSema's ongoing pivotal REDEFINE program."
+    },
+    {
+      "date": "2026-07-07",
       "headline": "Novo Nordisk downgraded to Hold as competitive and margin pressures mount",
       "source": "ad-hoc-news.de (analyst roundup)",
       "url": "https://www.ad-hoc-news.de/boerse/news/ueberblick/novo-nordisk-consensus-shifts-after-analyst-moves-shares-trade-lower-in/69632351",
       "summary": "Novo Nordisk shares traded lower in Europe after a fresh round of analyst rating changes cut the stock to Hold, citing an accounting-driven Q1 beat that masked declining underlying sales and EBIT, alongside eroding US market share and pricing pressure. Analysts flagged the shares as roughly fairly valued near 15x FY2027 earnings with limited near-term upside."
     },
     {
-      "date": "2026-07-06",
-      "headline": "Novo Nordisk Korea merges obesity and diabetes divisions in strategic restructuring",
-      "source": "The Asia Business Daily (Asiae)",
-      "url": "https://www.asiae.co.kr/en/article/2026070620404295900",
-      "summary": "Novo Nordisk's Korean unit merged its obesity and diabetes business divisions and reshuffled executives, a move read as an effort to shore up its defense of GLP-1 leadership in the local market against intensifying competition from Eli Lilly."
-    },
-    {
-      "date": "2026-06-26",
-      "headline": "Wave of analyst downgrades hits Novo Nordisk as Morningstar, Deutsche Bank and Nordea cut ratings",
-      "source": "ad-hoc-news.de (analyst roundup)",
-      "url": "https://www.ad-hoc-news.de/boerse/news/ueberblick/novo-nordisk-consensus-after-morningstar-downgrade-shares-remain-in-focus/69627087",
-      "summary": "Morningstar cut Novo Nordisk to Hold from Buy on 25 June (target DKK 343), while Deutsche Bank and Nordea also moved to Hold from Buy around the same period; Goldman Sachs by contrast nudged its target up to DKK 310 while keeping a Neutral stance. The moves reflect growing caution on Novo's growth trajectory even as the average consensus price target has been trimmed over the past three months."
+      "date": "2026-06-11",
+      "headline": "Wegovy pill becomes first daily GLP-1 weight-loss tablet approved in the UK",
+      "source": "Novo Nordisk (GlobeNewswire press release)",
+      "url": "https://www.globenewswire.com/news-release/2026/06/11/3310643/0/en/novo-nordisk-wegovy-pill-semaglutide-tablets-becomes-first-daily-glp-1-weight-loss-pill-approved-in-the-uk.html",
+      "summary": "The UK's MHRA approved Wegovy pill (oral semaglutide) for adults with obesity or overweight with a weight-related condition, making the UK the third market to license the drug after the US and UAE and the first GLP-1 tablet licensed for weight management in Britain. Availability was expected via private prescription within weeks, while NHS access still requires a NICE review."
     },
     {
       "date": "2026-06-07",
@@ -64,6 +64,12 @@
       "confirmed": false
     },
     {
+      "when": "2026 (following June 2026 MHRA approval)",
+      "label": "Wegovy pill launch outside the US, including UK availability",
+      "detail": "Following MHRA approval on June 11, 2026, Novo Nordisk plans to make the oral Wegovy pill available via private prescription in the UK within weeks, with broader international launches (pending local regulatory approvals) targeted for H2 2026; NHS reimbursement still requires a separate NICE review.",
+      "confirmed": true
+    },
+    {
       "when": "2027 (effective January 1, 2027)",
       "label": "US list-price cuts for Wegovy, Ozempic and Rybelsus take effect",
       "detail": "Announced February 24, 2026: Novo will lower US list prices to $675/month for Wegovy injection/tablets and Ozempic injection/tablets (roughly 50% and 35% cuts respectively) starting January 1, 2027, while leaving direct-to-consumer self-pay pricing unchanged; a factor in future US revenue-per-script trends.",
@@ -78,9 +84,9 @@
     {
       "when": "Ongoing through ~February 2027",
       "label": "DKK 15 billion share buyback programme",
-      "detail": "Novo Nordisk is executing a share repurchase programme of up to DKK 15 billion over a 12-month period that began February 4, 2026; weekly transaction updates (most recently confirming purchases through July 10, 2026) are reported to the market and factor into per-share capital return.",
+      "detail": "Novo Nordisk is executing a share repurchase programme of up to DKK 15 billion over a 12-month period that began February 4, 2026; weekly transaction updates (most recently confirming purchases through July 13, 2026) are reported to the market and factor into per-share capital return.",
       "confirmed": true
     }
   ],
-  "pulse": "Novo Nordisk is navigating a rough patch: 2026 guidance for declining sales/profit, a 9,000-role restructuring under new CEO Mike Doustdar, and a mid-2026 wave of analyst downgrades (Morningstar, Deutsche Bank, Nordea) reflect concern over US share losses to Eli Lilly and margin pressure, even as CagriSema underwhelmed versus Zepbound in a head-to-head trial. Against that backdrop, the Wegovy oral pill is a genuine bright spot, crossing 3 million US prescriptions by June 2026 and reaching largely GLP-1-naive patients, while the pipeline (CagriSema FDA filing, denecimig hemophilia data, amycretin Phase 3) continues to advance. The next major checkpoint is the August 5, 2026 Q2 earnings report, with CagriSema's FDA decision expected later in the year as the key overhang/catalyst for the long-dated call position."
+  "pulse": "Novo Nordisk remains in a tug-of-war between pipeline strength and eroding sentiment: the withdrawal of a minor CagriSema device-comparability study on July 7 and a fresh round of Hold downgrades underscore lingering doubts about the next-gen obesity franchise and US share losses to Eli Lilly, even as 2026 guidance points to declining sales/profit. Against that, commercial and regulatory momentum for the core franchise is real -- the Wegovy oral pill topped 3 million US prescriptions by June, won UK MHRA approval as the first licensed GLP-1 weight-loss tablet, and denecimig's hemophilia A data continues to build toward an FDA decision. The next major checkpoint is the August 5, 2026 Q2 earnings report, with CagriSema's FDA decision expected later in the year as the key overhang/catalyst for the long-dated call position."
 }

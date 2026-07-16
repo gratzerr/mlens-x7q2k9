@@ -2,6 +2,13 @@
   "ticker": "PINK",
   "news": [
     {
+      "date": "2026-07-14",
+      "headline": "Brookline Capital Markets Initiates Coverage of Perimeter Medical Imaging AI with Buy Rating",
+      "source": "BioTuesdays",
+      "url": "https://biotuesdays.com/2026/07/14/brookline-starts-perimeter-at-buy-pt-c1-54/",
+      "summary": "Brookline Capital Markets analyst Kemp Doliver started coverage of Perimeter (TSXV:PINK; OTCQX:PYNKF) at Buy with a C$1.54 (US$1.11) price target, noting Claire's FDA Breakthrough Device status should speed CMS review of the company's planned New Technology APC filing for Medicare outpatient reimbursement, with a decision expected by year-end. Shares closed at C$0.32 on July 13, well below the new target."
+    },
+    {
       "date": "2026-07-06",
       "headline": "Paradigm Capital Names Perimeter Medical Imaging a New Healthcare Top Pick",
       "source": "BioTuesdays",
@@ -39,9 +46,9 @@
   ],
   "catalysts": [
     {
-      "when": "H2 2026 (effective date targeted Jan 1, 2027; possibly Oct 1, 2026)",
+      "when": "H2 2026 (decision expected by year-end 2026; effective date targeted Jan 1, 2027, possibly Oct 1, 2026)",
       "label": "CMS Medicare reimbursement decision for Claire",
-      "detail": "Management is filing a CMS application via the MEARIS quarterly process with the goal of securing a national reimbursement determination for Claire, which would take effect January 1, 2027 (an earlier October 1, 2026 effective date is possible but considered unlikely); a positive decision would likely be followed by commercial payer policy reviews (UnitedHealth, Anthem, Cigna, Aetna) in Q1-Q2 2027.",
+      "detail": "Management is filing a New Technology APC application via the MEARIS quarterly process under Medicare's Outpatient Prospective Payment System, with Claire's FDA Breakthrough Device status expected to speed CMS review; a decision is expected by year-end 2026, effective January 1, 2027 (an earlier October 1, 2026 effective date is possible but considered unlikely). A positive decision would likely be followed by commercial payer policy reviews (UnitedHealth, Anthem, Cigna, Aetna) in Q1-Q2 2027.",
       "confirmed": false
     },
     {
@@ -63,5 +70,5 @@
       "confirmed": false
     }
   ],
-  "pulse": "Since Claire's landmark March 2026 FDA PMA approval as the first AI-enabled intraoperative breast-cancer margin device, Perimeter has stacked supportive developments: non-dilutive INOVAIT/Mitacs funding, a closed C$6.04M convertible debenture financing to fund U.S. commercialization, and a fresh Paradigm Capital Top Pick call (C$0.95 target) even as shares trade near C$0.28. The key re-rating catalyst ahead is the CMS Medicare reimbursement decision for Claire, targeted for a January 1, 2027 effective date, alongside continued hospital-system rollout and a still-unconfirmed potential Nasdaq uplisting."
+  "pulse": "Since Claire's landmark March 2026 FDA PMA approval as the first AI-enabled intraoperative breast-cancer margin device, Perimeter has stacked supportive developments: non-dilutive INOVAIT/Mitacs funding, a closed C$6.04M convertible debenture financing, and back-to-back bullish analyst calls in July from Paradigm Capital (Top Pick, C$0.95 target) and Brookline Capital Markets (new Buy initiation, C$1.54 target), even as shares trade near C$0.30-0.32. The key re-rating catalyst ahead is the CMS Medicare New Technology APC reimbursement decision for Claire, expected by year-end 2026 with a targeted January 1, 2027 effective date, alongside continued hospital-system rollout and a still-unconfirmed potential Nasdaq uplisting."
 }

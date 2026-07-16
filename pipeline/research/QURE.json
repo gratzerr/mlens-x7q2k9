@@ -2,6 +2,13 @@
   "ticker": "QURE",
   "news": [
     {
+      "date": "2026-07-02",
+      "headline": "uniQure CEO Kapusta Exercises Options, Sells Shares Under 10b5-1 Plan",
+      "source": "StockTitan / SEC Form 4",
+      "url": "https://www.stocktitan.net/sec-filings/QURE/form-4-uni-qure-n-v-insider-trading-activity-7c5938986f9c.html",
+      "summary": "CEO Matthew Kapusta exercised options for 21,082 shares at $19.39 and sold the shares at an average price of $45.16 under a pre-arranged Rule 10b5-1 trading plan, for total proceeds of roughly $952,000, leaving him with 519,227 ordinary shares."
+    },
+    {
       "date": "2026-07-01",
       "headline": "uniQure (QURE) Now Trades Above Golden Cross: Time to Buy?",
       "source": "Zacks / Yahoo Finance",
@@ -20,14 +27,7 @@
       "headline": "uniQure stock rating reiterated at Buy by H.C. Wainwright on FDA update; price target raised to $80",
       "source": "Investing.com",
       "url": "https://www.investing.com/news/analyst-ratings/uniqure-stock-rating-reiterated-at-buy-by-hc-wainwright-on-fda-update-93CH-4749658",
-      "summary": "H.C. Wainwright raised its price target to $80 from $50 (Mizuho separately raised its target to $68 from $35), arguing the June 17 FDA update re-establishes AMT-130 as the leading disease-modifying Huntington's candidate with a clear near-term U.S. filing path."
-    },
-    {
-      "date": "2026-06-22",
-      "headline": "uniQure Commences $150 Million Proposed Public Offering",
-      "source": "StockTitan / GlobeNewswire",
-      "url": "https://www.stocktitan.net/news/QURE/uni-qure-announces-150-million-proposed-public-8nrp1a8nofta.html",
-      "summary": "uniQure launched an underwritten public offering targeting $150 million to bolster its cash position following the positive AMT-130 regulatory news, which was subsequently upsized to roughly $259 million gross."
+      "summary": "H.C. Wainwright raised its price target to $80 from $50 (Mizuho, Stifel, RBC, Leerink, Barclays and Cantor Fitzgerald separately raised targets into the $60s-$70s), arguing the June 17 FDA update re-establishes AMT-130 as the leading disease-modifying Huntington's candidate with a clear near-term U.S. filing path."
     },
     {
       "date": "2026-06-19",
@@ -66,7 +66,7 @@
     {
       "when": "~2026-07-29",
       "label": "Q2 2026 earnings report",
-      "detail": "uniQure is expected to report second-quarter 2026 financial results and provide further updates on BLA/MAA filing progress and cash runway (estimated date per consensus calendars, not yet formally confirmed by the company).",
+      "detail": "uniQure is expected to report second-quarter 2026 financial results and provide further updates on BLA/MAA filing progress, confirmatory-study design alignment with the FDA, and cash runway (estimated date per consensus calendars, not yet formally confirmed by the company).",
       "confirmed": false
     },
     {
@@ -88,5 +88,5 @@
       "confirmed": false
     }
   ],
-  "pulse": "uniQure has been transformed since mid-June 2026, when the FDA reversed course and agreed that ~3-year Phase I/II data can support an accelerated-approval BLA for AMT-130 in Huntington's disease, sending shares up roughly 180% over 90 days and prompting a ~$259M equity raise plus a wave of analyst price-target hikes (H.C. Wainwright to $80, Mizuho to $68). The company is now racing toward parallel Q3 2026 U.S. (BLA) and UK (MAA) filings while also advancing early-stage AMT-260 gene therapy data in epilepsy, though final FDA alignment on the confirmatory study design and the eventual approval timeline remain unresolved risks. Sentiment and momentum are strongly positive, but the stock's re-rating already prices in a substantial probability of successful accelerated approval."
+  "pulse": "uniQure remains in a holding pattern of strong positive momentum since the mid-June 2026 FDA reversal, which agreed that ~3-year Phase I/II data can support an accelerated-approval BLA for AMT-130 in Huntington's disease; shares are up roughly 180%+ over the past 90 days and the company raised ~$259M via an upsized equity offering to fund the filing. As of July 16, 2026 there have been no further major company-specific catalysts since the July 1 golden-cross technical breakout and a routine CEO 10b5-1 option exercise/sale on July 2 — the market is now waiting on Q3 2026 U.S. (BLA) and UK (MAA) filings, final FDA alignment on confirmatory study design, and the next scheduled update at Q2 2026 earnings (expected around late July). Sentiment and analyst price targets remain strongly positive, but the stock's re-rating already prices in a high probability of successful accelerated approval, leaving it sensitive to any slippage in the filing timeline or confirmatory-trial terms."
 }
