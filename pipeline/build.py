@@ -58,6 +58,35 @@ if pp:
                 if h.get("costPrice"):
                     h["unrealizedReturn"] = round((nvo["price"]/h["costPrice"]-1)*100, 1)
                     h["totalGainNet"] = round(h["value"] - nvo["shares"]*h["costPrice"])
+    # ---- holdings reconcile: POSITIONS come from the engine (depot.xml via pp.json);
+    # portfolio.json only contributes presentation extras (thesis, links, pid).
+    # New buys appear and sold positions disappear automatically — the snapshot can
+    # never again show a stale position list (WGS-sold/RPID-missing incident 2026-07-16).
+    if pp.get("holdings"):
+        alias = {"PINK.V": "PINK"}
+        secs = [x for x in pp["holdings"] if x.get("ticker") and len(x["ticker"]) <= 10]
+        by_tk = {h["ticker"]: h for h in port["holdings"] if h.get("assetType") == "security"}
+        rest = [h for h in port["holdings"] if h.get("assetType") != "security"]
+        merged = []
+        for x in secs:
+            tk = alias.get(x["ticker"], x["ticker"])
+            h = by_tk.get(tk)
+            if h is None:   # brand-new position: sensible defaults, thesis fills in later
+                nm = (x.get("name") or tk).title()
+                h = {"pid": "pp_" + tk, "ticker": tk, "name": nm, "assetType": "security",
+                     "thesis": "", "ySym": x["ticker"], "gquery": nm,
+                     "links": {"stocktwits": "https://stocktwits.com/symbol/" + tk,
+                               "x": "https://x.com/search?q=%24" + tk + "&f=live",
+                               "finviz": "https://finviz.com/quote.ashx?t=" + tk}}
+            h["shares"] = x.get("shares"); h["price"] = x.get("price")
+            h["value"] = round(x.get("valueUsd") or x.get("value") or 0)
+            if x.get("unrealRet") is not None: h["unrealizedReturn"] = x["unrealRet"]
+            if x.get("basisUsd"):
+                h["totalGainNet"] = round((x.get("valueUsd") or 0) - x["basisUsd"] + (x.get("realizedUsd") or 0))
+            merged.append(h)
+        cash_first = [h for h in rest if h.get("assetType") == "cash"]
+        options = [h for h in rest if h.get("assetType") != "cash"]
+        port["holdings"] = cash_first + sorted(merged, key=lambda h: -h["value"]) + options
     port["totalValue"] = sum(h["value"] for h in port["holdings"])
 
 # ---- SEC CIK auto-resolution (so a NEWLY bought US ticker auto-gets instant SEC alerts) ----
