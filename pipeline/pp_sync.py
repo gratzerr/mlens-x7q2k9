@@ -620,8 +620,17 @@ out={"fileDate":datetime.datetime.fromtimestamp(os.path.getmtime(DEPOT)).strftim
      "ttwrorApproxSince2022":round(acc_ret*100,2),
      "yearlyReturnsApprox":yearly,
      "holdings":holdings}
+out["txmax"]=max((t["date"] for t in txs.values() if t.get("date")), default="")
+# NEVER regress: a stale depot.xml (Drive lag, partial download) must not overwrite
+# a pp.json that was built from a newer transaction state
+try:
+    _old=json.load(open(os.path.join(ROOT,"pp.json")))
+    if (_old.get("txmax") or "") > out["txmax"]:
+        raise SystemExit(f"pp_sync: depot.xml aelter (txmax {out['txmax']}) als pp.json ({_old['txmax']}) — NICHT ueberschrieben")
+except SystemExit: raise
+except Exception: pass
 json.dump(out,open(os.path.join(ROOT,"pp.json"),"w"),ensure_ascii=False,indent=1)
-print(f"pp.json written: {len(holdings)} holdings, securities EUR {tot_sec_eur:,.0f}, cash EUR {PP_CASH_EUR:,.2f}")
+print(f"pp.json written: {len(holdings)} holdings, securities EUR {tot_sec_eur:,.0f}, cash EUR {PP_CASH_EUR:,.2f} (txmax {out['txmax']})")
 print(f"TTWROR since 2022: {acc_ret*100:.2f}%  YTD {ytd:.2f}%  annualized {annualized:.2f}%  IZF {izf:.2f}%")
 print(f"capital gains (FIFO since 2022): realized EUR {realized_eur:,.0f} / USD {realized_usd:,.0f}  unrealized EUR {unrealized_eur:,.0f} / USD {unrealized_usd:,.0f}  net-worth series {len(daily)} days (today USD {daily[-1]['v']:,})")
 print("yearly:",yearly)
