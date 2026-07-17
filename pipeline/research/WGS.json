@@ -58,10 +58,10 @@
       "confirmed": false
     },
     {
-      "when": "2026-10-15 to 2026-10-16",
-      "label": "ASHG 2026 Annual Meeting data presentations",
-      "detail": "GeneDx plans to showcase 14 research studies drawn from its GeneDx Infinity dataset (~1 million exomes/genomes) at the American Society of Human Genetics annual meeting, including newborn screening (GUARDIAN study) and neurodevelopmental disorder genetics findings.",
-      "confirmed": true
+      "when": "2026-10-20 to 2026-10-24",
+      "label": "ASHG 2026 Annual Meeting (Montreal)",
+      "detail": "GeneDx is expected to again showcase research drawn from its GeneDx Infinity dataset (~1 million exomes/genomes) at the American Society of Human Genetics annual meeting, as it did with 14 studies at ASHG 2025 (newborn screening/GUARDIAN, neurodevelopmental disorders, ML-driven variant classification); the 2026 abstract slate has not yet been announced.",
+      "confirmed": false
     },
     {
       "when": "H2 2026 (ongoing)",
@@ -70,5 +70,5 @@
       "confirmed": true
     }
   ],
-  "pulse": "GeneDx shares remain depressed more than two months after the May 2026 Q1 report exposed a reimbursement-driven margin miss and a Fabric Genomics impairment. Against that backdrop, the most tangible positive development has been operational rather than financial: GeneDx's Sunshine Genetics newborn whole-genome-sequencing program went live at Tampa General Hospital in July, the first real-world rollout of a state-backed genomic newborn screening program with GeneDx as sequencing partner, alongside Carelon's expanded outpatient coverage policy that has driven a string of analyst price-target increases (Piper Sandler, Guggenheim) even as others (Zacks) turned more bearish. With no Q2 2026 earnings date yet confirmed, the market's next real test of whether volume growth (guided ~30,000 tests, ~70% gross margin) is translating back into margin recovery is likely in early August."
+  "pulse": "GeneDx shares remain depressed roughly two and a half months after the May 2026 Q1 report exposed a reimbursement-driven margin miss and a $31 million Fabric Genomics impairment, and the stock has since drawn a cluster of securities class-action filings (lead-plaintiff deadline August 3, 2026) that are now a background litigation overhang rather than an operational one. Against that backdrop, the tangible positive developments have been operational: the Sunshine Genetics newborn whole-genome-sequencing program went live at Tampa General Hospital in July (first real-world rollout of a state-backed genomic newborn screening program with GeneDx as sequencing partner), a new President (Mark Gardner) was brought in to sharpen commercial execution, and Carelon's expanded outpatient coverage policy has driven a string of analyst price-target increases (Piper Sandler, Guggenheim) even as others (Zacks) turned more bearish. Board member Eli Casdin has kept buying stock on the open market through June. With no Q2 2026 earnings date yet confirmed, the market's next real test of whether volume growth (guided ~30,000 tests, ~70% gross margin) is translating back into margin recovery is likely in early August."
 }

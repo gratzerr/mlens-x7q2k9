@@ -6,28 +6,28 @@
       "headline": "NeurAxis Declares Q2 2026 Stock Dividend on Series B Preferred",
       "source": "TipRanks / SEC 8-K",
       "url": "https://www.tipranks.com/news/company-announcements/neuraxis-declares-q2-stock-dividend-on-series-b",
-      "summary": "NeurAxis's board authorized a Q2 2026 stock dividend on its Series B Preferred Stock, to be paid in roughly 80,463 common shares rather than cash. The dividend is payable July 29, 2026 to holders of record as of July 21, 2026, based on a $2.38 conversion rate."
+      "summary": "NeurAxis's board authorized a Q2 2026 stock dividend on its Series B Preferred Stock, to be paid in roughly 80,463 common shares rather than cash, based on a $2.38 conversion rate. The dividend is payable July 29, 2026 to holders of record as of July 21, 2026."
     },
     {
-      "date": "2026-06-12",
+      "date": "2026-06-10",
       "headline": "NeurAxis Stockholders Approve Directors and Equity Compensation Plans",
       "source": "StockTitan / SEC DEF 14A",
       "url": "https://www.stocktitan.net/sec-filings/NRXS/def-14a-neuraxis-inc-definitive-proxy-statement-6a0303e55ee1.html",
-      "summary": "At its June 10, 2026 annual meeting, NeurAxis shareholders re-elected all six director nominees and approved expanding the 2022 Omnibus Incentive Plan's share pool from about 1.48 million to 3.4 million shares, plus a new 2025 Employee Stock Purchase Plan."
+      "summary": "At its June 10, 2026 annual meeting in Carmel, Indiana, NeurAxis shareholders re-elected all six director nominees and approved expanding the 2022 Omnibus Incentive Plan's share pool from about 1.48 million to 3.4 million shares (extending its evergreen feature to 2033), plus a new 2025 Employee Stock Purchase Plan."
     },
     {
       "date": "2026-05-12",
       "headline": "NeurAxis Reports Record First-Quarter 2026 Financial Results Driven by 80% Revenue Growth",
       "source": "GlobeNewswire",
       "url": "https://www.globenewswire.com/news-release/2026/05/12/3292697/0/en/neuraxis-reports-record-first-quarter-2026-financial-results-driven-by-80-year-over-year-revenue-growth.html",
-      "summary": "Q1 2026 revenue hit a record $1.6 million, up 80% year-over-year, with gross margin expanding to 86.4% and net loss narrowing, beating consensus estimates. Management credited the new Category I CPT code for PENFS reimbursement and early VA Federal Supply Schedule adoption running ahead of plan; Craig-Hallum subsequently raised its price target to $13 on the beat, a level that still excludes VA revenue from its model."
+      "summary": "Q1 2026 revenue hit a record $1.6 million (up 80% YoY, unit deliveries up 35%), gross margin expanded to 86.4%, and operating loss narrowed 24%, powered by the new Category I CPT code for PENFS reimbursement and a VA Federal Supply Schedule ramp management said is running ahead of plan. On the call, management guided to a burn rate of roughly $1 million or less per month for the rest of 2026 and pointed to about $15 million in annualized revenue as the level needed for cash-flow breakeven; Craig-Hallum reiterated Buy and a $13 price target afterward, still excluding VA revenue from its model."
     },
     {
       "date": "2026-04-22",
       "headline": "NeurAxis Expands Payer Coverage with Four New Medical Policies",
       "source": "GlobeNewswire",
       "url": "https://www.globenewswire.com/news-release/2026/04/22/3278802/0/en/neuraxis-expands-payer-coverage-with-four-new-medical-policies.html",
-      "summary": "NeurAxis announced four additional insurer medical policies covering PENFS/IB-Stim, adding roughly 1.25 million covered lives across West Virginia, New Hampshire, South Carolina, Virginia and Florida. The move continues the company's push to broaden reimbursement access ahead of the Category I CPT code taking effect."
+      "summary": "NeurAxis announced four additional insurer medical policies covering PENFS/IB-Stim, adding roughly 1.25 million covered lives across West Virginia, New Hampshire, South Carolina, Virginia and Florida. The move continues the company's push to broaden reimbursement access following the Category I CPT code taking effect January 1, 2026."
     },
     {
       "date": "2026-04-21",
@@ -41,14 +41,14 @@
       "headline": "NeurAxis CEO and CFO Buy Shares in the Open Market",
       "source": "MarketBeat / SEC Form 4",
       "url": "https://www.marketbeat.com/instant-alerts/insider-buying-neuraxis-nasdaqnrxs-ceo-buys-8060-shares-of-stock-2026-04-03/",
-      "summary": "CEO Brian Carrico purchased 8,060 shares at $1.96 apiece, bringing his direct stake to 348,178 shares, while CFO Timothy Henrichs made his first open-market purchase of 7,593 shares the same day. The coordinated buying signaled management confidence following the Q1 growth acceleration."
+      "summary": "CEO Brian Carrico purchased 8,060 shares at $1.96 apiece, bringing his direct stake to 348,178 shares, while CFO Timothy Henrichs made his first open-market purchase of 7,593 shares the same day. The coordinated buying signaled management confidence ahead of the Q1 growth acceleration reported the following month."
     }
   ],
   "catalysts": [
     {
       "when": "2026-08-11",
       "label": "Q2 2026 earnings call (estimated)",
-      "detail": "NeurAxis has not yet issued a press release scheduling its Q2 2026 results call; based on its Q1 2026 reporting date (May 12) and historical cadence, analysts project the report around August 11, 2026.",
+      "detail": "NeurAxis has not yet issued a press release scheduling its Q2 2026 results call. Based on its Q1 2026 reporting date (May 12) and historical cadence, most trackers project the report around August 11, 2026, though some data providers show estimates as late as mid-September; official confirmation is still pending.",
       "confirmed": false
     },
     {
@@ -66,9 +66,21 @@
     {
       "when": "2026 (ongoing)",
       "label": "VA Federal Supply Schedule ramp",
-      "detail": "Continued scale-up of IB-Stim sales through the VA's Federal Supply Schedule contract, which management said is tracking ahead of initial expectations; this revenue stream is not yet reflected in sell-side models (e.g., Craig-Hallum's $13 target).",
+      "detail": "Continued scale-up of IB-Stim sales through the VA's Federal Supply Schedule contract, which management said is tracking ahead of initial expectations; this revenue stream is not yet reflected in sell-side models (e.g., Craig-Hallum's $13 target). Independent analysts estimate even low-single-digit penetration of the eligible VA population could add several million dollars of incremental annual revenue by 2027-2028.",
+      "confirmed": false
+    },
+    {
+      "when": "H2 2026",
+      "label": "Cash-flow breakeven trajectory / ~$15M revenue run-rate target",
+      "detail": "Management has framed roughly $15 million in annualized revenue as the level needed to reach cash-flow breakeven, alongside guidance for a monthly cash burn of about $1 million or less through the rest of 2026 -- a milestone investors will track via upcoming quarterly reports.",
+      "confirmed": false
+    },
+    {
+      "when": "Fall 2026 (expected)",
+      "label": "Lytham Partners investor conference participation",
+      "detail": "NeurAxis has participated in Lytham Partners' Fall Investor Conference in each of the last two years (most recently September 30, 2025); a similar Fall 2026 appearance is likely but has not yet been formally announced.",
       "confirmed": false
     }
   ],
-  "pulse": "NeurAxis is in a quiet stretch between catalysts: since its record Q1 2026 print (revenue +80% YoY) and June 10 annual meeting, the only fresh corporate action has been the routine Q2 Series B preferred stock dividend declared July 9 (paying July 29). The underlying growth story remains intact and reimbursement-driven — the new Category I CPT code, ~100 million covered lives, and an ahead-of-plan VA Federal Supply Schedule ramp — with Wall Street's two covering analysts holding Strong Buy ratings and price targets of $9-$13 (median $11), none of which yet fully credit VA revenue. The next real catalyst is Q2 2026 earnings, expected around August 11 (not yet officially scheduled), which should show whether the CPT-code and VA tailwinds are still accelerating unit growth."
+  "pulse": "NeurAxis remains in a fairly quiet news stretch: since its record Q1 2026 print (revenue +80% YoY, unit deliveries +35%) and the June 10 annual meeting, the only fresh corporate action has been the routine Q2 Series B preferred stock dividend declared July 9 (paying July 29) -- no new payer wins, VA updates, or regulatory news have surfaced in the past several weeks. The underlying growth story remains intact and reimbursement-driven -- the new Category I CPT code, ~100 million covered lives, and an ahead-of-plan VA Federal Supply Schedule ramp -- with management targeting roughly $15 million in annualized revenue for cash-flow breakeven and both covering analysts (Craig-Hallum et al.) holding Strong Buy ratings and price targets of $9-$13, none of which yet fully credit VA revenue. The next real catalyst is Q2 2026 earnings, expected around mid-August (not yet officially scheduled), which should show whether the CPT-code and VA tailwinds are still accelerating unit growth."
 }

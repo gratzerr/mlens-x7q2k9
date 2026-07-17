@@ -64,6 +64,12 @@
       "confirmed": false
     },
     {
+      "when": "Ahead of Q3 2026 BLA filing",
+      "label": "FDA alignment on confirmatory study design",
+      "detail": "Before the BLA submission, uniQure still needs to finalize the design of the required post-approval confirmatory study with the FDA, including whether it uses a concurrent standard-of-care control arm instead of a sham-surgery placebo; the FDA has said it will work expeditiously with the company on this.",
+      "confirmed": false
+    },
+    {
       "when": "2026-07-28 (est.)",
       "label": "Q2 2026 earnings report",
       "detail": "uniQure is expected to report second-quarter 2026 financial results and provide a pipeline/regulatory update; date is an analyst/data-provider estimate (aggregators list July 28) and has not yet been formally confirmed by the company.",
@@ -94,5 +100,5 @@
       "confirmed": false
     }
   ],
-  "pulse": "uniQure shares exploded roughly 70-80% in mid-June 2026 after the FDA reversed course and agreed that ~3-year Phase I/II data on AMT-130 can support an accelerated-approval BLA in Huntington's disease, triggering a wave of analyst upgrades (targets up to $80) and enabling a $259M capital raise to fund the filing. Since early July the stock has cooled into a consolidation/technical-strength phase (golden cross, routine insider 10b5-1 sales) with no major fresh catalysts, as the market awaits the Q2 2026 earnings update (~July 28) and the actual Q3 2026 BLA and UK MHRA filings. Sentiment is bullish (Strong Buy consensus, ~$57-65 average target) but hinges on execution of the BLA submission and eventual FDA review outcome."
+  "pulse": "uniQure shares exploded roughly 70-80% in mid-June 2026 after the FDA reversed course and agreed that ~3-year Phase I/II data on AMT-130 can support an accelerated-approval BLA in Huntington's disease, triggering a wave of analyst upgrades (targets up to $80) and enabling a $259M capital raise to fund the filing. Through mid-July the stock has traded in a consolidation range (around $40-46) with no major fresh news beyond routine insider 10b5-1 filings, as the market awaits the Q2 2026 earnings update (still only an unconfirmed ~July 28 estimate) and the actual Q3 2026 BLA and UK MHRA filings; a residual open item is that the FDA and uniQure still need to finalize the design of the mandated post-approval confirmatory study before the BLA can be submitted. Sentiment remains bullish (Strong Buy consensus, ~$65 average target, high of $95) but hinges on execution of the BLA submission and eventual FDA review outcome."
 }
