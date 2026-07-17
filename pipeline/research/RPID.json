@@ -9,27 +9,60 @@
    "summary": "Small insider sale via option exercise; prior sales noted on Jun 10, Jun 22 and Jul 1."
   },
   {
-   "date": "2026-05-13",
-   "headline": "Q1 2026: revenue $8.0M (+11% YoY) beats forecast, EPS -$0.31 misses; Q2 guided to ~$7.8M",
-   "source": "Investing.com",
-   "url": "https://www.investing.com/news/transcripts/earnings-call-transcript-rapid-micro-biosystems-misses-eps-revenue-exceeds-forecast-in-q1-2026-93CH-4686695",
-   "summary": "Growth-Detect system placements driving recurring consumables; FY26 consensus ~$39M (+17%)."
+   "date": "2026-06-10",
+   "headline": "Rapid Micro Biosystems Announces Inducement Grant Under Nasdaq Listing Rule 5635(c)(4)",
+   "source": "GlobeNewswire",
+   "url": "https://www.globenewswire.com/news-release/2026/06/10/3310119/33206/en/Rapid-Micro-Biosystems-Announces-Inducement-Grant-Under-Nasdaq-Listing-Rule-5635-c-4.html",
+   "summary": "Routine grant of 60,000 restricted stock units to a newly hired employee, signaling continued headcount growth."
   },
   {
-   "date": "2026-05-20",
-   "headline": "Underwritten public offering: ~$9.8M gross proceeds",
-   "source": "Company/IR",
-   "url": "https://investors.rapidmicrobio.com/news-and-events/news-releases/",
-   "summary": "Balance-sheet top-up; dilution priced near then-market. Watch cash runway commentary at Q2."
+   "date": "2026-05-19",
+   "headline": "Rapid Micro Biosystems prices ~$32M underwritten offering (units incl. warrants), ~$9.8M gross upfront",
+   "source": "GlobeNewswire",
+   "url": "https://www.globenewswire.com/news-release/2026/05/19/3297111/33206/en/Rapid-Micro-Biosystems-Announces-Pricing-of-Up-to-Approximately-32-Million-Underwritten-Offering.html",
+   "summary": "Priced 3.58M Class A shares plus pre-funded/Series A/B warrants at $1.955/unit with Bain Capital Life Sciences and Armistice Capital participating; full warrant exercise could add ~$21.7M more but would further dilute holders."
+  },
+  {
+   "date": "2026-05-13",
+   "headline": "Q1 2026: revenue $8.0M (+11% YoY) beats forecast, EPS -$0.31 misses; 6 Growth Direct systems placed",
+   "source": "Investing.com",
+   "url": "https://www.investing.com/news/transcripts/earnings-call-transcript-rapid-micro-biosystems-misses-eps-revenue-exceeds-forecast-in-q1-2026-93CH-4686695",
+   "summary": "Growth Direct system placements (6 vs 3 a year ago) driving >30% consumables growth, but the GAAP net loss missed consensus by roughly 23%, reviving profitability concerns."
+  },
+  {
+   "date": "2026-03-12",
+   "headline": "Rapid Micro Biosystems reports record Q4/FY2025 results and issues FY2026 guidance",
+   "source": "GlobeNewswire",
+   "url": "https://www.globenewswire.com/news-release/2026/03/12/3254470/33206/en/Rapid-Micro-Biosystems-Reports-Record-Fourth-Quarter-and-Full-Year-2025-Financial-Results-and-Provides-2026-Guidance.html",
+   "summary": "Q4 2025 revenue hit a record $11.3M (+37% YoY), FY2025 revenue $33.6M (+20% YoY) on 28 system placements; guided FY2026 revenue to $37-41M on 30-38 planned placements."
+  },
+  {
+   "date": "2026-03-12",
+   "headline": "Samsung Biologics places follow-on multi-system Growth Direct order",
+   "source": "GlobeNewswire",
+   "url": "https://www.globenewswire.com/news-release/2026/03/12/3254421/33206/en/Rapid-Micro-Biosystems-Announces-Follow-on-Multi-System-Order-from-Samsung-Biologics-to-Expand-Deployment-of-Growth-Direct-Platform.html",
+   "summary": "Samsung Biologics expanded its existing Growth Direct deployment with a follow-on multi-system order; management said this order underpins the low end of FY2026 guidance."
   }
  ],
  "catalysts": [
   {
    "when": "2026-08",
    "label": "Q2 2026 earnings (est. early/mid August)",
-   "detail": "Historically reports Q2 in early-to-mid August (Aug 4 in 2023, Aug 12 in 2025). Guided ~$7.8M revenue; watch new Growth Direct placements, consumables pull-through and cash runway after the May raise.",
+   "detail": "Historically reports Q2 in early-to-mid August (Aug 4 in 2023, Aug 12 in 2025). Watch new Growth Direct placements, consumables pull-through and cash runway after the May raise, and progress toward the 30-38 unit FY2026 placement guidance.",
    "confirmed": false
+  },
+  {
+   "when": "Through FY2026 (ongoing)",
+   "label": "Additional large multi-system Growth Direct orders",
+   "detail": "The low end of FY2026 revenue guidance ($37M) assumes only the March Samsung Biologics order; the high end ($41M) needs further large customer orders, which would be a positive catalyst.",
+   "confirmed": false
+  },
+  {
+   "when": "Contingent / no fixed date",
+   "label": "Potential exercise of Series A/B warrants from the May 2026 offering",
+   "detail": "If investors from the May offering fully exercise their attached warrants for cash, RPID could receive up to an additional ~$21.7M, improving the balance sheet without a new financing round.",
+   "confirmed": true
   }
  ],
- "pulse": "Fresh position (Jul 14-15 buys ~$2.11 avg). Micro-cap automation play in pharma QC: Growth Direct systems seed recurring consumables/service revenue (~+11% YoY, FY26 consensus ~$39M, +17%). Story hinges on placement cadence and narrowing cash burn; May's ~$9.8M raise buys time but keeps dilution in the picture."
+ "pulse": "Fresh position (Jul 14-15 buys ~$2.11 avg). Micro-cap automation play in pharma QC: Growth Direct systems seed recurring consumables/service revenue, with FY2025 revenue up 20% to $33.6M and FY2026 guided to $37-41M on 30-38 planned system placements, underpinned by a March 2026 Samsung Biologics follow-on order. Story hinges on placement cadence and narrowing cash burn; the May ~$9.8M raise (up to $32M with warrants) buys runway but keeps dilution in the picture, and Q1 2026's EPS miss kept profitability concerns alive."
 }
