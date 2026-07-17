@@ -1788,6 +1788,10 @@ function startLive(){
 }
 
 function boot(){
+  /* network-first SW: guarantees future opens fetch the CURRENT index.html
+     (iOS home-screen apps otherwise pin an old copy indefinitely) */
+  try{ if('serviceWorker' in navigator && /github\.io$/.test(location.hostname))
+    navigator.serviceWorker.register('sw.js').catch(()=>{}); }catch(e){}
   /* Artifact/anywhere-but-Pages = frozen snapshot (sandbox blocks all live fetches).
      Make that impossible to mistake for the live app. */
   if(!/(^|\.)github\.io$|^localhost$|^127\./.test(location.hostname)){
