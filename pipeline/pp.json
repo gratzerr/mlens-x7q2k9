@@ -8,8 +8,8 @@
   {
    "account": "IBKR USD",
    "ccy": "USD",
-   "balance": 38137.46,
-   "eur": 33366.11
+   "balance": -113191.18,
+   "eur": -99029.9
   },
   {
    "account": "IBKR EUR",
@@ -50,8 +50,8 @@
  "netContribUsd": 739179,
  "earningsEur": 13297.85,
  "earningsUsd": 14376,
- "feesEur": 8233.81,
- "feesUsd": 9399,
+ "feesEur": 8382.25,
+ "feesUsd": 9569,
  "taxesEur": 1717.1,
  "taxesUsd": 1907,
  "series": [
@@ -26578,13 +26578,76 @@
    "Q": 827200,
    "g": 14376,
    "G": 13298,
-   "f": 9399,
-   "F": 8234,
+   "f": 9569,
+   "F": 8382,
    "t": 1907,
    "T": 1717
   }
  ],
  "payments": [
+  {
+   "d": "2026-07-16",
+   "k": "fee",
+   "tk": "CLPT",
+   "eur": 5.07,
+   "usd": 5.79
+  },
+  {
+   "d": "2026-07-16",
+   "k": "fee",
+   "tk": "CRBU",
+   "eur": 32.42,
+   "usd": 37.06
+  },
+  {
+   "d": "2026-07-16",
+   "k": "fee",
+   "tk": "DCTH",
+   "eur": 4.86,
+   "usd": 5.55
+  },
+  {
+   "d": "2026-07-16",
+   "k": "fee",
+   "tk": "NRXS",
+   "eur": 2.39,
+   "usd": 2.73
+  },
+  {
+   "d": "2026-07-16",
+   "k": "fee",
+   "tk": "RPID",
+   "eur": 32.42,
+   "usd": 37.06
+  },
+  {
+   "d": "2026-07-16",
+   "k": "fee",
+   "tk": "RPID",
+   "eur": 21.05,
+   "usd": 24.06
+  },
+  {
+   "d": "2026-07-16",
+   "k": "fee",
+   "tk": "RPID",
+   "eur": 14.69,
+   "usd": 16.79
+  },
+  {
+   "d": "2026-07-16",
+   "k": "fee",
+   "tk": "RPID",
+   "eur": 13.37,
+   "usd": 15.28
+  },
+  {
+   "d": "2026-07-16",
+   "k": "fee",
+   "tk": "RPID",
+   "eur": 22.18,
+   "usd": 25.35
+  },
   {
    "d": "2026-07-16",
    "k": "deposit",
@@ -41880,6 +41943,11 @@
     "2026-06-18",
     500.0,
     17.5
+   ],
+   [
+    "2026-07-16",
+    1000.0,
+    15.137
    ]
   ],
   "DCTH": [
@@ -41922,6 +41990,11 @@
     "2026-07-14",
     500.0,
     12.8
+   ],
+   [
+    "2026-07-16",
+    1500.0,
+    12.77
    ]
   ],
   "NRXS": [
@@ -41959,6 +42032,11 @@
     "2026-07-15",
     2500.0,
     7.0
+   ],
+   [
+    "2026-07-16",
+    2500.0,
+    6.7878
    ]
   ],
   "QURE": [
@@ -42061,6 +42139,11 @@
     "2026-07-10",
     10000.0,
     1.765
+   ],
+   [
+    "2026-07-16",
+    10000.0,
+    1.665
    ]
   ],
   "LXEO": [
@@ -42085,6 +42168,11 @@
     "2026-07-15",
     30000.0,
     2.1815
+   ],
+   [
+    "2026-07-16",
+    40000.0,
+    2.0812
    ]
   ]
  },
@@ -46053,16 +46141,16 @@
    "ticker": "CLPT",
    "name": "CLEARPOINT NEURO INC",
    "byPort": {
-    "IBKR": 17500.0
+    "IBKR": 18500.0
    },
    "isin": "US18507C1036",
    "ccy": "USD",
-   "shares": 17500.0,
+   "shares": 18500.0,
    "price": 15.06000041,
-   "value": 263550.01,
-   "valueEur": 230577,
-   "valueUsd": 263550,
-   "basisUsd": 168705,
+   "value": 278610.01,
+   "valueEur": 243753,
+   "valueUsd": 278610,
+   "basisUsd": 183842,
    "realizedUsd": -60391,
    "avgCost": 9.6403,
    "unrealRet": 56.2,
@@ -46073,16 +46161,16 @@
    "ticker": "DCTH",
    "name": "Delcath Systems, Inc.",
    "byPort": {
-    "IBKR": 17500.0
+    "IBKR": 19000.0
    },
    "isin": "US24661P8077",
    "ccy": "USD",
-   "shares": 17500.0,
+   "shares": 19000.0,
    "price": 12.85000038,
-   "value": 224875.01,
-   "valueEur": 196741,
-   "valueUsd": 224875,
-   "basisUsd": 162729,
+   "value": 244150.01,
+   "valueEur": 213605,
+   "valueUsd": 244150,
+   "basisUsd": 181884,
    "realizedUsd": -16090,
    "avgCost": 9.2988,
    "unrealRet": 38.2,
@@ -46114,16 +46202,16 @@
    "ticker": "NRXS",
    "name": "NEURAXIS INC",
    "byPort": {
-    "IBKR": 32500.0
+    "IBKR": 35000.0
    },
    "isin": "US64134X2018",
    "ccy": "USD",
-   "shares": 32500.0,
+   "shares": 35000.0,
    "price": 6.7800002,
-   "value": 220350.01,
-   "valueEur": 192782,
-   "valueUsd": 220350,
-   "basisUsd": 181066,
+   "value": 237300.01,
+   "valueEur": 207612,
+   "valueUsd": 237300,
+   "basisUsd": 198036,
    "realizedUsd": 0,
    "avgCost": 5.5713,
    "unrealRet": 21.7,
@@ -46174,16 +46262,16 @@
    "ticker": "CRBU",
    "name": "CARIBOU BIOSCIENCES INC",
    "byPort": {
-    "IBKR": 90000.0
+    "IBKR": 100000.0
    },
    "isin": "US1420381089",
    "ccy": "USD",
-   "shares": 90000.0,
+   "shares": 100000.0,
    "price": 1.65999996,
-   "value": 149400.0,
-   "valueEur": 130709,
-   "valueUsd": 149400,
-   "basisUsd": 167527,
+   "value": 166000.0,
+   "valueEur": 145232,
+   "valueUsd": 166000,
+   "basisUsd": 184177,
    "realizedUsd": 0,
    "avgCost": 1.8614,
    "unrealRet": -10.8,
@@ -46219,10 +46307,10 @@
    "isin": "",
    "ccy": "USD",
    "shares": 10000.0,
-   "price": 12.4,
-   "value": 124000.0,
-   "valueEur": 108486,
-   "valueUsd": 124000,
+   "price": 13.5,
+   "value": 135000.0,
+   "valueEur": 118110,
+   "valueUsd": 135000,
    "basisUsd": 96482,
    "realizedUsd": 0,
    "avgCost": 9.6482,
