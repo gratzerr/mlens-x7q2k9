@@ -338,7 +338,9 @@ data = {
     # with the live-quote overlay the engine series ends TODAY — the header date
     # should say so instead of the depot-file date
     "asOf": (pp["series"][-1]["d"] if pp and pp.get("series") else port["asOf"]),
-    "generated": datetime.datetime.now().strftime("%Y-%m-%d %H:%M"),
+    # UTC! Mac (EEST) vs runner (UTC) stamps broke the client's freshness compare
+    # -> updates were rejected for hours after every local build+push
+    "generated": datetime.datetime.utcnow().strftime("%Y-%m-%d %H:%M"),
     "currency": port.get("currency", "EUR"),
     "portfolioId": port.get("portfolioId", "66e18c9426cf62020ccc7ee7"),
     "totalValue": total,
