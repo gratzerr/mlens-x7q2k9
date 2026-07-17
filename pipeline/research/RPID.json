@@ -1,0 +1,35 @@
+{
+ "ticker": "RPID",
+ "news": [
+  {
+   "date": "2026-07-08",
+   "headline": "Form 144: RPID affiliate notifies sale of 10,000 Class A shares (option exercise)",
+   "source": "Stock Titan / SEC",
+   "url": "https://www.stocktitan.net/sec-filings/RPID/144-rapid-micro-biosystems-inc-sec-filing-15df3a9aed2f.html",
+   "summary": "Small insider sale via option exercise; prior sales noted on Jun 10, Jun 22 and Jul 1."
+  },
+  {
+   "date": "2026-05-13",
+   "headline": "Q1 2026: revenue $8.0M (+11% YoY) beats forecast, EPS -$0.31 misses; Q2 guided to ~$7.8M",
+   "source": "Investing.com",
+   "url": "https://www.investing.com/news/transcripts/earnings-call-transcript-rapid-micro-biosystems-misses-eps-revenue-exceeds-forecast-in-q1-2026-93CH-4686695",
+   "summary": "Growth-Detect system placements driving recurring consumables; FY26 consensus ~$39M (+17%)."
+  },
+  {
+   "date": "2026-05-20",
+   "headline": "Underwritten public offering: ~$9.8M gross proceeds",
+   "source": "Company/IR",
+   "url": "https://investors.rapidmicrobio.com/news-and-events/news-releases/",
+   "summary": "Balance-sheet top-up; dilution priced near then-market. Watch cash runway commentary at Q2."
+  }
+ ],
+ "catalysts": [
+  {
+   "when": "2026-08",
+   "label": "Q2 2026 earnings (est. early/mid August)",
+   "detail": "Historically reports Q2 in early-to-mid August (Aug 4 in 2023, Aug 12 in 2025). Guided ~$7.8M revenue; watch new Growth Direct placements, consumables pull-through and cash runway after the May raise.",
+   "confirmed": false
+  }
+ ],
+ "pulse": "Fresh position (Jul 14-15 buys ~$2.11 avg). Micro-cap automation play in pharma QC: Growth Direct systems seed recurring consumables/service revenue (~+11% YoY, FY26 consensus ~$39M, +17%). Story hinges on placement cadence and narrowing cash burn; May's ~$9.8M raise buys time but keeps dilution in the picture."
+}
