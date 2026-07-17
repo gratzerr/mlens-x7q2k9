@@ -1,9 +1,9 @@
 {
- "fileDate": "2026-07-17 08:05",
- "generated": "2026-07-17 08:26",
+ "fileDate": "2026-07-16 15:50",
+ "generated": "2026-07-17 11:28",
  "engine": "pp-exact (verified vs PP app 2026-07-11)",
- "totalSecuritiesEur": 1921022,
- "cashEur": 34504.3,
+ "totalSecuritiesEur": 1916574,
+ "cashEur": 34396.33,
  "cashByAccount": [
   {
    "account": "IBKR USD",
@@ -30,22 +30,22 @@
    "eur": 96.6
   }
  ],
- "totalEur": 1955526,
- "ttwrorSince2022": 399.29,
- "ttwrorYtd": 98.25,
- "ttwrorAnnualized": 42.51,
- "izf": 70.72,
+ "totalEur": 1950970,
+ "ttwrorSince2022": 398.12,
+ "ttwrorYtd": 97.78,
+ "ttwrorAnnualized": 42.43,
+ "izf": 70.56,
  "yearlyReturns": {
   "2022": 3.3,
   "2023": 11.8,
   "2024": 45.2,
   "2025": 50.2,
-  "2026": 98.2
+  "2026": 97.8
  },
- "realizedEur": 827200,
- "unrealizedEur": 457073,
+ "realizedEur": 827800,
+ "unrealizedEur": 452284,
  "realizedUsd": 998208,
- "unrealizedUsd": 503156,
+ "unrealizedUsd": 505163,
  "netContribEur": 667272,
  "netContribUsd": 739179,
  "earningsEur": 13297.85,
@@ -26569,10 +26569,10 @@
   },
   {
    "d": "2026-07-16",
-   "v": 2235167,
-   "e": 1955526,
-   "r": 3.992872,
-   "c": 739179,
+   "v": 2237178,
+   "e": 1950970,
+   "r": 3.981242,
+   "c": 739181,
    "k": 667272,
    "q": 998208,
    "Q": 827200,
@@ -46017,15 +46017,15 @@
    "name": "RAPID MICRO BIOSYSTEMS INC-A"
   }
  ],
- "ppReferenceTtwror": 399.29,
+ "ppReferenceTtwror": 398.12,
  "ppReferenceDate": "2026-07-17",
- "ttwrorApproxSince2022": 399.29,
+ "ttwrorApproxSince2022": 398.12,
  "yearlyReturnsApprox": {
   "2022": 3.3,
   "2023": 11.8,
   "2024": 45.2,
   "2025": 50.2,
-  "2026": 98.2
+  "2026": 97.8
  },
  "holdings": [
   {
@@ -46044,8 +46044,8 @@
    "valueUsd": 393600,
    "basisUsd": 91996,
    "realizedUsd": 11487,
-   "avgCost": 12.7255,
-   "unrealRet": 209.3,
+   "avgCost": 9.1996,
+   "unrealRet": 327.8,
    "priceDate": "2026-07-16"
   },
   {
@@ -46064,8 +46064,8 @@
    "valueUsd": 263550,
    "basisUsd": 168705,
    "realizedUsd": -60391,
-   "avgCost": 12.0988,
-   "unrealRet": 24.5,
+   "avgCost": 9.6403,
+   "unrealRet": 56.2,
    "priceDate": "2026-07-16"
   },
   {
@@ -46084,8 +46084,29 @@
    "valueUsd": 224875,
    "basisUsd": 162729,
    "realizedUsd": -16090,
-   "avgCost": 9.6638,
-   "unrealRet": 33.0,
+   "avgCost": 9.2988,
+   "unrealRet": 38.2,
+   "priceDate": "2026-07-16"
+  },
+  {
+   "account": "ALL",
+   "ticker": "PINK.V",
+   "name": "PERIMETER MEDICAL IMAGING AI",
+   "byPort": {
+    "IBKR": 500000.0,
+    "SQ": 500000.0
+   },
+   "isin": "CA71385D1078",
+   "ccy": "CAD",
+   "shares": 1000000.0,
+   "price": 0.31,
+   "value": 310000.0,
+   "valueEur": 192762,
+   "valueUsd": 221040,
+   "basisUsd": 229612,
+   "realizedUsd": 0,
+   "avgCost": 0.3173,
+   "unrealRet": -3.7,
    "priceDate": "2026-07-16"
   },
   {
@@ -46104,29 +46125,8 @@
    "valueUsd": 220350,
    "basisUsd": 181066,
    "realizedUsd": 0,
-   "avgCost": 5.5738,
-   "unrealRet": 21.6,
-   "priceDate": "2026-07-16"
-  },
-  {
-   "account": "ALL",
-   "ticker": "PINK.V",
-   "name": "PERIMETER MEDICAL IMAGING AI",
-   "byPort": {
-    "IBKR": 500000.0,
-    "SQ": 500000.0
-   },
-   "isin": "CA71385D1078",
-   "ccy": "CAD",
-   "shares": 1000000.0,
-   "price": 0.31,
-   "value": 310000.0,
-   "valueEur": 191630,
-   "valueUsd": 219033,
-   "basisUsd": 229612,
-   "realizedUsd": 0,
-   "avgCost": 0.3173,
-   "unrealRet": -2.3,
+   "avgCost": 5.5713,
+   "unrealRet": 21.7,
    "priceDate": "2026-07-16"
   },
   {
@@ -46145,8 +46145,8 @@
    "valueUsd": 214560,
    "basisUsd": 206731,
    "realizedUsd": -54345,
-   "avgCost": 79.9164,
-   "unrealRet": -16.1,
+   "avgCost": 64.6034,
+   "unrealRet": 3.8,
    "priceDate": "2026-07-16"
   },
   {
@@ -46165,8 +46165,8 @@
    "valueUsd": 200640,
    "basisUsd": 218000,
    "realizedUsd": 0,
-   "avgCost": 4.9595,
-   "unrealRet": -8.1,
+   "avgCost": 4.9545,
+   "unrealRet": -8.0,
    "priceDate": "2026-07-16"
   },
   {
@@ -46185,8 +46185,8 @@
    "valueUsd": 149400,
    "basisUsd": 167527,
    "realizedUsd": 0,
-   "avgCost": 1.8654,
-   "unrealRet": -11.0,
+   "avgCost": 1.8614,
+   "unrealRet": -10.8,
    "priceDate": "2026-07-16"
   },
   {
@@ -46205,8 +46205,8 @@
    "valueUsd": 125400,
    "basisUsd": 126426,
    "realizedUsd": 0,
-   "avgCost": 2.1103,
-   "unrealRet": -1.0,
+   "avgCost": 2.1071,
+   "unrealRet": -0.8,
    "priceDate": "2026-07-16"
   },
   {
@@ -46225,8 +46225,8 @@
    "valueUsd": 124000,
    "basisUsd": 96482,
    "realizedUsd": 0,
-   "avgCost": 9.6552,
-   "unrealRet": 28.4,
+   "avgCost": 9.6482,
+   "unrealRet": 28.5,
    "priceDate": "2026-07-15"
   },
   {
@@ -46245,7 +46245,7 @@
    "valueUsd": 60320,
    "basisUsd": 43298,
    "realizedUsd": 0,
-   "avgCost": 10.8275,
+   "avgCost": 10.8244,
    "unrealRet": 39.3,
    "priceDate": "2026-07-16"
   }

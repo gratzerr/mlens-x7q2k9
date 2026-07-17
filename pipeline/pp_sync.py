@@ -573,7 +573,12 @@ for si,a in posagg.items():
         "valueUsd":round(to_usd(val,s["ccy"],END)),
         "basisUsd":round(basis_usd),
         "realizedUsd":round(rz_usd_by_sec.get(si,0.0)),
-        "avgCost":round(avg,4),"unrealRet":round((px-avg)/avg*100,1) if avg else 0,
+        # entry price = FIFO REMAINING basis / shares (matches Parqet purchasePrice);
+        # the naive all-buys average is wrong once some lots were sold. Non-USD (PINK/CAD)
+        # keeps the buy average — no sells there, so both are identical.
+        "avgCost":round(basis_usd/a["net"],4) if (s["ccy"]=="USD" and a["net"]) else round(avg,4),
+        "unrealRet":(round((to_usd(val,s["ccy"],END)/basis_usd-1)*100,1) if basis_usd
+                     else (round((px-avg)/avg*100,1) if avg else 0)),
         "priceDate":pdate})
 holdings.sort(key=lambda h:-h["valueEur"])
 

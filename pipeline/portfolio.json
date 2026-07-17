@@ -1,14 +1,14 @@
 {
- "asOf": "2026-07-12",
+ "asOf": "2026-07-11",
  "currency": "USD",
  "source": "Parqet (live)",
  "portfolioId": "66e18c9426cf62020ccc7ee7",
- "totalValue": 2412962,
+ "totalValue": 2379073,
  "cashValue": 39000,
- "netGainUnrealized": 774092,
- "unrealizedReturn": 48.5,
+ "netGainUnrealized": 772404,
+ "unrealizedReturn": 48.1,
  "izf": 97.8,
- "ttwror": 332.2,
+ "ttwror": 331.6,
  "realizedAllTime": 1075764,
  "chartYtd": "__CHART_YTD__",
  "holdings": [
@@ -38,24 +38,6 @@
     "stocktwits": "https://stocktwits.com/symbol/QURE",
     "x": "https://x.com/search?q=%24QURE&f=live",
     "finviz": "https://finviz.com/quote.ashx?t=QURE"
-   }
-  },
-  {
-   "pid": "hld_69fb07ca78d93ddda8dfe947",
-   "ticker": "WGS",
-   "name": "GeneDx Holdings",
-   "assetType": "security",
-   "value": 328325,
-   "unrealizedReturn": 79.1,
-   "totalGainNet": 145026,
-   "thesis": "Genomic diagnostics / rare disease testing",
-   "ySym": "WGS",
-   "gquery": "GeneDx",
-   "links": {
-    "ir": "https://ir.genedx.com/",
-    "stocktwits": "https://stocktwits.com/symbol/WGS",
-    "x": "https://x.com/search?q=%24WGS&f=live",
-    "finviz": "https://finviz.com/quote.ashx?t=WGS"
    }
   },
   {
@@ -117,9 +99,9 @@
    "ticker": "DCTH",
    "name": "Delcath Systems",
    "assetType": "security",
-   "value": 221282,
-   "unrealizedReturn": 41.4,
-   "totalGainNet": 48366,
+   "value": 208266,
+   "unrealizedReturn": 44.9,
+   "totalGainNet": 48191,
    "thesis": "HEPZATO KIT (interventional oncology)",
    "ySym": "DCTH",
    "gquery": "Delcath",
@@ -171,9 +153,9 @@
    "ticker": "CRBU",
    "name": "Caribou Biosciences",
    "assetType": "security",
-   "value": 172800,
-   "unrealizedReturn": 2.9,
-   "totalGainNet": 4910,
+   "value": 153600,
+   "unrealizedReturn": 2.3,
+   "totalGainNet": 3397,
    "thesis": "CRISPR allogeneic cell therapy (CB-010)",
    "ySym": "CRBU",
    "gquery": "Caribou Biosciences",
@@ -204,7 +186,7 @@
   },
   {
    "ticker": "NVO",
-   "name": "Novo Nordisk \u2014 Jan-2027 $40 Call",
+   "name": "Novo Nordisk — Jan-2027 $40 Call",
    "assetType": "option",
    "value": 114000,
    "shares": 10000,
@@ -212,7 +194,7 @@
    "costPrice": 8.26,
    "unrealizedReturn": 38.0,
    "totalGainNet": 31400,
-   "thesis": "Long call on Novo Nordisk (exp Jan 2027, strike $40) \u2014 leveraged bet on the GLP-1 franchise re-rating",
+   "thesis": "Long call on Novo Nordisk (exp Jan 2027, strike $40) — leveraged bet on the GLP-1 franchise re-rating",
    "links": {
     "ir": "https://www.novonordisk.com/investors.html",
     "stocktwits": "https://stocktwits.com/symbol/NVO",
@@ -220,6 +202,22 @@
     "finviz": "https://finviz.com/quote.ashx?t=NVO"
    },
    "gquery": "Novo Nordisk"
+  },
+  {
+   "pid": "hld_6a58d2c819c64561317a5108",
+   "ticker": "RPID",
+   "name": "Rapid Micro Biosystems",
+   "assetType": "security",
+   "value": 125400,
+   "thesis": "",
+   "ySym": "RPID",
+   "gquery": "Rapid Micro Biosystems",
+   "links": {
+    "ir": "https://ir.rapidmicrobio.com",
+    "stocktwits": "https://stocktwits.com/symbol/RPID",
+    "x": "https://x.com/search?q=%24RPID&f=live",
+    "finviz": "https://finviz.com/quote.ashx?t=RPID"
+   }
   }
  ],
  "ttwrorYtd": 76.4
