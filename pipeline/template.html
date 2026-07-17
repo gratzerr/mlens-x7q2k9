@@ -941,6 +941,7 @@ async function fsDataPoll(){
       Object.assign(_cfg,{name:c.name,public:c.public,owner:c.owner}); cfgLists(c);
       renderKpis(); rerender(); applyName(); applyVisibility();
       if(_tab==='research'&&window.RS&&RS.tk) rsEstimates();   // fresh saEst tables reach an open ticker
+      try{ localStorage.setItem('pc-lastdata', c.data); }catch(e){}   // next open starts from THIS state
     }
   }catch(e){}
 }
@@ -1786,6 +1787,13 @@ function startLive(){
 }
 
 function boot(){
+  /* first paint from the freshest data THIS DEVICE has seen: a browser-cached old
+     index.html must not flash a days-old total before the Firestore poll lands */
+  try{
+    const s=localStorage.getItem('pc-lastdata');
+    if(s&&DATA){ const j=JSON.parse(s);
+      if(j&&j.generated&&(!DATA.generated||j.generated>DATA.generated)) DATA=j; }
+  }catch(e){}
   SEC_CIK=DATA.secCik||{};
   document.getElementById('asof').textContent=new Date(DATA.asOf).toLocaleDateString('en-US',{month:'long',day:'numeric',year:'numeric'});
   document.getElementById('hcount').textContent=DATA.holdings.filter(h=>h.assetType!=='cash').length;
