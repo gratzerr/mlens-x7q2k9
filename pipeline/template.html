@@ -1788,6 +1788,19 @@ function startLive(){
 }
 
 function boot(){
+  /* Artifact/anywhere-but-Pages = frozen snapshot (sandbox blocks all live fetches).
+     Make that impossible to mistake for the live app. */
+  if(!/(^|\.)github\.io$|^localhost$|^127\./.test(location.hostname)){
+    const o=document.createElement('div');
+    o.style.cssText='position:fixed;inset:0;z-index:10000;background:var(--bg);display:flex;flex-direction:column;align-items:center;justify-content:center;gap:14px;padding:24px;text-align:center';
+    o.innerHTML='<div style="font-size:34px">🧊</div>'
+      +'<div style="font-size:17px;font-weight:700">Das ist nur ein eingefrorener Snapshot</div>'
+      +'<div style="font-size:13.5px;color:var(--muted);max-width:420px">Kurse und Depotwerte aktualisieren sich hier NICHT. Die Live-Version läuft auf GitHub Pages.</div>'
+      +'<a href="https://gratzerr.github.io/mlens-x7q2k9/" style="background:var(--up);color:#fff;font-weight:700;padding:12px 22px;border-radius:10px;text-decoration:none;font-size:15px">→ Live-Version öffnen</a>'
+      +'<button id="snapdismiss" style="background:none;border:none;color:var(--muted);font-size:12px;cursor:pointer;text-decoration:underline">Snapshot trotzdem ansehen</button>';
+    document.body.appendChild(o);
+    o.querySelector('#snapdismiss').onclick=()=>o.remove();
+  }
   /* first paint from the freshest data THIS DEVICE has seen: a browser-cached old
      index.html must not flash a days-old total before the Firestore poll lands */
   try{
