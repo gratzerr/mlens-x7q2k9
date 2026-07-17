@@ -1544,6 +1544,7 @@ async function refreshSocial(){
       await new Promise(r=>setTimeout(r,1200));
     }
     if(dirty||Object.keys(liveState.socialBy).length){
+      _socialPrune();
       const all=Object.values(liveState.socialBy).flat();
       all.sort((a,b)=>new Date(b.time)-new Date(a.time));
       liveState.social=all.slice(0,40); liveState.lastSocial=new Date();
@@ -1562,8 +1563,19 @@ function loadSocialCache(){
       if(!cur || (msgs[0]&&cur[0]&&new Date(msgs[0].time)>new Date(cur[0].time))) liveState.socialBy[tk]=msgs;
     }
   }catch(e){}
+  _socialPrune();
   const all=Object.values(liveState.socialBy).flat();
   if(all.length){ all.sort((a,b)=>new Date(b.time)-new Date(a.time)); liveState.social=all.slice(0,40); }
+}
+/* sold positions must vanish from the buzz feed — drop cached streams of tickers
+   no longer held (old snapshot/localStorage would otherwise resurrect them) */
+function _socialPrune(){
+  const held=new Set(DATA.holdings.filter(h=>h.assetType!=='cash').map(h=>h.ticker));
+  let changed=false;
+  Object.keys(liveState.socialBy||{}).forEach(tk=>{
+    if(!held.has(tk)){ delete liveState.socialBy[tk]; changed=true; }
+  });
+  if(changed){ try{ localStorage.setItem('pc-social',JSON.stringify(liveState.socialBy)); }catch(e){} }
 }
 
 /* ===== SEC EDGAR live filing watcher — INSTANT IR alerts =====================
@@ -1754,6 +1766,7 @@ async function loadMoreActivities(){
 
 function startLive(){
   // initial pulls + intervals; each guarded so one failure never breaks the page
+  fsDataPoll().catch(()=>{});   // IMMEDIATELY: a cached/old HTML must not show stale totals for a minute
   refreshParqet().catch(()=>{});
   refreshPrices().catch(()=>{}); refreshNews().catch(()=>{}); refreshSocial().catch(()=>{}); refreshWatch().catch(()=>{});
   refreshSEC().catch(()=>{});                                // SEC baseline, then watch
