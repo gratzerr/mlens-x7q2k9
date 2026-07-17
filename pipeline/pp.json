@@ -1,9 +1,9 @@
 {
- "fileDate": "2026-07-16 15:50",
- "generated": "2026-07-17 11:28",
+ "fileDate": "2026-07-17 08:50",
+ "generated": "2026-07-17 09:11",
  "engine": "pp-exact (verified vs PP app 2026-07-11)",
- "totalSecuritiesEur": 1916574,
- "cashEur": 34396.33,
+ "totalSecuritiesEur": 2063179,
+ "cashEur": -97891.71,
  "cashByAccount": [
   {
    "account": "IBKR USD",
@@ -30,22 +30,22 @@
    "eur": 96.6
   }
  ],
- "totalEur": 1950970,
- "ttwrorSince2022": 398.12,
- "ttwrorYtd": 97.78,
- "ttwrorAnnualized": 42.43,
- "izf": 70.56,
+ "totalEur": 1965287,
+ "ttwrorSince2022": 401.78,
+ "ttwrorYtd": 99.24,
+ "ttwrorAnnualized": 42.66,
+ "izf": 71.07,
  "yearlyReturns": {
   "2022": 3.3,
   "2023": 11.8,
   "2024": 45.2,
   "2025": 50.2,
-  "2026": 97.8
+  "2026": 99.2
  },
- "realizedEur": 827800,
- "unrealizedEur": 452284,
+ "realizedEur": 827200,
+ "unrealizedEur": 466982,
  "realizedUsd": 998208,
- "unrealizedUsd": 505163,
+ "unrealizedUsd": 514482,
  "netContribEur": 667272,
  "netContribUsd": 739179,
  "earningsEur": 13297.85,
@@ -26569,10 +26569,10 @@
   },
   {
    "d": "2026-07-16",
-   "v": 2237178,
-   "e": 1950970,
-   "r": 3.981242,
-   "c": 739181,
+   "v": 2246323,
+   "e": 1965287,
+   "r": 4.017792,
+   "c": 739179,
    "k": 667272,
    "q": 998208,
    "Q": 827200,
@@ -46105,15 +46105,15 @@
    "name": "RAPID MICRO BIOSYSTEMS INC-A"
   }
  ],
- "ppReferenceTtwror": 398.12,
+ "ppReferenceTtwror": 401.78,
  "ppReferenceDate": "2026-07-17",
- "ttwrorApproxSince2022": 398.12,
+ "ttwrorApproxSince2022": 401.78,
  "yearlyReturnsApprox": {
   "2022": 3.3,
   "2023": 11.8,
   "2024": 45.2,
   "2025": 50.2,
-  "2026": 97.8
+  "2026": 99.2
  },
  "holdings": [
   {
@@ -46152,8 +46152,8 @@
    "valueUsd": 278610,
    "basisUsd": 183842,
    "realizedUsd": -60391,
-   "avgCost": 9.6403,
-   "unrealRet": 56.2,
+   "avgCost": 9.9374,
+   "unrealRet": 51.5,
    "priceDate": "2026-07-16"
   },
   {
@@ -46172,29 +46172,8 @@
    "valueUsd": 244150,
    "basisUsd": 181884,
    "realizedUsd": -16090,
-   "avgCost": 9.2988,
-   "unrealRet": 38.2,
-   "priceDate": "2026-07-16"
-  },
-  {
-   "account": "ALL",
-   "ticker": "PINK.V",
-   "name": "PERIMETER MEDICAL IMAGING AI",
-   "byPort": {
-    "IBKR": 500000.0,
-    "SQ": 500000.0
-   },
-   "isin": "CA71385D1078",
-   "ccy": "CAD",
-   "shares": 1000000.0,
-   "price": 0.31,
-   "value": 310000.0,
-   "valueEur": 192762,
-   "valueUsd": 221040,
-   "basisUsd": 229612,
-   "realizedUsd": 0,
-   "avgCost": 0.3173,
-   "unrealRet": -3.7,
+   "avgCost": 9.5729,
+   "unrealRet": 34.2,
    "priceDate": "2026-07-16"
   },
   {
@@ -46213,8 +46192,29 @@
    "valueUsd": 237300,
    "basisUsd": 198036,
    "realizedUsd": 0,
-   "avgCost": 5.5713,
-   "unrealRet": 21.7,
+   "avgCost": 5.6582,
+   "unrealRet": 19.8,
+   "priceDate": "2026-07-16"
+  },
+  {
+   "account": "ALL",
+   "ticker": "PINK.V",
+   "name": "PERIMETER MEDICAL IMAGING AI",
+   "byPort": {
+    "IBKR": 500000.0,
+    "SQ": 500000.0
+   },
+   "isin": "CA71385D1078",
+   "ccy": "CAD",
+   "shares": 1000000.0,
+   "price": 0.31,
+   "value": 310000.0,
+   "valueEur": 191630,
+   "valueUsd": 219033,
+   "basisUsd": 229612,
+   "realizedUsd": 0,
+   "avgCost": 0.3173,
+   "unrealRet": -4.6,
    "priceDate": "2026-07-16"
   },
   {
@@ -46235,6 +46235,26 @@
    "realizedUsd": -54345,
    "avgCost": 64.6034,
    "unrealRet": 3.8,
+   "priceDate": "2026-07-16"
+  },
+  {
+   "account": "ALL",
+   "ticker": "RPID",
+   "name": "RAPID MICRO BIOSYSTEMS INC-A",
+   "byPort": {
+    "IBKR": 100000.0
+   },
+   "isin": "US75340L1044",
+   "ccy": "USD",
+   "shares": 100000.0,
+   "price": 2.08999991,
+   "value": 208999.99,
+   "valueEur": 182852,
+   "valueUsd": 209000,
+   "basisUsd": 209673,
+   "realizedUsd": 0,
+   "avgCost": 2.0967,
+   "unrealRet": -0.3,
    "priceDate": "2026-07-16"
   },
   {
@@ -46273,28 +46293,8 @@
    "valueUsd": 166000,
    "basisUsd": 184177,
    "realizedUsd": 0,
-   "avgCost": 1.8614,
-   "unrealRet": -10.8,
-   "priceDate": "2026-07-16"
-  },
-  {
-   "account": "ALL",
-   "ticker": "RPID",
-   "name": "RAPID MICRO BIOSYSTEMS INC-A",
-   "byPort": {
-    "IBKR": 60000.0
-   },
-   "isin": "US75340L1044",
-   "ccy": "USD",
-   "shares": 60000.0,
-   "price": 2.08999991,
-   "value": 125399.99,
-   "valueEur": 109711,
-   "valueUsd": 125400,
-   "basisUsd": 126426,
-   "realizedUsd": 0,
-   "avgCost": 2.1071,
-   "unrealRet": -0.8,
+   "avgCost": 1.8418,
+   "unrealRet": -9.9,
    "priceDate": "2026-07-16"
   },
   {
@@ -46314,8 +46314,8 @@
    "basisUsd": 96482,
    "realizedUsd": 0,
    "avgCost": 9.6482,
-   "unrealRet": 28.5,
-   "priceDate": "2026-07-15"
+   "unrealRet": 39.9,
+   "priceDate": "2026-07-16"
   },
   {
    "account": "ALL",
