@@ -87,6 +87,14 @@ if pp:
         cash_first = [h for h in rest if h.get("assetType") == "cash"]
         options = [h for h in rest if h.get("assetType") != "cash"]
         port["holdings"] = cash_first + sorted(merged, key=lambda h: -h["value"]) + options
+        # persist ticker-set changes back to portfolio.json — ir_sweep/social_sync read
+        # their ticker lists from the FILE, so new buys must land there too (only on
+        # set changes, to avoid a value-churn diff in every minute commit)
+        if set(by_tk) != {h["ticker"] for h in merged}:
+            try:
+                json.dump(port, open(os.path.join(ROOT, "portfolio.json"), "w"),
+                          ensure_ascii=False, indent=1)
+            except Exception: pass
     port["totalValue"] = sum(h["value"] for h in port["holdings"])
 
 # ---- SEC CIK auto-resolution (so a NEWLY bought US ticker auto-gets instant SEC alerts) ----
