@@ -1,8 +1,8 @@
 {
- "fileDate": "2026-07-17 15:35",
- "generated": "2026-07-17 15:56",
+ "fileDate": "2026-07-17 18:14",
+ "generated": "2026-07-17 18:40",
  "engine": "pp-exact (verified vs PP app 2026-07-11)",
- "totalSecuritiesEur": 2073611,
+ "totalSecuritiesEur": 2061857,
  "cashEur": -97891.71,
  "cashByAccount": [
   {
@@ -30,22 +30,22 @@
    "eur": 96.6
   }
  ],
- "totalEur": 1975720,
- "ttwrorSince2022": 404.44,
- "ttwrorYtd": 100.29,
- "ttwrorAnnualized": 42.8,
- "izf": 71.33,
+ "totalEur": 1963965,
+ "ttwrorSince2022": 401.44,
+ "ttwrorYtd": 99.1,
+ "ttwrorAnnualized": 42.61,
+ "izf": 70.92,
  "yearlyReturns": {
   "2022": 3.3,
   "2023": 11.8,
   "2024": 45.2,
   "2025": 50.2,
-  "2026": 100.3
+  "2026": 99.1
  },
  "realizedEur": 827200,
- "unrealizedEur": 477415,
+ "unrealizedEur": 465661,
  "realizedUsd": 998208,
- "unrealizedUsd": 526406,
+ "unrealizedUsd": 512971,
  "netContribEur": 667272,
  "netContribUsd": 739179,
  "earningsEur": 13297.85,
@@ -26585,9 +26585,9 @@
   },
   {
    "d": "2026-07-17",
-   "v": 2258247,
-   "e": 1975720,
-   "r": 4.044429,
+   "v": 2244812,
+   "e": 1963965,
+   "r": 4.014418,
    "c": 739179,
    "k": 667272,
    "q": 998208,
@@ -45486,6 +45486,21 @@
  ],
  "securities": [
   {
+   "isin": "IE00B6YX5D40",
+   "ticker": "SPYD",
+   "name": "SPDR S+P US D.ARIST.ETF D"
+  },
+  {
+   "isin": "IE00B44T3H88",
+   "ticker": "H4ZP",
+   "name": "HSBC MSCI CHINA UCITS ETF"
+  },
+  {
+   "isin": "IE00B3XXRP09",
+   "ticker": "VUSA.DE",
+   "name": "VANGUARD S+P 500U.ETF DLD"
+  },
+  {
    "isin": "CNE1000001W2",
    "ticker": "AQE.F",
    "name": "Anhui Conch Cement Co. Ltd. Registered Shares H YC 1"
@@ -45666,6 +45681,11 @@
    "name": "NIKE Inc. Registered Shares Class B o.N."
   },
   {
+   "isin": "IE00B5BMR087",
+   "ticker": "SXR8",
+   "name": "ISHSVII-CORE S+P500 DLACC"
+  },
+  {
    "isin": "GB0002374006",
    "ticker": "GUI.F",
    "name": "DIAGEO PLC LS-,28935185"
@@ -45709,6 +45729,11 @@
    "isin": "GB0005603997",
    "ticker": "LGEN.L",
    "name": "Legal & General Group Plc"
+  },
+  {
+   "isin": "IE00BK5BQT80",
+   "ticker": "VWCE.DE",
+   "name": "VANG.FTSE A.W. DLA"
   },
   {
    "isin": "GB0007188757",
@@ -45931,14 +45956,29 @@
    "name": "Confluent, Inc."
   },
   {
+   "isin": "DE000A3GSUD3",
+   "ticker": "VSOL.DE",
+   "name": "VANECK SOLANA ETN"
+  },
+  {
    "isin": "US98980G1022",
    "ticker": "ZS",
    "name": "ZSCALER INC"
   },
   {
+   "isin": "US81730H1095",
+   "ticker": "S",
+   "name": "SentinelOne, Inc."
+  },
+  {
    "isin": "US18915M1071",
    "ticker": "NET",
    "name": "CLOUDFLARE INC - CLASS A"
+  },
+  {
+   "isin": "DE000A3GPSP7",
+   "ticker": "VETH.DE",
+   "name": "VANECK ETHEREUM ETN"
   },
   {
    "isin": "NL0009805522",
@@ -45951,6 +45991,11 @@
    "name": "monday.com Ltd."
   },
   {
+   "isin": "US88339J1051",
+   "ticker": "TTD",
+   "name": "THE TRADE DESK INC"
+  },
+  {
    "isin": "US75734B1008",
    "ticker": "RDDT",
    "name": "Reddit, Inc."
@@ -45961,9 +46006,19 @@
    "name": "Toast, Inc."
   },
   {
+   "isin": "US26856L1035",
+   "ticker": "ELF",
+   "name": "ELF BEAUTY INC"
+  },
+  {
    "isin": "US7811541090",
    "ticker": "RBRK",
    "name": "RUBRIK INC-A"
+  },
+  {
+   "isin": "US0079031078",
+   "ticker": "AMD",
+   "name": "ADVANCED MICRO DEVICES"
   },
   {
    "isin": "IL0011741688",
@@ -45996,6 +46051,11 @@
    "name": "DUOLINGO"
   },
   {
+   "isin": "US09175A2069",
+   "ticker": "BMNR",
+   "name": "BitMine Immersion Technologies,"
+  },
+  {
    "isin": "US74276L1052",
    "ticker": "PRCT",
    "name": "PROCEPT BIOROBOTICS CORP"
@@ -46004,6 +46064,11 @@
    "isin": "CA73044W3021",
    "ticker": "POET",
    "name": "POET Technologies Inc."
+  },
+  {
+   "isin": "US6963894026",
+   "ticker": "PALI",
+   "name": "PALISADE BIO INC"
   },
   {
    "isin": "US4158581094",
@@ -46019,6 +46084,11 @@
    "isin": "US29772L1089",
    "ticker": "ETON",
    "name": "ETON PHARMACEUTICALS INC"
+  },
+  {
+   "isin": "US38942Q2021",
+   "ticker": "CALC",
+   "name": "CALCIMEDICA INC"
   },
   {
    "isin": "US18507C1036",
@@ -46071,9 +46141,19 @@
    "name": "PERSONALIS INC"
   },
   {
+   "isin": "US03823U1025",
+   "ticker": "AAOI",
+   "name": "APPLIED OPTOELECTRONICS INC"
+  },
+  {
    "isin": "US6402683063",
    "ticker": "NKTR",
    "name": "NEKTAR THERAPEUTICS"
+  },
+  {
+   "isin": "US00246W1036",
+   "ticker": "AXTI",
+   "name": "AXT INC"
   },
   {
    "isin": "US81663L2007",
@@ -46084,6 +46164,11 @@
    "isin": "US80303D3052",
    "ticker": "SNWV",
    "name": "SANUWAVE Health, Inc."
+  },
+  {
+   "isin": "US09077D2099",
+   "ticker": "BFRI",
+   "name": "Biofrontera Inc."
   },
   {
    "isin": "CA71385D1078",
@@ -46121,15 +46206,15 @@
    "name": "RAPID MICRO BIOSYSTEMS INC-A"
   }
  ],
- "ppReferenceTtwror": 404.44,
+ "ppReferenceTtwror": 401.44,
  "ppReferenceDate": "2026-07-17",
- "ttwrorApproxSince2022": 404.44,
+ "ttwrorApproxSince2022": 401.44,
  "yearlyReturnsApprox": {
   "2022": 3.3,
   "2023": 11.8,
   "2024": 45.2,
   "2025": 50.2,
-  "2026": 100.3
+  "2026": 99.1
  },
  "holdings": [
   {
@@ -46142,14 +46227,14 @@
    "isin": "NL0010696654",
    "ccy": "USD",
    "shares": 10000.0,
-   "price": 40.15999984,
-   "value": 401600.0,
-   "valueEur": 351356,
-   "valueUsd": 401600,
+   "price": 40.15000152,
+   "value": 401500.02,
+   "valueEur": 351269,
+   "valueUsd": 401500,
    "basisUsd": 91996,
    "realizedUsd": 11487,
    "avgCost": 9.1996,
-   "unrealRet": 336.5,
+   "unrealRet": 336.4,
    "priceDate": "2026-07-17"
   },
   {
@@ -46162,14 +46247,14 @@
    "isin": "US18507C1036",
    "ccy": "USD",
    "shares": 18500.0,
-   "price": 15.09000015,
-   "value": 279165.0,
-   "valueEur": 244239,
-   "valueUsd": 279165,
+   "price": 14.98999977,
+   "value": 277315.0,
+   "valueEur": 242620,
+   "valueUsd": 277315,
    "basisUsd": 183842,
    "realizedUsd": -60391,
    "avgCost": 9.9374,
-   "unrealRet": 51.9,
+   "unrealRet": 50.8,
    "priceDate": "2026-07-17"
   },
   {
@@ -46182,14 +46267,14 @@
    "isin": "US24661P8077",
    "ccy": "USD",
    "shares": 19000.0,
-   "price": 12.9300003,
-   "value": 245670.01,
-   "valueEur": 214934,
-   "valueUsd": 245670,
+   "price": 12.96000003,
+   "value": 246240.0,
+   "valueEur": 215433,
+   "valueUsd": 246240,
    "basisUsd": 181884,
    "realizedUsd": -16090,
    "avgCost": 9.5729,
-   "unrealRet": 35.1,
+   "unrealRet": 35.4,
    "priceDate": "2026-07-17"
   },
   {
@@ -46202,14 +46287,34 @@
    "isin": "US64134X2018",
    "ccy": "USD",
    "shares": 35000.0,
-   "price": 6.76770019,
-   "value": 236869.51,
-   "valueEur": 207235,
-   "valueUsd": 236870,
+   "price": 6.65999984,
+   "value": 233099.99,
+   "valueEur": 203937,
+   "valueUsd": 233100,
    "basisUsd": 198036,
    "realizedUsd": 0,
    "avgCost": 5.6582,
-   "unrealRet": 19.6,
+   "unrealRet": 17.7,
+   "priceDate": "2026-07-17"
+  },
+  {
+   "account": "ALL",
+   "ticker": "NKTR",
+   "name": "NEKTAR THERAPEUTICS",
+   "byPort": {
+    "SQ": 3200.0
+   },
+   "isin": "US6402683063",
+   "ccy": "USD",
+   "shares": 3200.0,
+   "price": 67.5,
+   "value": 216000.0,
+   "valueEur": 188976,
+   "valueUsd": 216000,
+   "basisUsd": 206731,
+   "realizedUsd": -54345,
+   "avgCost": 64.6034,
+   "unrealRet": 4.5,
    "priceDate": "2026-07-17"
   },
   {
@@ -46223,34 +46328,14 @@
    "isin": "CA71385D1078",
    "ccy": "CAD",
    "shares": 1000000.0,
-   "price": 0.31,
-   "value": 310000.0,
-   "valueEur": 191630,
-   "valueUsd": 219033,
+   "price": 0.30000001,
+   "value": 300000.01,
+   "valueEur": 185448,
+   "valueUsd": 211968,
    "basisUsd": 229612,
    "realizedUsd": 0,
    "avgCost": 0.3173,
-   "unrealRet": -4.6,
-   "priceDate": "2026-07-17"
-  },
-  {
-   "account": "ALL",
-   "ticker": "NKTR",
-   "name": "NEKTAR THERAPEUTICS",
-   "byPort": {
-    "SQ": 3200.0
-   },
-   "isin": "US6402683063",
-   "ccy": "USD",
-   "shares": 3200.0,
-   "price": 67.75,
-   "value": 216800.0,
-   "valueEur": 189676,
-   "valueUsd": 216800,
-   "basisUsd": 206731,
-   "realizedUsd": -54345,
-   "avgCost": 64.6034,
-   "unrealRet": 4.9,
+   "unrealRet": -7.7,
    "priceDate": "2026-07-17"
   },
   {
@@ -46263,14 +46348,14 @@
    "isin": "US52886X1072",
    "ccy": "USD",
    "shares": 44000.0,
-   "price": 4.63999986,
-   "value": 204159.99,
-   "valueEur": 178618,
-   "valueUsd": 204160,
+   "price": 4.6550002,
+   "value": 204820.01,
+   "valueEur": 179195,
+   "valueUsd": 204820,
    "basisUsd": 218000,
    "realizedUsd": 0,
    "avgCost": 4.9545,
-   "unrealRet": -6.3,
+   "unrealRet": -6.0,
    "priceDate": "2026-07-17"
   },
   {
@@ -46283,14 +46368,14 @@
    "isin": "US75340L1044",
    "ccy": "USD",
    "shares": 100000.0,
-   "price": 2.01999998,
-   "value": 202000.0,
-   "valueEur": 176728,
-   "valueUsd": 202000,
+   "price": 2.02999997,
+   "value": 203000.0,
+   "valueEur": 177603,
+   "valueUsd": 203000,
    "basisUsd": 209673,
    "realizedUsd": 0,
    "avgCost": 2.0967,
-   "unrealRet": -3.7,
+   "unrealRet": -3.2,
    "priceDate": "2026-07-17"
   },
   {
@@ -46303,14 +46388,14 @@
    "isin": "US1420381089",
    "ccy": "USD",
    "shares": 100000.0,
-   "price": 1.66499996,
-   "value": 166500.0,
-   "valueEur": 145669,
-   "valueUsd": 166500,
+   "price": 1.64999997,
+   "value": 165000.0,
+   "valueEur": 144357,
+   "valueUsd": 165000,
    "basisUsd": 184177,
    "realizedUsd": 0,
    "avgCost": 1.8418,
-   "unrealRet": -9.6,
+   "unrealRet": -10.4,
    "priceDate": "2026-07-17"
   },
   {
@@ -46343,14 +46428,14 @@
    "isin": "US88032L6056",
    "ccy": "USD",
    "shares": 4000.0,
-   "price": 15.83500003,
-   "value": 63340.0,
-   "valueEur": 55416,
-   "valueUsd": 63340,
+   "price": 15.68999958,
+   "value": 62760.0,
+   "valueEur": 54908,
+   "valueUsd": 62760,
    "basisUsd": 43298,
    "realizedUsd": 0,
    "avgCost": 10.8244,
-   "unrealRet": 46.3,
+   "unrealRet": 45.0,
    "priceDate": "2026-07-17"
   }
  ],
