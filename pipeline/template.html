@@ -893,8 +893,14 @@ function fbInit(){
 }
 async function ownerSignIn(){
   const ok=await fbInit(); if(!ok) return alert('Google sign-in unavailable here');
-  try{ await firebase.auth().signInWithPopup(new firebase.auth.GoogleAuthProvider()); }
-  catch(e){ if(e&&e.code!=='auth/popup-closed-by-user') alert('Sign-in failed: '+(e.message||e)); }
+  const prov=new firebase.auth.GoogleAuthProvider();
+  try{ await firebase.auth().signInWithPopup(prov); }
+  catch(e){
+    if(e&&e.code==='auth/popup-closed-by-user') return;
+    // popups are blocked in iOS home-screen apps & strict browsers -> full-page redirect
+    try{ await firebase.auth().signInWithRedirect(prov); }
+    catch(e2){ alert('Sign-in failed: '+((e2&&e2.message)||(e&&e.message)||e)); }
+  }
 }
 function ownerSignOut(){ try{ firebase.auth().signOut(); }catch(e){} }
 async function onAuthChange(){
