@@ -843,6 +843,23 @@ function applyName(){
   document.title=_cfg.name;
 }
 function applyVisibility(){
+  /* guest mode (anyone who isn't the signed-in owner): read-only. No settings,
+     no research search (that queue burns the owner's API quota) — guests get a
+     picker of tickers whose data is already loaded (e.g. NVDA as a showcase). */
+  const guest=!isOwner();
+  const gear=document.getElementById('appset'); if(gear) gear.style.display=guest?'none':'';
+  const inp=document.getElementById('rs-search');
+  if(inp&&inp.parentElement) inp.parentElement.style.display=guest?'none':'';
+  const rr=document.getElementById('rs-recent');
+  if(rr&&guest&&window.DATA&&DATA){
+    const av=[...new Set([
+      ...DATA.holdings.filter(h=>h.assetType==='security').map(h=>h.ticker),
+      ...((_cfg.watchlist)||[]),
+      ...Object.keys(DATA.saEst||{}).filter(k=>!k.startsWith('_')&&k!=='PINK.V')])];
+    rr.innerHTML='<span style="font-size:11.5px;color:var(--muted);align-self:center">view only · pick a ticker:</span>'
+      +av.map(t=>`<button class="secbtn" data-rsopen="${esc(t)}">${esc(t)}</button>`).join('');
+    rr.querySelectorAll('[data-rsopen]').forEach(b=>b.onclick=()=>rsLoad(b.dataset.rsopen));
+  } else if(rr&&!guest&&rr.querySelector('[data-rsopen]')) rr.innerHTML='';
   let ov=document.getElementById('lockov');
   const locked=_cfg.public===false && !isOwner();
   if(locked){
@@ -1837,6 +1854,7 @@ function boot(){
     if(age<3*60000) window._veilOff();
     else setTimeout(()=>{ if(window._veilOff) window._veilOff(); },3500);
   }catch(e){ window._veilOff(); }
+  applyVisibility();   // guest defaults from first paint; owner controls return when auth restores
   SEC_CIK=DATA.secCik||{};
   document.getElementById('asof').textContent=new Date(DATA.asOf).toLocaleDateString('en-US',{month:'long',day:'numeric',year:'numeric'});
   document.getElementById('hcount').textContent=DATA.holdings.filter(h=>h.assetType!=='cash').length;
