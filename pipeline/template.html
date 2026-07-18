@@ -949,6 +949,7 @@ async function fsDataPoll(){
       renderKpis(); rerender(); applyName(); applyVisibility();
       if(_tab==='research'&&window.RS&&RS.tk) rsEstimates();   // fresh saEst tables reach an open ticker
       try{ localStorage.setItem('pc-lastdata', c.data); }catch(e){}   // next open starts from THIS state
+      liveState.lastEngine=new Date(); setBadge();
       if(window._veilOff) window._veilOff();   // fresh build is on screen — reveal
     }
   }catch(e){}
@@ -1363,10 +1364,12 @@ const NEWS_DOMAINS = new Set(["finance.yahoo.com","seekingalpha.com","stocktitan
 
 function setBadge(){
   const el=document.getElementById('livebadge'); if(!el) return;
-  if(liveState.lastParqet||liveState.lastPrice||liveState.lastNews){
+  /* minute-fresh engine data from Firestore already IS live — the "Snapshot" label
+     must not flash while client-side quote fetches are still warming up */
+  if(liveState.lastEngine||liveState.lastParqet||liveState.lastPrice||liveState.lastNews){
     const t=x=>x?x.toLocaleTimeString('en-US',{hour:'2-digit',minute:'2-digit'}):'';
     el.className='badge live'; el.innerHTML='<span class="pulse-dot"></span>LIVE';
-    el.title=(liveState.lastParqet?'portfolio '+t(liveState.lastParqet):'')+(liveState.lastPrice?' · prices '+t(liveState.lastPrice):'')+(liveState.lastNews?' · news '+t(liveState.lastNews):'');
+    el.title=(liveState.lastEngine?'engine '+t(liveState.lastEngine):'')+(liveState.lastParqet?' · portfolio '+t(liveState.lastParqet):'')+(liveState.lastPrice?' · prices '+t(liveState.lastPrice):'')+(liveState.lastNews?' · news '+t(liveState.lastNews):'');
   }
 }
 
