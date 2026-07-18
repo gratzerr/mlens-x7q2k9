@@ -1029,17 +1029,18 @@ function initAppSettings(){
   applyName();
   const shareUrl='https://gratzerr.github.io/mlens-x7q2k9/';
   let P=null;
-  const seed=()=>({name:_cfg.name, pub:_cfg.public!==false, ccy:_ccy, priv:_priv});
+  const seed=()=>({name:_cfg.name, pub:!(_cfg.hidden===true||_cfg.public===false), ccy:_ccy, priv:_priv});
   const draw=()=>{ if(!P) P=seed(); pop.innerHTML=`
     <div style="font-size:11px;text-transform:uppercase;letter-spacing:.6px;color:var(--muted);font-weight:660;margin-bottom:6px">Portfolio name</div>
     <input type="text" id="pnamein" value="${esc(P.name)}" maxlength="40" style="width:230px;margin-bottom:12px;
       background:var(--surface-2);border:1px solid var(--border);border-radius:8px;padding:7px 10px;
       font:inherit;font-size:13px;color:var(--ink);outline:none">
     <div style="font-size:11px;text-transform:uppercase;letter-spacing:.6px;color:var(--muted);font-weight:660;margin-bottom:7px">Sharing</div>
-    <div class="tfsel" style="margin-bottom:8px">
+    <div class="tfsel" style="margin-bottom:${_user?'8':'2'}px">
       <button data-vis="1" class="${P.pub?'on':''}">Public</button>
       <button data-vis="0" class="${!P.pub?'on':''}">Private</button>
     </div>
+    ${_user?'':'<div style="font-size:11px;color:var(--down);margin-bottom:8px">zum Ändern von Name/Sharing zuerst unten mit Google anmelden</div>'}
     <div style="display:flex;gap:6px;margin-bottom:12px">
       <input type="text" readonly value="${shareUrl}" id="sharein" style="flex:1;min-width:150px;
         background:var(--surface-2);border:1px solid var(--border);border-radius:8px;padding:6px 9px;
@@ -1096,7 +1097,7 @@ function initAppSettings(){
       _priv=P.priv; localStorage.setItem('pc-priv',_priv?'1':'0');
       refreshAllMoney();
       // portfolio settings (name, sharing) — only when changed; needs the owner login
-      const remoteChanged = P.name!==_cfg.name || P.pub!==(_cfg.public!==false);
+      const remoteChanged = P.name!==_cfg.name || P.pub!==!(_cfg.hidden===true||_cfg.public===false);
       if(remoteChanged){
         const ok=await saveConfig(stat,P.name,P.pub);
         if(!ok) return;                      // stat already shows why
