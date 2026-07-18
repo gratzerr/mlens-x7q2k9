@@ -348,6 +348,13 @@
   @media(max-width:560px){ .sd-stats{grid-template-columns:repeat(2,minmax(0,1fr))} .secov{padding:0} .secmodal{border-radius:0;min-height:100vh;max-width:none} }
 </style>
 
+<!-- static boot veil: visible from the VERY FIRST paint — nothing (skeleton or stale
+     numbers) shows until boot() decides the data is fresh and lifts it -->
+<div id="bootveil" style="position:fixed;inset:0;z-index:10001;background:var(--bg);display:flex;align-items:center;justify-content:center">
+  <div style="width:34px;height:34px;border:3px solid var(--line);border-top-color:var(--up);border-radius:50%;animation:bvspin .8s linear infinite"></div>
+  <style>@keyframes bvspin{to{transform:rotate(360deg)}}</style>
+</div>
+
 <div class="secov" id="secov"><div class="secmodal" id="secmodal"></div></div>
 <div class="wrap">
   <div class="breaking" id="breaking"></div>
@@ -1812,20 +1819,16 @@ function boot(){
     if(s&&DATA){ const j=JSON.parse(s);
       if(j&&j.generated&&(!DATA.generated||j.generated>DATA.generated)) DATA=j; }
   }catch(e){}
-  /* NEVER show a stale snapshot: if the best data on this device is older than a few
-     minutes, veil the page until the immediate Firestore poll swaps in the live build
+  /* the STATIC veil (first element in the markup) is already covering the page.
+     Lift it immediately when the data on this device is fresh (<3 min); otherwise
+     keep it until the immediate Firestore poll swaps in the live build
      (sub-second on a normal connection; 3.5s hard fallback so offline still renders) */
+  window._veilOff=()=>{ const e=document.getElementById('bootveil'); if(e) e.remove(); window._veilOff=null; };
   try{
     const age=Date.now()-Date.parse(String(DATA.generated||'').replace(' ','T')+':00Z');
-    if(!(age<3*60000)){
-      const v=document.createElement('div'); v.id='bootveil';
-      v.style.cssText='position:fixed;inset:0;z-index:9999;background:var(--bg);display:flex;align-items:center;justify-content:center';
-      v.innerHTML='<div style="width:34px;height:34px;border:3px solid var(--line);border-top-color:var(--up);border-radius:50%;animation:spin 0.8s linear infinite"></div><style>@keyframes spin{to{transform:rotate(360deg)}}</style>';
-      document.body.appendChild(v);
-      window._veilOff=()=>{ const e=document.getElementById('bootveil'); if(e) e.remove(); window._veilOff=null; };
-      setTimeout(()=>{ if(window._veilOff) window._veilOff(); },3500);
-    }
-  }catch(e){}
+    if(age<3*60000) window._veilOff();
+    else setTimeout(()=>{ if(window._veilOff) window._veilOff(); },3500);
+  }catch(e){ window._veilOff(); }
   SEC_CIK=DATA.secCik||{};
   document.getElementById('asof').textContent=new Date(DATA.asOf).toLocaleDateString('en-US',{month:'long',day:'numeric',year:'numeric'});
   document.getElementById('hcount').textContent=DATA.holdings.filter(h=>h.assetType!=='cash').length;
@@ -3738,6 +3741,7 @@ function drawLines(svg,tip,lines,pts){
 (async function start(){
   if(DATA){ boot(); fbInit(); return; }               // public: baked data, auth lazily for owner edits
   // private build: no data in the page at all — everything comes from Firestore
+  { const v=document.getElementById('bootveil'); if(v) v.remove(); }   // sign-in screen must be visible
   document.querySelector('.wrap').style.display='none';
   initTheme(); _cfg.public=false; applyVisibility();  // lock screen with "Owner sign in" button
   await fbInit();                                     // onAuthStateChanged -> fsLoadData() when owner
