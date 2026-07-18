@@ -1,8 +1,8 @@
 {
- "fileDate": "2026-07-18 03:18",
- "generated": "2026-07-18 03:39",
+ "fileDate": "2026-07-18 03:40",
+ "generated": "2026-07-18 04:01",
  "engine": "pp-exact (verified vs PP app 2026-07-11)",
- "totalSecuritiesEur": 2076209,
+ "totalSecuritiesEur": 2079300,
  "cashEur": -97891.71,
  "cashByAccount": [
   {
@@ -30,22 +30,22 @@
    "eur": 96.6
   }
  ],
- "totalEur": 1978318,
- "ttwrorSince2022": 405.11,
- "ttwrorYtd": 100.56,
- "ttwrorAnnualized": 42.84,
- "izf": 71.43,
+ "totalEur": 1981409,
+ "ttwrorSince2022": 405.9,
+ "ttwrorYtd": 100.87,
+ "ttwrorAnnualized": 42.89,
+ "izf": 71.53,
  "yearlyReturns": {
   "2022": 3.3,
   "2023": 11.8,
   "2024": 45.2,
   "2025": 50.2,
-  "2026": 100.6
+  "2026": 100.9
  },
  "realizedEur": 827200,
- "unrealizedEur": 480013,
+ "unrealizedEur": 483104,
  "realizedUsd": 998208,
- "unrealizedUsd": 529376,
+ "unrealizedUsd": 532909,
  "netContribEur": 667272,
  "netContribUsd": 739179,
  "earningsEur": 13297.85,
@@ -26585,9 +26585,9 @@
   },
   {
    "d": "2026-07-17",
-   "v": 2261217,
-   "e": 1978318,
-   "r": 4.051063,
+   "v": 2264750,
+   "e": 1981409,
+   "r": 4.058954,
    "c": 739179,
    "k": 667272,
    "q": 998208,
@@ -46121,15 +46121,15 @@
    "name": "RAPID MICRO BIOSYSTEMS INC-A"
   }
  ],
- "ppReferenceTtwror": 405.11,
+ "ppReferenceTtwror": 405.9,
  "ppReferenceDate": "2026-07-18",
- "ttwrorApproxSince2022": 405.11,
+ "ttwrorApproxSince2022": 405.9,
  "yearlyReturnsApprox": {
   "2022": 3.3,
   "2023": 11.8,
   "2024": 45.2,
   "2025": 50.2,
-  "2026": 100.6
+  "2026": 100.9
  },
  "holdings": [
   {
@@ -46214,6 +46214,27 @@
   },
   {
    "account": "ALL",
+   "ticker": "PINK.V",
+   "name": "PERIMETER MEDICAL IMAGING AI",
+   "byPort": {
+    "IBKR": 500000.0,
+    "SQ": 500000.0
+   },
+   "isin": "CA71385D1078",
+   "ccy": "CAD",
+   "shares": 1000000.0,
+   "price": 0.31,
+   "value": 310000.0,
+   "valueEur": 191630,
+   "valueUsd": 219033,
+   "basisUsd": 229612,
+   "realizedUsd": 0,
+   "avgCost": 0.3173,
+   "unrealRet": -4.6,
+   "priceDate": "2026-07-17"
+  },
+  {
+   "account": "ALL",
    "ticker": "NKTR",
    "name": "NEKTAR THERAPEUTICS",
    "byPort": {
@@ -46230,27 +46251,6 @@
    "realizedUsd": -54345,
    "avgCost": 64.6034,
    "unrealRet": 5.7,
-   "priceDate": "2026-07-17"
-  },
-  {
-   "account": "ALL",
-   "ticker": "PINK.V",
-   "name": "PERIMETER MEDICAL IMAGING AI",
-   "byPort": {
-    "IBKR": 500000.0,
-    "SQ": 500000.0
-   },
-   "isin": "CA71385D1078",
-   "ccy": "CAD",
-   "shares": 1000000.0,
-   "price": 0.305,
-   "value": 305000.0,
-   "valueEur": 188539,
-   "valueUsd": 215500,
-   "basisUsd": 229612,
-   "realizedUsd": 0,
-   "avgCost": 0.3173,
-   "unrealRet": -6.1,
    "priceDate": "2026-07-17"
   },
   {
