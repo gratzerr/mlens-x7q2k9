@@ -3049,6 +3049,7 @@ function rsInit(){
   const sug=document.getElementById('rs-sugg');
   const recents=()=>{try{return JSON.parse(localStorage.getItem('pc-rsrecent')||'[]');}catch(e){return [];}};
   const renderRecents=()=>{
+    if(!isOwner()){ applyVisibility(); return; }   // guests: read-only ticker picker instead of recents
     const list=recents();
     document.getElementById('rs-recent').innerHTML=list.length?
       '<span style="font-size:11px;text-transform:uppercase;letter-spacing:.5px;color:var(--muted);font-weight:660;align-self:center">Recent</span> '+
