@@ -3,33 +3,54 @@
  "news": [
   {
    "date": "2026-07-08",
-   "headline": "Form 144: RPID affiliate notifies sale of 10,000 Class A shares (option exercise)",
+   "headline": "Form 144: RPID insider notifies sale of 10,000 Class A shares (option exercise)",
    "source": "Stock Titan / SEC",
    "url": "https://www.stocktitan.net/sec-filings/RPID/144-rapid-micro-biosystems-inc-sec-filing-15df3a9aed2f.html",
-   "summary": "Small insider sale via option exercise; prior sales noted on Jun 10, Jun 22 and Jul 1."
+   "summary": "An RPID insider filed a Form 144 to sell 10,000 Class A shares obtained via option exercise, the latest in a string of small routine insider sales also dated June 10, June 22 and July 1, 2026."
+  },
+  {
+   "date": "2026-06-10",
+   "headline": "Rapid Micro Biosystems Announces Inducement Grant Under Nasdaq Listing Rule 5635(c)(4)",
+   "source": "GlobeNewswire",
+   "url": "https://www.globenewswire.com/news-release/2026/06/10/3310119/33206/en/Rapid-Micro-Biosystems-Announces-Inducement-Grant-Under-Nasdaq-Listing-Rule-5635-c-4.html",
+   "summary": "The company granted 60,000 restricted stock units to a newly hired employee as a material inducement to employment, vesting in three equal annual installments over three years."
+  },
+  {
+   "date": "2026-05-29",
+   "headline": "KeyBanc Capital Markets cuts Rapid Micro Biosystems price target to $5 from $8",
+   "source": "MarketBeat",
+   "url": "https://www.marketbeat.com/stocks/NASDAQ/RPID/price-target/",
+   "summary": "KeyBanc lowered its price target on RPID to $5 from $8, citing the dilutive impact of the May equity raise; the firm kept a positive rating on the growth thesis."
+  },
+  {
+   "date": "2026-05-22",
+   "headline": "Lake Street cuts Rapid Micro Biosystems price target to $7 from $8",
+   "source": "MarketBeat",
+   "url": "https://www.marketbeat.com/stocks/NASDAQ/RPID/price-target/",
+   "summary": "Lake Street Capital Markets, a joint bookrunner on the May offering, trimmed its price target to $7 from $8 following the pricing of the new share/warrant issuance."
+  },
+  {
+   "date": "2026-05-19",
+   "headline": "Rapid Micro Biosystems Announces Pricing of Up to Approximately $32 Million Underwritten Offering",
+   "source": "GlobeNewswire",
+   "url": "https://www.globenewswire.com/news-release/2026/05/19/3297111/33206/en/Rapid-Micro-Biosystems-Announces-Pricing-of-Up-to-Approximately-32-Million-Underwritten-Offering.html",
+   "summary": "RPID priced Class A shares with Series A/B warrants at a combined $1.955, raising about $9.8M in immediate gross proceeds (up to $32M if all warrants are later exercised for cash); Bain Capital Life Sciences, Armistice Capital and company insiders, including director Kirk Malloy, participated in the deal."
   },
   {
    "date": "2026-05-13",
-   "headline": "Q1 2026: revenue $8.0M (+11% YoY) beats forecast, EPS -$0.31 misses; Q2 guided to ~$7.8M",
-   "source": "Investing.com",
+   "headline": "Rapid Micro Biosystems Reports First Quarter 2026 Financial Results",
+   "source": "Investing.com / GlobeNewswire",
    "url": "https://www.investing.com/news/transcripts/earnings-call-transcript-rapid-micro-biosystems-misses-eps-revenue-exceeds-forecast-in-q1-2026-93CH-4686695",
-   "summary": "Growth-Detect system placements driving recurring consumables; FY26 consensus ~$39M (+17%)."
-  },
-  {
-   "date": "2026-05-20",
-   "headline": "Underwritten public offering: ~$9.8M gross proceeds",
-   "source": "Company/IR",
-   "url": "https://investors.rapidmicrobio.com/news-and-events/news-releases/",
-   "summary": "Balance-sheet top-up; dilution priced near then-market. Watch cash runway commentary at Q2."
+   "summary": "Q1 2026 revenue rose 11% YoY to $8.0M, beating estimates, while EPS of -$0.31 missed consensus; management guided Q2 revenue to roughly $7.8M and reaffirmed full-year 2026 targets of 30-38 Growth Direct placements and $37-41M revenue."
   }
  ],
  "catalysts": [
   {
    "when": "2026-08",
    "label": "Q2 2026 earnings (est. early/mid August)",
-   "detail": "Historically reports Q2 in early-to-mid August (Aug 4 in 2023, Aug 12 in 2025). Guided ~$7.8M revenue; watch new Growth Direct placements, consumables pull-through and cash runway after the May raise.",
+   "detail": "Historically reports Q2 in early-to-mid August (Aug 4 in 2023, Aug 12 in 2025). Guided ~$7.8M revenue; watch new Growth Direct placement cadence toward the 30-38 unit FY26 target, consumables pull-through, and cash runway following the May equity raise and subsequent sell-side price-target cuts.",
    "confirmed": false
   }
  ],
- "pulse": "Fresh position (Jul 14-15 buys ~$2.11 avg). Micro-cap automation play in pharma QC: Growth Direct systems seed recurring consumables/service revenue (~+11% YoY, FY26 consensus ~$39M, +17%). Story hinges on placement cadence and narrowing cash burn; May's ~$9.8M raise buys time but keeps dilution in the picture."
+ "pulse": "Fresh dilution-heavy stretch: a May offering (~$9.8M upfront, up to $32M if warrants are exercised) brought in Bain Capital, Armistice Capital and insider buying, but KeyBanc and Lake Street both cut price targets ($5 and $7 from $8) on the added share count, and the stock has drifted down into the ~$2 range with routine insider option-exercise sales continuing into July. Underlying business still executing on Growth Direct placements (Q1 revenue +11% YoY, FY26 guidance of 30-38 placements / $37-41M revenue reaffirmed), so the story remains a race between placement/consumables growth and continued cash burn and dilution ahead of the August Q2 report."
 }
