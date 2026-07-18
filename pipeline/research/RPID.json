@@ -6,7 +6,7 @@
    "headline": "Form 144: RPID insider notifies sale of 10,000 Class A shares (option exercise)",
    "source": "Stock Titan / SEC",
    "url": "https://www.stocktitan.net/sec-filings/RPID/144-rapid-micro-biosystems-inc-sec-filing-15df3a9aed2f.html",
-   "summary": "An RPID insider filed a Form 144 to sell 10,000 Class A shares obtained via option exercise, the latest in a string of small routine insider sales also dated June 10, June 22 and July 1, 2026."
+   "summary": "An RPID insider filed a Form 144 to sell 10,000 Class A shares obtained via option exercise, continuing a string of small routine insider sales also dated June 10 (5,000 shares), June 22 (3,688 shares) and July 1 (6,312 shares), against roughly 41.7 million shares outstanding."
   },
   {
    "date": "2026-06-10",
@@ -46,11 +46,11 @@
  ],
  "catalysts": [
   {
-   "when": "2026-08",
-   "label": "Q2 2026 earnings (est. early/mid August)",
-   "detail": "Historically reports Q2 in early-to-mid August (Aug 4 in 2023, Aug 12 in 2025). Guided ~$7.8M revenue; watch new Growth Direct placement cadence toward the 30-38 unit FY26 target, consumables pull-through, and cash runway following the May equity raise and subsequent sell-side price-target cuts.",
+   "when": "2026-07-31",
+   "label": "Q2 2026 earnings (analyst-calendar estimate, not yet company-confirmed)",
+   "detail": "Earnings-calendar trackers (TradingView, WallStreetZen) currently list July 31, 2026 as the next report date, though as of July 18 the company had not yet issued its customary advance press release fixing the date (it announced the May 13 Q1 date about a week ahead of time). Historically RPID has also reported Q2 in early-to-mid August (Aug 4 in 2023, Aug 12 in 2025). Watch the guided ~$7.8M Q2 revenue, new Growth Direct placement cadence toward the 30-38 unit FY26 target, consumables pull-through, and cash runway following the May equity raise and subsequent sell-side price-target cuts.",
    "confirmed": false
   }
  ],
- "pulse": "Fresh dilution-heavy stretch: a May offering (~$9.8M upfront, up to $32M if warrants are exercised) brought in Bain Capital, Armistice Capital and insider buying, but KeyBanc and Lake Street both cut price targets ($5 and $7 from $8) on the added share count, and the stock has drifted down into the ~$2 range with routine insider option-exercise sales continuing into July. Underlying business still executing on Growth Direct placements (Q1 revenue +11% YoY, FY26 guidance of 30-38 placements / $37-41M revenue reaffirmed), so the story remains a race between placement/consumables growth and continued cash burn and dilution ahead of the August Q2 report."
+ "pulse": "Fresh dilution-heavy stretch continues to weigh on sentiment: the May offering (~$9.8M upfront, up to $32M if warrants are exercised) brought in Bain Capital, Armistice Capital and insider buying, but KeyBanc and Lake Street both cut price targets ($5 and $7 from $8) on the added share count. The stock has traded roughly flat-to-down through July (around $2.21 on July 15, 2026, still off about 10% since March 31 per market trackers), with routine small insider option-exercise sales continuing into July and no major operational news since the June 10 inducement grant. The underlying business is still executing on Growth Direct placements (Q1 revenue +11% YoY, FY26 guidance of 30-38 placements / $37-41M revenue reaffirmed), so the story remains a race between placement/consumables growth and continued cash burn and dilution ahead of the next quarterly report, tentatively pegged to late July/early August but not yet confirmed by the company."
 }

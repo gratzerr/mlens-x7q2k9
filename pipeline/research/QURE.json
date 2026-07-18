@@ -2,39 +2,39 @@
   "ticker": "QURE",
   "news": [
     {
+      "date": "2026-07-14",
+      "headline": "uniQure (QURE) Rebound Puts AMT-130 Valuation Debate Back In Focus",
+      "source": "Simply Wall St",
+      "url": "https://simplywall.st/stocks/us/pharmaceuticals-biotech/nasdaq-qure/uniqure/news/uniqure-qure-rebound-puts-amt-130-valuation-debate-back-in-f",
+      "summary": "Following uniQure's sharp share-price rebound, analysts flagged a wide gap between the stock's recent close (around $41) and a widely cited fair-value estimate near $64.47, driven by optimism over AMT-130's accelerated-approval path and pipeline expansion into epilepsy, Fabry disease and SOD1-ALS. The piece also cautioned that QURE trades at roughly 18.9x forward metrics versus a biotech peer average near 5.1x, implying valuation risk if regulatory or clinical sentiment cools."
+    },
+    {
       "date": "2026-07-02",
       "headline": "uniQure CEO sells 21,082 shares after option exercise under 10b5-1 plan",
       "source": "StockTitan",
       "url": "https://www.stocktitan.net/sec-filings/QURE/form-4-uni-qure-n-v-insider-trading-activity-7c5938986f9c.html",
-      "summary": "CEO Matthew Kapusta exercised options at $19.39 and sold the resulting 21,082 ordinary shares at roughly $45-$46 under a pre-arranged Rule 10b5-1 trading plan. Similar 10b5-1 exercises/sales were also reported for the CMO and a director around the same time."
-    },
-    {
-      "date": "2026-07-01",
-      "headline": "uniQure (QURE) Now Trades Above Golden Cross: Time to Buy?",
-      "source": "Zacks / Yahoo Finance",
-      "url": "https://www.zacks.com/stock/news/2946194/uniqure-qure-now-trades-above-golden-cross-time-to-buy",
-      "summary": "QURE's 50-day moving average crossed above its 200-day moving average, a bullish 'golden cross' technical signal, after the stock gained roughly 72% over the prior four weeks. Zacks flagged the technical setup as potentially attractive but noted the stock still carries a Hold rank pending fundamental catalysts."
+      "summary": "CEO Matthew Kapusta exercised options at $19.39 and sold the resulting 21,082 ordinary shares at roughly $45-$46 under a pre-arranged Rule 10b5-1 trading plan. Similar 10b5-1 exercises/sales were also reported for the CMO and a director around the same time (late June/early July)."
     },
     {
       "date": "2026-06-25",
       "headline": "uniQure Announces Closing of Upsized Public Offering and Full Exercise by Underwriters of Option to Purchase Additional Shares",
       "source": "GlobeNewswire",
       "url": "https://www.globenewswire.com/news-release/2026/06/25/3317934/0/en/uniqure-announces-closing-of-upsized-public-offering-and-full-exercise-by-underwriters-of-option-to-purchase-additional-shares.html",
-      "summary": "uniQure closed its upsized underwritten offering of ordinary shares at $45.50 per share, raising approximately $259 million in gross proceeds including the underwriters' full option exercise. Proceeds are earmarked to fund the planned AMT-130 BLA submission and broader pipeline development."
+      "summary": "uniQure closed its underwritten offering of 5,686,813 ordinary shares at $45.50 per share, upsized from an initially announced $150 million raise and including the underwriters' full option exercise, for gross proceeds of approximately $259 million. Proceeds are earmarked to fund the planned AMT-130 BLA submission and broader pipeline development."
     },
     {
       "date": "2026-06-19",
       "headline": "uniQure Announces Preliminary Data on the First Cohort in the Phase I/IIa Clinical Trial of AMT-260 in Refractory Mesial Temporal Lobe Epilepsy",
       "source": "GlobeNewswire",
-      "url": "https://www.globenewswire.com/news-release/2026/06/19/3314701/0/en/uniqure-announces-preliminary-data-on-the-first-cohort-in-the-phase-i-iia-clinical-trial-of-amt-260-in-refractory-mesial-temporal-lobe-epilepsy.html",
-      "summary": "Six-month follow-up data on the first, low-dose AMT-260 cohort (six patients) showed the therapy was generally well tolerated with no serious adverse events, and three of six patients had meaningful reductions (79%-100%) in disabling seizures. Enrollment in the higher-dose cohort is ongoing."
+      "url": "https://www.globenewswire.com/news-release/2026/06/19/3314701/0/en/uniQure-Announces-Preliminary-Data-on-the-First-Cohort-in-the-Phase-I-IIa-Clinical-Trial-of-AMT-260-in-Refractory-Mesial-Temporal-Lobe-Epilepsy.html",
+      "summary": "Six-month follow-up data on the first, low-dose AMT-260 cohort (six patients) showed the therapy was generally well tolerated with no serious adverse events, and three of six patients had meaningful reductions (79%-100%) in disabling seizures. Enrollment in the higher-dose cohort is ongoing, with updated data from both cohorts expected in H1 2027."
     },
     {
       "date": "2026-06-18",
-      "headline": "Barclays, Cantor Fitzgerald and Leerink sharply raise uniQure price targets after FDA reversal",
+      "headline": "Barclays, Cantor Fitzgerald, RBC, Goldman Sachs and others sharply raise uniQure price targets after FDA reversal",
       "source": "Investing.com",
       "url": "https://www.investing.com/news/analyst-ratings/barclays-upgrades-uniqure-stock-rating-on-huntingtons-timeline-93CH-4749969",
-      "summary": "Following the FDA's reversal on the AMT-130 filing pathway, Barclays upgraded QURE to Overweight with a $65 target, Cantor Fitzgerald upgraded to Overweight at $61, and Leerink raised its target to $70 (from $36); H.C. Wainwright and Mizuho also lifted targets to $80 and $68 respectively. The wave of upgrades followed the stock's roughly 78% single-day surge."
+      "summary": "Following the FDA's reversal on the AMT-130 filing pathway, Barclays upgraded QURE to Overweight with a $65 target, Cantor Fitzgerald upgraded to Overweight at $61, RBC Capital raised its target to $65, Goldman Sachs raised its target to $46 (Neutral), and H.C. Wainwright and Mizuho lifted targets to $80 and $68 respectively. The wave of upgrades followed the stock's roughly 78% single-day surge."
     },
     {
       "date": "2026-06-17",
@@ -70,9 +70,9 @@
       "confirmed": false
     },
     {
-      "when": "2026-07-28 (est.)",
+      "when": "2026-07-28 to 2026-08-03 (est.)",
       "label": "Q2 2026 earnings report",
-      "detail": "uniQure is expected to report second-quarter 2026 financial results and provide a pipeline/regulatory update; date is an analyst/data-provider estimate (aggregators list July 28) and has not yet been formally confirmed by the company.",
+      "detail": "uniQure is expected to report second-quarter 2026 financial results and provide a pipeline/regulatory update; the window is an analyst/data-provider estimate based on prior-year timing and has not yet been formally confirmed by the company.",
       "confirmed": false
     },
     {
@@ -100,5 +100,5 @@
       "confirmed": false
     }
   ],
-  "pulse": "uniQure shares exploded roughly 70-80% in mid-June 2026 after the FDA reversed course and agreed that ~3-year Phase I/II data on AMT-130 can support an accelerated-approval BLA in Huntington's disease, triggering a wave of analyst upgrades (targets up to $80) and enabling a $259M capital raise to fund the filing. As of July 18 the stock has settled into a consolidation range (around $41-42) with no material fresh news since the early-July insider 10b5-1 filings, as the market now awaits the Q2 2026 earnings update (still only an unconfirmed ~July 28 estimate) and the actual Q3 2026 BLA and UK MHRA filings, which are due imminently since Q3 2026 began July 1; a residual open item is that the FDA and uniQure still need to finalize the design of the mandated post-approval confirmatory study before the BLA can be submitted. Sentiment remains bullish (Strong Buy consensus, average target in the mid-$60s) but hinges on execution of the BLA submission and eventual FDA review outcome."
+  "pulse": "uniQure shares exploded roughly 70-80% in mid-June 2026 after the FDA reversed course and agreed that ~3-year Phase I/II data on AMT-130 can support an accelerated-approval BLA in Huntington's disease, triggering a wave of analyst upgrades (targets up to $80) and enabling a $259M capital raise to fund the filing. As of July 18 the stock has settled into a consolidation range in the low-$40s (around $40-41), with no major fresh operational news since early July beyond routine insider 10b5-1 sales and a Simply Wall St valuation piece (mid-July) highlighting a wide gap between the market price and a ~$64 fair-value estimate alongside a rich 18.9x multiple versus biotech peers; the market now awaits the Q2 2026 earnings update (still only an unconfirmed late-July/early-August window) and the actual Q3 2026 BLA and UK MHRA filings, which are due imminently since Q3 2026 began July 1. A residual open item is that the FDA and uniQure still need to finalize the design of the mandated post-approval confirmatory study before the BLA can be submitted. Sentiment remains bullish (Strong Buy consensus, average target in the mid-$60s) but hinges on execution of the BLA submission and eventual FDA review outcome."
 }

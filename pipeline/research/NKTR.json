@@ -6,21 +6,21 @@
       "headline": "Nektar Therapeutics (NASDAQ:NKTR) Stock Price Up 5.2% - What's Next?",
       "source": "Daily Political",
       "url": "https://www.dailypolitical.com/2026/07/09/nektar-therapeutics-nasdaqnktr-stock-price-up-5-2-whats-next.html",
-      "summary": "NKTR shares gained about 5% on July 9, 2026, extending the summer rally amid continued sector-wide optimism in immunology/dermatology biotech; the stock carries a consensus 'Moderate Buy' rating from analysts (nine Buy, one Hold, one Sell) with an average price target near $150."
+      "summary": "NKTR shares gained about 5% on July 9, 2026, extending the summer rally amid continued sector-wide optimism in immunology/dermatology biotech; the stock carries a consensus 'Strong Buy'-leaning rating from analysts (roughly seven to nine Buy, one Hold, zero to one Sell) with an average price target in the $130-$150 range."
     },
     {
       "date": "2026-07-04",
       "headline": "Jonathan Zalevsky Sells 5,681 Shares of Nektar Therapeutics (NASDAQ:NKTR) Stock",
       "source": "Daily Political",
       "url": "https://www.dailypolitical.com/2026/07/04/jonathan-zalevsky-sells-5681-shares-of-nektar-therapeutics-nasdaqnktr-stock.html",
-      "summary": "Nektar's Chief Research and Development Officer Jonathan Zalevsky sold 5,681 shares on June 30, 2026 for about $397,670 under a Rule 10b5-1 trading plan adopted in March 2026, echoing CEO Howard Robin's insider sale from the same week."
+      "summary": "Nektar's Chief Research and Development Officer Jonathan Zalevsky sold 5,681 shares on June 30, 2026 at $70.00 per share under a Rule 10b5-1 trading plan adopted in March 2026, echoing CEO Howard Robin's insider sale from the same week."
     },
     {
       "date": "2026-07-02",
       "headline": "Nektar Therapeutics Stock Clocks Best Day In Over 2 Months As Investors Await Upcoming Clinical Data In Eczema",
       "source": "Stocktwits",
       "url": "https://stocktwits.com/news-articles/markets/equity/nktr-stock-clocks-best-day-in-over-2-months-as-investors-await-upcoming-clinical-data-in-eczema/cZm97YVR7jf",
-      "summary": "NKTR shares jumped roughly 10.65% after Canaccord flagged Nektar as a likely sentiment beneficiary of AbbVie's planned Apogee Therapeutics acquisition in immunology/dermatology, with investors also positioning ahead of the July 2026 start of the Phase 3 ZENITH-AD program."
+      "summary": "NKTR shares jumped roughly 10.65% after Canaccord flagged Nektar as a likely sentiment beneficiary of AbbVie's planned $10.9 billion acquisition of Apogee Therapeutics in immunology/dermatology, with investors also positioning ahead of the July 2026 start of the Phase 3 ZENITH-AD program."
     },
     {
       "date": "2026-06-27",
@@ -48,8 +48,14 @@
     {
       "when": "July 2026",
       "label": "Phase 3 ZENITH-AD initiation (biologic-naive studies)",
-      "detail": "Nektar plans to start the first two of five ZENITH-AD Phase 3 trials in moderate-to-severe atopic dermatitis, enrolling biologic-naive patients; a third trial in biologic-experienced patients is planned to start a few months later. As of July 18, 2026 no first-patient-dosed announcement had yet been made.",
+      "detail": "Nektar plans to start the first two of five ZENITH-AD Phase 3 trials in moderate-to-severe atopic dermatitis, enrolling biologic-naive patients across roughly 150 sites in North America, Europe and Asia-Pacific per trial; a third trial in biologic-experienced patients is planned to start a few months later. As of July 18, 2026 no first-patient-dosed announcement had yet been made.",
       "confirmed": true
+    },
+    {
+      "when": "August 6, 2026 (estimated)",
+      "label": "Q2 2026 earnings report",
+      "detail": "Next scheduled quarterly financial results and pipeline update; third-party earnings calendars point to August 6, 2026, consistent with the prior year's August 7, 2025 Q2 report, but Nektar had not yet issued an official press release confirming the date/time as of July 18, 2026. Expected to include an update on ZENITH-AD initiation progress and cash runway (currently guided into 2028).",
+      "confirmed": false
     },
     {
       "when": "H2 2026",
@@ -64,12 +70,6 @@
       "confirmed": true
     },
     {
-      "when": "Early-to-mid August 2026 (estimated)",
-      "label": "Q2 2026 earnings report",
-      "detail": "Next scheduled quarterly financial results and pipeline update, expected roughly three months after the May 7, 2026 Q1 2026 report (Q2 2025 results were reported August 7, 2025, suggesting a similar early-August 2026 date), including an update on ZENITH-AD initiation progress and cash runway (currently guided into 2028). Exact date not yet confirmed as of July 18, 2026.",
-      "confirmed": false
-    },
-    {
       "when": "Mid-2028",
       "label": "First ZENITH-AD Phase 3 data readout",
       "detail": "Topline results from the first two biologic-naive ZENITH-AD atopic dermatitis studies are expected, marking the first pivotal efficacy readout for rezpegaldesleukin.",
@@ -82,5 +82,5 @@
       "confirmed": false
     }
   ],
-  "pulse": "Nektar shares have kept climbing through mid-July 2026 (touching the mid-$70s after a roughly 5% pop on July 9, and sharply higher versus a year ago) as the company pushes rezpegaldesleukin, its Treg-stimulating biologic, toward pivotal testing, backed by over $1 billion in cash after a series of 2026 equity raises. The five-trial Phase 3 ZENITH-AD program in atopic dermatitis was slated to begin in July 2026, with a Phase 3 alopecia areata program and a new-indication proof-of-concept study also planned for later this year, but as of July 18 no formal ZENITH-AD first-patient-dosed announcement had been made and the first pivotal data won't read out until mid-2028. Sentiment through late June and July was boosted by FTSE Russell index inclusion, continued hiring, and sector-wide optimism following AbbVie's Apogee Therapeutics acquisition (seen as a read-through validating Nektar's atopic-dermatitis approach), tempered by routine 10b5-1 insider selling from both the CEO and R&D chief and a wide analyst price-target spread (roughly $80 to $192)."
+  "pulse": "Nektar shares have kept climbing through mid-July 2026 (touching the low-$70s after a roughly 5% pop on July 9, and sharply higher versus a year ago) as the company pushes rezpegaldesleukin, its Treg-stimulating biologic, toward pivotal testing, backed by over $1 billion in cash after a series of 2026 equity raises. The five-trial Phase 3 ZENITH-AD program in atopic dermatitis was slated to begin in July 2026, with a Phase 3 alopecia areata program and a new-indication proof-of-concept study also planned for later this year, but as of July 18 no formal ZENITH-AD first-patient-dosed announcement had been made and the first pivotal data won't read out until mid-2028; Q2 2026 earnings are estimated for around August 6 though not yet officially confirmed. Sentiment through late June and July was boosted by FTSE Russell index inclusion, continued hiring, and sector-wide optimism following AbbVie's $10.9 billion Apogee Therapeutics acquisition (seen as a read-through validating Nektar's atopic-dermatitis approach), tempered by routine 10b5-1 insider selling from both the CEO and R&D chief and a wide analyst price-target spread (roughly $80 to $192)."
 }

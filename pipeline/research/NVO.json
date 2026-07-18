@@ -16,11 +16,11 @@
       "summary": "At the ISTH Congress in Paris (July 11-15, 2026), Novo Nordisk presented interim FRONTIER4 extension data showing long-term safety and efficacy of investigational denecimig prophylaxis in 426 children, adolescents and adults with hemophilia A, with or without inhibitors, across once-weekly to once-monthly dosing regimens. Denecimig, submitted to the FDA via BLA in September 2025, is positioned as a potential first FVIIIa-mimetic prophylaxis option; Novo also reported first-time explorer10 data on concizumab in children with inhibitors."
     },
     {
-      "date": "2026-07-07",
-      "headline": "Vivani Medical enters into agreement with Novo Nordisk to evaluate NPM-139, a miniature, ultra-long-acting semaglutide implant for chronic weight management",
-      "source": "GlobeNewswire / CNBC",
-      "url": "https://www.globenewswire.com/news-release/2026/07/07/3323068/0/en/vivani-medical-enters-into-agreement-with-novo-nordisk-to-evaluate-npm-139-a-miniature-ultra-long-acting-semaglutide-implant-for-chronic-weight-management.html",
-      "summary": "Novo Nordisk agreed to evaluate Vivani Medical's NPM-139, a miniature NanoPortal-based implant designed to deliver semaglutide for months via a once- or twice-yearly procedure, with no exclusivity granted under the non-binding deal. A first-in-human Phase 1 study versus Wegovy injections is expected to start mid-2026 with topline data by year-end, targeting the adherence and drop-out problems that limit real-world GLP-1 effectiveness."
+      "date": "2026-07-03",
+      "headline": "UK MHRA grants Wegovy (semaglutide) conditional marketing authorisation to treat MASH liver disease with moderate-to-advanced fibrosis",
+      "source": "GOV.UK / FirstWord Pharma",
+      "url": "https://www.gov.uk/government/news/semaglutide-wegovy-approved-to-treat-form-of-liver-disease",
+      "summary": "The UK's Medicines and Healthcare products Regulatory Agency granted Novo Nordisk's Wegovy injection a conditional marketing authorisation on July 3, 2026 to treat metabolic dysfunction-associated steatohepatitis (MASH) in adults with moderate-to-advanced liver fibrosis, following the drug's US MASH approval in August 2025. The UK nod adds a third approved indication for semaglutide beyond weight management and cardiovascular risk reduction, though full authorisation still requires further confirmatory evidence from ongoing studies."
     },
     {
       "date": "2026-07-01",
@@ -48,7 +48,7 @@
     {
       "when": "2026-08-05",
       "label": "Q2 2026 earnings report",
-      "detail": "Novo Nordisk is scheduled to report second-quarter and first-half 2026 financial results before the market opens on August 5, 2026, with investors watching for updated full-year guidance, US Wegovy/Ozempic volume and share trends including early Medicare GLP-1 Bridge uptake, and commentary on competitive pressure from Eli Lilly.",
+      "detail": "Novo Nordisk is scheduled to report second-quarter and first-half 2026 financial results before the market opens on August 5, 2026, with investors watching for updated full-year guidance (currently a 4%-12% adjusted sales/operating-profit decline range at constant exchange rates), US Wegovy/Ozempic volume and share trends including early Medicare GLP-1 Bridge uptake, and commentary on competitive pressure from Eli Lilly.",
       "confirmed": true
     },
     {
@@ -66,7 +66,7 @@
     {
       "when": "H2 2026",
       "label": "Wegovy pill commercial roll-out across EU member states",
-      "detail": "Following the European Commission's July 15, 2026 marketing authorization (after the CHMP's May 2026 positive opinion), Novo Nordisk plans to launch the oral Wegovy pill commercially across EU countries through H2 2026, with pricing and reimbursement negotiated market-by-market; UK availability via private prescription began after a June 2026 MHRA approval, with NHS reimbursement still pending a separate NICE review.",
+      "detail": "Following the European Commission's July 15, 2026 marketing authorization (after the CHMP's May 2026 positive opinion), Novo Nordisk plans to launch the oral Wegovy pill commercially across EU countries through H2 2026, with pricing and reimbursement negotiated market-by-market; UK availability via private prescription began after a June 2026 MHRA approval (with a separate July 3, 2026 MHRA nod for Wegovy injection in MASH liver disease), while NHS reimbursement of the pill still awaits a separate NICE review.",
       "confirmed": true
     },
     {
@@ -84,15 +84,15 @@
     {
       "when": "Ongoing through ~February 2027",
       "label": "DKK 15 billion share buyback programme",
-      "detail": "Novo Nordisk is executing a share repurchase programme of up to DKK 15 billion over a 12-month period that began February 4, 2026; weekly updates through mid-July 2026 confirmed cumulative repurchases of roughly 24 million B shares (at an average price of ~DKK 272.45, totaling over DKK 6.5 billion) since inception, with further weekly updates due through the programme's conclusion.",
+      "detail": "Novo Nordisk is executing a share repurchase programme of up to DKK 15 billion over a 12-month period that began February 4, 2026 (current tranche running May 6, 2026 to February 1, 2027 for up to DKK 11.2 billion); weekly updates through July 13, 2026 confirmed cumulative repurchases since inception of roughly 24.0 million B shares (average price ~DKK 272.45, transaction value over DKK 6.5 billion), taking treasury holdings to about 0.9% of share capital, with further weekly updates due through the programme's conclusion.",
       "confirmed": true
     },
     {
       "when": "Mid-2026 start / results by year-end 2026",
       "label": "Vivani Medical NPM-139 semaglutide implant Phase 1 study",
-      "detail": "Under the July 7, 2026 agreement with Vivani Medical, a first-in-human Phase 1 trial of the NPM-139 ultra-long-acting semaglutide implant (versus Wegovy injections) is expected to begin mid-2026, with topline safety/PK/tolerability results anticipated by year-end 2026 -- an early read on a potential twice-yearly dosing alternative to weekly injections.",
+      "detail": "Under a July 7, 2026 agreement with Vivani Medical, a first-in-human Phase 1 trial of the NPM-139 ultra-long-acting semaglutide implant (versus Wegovy injections) is expected to begin mid-2026, with topline safety/PK/tolerability results anticipated by year-end 2026 -- an early read on a potential twice-yearly dosing alternative to weekly injections.",
       "confirmed": false
     }
   ],
-  "pulse": "Novo Nordisk closed out a busy summer stretch on a regulatory high note, winning European Commission approval on July 15 for the Wegovy pill as the first oral GLP-1 for weight management in the EU, on top of the Medicare GLP-1 Bridge's July 1 launch giving US Medicare patients $50-a-month access to Wegovy. Those commercial tailwinds are counterbalanced by a disclosed June cyberattack that exposed clinical-trial, IP and AI-model data (with no ransom paid and no operational disruption), plus a still-lingering competitive threat from Eli Lilly's oral Foundayo pill; pipeline diversification continues via fresh long-term denecimig hemophilia A data and a new Vivani Medical deal to test a twice-yearly semaglutide implant. The next major checkpoints are the August 5, 2026 Q2 earnings report and CagriSema's FDA decision expected later in the year, both key swing factors for the long-dated call position."
+  "pulse": "Novo Nordisk has strung together a run of regulatory wins into mid-July 2026 -- EU approval of the Wegovy pill (July 15), a UK MHRA nod for Wegovy in MASH liver disease (July 3), and the July 1 launch of the Medicare GLP-1 Bridge giving US Medicare patients $50-a-month Wegovy access -- while continuing to diversify its pipeline via fresh denecimig hemophilia A data and a new Vivani Medical deal for a twice-yearly semaglutide implant. Those tailwinds are tempered by a disclosed June cyberattack (no ransom paid, no operational disruption) and an unresolved competitive battle with Eli Lilly's oral Foundayo pill, against a backdrop of narrowed full-year guidance still pointing to a sales/profit decline. For the long-dated $40 call position, the next key checkpoints are the August 5, 2026 Q2 earnings report and CagriSema's FDA decision expected in Q4 2026, both of which will shape whether Novo's regulatory momentum translates into a durable growth reacceleration versus Lilly."
 }
