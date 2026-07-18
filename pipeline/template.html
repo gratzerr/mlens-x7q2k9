@@ -847,7 +847,9 @@ function applyVisibility(){
      no research search (that queue burns the owner's API quota) — guests get a
      picker of tickers whose data is already loaded (e.g. NVDA as a showcase). */
   const guest=!isOwner();
-  const gear=document.getElementById('appset'); if(gear) gear.style.display=guest?'none':'';
+  // gear stays VISIBLE for guests, just inert (Rafael: sehen ja, klicken nein)
+  const gear=document.getElementById('appset');
+  if(gear){ gear.style.opacity=guest?'0.45':''; gear.style.cursor=guest?'default':''; gear.title=guest?'owner only':'settings'; }
   const inp=document.getElementById('rs-search');
   if(inp&&inp.parentElement) inp.parentElement.style.display=guest?'none':'';
   const rr=document.getElementById('rs-recent');
@@ -1083,6 +1085,7 @@ function initAppSettings(){
   window._drawAppSettings=draw;
   draw();
   btn.addEventListener('click',e=>{e.stopPropagation();
+    if(!isOwner()) return;                   // guests see the gear but it does nothing
     const opening=pop.style.display==='none';
     if(opening){ P=seed(); draw(); }         // fresh pending state on every open
     pop.style.display=opening?'':'none';
