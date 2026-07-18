@@ -228,6 +228,7 @@
   .htable td:first-child{text-align:left;padding-left:2px}
   .htable .c1{font-weight:650;font-size:13.5px;font-variant-numeric:tabular-nums}
   .htable .c2{font-size:11.5px;color:var(--muted);margin-top:1px;font-variant-numeric:tabular-nums}
+  .htable .c2.up{color:var(--up)} .htable .c2.down{color:var(--down)}
   .htable .hname{display:flex;align-items:center;gap:9px;min-width:0}
   .htable .hname .nm2{font-size:11.5px;color:var(--muted);max-width:150px;overflow:hidden;text-overflow:ellipsis}
   .htable tr.cashrow td{color:var(--muted)}
@@ -361,7 +362,7 @@
   <header class="top">
     <div>
       <div class="title"><span class="dot"></span><span id="ptitle">Rafael's Portfolio</span></div>
-      <div class="sub"><span id="livebadge" class="badge snap">Snapshot</span> As of <b id="asof"></b> · <span id="hcount"></span> positions</div>
+      <div class="sub"><span id="livebadge" class="badge snap"></span> As of <b id="asof"></b> · <span id="hcount"></span> positions</div>
     </div>
     <div style="position:relative;display:flex;align-items:center;gap:8px">
       <button class="secbtn" id="secalertbtn" style="display:none;margin-right:0">SEC alerts</button>
@@ -681,7 +682,6 @@ function renderChart(){
        <stop offset="1" stop-color="${acc}" stop-opacity="0"/></linearGradient></defs>`+
     `<path d="${area}" fill="url(#g)"/>`+
     `<path d="${line}" fill="none" stroke="${acc}" stroke-width="2.4" stroke-linejoin="round" stroke-linecap="round"/>`+
-    `<circle cx="${X(pts[pts.length-1].d).toFixed(1)}" cy="${Y(val(pts[pts.length-1])).toFixed(1)}" r="4" fill="${acc}" stroke="${cvar('--surface')}" stroke-width="2"/>`+
     `<line class="cross" id="cx" x1="0" y1="${pad.t}" x2="0" y2="${yb}" style="opacity:0"/>`+
     `<circle id="cd" r="4.5" fill="${acc}" stroke="${cvar('--surface')}" stroke-width="2" style="opacity:0"/>`;
   const cx=svg.querySelector('#cx'), cd=svg.querySelector('#cd');
@@ -975,6 +975,7 @@ async function fsDataPoll(){
     const c=await fsGet(isOwner());
     if(!c.data) return;
     const fresh=JSON.parse(c.data);
+    if(fresh&&fresh.generated){ liveState.lastEngine=new Date(); setBadge(); }   // poll ok = engine data is current, even without a swap
     /* accept any DIFFERENT build, not only lexically newer: mixed-timezone stamps
        (Mac EEST vs runner UTC) once blocked updates for hours. Firestore always
        holds the latest pushed build, so "different" == "newer". */
@@ -1884,8 +1885,9 @@ function boot(){
   window._veilOff=()=>{ const e=document.getElementById('bootveil'); if(e) e.remove(); window._veilOff=null; };
   try{
     const age=Date.now()-Date.parse(String(DATA.generated||'').replace(' ','T')+':00Z');
-    if(age<3*60000) window._veilOff();
-    else setTimeout(()=>{ if(window._veilOff) window._veilOff(); },3500);
+    if(age<3*60000){ window._veilOff(); liveState.lastEngine=new Date(); setBadge(); }   // fresh = LIVE, no Snapshot flash
+    else setTimeout(()=>{ if(window._veilOff){ window._veilOff();
+      const b=document.getElementById('livebadge'); if(b&&!b.textContent) b.textContent='Snapshot'; } },3500);
   }catch(e){ window._veilOff(); }
   applyVisibility();   // guest defaults from first paint; owner controls return when auth restores
   SEC_CIK=DATA.secCik||{};
