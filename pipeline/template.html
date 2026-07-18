@@ -523,6 +523,10 @@ function colorFor(i){
 /* display settings: currency (USD/EUR at today's ECB rate) + privacy (mask amounts) */
 let _ccy = localStorage.getItem('pc-ccy')||'USD';
 let _priv = localStorage.getItem('pc-priv')==='1';
+/* "Hide amounts" is an OWNER convenience (screen sharing). A leftover flag on a
+   guest device would show %-only with no way to turn it off (settings are inert
+   for guests) — so guests always see full values. */
+try{ if(_priv && localStorage.getItem('pc-og')!=='1'){ _priv=false; localStorage.removeItem('pc-priv'); } }catch(e){}
 const curSym = () => _ccy==='EUR' ? '€' : '$';
 const inCcy = n => _ccy==='EUR' ? n/(DATA.usdPerEur||1.14) : n;
 const MASK = '•••••';
