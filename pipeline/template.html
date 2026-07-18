@@ -948,7 +948,7 @@ async function fsDataPoll(){
       Object.assign(_cfg,{name:c.name,public:c.public,owner:c.owner}); cfgLists(c);
       renderKpis(); rerender(); applyName(); applyVisibility();
       if(_tab==='research'&&window.RS&&RS.tk) rsEstimates();   // fresh saEst tables reach an open ticker
-      try{ localStorage.setItem('pc-lastdata', c.data); }catch(e){}   // next open starts from THIS state
+      _saveLast();   // enriched (livePrice restored above) — next open paints this exact state
       liveState.lastEngine=new Date(); setBadge();
       if(window._veilOff) window._veilOff();   // fresh build is on screen — reveal
     }
@@ -1419,7 +1419,11 @@ async function refreshPrices(){
   if(!any) return;
   liveState.lastPrice=new Date();
   renderHoldingsTable(); renderHoldings(); setBadge();
+  _saveLast();   // a refresh must repaint the LAST-SEEN prices, not minute-old engine ones
 }
+/* persist the enriched on-screen state (incl. livePrice/dayChange) — a page refresh
+   boots from exactly what the user last saw, so no price ever visibly "jumps back" */
+function _saveLast(){ try{ localStorage.setItem('pc-lastdata', JSON.stringify(DATA)); }catch(e){} }
 
 /* ---- LIVE PORTFOLIO from Parqet (holdings, values, gains, IRR) ---- */
 async function refreshParqet(){
@@ -1446,6 +1450,7 @@ async function refreshParqet(){
   DATA.holdings.forEach(h=>{ h.alloc=+(100*h.value/DATA.totalValue).toFixed(1); });
   liveState.lastParqet=new Date();
   renderKpis(); renderHoldingsTable(); renderAlloc(); renderPerfBars(); renderHoldings(); setBadge();
+  _saveLast();
 }
 
 /* ---- chart timeframe selector (PP net-worth series, sliced locally) ---- */
