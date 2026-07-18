@@ -2,6 +2,13 @@
   "ticker": "DCTH",
   "news": [
     {
+      "date": "2026-07-16",
+      "headline": "Delcath Systems, Inc. Announces Inducement Grants Under Nasdaq Listing Rule 5635(c)(4)",
+      "source": "BioSpace",
+      "url": "https://www.biospace.com/press-releases/delcath-systems-inc-announces-inducement-grants-under-nasdaq-listing-rule-5635c4-july-16-2026",
+      "summary": "Delcath granted equity awards as employment inducements, outside its shareholder-approved incentive plan, to four new employees whose employment began in May and June 2026. The routine Nasdaq-required disclosure points to continued headcount additions as the company scales its commercial and clinical operations."
+    },
+    {
       "date": "2026-07-09",
       "headline": "Delcath Systems Announces First Patient Dosed in Phase 2 Clinical Trial of HEPZATO in Liver-Dominant Metastatic Breast Cancer",
       "source": "BusinessWire",
@@ -35,20 +42,13 @@
       "source": "BioSpace",
       "url": "https://www.biospace.com/press-releases/delcath-systems-inc-announces-inclusion-of-chemosat-hepatic-delivery-system-for-melphalan-as-a-recommended-liver-directed-regional-therapy-option-in-the-esmo-euracan-clinical-practice-guidelines-for-uveal-melanoma",
       "summary": "Delcath's CHEMOSAT Hepatic Delivery System was named the first-listed regional treatment option for multifocal liver-only uveal melanoma metastases in the newly published ESMO-EURACAN Clinical Practice Guideline. The guideline cites two Phase 3 trials showing improved hepatic and overall progression-free survival versus best alternative care."
-    },
-    {
-      "date": "2026-03-03",
-      "headline": "Delcath Systems Announces Publication of CHOPIN Clinical Trial Results in The Lancet Oncology",
-      "source": "BusinessWire",
-      "url": "https://www.businesswire.com/news/home/20260303038931/en/Delcath-Systems-Announces-Publication-of-CHOPIN-Clinical-Trial-Results-in-The-Lancet-Oncology",
-      "summary": "Full results from the investigator-initiated, randomized Phase 2 CHOPIN trial -- combining Delcath's PHP with ipilimumab and nivolumab in metastatic uveal melanoma -- were published in The Lancet Oncology, showing more than triple the 1-year progression-free survival rate and nearly double the 2-year overall survival versus PHP alone. The trial was led by Professor Ellen Kapiteijn of Leiden University Medical Center and builds on topline data first presented at ESMO 2025."
     }
   ],
   "catalysts": [
     {
       "when": "Early-to-mid August 2026 (estimated)",
       "label": "Q2 2026 earnings report",
-      "detail": "Next quarterly results are expected roughly three months after the May 7, 2026 Q1 print (Q2 2025's report landed August 6); no specific Q2 2026 call date had been announced as of July 17, 2026. Management will likely update HEPZATO volume growth, site-activation pace and progress toward the $100M+ FY2026 revenue guidance.",
+      "detail": "Next quarterly results are expected roughly three months after the May 7, 2026 Q1 print (Q2 2025's report landed August 6); no specific Q2 2026 call date had been announced as of July 18, 2026. Management will likely update HEPZATO volume growth, site-activation pace and progress toward the $100M+ FY2026 revenue guidance.",
       "confirmed": false
     },
     {
@@ -76,5 +76,5 @@
       "confirmed": true
     }
   ],
-  "pulse": "Delcath's commercial ramp continues: Q1 2026 revenue grew to $25.0 million on ~36% HEPZATO volume growth, and management reiterated full-year 2026 guidance of at least $100 million in revenue. The clinical pipeline keeps broadening beyond melanoma -- the first patient is now dosed in the Phase 2 DELUMA breast cancer trial, alongside an ongoing colorectal cancer Phase 2 study, growing guideline recognition (ESMO-EURACAN) for CHEMOSAT in uveal melanoma, and a full Lancet Oncology publication of the positive CHOPIN combination-therapy data. News flow has remained unusually quiet since the July 9 DELUMA announcement -- as of July 17, 2026, no further press releases, financing, or trial updates have surfaced -- with the stock trading near its 52-week high heading into the next earnings report, which analysts expect in early-to-mid August but which has not yet been formally scheduled."
+  "pulse": "Delcath's commercial ramp continues: Q1 2026 revenue grew to $25.0 million on ~36% HEPZATO volume growth, and management reiterated full-year 2026 guidance of at least $100 million in revenue. The clinical pipeline keeps broadening beyond melanoma -- the first patient was dosed in the Phase 2 DELUMA breast cancer trial on July 9, alongside an ongoing colorectal cancer Phase 2 study and growing guideline recognition (ESMO-EURACAN) for CHEMOSAT in uveal melanoma. Substantive news flow has stayed quiet since the DELUMA dosing update -- the only item since has been a routine July 16 Nasdaq inducement-grant disclosure tied to new hires -- with the stock trading near its 52-week high heading into the next earnings report, which analysts expect in early-to-mid August but which has not yet been formally scheduled as of July 18, 2026."
 }
