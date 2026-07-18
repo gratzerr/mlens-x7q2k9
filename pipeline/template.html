@@ -851,7 +851,7 @@ function applyVisibility(){
   const inp=document.getElementById('rs-search');
   if(inp&&inp.parentElement) inp.parentElement.style.display=guest?'none':'';
   const rr=document.getElementById('rs-recent');
-  if(rr&&guest&&window.DATA&&DATA){
+  if(rr&&guest&&DATA){
     const av=[...new Set([
       ...DATA.holdings.filter(h=>h.assetType==='security').map(h=>h.ticker),
       ...((_cfg.watchlist)||[]),
