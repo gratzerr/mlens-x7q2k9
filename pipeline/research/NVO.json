@@ -2,6 +2,13 @@
   "ticker": "NVO",
   "news": [
     {
+      "date": "2026-07-17",
+      "headline": "Novo Nordisk stock rises as Wegovy pill captures roughly 89% of US oral GLP-1 prescriptions versus Eli Lilly's Foundayo",
+      "source": "Yahoo Finance / The Motley Fool",
+      "url": "https://finance.yahoo.com/healthcare/articles/novo-nordisk-stock-rises-wegovy-200439665.html",
+      "summary": "IQVIA prescription data for the week ended July 3, 2026 showed the oral Wegovy pill generating about 153,050 US prescriptions versus roughly 19,550 for Lilly's Foundayo, an estimated 89% share of the two-drug oral weight-loss category, with over 80% of new scripts going to GLP-1-naive patients. Novo's roughly three-month head start in launching an oral GLP-1 pill continues to translate into a commanding lead over Lilly in the nascent oral obesity-drug market."
+    },
+    {
       "date": "2026-07-15",
       "headline": "Novo Nordisk receives European Commission approval of Wegovy pill as first oral GLP-1 for weight management in the EU; single, ready-to-use pen for higher dose 7.2 mg also approved",
       "source": "GlobeNewswire (Novo Nordisk) / BioSpace",
@@ -35,13 +42,6 @@
       "source": "FiercePharma",
       "url": "https://www.fiercepharma.com/pharma/novos-security-breach-claimed-hacking-groups-attempted-squeeze-multi-million-ransom-bids",
       "summary": "Novo Nordisk disclosed unauthorized access to a limited number of internal IT systems, with attackers copying source code, proprietary data on marketed and unreleased drugs, internal AI models, manufacturing records and pseudonymized data on roughly 11,500 clinical-trial participants; extortion groups FulcrumSec and TheUSERS007 separately claimed responsibility and sought ransoms of $25 million and $50 million. Novo said it did not pay either group and that the incident has not disrupted its core business operations."
-    },
-    {
-      "date": "2026-06-07",
-      "headline": "Wegovy pill prescriptions surpass 3 million as Novo Nordisk unveils new data at ADA 2026",
-      "source": "PR Newswire / FiercePharma",
-      "url": "https://www.prnewswire.com/news-releases/wegovy-pill-prescriptions-surpass-3-million-1-filled-roughly-every-5-seconds-bringing-glp-1-therapy-to-people-with-obesity-previously-untreated-while-novo-nordisk-unveils-new-data-at-ada-2026-302793337.html",
-      "summary": "Novo Nordisk announced that Wegovy (semaglutide) 25mg tablets surpassed 3 million US prescriptions in just over five months, with over 80% of new patients GLP-1-naive, making it one of the strongest US drug launches by volume on record. The milestone coincided with Novo presenting a broad new data package on Wegovy and CagriSema at the ADA 86th Scientific Sessions in New Orleans (5-8 June 2026)."
     }
   ],
   "catalysts": [
@@ -94,5 +94,5 @@
       "confirmed": false
     }
   ],
-  "pulse": "Novo Nordisk has strung together a run of regulatory wins into mid-July 2026 -- EU approval of the Wegovy pill (July 15), a UK MHRA nod for Wegovy in MASH liver disease (July 3), and the July 1 launch of the Medicare GLP-1 Bridge giving US Medicare patients $50-a-month Wegovy access -- while continuing to diversify its pipeline via fresh denecimig hemophilia A data and a new Vivani Medical deal for a twice-yearly semaglutide implant. Those tailwinds are tempered by a disclosed June cyberattack (no ransom paid, no operational disruption) and an unresolved competitive battle with Eli Lilly's oral Foundayo pill, against a backdrop of narrowed full-year guidance still pointing to a sales/profit decline. For the long-dated $40 call position, the next key checkpoints are the August 5, 2026 Q2 earnings report and CagriSema's FDA decision expected in Q4 2026, both of which will shape whether Novo's regulatory momentum translates into a durable growth reacceleration versus Lilly."
+  "pulse": "Novo Nordisk enters late July 2026 riding a run of regulatory and commercial wins: EU approval of the Wegovy pill (July 15), a UK MHRA nod for Wegovy in MASH liver disease (July 3), the July 1 launch of the Medicare GLP-1 Bridge giving US Medicare patients $50-a-month Wegovy access, and fresh IQVIA data showing the Wegovy pill holding roughly 89% of US oral GLP-1 prescriptions versus Eli Lilly's Foundayo. Those tailwinds are tempered by a disclosed June cyberattack (no ransom paid, no operational disruption) and a still-unresolved medium-term competitive battle with Lilly's injectable Zepbound and oral Foundayo, against a backdrop of narrowed full-year guidance still pointing to a sales/profit decline. For the long-dated call position, the next key checkpoints are the August 5, 2026 Q2 earnings report and CagriSema's FDA decision expected in Q4 2026, both of which will shape whether Novo's oral-GLP-1 lead and regulatory momentum translate into a durable growth reacceleration versus Lilly."
 }
