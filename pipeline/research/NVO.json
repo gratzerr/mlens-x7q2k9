@@ -2,6 +2,13 @@
   "ticker": "NVO",
   "news": [
     {
+      "date": "2026-07-17",
+      "headline": "Novo Nordisk's Wegovy pill captures roughly 89% of US oral GLP-1 prescriptions, far outpacing Eli Lilly's Foundayo",
+      "source": "The Motley Fool / Yahoo Finance",
+      "url": "https://www.fool.com/investing/2026/07/17/wegovy-pill-just-changed-the-glp-1-market-heres-wh/",
+      "summary": "IQVIA prescription data for the week ended July 3, 2026 showed oral Wegovy generated about 153,050 US prescriptions versus roughly 19,550 for Eli Lilly's Foundayo, giving Novo an estimated 89% share of the nascent oral anti-obesity pill market despite Foundayo's April 2026 approval. More than 80% of new Wegovy pill prescriptions are going to GLP-1-naive patients, suggesting the pill is expanding the overall market rather than just taking share."
+    },
+    {
       "date": "2026-07-15",
       "headline": "Novo Nordisk receives European Commission approval of Wegovy pill as first oral GLP-1 for weight management in the EU; single, ready-to-use pen for higher dose 7.2 mg also approved",
       "source": "GlobeNewswire (Novo Nordisk) / BioSpace",
@@ -35,13 +42,6 @@
       "source": "FiercePharma",
       "url": "https://www.fiercepharma.com/pharma/novos-security-breach-claimed-hacking-groups-attempted-squeeze-multi-million-ransom-bids",
       "summary": "Novo Nordisk disclosed unauthorized access to a limited number of internal IT systems, with attackers copying source code, proprietary data on marketed and unreleased drugs, internal AI models, manufacturing records and pseudonymized data on roughly 11,500 clinical-trial participants; extortion groups FulcrumSec and TheUSERS007 separately claimed responsibility and sought ransoms of $25 million and $50 million. Novo said it did not pay either group and that the incident has not disrupted its core business operations."
-    },
-    {
-      "date": "2026-06-07",
-      "headline": "Wegovy pill prescriptions surpass 3 million as Novo Nordisk unveils new data at ADA 2026",
-      "source": "PR Newswire / FiercePharma",
-      "url": "https://www.prnewswire.com/news-releases/wegovy-pill-prescriptions-surpass-3-million-1-filled-roughly-every-5-seconds-bringing-glp-1-therapy-to-people-with-obesity-previously-untreated-while-novo-nordisk-unveils-new-data-at-ada-2026-302793337.html",
-      "summary": "Novo Nordisk announced that Wegovy (semaglutide) 25mg tablets surpassed 3 million US prescriptions in just over five months, with over 80% of new patients GLP-1-naive, making it one of the strongest US drug launches by volume on record. The milestone coincided with Novo presenting a broad new data package on Wegovy and CagriSema at the ADA 86th Scientific Sessions in New Orleans (5-8 June 2026)."
     }
   ],
   "catalysts": [
@@ -54,7 +54,7 @@
     {
       "when": "Q4 2026 (exact PDUFA date not yet public)",
       "label": "FDA decision on CagriSema for chronic weight management",
-      "detail": "CagriSema (cagrilintide/semaglutide) NDA was submitted in December 2025 based on REDEFINE 1/2 data; a standard review implies a decision around late 2026. Approval would give Novo a next-generation, higher-efficacy obesity drug to compete with Lilly's Zepbound/orforglipron (Foundayo) franchise.",
+      "detail": "CagriSema (cagrilintide/semaglutide) NDA was submitted in December 2025 based on REDEFINE 1/2 data; a standard review implies a decision around late 2026. Approval would give Novo a next-generation obesity drug to compete with Lilly's Zepbound/orforglipron (Foundayo) franchise, though the separate REDEFINE 4 head-to-head trial found CagriSema fell short of Zepbound's weight-loss efficacy at 84 weeks.",
       "confirmed": false
     },
     {
@@ -64,9 +64,9 @@
       "confirmed": false
     },
     {
-      "when": "H2 2026",
+      "when": "H2 2026 (approx.)",
       "label": "Wegovy pill commercial roll-out across EU member states",
-      "detail": "Following the European Commission's July 15, 2026 marketing authorization (after the CHMP's May 2026 positive opinion), Novo Nordisk plans to launch the oral Wegovy pill commercially across EU countries through H2 2026, with pricing and reimbursement negotiated market-by-market; UK availability via private prescription began after a June 2026 MHRA approval (with a separate July 3, 2026 MHRA nod for Wegovy injection in MASH liver disease), while NHS reimbursement of the pill still awaits a separate NICE review.",
+      "detail": "Following the European Commission's July 15, 2026 marketing authorization (after the CHMP's May 2026 positive opinion), Novo Nordisk plans to launch the oral Wegovy pill commercially across EU countries through H2 2026, with pricing and reimbursement negotiated market-by-market; UK availability via private prescription began after a June 2026 MHRA approval (with a separate July 3, 2026 MHRA nod for Wegovy injection in MASH liver disease), while NHS reimbursement of the pill still awaits a separate NICE review. Early US data shows the pill holding roughly 89% share of oral GLP-1 prescriptions against Lilly's Foundayo, a dynamic Novo will aim to replicate in Europe.",
       "confirmed": true
     },
     {
@@ -94,5 +94,5 @@
       "confirmed": false
     }
   ],
-  "pulse": "Novo Nordisk has strung together a run of regulatory wins into mid-July 2026 -- EU approval of the Wegovy pill (July 15), a UK MHRA nod for Wegovy in MASH liver disease (July 3), and the July 1 launch of the Medicare GLP-1 Bridge giving US Medicare patients $50-a-month Wegovy access -- while continuing to diversify its pipeline via fresh denecimig hemophilia A data and a new Vivani Medical deal for a twice-yearly semaglutide implant. Those tailwinds are tempered by a disclosed June cyberattack (no ransom paid, no operational disruption) and an unresolved competitive battle with Eli Lilly's oral Foundayo pill, against a backdrop of narrowed full-year guidance still pointing to a sales/profit decline. For the long-dated $40 call position, the next key checkpoints are the August 5, 2026 Q2 earnings report and CagriSema's FDA decision expected in Q4 2026, both of which will shape whether Novo's regulatory momentum translates into a durable growth reacceleration versus Lilly."
+  "pulse": "Novo Nordisk has strung together a run of regulatory and commercial wins into mid-July 2026 -- EU approval of the Wegovy pill (July 15), a UK MHRA nod for Wegovy in MASH liver disease (July 3), the July 1 launch of the Medicare GLP-1 Bridge, and IQVIA data showing the Wegovy pill holding roughly 89% of US oral GLP-1 prescriptions well ahead of Eli Lilly's Foundayo. Those tailwinds are tempered by a disclosed June cyberattack (no ransom paid, no operational disruption), CagriSema's underwhelming head-to-head showing against Zepbound, and narrowed full-year guidance still pointing to a sales/profit decline amid US pricing pressure and patent expiries. For the long-dated $40 call position, the next key checkpoints are the August 5, 2026 Q2 earnings report and CagriSema's FDA decision expected in Q4 2026, both of which will shape whether Novo's regulatory and pill-launch momentum can offset intensifying competition from Lilly."
 }
