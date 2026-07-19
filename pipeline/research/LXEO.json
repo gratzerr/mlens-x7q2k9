@@ -3,10 +3,10 @@
   "news": [
     {
       "date": "2026-07-01",
-      "headline": "Lexeo Therapeutics CFO and CEO Sell Shares to Cover RSU Tax Withholding",
+      "headline": "Lexeo Therapeutics CEO, CFO and COO Sell Shares to Cover RSU Tax Withholding",
       "source": "StockTitan / SEC Form 4",
       "url": "https://www.stocktitan.net/sec-filings/LXEO/form-4-lexeo-therapeutics-inc-insider-trading-activity-bb86ac059861.html",
-      "summary": "Following performance RSU vesting on June 29, CFO Louis Edward Tamayo sold 4,641 shares at a weighted-average price of $4.49 and CEO R. Nolan Townsend sold 25,947 shares at $4.48, both routine transactions to cover tax obligations, with each executive retaining substantial remaining holdings."
+      "summary": "Following performance RSU vesting on June 29, CEO R. Nolan Townsend sold 25,947 shares at a weighted-average price of $4.48, CFO Louis Edward Tamayo sold 4,641 shares at $4.49, and COO Jose Manuel Otero sold 4,666 shares at $4.48, all routine transactions to cover tax obligations with each executive retaining substantial remaining holdings."
     },
     {
       "date": "2026-06-25",
@@ -34,14 +34,14 @@
       "headline": "Lexeo Therapeutics Announces Regulatory Update and Registrational Trial Design for LX2006 Gene Therapy in Friedreich Ataxia",
       "source": "GlobeNewswire / BioSpace",
       "url": "https://www.globenewswire.com/news-release/2026/06/15/3311662/0/en/lexeo-therapeutics-announces-regulatory-update-and-registrational-trial-design-for-lx2006-gene-therapy-in-friedreich-ataxia.html",
-      "summary": "Lexeo finalized the protocol and statistical analysis plan for SUNRISE-FA 2, a pivotal open-label trial of high-dose LX2006 in Friedreich ataxia cardiomyopathy, after the FDA confirmed no additional nonclinical bridging studies are required. The company guided to a topline readout in 2H 2027 and a BLA submission in 1H 2028 under the accelerated approval pathway; shares rose on the news."
+      "summary": "Lexeo finalized the protocol and statistical analysis plan for SUNRISE-FA 2, a pivotal open-label trial of high-dose LX2006 in Friedreich ataxia cardiomyopathy, after the FDA confirmed no additional nonclinical bridging studies are required. The company guided to a topline readout in 2H 2027 and a BLA submission in 1H 2028 under the accelerated approval pathway; shares rose more than 12% on the news."
     }
   ],
   "catalysts": [
     {
       "when": "Q3 2026 (expected)",
       "label": "SUNRISE-FA 2 first patient dosing / trial initiation update",
-      "detail": "Lexeo guided that SUNRISE-FA 2 enrollment was on track to begin by the end of June 2026 following finalization of the pivotal trial protocol; confirmation of first-patient dosing has not yet been publicly announced as of July 18, 2026.",
+      "detail": "Lexeo guided that SUNRISE-FA 2 enrollment was on track to begin by the end of June 2026 following finalization of the pivotal trial protocol; confirmation of first-patient dosing has not yet been publicly announced as of July 19, 2026.",
       "confirmed": false
     },
     {
@@ -59,7 +59,7 @@
     {
       "when": "~August 13-19, 2026 (estimated)",
       "label": "Q2 2026 earnings report",
-      "detail": "Third-party earnings calendars (e.g., Nasdaq) place Lexeo's second-quarter 2026 financial and operational results around August 13-19, 2026, consistent with its Q1 2026 (May 11, 2026) reporting cadence; the company has not yet officially confirmed the exact date as of July 18, 2026.",
+      "detail": "Third-party earnings calendars (e.g., Nasdaq) place Lexeo's second-quarter 2026 financial and operational results around August 13-19, 2026, consistent with its Q1 2026 (May 11, 2026) reporting cadence; the company has not yet officially confirmed the exact date as of July 19, 2026.",
       "confirmed": false
     },
     {
@@ -75,5 +75,5 @@
       "confirmed": false
     }
   ],
-  "pulse": "Lexeo's lead program, LX2006 for Friedreich ataxia cardiomyopathy, gained momentum in mid-June 2026 as the company finalized its pivotal SUNRISE-FA 2 trial design with FDA input and published supportive Phase I/II data in JAMA Cardiology, targeting a 2H 2027 topline readout and a 1H 2028 accelerated-approval BLA filing; shareholders also reelected the board and ratified KPMG as auditor at the June 25 annual meeting. Sell-side coverage remains broadly constructive (Strong Buy/Overweight/Outperform ratings from JPMorgan, Raymond James, Cantor Fitzgerald, Oppenheimer and H.C. Wainwright, with an average price target near $18) even as JPMorgan trimmed its target to $9 from $12 in late June, and the CEO, CFO and COO's early-July share sales appear to be routine RSU tax transactions rather than signals. No further material company news has emerged since the July 1 insider filings, with the stock trading roughly $4.5-$5.1 through mid-July (around $4.8-$5.0 as of July 18); investors are now watching for confirmation that SUNRISE-FA 2 has begun dosing (guided for around end of June/Q3 2026), an unconfirmed Q2 2026 earnings report estimated for mid-August 2026, and the earlier-stage PKP2-ACM program (LX2020), whose next major catalyst is a 12-month high-dose data update expected in Q4 2026."
+  "pulse": "Lexeo's lead program, LX2006 for Friedreich ataxia cardiomyopathy, gained momentum in mid-June 2026 as the company finalized its pivotal SUNRISE-FA 2 trial design with FDA input and published supportive Phase I/II data in JAMA Cardiology, targeting a 2H 2027 topline readout and a 1H 2028 accelerated-approval BLA filing; shareholders also reelected the board and ratified KPMG as auditor at the June 25 annual meeting. Sell-side coverage remains broadly constructive (Strong Buy/Overweight/Outperform ratings from JPMorgan, Raymond James, Cantor Fitzgerald, Oppenheimer and H.C. Wainwright, with an average price target near $18-19) even as JPMorgan trimmed its target to $9 from $12 in late June, and the CEO, CFO and COO's early-July share sales appear to be routine RSU tax transactions rather than signals. No further material company news has emerged since the July 1 insider filings, with the stock trading roughly $4.5-$5.1 through mid-July; investors are now watching for confirmation that SUNRISE-FA 2 has begun dosing (guided for around end of June/Q3 2026), an unconfirmed Q2 2026 earnings report estimated for mid-August 2026, and the earlier-stage PKP2-ACM program (LX2020), whose next major catalyst is a 12-month high-dose data update expected in Q4 2026."
 }
