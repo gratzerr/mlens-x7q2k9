@@ -2252,10 +2252,11 @@ function renderPeriodBar(){
   /* Chromium commits a 'change' after EVERY typed year digit (0002 → 0020 → 0202 → 2026);
      only accept dates that can be real, so half-typed years never apply */
   const okDate=s=>s&&s>=d0.slice(0,4)+'-01-01'&&(!d1||s<=d1);
+  const hideDates=()=>{ from.style.display='none'; to.style.display='none'; from.value=''; to.value=''; };
   const apply=()=>{
     const v=sel.value;
-    if(v.startsWith('rel:')) PF_P={k:'rel',v:v.slice(4)};
-    else if(v.startsWith('year:')) PF_P={k:'year',y:+v.slice(5)};
+    if(v.startsWith('rel:')){ hideDates(); PF_P={k:'rel',v:v.slice(4)}; }
+    else if(v.startsWith('year:')){ hideDates(); PF_P={k:'year',y:+v.slice(5)}; }
     else if(v==='since'){ from.style.display='inline-block'; to.style.display='none';
       if(!from.value){ from.value=d0; from.focus(); } /* prefill: all segments set, overtyping always works */
       if(!okDate(from.value)) return; PF_P={k:'since',from:from.value}; }
@@ -3342,10 +3343,11 @@ function renderPayPeriodBar(){
   const d0=(DATA.chartPP&&DATA.chartPP[0]||{}).d||'2021-12-30', d1=(DATA.chartPP&&DATA.chartPP[DATA.chartPP.length-1]||{}).d||'';
   [from,to].forEach(x=>{x.min=d0; if(d1)x.max=d1;});
   const okDate=s=>s&&s>=d0.slice(0,4)+'-01-01'&&(!d1||s<=d1);
+  const hideDates=()=>{ from.style.display='none'; to.style.display='none'; from.value=''; to.value=''; };
   const apply=()=>{
     const v=sel.value;
-    if(v.startsWith('rel:')) PAY_P={k:'rel',v:v.slice(4)};
-    else if(v.startsWith('year:')) PAY_P={k:'year',y:+v.slice(5)};
+    if(v.startsWith('rel:')){ hideDates(); PAY_P={k:'rel',v:v.slice(4)}; }
+    else if(v.startsWith('year:')){ hideDates(); PAY_P={k:'year',y:+v.slice(5)}; }
     else if(v==='since'){ from.style.display='inline-block'; to.style.display='none';
       if(!from.value){ from.value=d0; from.focus(); }
       if(!okDate(from.value)) return; PAY_P={k:'since',from:from.value}; }
