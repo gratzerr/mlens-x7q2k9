@@ -1,6 +1,6 @@
 {
- "fileDate": "2026-07-19 10:17",
- "generated": "2026-07-19 10:44",
+ "fileDate": "2026-07-19 10:44",
+ "generated": "2026-07-19 11:05",
  "engine": "pp-exact (verified vs PP app 2026-07-11)",
  "totalSecuritiesEur": 2079300,
  "cashEur": -97891.71,
@@ -45486,21 +45486,6 @@
  ],
  "securities": [
   {
-   "isin": "IE00B6YX5D40",
-   "ticker": "SPYD",
-   "name": "SPDR S+P US D.ARIST.ETF D"
-  },
-  {
-   "isin": "IE00B44T3H88",
-   "ticker": "H4ZP",
-   "name": "HSBC MSCI CHINA UCITS ETF"
-  },
-  {
-   "isin": "IE00B3XXRP09",
-   "ticker": "VUSA.DE",
-   "name": "VANGUARD S+P 500U.ETF DLD"
-  },
-  {
    "isin": "CNE1000001W2",
    "ticker": "AQE.F",
    "name": "Anhui Conch Cement Co. Ltd. Registered Shares H YC 1"
@@ -45681,11 +45666,6 @@
    "name": "NIKE Inc. Registered Shares Class B o.N."
   },
   {
-   "isin": "IE00B5BMR087",
-   "ticker": "SXR8",
-   "name": "ISHSVII-CORE S+P500 DLACC"
-  },
-  {
    "isin": "GB0002374006",
    "ticker": "GUI.F",
    "name": "DIAGEO PLC LS-,28935185"
@@ -45729,11 +45709,6 @@
    "isin": "GB0005603997",
    "ticker": "LGEN.L",
    "name": "Legal & General Group Plc"
-  },
-  {
-   "isin": "IE00BK5BQT80",
-   "ticker": "VWCE.DE",
-   "name": "VANG.FTSE A.W. DLA"
   },
   {
    "isin": "GB0007188757",
@@ -45956,29 +45931,14 @@
    "name": "Confluent, Inc."
   },
   {
-   "isin": "DE000A3GSUD3",
-   "ticker": "VSOL.DE",
-   "name": "VANECK SOLANA ETN"
-  },
-  {
    "isin": "US98980G1022",
    "ticker": "ZS",
    "name": "ZSCALER INC"
   },
   {
-   "isin": "US81730H1095",
-   "ticker": "S",
-   "name": "SentinelOne, Inc."
-  },
-  {
    "isin": "US18915M1071",
    "ticker": "NET",
    "name": "CLOUDFLARE INC - CLASS A"
-  },
-  {
-   "isin": "DE000A3GPSP7",
-   "ticker": "VETH.DE",
-   "name": "VANECK ETHEREUM ETN"
   },
   {
    "isin": "NL0009805522",
@@ -45991,11 +45951,6 @@
    "name": "monday.com Ltd."
   },
   {
-   "isin": "US88339J1051",
-   "ticker": "TTD",
-   "name": "THE TRADE DESK INC"
-  },
-  {
    "isin": "US75734B1008",
    "ticker": "RDDT",
    "name": "Reddit, Inc."
@@ -46006,19 +45961,9 @@
    "name": "Toast, Inc."
   },
   {
-   "isin": "US26856L1035",
-   "ticker": "ELF",
-   "name": "ELF BEAUTY INC"
-  },
-  {
    "isin": "US7811541090",
    "ticker": "RBRK",
    "name": "RUBRIK INC-A"
-  },
-  {
-   "isin": "US0079031078",
-   "ticker": "AMD",
-   "name": "ADVANCED MICRO DEVICES"
   },
   {
    "isin": "IL0011741688",
@@ -46051,11 +45996,6 @@
    "name": "DUOLINGO"
   },
   {
-   "isin": "US09175A2069",
-   "ticker": "BMNR",
-   "name": "BitMine Immersion Technologies,"
-  },
-  {
    "isin": "US74276L1052",
    "ticker": "PRCT",
    "name": "PROCEPT BIOROBOTICS CORP"
@@ -46064,11 +46004,6 @@
    "isin": "CA73044W3021",
    "ticker": "POET",
    "name": "POET Technologies Inc."
-  },
-  {
-   "isin": "US6963894026",
-   "ticker": "PALI",
-   "name": "PALISADE BIO INC"
   },
   {
    "isin": "US4158581094",
@@ -46084,11 +46019,6 @@
    "isin": "US29772L1089",
    "ticker": "ETON",
    "name": "ETON PHARMACEUTICALS INC"
-  },
-  {
-   "isin": "US38942Q2021",
-   "ticker": "CALC",
-   "name": "CALCIMEDICA INC"
   },
   {
    "isin": "US18507C1036",
@@ -46141,19 +46071,9 @@
    "name": "PERSONALIS INC"
   },
   {
-   "isin": "US03823U1025",
-   "ticker": "AAOI",
-   "name": "APPLIED OPTOELECTRONICS INC"
-  },
-  {
    "isin": "US6402683063",
    "ticker": "NKTR",
    "name": "NEKTAR THERAPEUTICS"
-  },
-  {
-   "isin": "US00246W1036",
-   "ticker": "AXTI",
-   "name": "AXT INC"
   },
   {
    "isin": "US81663L2007",
@@ -46164,11 +46084,6 @@
    "isin": "US80303D3052",
    "ticker": "SNWV",
    "name": "SANUWAVE Health, Inc."
-  },
-  {
-   "isin": "US09077D2099",
-   "ticker": "BFRI",
-   "name": "Biofrontera Inc."
   },
   {
    "isin": "CA71385D1078",
