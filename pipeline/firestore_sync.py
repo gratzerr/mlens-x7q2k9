@@ -18,8 +18,14 @@ def access_token():
     return gt_at()
 
 ROOT = os.path.dirname(os.path.abspath(__file__))
-DOC = "https://firestore.googleapis.com/v1/projects/portfolio-cockpit-rg/databases/(default)/documents/portfolios/main"
-OWNER = "rafael.gratzer@gmail.com"
+# instance config (starter-kit): cockpit_config.json overrides the Rafael defaults
+try:
+    _icfg = json.load(open(os.path.join(ROOT, "cockpit_config.json")))
+except Exception:
+    _icfg = {}
+_PROJECT = _icfg.get("firebaseProjectId", "portfolio-cockpit-rg")
+DOC = f"https://firestore.googleapis.com/v1/projects/{_PROJECT}/databases/(default)/documents/portfolios/main"
+OWNER = _icfg.get("ownerEmail", "rafael.gratzer@gmail.com")
 
 def req(method, url, body=None, tok=None):
     cmd = ["curl","-s","-X",method,url,"-H","Authorization: Bearer "+tok]
@@ -36,7 +42,7 @@ def pull():
     if "fields" not in j:                       # first run: create the doc
         body = {"fields":{
             "owner":{"stringValue":OWNER},
-            "name":{"stringValue":"Rafael's Portfolio"},
+            "name":{"stringValue":_icfg.get("portfolioName", "Rafael's Portfolio")},
             "public":{"booleanValue":True},
             "data":{"stringValue":""}}}
         j = req("PATCH", DOC, body, tok)

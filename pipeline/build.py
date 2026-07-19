@@ -431,6 +431,30 @@ def site_is_public():
         return True
 
 TEMPLATE = open(os.path.join(ROOT, "template.html"), encoding="utf-8").read()
+
+# ---- instance config (starter-kit): cockpit_config.json overrides the baked-in
+# Rafael defaults, so a clone only edits ONE file. Absent/partial config = identical
+# output to before (verified byte-identical without a config file).
+_CFG_DEFAULTS = {
+    "firebaseApiKey": "AIzaSyA8ycuNIjcLCmYpTV8IMJLLpW8S0Jiv4mA",
+    "firebaseAuthDomain": "portfolio-cockpit-rg.firebaseapp.com",
+    "firebaseProjectId": "portfolio-cockpit-rg",
+    "portfolioName": "Rafael's Portfolio",
+    "liveUrl": "https://gratzerr.github.io/mlens-x7q2k9/",
+    "ogHash": "4bc2b77abbd6131c88235e7de77c55e13c8ed7a573ccdaec8e45a9b1dbcf93f7",
+}
+try:
+    _icfg = {**_CFG_DEFAULTS, **json.load(open(os.path.join(ROOT, "cockpit_config.json")))}
+except Exception:
+    _icfg = dict(_CFG_DEFAULTS)
+if _icfg != _CFG_DEFAULTS:
+    TEMPLATE = (TEMPLATE
+        .replace(_CFG_DEFAULTS["firebaseApiKey"], _icfg["firebaseApiKey"])
+        .replace(_CFG_DEFAULTS["firebaseAuthDomain"], _icfg["firebaseAuthDomain"])
+        .replace(_CFG_DEFAULTS["firebaseProjectId"], _icfg["firebaseProjectId"])
+        .replace(_CFG_DEFAULTS["portfolioName"], _icfg["portfolioName"])
+        .replace(_CFG_DEFAULTS["liveUrl"], _icfg["liveUrl"])
+        .replace(_CFG_DEFAULTS["ogHash"], _icfg["ogHash"]))
 if site_is_public():
     out = TEMPLATE.replace("/*__DATA__*/", DATA_JSON)
     mode = "public (data baked)"
