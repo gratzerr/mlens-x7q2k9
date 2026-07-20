@@ -2387,6 +2387,26 @@ let _rsRot=0;
    corsproxy otherwise costs a 6.5s timeout per tag before rotating -> minute-long loads) */
 let _rsBest=(()=>{ try{ const v=+localStorage.getItem('pc-rsproxy'); return v>=0&&v<RS_PROXIES.length?v:-1; }catch(e){ return -1; } })();
 function _rsRemember(p){ if(_rsBest!==p){ _rsBest=p; try{ localStorage.setItem('pc-rsproxy',String(p)); }catch(e){} } }
+/* companyfacts = ALL concepts of a company in ONE request — first visit of a big
+   filer (ORCL: ~40 concept round-trips, 30-45s) collapses to one download (2-5s) */
+async function rsFetchFacts(cik){
+  const u=`https://data.sec.gov/api/xbrl/companyfacts/CIK${String(cik).padStart(10,'0')}.json`;
+  const via=async(mk,ms)=>{ const c=new AbortController(); const to=setTimeout(()=>c.abort(),ms);
+    try{ const r=await fetch(mk(u),{signal:c.signal});
+      const t=await r.text(); const i=t.indexOf('{"'); if(i<0) throw new Error('bad');
+      const j=JSON.parse(t.slice(i));
+      if(!j.facts) throw new Error('nofacts');
+      return j.facts;
+    } finally { clearTimeout(to); } };
+  const order=[]; if(_rsBest>=0) order.push(_rsBest);
+  for(let k=0;k<RS_PROXIES.length;k++){ if(!order.includes(k)) order.push(k); }
+  let lastErr;
+  for(const p of order){
+    try{ const f=await via(RS_PROXIES[p],15000); _rsRemember(p); return f; }
+    catch(e){ lastErr=e; }
+  }
+  throw lastErr;
+}
 async function rsFetchConcept(cik,tax,tag){
   const u=`https://data.sec.gov/api/xbrl/companyconcept/CIK${String(cik).padStart(10,'0')}/${tax}/${tag}.json`;
   const via=async(mk,ms)=>{ const c=new AbortController(); const to=setTimeout(()=>c.abort(),ms);
@@ -2512,6 +2532,21 @@ async function rsLoad(tk){
   if(RS.tk!==tk) return;
   if(!cik){ RS.loading=false; RS.noSec=true; renderResearch(); return; }
   const data=RS.data;
+  /* FAST PATH: one companyfacts download fills every card at once ("es muss immer
+     augenblicklich sein") — absent concepts are legitimately empty, not errors */
+  try{
+    const facts=await rsFetchFacts(cik);
+    if(RS.tk!==tk) return;
+    Object.entries(RS_CONCEPTS).forEach(([key,[tax,tags,unit,inst,kind]])=>{
+      const parts=[];
+      tags.forEach(t=>{ const [tx,tag]=t.includes(':')?t.split(':'):[tax,t];
+        const f=(facts[tx]||{})[tag];
+        if(f&&f.units) parts.push(rsSeries({units:f.units},unit,inst,kind==='avg')); });
+      data[key]=parts.length?rsMerge(parts):{q:[],a:[]};
+    });
+    rsDerive(data); RS.loading=false; _rsCache[tk]=data; rsCacheSet(tk,data);
+    renderResearch(); return;
+  }catch(e){}   // proxies choked on the big file -> old per-concept path below
   let pending=Object.keys(RS_CONCEPTS).length;
   Object.entries(RS_CONCEPTS).forEach(([key,[tax,tags,unit,inst,kind]])=>{
     (async()=>{
