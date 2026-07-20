@@ -2528,6 +2528,14 @@ async function rsLoad(tk){
       renderResearch(); return;
     }
   }catch(e){}
+  /* S&P-500 static cache on the Pages CDN — big caps open instantly, zero SEC calls */
+  try{
+    const r=await fetch('rs/'+encodeURIComponent(tk)+'.json',{cache:'no-store'});
+    if(r.ok){ const d=await r.json();
+      if(RS.tk===tk&&(d.revenue||d.netInc)){ delete d._ts;
+        rsDerive(d); RS.data=d; RS.loading=false; _rsCache[tk]=d;
+        renderResearch(); return; } }
+  }catch(e){}
   const cik=await rsCik(tk);
   if(RS.tk!==tk) return;
   if(!cik){ RS.loading=false; RS.noSec=true; renderResearch(); return; }

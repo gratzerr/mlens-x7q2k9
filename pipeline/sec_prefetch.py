@@ -157,5 +157,68 @@ def main():
         json.dump(res, open(OUT, "w"), separators=(",", ":"))
         print(f"rs_prefetch.json: {len(res)} tickers, {os.path.getsize(OUT)//1024}KB")
 
+# ---- S&P-500 static cache: rs/<TK>.json on the Pages CDN. The heavyweights whose
+# 20-year filing histories are SLOW through the client proxies are exactly the ones
+# people search — pre-baking them makes any big-cap open instantly ("immer
+# augenblicklich"). Long-tail small caps stay on the client path (short histories = fast).
+UNIVERSE_URL = "https://raw.githubusercontent.com/datasets/s-and-p-500-companies/main/data/constituents.csv"
+
+def rs_dir():
+    base = os.path.dirname(ROOT) if os.path.basename(ROOT) == "pipeline" else os.path.join(ROOT, "site")
+    d = os.path.join(base, "rs")
+    os.makedirs(d, exist_ok=True)
+    return d
+
+def universe():
+    f = os.path.join(ROOT, "universe.json")
+    try:
+        u = json.load(open(f))
+        if time.time() - u.get("_ts", 0) < 7 * 86400: return u["list"]
+    except Exception: pass
+    try:
+        import csv, io
+        req = urllib.request.Request(UNIVERSE_URL, headers=UA)
+        txt = urllib.request.urlopen(req, timeout=20).read().decode()
+        rows = list(csv.DictReader(io.StringIO(txt)))
+        lst = [[r["Symbol"].strip().replace(".", "-"), int(r["CIK"])] for r in rows if r.get("CIK")]
+        if len(lst) > 400:
+            json.dump({"_ts": int(time.time()), "list": lst}, open(f, "w"))
+            return lst
+    except Exception: pass
+    try: return json.load(open(f))["list"]
+    except Exception: return []
+
+def sweep_universe(per_run=5, stale_days=7):
+    d = rs_dir()
+    now = time.time()
+    todo = []
+    for tk, cik in universe():
+        p = os.path.join(d, tk + ".json")
+        try:
+            ts = json.load(open(p)).get("_ts", 0)
+            if now - ts < stale_days * 86400: continue
+        except Exception: ts = 0
+        todo.append((ts, tk, cik))
+    if not todo: return
+    todo.sort()   # missing / stalest first
+    done = 0
+    for ts, tk, cik in todo[:per_run]:
+        data = {}
+        for key, (tax, tags, unit, inst, kind) in CONCEPTS.items():
+            parts = []
+            for t in tags:
+                try:
+                    parts.append(series(fetch_concept(cik, tax, t), unit, inst, kind == "avg"))
+                except Exception:
+                    continue
+                time.sleep(0.12)   # SEC fair-use pacing
+            if parts: data[key] = merge(parts)
+        data["_ts"] = int(now)
+        json.dump(data, open(os.path.join(d, tk + ".json"), "w"), separators=(",", ":"))
+        done += 1
+    print(f"rs/ universe: {done} refreshed, {len(todo)-done} pending")
+
 if __name__ == "__main__":
     main()
+    try: sweep_universe()
+    except Exception as e: print("universe sweep skipped:", e)
