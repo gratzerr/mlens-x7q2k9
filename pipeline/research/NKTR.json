@@ -2,6 +2,13 @@
   "ticker": "NKTR",
   "news": [
     {
+      "date": "2026-07-20",
+      "headline": "Nektar Therapeutics (NKTR) Stock Looks Above Fair Value Despite Its 7x Run",
+      "source": "Simply Wall St News",
+      "url": "https://simplywall.st/stocks/us/pharmaceuticals-biotech/nasdaq-nktr/nektar-therapeutics/news/nektar-therapeutics-nktr-stock-looks-above-fair-value-despit",
+      "summary": "A July 20, 2026 valuation review found NKTR trading at roughly 41.5x price-to-sales versus a pharmaceuticals-industry average near 6.1x and a peer average around 11.2x, well above Simply Wall St's estimated fair multiple of about 17.5x. The piece concludes that after the stock's roughly 7x three-year run, a lot of optimism about rezpegaldesleukin's future revenue is already priced in, leaving little room for disappointment."
+    },
+    {
       "date": "2026-07-09",
       "headline": "Nektar Therapeutics (NASDAQ:NKTR) Stock Price Up 5.2% - What's Next?",
       "source": "Daily Political",
@@ -28,13 +35,6 @@
       "source": "Simply Wall St News",
       "url": "https://simplywall.st/stocks/us/pharmaceuticals-biotech/nasdaq-nktr/nektar-therapeutics/news/how-nektar-therapeutics-broad-ftse-russell-index-inclusion-w/amp",
       "summary": "Nektar was added to the Russell 2000, 2500 and 3000 indices (and related growth/value/small-cap variants) in the June 2026 FTSE Russell reconstitution, a move expected to draw passive, benchmark-tracking fund flows into the stock."
-    },
-    {
-      "date": "2026-06-26",
-      "headline": "Nektar Therapeutics Reports Inducement Grants Under Nasdaq Listing Rule 5635(c)(4)",
-      "source": "PR Newswire",
-      "url": "https://www.prnewswire.com/news-releases/nektar-therapeutics-reports-inducement-grants-under-nasdaq-listing-rule-5635c4-302812216.html",
-      "summary": "Nektar granted stock options and RSUs to seven newly hired employees under its 2025 Inducement Plan at an exercise price of $60.98, signaling continued hiring as the company staffs up for the Phase 3 rezpegaldesleukin program."
     },
     {
       "date": "2026-06-24",
@@ -82,5 +82,5 @@
       "confirmed": false
     }
   ],
-  "pulse": "Nektar shares have traded choppily but well above year-ago levels through mid-July 2026 (a roughly 10.6% pop on July 2, a 5.2% gain on July 9, then giving back ground to the high-$60s/low-$70s by mid-month) as the company pushes rezpegaldesleukin, its Treg-stimulating biologic, toward pivotal testing, backed by over $1 billion in cash after a series of 2026 equity raises. The five-trial Phase 3 ZENITH-AD program in atopic dermatitis was slated to begin in July 2026, with a Phase 3 alopecia areata program and a new-indication proof-of-concept study also planned for later this year, but as of July 20 no formal ZENITH-AD first-patient-dosed announcement had been made and the first pivotal data won't read out until mid-2028; Q2 2026 earnings are estimated for around August 6 though not yet officially confirmed. Sentiment through late June and July was boosted by FTSE Russell index inclusion, continued hiring, and sector-wide optimism following AbbVie's $10.9 billion Apogee Therapeutics acquisition (seen as a read-through validating Nektar's atopic-dermatitis approach), tempered by routine 10b5-1 insider selling from both the CEO and R&D chief and a wide analyst price-target spread (roughly $80 to $185)."
+  "pulse": "Nektar shares cooled somewhat through mid-to-late July 2026 (trading around $68-71, off the July 2 pop of roughly 10.6% and the July 9 gain of 5.2%) even as the stock remains up dramatically versus a year ago, with a July 20 valuation piece flagging NKTR's ~41.5x price-to-sales as well above peer and industry norms and warning that a lot of optimism about rezpegaldesleukin is already priced in. The company is still pushing its Treg-stimulating biologic toward pivotal testing, backed by over $1 billion in cash after 2026 equity raises: the five-trial Phase 3 ZENITH-AD program in atopic dermatitis was slated to begin in July 2026, but as of July 20 no formal first-patient-dosed announcement had been made, first pivotal data won't read out until mid-2028, and Q2 2026 earnings are estimated for around August 6 though not yet officially confirmed. Recent sentiment support has come from FTSE Russell index inclusion and sector-wide optimism following AbbVie's pending $10.9 billion acquisition of Apogee Therapeutics (seen as validating the atopic-dermatitis approach), tempered by routine 10b5-1 insider selling from both the CEO and R&D chief and a wide analyst price-target spread (roughly $80 to $185)."
 }

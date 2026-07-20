@@ -2,13 +2,6 @@
   "ticker": "NVO",
   "news": [
     {
-      "date": "2026-07-17",
-      "headline": "Novo Nordisk to launch lower-cost authorized Ozempic copy \"Extensior\" in South Africa via Acino partnership",
-      "source": "Reuters (via regional wire syndication)",
-      "url": "https://www.regionalmedianews.com/news/national/health/novo-nordisk-to-launch-lower-cost-ozempic-copy-in-south-africa/",
-      "summary": "Novo Nordisk will launch Extensior, an authorized copy of Ozempic using the same semaglutide API, manufacturing process and delivery device as the branded product, in South Africa on July 27, 2026, in the same 0.25mg/0.5mg/1mg doses. The rollout is supported by Swiss partner Acino (part of Arcera) and is aimed at expanding affordable access to semaglutide for type 2 diabetes in high-growth emerging markets ahead of eventual patent/exclusivity erosion."
-    },
-    {
       "date": "2026-07-15",
       "headline": "Novo Nordisk receives European Commission approval of Wegovy pill as first oral GLP-1 for weight management in the EU",
       "source": "GlobeNewswire (Novo Nordisk) / BioSpace",
@@ -16,11 +9,18 @@
       "summary": "The European Commission approved oral semaglutide 25 mg (Wegovy pill) for adults with obesity or overweight with a weight-related comorbidity across all 27 EU member states plus Norway, Iceland and Liechtenstein, following the CHMP's May 2026 positive opinion; a single ready-to-use pen for the higher-dose 7.2 mg injectable was also cleared. Commentary noted Eli Lilly still lacks an approved oral GLP-1 rival in Europe."
     },
     {
-      "date": "2026-07-11",
-      "headline": "Novo Nordisk's denecimig (Mim8) demonstrated positive long-term safety and efficacy results in Phase 3 FRONTIER4 hemophilia A extension study at ISTH 2026",
-      "source": "PR Newswire / BioSpace",
-      "url": "https://www.biospace.com/press-releases/novo-nordisks-denecimig-mim8-demonstrated-positive-results-in-long-term-safety-and-efficacy-in-phase-3-hemophilia-a-frontier-extension-study-at-isth-2026",
-      "summary": "At the ISTH Congress in Paris (July 11-15, 2026), Novo Nordisk presented interim FRONTIER4 extension data showing long-term safety and efficacy of investigational denecimig prophylaxis in 426 children, adolescents and adults with hemophilia A, with or without inhibitors, across once-weekly to once-monthly dosing regimens. Denecimig, submitted to the FDA via BLA in September 2025, is positioned as a potential first FVIIIa-mimetic prophylaxis option; Novo also reported first-time explorer10 data on concizumab in children with inhibitors."
+      "date": "2026-07-07",
+      "headline": "Vivani Medical enters agreement with Novo Nordisk to evaluate NPM-139, a miniature ultra-long-acting semaglutide implant for chronic weight management",
+      "source": "GlobeNewswire / BioSpace",
+      "url": "https://www.globenewswire.com/news-release/2026/07/07/3323068/0/en/vivani-medical-enters-into-agreement-with-novo-nordisk-to-evaluate-npm-139-a-miniature-ultra-long-acting-semaglutide-implant-for-chronic-weight-management.html",
+      "summary": "Novo Nordisk signed a non-exclusive agreement with Vivani Medical to evaluate NPM-139, a twice-yearly semaglutide implant built on Vivani's NanoPortal platform, as Novo broadens its obesity-drug delivery options beyond injectables and pills. Vivani expects to start a first-in-human Phase 1 study versus Wegovy injections in mid-2026, part of Novo's wider push to diversify its GLP-1 franchise as competition with Eli Lilly intensifies."
+    },
+    {
+      "date": "2026-07-06",
+      "headline": "Novo Nordisk Korea merges obesity and diabetes divisions in executive reshuffle as Eli Lilly's Zepbound overtakes Wegovy on US and Korean prescriptions",
+      "source": "The Asia Business Daily / European Pharmaceutical Review",
+      "url": "https://www.europeanpharmaceuticalreview.com/news/obesity-drug-competition-fuels-novo-nordisk-restructure/265342.article",
+      "summary": "Novo Nordisk Korea merged its obesity and diabetes commercial units and installed a locally experienced executive in a bid to speed up decision-making, as Eli Lilly's tirzepatide-based Mounjaro/Zepbound franchise pulled further ahead -- US weekly Zepbound prescriptions now exceed Wegovy's by more than 100,000 (near 60% share), while in Korea Lilly's Mounjaro sales roughly tripled Wegovy's despite a Novo wholesale price cut of about 40%. The restructuring underscores how much ground Novo needs to claw back from Lilly even as its own regulatory and access wins continue."
     },
     {
       "date": "2026-07-03",
@@ -37,11 +37,11 @@
       "summary": "Starting July 1, 2026, the CMS-run Medicare GLP-1 Bridge demonstration gives eligible Medicare Part D beneficiaries with obesity access to Wegovy injection and tablets (alongside Eli Lilly's Zepbound and Foundayo) for a flat $50 monthly copay, with the program running through the end of 2027. The move removes a major reimbursement barrier that had largely limited obesity-drug uptake to commercially insured and cash-pay patients, adding a new growth lever for Novo's US Wegovy volumes."
     },
     {
-      "date": "2026-06-11",
-      "headline": "Novo Nordisk confirms cyberattack after hackers claim theft of 1.3TB of data including clinical-trial and unreleased-drug information",
-      "source": "FiercePharma",
-      "url": "https://www.fiercepharma.com/pharma/novos-security-breach-claimed-hacking-groups-attempted-squeeze-multi-million-ransom-bids",
-      "summary": "Novo Nordisk disclosed unauthorized access to a limited number of internal IT systems, with attackers copying source code, proprietary data on marketed and unreleased drugs, internal AI models, manufacturing records and pseudonymized data on roughly 11,500 clinical-trial participants; extortion groups FulcrumSec and TheUSERS007 separately claimed responsibility and sought ransoms of $25 million and $50 million. Novo said it did not pay either group and that the incident has not disrupted its core business operations."
+      "date": "2026-06-07",
+      "headline": "Wegovy pill prescriptions surpass 3 million in just over five months as Novo Nordisk unveils new data at ADA 2026",
+      "source": "PR Newswire (Novo Nordisk) / FiercePharma",
+      "url": "https://www.prnewswire.com/news-releases/wegovy-pill-prescriptions-surpass-3-million-1-filled-roughly-every-5-seconds-bringing-glp-1-therapy-to-people-with-obesity-previously-untreated-while-novo-nordisk-unveils-new-data-at-ada-2026-302793337.html",
+      "summary": "Novo Nordisk said Wegovy pill prescriptions topped 3 million since its January 2026 US launch -- one filled roughly every five seconds and more than 80% going to patients new to GLP-1 therapy -- making it one of the strongest US pharmaceutical launches by volume on record. The milestone, announced alongside new cardiometabolic data at the ADA 2026 Scientific Sessions in New Orleans, offered fresh evidence that Novo's oral GLP-1 franchise is scaling quickly even as Eli Lilly continues to gain injectable market share."
     }
   ],
   "catalysts": [
@@ -54,25 +54,31 @@
     {
       "when": "2026-08-05",
       "label": "Q2 2026 earnings report",
-      "detail": "Novo Nordisk is scheduled to report second-quarter and first-half 2026 financial results before the market opens on August 5, 2026, with investors watching for updated full-year guidance, US Wegovy/Ozempic volume and share trends including early Medicare GLP-1 Bridge uptake, and commentary on competitive pressure from Eli Lilly.",
+      "detail": "Novo Nordisk is scheduled to report second-quarter and first-half 2026 financial results before the market opens on August 5, 2026, with investors watching for updated full-year guidance, US Wegovy/Ozempic volume and share trends including early Medicare GLP-1 Bridge uptake, and commentary on competitive pressure from Eli Lilly's Zepbound and Foundayo.",
       "confirmed": true
     },
     {
       "when": "Q4 2026 (exact PDUFA date not yet public)",
       "label": "FDA decision on CagriSema for chronic weight management",
-      "detail": "CagriSema (cagrilintide/semaglutide) NDA was submitted in December 2025 based on REDEFINE 1/2 data; a standard review implies a decision around late 2026. Approval would give Novo a next-generation, higher-efficacy obesity drug to compete with Lilly's Zepbound/orforglipron (Foundayo) franchise. Separately, the REDEFINE 2 long-term weight-loss extension trial and the REIMAGINE 1-3 type 2 diabetes program (positive data presented at ADA 2026) were confirmed completed on ClinicalTrials.gov as of mid-July 2026, positioning CagriSema for a potential type 2 diabetes label expansion filing as well.",
+      "detail": "CagriSema (cagrilintide/semaglutide) NDA was submitted in December 2025 based on REDEFINE 1/2 data; a standard review implies a decision around late 2026. Approval would give Novo a next-generation, higher-efficacy obesity drug to compete with Lilly's Zepbound/orforglipron (Foundayo) franchise. Separately, the REIMAGINE 1-3 type 2 diabetes program (positive HbA1c and weight-loss data presented at ADA 2026) and additional head-to-head studies versus tirzepatide have been reported completed on ClinicalTrials.gov through mid-July 2026, positioning CagriSema for a potential type 2 diabetes label expansion filing as well.",
       "confirmed": false
     },
     {
       "when": "H2 2026 (approx., ~10-12 months after Sept 2025 BLA submission)",
       "label": "FDA decision on denecimig (Mim8) for hemophilia A",
-      "detail": "Denecimig's BLA was submitted to the FDA in September 2025; supported by fresh FRONTIER4 long-term data unveiled at ISTH in July 2026. Approval would give Novo a new once-weekly-to-once-monthly FVIIIa-mimetic prophylaxis option in hemophilia A.",
+      "detail": "Denecimig's BLA was submitted to the FDA in September 2025; supported by fresh FRONTIER4 long-term extension data unveiled at the ISTH Congress in July 2026. Approval would give Novo a new once-weekly-to-once-monthly FVIIIa-mimetic prophylaxis option in hemophilia A.",
       "confirmed": false
     },
     {
       "when": "H2 2026",
       "label": "Wegovy pill commercial roll-out across EU member states",
       "detail": "Following the European Commission's July 15, 2026 marketing authorization (after the CHMP's May 2026 positive opinion), Novo Nordisk plans to launch the oral Wegovy pill commercially across EU countries through H2 2026, with pricing and reimbursement negotiated market-by-market; UK availability via private prescription began after a June 2026 MHRA approval (with a separate July 3, 2026 MHRA nod for Wegovy injection in MASH liver disease), while NHS reimbursement of the pill still awaits a separate NICE review.",
+      "confirmed": true
+    },
+    {
+      "when": "Mid-2026 initiation",
+      "label": "First-in-human Phase 1 trial of NPM-139 semaglutide implant (Vivani partnership)",
+      "detail": "Following the July 7, 2026 agreement between Novo Nordisk and Vivani Medical, Vivani expects to start a randomized, first-in-human Phase 1 study of NPM-139 -- a twice-yearly semaglutide implant using its NanoPortal platform, with Wegovy injections as an active comparator -- aimed at supporting a subsequent Phase 2 dose-ranging study; a longer-acting delivery format would be a differentiator in Novo's obesity portfolio versus Lilly's injectable and oral offerings.",
       "confirmed": true
     },
     {
@@ -94,5 +100,5 @@
       "confirmed": true
     }
   ],
-  "pulse": "Novo Nordisk has strung together a run of regulatory and commercial wins into late July 2026 -- EU approval of the Wegovy pill (July 15), a UK MHRA nod for Wegovy in MASH liver disease (July 3), the July 1 launch of the Medicare GLP-1 Bridge giving US Medicare patients $50-a-month Wegovy access, and a July 27 South African launch of the authorized Ozempic copy Extensior to defend share in emerging markets -- while continuing to diversify its pipeline via fresh denecimig hemophilia A data and completed CagriSema trials feeding a likely late-2026 FDA obesity decision. Those tailwinds are tempered by a disclosed June cyberattack (no ransom paid, no operational disruption) and an unresolved competitive battle with Eli Lilly's oral Foundayo pill, against a backdrop of pricing pressure culminating in January 2027 US list-price cuts. For the long-dated $40 call position, the next key checkpoints are the August 5, 2026 Q2 earnings report and CagriSema's FDA decision expected in Q4 2026, both of which will shape whether Novo's regulatory momentum translates into a durable growth reacceleration versus Lilly."
+  "pulse": "Novo Nordisk keeps racking up regulatory and commercial wins for its GLP-1 franchise -- EU approval of the Wegovy pill (July 15), the July 7 Vivani implant partnership exploring a twice-yearly semaglutide delivery format, a UK MHRA nod for Wegovy in MASH liver disease (July 3), the July 1 Medicare GLP-1 Bridge giving US patients $50-a-month Wegovy access, and a 3-million-prescription milestone for the Wegovy pill unveiled at ADA 2026 -- yet Eli Lilly keeps extending its lead on the ground, with Zepbound now outselling Wegovy by over 100,000 US weekly scripts (near 60% share) and prompting a defensive restructuring of Novo's Korea operations. For the long-dated $40 call position, the tension between genuine regulatory/access momentum and continued share loss to Lilly should come into sharper focus at the August 5, 2026 Q2 earnings report and with CagriSema's FDA decision expected in Q4 2026, both of which will determine whether Novo's pipeline and access wins can outpace Lilly's commercial execution."
 }

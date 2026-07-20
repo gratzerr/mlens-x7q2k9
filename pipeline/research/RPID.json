@@ -48,7 +48,13 @@
   {
    "when": "2026-08-05 (estimate)",
    "label": "Q2 2026 earnings (analyst-calendar estimate, not yet company-confirmed)",
-   "detail": "As of July 20, the company had not yet issued its customary advance press release fixing the Q2 report date (it announced the May 13 Q1 date about a week ahead of time, and the March 12 Q4/FY25 date about two weeks ahead). Historically RPID has reported Q2 in early-to-mid August (Aug 4 in 2023, Aug 12 in 2025); earnings-calendar trackers currently cluster estimates around late July/early August. Watch the guided ~$7.8M Q2 revenue, new Growth Direct placement cadence toward the 30-38 unit FY26 target, consumables pull-through, and cash runway following the May equity raise and subsequent sell-side price-target cuts.",
+   "detail": "As of July 20, the company had still not issued its customary advance press release fixing the Q2 report date (it announced the May 13 Q1 date about a week ahead of time, and the March 12 Q4/FY25 date about two weeks ahead). Historically RPID has reported Q2 in early-to-mid August (Aug 4 in 2023, Aug 12 in 2025); earnings-calendar trackers currently cluster estimates around late July/early August. Watch the guided ~$7.8M Q2 revenue, new Growth Direct placement cadence toward the 30-38 unit FY26 target, consumables pull-through, and cash runway following the May equity raise and subsequent sell-side price-target cuts.",
+   "confirmed": false
+  },
+  {
+   "when": "H2 2026",
+   "label": "Launch of next-generation cloud-native Growth Direct software platform",
+   "detail": "On the March 2026 Q4/FY25 earnings call, management said it plans to release a next-generation, cloud-enabled software platform in the second half of 2026, intended to enhance customer experience and expand value delivery through AI-driven analytics; no firm launch date has been given yet.",
    "confirmed": false
   },
   {
@@ -58,5 +64,5 @@
    "confirmed": false
   }
  ],
- "pulse": "News flow has been thin over the past six weeks: aside from a routine June 10 inducement RSU grant and a Frankfurt conference poster presentation, the only recurring items have been small, scheduled insider option-exercise sales (June 10, June 22, July 1, July 8) that together total well under 1% of shares outstanding. The stock remains under pressure from May's dilutive ~$32M warrant-linked offering, which drove KeyBanc and Lake Street to cut price targets to $5 and $7 (from $8); shares bottomed around $1.70-1.85 in mid-to-late June before recovering to roughly $2.21 by mid-July. Fundamentally the business is still executing on Growth Direct placements and the MilliporeSigma/Samsung Biologics channel (Q1 revenue +11% YoY, FY26 guidance of 30-38 placements/$37-41M revenue reaffirmed), so the near-term story is a wait for Q2 results (expected late July/early August, not yet formally scheduled) to show whether placement and consumables momentum is offsetting continued cash burn and dilution."
+ "pulse": "News flow has remained thin through mid-July: aside from the June 10 inducement RSU grant and a Frankfurt conference poster presentation, the only recurring items are small, scheduled insider option-exercise sales (June 10, June 22, July 1, July 8) that together total well under 1% of shares outstanding, alongside continued modest institutional portfolio churn. The stock is still digesting May's dilutive ~$32M warrant-linked offering, which drove KeyBanc and Lake Street to cut price targets to $5 and $7 (from $8); shares bottomed near $1.70-1.85 in mid-to-late June and have since recovered to roughly $2.20 by mid-July, though quote sources show continued volatility. Fundamentally the business is still executing on Growth Direct placements and the MilliporeSigma/Samsung Biologics channel (Q1 revenue +11% YoY, FY26 guidance of 30-38 placements/$37-41M revenue reaffirmed) while CEO Robert Spignesi continues to double as principal operating officer following the April COO departure; the near-term story is a wait for Q2 results (expected late July/early August, still not formally scheduled as of July 20) and, further out, the planned H2 2026 launch of a next-generation cloud-native software platform, to show whether placement and consumables momentum is offsetting continued cash burn and dilution."
 }
