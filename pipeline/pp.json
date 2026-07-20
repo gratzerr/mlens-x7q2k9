@@ -46338,7 +46338,7 @@
    "basisUsd": 218000,
    "realizedUsd": 0,
    "avgCost": 4.9545,
-   "unrealRet": -8.8,
+   "unrealRet": -9.4,
    "priceDate": "2026-07-20"
   },
   {
@@ -46351,14 +46351,14 @@
    "isin": "US1420381089",
    "ccy": "USD",
    "shares": 100000.0,
-   "price": 1.60500001,
-   "value": 160500.0,
-   "valueEur": 140420,
-   "valueUsd": 160500,
+   "price": 1.615,
+   "value": 161500.0,
+   "valueEur": 141295,
+   "valueUsd": 161500,
    "basisUsd": 184177,
    "realizedUsd": 0,
    "avgCost": 1.8418,
-   "unrealRet": -12.9,
+   "unrealRet": -12.3,
    "priceDate": "2026-07-20"
   },
   {
