@@ -2532,21 +2532,24 @@ async function rsLoad(tk){
   if(RS.tk!==tk) return;
   if(!cik){ RS.loading=false; RS.noSec=true; renderResearch(); return; }
   const data=RS.data;
-  /* FAST PATH: one companyfacts download fills every card at once ("es muss immer
-     augenblicklich sein") — absent concepts are legitimately empty, not errors */
-  try{
-    const facts=await rsFetchFacts(cik);
+  /* RACE: companyfacts (everything in ONE download) runs IN PARALLEL with the
+     per-concept fetches. Small filers finish via facts in ~2s; for mega-caps whose
+     facts file is huge, the per-concept stream keeps painting cards progressively
+     and facts back-fills whatever is still missing the moment it lands. */
+  rsFetchFacts(cik).then(facts=>{
     if(RS.tk!==tk) return;
     Object.entries(RS_CONCEPTS).forEach(([key,[tax,tags,unit,inst,kind]])=>{
+      if(data[key]&&(data[key].q||[]).length&&!data[key].err) return;   // stream already delivered this one
       const parts=[];
       tags.forEach(t=>{ const [tx,tag]=t.includes(':')?t.split(':'):[tax,t];
         const f=(facts[tx]||{})[tag];
         if(f&&f.units) parts.push(rsSeries({units:f.units},unit,inst,kind==='avg')); });
-      data[key]=parts.length?rsMerge(parts):{q:[],a:[]};
+      data[key]=parts.length?rsMerge(parts):{q:[],a:[]};   // legitimately empty ≠ error
     });
-    rsDerive(data); RS.loading=false; _rsCache[tk]=data; rsCacheSet(tk,data);
-    renderResearch(); return;
-  }catch(e){}   // proxies choked on the big file -> old per-concept path below
+    rsDerive(data); RS.loading=false; _rsCache[tk]=data;
+    if(!Object.values(data).some(v=>v&&v.err)) rsCacheSet(tk,data);
+    renderResearch();
+  }).catch(()=>{});
   let pending=Object.keys(RS_CONCEPTS).length;
   Object.entries(RS_CONCEPTS).forEach(([key,[tax,tags,unit,inst,kind]])=>{
     (async()=>{
