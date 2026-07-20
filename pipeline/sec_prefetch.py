@@ -188,21 +188,37 @@ def universe():
     try: return json.load(open(f))["list"]
     except Exception: return []
 
-def sweep_universe(per_run=5, stale_days=7):
+def full_universe():
+    """S&P-500 FIRST (priority fill), then EVERY SEC-listed ticker from cik.json —
+    'geht das auch sofort': after the sweep, any US ticker opens instantly."""
+    import re
+    lst = universe()
+    seen = {tk for tk, _ in lst}
+    try:
+        m = json.load(open(os.path.join(ROOT, "cik.json")))
+        for tk, cik in m.items():
+            if tk in seen or not re.fullmatch(r"[A-Za-z0-9.-]{1,10}", tk): continue
+            lst.append([tk, int(cik)]); seen.add(tk)
+    except Exception: pass
+    return lst
+
+def sweep_universe(budget_s=25, stale_days=7):
     d = rs_dir()
+    state_f = os.path.join(d, "_state.json")   # freshness lives HERE — content files only
+    try: state = json.load(open(state_f))       # change on REAL data changes (git history!)
+    except Exception: state = {}
     now = time.time()
     todo = []
-    for tk, cik in universe():
-        p = os.path.join(d, tk + ".json")
-        try:
-            ts = json.load(open(p)).get("_ts", 0)
-            if now - ts < stale_days * 86400: continue
-        except Exception: ts = 0
+    for tk, cik in full_universe():
+        ts = state.get(tk, 0)
+        if not ts and not os.path.exists(os.path.join(d, tk + ".json")): ts = 0
+        if now - ts < stale_days * 86400: continue
         todo.append((ts, tk, cik))
     if not todo: return
-    todo.sort()   # missing / stalest first
-    done = 0
-    for ts, tk, cik in todo[:per_run]:
+    todo.sort(key=lambda x: x[0])   # missing / stalest first; universe order breaks ties (S&P first)
+    done = 0; t0 = time.time()
+    for ts, tk, cik in todo:
+        if time.time() - t0 > budget_s: break
         data = {}
         for key, (tax, tags, unit, inst, kind) in CONCEPTS.items():
             parts = []
@@ -213,9 +229,15 @@ def sweep_universe(per_run=5, stale_days=7):
                     continue
                 time.sleep(0.12)   # SEC fair-use pacing
             if parts: data[key] = merge(parts)
-        data["_ts"] = int(now)
-        json.dump(data, open(os.path.join(d, tk + ".json"), "w"), separators=(",", ":"))
-        done += 1
+        p = os.path.join(d, tk + ".json")
+        new = json.dumps(data, separators=(",", ":"))
+        old = None
+        try: old = open(p).read()
+        except Exception: pass
+        if new != old and (data.get("revenue") or data.get("netInc") or data.get("totalAssets")):
+            open(p, "w").write(new)
+        state[tk] = int(now); done += 1
+    json.dump(state, open(state_f, "w"))
     print(f"rs/ universe: {done} refreshed, {len(todo)-done} pending")
 
 if __name__ == "__main__":
