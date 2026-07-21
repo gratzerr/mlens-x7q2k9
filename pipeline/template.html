@@ -1939,10 +1939,11 @@ function boot(){
   }
   /* first paint from the freshest data THIS DEVICE has seen: a browser-cached old
      index.html must not flash a days-old total before the Firestore poll lands */
+  let _fromStore=false;
   try{
     const s=localStorage.getItem('pc-lastdata');
     if(s&&DATA){ const j=JSON.parse(s);
-      if(j&&j.generated&&(!DATA.generated||j.generated>DATA.generated)) DATA=j; }
+      if(j&&j.generated&&(!DATA.generated||j.generated>DATA.generated)){ DATA=j; _fromStore=true; } }
   }catch(e){}
   /* the STATIC veil (first element in the markup) is already covering the page.
      Lift it immediately when the data on this device is fresh (<3 min); otherwise
@@ -1951,9 +1952,12 @@ function boot(){
   window._veilOff=()=>{ const e=document.getElementById('bootveil'); if(e) e.remove(); window._veilOff=null; };
   try{
     const age=Date.now()-Date.parse(String(DATA.generated||'').replace(' ','T')+':00Z');
-    /* 45s: only data from the CURRENT minute-build paints instantly — anything older
-       waits behind the veil for the live swap (no stale total, ever) */
-    if(age<45000){ window._veilOff(); liveState.lastEngine=new Date(); setBadge(); }
+    /* instant paint ("es darf nur eine ms laden"): the LAST-SEEN state (pc-lastdata,
+       incl. live prices) paints immediately for up to 4h — it is what the user just
+       had on screen; the instant poll corrects within ~0.5s. The spinner remains
+       ONLY when no usable local state exists (first visit / days-old cached HTML). */
+    if(age<45000||( _fromStore&&age<4*3600000)){ window._veilOff();
+      if(age<45000){ liveState.lastEngine=new Date(); setBadge(); } }
     else setTimeout(()=>{ if(window._veilOff){ window._veilOff();
       const b=document.getElementById('livebadge'); if(b&&!b.textContent) b.textContent='Snapshot'; } },3500);
   }catch(e){ window._veilOff(); }
