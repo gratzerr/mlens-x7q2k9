@@ -331,11 +331,14 @@
       -webkit-overflow-scrolling:touch;overscroll-behavior-y:contain}
     /* native-app bottom navigation: ALL six tabs always visible */
     .tabbar{display:none}
-    .bottomnav{position:fixed;left:0;right:0;bottom:0;z-index:60;display:flex;
-      background:color-mix(in srgb, var(--surface) 90%, transparent);
-      backdrop-filter:blur(16px);-webkit-backdrop-filter:blur(16px);
-      border-top:1px solid var(--border);
-      padding:6px 4px calc(6px + env(safe-area-inset-bottom))}
+    /* Liquid-Glass-Pille (Parqet-Stil): schwebt mit Abstand über der Unterkante —
+       der Abstand ist Design; die iOS-Web-App darf unten ruhig frueher enden */
+    .bottomnav{position:fixed;left:14px;right:14px;bottom:calc(14px + env(safe-area-inset-bottom));
+      z-index:60;display:flex;
+      background:color-mix(in srgb, var(--surface) 76%, transparent);
+      backdrop-filter:blur(22px) saturate(150%);-webkit-backdrop-filter:blur(22px) saturate(150%);
+      border:1px solid var(--border);border-radius:28px;
+      padding:8px 6px;box-shadow:0 10px 30px rgba(0,0,0,.4)}
     .bottomnav button{flex:1;min-width:0;border:0;background:none;color:var(--muted);
       font:inherit;font-size:9.5px;font-weight:650;letter-spacing:.1px;
       display:flex;flex-direction:column;align-items:center;gap:3px;padding:4px 0;cursor:pointer}
@@ -343,7 +346,7 @@
     .bottomnav button.on{color:var(--accent)}
     /* !important: the later ≤860px rule would otherwise override this back to 48px
        and content would slide under the bottom nav */
-    .wrap{padding-bottom:calc(96px + env(safe-area-inset-bottom))!important}
+    .wrap{padding-bottom:calc(112px + env(safe-area-inset-bottom))!important}
     /* tables: ticker column stays pinned while swiping through the value columns */
     .htable th:first-child,.htable td:first-child{position:sticky;left:0;z-index:2;background:var(--plane)}
     .htable tbody tr:hover td:first-child{background:var(--plane)}
