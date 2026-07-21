@@ -916,6 +916,7 @@ async function ogUnlock(){
 function applyName(){
   const el=document.getElementById('ptitle'); if(el) el.textContent=_cfg.name;
   document.title=_cfg.name;
+  try{ localStorage.setItem('pc-name',_cfg.name); }catch(e){}   // next load paints the right name instantly
 }
 function applyVisibility(){
   /* guest mode (anyone who isn't the signed-in owner): read-only. No settings,
@@ -1939,6 +1940,8 @@ function boot(){
   }
   /* first paint from the freshest data THIS DEVICE has seen: a browser-cached old
      index.html must not flash a days-old total before the Firestore poll lands */
+  /* the baked default name must never flash — use the locally remembered one */
+  try{ const n=localStorage.getItem('pc-name'); if(n){ _cfg.name=n; applyName(); } }catch(e){}
   let _fromStore=false;
   try{
     const s=localStorage.getItem('pc-lastdata');

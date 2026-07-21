@@ -455,6 +455,15 @@ if _icfg != _CFG_DEFAULTS:
         .replace(_CFG_DEFAULTS["portfolioName"], _icfg["portfolioName"])
         .replace(_CFG_DEFAULTS["liveUrl"], _icfg["liveUrl"])
         .replace(_CFG_DEFAULTS["ogHash"], _icfg["ogHash"]))
+# bake the CURRENT portfolio name (owner renames via settings -> Firestore -> site_state):
+# otherwise every load flashes the old baked default before the config fetch lands
+try:
+    _live_name = json.load(open(os.path.join(ROOT, "site_state.json"))).get("name", "")
+    _live_name = _live_name.replace('"', "").replace("\\", "").strip()
+    if _live_name and _live_name != _icfg["portfolioName"]:
+        TEMPLATE = TEMPLATE.replace(_icfg["portfolioName"], _live_name)
+except Exception:
+    pass
 if site_is_public():
     out = TEMPLATE.replace("/*__DATA__*/", DATA_JSON)
     mode = "public (data baked)"
