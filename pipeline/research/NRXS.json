@@ -60,19 +60,19 @@
     {
       "when": "H2 2026",
       "label": "Additional payer medical-policy wins",
-      "detail": "Company continues pursuing new insurer coverage decisions for PENFS/IB-Stim to further expand covered lives beyond current levels (roughly 100 million lives covered as of early 2026).",
+      "detail": "Company continues pursuing new insurer coverage decisions for PENFS/IB-Stim to further expand covered lives beyond current levels (roughly 100 million lives covered as of early 2026); no new policy wins have been announced since the April 22 update.",
       "confirmed": false
     },
     {
       "when": "2026 (ongoing)",
       "label": "VA Federal Supply Schedule ramp",
-      "detail": "Continued scale-up of IB-Stim sales through the VA's Federal Supply Schedule contract, which management said is tracking ahead of initial expectations; this revenue stream is not yet reflected in sell-side models (e.g., Craig-Hallum's $13 target). Independent analysts estimate even low-single-digit penetration of the eligible VA population could add several million dollars of incremental annual revenue by 2027-2028.",
+      "detail": "Continued scale-up of IB-Stim sales through the VA's Federal Supply Schedule contract (effective December 1, 2025), which management said in May was tracking ahead of initial expectations; this revenue stream is not yet reflected in sell-side models (e.g., Craig-Hallum's price target). Independent analysts estimate even low-single-digit penetration of the eligible VA population could add several million dollars of incremental annual revenue by 2027-2028.",
       "confirmed": false
     },
     {
       "when": "H2 2026",
       "label": "Cash-flow breakeven trajectory / ~$15M revenue run-rate target",
-      "detail": "Management has framed roughly $15 million in annualized revenue as the level needed to reach cash-flow breakeven, alongside guidance for a monthly cash burn of about $1 million or less through the rest of 2026 -- a milestone investors will track via upcoming quarterly reports.",
+      "detail": "Management has framed roughly $15 million in annualized revenue as the level needed to reach cash-flow breakeven, alongside guidance for a monthly cash burn of about $1 million or less through the rest of 2026 -- a milestone investors will track via upcoming quarterly reports, and one relevant to resolving the going-concern qualification on the balance sheet.",
       "confirmed": false
     },
     {
@@ -82,5 +82,5 @@
       "confirmed": false
     }
   ],
-  "pulse": "NeurAxis remains in an extended quiet stretch through July 21: beyond the June 10 annual-meeting votes and the routine Q2 Series B preferred stock dividend declared July 9 (paying July 29 to holders of record July 21), a fresh re-check across SEC filings, press releases and news aggregators turned up no new payer wins, VA updates, FDA news, or financing actions since early July, and no Q2 earnings date has been formally confirmed. The stock has been trading in a fairly narrow high-$6 to low-$7 range (around $7.05-$7.30 in early-to-mid July) since its 52-week high near $9.33 on June 27, with the underlying growth story staying intact and reimbursement-driven (the new Category I CPT code, roughly 100 million covered lives, an ahead-of-plan VA Federal Supply Schedule ramp), tempered by the going-concern qualification still attached to the Q1 10-Q despite $7.1 million of cash on hand. Analysts (Craig-Hallum et al.) hold Buy/Strong Buy ratings with price targets of $9-$13 that largely exclude VA revenue, and the next real catalyst is Q2 2026 earnings, only estimated for around August 11-12 based on last year's cadence (not yet officially scheduled), which should show whether CPT-code and VA tailwinds are still accelerating unit growth and whether the cash-runway picture has improved enough to address the going-concern language."
+  "pulse": "NeurAxis remains in an extended quiet stretch: a fresh re-check on July 21 across SEC filings, press releases, and news aggregators confirms the only company-specific developments since early June are the June 10 annual-meeting votes (director re-elections, expanded incentive plan) and the routine Q2 Series B preferred stock dividend declared July 9 (paying July 29 to holders of record July 21) -- no new payer wins, VA updates, FDA news, or financing actions have surfaced, and no Q2 2026 earnings date has been formally scheduled yet. The stock has traded in a fairly narrow high-$6 to low-$8 range since setting a 52-week high near $9.33 on June 27, with the underlying growth story staying intact and reimbursement-driven (the new Category I CPT code, roughly 100 million covered lives, an ahead-of-plan VA Federal Supply Schedule ramp), tempered by the going-concern qualification still attached to the Q1 10-Q despite $7.1 million of cash on hand. Analysts (Craig-Hallum et al.) hold Buy/Strong Buy ratings with price targets of $9-$13 that largely exclude VA revenue, and the next real catalyst is Q2 2026 earnings, only estimated for around August 11-12 based on last year's cadence (not yet officially confirmed), which should show whether CPT-code and VA tailwinds are still accelerating unit growth and whether the cash-runway picture has improved enough to address the going-concern language."
 }
