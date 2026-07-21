@@ -590,7 +590,17 @@ const tIdx = tk => DATA.holdings.findIndex(x=>x.ticker===tk);
 const enDate = s => new Date(s).toLocaleDateString('en-US',{month:'short',day:'2-digit'});
 
 /* ---- KPI tiles ---- */
+/* boot settle: mehrere Startquellen (Store -> Engine -> Parqet -> Kurse) aktualisieren
+   die Kacheln kurz nacheinander — sichtbares "Blinken". Erste Malung sofort, alle
+   weiteren Updates der ersten 2.5s werden zu EINEM gebuendelt; danach normal. */
+const _kpiBootT=Date.now(); let _kpiFirst=true,_kpiTmr=null;
 function renderKpis(){
+  if(_kpiFirst){ _kpiFirst=false; _renderKpis(); return; }
+  const left=_kpiBootT+2500-Date.now();
+  if(left>0){ clearTimeout(_kpiTmr); _kpiTmr=setTimeout(_renderKpis,left); return; }
+  _renderKpis();
+}
+function _renderKpis(){
   const d=DATA;
   // capital gains from the PP-exact FIFO engine (depot.xml), USD at tx-date FX
   const un=d.ppUnrealizedUsd!=null?d.ppUnrealizedUsd:d.netGainUnrealized;
