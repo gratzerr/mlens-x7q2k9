@@ -304,6 +304,22 @@
   .foot{color:var(--muted);font-size:12px;text-align:center;margin-top:26px;line-height:1.6}
   .morebtn{background:none;border:0;color:var(--accent);font-size:12.5px;font-weight:600;cursor:pointer;padding:8px 0 0;font-family:inherit}
 
+  /* ---- phone polish (Rafael: "mach es perfekt" beim Teilen) ---- */
+  @media(max-width:640px){
+    html{-webkit-text-size-adjust:100%}
+    .tabbar{max-width:100%;overflow-x:auto;scrollbar-width:none;-webkit-overflow-scrolling:touch}
+    .tabbar::-webkit-scrollbar{display:none}
+    .tabbar button{padding:8px 12px;font-size:12.5px;flex:none}
+    /* tables: ticker column stays pinned while swiping through the value columns */
+    .htable th:first-child,.htable td:first-child{position:sticky;left:0;z-index:2;background:var(--plane)}
+    .htable tbody tr:hover td:first-child{background:var(--plane)}
+    .tfsel button{padding:5px 9px;font-size:11.5px}
+    .themebtn,.sd-x{width:36px;height:36px}
+    /* iOS zooms into focused inputs below 16px — keep the layout still */
+    #rs-search,input[type=date],input[type=text]{font-size:16px!important}
+    .sd-ranges button{padding:6px 11px}
+    header.top{margin-bottom:14px}
+  }
   @media(max-width:860px){
     .kpis{grid-template-columns:repeat(2,minmax(0,1fr))}
     .tile{padding:13px 14px;min-width:0}
@@ -3461,7 +3477,7 @@ function renderPayments(){
     const h=Math.abs(v)/mx*(H-padB-padT);
     const col=def.flow===1?(v>=0?cvar('--up'):cvar('--down')):def.flow===-1?cvar('--down'):cvar('--accent');
     if(v) bars+=`<rect x="${(x-bw/2).toFixed(1)}" y="${(H-padB-h).toFixed(1)}" width="${bw.toFixed(1)}" height="${Math.max(2,h).toFixed(1)}" rx="3" fill="${col}" opacity="0.85"><title>${m}: ${money(pairs[i][1],pairs[i][0])}</title></rect>`;
-    const every=months.length>18?3:1;
+    const every=months.length>36?6:months.length>18?3:1;
     if(i%every===0) labels+=`<text x="${x.toFixed(1)}" y="${H-7}" text-anchor="middle" font-size="10" fill="${cvar('--muted')}" font-family="system-ui">${months.length>13?m.slice(2).replace('-','/'):['J','F','M','A','M','J','J','A','S','O','N','D'][+m.slice(5,7)-1]}</text>`;
   });
   svg.setAttribute('viewBox',`0 0 ${W} ${H}`);
