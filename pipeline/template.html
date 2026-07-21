@@ -1,5 +1,11 @@
 <meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="apple-mobile-web-app-title" content="Depot">
+<meta name="theme-color" content="#0f131c">
+<link rel="manifest" href="manifest.json">
 <meta name="robots" content="noindex, nofollow">
 <title>Rafael's Portfolio</title>
 <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%23101828'/%3E%3Cpath d='M12 44L26 30l10 8 16-20' fill='none' stroke='%233ecb63' stroke-width='6' stroke-linecap='round' stroke-linejoin='round'/%3E%3Ccircle cx='52' cy='18' r='4.5' fill='%233ecb63'/%3E%3C/svg%3E">
@@ -305,11 +311,22 @@
   .morebtn{background:none;border:0;color:var(--accent);font-size:12.5px;font-weight:600;cursor:pointer;padding:8px 0 0;font-family:inherit}
 
   /* ---- phone polish (Rafael: "mach es perfekt" beim Teilen) ---- */
+  .bottomnav{display:none}
   @media(max-width:640px){
     html{-webkit-text-size-adjust:100%}
-    .tabbar{max-width:100%;overflow-x:auto;scrollbar-width:none;-webkit-overflow-scrolling:touch}
-    .tabbar::-webkit-scrollbar{display:none}
-    .tabbar button{padding:8px 12px;font-size:12.5px;flex:none}
+    /* native-app bottom navigation: ALL six tabs always visible */
+    .tabbar{display:none}
+    .bottomnav{position:fixed;left:0;right:0;bottom:0;z-index:60;display:flex;
+      background:color-mix(in srgb, var(--surface) 90%, transparent);
+      backdrop-filter:blur(16px);-webkit-backdrop-filter:blur(16px);
+      border-top:1px solid var(--border);
+      padding:6px 4px calc(6px + env(safe-area-inset-bottom))}
+    .bottomnav button{flex:1;min-width:0;border:0;background:none;color:var(--muted);
+      font:inherit;font-size:9.5px;font-weight:650;letter-spacing:.1px;
+      display:flex;flex-direction:column;align-items:center;gap:3px;padding:4px 0;cursor:pointer}
+    .bottomnav button svg{width:21px;height:21px;flex:none}
+    .bottomnav button.on{color:var(--accent)}
+    .wrap{padding-bottom:96px}
     /* tables: ticker column stays pinned while swiping through the value columns */
     .htable th:first-child,.htable td:first-child{position:sticky;left:0;z-index:2;background:var(--plane)}
     .htable tbody tr:hover td:first-child{background:var(--plane)}
@@ -373,6 +390,16 @@
 </div>
 
 <div class="secov" id="secov"><div class="secmodal" id="secmodal"></div></div>
+
+<!-- mobile bottom navigation (native-app style) — inherits all [data-tabbtn] wiring -->
+<nav class="bottomnav" id="bottomnav">
+  <button data-tabbtn="portfolio" class="on"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21.21 15.89A10 10 0 1 1 8 2.83"/><path d="M22 12A10 10 0 0 0 12 2v10z"/></svg>Portfolio</button>
+  <button data-tabbtn="news"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 22h16a2 2 0 0 0 2-2V4a2 2 0 0 0-2-2H8a2 2 0 0 0-2 2v16a2 2 0 0 1-4 0V6"/><path d="M18 14h-8M15 18h-5M10 6h8v4h-8z"/></svg>News</button>
+  <button data-tabbtn="performance"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="22 7 13.5 15.5 8.5 10.5 2 17"/><polyline points="16 7 22 7 22 13"/></svg>Perf</button>
+  <button data-tabbtn="payments"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M16 8h-6a2 2 0 1 0 0 4h4a2 2 0 1 1 0 4H8M12 6v2m0 8v2"/></svg>Pay</button>
+  <button data-tabbtn="watchlist"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M2 12s3-7 10-7 10 7 10 7-3 7-10 7-10-7-10-7Z"/><circle cx="12" cy="12" r="3"/></svg>Watch</button>
+  <button data-tabbtn="research"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.3-4.3"/></svg>Research</button>
+</nav>
 <div class="wrap">
   <div class="breaking" id="breaking"></div>
   <header class="top">
@@ -862,6 +889,17 @@ const isOwner=()=>!!(_user && _cfg.owner && _user.email===_cfg.owner);
    Rafael's devices from ever needing the login just to SEE his own portfolio) */
 const OG_HASH='4bc2b77abbd6131c88235e7de77c55e13c8ed7a573ccdaec8e45a9b1dbcf93f7';
 const ownerDev=()=>{ if(isOwner()) return true; try{ return localStorage.getItem('pc-og')==='1'; }catch(e){ return false; } };
+/* standalone home-screen apps have their OWN localStorage — the lock screen offers a
+   manual code entry so the owner can unlock the installed app directly */
+async function ogUnlock(){
+  const tok=prompt('Geräte-Code eingeben:'); if(!tok) return;
+  try{
+    const buf=await crypto.subtle.digest('SHA-256', new TextEncoder().encode(tok.trim()));
+    const hex=[...new Uint8Array(buf)].map(b=>b.toString(16).padStart(2,'0')).join('');
+    if(hex===OG_HASH){ localStorage.setItem('pc-og','1'); applyVisibility(); }
+    else alert('Code falsch');
+  }catch(e){}
+}
 (async()=>{ try{
   const tok=new URLSearchParams(location.search).get('og');
   if(!tok) return;
@@ -900,7 +938,7 @@ function applyVisibility(){
   const locked=(_cfg.public===false||_cfg.hidden===true) && !ownerDev();
   if(locked){
     if(!ov){ ov=document.createElement('div'); ov.id='lockov';
-      ov.innerHTML='<div class="lockbox"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="30" height="30" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg><div class="lt1">This portfolio is private</div><div class="lt2">The owner has turned off public sharing.</div><div style="margin-top:14px"><button class="secbtn" onclick="ownerSignIn()">Owner sign in with Google</button></div></div>';
+      ov.innerHTML='<div class="lockbox"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="30" height="30" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg><div class="lt1">This portfolio is private</div><div class="lt2">The owner has turned off public sharing.</div><div style="margin-top:14px;display:flex;gap:8px;justify-content:center;flex-wrap:wrap"><button class="secbtn" onclick="ownerSignIn()">Owner sign in with Google</button><button class="secbtn" onclick="ogUnlock()">Geräte-Code</button></div></div>';
       document.body.appendChild(ov); }
     ov.style.display='flex';
   } else if(ov) ov.style.display='none';
