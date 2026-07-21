@@ -2,11 +2,18 @@
  "ticker": "RPID",
  "news": [
   {
+   "date": "2026-07-15",
+   "headline": "RPID shares jump over 6% intraday to $2.21, extending rebound off June lows",
+   "source": "Yahoo Finance",
+   "url": "https://finance.yahoo.com/quote/RPID/",
+   "summary": "Rapid Micro Biosystems shares rose 6.76% on July 15 to close at $2.21 (market cap roughly $103M), adding further gains after hours; no company press release accompanied the move, so it appears to reflect broader small-cap biotech sentiment and continued recovery from the mid-to-late June lows near $1.70-1.85 rather than fresh company-specific news."
+  },
+  {
    "date": "2026-07-08",
    "headline": "Form 144: RPID insider notifies sale of 10,000 Class A shares (option exercise)",
    "source": "Stock Titan / SEC",
    "url": "https://www.stocktitan.net/sec-filings/RPID/144-rapid-micro-biosystems-inc-sec-filing-15df3a9aed2f.html",
-   "summary": "An RPID insider filed a Form 144 to sell 10,000 Class A shares obtained via option exercise, the latest in a string of small routine insider sales also dated June 10 (5,000 shares), June 22 (3,688 shares) and July 1 (6,312 shares), against roughly 41.7 million shares outstanding."
+   "summary": "An RPID insider filed a Form 144 to sell 10,000 Class A shares obtained via option exercise, the latest in a string of small routine insider sales also dated June 10 (5,000 shares), June 22 (3,688 shares) and July 1 (6,312 shares), against roughly 41.7 million shares outstanding; no further Form 144 filings have surfaced since July 8 as of July 21."
   },
   {
    "date": "2026-06-11",
@@ -21,34 +28,13 @@
    "source": "GlobeNewswire",
    "url": "https://www.globenewswire.com/news-release/2026/06/10/3310119/33206/en/Rapid-Micro-Biosystems-Announces-Inducement-Grant-Under-Nasdaq-Listing-Rule-5635-c-4.html",
    "summary": "The company granted 60,000 restricted stock units to a newly hired employee as a material inducement to employment, vesting in three equal annual installments over three years."
-  },
-  {
-   "date": "2026-05-29",
-   "headline": "KeyBanc Capital Markets cuts Rapid Micro Biosystems price target to $5 from $8",
-   "source": "MarketBeat",
-   "url": "https://www.marketbeat.com/stocks/NASDAQ/RPID/price-target/",
-   "summary": "KeyBanc lowered its price target on RPID to $5 from $8, citing the dilutive impact of the May equity raise, while maintaining an Overweight rating on the growth thesis."
-  },
-  {
-   "date": "2026-05-22",
-   "headline": "Lake Street cuts Rapid Micro Biosystems price target to $7 from $8",
-   "source": "MarketBeat",
-   "url": "https://www.marketbeat.com/stocks/NASDAQ/RPID/price-target/",
-   "summary": "Lake Street Capital Markets, a joint bookrunner on the May offering, trimmed its price target to $7 from $8 following the pricing of the new share/warrant issuance."
-  },
-  {
-   "date": "2026-05-19",
-   "headline": "Rapid Micro Biosystems Announces Pricing of Up to Approximately $32 Million Underwritten Offering",
-   "source": "GlobeNewswire",
-   "url": "https://www.globenewswire.com/news-release/2026/05/19/3297111/33206/en/Rapid-Micro-Biosystems-Announces-Pricing-of-Up-to-Approximately-32-Million-Underwritten-Offering.html",
-   "summary": "RPID priced Class A shares with Series A/B warrants at a combined $1.955, raising about $9.8M in immediate gross proceeds (up to $32M if all warrants are later exercised for cash); Bain Capital Life Sciences, Armistice Capital and company insiders, including director Kirk Malloy, participated in the deal."
   }
  ],
  "catalysts": [
   {
    "when": "2026-08-05 (estimate)",
    "label": "Q2 2026 earnings (analyst-calendar estimate, not yet company-confirmed)",
-   "detail": "As of July 20, the company had still not issued its customary advance press release fixing the Q2 report date (it announced the May 13 Q1 date about a week ahead of time, and the March 12 Q4/FY25 date about two weeks ahead). Historically RPID has reported Q2 in early-to-mid August (Aug 4 in 2023, Aug 12 in 2025); earnings-calendar trackers currently cluster estimates around late July/early August. Watch the guided ~$7.8M Q2 revenue, new Growth Direct placement cadence toward the 30-38 unit FY26 target, consumables pull-through, and cash runway following the May equity raise and subsequent sell-side price-target cuts.",
+   "detail": "As of July 21, the company had still not issued its customary advance press release fixing the Q2 report date (it announced the May 13 Q1 date about a week ahead of time, and the March 12 Q4/FY25 date about two weeks ahead). Historically RPID has reported Q2 in early-to-mid August (Aug 4 in 2023, Aug 12 in 2025); earnings-calendar trackers currently cluster estimates around late July/early August. Watch the guided ~$7.8-8M Q2 revenue, new Growth Direct placement cadence toward the 30-38 unit FY26 target, consumables pull-through, and cash runway following the May equity raise.",
    "confirmed": false
   },
   {
@@ -64,5 +50,5 @@
    "confirmed": false
   }
  ],
- "pulse": "News flow has remained thin through mid-July: aside from the June 10 inducement RSU grant and a Frankfurt conference poster presentation, the only recurring items are small, scheduled insider option-exercise sales (June 10, June 22, July 1, July 8) that together total well under 1% of shares outstanding, alongside continued modest institutional portfolio churn. The stock is still digesting May's dilutive ~$32M warrant-linked offering, which drove KeyBanc and Lake Street to cut price targets to $5 and $7 (from $8); shares bottomed near $1.70-1.85 in mid-to-late June and have since recovered to roughly $2.20 by mid-July, though quote sources show continued volatility. Fundamentally the business is still executing on Growth Direct placements and the MilliporeSigma/Samsung Biologics channel (Q1 revenue +11% YoY, FY26 guidance of 30-38 placements/$37-41M revenue reaffirmed) while CEO Robert Spignesi continues to double as principal operating officer following the April COO departure; the near-term story is a wait for Q2 results (expected late July/early August, still not formally scheduled as of July 20) and, further out, the planned H2 2026 launch of a next-generation cloud-native software platform, to show whether placement and consumables momentum is offsetting continued cash burn and dilution."
+ "pulse": "Company-specific news flow has stayed very thin through mid-July: beyond the June 10 inducement RSU grant and a Frankfurt conference poster presentation, the only recurring items are small, scheduled insider option-exercise sales (June 10, June 22, July 1, July 8) that together total well under 1% of shares outstanding. The stock, still digesting May's dilutive ~$32M warrant-linked offering that drove KeyBanc and Lake Street to cut price targets to $5 and $7, bottomed near $1.70-1.85 in mid-to-late June and has since recovered to roughly $2.20-2.30 by mid-July (market cap ~$103M) on no clearly identified company catalyst, alongside continued institutional portfolio churn (institutional ownership near 61%, per most recent 13F-based data). Fundamentally the business is still executing on Growth Direct placements and the MilliporeSigma/Samsung Biologics channel (Q1 revenue +11% YoY, FY26 guidance of 30-38 placements/$37-41M revenue reaffirmed) while CEO Robert Spignesi continues to double as principal operating officer following the April COO departure; the near-term story is a wait for Q2 results (expected late July/early August, still not formally scheduled as of July 21) and, further out, the planned H2 2026 launch of a next-generation cloud-native software platform, to show whether placement and consumables momentum is offsetting continued cash burn and dilution."
 }
