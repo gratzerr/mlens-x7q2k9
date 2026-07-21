@@ -1431,7 +1431,9 @@ function initTheme(){
   if(window._themeInit) return; window._themeInit=true;
   const btn=document.getElementById('themebtn');
   const saved=localStorage.getItem('pc-theme');
-  if(saved) document.documentElement.setAttribute('data-theme',saved);
+  // first visit defaults to DARK regardless of system theme (Rafael 2026-07-21);
+  // a saved toggle choice always wins
+  document.documentElement.setAttribute('data-theme',saved||'dark');
   const icon=()=>{ btn.innerHTML=isDarkTheme()?SVG_SUN:SVG_MOON; };
   icon();
   btn.addEventListener('click',()=>{
