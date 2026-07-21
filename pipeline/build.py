@@ -462,6 +462,17 @@ try:
     _live_name = _live_name.replace('"', "").replace("\\", "").strip()
     if _live_name and _live_name != _icfg["portfolioName"]:
         TEMPLATE = TEMPLATE.replace(_icfg["portfolioName"], _live_name)
+    if _live_name:   # keep the PWA manifest (home-screen label) in sync too
+        _mf_path = (os.path.join(os.path.dirname(ROOT), "manifest.json")
+                    if os.path.basename(ROOT) == "pipeline"
+                    else os.path.join(ROOT, "site", "manifest.json"))
+        try:
+            _mf = json.load(open(_mf_path))
+            if _mf.get("short_name") != _live_name:
+                _mf["name"] = _mf["short_name"] = _live_name
+                json.dump(_mf, open(_mf_path, "w"), indent=2)
+        except Exception:
+            pass
 except Exception:
     pass
 if site_is_public():

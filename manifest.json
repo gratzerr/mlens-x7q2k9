@@ -1,6 +1,6 @@
 {
-  "name": "Race to $10M",
-  "short_name": "Race to $10M",
+  "name": "Mission $10M",
+  "short_name": "Mission $10M",
   "start_url": "./",
   "scope": "./",
   "display": "standalone",
