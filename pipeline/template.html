@@ -51,7 +51,8 @@
     font-family:system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;
     font-size:15px;line-height:1.5;-webkit-font-smoothing:antialiased}
   a{color:inherit}
-  .wrap{max-width:1180px;margin:0 auto;padding:26px 20px 80px}
+  .wrap{max-width:1180px;margin:0 auto;padding:26px 20px 80px;
+    padding-top:calc(26px + env(safe-area-inset-top))}   /* notch/Dynamic Island clearance in standalone */
   .tnum{font-variant-numeric:tabular-nums}
 
   header.top{display:flex;align-items:baseline;justify-content:space-between;gap:12px;flex-wrap:wrap;margin-bottom:22px}
@@ -326,7 +327,9 @@
       display:flex;flex-direction:column;align-items:center;gap:3px;padding:4px 0;cursor:pointer}
     .bottomnav button svg{width:21px;height:21px;flex:none}
     .bottomnav button.on{color:var(--accent)}
-    .wrap{padding-bottom:96px}
+    /* !important: the later ≤860px rule would otherwise override this back to 48px
+       and content would slide under the bottom nav */
+    .wrap{padding-bottom:calc(96px + env(safe-area-inset-bottom))!important}
     /* tables: ticker column stays pinned while swiping through the value columns */
     .htable th:first-child,.htable td:first-child{position:sticky;left:0;z-index:2;background:var(--plane)}
     .htable tbody tr:hover td:first-child{background:var(--plane)}
@@ -348,7 +351,7 @@
     .alogo{width:22px;height:22px}
     .cols,.cols.eq{grid-template-columns:1fr}
     .hgrid{grid-template-columns:1fr}
-    .wrap{padding:16px 12px 48px}
+    .wrap{padding:16px 12px 48px;padding-top:calc(16px + env(safe-area-inset-top))}
     .sparkrow{flex-direction:column;align-items:stretch;gap:8px}
     .rng{width:auto}
   }
