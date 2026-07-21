@@ -317,28 +317,28 @@
   .bottomnav{display:none}
   @media(max-width:640px){
     html{-webkit-text-size-adjust:100%}
-    /* App-Shell: das Fenster selbst scrollt nie — nur .wrap scrollt. Fixe Leisten
-       (Statusleisten-Bereich oben, Bottom-Nav unten) haben dadurch beim Tab-Wechsel
-       keinen Viewport-Scroll mehr, an dem sie mitspringen könnten */
+    /* App-Shell: body ist eine feste Flex-Spalte (Scroller oben, Nav unten), das
+       Fenster selbst scrollt nie. Die Bottom-Nav ist bewusst NICHT position:fixed —
+       iOS-Standalone verankert fixe Elemente nach Scroll-Resets falsch (Nav hängt
+       dann über dem unteren Rand); als normales Flow-Element kann sie nicht springen */
     html,body{height:100%;overflow:hidden;overscroll-behavior:none}
-    .wrap{height:100%;height:100dvh;overflow-y:auto;-webkit-overflow-scrolling:touch;
-      overscroll-behavior-y:contain}
+    body{display:flex;flex-direction:column;height:100dvh}
+    .wrap{order:1;flex:1 1 0;min-height:0;width:100%;overflow-y:auto;
+      -webkit-overflow-scrolling:touch;overscroll-behavior-y:contain}
     /* native-app bottom navigation: ALL six tabs always visible */
     .tabbar{display:none}
-    .bottomnav{position:fixed;left:0;right:0;bottom:0;z-index:60;display:flex;
-      background:color-mix(in srgb, var(--surface) 90%, transparent);
-      backdrop-filter:blur(16px);-webkit-backdrop-filter:blur(16px);
+    .bottomnav{order:2;flex:none;z-index:60;display:flex;
+      background:var(--surface);
       border-top:1px solid var(--border);
-      padding:6px 4px calc(6px + env(safe-area-inset-bottom));
-      transform:translateZ(0);will-change:transform}   /* eigene Compositor-Ebene: iOS-"Mitspringen" beim Tab-Scroll verhindern */
+      padding:6px 4px calc(6px + env(safe-area-inset-bottom))}
     .bottomnav button{flex:1;min-width:0;border:0;background:none;color:var(--muted);
       font:inherit;font-size:9.5px;font-weight:650;letter-spacing:.1px;
       display:flex;flex-direction:column;align-items:center;gap:3px;padding:4px 0;cursor:pointer}
     .bottomnav button svg{width:21px;height:21px;flex:none}
     .bottomnav button.on{color:var(--accent)}
-    /* !important: the later ≤860px rule would otherwise override this back to 48px
-       and content would slide under the bottom nav */
-    .wrap{padding-bottom:calc(96px + env(safe-area-inset-bottom))!important}
+    /* !important: the later ≤860px rule would otherwise shrink this; die Nav ist im
+       Flow, der Puffer ist nur noch Atemraum am Listenende */
+    .wrap{padding-bottom:32px!important}
     /* tables: ticker column stays pinned while swiping through the value columns */
     .htable th:first-child,.htable td:first-child{position:sticky;left:0;z-index:2;background:var(--plane)}
     .htable tbody tr:hover td:first-child{background:var(--plane)}
