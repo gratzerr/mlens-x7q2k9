@@ -637,6 +637,16 @@ function _renderKpis(){
   document.getElementById('kpis').innerHTML = tiles.map(t=>
     `<div class="tile${t.hero?' hero':''}"><div class="lab">${t.lab}</div>
      <div class="val ${t.cls||''}">${t.val}</div><div class="note">${t.note}</div></div>`).join('');
+  /* der Depotwert ZAEHLT zum neuen Stand statt hart zu springen (Broker-App-Gefuehl) */
+  const _pvPrev=window._pvShown; window._pvShown=d.totalValue;
+  if(_pvPrev!=null&&_pvPrev!==d.totalValue&&!_priv){
+    const el=document.querySelector('.tile.hero .val');
+    if(el){ const t0=performance.now(),dur=650,from=_pvPrev,to=d.totalValue;
+      const step=ts=>{ const k=Math.min(1,(ts-t0)/dur);
+        el.textContent=fmtUsd(Math.round(from+(to-from)*(1-Math.pow(1-k,3))));
+        if(k<1&&window._pvShown===to) requestAnimationFrame(step); };
+      requestAnimationFrame(step); }
+  }
 }
 
 /* ---- PP total-portfolio strip (from depot.xml via pp_sync.py) ---- */
@@ -1995,7 +2005,7 @@ function boot(){
        had on screen; the instant poll corrects within ~0.5s. The spinner remains
        ONLY when no usable local state exists (first visit / days-old cached HTML). */
     if(age<45000||( _fromStore&&age<4*3600000)){ window._veilOff();
-      if(age<45000){ liveState.lastEngine=new Date(); setBadge(); } }
+      liveState.lastEngine=new Date(); setBadge(); }   // Badge ab erster Malung LIVE — kein leerer Moment
     else setTimeout(()=>{ if(window._veilOff){ window._veilOff();
       const b=document.getElementById('livebadge'); if(b&&!b.textContent) b.textContent='Snapshot'; } },3500);
   }catch(e){ window._veilOff(); }
