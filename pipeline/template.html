@@ -2003,6 +2003,7 @@ let _tab='portfolio';
 function switchTab(t){
   const changed=(_tab!==t);
   _tab=t;
+  if(changed) window.scrollTo(0,0);   // ein Tab-Wechsel startet oben — kein Scroll-Sprung bei kurzen Tabs
   document.querySelectorAll('[data-tab]').forEach(el=>el.classList.toggle('tabon',el.dataset.tab===t));
   document.querySelectorAll('[data-tabbtn]').forEach(b=>b.classList.toggle('on',b.dataset.tabbtn===t));
   try{ history.replaceState(null,'','#'+t); }catch(e){}
