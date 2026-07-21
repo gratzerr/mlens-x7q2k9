@@ -75,12 +75,12 @@
   .tabbar button.on{background:var(--accent);color:#fff}
   [data-tab]:not(.tabon){display:none!important}   /* .tabon keeps the element's own display */
 
-  .kpis{display:grid;grid-template-columns:repeat(4,1fr);gap:14px;margin-bottom:20px}
+  .kpis{display:grid;grid-template-columns:repeat(5,1fr);gap:14px;margin-bottom:20px}
   .tile{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);
     padding:18px 19px 16px;box-shadow:var(--shadow)}
   .tile .lab{font-size:11px;color:var(--muted);text-transform:uppercase;letter-spacing:.7px;font-weight:650}
   .tile .val{font-size:29px;font-weight:740;margin-top:7px;letter-spacing:-.8px;font-variant-numeric:tabular-nums}
-  .tile.hero .val{font-size:35px;letter-spacing:-1px}   /* der aktuelle Depotwert soll dominieren */
+  .tile.hero .val{font-size:31px;letter-spacing:-1px}   /* der aktuelle Depotwert soll dominieren */
   .tile.hero{border-color:color-mix(in srgb, var(--accent) 30%, var(--border))}
   .tile .note{font-size:12.5px;color:var(--muted);margin-top:4px;line-height:1.55}
   .up{color:var(--up)} .down{color:var(--down)}
@@ -612,10 +612,24 @@ function _renderKpis(){
   const gn=(un||0)>=0, rz=(rl||0)>=0;
   // in EUR mode use the engine-exact EUR figures (verified vs the PP app), not FX-converted USD
   const money=(usd,eur)=>_priv?MASK:(_ccy==='EUR'&&eur!=null?fmtE(eur):fmtUsd(usd));
+  /* Today: live intraday move across all positions (falls back to the engine's
+     last daily step before the first price fetch lands) */
+  const _today=(()=>{ let ch=0,base=0,any=false;
+    d.holdings.forEach(h=>{ if(h.assetType==='cash') return; const v=h.value||0;
+      if(h.dayChange!=null&&isFinite(h.dayChange)){ const prev=v/(1+h.dayChange/100); ch+=v-prev; base+=prev; any=true; }
+      else base+=v; });
+    base+=d.cashValue||0;
+    if(any) return {usd:ch,pct:base?ch/base*100:0};
+    const s=d.chartPP; if(s&&s.length>1){ const a=s[s.length-2].v,b=s[s.length-1].v;
+      return {usd:b-a,pct:a?(b/a-1)*100:0}; }
+    return null; })();
   const tiles=[
     {lab:'Portfolio Value', val:fmtUsd(d.totalValue), hero:1,
      note:_ccy+' · '+(d.holdings.length-1)+' positions · net cash '+fmtUsd(d.cashValue)
        +(d.ppNetContribUsd!=null?'<br>invested capital '+money(d.ppNetContribUsd,d.ppNetContribEur):'')},
+    {lab:'Today', val:_today?fmtPct(_today.pct):'—',
+     note:_today?(_priv?MASK:fmtUsd(_today.usd))+' vs yesterday':'—',
+     cls:_today&&_today.pct>=0?'up':'down'},
     {lab:'Unrealized Gain', val:money(un,d.ppUnrealizedEur), note:'current holdings · FIFO vs cost', cls:gn?'up':'down'},
     {lab:'Realized Gain', val:money(rl,d.ppRealizedEur), note:'booked from sells since 2022', cls:rz?'up':'down'},
     {lab:'Return YTD', val:fmtPct(d.ttwrorYtd||0), note:'since inception (2022) '+fmtPct(d.since2022!=null?d.since2022:(d.pp&&d.pp.ppReferenceTtwror)||0)+'<br>IRR '+(d.izf||0).toFixed(2)+'%', cls:(d.ttwrorYtd||0)>=0?'up':'down'},
@@ -1550,6 +1564,7 @@ async function refreshPrices(){
   if(!any) return;
   liveState.lastPrice=new Date();
   renderHoldingsTable(); renderHoldings(); setBadge();
+  renderKpis();   // the Today tile ticks with the live prices
   _saveLast();   // a refresh must repaint the LAST-SEEN prices, not minute-old engine ones
 }
 /* persist the enriched on-screen state (incl. livePrice/dayChange) — a page refresh
