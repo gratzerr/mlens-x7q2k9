@@ -1905,6 +1905,13 @@ function startLive(){
   setInterval(()=>refreshSEC().catch(()=>{}), 90000);       // SEC EDGAR filing watch every 90s
   setInterval(()=>refreshNews().catch(()=>{}), 900000);     // news (GDELT) every 15 min
   setInterval(()=>fsDataPoll().catch(()=>{}), 60000);       // minute-fresh engine data from Firestore
+  /* returning to the app/tab (no reload): refresh IMMEDIATELY — background tabs get
+     throttled, and a resumed standalone app would otherwise show its pre-sleep state
+     for up to a minute */
+  const wake=()=>{ if(document.visibilityState!=='visible') return;
+    fsDataPoll().catch(()=>{}); refreshPrices().catch(()=>{}); refreshParqet().catch(()=>{}); };
+  document.addEventListener('visibilitychange',wake);
+  window.addEventListener('pageshow',e=>{ if(e.persisted) wake(); });   // bfcache restore
 }
 
 function boot(){
@@ -1939,7 +1946,9 @@ function boot(){
   window._veilOff=()=>{ const e=document.getElementById('bootveil'); if(e) e.remove(); window._veilOff=null; };
   try{
     const age=Date.now()-Date.parse(String(DATA.generated||'').replace(' ','T')+':00Z');
-    if(age<3*60000){ window._veilOff(); liveState.lastEngine=new Date(); setBadge(); }   // fresh = LIVE, no Snapshot flash
+    /* 45s: only data from the CURRENT minute-build paints instantly — anything older
+       waits behind the veil for the live swap (no stale total, ever) */
+    if(age<45000){ window._veilOff(); liveState.lastEngine=new Date(); setBadge(); }
     else setTimeout(()=>{ if(window._veilOff){ window._veilOff();
       const b=document.getElementById('livebadge'); if(b&&!b.textContent) b.textContent='Snapshot'; } },3500);
   }catch(e){ window._veilOff(); }
