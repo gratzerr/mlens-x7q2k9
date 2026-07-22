@@ -1879,8 +1879,11 @@ function renderActivities(){
   el.innerHTML=all.slice(0,_actShown).map(a=>{
     const sym=CCY_SYM[a.ccy]||((a.ccy||'USD')+" ");
     const dt=new Date(a.d).toLocaleDateString('en-US',{month:'short',day:'2-digit',year:'2-digit'});
-    const tk=a.tk||'—';
-    const h=DATA.holdings.find(x=>x.ticker===tk);
+    let tk=a.tk||'—';
+    const occ=tk.match(/^([A-Z.]{1,6})(\d{2})(\d{2})(\d{2})([CP])(\d{8})$/);
+    if(occ){ const M=['','Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
+      tk=occ[1]+' '+M[+occ[3]]+'-20'+occ[2]+' $'+(+occ[6]/1000)+' '+(occ[5]==='C'?'Call':'Put'); }
+    const h=DATA.holdings.find(x=>x.ticker===(occ?occ[1]:tk));
     const sec=DATA.secByIsin&&DATA.secByIsin[a.isin||''];
     const nm=(h&&h.name)||(sec&&sec.name)||'';
     const ty=a.t==='BUY'?'Buy':a.t==='SELL'?'Sell':a.t==='DIVIDEND'?'Dividend':'Interest';
@@ -1888,9 +1891,9 @@ function renderActivities(){
     const sub=isTrade? (Number(a.sh).toLocaleString('en-US')+" @ "+sym+(+a.px).toLocaleString('en-US',{minimumFractionDigits:2,maximumFractionDigits:4})):"";
     const sign=ty==="Buy"?"−":"+";
     const isin=a.isin||(DATA.isinByTicker&&DATA.isinByTicker[tk])||'';
-    const cur=tickerLogos(tk);
+    const cur=tickerLogos(occ?occ[1]:tk);
     const cands=cur.length?cur:[].concat(isin?["https://assets.parqet.com/logos/isin/"+isin+"?format=png&size=64"]:[],
-      (tk&&tk!=='—')?["https://assets.parqet.com/logos/symbol/"+encodeURIComponent(tk.split(' ')[0])+"?format=png&size=64"]:[]);
+      (tk&&tk!=='—')?["https://assets.parqet.com/logos/symbol/"+encodeURIComponent((occ?occ[1]:tk).split(' ')[0])+"?format=png&size=64"]:[]);
     return `<div class="act">
       <div class="ad">${dt}</div>
       <div class="atype ${actCls(ty)}">${esc(ty.toUpperCase())}</div>

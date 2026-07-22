@@ -193,6 +193,17 @@ def displayed_isins():
     return isins or None
 
 _shown_isins = displayed_isins()
+# displayed brokers = the ports the CURRENT holdings sit in (IBKR/SQ); the private
+# depot has its own port name and is never among them
+_disp_ports = set()
+for _h in (pp.get("holdings", []) if pp else []):
+    _disp_ports.update((_h.get("byPort") or {}).keys())
+# the Parqet-derived shown-set is frozen in the pre-retirement past — extend it with
+# everything the displayed depot itself references, so post-Parqet buys stay visible
+if _shown_isins is not None and pp:
+    _shown_isins |= {h.get("isin") for h in pp.get("holdings", []) if h.get("isin")}
+    _shown_isins |= {t.get("isin") for t in pp.get("trades", [])
+                     if t.get("isin") and (not _disp_ports or t.get("port") in _disp_ports)}
 
 # Persist the privacy filter INTO pp.json itself, so the copy that lands in the public
 # repo's pipeline/ (and the cloud rebuild, which has no web egress to re-fetch) never
@@ -431,7 +442,8 @@ data = {
     "acts": (lambda: (
         sorted(
           [a for a in (pp.get("acts", []) if pp else [])
-             if _shown_isins is None or a.get("isin") in _shown_isins]
+             if (a.get("port") in _disp_ports if (a.get("port") and _disp_ports)
+                 else (_shown_isins is None or a.get("isin") in _shown_isins or not a.get("isin")))]
           + [{"d": p["d"], "t": p["k"].upper(), "tk": p["tk"], "amt": p["usd"], "ccy": "USD"}
              for p in _pays if p["k"] in ("dividend", "interest") and p.get("tk")
              and (_shown_isins is None or any(s.get("ticker") == p["tk"] for s in pp.get("securities", [])))],

@@ -461,7 +461,8 @@ for t in ptx:
     if sh>1e-9 and ty in ("BUY","SELL","DELIVERY_INBOUND","DELIVERY_OUTBOUND"):
         acts.append({"d":t["date"],"t":"BUY" if ty in ("BUY","DELIVERY_INBOUND") else "SELL",
                      "sec":s,"sh":round(sh,4),"px":round(g/sh,4),
-                     "ccy":t["ccy"],"amt":round(g,2)})
+                     "ccy":t["ccy"],"amt":round(g,2),
+                     "port":(portfolios.get(t["owner"]) or {}).get("name")})
     if ty in ("BUY","DELIVERY_INBOUND"):
         lots[s].append([sh,eur,usd,t["date"]])
         if sh>1e-9:
