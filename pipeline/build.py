@@ -427,6 +427,16 @@ data = {
     # PP net-worth curve (daily EUR value + cum TTWROR) — replaces Parqet's wrong chart
     "chartPP": pp.get("series", []) if pp else [],
     "trades": pp_trades,
+    # Activities feed from the engine: trades + dividends/interest, shown ISINs only
+    "acts": (lambda: (
+        sorted(
+          [a for a in (pp.get("acts", []) if pp else [])
+             if _shown_isins is None or a.get("isin") in _shown_isins]
+          + [{"d": p["d"], "t": p["k"].upper(), "tk": p["tk"], "amt": p["usd"], "ccy": "USD"}
+             for p in _pays if p["k"] in ("dividend", "interest") and p.get("tk")
+             and (_shown_isins is None or any(s.get("ticker") == p["tk"] for s in pp.get("securities", [])))],
+          key=lambda a: a["d"], reverse=True)[:150]
+    ))(),
     "tradeLogos": trade_logos,
     "payments": pay_journal,
     # security name map for Activities — ONLY ISINs shown in this portfolio (dividend
