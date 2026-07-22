@@ -2,7 +2,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="mobile-web-app-capable" content="yes">
-<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="apple-mobile-web-app-status-bar-style" content="default">
 <meta name="apple-mobile-web-app-title" content="Mission $10M">
 <meta name="theme-color" content="#0f131c">
 <link rel="manifest" href="manifest.json">
@@ -331,9 +331,13 @@
       -webkit-overflow-scrolling:touch;overscroll-behavior-y:contain}
     /* native-app bottom navigation: ALL six tabs always visible */
     .tabbar{display:none}
-    /* Liquid-Glass-Pille (Parqet-Stil): schwebt mit Abstand über der Unterkante —
-       der Abstand ist Design; die iOS-Web-App darf unten ruhig frueher enden */
-    .bottomnav{position:fixed;left:14px;right:14px;bottom:10px;
+    /* Inhalt blendet unter der Pille sanft in den Hintergrund aus — kein hartes
+       Abschneiden an der Unterkante der Web-App */
+    body::after{content:'';position:fixed;left:0;right:0;bottom:0;height:96px;
+      pointer-events:none;z-index:55;
+      background:linear-gradient(to top, var(--plane) 25%, transparent)}
+    /* Liquid-Glass-Pille (Parqet-Stil): schwebt knapp über dem unteren Rand */
+    .bottomnav{position:fixed;left:14px;right:14px;bottom:calc(6px + env(safe-area-inset-bottom));
       z-index:60;display:flex;
       background:color-mix(in srgb, var(--surface) 76%, transparent);
       backdrop-filter:blur(22px) saturate(150%);-webkit-backdrop-filter:blur(22px) saturate(150%);
