@@ -1,15 +1,15 @@
 {
- "fileDate": "2026-07-22 05:39",
- "generated": "2026-07-22 06:00",
+ "fileDate": "2026-07-22 06:22",
+ "generated": "2026-07-22 06:22",
  "engine": "pp-exact (verified vs PP app 2026-07-11)",
- "totalSecuritiesEur": 2098414,
- "cashEur": -97891.71,
+ "totalSecuritiesEur": 2088441,
+ "cashEur": -99227.63,
  "cashByAccount": [
   {
    "account": "IBKR USD",
    "ccy": "USD",
-   "balance": -113191.18,
-   "eur": -99029.9
+   "balance": -114718.14,
+   "eur": -100365.83
   },
   {
    "account": "IBKR EUR",
@@ -30,28 +30,28 @@
    "eur": 96.6
   }
  ],
- "totalEur": 2000523,
- "ttwrorSince2022": 410.78,
- "ttwrorYtd": 102.81,
- "ttwrorAnnualized": 43.07,
- "izf": 71.79,
+ "totalEur": 1989213,
+ "ttwrorSince2022": 407.89,
+ "ttwrorYtd": 101.66,
+ "ttwrorAnnualized": 42.89,
+ "izf": 71.4,
  "yearlyReturns": {
   "2022": 3.3,
   "2023": 11.8,
   "2024": 45.2,
   "2025": 50.2,
-  "2026": 102.8
+  "2026": 101.7
  },
- "realizedEur": 827200,
- "unrealizedEur": 502218,
- "realizedUsd": 998208,
- "unrealizedUsd": 554756,
+ "realizedEur": 851813,
+ "unrealizedEur": 466354,
+ "realizedUsd": 1024226,
+ "unrealizedUsd": 515878,
  "netContribEur": 667272,
  "netContribUsd": 739179,
  "earningsEur": 13297.85,
  "earningsUsd": 14376,
- "feesEur": 8382.25,
- "feesUsd": 9569,
+ "feesEur": 8440.18,
+ "feesUsd": 9635,
  "taxesEur": 1717.1,
  "taxesUsd": 1907,
  "series": [
@@ -26585,9 +26585,9 @@
   },
   {
    "d": "2026-07-17",
-   "v": 2264750,
-   "e": 1981409,
-   "r": 4.058954,
+   "v": 2254650,
+   "e": 1972572,
+   "r": 4.036393,
    "c": 739179,
    "k": 667272,
    "q": 998208,
@@ -26601,9 +26601,9 @@
   },
   {
    "d": "2026-07-18",
-   "v": 2264750,
-   "e": 1981409,
-   "r": 4.058954,
+   "v": 2254650,
+   "e": 1972572,
+   "r": 4.036393,
    "c": 739179,
    "k": 667272,
    "q": 998208,
@@ -26617,9 +26617,9 @@
   },
   {
    "d": "2026-07-19",
-   "v": 2264750,
-   "e": 1981409,
-   "r": 4.058954,
+   "v": 2254650,
+   "e": 1972572,
+   "r": 4.036393,
    "c": 739179,
    "k": 667272,
    "q": 998208,
@@ -26633,38 +26633,52 @@
   },
   {
    "d": "2026-07-20",
-   "v": 2236286,
-   "e": 1956506,
-   "r": 3.995372,
+   "v": 2219959,
+   "e": 1942221,
+   "r": 3.958901,
    "c": 739179,
    "k": 667272,
-   "q": 998208,
-   "Q": 827200,
+   "q": 1024226,
+   "Q": 851813,
    "g": 14376,
    "G": 13298,
-   "f": 9569,
-   "F": 8382,
+   "f": 9635,
+   "F": 8440,
    "t": 1907,
    "T": 1717
   },
   {
    "d": "2026-07-21",
-   "v": 2286598,
-   "e": 2000523,
-   "r": 4.107757,
+   "v": 2273671,
+   "e": 1989213,
+   "r": 4.078881,
    "c": 739179,
    "k": 667272,
-   "q": 998208,
-   "Q": 827200,
+   "q": 1024226,
+   "Q": 851813,
    "g": 14376,
    "G": 13298,
-   "f": 9569,
-   "F": 8382,
+   "f": 9635,
+   "F": 8440,
    "t": 1907,
    "T": 1717
   }
  ],
  "payments": [
+  {
+   "d": "2026-07-20",
+   "k": "fee",
+   "tk": "ABVX270115C00120000",
+   "eur": 17.17,
+   "usd": 19.63
+  },
+  {
+   "d": "2026-07-20",
+   "k": "fee",
+   "tk": "NVO270115C00040000",
+   "eur": 40.76,
+   "usd": 46.59
+  },
   {
    "d": "2026-07-16",
    "k": "fee",
@@ -42178,13 +42192,6 @@
     67.0
    ]
   ],
-  "NVO270115C00040000": [
-   [
-    "2026-05-05",
-    10000.0,
-    9.6482
-   ]
-  ],
   "PINK.V": [
    [
     "2026-05-12",
@@ -42254,6 +42261,13 @@
     40000.0,
     2.0812
    ]
+  ],
+  "ABVX270115C00120000": [
+   [
+    "2026-07-20",
+    4000.0,
+    30.9902
+   ]
   ]
  },
  "ports": [
@@ -42262,6 +42276,21 @@
   "SQ"
  ],
  "trades": [
+  {
+   "port": "IBKR",
+   "buy": "2026-05-05",
+   "sell": "2026-07-20",
+   "days": 76,
+   "sh": 10000.0,
+   "proceedsUsd": 122500,
+   "basisUsd": 96482,
+   "gainUsd": 26018,
+   "gainEur": 24612,
+   "ret": 26.97,
+   "ticker": "NVO270115C00040000",
+   "name": "NVO 15JAN27 40 C",
+   "isin": ""
+  },
   {
    "port": "IBKR",
    "buy": "2026-05-05",
@@ -45550,6 +45579,21 @@
  ],
  "securities": [
   {
+   "isin": "IE00B6YX5D40",
+   "ticker": "SPYD",
+   "name": "SPDR S+P US D.ARIST.ETF D"
+  },
+  {
+   "isin": "IE00B44T3H88",
+   "ticker": "H4ZP",
+   "name": "HSBC MSCI CHINA UCITS ETF"
+  },
+  {
+   "isin": "IE00B3XXRP09",
+   "ticker": "VUSA.DE",
+   "name": "VANGUARD S+P 500U.ETF DLD"
+  },
+  {
    "isin": "CNE1000001W2",
    "ticker": "AQE.F",
    "name": "Anhui Conch Cement Co. Ltd. Registered Shares H YC 1"
@@ -45730,6 +45774,11 @@
    "name": "NIKE Inc. Registered Shares Class B o.N."
   },
   {
+   "isin": "IE00B5BMR087",
+   "ticker": "SXR8",
+   "name": "ISHSVII-CORE S+P500 DLACC"
+  },
+  {
    "isin": "GB0002374006",
    "ticker": "GUI.F",
    "name": "DIAGEO PLC LS-,28935185"
@@ -45773,6 +45822,11 @@
    "isin": "GB0005603997",
    "ticker": "LGEN.L",
    "name": "Legal & General Group Plc"
+  },
+  {
+   "isin": "IE00BK5BQT80",
+   "ticker": "VWCE.DE",
+   "name": "VANG.FTSE A.W. DLA"
   },
   {
    "isin": "GB0007188757",
@@ -45995,14 +46049,29 @@
    "name": "Confluent, Inc."
   },
   {
+   "isin": "DE000A3GSUD3",
+   "ticker": "VSOL.DE",
+   "name": "VANECK SOLANA ETN"
+  },
+  {
    "isin": "US98980G1022",
    "ticker": "ZS",
    "name": "ZSCALER INC"
   },
   {
+   "isin": "US81730H1095",
+   "ticker": "S",
+   "name": "SentinelOne, Inc."
+  },
+  {
    "isin": "US18915M1071",
    "ticker": "NET",
    "name": "CLOUDFLARE INC - CLASS A"
+  },
+  {
+   "isin": "DE000A3GPSP7",
+   "ticker": "VETH.DE",
+   "name": "VANECK ETHEREUM ETN"
   },
   {
    "isin": "NL0009805522",
@@ -46015,6 +46084,11 @@
    "name": "monday.com Ltd."
   },
   {
+   "isin": "US88339J1051",
+   "ticker": "TTD",
+   "name": "THE TRADE DESK INC"
+  },
+  {
    "isin": "US75734B1008",
    "ticker": "RDDT",
    "name": "Reddit, Inc."
@@ -46025,9 +46099,19 @@
    "name": "Toast, Inc."
   },
   {
+   "isin": "US26856L1035",
+   "ticker": "ELF",
+   "name": "ELF BEAUTY INC"
+  },
+  {
    "isin": "US7811541090",
    "ticker": "RBRK",
    "name": "RUBRIK INC-A"
+  },
+  {
+   "isin": "US0079031078",
+   "ticker": "AMD",
+   "name": "ADVANCED MICRO DEVICES"
   },
   {
    "isin": "IL0011741688",
@@ -46060,6 +46144,11 @@
    "name": "DUOLINGO"
   },
   {
+   "isin": "US09175A2069",
+   "ticker": "BMNR",
+   "name": "BitMine Immersion Technologies,"
+  },
+  {
    "isin": "US74276L1052",
    "ticker": "PRCT",
    "name": "PROCEPT BIOROBOTICS CORP"
@@ -46068,6 +46157,11 @@
    "isin": "CA73044W3021",
    "ticker": "POET",
    "name": "POET Technologies Inc."
+  },
+  {
+   "isin": "US6963894026",
+   "ticker": "PALI",
+   "name": "PALISADE BIO INC"
   },
   {
    "isin": "US4158581094",
@@ -46083,6 +46177,11 @@
    "isin": "US29772L1089",
    "ticker": "ETON",
    "name": "ETON PHARMACEUTICALS INC"
+  },
+  {
+   "isin": "US38942Q2021",
+   "ticker": "CALC",
+   "name": "CALCIMEDICA INC"
   },
   {
    "isin": "US18507C1036",
@@ -46135,9 +46234,19 @@
    "name": "PERSONALIS INC"
   },
   {
+   "isin": "US03823U1025",
+   "ticker": "AAOI",
+   "name": "APPLIED OPTOELECTRONICS INC"
+  },
+  {
    "isin": "US6402683063",
    "ticker": "NKTR",
    "name": "NEKTAR THERAPEUTICS"
+  },
+  {
+   "isin": "US00246W1036",
+   "ticker": "AXTI",
+   "name": "AXT INC"
   },
   {
    "isin": "US81663L2007",
@@ -46148,6 +46257,11 @@
    "isin": "US80303D3052",
    "ticker": "SNWV",
    "name": "SANUWAVE Health, Inc."
+  },
+  {
+   "isin": "US09077D2099",
+   "ticker": "BFRI",
+   "name": "Biofrontera Inc."
   },
   {
    "isin": "CA71385D1078",
@@ -46185,15 +46299,15 @@
    "name": "RAPID MICRO BIOSYSTEMS INC-A"
   }
  ],
- "ppReferenceTtwror": 410.78,
+ "ppReferenceTtwror": 407.89,
  "ppReferenceDate": "2026-07-22",
- "ttwrorApproxSince2022": 410.78,
+ "ttwrorApproxSince2022": 407.89,
  "yearlyReturnsApprox": {
   "2022": 3.3,
   "2023": 11.8,
   "2024": 45.2,
   "2025": 50.2,
-  "2026": 102.8
+  "2026": 101.7
  },
  "holdings": [
   {
@@ -46379,23 +46493,23 @@
   },
   {
    "account": "ALL",
-   "ticker": "NVO270115C00040000",
-   "name": "NVO 15JAN27 40 C",
+   "ticker": "ABVX270115C00120000",
+   "name": "ABVX 15JAN27 120 C",
    "byPort": {
-    "IBKR": 10000.0
+    "IBKR": 4000.0
    },
    "isin": "",
    "ccy": "USD",
-   "shares": 10000.0,
-   "price": 13.5,
-   "value": 135000.0,
-   "valueEur": 118110,
-   "valueUsd": 135000,
-   "basisUsd": 96482,
+   "shares": 4000.0,
+   "price": 30.9,
+   "value": 123600.0,
+   "valueEur": 108136,
+   "valueUsd": 123600,
+   "basisUsd": 123961,
    "realizedUsd": 0,
-   "avgCost": 9.6482,
-   "unrealRet": 39.9,
-   "priceDate": "2026-07-16"
+   "avgCost": 30.9902,
+   "unrealRet": -0.3,
+   "priceDate": "2026-07-21"
   },
   {
    "account": "ALL",
@@ -46418,5 +46532,5 @@
    "priceDate": "2026-07-21"
   }
  ],
- "txmax": "2026-07-16"
+ "txmax": "2026-07-20"
 }
