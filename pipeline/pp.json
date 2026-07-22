@@ -45579,21 +45579,6 @@
  ],
  "securities": [
   {
-   "isin": "IE00B6YX5D40",
-   "ticker": "SPYD",
-   "name": "SPDR S+P US D.ARIST.ETF D"
-  },
-  {
-   "isin": "IE00B44T3H88",
-   "ticker": "H4ZP",
-   "name": "HSBC MSCI CHINA UCITS ETF"
-  },
-  {
-   "isin": "IE00B3XXRP09",
-   "ticker": "VUSA.DE",
-   "name": "VANGUARD S+P 500U.ETF DLD"
-  },
-  {
    "isin": "CNE1000001W2",
    "ticker": "AQE.F",
    "name": "Anhui Conch Cement Co. Ltd. Registered Shares H YC 1"
@@ -45724,11 +45709,6 @@
    "name": "Starbucks Corp. Reg. Shares DL -,001"
   },
   {
-   "isin": "KYG8208B1014",
-   "ticker": null,
-   "name": "JD.com Inc. Registered Shares A o.N."
-  },
-  {
    "isin": "US02079K3059",
    "ticker": "ABEA.F",
    "name": "Alphabet Inc. Reg. Shs Cl. A"
@@ -45774,11 +45754,6 @@
    "name": "NIKE Inc. Registered Shares Class B o.N."
   },
   {
-   "isin": "IE00B5BMR087",
-   "ticker": "SXR8",
-   "name": "ISHSVII-CORE S+P500 DLACC"
-  },
-  {
    "isin": "GB0002374006",
    "ticker": "GUI.F",
    "name": "DIAGEO PLC LS-,28935185"
@@ -45822,11 +45797,6 @@
    "isin": "GB0005603997",
    "ticker": "LGEN.L",
    "name": "Legal & General Group Plc"
-  },
-  {
-   "isin": "IE00BK5BQT80",
-   "ticker": "VWCE.DE",
-   "name": "VANG.FTSE A.W. DLA"
   },
   {
    "isin": "GB0007188757",
@@ -46049,29 +46019,14 @@
    "name": "Confluent, Inc."
   },
   {
-   "isin": "DE000A3GSUD3",
-   "ticker": "VSOL.DE",
-   "name": "VANECK SOLANA ETN"
-  },
-  {
    "isin": "US98980G1022",
    "ticker": "ZS",
    "name": "ZSCALER INC"
   },
   {
-   "isin": "US81730H1095",
-   "ticker": "S",
-   "name": "SentinelOne, Inc."
-  },
-  {
    "isin": "US18915M1071",
    "ticker": "NET",
    "name": "CLOUDFLARE INC - CLASS A"
-  },
-  {
-   "isin": "DE000A3GPSP7",
-   "ticker": "VETH.DE",
-   "name": "VANECK ETHEREUM ETN"
   },
   {
    "isin": "NL0009805522",
@@ -46107,11 +46062,6 @@
    "isin": "US7811541090",
    "ticker": "RBRK",
    "name": "RUBRIK INC-A"
-  },
-  {
-   "isin": "US0079031078",
-   "ticker": "AMD",
-   "name": "ADVANCED MICRO DEVICES"
   },
   {
    "isin": "IL0011741688",

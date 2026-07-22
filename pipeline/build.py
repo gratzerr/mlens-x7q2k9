@@ -197,6 +197,15 @@ _shown_isins = displayed_isins()
 # Persist the privacy filter INTO pp.json itself, so the copy that lands in the public
 # repo's pipeline/ (and the cloud rebuild, which has no web egress to re-fetch) never
 # carries the separate depots' security names. Only when the fetch succeeded.
+if pp and _shown_isins is None and pp.get("securities"):
+    # Parqet-free fallback (account retired 2026-07-22): keep only securities the
+    # displayed portfolio itself references — holdings, closed trades, buy markers.
+    # Payments are excluded on purpose: the private dividend depot pays through there.
+    ref_isin = {h.get("isin") for h in pp.get("holdings", [])} | {t.get("isin") for t in pp.get("trades", [])}
+    ref_tk = ({h.get("ticker") for h in pp.get("holdings", [])} | {t.get("ticker") for t in pp.get("trades", [])}
+              | set((pp.get("buysByTicker") or {}).keys()))
+    _shown_isins = {s.get("isin") for s in pp["securities"]
+                    if s.get("isin") in ref_isin or s.get("ticker") in ref_tk}
 if pp and _shown_isins is not None and pp.get("securities"):
     kept = [s for s in pp["securities"] if s.get("isin") in _shown_isins]
     if kept and len(kept) < len(pp["securities"]):
@@ -335,8 +344,8 @@ total = port["totalValue"]
 for h in port["holdings"]:
     h["alloc"] = round(100.0 * h["value"] / total, 1)
     h["logos"] = logo_candidates(h)
-    if h["assetType"] == "option":   # underlying live quotes must never overwrite contract prices
-        h.pop("ySym", None)
+    if h["assetType"] == "option":   # Yahoo quotes OCC contract symbols directly (real option price)
+        h["ySym"] = h.get("occ") or h["ticker"]
         h["gquery"] = NEWS_QUERY.get(h["ticker"], (h.get("name") or h["ticker"]).split(" \u2014 ")[0])
         h["liveCcy"] = LIVE_CCY.get(h["ticker"], "USD")
     elif h["assetType"] != "cash":
