@@ -11,7 +11,7 @@ Writes:
 
 Re-run daily after refreshing the source JSON to keep the dashboard current.
 """
-import json, os, datetime, html
+import json, os, re, datetime, html
 
 ROOT = os.path.dirname(os.path.abspath(__file__))
 
@@ -48,16 +48,6 @@ if pp:
         for h in port["holdings"]:
             if h.get("assetType") == "cash":
                 h["value"] = cash_usd
-    nvo = next((x for x in pp.get("holdings", []) if "NVO" in (x.get("ticker") or "")), None)
-    if nvo:
-        for h in port["holdings"]:
-            if h.get("assetType") == "option":
-                h["price"] = nvo["price"]
-                h["shares"] = nvo["shares"]
-                h["value"] = round(nvo["shares"] * nvo["price"])
-                if h.get("costPrice"):
-                    h["unrealizedReturn"] = round((nvo["price"]/h["costPrice"]-1)*100, 1)
-                    h["totalGainNet"] = round(h["value"] - nvo["shares"]*h["costPrice"])
     # ---- holdings reconcile: POSITIONS come from the engine (depot.xml via pp.json);
     # portfolio.json only contributes presentation extras (thesis, links, pid).
     # New buys appear and sold positions disappear automatically — the snapshot can
@@ -85,12 +75,42 @@ if pp:
                 h["totalGainNet"] = round((x.get("valueUsd") or 0) - x["basisUsd"] + (x.get("realizedUsd") or 0))
             merged.append(h)
         cash_first = [h for h in rest if h.get("assetType") == "cash"]
-        options = [h for h in rest if h.get("assetType") != "cash"]
+        # options reconcile like securities: the engine (OCC-style tickers, e.g.
+        # ABVX270115C00120000) is the source of truth — new contracts appear, sold
+        # ones disappear (NVO-call-sold incident 2026-07-22)
+        MON = {1:"Jan",2:"Feb",3:"Mar",4:"Apr",5:"May",6:"Jun",7:"Jul",8:"Aug",9:"Sep",10:"Oct",11:"Nov",12:"Dec"}
+        DASH = "\u2014"
+        prev_opts = {h.get("occ") or h.get("ticker"): h for h in rest if h.get("assetType") != "cash"}
+        options = []
+        for x in pp["holdings"]:
+            m = re.match(r"^([A-Z.]{1,6})(\d{6})([CP])(\d{8})$", x.get("ticker") or "")
+            if not m or (x.get("shares") or 0) <= 0:
+                continue
+            und, ymd, cp = m.group(1), m.group(2), m.group(3)
+            strike = int(m.group(4)) / 1000
+            label = f"{MON[int(ymd[2:4])]}-20{ymd[0:2]} ${strike:g} {'Call' if cp == 'C' else 'Put'}"
+            h = prev_opts.get(m.group(0)) or prev_opts.get(und)
+            if h is None:   # brand-new contract: sensible defaults, thesis fills in later
+                h = {"pid": "pp_" + m.group(0), "ticker": und, "assetType": "option",
+                     "name": und + " " + DASH + " " + label, "thesis": "", "gquery": und,
+                     "links": {"stocktwits": "https://stocktwits.com/symbol/" + und,
+                               "x": "https://x.com/search?q=%24" + und + "&f=live",
+                               "finviz": "https://finviz.com/quote.ashx?t=" + und}}
+            else:           # keep the curated name prefix, refresh the contract label
+                h["name"] = (h.get("name") or und).split(" " + DASH + " ")[0] + " " + DASH + " " + label
+            h["occ"] = m.group(0)
+            h["shares"] = x.get("shares"); h["price"] = x.get("price")
+            h["value"] = round(x.get("valueUsd") or x.get("value") or 0)
+            if x.get("avgCost"): h["costPrice"] = x["avgCost"]
+            if x.get("unrealRet") is not None: h["unrealizedReturn"] = x["unrealRet"]
+            if x.get("basisUsd"):
+                h["totalGainNet"] = round((x.get("valueUsd") or 0) - x["basisUsd"] + (x.get("realizedUsd") or 0))
+            options.append(h)
         port["holdings"] = cash_first + sorted(merged, key=lambda h: -h["value"]) + options
         # persist ticker-set changes back to portfolio.json — ir_sweep/social_sync read
         # their ticker lists from the FILE, so new buys must land there too (only on
         # set changes, to avoid a value-churn diff in every minute commit)
-        if set(by_tk) != {h["ticker"] for h in merged}:
+        if set(by_tk) != {h["ticker"] for h in merged} or set(prev_opts) != {h["occ"] for h in options}:
             try:
                 json.dump(port, open(os.path.join(ROOT, "portfolio.json"), "w"),
                           ensure_ascii=False, indent=1)

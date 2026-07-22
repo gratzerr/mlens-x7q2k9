@@ -4,10 +4,10 @@
  "source": "Parqet (live)",
  "portfolioId": "66e18c9426cf62020ccc7ee7",
  "totalValue": 2379073,
- "cashValue": 39000,
+ "cashValue": -113417,
  "netGainUnrealized": 772404,
  "unrealizedReturn": 48.1,
- "izf": 97.8,
+ "izf": 71.4,
  "ttwror": 331.6,
  "realizedAllTime": 1075764,
  "chartYtd": "__CHART_YTD__",
@@ -16,7 +16,7 @@
    "ticker": "Cash",
    "name": "Net Cash (PP)",
    "assetType": "cash",
-   "value": -73327,
+   "value": -113417,
    "unrealizedReturn": 0,
    "totalGainNet": 0,
    "thesis": "SQ USD/EUR + IBKR EUR/USD incl. margin",
@@ -27,9 +27,9 @@
    "ticker": "QURE",
    "name": "uniQure",
    "assetType": "security",
-   "value": 426465,
-   "unrealizedReturn": 363.3,
-   "totalGainNet": 345864,
+   "value": 400900,
+   "unrealizedReturn": 335.8,
+   "totalGainNet": 320391,
    "thesis": "AMT-130 gene therapy for Huntington's disease",
    "ySym": "QURE",
    "gquery": "uniQure",
@@ -38,16 +38,18 @@
     "stocktwits": "https://stocktwits.com/symbol/QURE",
     "x": "https://x.com/search?q=%24QURE&f=live",
     "finviz": "https://finviz.com/quote.ashx?t=QURE"
-   }
+   },
+   "shares": 10000.0,
+   "price": 40.09000015
   },
   {
    "pid": "hld_695f994d700de118b95a7054",
    "ticker": "CLPT",
    "name": "ClearPoint Neuro",
    "assetType": "security",
-   "value": 306250,
-   "unrealizedReturn": 81.3,
-   "totalGainNet": 76655,
+   "value": 285085,
+   "unrealizedReturn": 55.1,
+   "totalGainNet": 40852,
    "thesis": "Neuro-navigation / gene-therapy delivery",
    "ySym": "CLPT",
    "gquery": "ClearPoint Neuro",
@@ -56,16 +58,18 @@
     "stocktwits": "https://stocktwits.com/symbol/CLPT",
     "x": "https://x.com/search?q=%24CLPT&f=live",
     "finviz": "https://finviz.com/quote.ashx?t=CLPT"
-   }
+   },
+   "shares": 18500.0,
+   "price": 15.40999984
   },
   {
    "pid": "hld_69958ddb69baa58c8f1f8c4d",
    "ticker": "NRXS",
    "name": "Neuraxis",
    "assetType": "security",
-   "value": 215100,
-   "unrealizedReturn": 31.4,
-   "totalGainNet": 51455,
+   "value": 245350,
+   "unrealizedReturn": 23.9,
+   "totalGainNet": 47314,
    "thesis": "IB-Stim / PENFS neuromodulation (pediatrics)",
    "ySym": "NRXS",
    "gquery": "Neuraxis",
@@ -74,34 +78,18 @@
     "stocktwits": "https://stocktwits.com/symbol/NRXS",
     "x": "https://x.com/search?q=%24NRXS&f=live",
     "finviz": "https://finviz.com/quote.ashx?t=NRXS"
-   }
-  },
-  {
-   "pid": "hld_6a183e2a547bdef260161491",
-   "ticker": "NKTR",
-   "name": "Nektar Therapeutics",
-   "assetType": "security",
-   "value": 211109,
-   "unrealizedReturn": 9.1,
-   "totalGainNet": 17581,
-   "thesis": "Rezpegaldesleukin (immunology / Treg biologic)",
-   "ySym": "NKTR",
-   "gquery": "Nektar Therapeutics",
-   "links": {
-    "ir": "https://ir.nektar.com/",
-    "stocktwits": "https://stocktwits.com/symbol/NKTR",
-    "x": "https://x.com/search?q=%24NKTR&f=live",
-    "finviz": "https://finviz.com/quote.ashx?t=NKTR"
-   }
+   },
+   "shares": 35000.0,
+   "price": 7.01000022
   },
   {
    "pid": "hld_6967705c8236bd47c52f5c3c",
    "ticker": "DCTH",
    "name": "Delcath Systems",
    "assetType": "security",
-   "value": 208266,
-   "unrealizedReturn": 44.9,
-   "totalGainNet": 48191,
+   "value": 243390,
+   "unrealizedReturn": 33.8,
+   "totalGainNet": 45416,
    "thesis": "HEPZATO KIT (interventional oncology)",
    "ySym": "DCTH",
    "gquery": "Delcath",
@@ -110,16 +98,18 @@
     "stocktwits": "https://stocktwits.com/symbol/DCTH",
     "x": "https://x.com/search?q=%24DCTH&f=live",
     "finviz": "https://finviz.com/quote.ashx?t=DCTH"
-   }
+   },
+   "shares": 19000.0,
+   "price": 12.81000041
   },
   {
    "pid": "hld_6a05e98db13dd7dd2991e731",
    "ticker": "PINK",
    "name": "Perimeter Medical Imaging AI",
    "assetType": "security",
-   "value": 228362,
-   "unrealizedReturn": -0.6,
-   "totalGainNet": -1282,
+   "value": 226099,
+   "unrealizedReturn": -1.5,
+   "totalGainNet": -3513,
    "thesis": "Claire OCT imaging (breast-cancer margins)",
    "ySym": "PINK.V",
    "gquery": "Perimeter Medical Imaging",
@@ -128,87 +118,36 @@
     "stocktwits": "https://stocktwits.com/symbol/PYNKF",
     "x": "https://x.com/search?q=%24PINK&f=live",
     "finviz": "https://finviz.com/quote.ashx?t=PYNKF"
-   }
-  },
-  {
-   "pid": "hld_6a50a76ca01cf4bd3026a819",
-   "ticker": "LXEO",
-   "name": "Lexeo Therapeutics",
-   "assetType": "security",
-   "value": 192396,
-   "unrealizedReturn": -3.5,
-   "totalGainNet": -7003,
-   "thesis": "Gene therapy (cardiac / APOE4 Alzheimer's)",
-   "ySym": "LXEO",
-   "gquery": "Lexeo Therapeutics",
-   "links": {
-    "ir": "https://ir.lexeotx.com/",
-    "stocktwits": "https://stocktwits.com/symbol/LXEO",
-    "x": "https://x.com/search?q=%24LXEO&f=live",
-    "finviz": "https://finviz.com/quote.ashx?t=LXEO"
-   }
-  },
-  {
-   "pid": "hld_6a50aa2ca01cf4bd3026ff90",
-   "ticker": "CRBU",
-   "name": "Caribou Biosciences",
-   "assetType": "security",
-   "value": 153600,
-   "unrealizedReturn": 2.3,
-   "totalGainNet": 3397,
-   "thesis": "CRISPR allogeneic cell therapy (CB-010)",
-   "ySym": "CRBU",
-   "gquery": "Caribou Biosciences",
-   "links": {
-    "ir": "https://ir.cariboubio.com/",
-    "stocktwits": "https://stocktwits.com/symbol/CRBU",
-    "x": "https://x.com/search?q=%24CRBU&f=live",
-    "finviz": "https://finviz.com/quote.ashx?t=CRBU"
-   }
-  },
-  {
-   "pid": "hld_6a3b86b121d8f7a6fe3f95e8",
-   "ticker": "TENX",
-   "name": "Tenax Therapeutics",
-   "assetType": "security",
-   "value": 70200,
-   "unrealizedReturn": 62.1,
-   "totalGainNet": 26890,
-   "thesis": "Levosimendan Phase 3 LEVEL (PH-HFpEF)",
-   "ySym": "TENX",
-   "gquery": "Tenax Therapeutics",
-   "links": {
-    "ir": "https://www.tenaxthera.com/investors",
-    "stocktwits": "https://stocktwits.com/symbol/TENX",
-    "x": "https://x.com/search?q=%24TENX&f=live",
-    "finviz": "https://finviz.com/quote.ashx?t=TENX"
-   }
-  },
-  {
-   "ticker": "NVO",
-   "name": "Novo Nordisk — Jan-2027 $40 Call",
-   "assetType": "option",
-   "value": 114000,
-   "shares": 10000,
-   "price": 11.4,
-   "costPrice": 8.26,
-   "unrealizedReturn": 38.0,
-   "totalGainNet": 31400,
-   "thesis": "Long call on Novo Nordisk (exp Jan 2027, strike $40) — leveraged bet on the GLP-1 franchise re-rating",
-   "links": {
-    "ir": "https://www.novonordisk.com/investors.html",
-    "stocktwits": "https://stocktwits.com/symbol/NVO",
-    "x": "https://x.com/search?q=%24NVO&f=live",
-    "finviz": "https://finviz.com/quote.ashx?t=NVO"
    },
-   "gquery": "Novo Nordisk"
+   "shares": 1000000.0,
+   "price": 0.31999999
+  },
+  {
+   "pid": "hld_6a183e2a547bdef260161491",
+   "ticker": "NKTR",
+   "name": "Nektar Therapeutics",
+   "assetType": "security",
+   "value": 219744,
+   "unrealizedReturn": 6.3,
+   "totalGainNet": -41332,
+   "thesis": "Rezpegaldesleukin (immunology / Treg biologic)",
+   "ySym": "NKTR",
+   "gquery": "Nektar Therapeutics",
+   "links": {
+    "ir": "https://ir.nektar.com/",
+    "stocktwits": "https://stocktwits.com/symbol/NKTR",
+    "x": "https://x.com/search?q=%24NKTR&f=live",
+    "finviz": "https://finviz.com/quote.ashx?t=NKTR"
+   },
+   "shares": 3200.0,
+   "price": 68.66999816
   },
   {
    "pid": "hld_6a58d2c819c64561317a5108",
    "ticker": "RPID",
    "name": "Rapid Micro Biosystems",
    "assetType": "security",
-   "value": 125400,
+   "value": 210000,
    "thesis": "",
    "ySym": "RPID",
    "gquery": "Rapid Micro Biosystems",
@@ -217,8 +156,93 @@
     "stocktwits": "https://stocktwits.com/symbol/RPID",
     "x": "https://x.com/search?q=%24RPID&f=live",
     "finviz": "https://finviz.com/quote.ashx?t=RPID"
-   }
+   },
+   "shares": 100000.0,
+   "price": 2.0999999,
+   "unrealizedReturn": 0.2,
+   "totalGainNet": 327
+  },
+  {
+   "pid": "hld_6a50a76ca01cf4bd3026a819",
+   "ticker": "LXEO",
+   "name": "Lexeo Therapeutics",
+   "assetType": "security",
+   "value": 205040,
+   "unrealizedReturn": -5.9,
+   "totalGainNet": -12960,
+   "thesis": "Gene therapy (cardiac / APOE4 Alzheimer's)",
+   "ySym": "LXEO",
+   "gquery": "Lexeo Therapeutics",
+   "links": {
+    "ir": "https://ir.lexeotx.com/",
+    "stocktwits": "https://stocktwits.com/symbol/LXEO",
+    "x": "https://x.com/search?q=%24LXEO&f=live",
+    "finviz": "https://finviz.com/quote.ashx?t=LXEO"
+   },
+   "shares": 44000.0,
+   "price": 4.65999984
+  },
+  {
+   "pid": "hld_6a50aa2ca01cf4bd3026ff90",
+   "ticker": "CRBU",
+   "name": "Caribou Biosciences",
+   "assetType": "security",
+   "value": 165000,
+   "unrealizedReturn": -10.4,
+   "totalGainNet": -19177,
+   "thesis": "CRISPR allogeneic cell therapy (CB-010)",
+   "ySym": "CRBU",
+   "gquery": "Caribou Biosciences",
+   "links": {
+    "ir": "https://ir.cariboubio.com/",
+    "stocktwits": "https://stocktwits.com/symbol/CRBU",
+    "x": "https://x.com/search?q=%24CRBU&f=live",
+    "finviz": "https://finviz.com/quote.ashx?t=CRBU"
+   },
+   "shares": 100000.0,
+   "price": 1.64999997
+  },
+  {
+   "pid": "hld_6a3b86b121d8f7a6fe3f95e8",
+   "ticker": "TENX",
+   "name": "Tenax Therapeutics",
+   "assetType": "security",
+   "value": 62880,
+   "unrealizedReturn": 45.2,
+   "totalGainNet": 19582,
+   "thesis": "Levosimendan Phase 3 LEVEL (PH-HFpEF)",
+   "ySym": "TENX",
+   "gquery": "Tenax Therapeutics",
+   "links": {
+    "ir": "https://www.tenaxthera.com/investors",
+    "stocktwits": "https://stocktwits.com/symbol/TENX",
+    "x": "https://x.com/search?q=%24TENX&f=live",
+    "finviz": "https://finviz.com/quote.ashx?t=TENX"
+   },
+   "shares": 4000.0,
+   "price": 15.72000026
+  },
+  {
+   "pid": "pp_ABVX270115C00120000",
+   "ticker": "ABVX",
+   "assetType": "option",
+   "name": "ABVX — Jan-2027 $120 Call",
+   "thesis": "",
+   "gquery": "ABVX",
+   "links": {
+    "stocktwits": "https://stocktwits.com/symbol/ABVX",
+    "x": "https://x.com/search?q=%24ABVX&f=live",
+    "finviz": "https://finviz.com/quote.ashx?t=ABVX"
+   },
+   "occ": "ABVX270115C00120000",
+   "shares": 4000.0,
+   "price": 30.9,
+   "value": 123600,
+   "costPrice": 30.9902,
+   "unrealizedReturn": -0.3,
+   "totalGainNet": -361
   }
  ],
- "ttwrorYtd": 76.4
+ "ttwrorYtd": 101.66,
+ "since2022": 407.89
 }
