@@ -361,14 +361,12 @@
     .sd-ranges button{padding:6px 11px}
     header.top{margin-bottom:14px}
   }
-  /* Nur im installierten App-Modus: iOS rechnet dort bei nicht scrollenden Seiten
-     mit dem "kleinen" Viewport (minus Statusleiste) — 100lvh ist die echte volle
-     Bildschirmhöhe. Browser bleibt beim bewährten bottom-Anker */
+  /* Installierter App-Modus: iOS malt nichts unterhalb des App-Viewports — die Pille
+     bleibt knapp über dessen Unterkante. Die Formel erkennt den Statusleisten-Modus:
+     alte Installation (black-translucent, Inset oben > 0) -> 6px über der Malgrenze;
+     neu installiertes Icon (default, Inset oben = 0) -> 6px über dem Home-Indicator */
   @media(max-width:640px) and (display-mode: standalone){
-    .wrap{height:100lvh;bottom:auto}
-    body::after{top:calc(100lvh - 96px);bottom:auto}
-    .bottomnav{height:65px;bottom:auto;
-      top:calc(100lvh - 65px - max(10px, env(safe-area-inset-bottom)))}
+    .bottomnav{bottom:calc(6px + max(0px, env(safe-area-inset-bottom) - env(safe-area-inset-top)))}
   }
   @media(max-width:860px){
     .kpis{grid-template-columns:repeat(2,minmax(0,1fr))}
