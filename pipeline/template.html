@@ -872,7 +872,7 @@ function _htPorts(){   // brokers that currently hold positions, biggest first
 function _htRows(){
   let rows=DATA.holdings.filter(h=>h.assetType!=='cash').map(h=>{
     const sym=h.ppCcy==='CAD'?'C$':'$';
-    const price=(h.livePrice!=null&&h.assetType!=='option')?h.livePrice:h.ppPrice;
+    const price=(h.livePrice!=null)?h.livePrice:h.ppPrice;
     /* broker view: scale the position by that broker's share count; entry price and
        gain-% stay identical (global FIFO basis), realized stays in the All view */
     const frac=_hport==='ALL'?1:((h.byPort||{})[_hport]||0)/(h.ppShares||1);
@@ -1439,7 +1439,7 @@ function renderHoldings(){
     const up=h.unrealizedReturn>=0;
     const dc=(h.dayChange!==undefined)?h.dayChange:null;
     const dcUp=(dc||0)>=0;
-    const px=(h.livePrice!==undefined&&h.assetType!=='option')?h.livePrice:h.price;
+    const px=(h.livePrice!==undefined)?h.livePrice:h.price;
     const r=h.research||{};
     const cats=(r.catalysts||[]).slice().sort((a,b)=>catKey(a.when).localeCompare(catKey(b.when)));
     const chips=cats.map(c=>{
@@ -1598,8 +1598,23 @@ async function refreshPrices(){
     if(y.spark&&y.spark.length>1) h.spark=y.spark;
   });
   if(!any) return;
+  /* live VALUES come from these quotes too (Parqet retired 2026-07-22):
+     value = shares x price, gain vs the engine's FIFO basis */
+  const fxr=liveState.fx;   // CAD per USD (CAD=X)
+  secs.forEach(h=>{
+    if(h.livePrice==null||h.ppShares==null) return;
+    const usd=(h.liveCcy==='CAD'&&fxr)?h.livePrice/fxr:h.livePrice;
+    h.value=Math.round(h.ppShares*usd);
+    if(h.ppBasisUsd){
+      h.totalGainNet=Math.round(h.value-h.ppBasisUsd+(h.ppRealizedUsd||0));
+      h.unrealizedReturn=+((h.value-h.ppBasisUsd)/h.ppBasisUsd*100).toFixed(1);
+    }
+  });
+  DATA.totalValue=Math.round(DATA.holdings.reduce((s,h)=>s+(h.value||0),0));
+  if(DATA.cashValue!=null) DATA.cashPct=+(100*DATA.cashValue/DATA.totalValue).toFixed(1);
+  DATA.holdings.forEach(h=>{ h.alloc=+(100*(h.value||0)/DATA.totalValue).toFixed(1); });
   liveState.lastPrice=new Date();
-  renderHoldingsTable(); renderHoldings(); setBadge();
+  renderHoldingsTable(); renderHoldings(); renderAlloc(); renderPerfBars(); setBadge();
   renderKpis();   // the Today tile ticks with the live prices
   _saveLast();   // a refresh must repaint the LAST-SEEN prices, not minute-old engine ones
 }
@@ -1608,32 +1623,6 @@ async function refreshPrices(){
 function _saveLast(){ try{ localStorage.setItem('pc-lastdata', JSON.stringify(DATA)); }catch(e){} }
 
 /* ---- LIVE PORTFOLIO from Parqet (holdings, values, gains, IRR) ---- */
-async function refreshParqet(){
-  const r=await fetch("https://api.parqet.com/v1/portfolios/assemble?useInclude=true&include=xirr&include=ttwror",
-    {method:"POST",headers:{"Content-Type":"application/json"},
-     body:JSON.stringify({portfolioIds:[DATA.portfolioId],timeframe:"max",currency:"USD"})});
-  if(!r.ok) return;
-  const j=await r.json();
-  const byId={}; (j.holdings||[]).forEach(h=>{ if(h.position&&h.position.currentValue>0) byId[h._id]=h; });
-  // NOTE: ALL portfolio-level figures (returns, realized/unrealized gains) come from
-  // the PP-exact engine (pp_sync.py over depot.xml) and are NOT overwritten by
-  // Parqet anymore (Rafael 2026-07-11: "Parqet rechnet falsch"). Parqet is only
-  // used for live per-holding market values below.
-  // per-holding from Parqet (cash + NVO option stay as built from Portfolio Performance)
-  DATA.holdings.forEach(h=>{
-    const pq=byId[h.pid]; if(!pq) return;
-    h.value=Math.round(pq.position.currentValue);
-    const up=pq.performance&&pq.performance.unrealized;
-    if(up){ h.unrealizedReturn=+up.returnNet.toFixed(1); h.totalGainNet=Math.round(up.gainNet); }
-  });
-  // total = live Parqet securities + PP option + PP net cash (can be negative = margin)
-  DATA.totalValue=Math.round(DATA.holdings.reduce((s,h)=>s+h.value,0));
-  DATA.cashPct=+(100*DATA.cashValue/DATA.totalValue).toFixed(1);
-  DATA.holdings.forEach(h=>{ h.alloc=+(100*h.value/DATA.totalValue).toFixed(1); });
-  liveState.lastParqet=new Date();
-  renderKpis(); renderHoldingsTable(); renderAlloc(); renderPerfBars(); renderHoldings(); setBadge();
-  _saveLast();
-}
 
 /* ---- chart timeframe selector (PP net-worth series, sliced locally) ---- */
 const TFS=[{k:'max',l:'Since inception'},{k:'ytd',l:'YTD'},{k:'1y',l:'1Y'},{k:'6m',l:'6M'},{k:'3m',l:'3M'},{k:'1m',l:'1M'}];
@@ -1969,13 +1958,11 @@ async function loadMoreActivities(){
 function startLive(){
   // initial pulls + intervals; each guarded so one failure never breaks the page
   fsDataPoll().catch(()=>{});   // IMMEDIATELY: a cached/old HTML must not show stale totals for a minute
-  refreshParqet().catch(()=>{});
   refreshPrices().catch(()=>{}); refreshNews().catch(()=>{}); refreshSocial().catch(()=>{}); refreshWatch().catch(()=>{});
   refreshSEC().catch(()=>{});                                // SEC baseline, then watch
   refreshActivities().catch(()=>{});
   setInterval(()=>refreshActivities().catch(()=>{}), 180000); // activities every 3 min
   const amb=document.getElementById('actmore'); if(amb) amb.addEventListener('click',()=>loadMoreActivities());
-  setInterval(()=>refreshParqet().catch(()=>{}), 120000);   // portfolio (Parqet) every 2 min
   setInterval(()=>refreshPrices().catch(()=>{}), 180000);   // intraday prices (Yahoo) every 3 min
   setInterval(()=>refreshWatch().catch(()=>{}), 180000);    // watchlist quotes on the same cadence
   setInterval(()=>refreshSocial().catch(()=>{}), 90000);    // social sweep (Stocktwits) every 90s
@@ -1986,7 +1973,7 @@ function startLive(){
      throttled, and a resumed standalone app would otherwise show its pre-sleep state
      for up to a minute */
   const wake=()=>{ if(document.visibilityState!=='visible') return;
-    fsDataPoll().catch(()=>{}); refreshPrices().catch(()=>{}); refreshParqet().catch(()=>{}); };
+    fsDataPoll().catch(()=>{}); refreshPrices().catch(()=>{}); };
   document.addEventListener('visibilitychange',wake);
   window.addEventListener('pageshow',e=>{ if(e.persisted) wake(); });   // bfcache restore
 }
@@ -3399,7 +3386,7 @@ function openSecDetail(tk){
   const live=(window._watchLive||{})[tk];
   const wm=(DATA.watchMeta||{})[tk]||{};
   const name=h?h.name:(wlName?wlName(tk,live):(live&&live.name)||tk);
-  const price=h?((h.livePrice!=null&&h.assetType!=='option')?h.livePrice:h.ppPrice):(live?live.price:(((DATA.watch||{})[tk]||[]).slice(-1)[0]||[])[1]);
+  const price=h?((h.livePrice!=null)?h.livePrice:h.ppPrice):(live?live.price:(((DATA.watch||{})[tk]||[]).slice(-1)[0]||[])[1]);
   const day=h?(h.dayChange):(live&&live.prevClose?((live.price/live.prevClose-1)*100):null);
   const sym=h?h.ySym||tk:tk;
   const dcls=day==null?'':(day>=0?'up':'down');
