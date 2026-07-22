@@ -47,7 +47,6 @@
     --shadow:0 1px 2px rgba(2,6,16,.5),0 14px 36px rgba(2,6,16,.38);
   }
   *{box-sizing:border-box}
-  html{--diag-sat:env(safe-area-inset-top);--diag-sab:env(safe-area-inset-bottom)}
   body{margin:0;background:var(--plane);color:var(--ink);
     font-family:system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;
     font-size:15px;line-height:1.5;-webkit-font-smoothing:antialiased}
@@ -4015,19 +4014,4 @@ function drawLines(svg,tip,lines,pts){
   await fbInit();                                     // onAuthStateChanged -> fsLoadData() when owner
 })();
 
-/* temporaere Viewport-Diagnose in der Fusszeile (Handy-Debugging) */
-window.addEventListener('load',()=>{try{
-  const p=document.createElement('div');p.style.cssText='position:fixed;top:0;left:0;width:0;height:100lvh;visibility:hidden;pointer-events:none';
-  document.body.appendChild(p);const lvh=Math.round(p.getBoundingClientRect().height);p.remove();
-  const cs=getComputedStyle(document.documentElement);
-  const el=document.createElement('div');
-  el.style.cssText='color:var(--muted);font-size:10.5px;margin-top:6px;opacity:.7';
-  el.textContent='vp '+window.innerWidth+'x'+window.innerHeight
-    +' | screen '+screen.width+'x'+screen.height
-    +' | vv '+(window.visualViewport?Math.round(window.visualViewport.height):'-')
-    +' | lvh '+lvh
-    +' | sat '+cs.getPropertyValue('--diag-sat').trim()+' sab '+cs.getPropertyValue('--diag-sab').trim()
-    +' | standalone '+(window.matchMedia('(display-mode: standalone)').matches?'yes':'no');
-  const f=document.querySelector('.foot'); if(f) f.appendChild(el);
-}catch(e){}});
 </script>
