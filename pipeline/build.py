@@ -296,11 +296,12 @@ def logo_candidates(h):
     return out
 
 # ---- PP per-holding numbers for the Holdings table (Rafael: "Daten unbedingt aus PP") ----
+_OCC_RE = re.compile(r"^[A-Z.]{1,6}\d{6}[CP]\d{8}$")
 def _pp_key(t):
-    return "NVO" if t.startswith("NVO") else t.split(".")[0]   # PINK.V -> PINK, NVO2701.. -> NVO
+    return t if _OCC_RE.match(t) else t.split(".")[0]   # PINK.V -> PINK; OCC tickers stay verbatim
 pp_by_ticker = {_pp_key(x["ticker"]): x for x in (pp.get("holdings", []) if pp else [])}
 for h in port["holdings"]:
-    px = pp_by_ticker.get(h["ticker"])
+    px = pp_by_ticker.get(h.get("occ") or h["ticker"])   # options match via their OCC ticker
     if px and h.get("assetType") != "cash":
         h["ppShares"] = px["shares"]
         h["ppAvgCost"] = px["avgCost"]          # native ccy (USD, PINK: CAD)
