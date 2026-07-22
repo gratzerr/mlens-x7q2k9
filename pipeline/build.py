@@ -435,7 +435,7 @@ data = {
           + [{"d": p["d"], "t": p["k"].upper(), "tk": p["tk"], "amt": p["usd"], "ccy": "USD"}
              for p in _pays if p["k"] in ("dividend", "interest") and p.get("tk")
              and (_shown_isins is None or any(s.get("ticker") == p["tk"] for s in pp.get("securities", [])))],
-          key=lambda a: a["d"], reverse=True)[:150]
+          key=lambda a: a["d"], reverse=True)
     ))(),
     "tradeLogos": trade_logos,
     "payments": pay_journal,
