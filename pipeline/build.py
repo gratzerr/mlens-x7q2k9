@@ -334,7 +334,11 @@ total = port["totalValue"]
 for h in port["holdings"]:
     h["alloc"] = round(100.0 * h["value"] / total, 1)
     h["logos"] = logo_candidates(h)
-    if h["assetType"] != "cash":
+    if h["assetType"] == "option":   # underlying live quotes must never overwrite contract prices
+        h.pop("ySym", None)
+        h["gquery"] = NEWS_QUERY.get(h["ticker"], (h.get("name") or h["ticker"]).split(" \u2014 ")[0])
+        h["liveCcy"] = LIVE_CCY.get(h["ticker"], "USD")
+    elif h["assetType"] != "cash":
         h["ySym"] = YAHOO_SYM.get(h["ticker"], h["ticker"])
         h["gquery"] = NEWS_QUERY.get(h["ticker"], h["name"])
         h["liveCcy"] = LIVE_CCY.get(h["ticker"], "USD")

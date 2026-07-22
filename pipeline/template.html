@@ -1439,7 +1439,7 @@ function renderHoldings(){
     const up=h.unrealizedReturn>=0;
     const dc=(h.dayChange!==undefined)?h.dayChange:null;
     const dcUp=(dc||0)>=0;
-    const px=(h.livePrice!==undefined)?h.livePrice:h.price;
+    const px=(h.livePrice!==undefined&&h.assetType!=='option')?h.livePrice:h.price;
     const r=h.research||{};
     const cats=(r.catalysts||[]).slice().sort((a,b)=>catKey(a.when).localeCompare(catKey(b.when)));
     const chips=cats.map(c=>{

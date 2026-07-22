@@ -226,9 +226,9 @@
    "pid": "pp_ABVX270115C00120000",
    "ticker": "ABVX",
    "assetType": "option",
-   "name": "ABVX — Jan-2027 $120 Call",
-   "thesis": "",
-   "gquery": "ABVX",
+   "name": "Abivax — Jan-2027 $120 Call",
+   "thesis": "Long call on Abivax (exp Jan 2027, strike $120) — leveraged bet on obefazimod's ulcerative-colitis approval & launch ramp",
+   "gquery": "Abivax",
    "links": {
     "stocktwits": "https://stocktwits.com/symbol/ABVX",
     "x": "https://x.com/search?q=%24ABVX&f=live",
