@@ -6,7 +6,7 @@
    "headline": "RPID shares jump over 6% intraday to $2.21, extending rebound off June lows",
    "source": "Yahoo Finance",
    "url": "https://finance.yahoo.com/quote/RPID/",
-   "summary": "Rapid Micro Biosystems shares rose 6.76% on July 15 to close around $2.21 (market cap roughly $103M); no company press release accompanied the move, so it appears to reflect broader small-cap biotech sentiment and a continued recovery from the mid-to-late June lows near $1.70-1.85 rather than fresh company-specific news."
+   "summary": "Rapid Micro Biosystems shares rose about 6.8% on July 15 to close near $2.21 (market cap roughly $103M); no company press release accompanied the move, so it appears to reflect broader small-cap biotech sentiment and a continued recovery from lows near $1.70-1.85 seen in late June/early July rather than fresh company-specific news."
   },
   {
    "date": "2026-07-08",
@@ -34,14 +34,21 @@
    "headline": "RPID short interest falls to about 166,100 shares, down 86% over the trailing 12 months",
    "source": "Fintel",
    "url": "https://fintel.io/ss/us/rpid",
-   "summary": "Short interest data compiled in the period covering early-to-mid June 2026 showed roughly 166,100 RPID shares sold short, equal to about 0.5% of the float and down 7% from the prior reporting period and 86% year-over-year, with days-to-cover around 1.0, indicating limited bearish positioning against the stock."
+   "summary": "Short interest data compiled for the period covering early-to-mid June 2026 showed roughly 166,100 RPID shares sold short, equal to about 0.5% of the float and down 7% from the prior reporting period and 86% year-over-year, with days-to-cover around 1.0, indicating limited bearish positioning against the stock."
+  },
+  {
+   "date": "2026-06-03",
+   "headline": "Amgen sponsors Rapid Micro Biosystems' first North American Growth Direct Day, drawing record attendance",
+   "source": "Company commentary / trade press",
+   "url": "https://www.defenseworld.net/2026/03/23/rapid-micro-biosystems-eyes-37m-41m-2026-revenue-as-growth-direct-day-draws-record-crowd.html",
+   "summary": "Amgen sponsored the company's first North American Growth Direct Day customer event in June 2026, bringing together existing and prospective biopharma customers around the Growth Direct platform as part of the commercial push toward FY26 placement guidance; management had flagged the event on the March Q4/FY25 call as a key H1 2026 commercial milestone."
   }
  ],
  "catalysts": [
   {
-   "when": "2026-07-31 (estimate)",
+   "when": "Early-to-mid August 2026 (estimate)",
    "label": "Q2 2026 earnings (analyst-calendar estimate, not yet company-confirmed)",
-   "detail": "As of July 22, the company had still not issued its customary advance press release fixing the Q2 report date (it announced the May 13 Q1 date about a week ahead of time, and the March 12 Q4/FY25 date about two weeks ahead). Earnings-calendar trackers (WallStreetZen, Zacks, Nasdaq, Investing.com) currently cluster around late July / early August 2026, in line with the roughly Aug 5-12 window RPID used in 2023-2025; the date should firm up once the company issues its own 'will announce' release. Watch new Growth Direct placement cadence toward the 30-38 unit FY26 target, consumables pull-through, gross margin progress toward the ~20% FY26 goal, and cash runway following the May equity raise.",
+   "detail": "As of July 22, the company had still not issued its customary advance press release fixing the Q2 report date (it announced the May 13 Q1 date about a week ahead, and the March 12 Q4/FY25 date about two weeks ahead). Last year's Q2 2025 results were reported via an 8-K dated August 12, 2025, and earnings-calendar trackers (WallStreetZen, Zacks, Nasdaq, Investing.com) currently cluster around late July/early August 2026 for this cycle. Watch new Growth Direct placement cadence toward the 30-38 unit FY26 target, consumables pull-through, gross margin progress toward the ~20% FY26 goal, and cash runway following the May equity raise.",
    "confirmed": false
   },
   {
@@ -52,10 +59,10 @@
   },
   {
    "when": "TBD 2026",
-   "label": "Continued Growth Direct multi-system order flow from large pharma/biologics customers (e.g. Samsung Biologics, MilliporeSigma channel)",
-   "detail": "Following the March 2026 follow-on multi-system order from Samsung Biologics and the ongoing five-year global distribution agreement with Merck KGaA's MilliporeSigma life-science business, further large multi-system placement announcements from top-20 biopharma customers remain a key upside catalyst toward the FY26 guidance of 30-38 placements and $37-41M revenue; no new order has been announced since March, through July 22.",
+   "label": "Continued Growth Direct multi-system order flow from large pharma/biologics customers (e.g. Amgen, Samsung Biologics, MilliporeSigma channel)",
+   "detail": "Following the March 2026 follow-on multi-system order from Samsung Biologics, the Q4 2025 multi-system order from Amgen, and the ongoing five-year global distribution agreement with Merck KGaA's MilliporeSigma life-science business, further large multi-system placement announcements from top-20 biopharma customers remain a key upside catalyst toward the FY26 guidance of 30-38 placements and $37-41M revenue; no new order has been announced since March, through July 22.",
    "confirmed": false
   }
  ],
- "pulse": "Company-specific news flow has stayed very thin through mid-to-late July: beyond the June 10 inducement RSU grant and a Frankfurt PDA conference poster presentation, the only recurring items are small, scheduled insider option-exercise sales (June 10, June 22, July 1, July 8, all under Form 144) that together total well under 1% of shares outstanding, alongside a sharply reduced short-interest reading (~166,100 shares, down 86% year-over-year). The stock, still digesting May's dilutive ~$32M warrant-linked offering that drove KeyBanc and Lake Street to cut price targets to $5 and $7, bottomed near $1.70-1.85 in mid-to-late June and has since recovered to roughly $2.20-2.30 by mid-July (market cap ~$103M) on no clearly identified company catalyst. Fundamentally the business continues executing on Growth Direct placements and the MilliporeSigma/Samsung Biologics channel (Q1 revenue +11% YoY, FY26 guidance of 30-38 placements/$37-41M revenue reaffirmed), and the near-term story is a wait for Q2 results (analyst-calendar trackers estimate late July/early August, still not formally scheduled by the company as of July 22) and, further out, the planned H2 2026 launch of a next-generation cloud-native software platform, to show whether placement and consumables momentum is offsetting continued cash burn and dilution."
+ "pulse": "Company-specific news flow has stayed very thin through mid-to-late July: beyond the June 10 inducement RSU grant, a Frankfurt PDA conference poster presentation, and Amgen's sponsorship of the company's first North American Growth Direct Day in June, the only recurring items are small, scheduled insider option-exercise sales (June 10, June 22, July 1, July 8, all under Form 144) that together total well under 1% of shares outstanding, alongside a sharply reduced short-interest reading (~166,100 shares, down 86% year-over-year). The stock, still digesting May's dilutive ~$32M warrant-linked offering that drove KeyBanc and Lake Street to cut price targets to $5 and $7 (KeyBanc has since maintained Overweight at $8), bottomed near $1.70-1.85 in late June/early July and has since recovered to roughly $2.20-2.30 by mid-July (market cap ~$103M) on no clearly identified company catalyst. Fundamentally the business continues executing on Growth Direct placements and the MilliporeSigma/Samsung Biologics/Amgen channel (Q1 revenue +11% YoY, FY26 guidance of 30-38 placements/$37-41M revenue reaffirmed), and the near-term story is a wait for Q2 results (still not formally scheduled by the company as of July 22, with trackers estimating late July/early August) and, further out, the planned H2 2026 launch of a next-generation cloud-native software platform, to show whether placement and consumables momentum is offsetting continued cash burn and dilution."
 }

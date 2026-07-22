@@ -1,0 +1,67 @@
+{
+  "ticker": "ABVX",
+  "news": [
+    {
+      "date": "2026-07-17",
+      "headline": "Abivax Re-Engages Centerview Amid Renewed Takeover Interest",
+      "source": "La Lettre / Reuters",
+      "url": "https://www.cnbc.com/2026/07/10/abivax-stock-takeover-us-launch-obefazimod-ulcerative-colitis.html",
+      "summary": "French media reported that Abivax has re-engaged investment bank Centerview as takeover speculation resurfaces following the company's positive maintenance trial data and large capital raise. CEO Marc de Garidel said the company is pursuing an independent path but remains open to talks, describing its strategy as \"the best defense is offense.\""
+    },
+    {
+      "date": "2026-07-10",
+      "headline": "Abivax $920 Million Cash Haul Lets It Prepare for Solo U.S. Launch Instead of Relying on a Buyer, CEO Tells CNBC",
+      "source": "CNBC",
+      "url": "https://www.cnbc.com/2026/07/10/abivax-stock-takeover-us-launch-obefazimod-ulcerative-colitis.html",
+      "summary": "CEO Marc de Garidel said the newly raised $920 million gives Abivax the option to commercialize obefazimod independently in the U.S. rather than depend on a Big Pharma partner or acquirer, with cash now projected to fund operations into 2029."
+    },
+    {
+      "date": "2026-07-06",
+      "headline": "Abivax Announces Closing of Upsized $920 Million Public Offering",
+      "source": "GlobeNewswire / Cooley",
+      "url": "https://www.cooley.com/news/coverage/2026/2026-07-06-abivax-announces-closing-of-upsized-$920-million-public-offering",
+      "summary": "Abivax closed its oversubscribed and upsized ADS offering, raising aggregate gross proceeds of $920 million (about €807 million) after underwriters fully exercised their option, at $125.00 per ADS. Proceeds are earmarked to fund a potential U.S. commercial launch of obefazimod."
+    },
+    {
+      "date": "2026-06-29",
+      "headline": "Abivax Reports Positive ABTECT Maintenance Part 2 Results for Obefazimod, Demonstrating Meaningful Clinical Benefit in Refractory Ulcerative Colitis Patients",
+      "source": "GlobeNewswire",
+      "url": "https://www.globenewswire.com/news-release/2026/06/29/3319283/0/en/Abivax-Reports-Positive-ABTECT-Maintenance-Part-2-Results-for-Obefazimod-Demonstrating-Meaningful-Clinical-Benefit-in-Refractory-Ulcerative-Colitis-Patients-and-Strengthening-the-P.html",
+      "summary": "Additional Phase 3 ABTECT maintenance data showed that patients who had not responded after 8 weeks of induction still achieved clinical remission (37.2%), clinical response (61.5%) and endoscopic remission (34.5%) at Week 44 with continued 50 mg obefazimod, with no new safety signals, reassuring investors after earlier malignancy-signal concerns."
+    },
+    {
+      "date": "2026-06-02",
+      "headline": "Biotech Takeover Target Abivax Sinks Over 43% as Cancer Cases Cloud Trial Data for Bowel Disease Drug",
+      "source": "CNBC",
+      "url": "https://www.cnbc.com/2026/06/02/abivax-stock-bowel-crohns-disease-trial-data.html",
+      "summary": "Shares plunged after topline Phase 3 ABTECT maintenance data disclosed a small number of malignancy cases among obefazimod-treated patients, rattling investors despite the trial otherwise meeting its primary endpoint; the stock later recovered as the June 29 Part 2 data update reinforced the safety database."
+    }
+  ],
+  "catalysts": [
+    {
+      "when": "Q4 2026",
+      "label": "FDA NDA submission for obefazimod in ulcerative colitis",
+      "detail": "Abivax has reaffirmed plans to submit a New Drug Application to the FDA for obefazimod in moderately to severely active ulcerative colitis in Q4 2026, following positive Phase 3 ABTECT induction and maintenance results.",
+      "confirmed": true
+    },
+    {
+      "when": "Mid-2027",
+      "label": "Phase 2b ENHANCE-CD topline data in Crohn's disease",
+      "detail": "Topline induction results from the Phase 2b ENHANCE-CD trial evaluating obefazimod in Crohn's disease are expected around mid-2027.",
+      "confirmed": true
+    },
+    {
+      "when": "Ongoing (2026)",
+      "label": "Potential M&A / takeover outcome",
+      "detail": "Renewed takeover speculation following the re-engagement of advisor Centerview; prior interest has reportedly come from AstraZeneca and Eli Lilly, though no formal bid has been confirmed and the company is also preparing to launch independently.",
+      "confirmed": false
+    },
+    {
+      "when": "2026-2027",
+      "label": "Potential EU/EMA regulatory filing for obefazimod",
+      "detail": "In parallel with the U.S. NDA, Abivax is expected to pursue European regulatory filings for obefazimod in ulcerative colitis, supporting a global launch strategy.",
+      "confirmed": false
+    }
+  ],
+  "pulse": "Abivax's Phase 3 ABTECT maintenance data (initial results June 1, supplementary Part 2 data June 29) confirmed obefazimod's efficacy in ulcerative colitis and reassured the market on the earlier malignancy-signal scare, reviving the stock and takeover speculation. The company closed an upsized $920 million ADS offering on July 6, giving it a cash runway into 2029 to fund an independent U.S. commercial launch, while CEO Marc de Garidel says Abivax is also open to acquisition talks after re-engaging bank Centerview in mid-July amid renewed Big Pharma interest. The key near-term catalyst is the planned FDA NDA submission for obefazimod in Q4 2026."
+}
