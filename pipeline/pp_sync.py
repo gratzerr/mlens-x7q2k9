@@ -440,6 +440,7 @@ for s,sh in open_sh.items():
         lots[s].append([sh, to_eur(v,SEC[s]["ccy"],START), to_usd(v,SEC[s]["ccy"],START), START])
 realized_eur=0.0;realized_usd=0.0
 trades=[]   # every SELL as a closed FIFO round-trip (for the trading-record widget)
+acts=[]     # raw trade journal for the Activities feed (Parqet retired 2026-07-22)
 buys_by_sec=defaultdict(lambda: defaultdict(lambda:[0.0,0.0]))  # sec -> date -> [shares, cost_native] for chart markers
 rz_usd_by_sec=defaultdict(float)   # per-security realized (USD) for the holdings table
 rz_day=defaultdict(lambda:[0.0,0.0])   # d -> [eur, usd] realized that day (for period calc)
@@ -457,6 +458,10 @@ for t in ptx:
     elif ty=="SELL": g=t["amount"]+t["fee"]+t["tax"]
     else: g=t["amount"]
     eur=to_eur(g,t["ccy"],t["date"]);usd=to_usd(g,t["ccy"],t["date"])
+    if sh>1e-9 and ty in ("BUY","SELL","DELIVERY_INBOUND","DELIVERY_OUTBOUND"):
+        acts.append({"d":t["date"],"t":"BUY" if ty in ("BUY","DELIVERY_INBOUND") else "SELL",
+                     "sec":s,"sh":round(sh,4),"px":round(g/sh,4),
+                     "ccy":t["ccy"],"amt":round(g,2)})
     if ty in ("BUY","DELIVERY_INBOUND"):
         lots[s].append([sh,eur,usd,t["date"]])
         if sh>1e-9:
@@ -613,6 +618,10 @@ out={"fileDate":datetime.datetime.fromtimestamp(os.path.getmtime(DEPOT)).strftim
          if sum(l[0] for l in lots.get(si,[]))>1e-6 },
      "ports":sorted({(portfolios.get(t["owner"]) or {}).get("name") for t in txs.values()
                      if t["kind"]=="port" and t["owner"]} - {None}),
+     "acts":sorted(({**{k:v for k,v in a.items() if k!="sec"},
+                     "tk":SEC[a["sec"]]["tk"] or (SEC[a["sec"]]["name"] or "")[:10],
+                     "isin":SEC[a["sec"]]["isin"]}
+                    for a in acts), key=lambda x:x["d"], reverse=True),
      "trades":sorted(({**{k:v for k,v in tr.items() if k!="sec"},
                        "ticker":SEC[tr["sec"]]["tk"] or (SEC[tr["sec"]]["name"] or "")[:10],
                        "name":SEC[tr["sec"]]["name"],"isin":SEC[tr["sec"]]["isin"]}

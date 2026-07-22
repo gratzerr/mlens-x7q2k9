@@ -1843,14 +1843,9 @@ function initSecAlerts(){
   btn.onclick=()=>{ Notification.requestPermission().then(sync); };
 }
 
-/* ---- Activities (live from Parqet, like the Parqet app) ---- */
-let _actItems=[], _actRawOffset=0, _actTotal=0;
-// Cash transfers in Parqet are fictional (artifact of modeling the NVO option) — real
-// cash lives in Portfolio Performance. Hide cash activities; show only real trades/dividends.
-function isCashAct(a){ return actTicker(a)==='Cash' || /cash/i.test(a.holdingAssetType||''); }
+/* ---- Activities (from the PP engine — Parqet retired 2026-07-22) ---- */
+let _actShown=50;
 const CCY_SYM={USD:"$",EUR:"€",CAD:"C$",GBP:"£"};
-function actIsin(a){ return a.isin||(a.asset&&a.asset.identifier)||''; }
-function actSec(a){ return DATA.secByIsin&&DATA.secByIsin[actIsin(a)]; }   // any security ever traded (depot.xml)
 /* ---- company logos: <img> with a fallback chain (Parqet CDN -> favicon -> hide) ---- */
 window._lerr=function(el){ const a=(el.dataset.alt||'').split('|').filter(Boolean);
   if(a.length){ el.src=a.shift(); el.dataset.alt=a.join('|'); }
@@ -1874,95 +1869,49 @@ function tickerLogos(tk){
   if(typeof wlSyms==='function'&&wlSyms().includes(tk)) return wlLogos(tk);
   return [];
 }
-function actTicker(a){
-  const byPid=DATA.holdings.find(h=>h.pid===a.holding);
-  if(byPid) return byPid.ticker;
-  if(a.holdingAssetType && /cash/i.test(a.holdingAssetType)) return "Cash";
-  if(!actIsin(a) && !a.asset && Math.abs((+a.price||1)-1)<1e-9) return "Cash";
-  const sec=actSec(a);
-  if(sec&&sec.tk) return sec.tk;
-  if(a.asset&&(a.asset.ticker||a.asset.symbol)) return a.asset.ticker||a.asset.symbol;
-  if(a.assetName) return a.assetName;
-  if(sec&&sec.name) return sec.name;
-  return actIsin(a)||"—";
-}
-function actName(a){
-  const byPid=DATA.holdings.find(h=>h.pid===a.holding);
-  const sec=actSec(a);
-  return (byPid&&byPid.name)||(sec&&sec.name)||(a.asset&&a.asset.name)||"";
-}
-function actLogo(a,tk){
-  const cur=tickerLogos(tk);                       // current holding -> curated chain (incl. overrides)
-  if(cur.length) return logoImg(cur,'alogo');
-  const isin=actIsin(a)||(DATA.isinByTicker&&DATA.isinByTicker[tk])||'';
-  const cands=[];
-  if(isin) cands.push("https://assets.parqet.com/logos/isin/"+isin+"?format=png&size=64");
-  if(tk&&tk!=="Cash"&&tk!=="—") cands.push("https://assets.parqet.com/logos/symbol/"+encodeURIComponent(tk.split(' ')[0])+"?format=png&size=64");
-  return logoImg(cands,'alogo');
-}
 function actCls(t){
   if(t==="Buy")return "buy"; if(t==="Sell")return "sell";
   if(/Dividend|Interest/.test(t))return "div"; return "oth";
 }
 function renderActivities(){
   const el=document.getElementById('activities'); if(!el)return;
-  el.innerHTML=_actItems.map(a=>{
-    const sym=CCY_SYM[a.currency]||(a.currency+" ");
-    const dt=new Date(a.datetime).toLocaleDateString('en-US',{month:'short',day:'2-digit',year:'2-digit'});
-    const tk=actTicker(a), nm=actName(a);
-    const isTrade=(a.type==="Buy"||a.type==="Sell")&&a.shares&&a.price;
-    const sub=isTrade? (Number(a.shares).toLocaleString('en-US')+" @ "+sym+(+a.price).toLocaleString('en-US',{minimumFractionDigits:2,maximumFractionDigits:4}))
-      : (a.shares&&a.price!==1? Number(a.shares).toLocaleString('en-US')+" units":"");
-    const sign=a.type==="Buy"?"−":a.type==="Sell"||/Dividend|Interest/.test(a.type)?"+":"";
+  const all=DATA.acts||[];
+  el.innerHTML=all.slice(0,_actShown).map(a=>{
+    const sym=CCY_SYM[a.ccy]||((a.ccy||'USD')+" ");
+    const dt=new Date(a.d).toLocaleDateString('en-US',{month:'short',day:'2-digit',year:'2-digit'});
+    const tk=a.tk||'—';
+    const h=DATA.holdings.find(x=>x.ticker===tk);
+    const sec=DATA.secByIsin&&DATA.secByIsin[a.isin||''];
+    const nm=(h&&h.name)||(sec&&sec.name)||'';
+    const ty=a.t==='BUY'?'Buy':a.t==='SELL'?'Sell':a.t==='DIVIDEND'?'Dividend':'Interest';
+    const isTrade=!!(a.sh&&a.px);
+    const sub=isTrade? (Number(a.sh).toLocaleString('en-US')+" @ "+sym+(+a.px).toLocaleString('en-US',{minimumFractionDigits:2,maximumFractionDigits:4})):"";
+    const sign=ty==="Buy"?"−":"+";
+    const isin=a.isin||(DATA.isinByTicker&&DATA.isinByTicker[tk])||'';
+    const cur=tickerLogos(tk);
+    const cands=cur.length?cur:[].concat(isin?["https://assets.parqet.com/logos/isin/"+isin+"?format=png&size=64"]:[],
+      (tk&&tk!=='—')?["https://assets.parqet.com/logos/symbol/"+encodeURIComponent(tk.split(' ')[0])+"?format=png&size=64"]:[]);
     return `<div class="act">
       <div class="ad">${dt}</div>
-      <div class="atype ${actCls(a.type)}">${esc(a.type.replace(/([a-z])([A-Z])/g,'$1 $2').toUpperCase())}</div>
-      ${actLogo(a,tk)}
+      <div class="atype ${actCls(ty)}">${esc(ty.toUpperCase())}</div>
+      ${logoImg(cands,'alogo',tk)}
       <div class="amain"><div class="aname">${esc(tk)}${nm&&nm!==tk?' <span class="asub">'+esc(nm)+'</span>':''}</div>
         ${sub?`<div class="asub">${maskable(esc(sub))}</div>`:''}</div>
-      <div class="aval tnum">${maskable(sign+sym+(+a.amount).toLocaleString('en-US',{minimumFractionDigits:2,maximumFractionDigits:2}))}</div>
+      <div class="aval tnum">${maskable(sign+sym+Math.abs(+a.amt||0).toLocaleString('en-US',{minimumFractionDigits:2,maximumFractionDigits:2}))}</div>
     </div>`;
   }).join('');
   const btn=document.getElementById('actmore');
-  if(btn){ btn.style.display=_actRawOffset<_actTotal?'':'none';
-    btn.textContent='Load more ('+Math.max(0,_actTotal-_actRawOffset).toLocaleString('en-US')+' older)'; }
-}
-async function fetchActivities(offset){
-  const r=await fetch("https://api.parqet.com/v1/activities?portfolioIds="+DATA.portfolioId+"&limit=50&offset="+offset);
-  if(!r.ok) throw new Error(r.status);
-  return await r.json();
-}
-async function refreshActivities(){
-  try{
-    const j=await fetchActivities(0);
-    _actTotal=j.totalCount||0;
-    const page=(j.activities||[]);
-    const known=new Set(_actItems.map(a=>a._id));
-    const fresh=page.filter(a=>!known.has(a._id)&&!isCashAct(a));  // new trades on top, cash hidden
-    if(fresh.length) _actItems=[...fresh, ..._actItems];
-    if(page.length>_actRawOffset) _actRawOffset=page.length;       // first page consumed
-    renderActivities();
-  }catch(e){}
-}
-async function loadMoreActivities(){
-  try{
-    const j=await fetchActivities(_actRawOffset);
-    const page=(j.activities||[]);
-    const known=new Set(_actItems.map(a=>a._id));
-    _actItems=[..._actItems, ...page.filter(a=>!known.has(a._id)&&!isCashAct(a))];
-    _actRawOffset+=page.length;
-    renderActivities();
-  }catch(e){}
+  if(btn){ btn.style.display=_actShown<all.length?'':'none';
+    btn.textContent='Load more ('+Math.max(0,all.length-_actShown).toLocaleString('en-US')+' older)'; }
 }
 
 function startLive(){
   // initial pulls + intervals; each guarded so one failure never breaks the page
+  renderActivities();           // feed is baked into DATA now (PP engine) — render once
   fsDataPoll().catch(()=>{});   // IMMEDIATELY: a cached/old HTML must not show stale totals for a minute
   refreshPrices().catch(()=>{}); refreshNews().catch(()=>{}); refreshSocial().catch(()=>{}); refreshWatch().catch(()=>{});
   refreshSEC().catch(()=>{});                                // SEC baseline, then watch
-  refreshActivities().catch(()=>{});
-  setInterval(()=>refreshActivities().catch(()=>{}), 180000); // activities every 3 min
-  const amb=document.getElementById('actmore'); if(amb) amb.addEventListener('click',()=>loadMoreActivities());
+  const amb=document.getElementById('actmore'); if(amb) amb.addEventListener('click',()=>{ _actShown+=50; renderActivities(); });
   setInterval(()=>refreshPrices().catch(()=>{}), 180000);   // intraday prices (Yahoo) every 3 min
   setInterval(()=>refreshWatch().catch(()=>{}), 180000);    // watchlist quotes on the same cadence
   setInterval(()=>refreshSocial().catch(()=>{}), 90000);    // social sweep (Stocktwits) every 90s
