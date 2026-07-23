@@ -2,6 +2,13 @@
   "ticker": "TENX",
   "news": [
     {
+      "date": "2026-07-22",
+      "headline": "TENX Initiates Coverage On Evercore ISI Group -- Rating Set to Outperform",
+      "source": "GuruFocus",
+      "url": "https://www.gurufocus.com/news/8972015/tenx-initiates-coverage-on-evercore-isi-group-rating-set-to-outperform",
+      "summary": "Evercore ISI initiated coverage of Tenax Therapeutics with an \"Outperform\" rating and a $39 price target, calling the upcoming Phase 3 LEVEL readout a \"critical binary event\" that could reshape market expectations given the large unmet need in PH-HFpEF. The new target implies roughly 148% upside from the stock's prior close."
+    },
+    {
       "date": "2026-07-17",
       "headline": "Tenax Therapeutics (TENX) Gets Updated 3.3% Ownership Filing From Millennium Group",
       "source": "StockTitan",
@@ -35,13 +42,6 @@
       "source": "GlobeNewswire",
       "url": "https://www.globenewswire.com/news-release/2026/07/02/3321224/12401/en/Tenax-Therapeutics-Announces-Late-Breaking-Presentation-of-LEVEL-Clinical-Trial-Data-at-ESC-Congress-2026.html",
       "summary": "Tenax will present Phase 3 LEVEL trial results for oral levosimendan (TNX-103) in a Late-Breaking Clinical Science session at ESC Congress 2026 in Munich on August 29, with topline data now expected in August 2026 ahead of database lock and statistical analysis."
-    },
-    {
-      "date": "2026-06-29",
-      "headline": "Tenax and Orion Secure Long-Term Levosimendan Supply Deal",
-      "source": "GlobeNewswire (via The Globe and Mail)",
-      "url": "https://www.theglobeandmail.com/investing/markets/stocks/TENX-Q/pressreleases/3087032/tenax-and-orion-secure-long-term-levosimendan-supply-deal/",
-      "summary": "Tenax and Orion Corporation signed a five-year, auto-renewing supply agreement naming Orion the primary manufacturer of oral levosimendan (TNX-103), alongside a license amendment extending the deadline for U.S. regulatory approval to December 31, 2035."
     }
   ],
   "catalysts": [
@@ -70,5 +70,5 @@
       "confirmed": false
     }
   ],
-  "pulse": "As of July 22, 2026, Tenax Therapeutics remains in a quiet holding pattern ahead of the pivotal readout for oral levosimendan (TNX-103) in pulmonary hypertension due to HFpEF, with topline Phase 3 LEVEL data expected in August 2026 and a late-breaking full data presentation confirmed for ESC Congress in Munich on August 29. Institutional positioning has grown more crowded and two-sided into the catalyst: Fidelity's FMR LLC disclosed a fresh 14.9% stake as of June 30 even as Millennium Management trimmed its stake to 3.3% from 5.1%, while short interest simultaneously surged 132.9% to about 7% of float, reflecting both bullish accumulation and rising bearish/hedging bets ahead of the binary event. The company enters the readout on solid financial footing (cash of $118.8 million funding operations into at least Q1 2028) and with strengthened market positioning: a long-term manufacturing/supply deal with Orion (regulatory deadline extended to 2035) and a bullish sell-side consensus (\"Moderate Buy\", average price targets around $38, with Piper Sandler's target as high as $50 and Guggenheim recently raising its target to $40). The stock's near-term trajectory hinges almost entirely on whether LEVEL hits its 6-minute-walk-distance primary endpoint, a binary catalyst that would position TNX-103 as a potential first-in-class approved PH-HFpEF therapy; Q2 2026 earnings are unofficially estimated around mid-August but have not yet been formally scheduled by the company."
+  "pulse": "As of July 23, 2026, Tenax Therapeutics remains in a quiet holding pattern ahead of the pivotal readout for oral levosimendan (TNX-103) in pulmonary hypertension due to HFpEF, with topline Phase 3 LEVEL data expected in August 2026 and a late-breaking full data presentation confirmed for ESC Congress in Munich on August 29. Sell-side conviction has kept building into the catalyst: Evercore ISI became the latest analyst to initiate coverage (Outperform, $39 target) on July 22, joining a consensus \"Moderate Buy\" with an average target near $38 (Piper Sandler as high as $50, Guggenheim at $40), even as institutional positioning has grown more crowded and two-sided, with Fidelity's FMR LLC disclosing a fresh 14.9% stake as of June 30 while Millennium Management trimmed its stake to 3.3% from 5.1% and short interest surged 132.9% to about 7% of float. The company enters the readout on solid financial footing (cash of $118.8 million funding operations into at least Q1 2028) and with strengthened market positioning via a long-term manufacturing/supply deal with Orion (regulatory deadline extended to 2035); the stock's near-term trajectory hinges almost entirely on whether LEVEL hits its 6-minute-walk-distance primary endpoint, a binary catalyst that would position TNX-103 as a potential first-in-class approved PH-HFpEF therapy, with Q2 2026 earnings unofficially estimated around mid-August but not yet formally scheduled by the company."
 }
