@@ -1609,7 +1609,7 @@ async function refreshPrices(){
 }
 /* persist the enriched on-screen state (incl. livePrice/dayChange) — a page refresh
    boots from exactly what the user last saw, so no price ever visibly "jumps back" */
-function _saveLast(){ try{ localStorage.setItem('pc-lastdata', JSON.stringify(DATA)); }catch(e){} }
+function _saveLast(){ try{ DATA._savedAt=Date.now(); localStorage.setItem('pc-lastdata', JSON.stringify(DATA)); }catch(e){} }
 
 /* ---- LIVE PORTFOLIO from Parqet (holdings, values, gains, IRR) ---- */
 
@@ -1945,13 +1945,21 @@ function boot(){
   try{
     const s=localStorage.getItem('pc-lastdata');
     if(s&&DATA){ const j=JSON.parse(s);
-      if(j&&j.generated&&(!DATA.generated||j.generated>DATA.generated)){ DATA=j; _fromStore=true; } }
+      if(j&&j.generated&&(!DATA.generated||j.generated>DATA.generated)){
+        /* Yahoo-Schmuckkurse altern schlecht: nach >10 min lieber den Engine-Kurs
+           zeigen als einen alten livePrice (QURE-44.48-Vorfall 2026-07-23) */
+        if(!j._savedAt||Date.now()-j._savedAt>600000)
+          (j.holdings||[]).forEach(h=>{ delete h.livePrice; delete h.dayChange; });
+        DATA=j; _fromStore=true; } }
   }catch(e){}
   /* the STATIC veil (first element in the markup) is already covering the page.
      Lift it immediately when the data on this device is fresh (<3 min); otherwise
      keep it until the immediate Firestore poll swaps in the live build
      (sub-second on a normal connection; 3.5s hard fallback so offline still renders) */
   window._veilOff=()=>{ const e=document.getElementById('bootveil'); if(e) e.remove(); window._veilOff=null; };
+  /* Firestore-Abruf SOFORT starten — nicht erst nach dem kompletten UI-Aufbau:
+     der frische Engine-Stand soll den Erst-Anstrich in <1s korrigieren */
+  fsDataPoll().catch(()=>{});
   try{
     const age=Date.now()-Date.parse(String(DATA.generated||'').replace(' ','T')+':00Z');
     /* instant paint ("es darf nur eine ms laden"): the LAST-SEEN state (pc-lastdata,
