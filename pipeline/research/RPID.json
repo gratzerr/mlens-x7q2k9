@@ -3,10 +3,10 @@
  "news": [
   {
    "date": "2026-07-15",
-   "headline": "RPID shares jump over 6% intraday to $2.21, extending rebound off June lows",
+   "headline": "RPID shares jump over 6% intraday to $2.21-2.29, extending rebound off June lows",
    "source": "Yahoo Finance",
    "url": "https://finance.yahoo.com/quote/RPID/",
-   "summary": "Rapid Micro Biosystems shares rose 6.76% on July 15 to close around $2.21 (market cap roughly $103M); no company press release accompanied the move, so it appears to reflect broader small-cap biotech sentiment and a continued recovery from the mid-to-late June lows near $1.70-1.85 rather than fresh company-specific news."
+   "summary": "Rapid Micro Biosystems shares rose to around $2.21-2.29 on July 15 (market cap roughly $103M); no company press release accompanied the move, so it appears to reflect broader small-cap biotech sentiment and a continued recovery from mid-to-late June lows near $1.70-1.85 rather than fresh company-specific news."
   },
   {
    "date": "2026-07-08",
@@ -57,5 +57,5 @@
    "confirmed": false
   }
  ],
- "pulse": "Company-specific news flow has stayed very thin through mid-to-late July: beyond the June 10 inducement RSU grant and a Frankfurt PDA conference poster presentation, the only recurring items are small, scheduled insider option-exercise sales (June 10, June 22, July 1, July 8, all under Form 144) that together total well under 1% of shares outstanding, alongside a sharply reduced short-interest reading (~166,100 shares, down 86% year-over-year). The stock, still digesting May's dilutive ~$32M warrant-linked offering that drove KeyBanc and Lake Street to cut price targets to $5 and $7, bottomed near $1.70-1.85 in mid-to-late June and has since recovered to roughly $2.20-2.30 by mid-July (market cap ~$103M) on no clearly identified company catalyst. Fundamentally the business continues executing on Growth Direct placements and the MilliporeSigma/Samsung Biologics channel (Q1 revenue +11% YoY, FY26 guidance of 30-38 placements/$37-41M revenue reaffirmed), and the near-term story is a wait for Q2 results (analyst-calendar trackers now point to roughly August 11, 2026, still not formally scheduled by the company as of July 23) and, further out, the planned H2 2026 launch of a next-generation cloud-native software platform, to show whether placement and consumables momentum is offsetting continued cash burn and dilution."
+ "pulse": "Company-specific news flow has stayed very thin through mid-to-late July: beyond the June 10 inducement RSU grant and a Frankfurt PDA conference poster presentation, the only recurring items are small, scheduled insider option-exercise sales (June 10, June 22, July 1, July 8, all under Form 144) that together total well under 1% of shares outstanding, alongside a sharply reduced short-interest reading (~166,100 shares, down 86% year-over-year). The stock, still digesting May's dilutive ~$32M warrant-linked offering (with Bain Capital Life Sciences and Armistice Capital among participants) that drove KeyBanc and Lake Street to cut price targets to $5 and $7, bottomed near $1.70-1.85 in mid-to-late June and has since recovered to roughly $2.20-2.30 by mid-July (market cap ~$103M) on no clearly identified company catalyst; no new Form 144 filings or press releases have surfaced between July 8 and July 23. Fundamentally the business continues executing on Growth Direct placements and the MilliporeSigma/Samsung Biologics channel (Q1 revenue +11% YoY, FY26 guidance of 30-38 placements/$37-41M revenue reaffirmed), and the near-term story is a wait for Q2 results (analyst-calendar trackers now point to roughly August 11, 2026, still not formally scheduled by the company as of July 23) and, further out, the planned H2 2026 launch of a next-generation cloud-native software platform, to show whether placement and consumables momentum is offsetting continued cash burn and dilution."
 }
