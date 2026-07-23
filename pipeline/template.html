@@ -1598,23 +1598,12 @@ async function refreshPrices(){
     if(y.spark&&y.spark.length>1) h.spark=y.spark;
   });
   if(!any) return;
-  /* live VALUES come from these quotes too (Parqet retired 2026-07-22):
-     value = shares x price, gain vs the engine's FIFO basis */
-  const fxr=liveState.fx;   // CAD per USD (CAD=X)
-  secs.forEach(h=>{
-    if(h.livePrice==null||h.ppShares==null) return;
-    const usd=(h.liveCcy==='CAD'&&fxr)?h.livePrice/fxr:h.livePrice;
-    h.value=Math.round(h.ppShares*usd);
-    if(h.ppBasisUsd){
-      h.totalGainNet=Math.round(h.value-h.ppBasisUsd+(h.ppRealizedUsd||0));
-      h.unrealizedReturn=+((h.value-h.ppBasisUsd)/h.ppBasisUsd*100).toFixed(1);
-    }
-  });
-  DATA.totalValue=Math.round(DATA.holdings.reduce((s,h)=>s+(h.value||0),0));
-  if(DATA.cashValue!=null) DATA.cashPct=+(100*DATA.cashValue/DATA.totalValue).toFixed(1);
-  DATA.holdings.forEach(h=>{ h.alloc=+(100*(h.value||0)/DATA.totalValue).toFixed(1); });
+  /* Yahoo bleibt KOSMETIK (Tages-%, Sparkline, 52w) — WERTE kommen ausschliesslich
+     aus der minuten-frischen Engine via fsDataPoll: die quotet die gerade offene
+     Boerse; Yahoo liefert ausserhalb der US-Session nur alte Schlusskurse
+     (Vorfall 2026-07-22: Browser-Yahoo ueberschrieb frischere Engine-Werte) */
   liveState.lastPrice=new Date();
-  renderHoldingsTable(); renderHoldings(); renderAlloc(); renderPerfBars(); setBadge();
+  renderHoldingsTable(); renderHoldings(); setBadge();
   renderKpis();   // the Today tile ticks with the live prices
   _saveLast();   // a refresh must repaint the LAST-SEEN prices, not minute-old engine ones
 }
