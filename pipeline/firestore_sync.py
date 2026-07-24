@@ -62,6 +62,16 @@ def pull():
 def push():
     tok = access_token()
     data = open(os.path.join(ROOT,"data.json"), encoding="utf-8").read()
+    # Firestore-Dokumente sind auf ~1 MiB begrenzt: die volle Trade-Historie (acts)
+    # sprengte das Limit und liess den Push tagelang scheitern (Vorfall 2026-07-24,
+    # eingefrorener Stand vom 21.07.). acts steckt in der gebackenen Seite — der
+    # Live-Push braucht sie nicht; der Client behaelt seine Liste beim Swap.
+    try:
+        j = json.loads(data)
+        j.pop("acts", None)
+        data = json.dumps(j, ensure_ascii=False, separators=(",", ":"))
+    except Exception:
+        pass
     body = {"fields":{
         "data":{"stringValue":data},
         "updated":{"stringValue":datetime.datetime.utcnow().isoformat()+"Z"}}}

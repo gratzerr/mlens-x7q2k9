@@ -1108,7 +1108,9 @@ async function fsDataPoll(){
     if(fresh && fresh.generated && fresh.generated>String(DATA.generated||'')){
       const live={};                             // keep client-side live enrichments
       DATA.holdings.forEach(h=>{ live[h.ticker]={lp:h.livePrice,dc:h.dayChange,hi:h.hi52,lo:h.lo52,sp:h.spark,pos:h.pos52}; });
+      const keepActs=(!fresh.acts||!fresh.acts.length)?DATA.acts:null;   // Live-Push traegt keine Historie (Firestore 1-MiB-Limit)
       DATA=fresh;
+      if(keepActs&&keepActs.length) DATA.acts=keepActs;
       DATA.holdings.forEach(h=>{ const l=live[h.ticker]; if(l){ h.livePrice=l.lp; h.dayChange=l.dc; h.hi52=l.hi; h.lo52=l.lo; h.spark=l.sp; h.pos52=l.pos; } });
       /* keep instant client-side benchmark previews until the cloud series arrives */
       Object.entries(window._benchPreview||{}).forEach(([s,ser])=>{
