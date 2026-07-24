@@ -393,7 +393,9 @@ data = {
     "asOf": (pp["series"][-1]["d"] if pp and pp.get("series") else port["asOf"]),
     # UTC! Mac (EEST) vs runner (UTC) stamps broke the client's freshness compare
     # -> updates were rejected for hours after every local build+push
-    "generated": datetime.datetime.utcnow().strftime("%Y-%m-%d %H:%M"),
+    # stamp = DATA freshness (engine run time), NOT build-machine clock — a build from
+    # a lagging data copy must never outrank fresher on-device/Firestore state
+    "generated": (pp.get("generated") if pp else None) or datetime.datetime.utcnow().strftime("%Y-%m-%d %H:%M"),
     "currency": port.get("currency", "EUR"),
     "portfolioId": port.get("portfolioId", "66e18c9426cf62020ccc7ee7"),
     "totalValue": total,
