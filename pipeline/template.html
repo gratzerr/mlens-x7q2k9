@@ -638,16 +638,13 @@ function _renderKpis(){
   const gn=(un||0)>=0, rz=(rl||0)>=0;
   // in EUR mode use the engine-exact EUR figures (verified vs the PP app), not FX-converted USD
   const money=(usd,eur)=>_priv?MASK:(_ccy==='EUR'&&eur!=null?fmtE(eur):fmtUsd(usd));
-  /* Today: live intraday move across all positions (falls back to the engine's
-     last daily step before the first price fetch lands) */
-  const _today=(()=>{ let ch=0,base=0,any=false;
-    d.holdings.forEach(h=>{ if(h.assetType==='cash') return; const v=h.value||0;
-      if(h.dayChange!=null&&isFinite(h.dayChange)){ const prev=v/(1+h.dayChange/100); ch+=v-prev; base+=prev; any=true; }
-      else base+=v; });
-    base+=d.cashValue||0;
-    if(any) return {usd:ch,pct:base?ch/base*100:0};
-    const s=d.chartPP; if(s&&s.length>1){ const a=s[s.length-2].v,b=s[s.length-1].v;
-      return {usd:b-a,pct:a?(b/a-1)*100:0}; }
+  /* Today: AUS DER ENGINE-TAGESREIHE (heutiger minuten-frischer Depotwert minus
+     gestriger Schlussstand) — damit stimmt die Kachel per Konstruktion exakt mit
+     dem Portfolio Value ueberein. Die alte Yahoo-Prozent-Mischung lieferte Werte,
+     die nie zu "Depotwert minus gestern" passten und beim Refresh kurz "—" zeigten */
+  const _today=(()=>{ const s=d.chartPP;
+    if(s&&s.length>1){ const a=s[s.length-2].v,b=s[s.length-1].v;
+      if(a!=null&&b!=null&&a) return {usd:b-a,pct:(b/a-1)*100}; }
     return null; })();
   const tiles=[
     {lab:'Portfolio Value', val:fmtUsd(d.totalValue), hero:1,
