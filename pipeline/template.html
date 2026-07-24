@@ -1101,10 +1101,11 @@ async function fsDataPoll(){
     if(!c.data) return;
     const fresh=JSON.parse(c.data);
     if(fresh&&fresh.generated){ liveState.lastEngine=new Date(); setBadge(); }   // poll ok = engine data is current, even without a swap
-    /* accept any DIFFERENT build, not only lexically newer: mixed-timezone stamps
-       (Mac EEST vs runner UTC) once blocked updates for hours. Firestore always
-       holds the latest pushed build, so "different" == "newer". */
-    if(fresh && fresh.generated && fresh.generated!==DATA.generated){
+    /* NUR NEUERE Stände übernehmen — niemals rückwärts: ein haengender Firestore-Push
+       lieferte tagelang den Stand vom 21.07., und "anders == neuer" liess die App
+       2 s nach dem Laden auf $2,273,671 zurueckspringen (Vorfall 2026-07-24).
+       Stamps sind seit build.py-Fix einheitlich UTC-Datenzeit -> String-Vergleich ok */
+    if(fresh && fresh.generated && fresh.generated>String(DATA.generated||'')){
       const live={};                             // keep client-side live enrichments
       DATA.holdings.forEach(h=>{ live[h.ticker]={lp:h.livePrice,dc:h.dayChange,hi:h.hi52,lo:h.lo52,sp:h.spark,pos:h.pos52}; });
       DATA=fresh;
