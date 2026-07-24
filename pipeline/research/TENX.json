@@ -9,13 +9,6 @@
       "summary": "Evercore ISI initiated coverage of Tenax Therapeutics with an \"Outperform\" rating and a $39 price target, calling the upcoming Phase 3 LEVEL readout a \"critical binary event\" that could reshape market expectations given the large unmet need in PH-HFpEF. The new target implies roughly 148% upside from the stock's prior close."
     },
     {
-      "date": "2026-07-17",
-      "headline": "Tenax Therapeutics (TENX) Gets Updated 3.3% Ownership Filing From Millennium Group",
-      "source": "StockTitan",
-      "url": "https://www.stocktitan.net/sec-filings/TENX/schedule-13g-a-tenax-therapeutics-inc-amended-passive-investment-disc-60098ca515fa.html",
-      "summary": "Millennium Management and affiliated funds (including Israel A. Englander) filed an amended Schedule 13G/A disclosing a reduced 3.3% passive stake in Tenax Therapeutics, down from the 5.1% stake reported in May 2026. The trim came in the run-up to the Phase 3 LEVEL data readout expected in August 2026."
-    },
-    {
       "date": "2026-07-16",
       "headline": "Tenax Therapeutics, Inc. Receives Consensus Recommendation of \"Moderate Buy\" from Analysts",
       "source": "Markets Daily",
@@ -42,6 +35,13 @@
       "source": "GlobeNewswire",
       "url": "https://www.globenewswire.com/news-release/2026/07/02/3321224/12401/en/Tenax-Therapeutics-Announces-Late-Breaking-Presentation-of-LEVEL-Clinical-Trial-Data-at-ESC-Congress-2026.html",
       "summary": "Tenax will present Phase 3 LEVEL trial results for oral levosimendan (TNX-103) in a Late-Breaking Clinical Science session at ESC Congress 2026 in Munich on August 29, with topline data now expected in August 2026 ahead of database lock and statistical analysis."
+    },
+    {
+      "date": "2026-06-29",
+      "headline": "Tenax and Orion Secure Long-Term Levosimendan Supply Deal",
+      "source": "The Globe and Mail / SEC 8-K",
+      "url": "https://www.stocktitan.net/sec-filings/TENX/8-k-tenax-therapeutics-inc-reports-material-event-ad68258dbd6d.html",
+      "summary": "Tenax and Orion Corporation signed a Supply Agreement making Orion the primary manufacturer of the oral levosimendan product (initial 5-year term with automatic 3-year renewals), alongside a Sixth Amendment to their license agreement that extends the deadline for obtaining U.S. regulatory approval to December 31, 2035."
     }
   ],
   "catalysts": [
@@ -70,5 +70,5 @@
       "confirmed": false
     }
   ],
-  "pulse": "As of July 24, 2026, Tenax Therapeutics remains in a quiet holding pattern ahead of the pivotal readout for oral levosimendan (TNX-103) in pulmonary hypertension due to HFpEF, with topline Phase 3 LEVEL data expected in August 2026 and a late-breaking full data presentation confirmed for ESC Congress in Munich on August 29. Sell-side conviction has kept building into the catalyst: Evercore ISI became the latest analyst to initiate coverage (Outperform, $39 target) on July 22, joining a consensus \"Moderate Buy\" with an average target near $38 (Piper Sandler as high as $50, Guggenheim at $40), even as institutional positioning has grown more crowded and two-sided, with Fidelity's FMR LLC disclosing a fresh 14.9% stake as of June 30 while Millennium Management trimmed its stake to 3.3% from 5.1% and short interest surged 132.9% to about 7% of float. The stock's near-term trajectory hinges almost entirely on whether LEVEL hits its 6-minute-walk-distance primary endpoint, a binary catalyst that would position TNX-103 as a potential first-in-class approved PH-HFpEF therapy, with Q2 2026 earnings unofficially estimated around mid-August but not yet formally scheduled by the company; cash of $118.8M as of March 31, 2026 (boosted by $30.5M in warrant exercises in Q1) funds operations into at least Q1 2028."
+  "pulse": "As of July 24, 2026, Tenax Therapeutics remains in a quiet holding pattern ahead of the pivotal Phase 3 LEVEL readout for oral levosimendan (TNX-103) in PH-HFpEF, with topline data expected in August 2026 and a late-breaking full presentation confirmed for ESC Congress in Munich on August 29. The company shored up its manufacturing and IP runway on June 29 by signing a long-term supply agreement with Orion Corporation alongside a Sixth Amendment to their license extending the U.S. regulatory approval deadline to December 31, 2035, even as sell-side conviction keeps building into the catalyst: Evercore ISI initiated coverage (Outperform, $39 target) on July 22, joining a consensus \"Moderate Buy\" near $38 (Piper Sandler as high as $50, Guggenheim at $40). Institutional positioning has grown more crowded and two-sided, with Fidelity's FMR LLC disclosing a fresh 14.9% stake as of June 30 while short interest surged 132.9% to about 7% of float, leaving the stock's near-term trajectory hinging almost entirely on whether LEVEL hits its 6-minute-walk-distance primary endpoint."
 }
