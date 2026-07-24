@@ -1,8 +1,8 @@
 {
- "fileDate": "2026-07-24 03:27",
- "generated": "2026-07-24 03:48",
+ "fileDate": "2026-07-24 03:50",
+ "generated": "2026-07-24 04:11",
  "engine": "pp-exact (verified vs PP app 2026-07-11)",
- "totalSecuritiesEur": 2047072,
+ "totalSecuritiesEur": 2050163,
  "cashEur": -99227.63,
  "cashByAccount": [
   {
@@ -30,22 +30,22 @@
    "eur": 96.6
   }
  ],
- "totalEur": 1947844,
- "ttwrorSince2022": 397.33,
- "ttwrorYtd": 97.47,
- "ttwrorAnnualized": 42.17,
- "izf": 69.74,
+ "totalEur": 1950935,
+ "ttwrorSince2022": 398.11,
+ "ttwrorYtd": 97.78,
+ "ttwrorAnnualized": 42.22,
+ "izf": 69.85,
  "yearlyReturns": {
   "2022": 3.3,
   "2023": 11.8,
   "2024": 45.2,
   "2025": 50.2,
-  "2026": 97.5
+  "2026": 97.8
  },
  "realizedEur": 851813,
- "unrealizedEur": 424985,
+ "unrealizedEur": 428076,
  "realizedUsd": 1024226,
- "unrealizedUsd": 468593,
+ "unrealizedUsd": 472126,
  "netContribEur": 667272,
  "netContribUsd": 739179,
  "earningsEur": 13297.85,
@@ -26681,9 +26681,9 @@
   },
   {
    "d": "2026-07-23",
-   "v": 2226386,
-   "e": 1947844,
-   "r": 3.973257,
+   "v": 2229919,
+   "e": 1950935,
+   "r": 3.981149,
    "c": 739179,
    "k": 667272,
    "q": 1024226,
@@ -62299,15 +62299,15 @@
    "name": "RAPID MICRO BIOSYSTEMS INC-A"
   }
  ],
- "ppReferenceTtwror": 397.33,
+ "ppReferenceTtwror": 398.11,
  "ppReferenceDate": "2026-07-24",
- "ttwrorApproxSince2022": 397.33,
+ "ttwrorApproxSince2022": 398.11,
  "yearlyReturnsApprox": {
   "2022": 3.3,
   "2023": 11.8,
   "2024": 45.2,
   "2025": 50.2,
-  "2026": 97.5
+  "2026": 97.8
  },
  "holdings": [
   {
@@ -62401,14 +62401,14 @@
    "isin": "CA71385D1078",
    "ccy": "CAD",
    "shares": 1000000.0,
-   "price": 0.31499999,
-   "value": 314999.99,
-   "valueEur": 194721,
-   "valueUsd": 222566,
+   "price": 0.31999999,
+   "value": 319999.99,
+   "valueEur": 197812,
+   "valueUsd": 226099,
    "basisUsd": 229612,
    "realizedUsd": 0,
    "avgCost": 0.3173,
-   "unrealRet": -3.1,
+   "unrealRet": -1.5,
    "priceDate": "2026-07-23"
   },
   {
