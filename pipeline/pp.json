@@ -1,8 +1,8 @@
 {
- "fileDate": "2026-07-25 03:25",
- "generated": "2026-07-25 03:45",
+ "fileDate": "2026-07-25 03:46",
+ "generated": "2026-07-25 04:06",
  "engine": "pp-exact (verified vs PP app 2026-07-11)",
- "totalSecuritiesEur": 2026840,
+ "totalSecuritiesEur": 2026854,
  "cashEur": -112084.36,
  "cashByAccount": [
   {
@@ -30,7 +30,7 @@
    "eur": 96.6
   }
  ],
- "totalEur": 1914755,
+ "totalEur": 1914769,
  "ttwrorSince2022": 388.88,
  "ttwrorYtd": 94.11,
  "ttwrorAnnualized": 41.61,
@@ -43,9 +43,9 @@
   "2026": 94.1
  },
  "realizedEur": 851813,
- "unrealizedEur": 391900,
+ "unrealizedEur": 391914,
  "realizedUsd": 1024226,
- "unrealizedUsd": 430776,
+ "unrealizedUsd": 430792,
  "netContribEur": 667272,
  "netContribUsd": 739179,
  "earningsEur": 13297.85,
@@ -26697,9 +26697,9 @@
   },
   {
    "d": "2026-07-24",
-   "v": 2188565,
-   "e": 1914755,
-   "r": 3.888774,
+   "v": 2188581,
+   "e": 1914769,
+   "r": 3.88881,
    "c": 739179,
    "k": 667272,
    "q": 1024226,
@@ -62439,10 +62439,10 @@
    "isin": "US6402683063",
    "ccy": "USD",
    "shares": 3200.0,
-   "price": 70.72499847,
-   "value": 226320.0,
-   "valueEur": 198005,
-   "valueUsd": 226320,
+   "price": 70.73000335,
+   "value": 226336.01,
+   "valueEur": 198019,
+   "valueUsd": 226336,
    "basisUsd": 206731,
    "realizedUsd": -54345,
    "avgCost": 64.6034,
