@@ -1,8 +1,8 @@
 {
- "fileDate": "2026-07-25 09:45",
- "generated": "2026-07-25 10:06",
+ "fileDate": "2026-07-25 10:07",
+ "generated": "2026-07-25 10:27",
  "engine": "pp-exact (verified vs PP app 2026-07-11)",
- "totalSecuritiesEur": 2059880,
+ "totalSecuritiesEur": 2026854,
  "cashEur": -112084.36,
  "cashByAccount": [
   {
@@ -30,22 +30,22 @@
    "eur": 96.6
   }
  ],
- "totalEur": 1947796,
- "ttwrorSince2022": 397.31,
- "ttwrorYtd": 97.46,
- "ttwrorAnnualized": 42.14,
- "izf": 69.64,
+ "totalEur": 1914769,
+ "ttwrorSince2022": 388.88,
+ "ttwrorYtd": 94.11,
+ "ttwrorAnnualized": 41.61,
+ "izf": 68.46,
  "yearlyReturns": {
   "2022": 3.3,
   "2023": 11.8,
   "2024": 45.2,
   "2025": 50.2,
-  "2026": 97.5
+  "2026": 94.1
  },
  "realizedEur": 851813,
- "unrealizedEur": 424940,
+ "unrealizedEur": 391914,
  "realizedUsd": 1024226,
- "unrealizedUsd": 468542,
+ "unrealizedUsd": 430792,
  "netContribEur": 667272,
  "netContribUsd": 739179,
  "earningsEur": 13297.85,
@@ -26681,9 +26681,9 @@
   },
   {
    "d": "2026-07-23",
-   "v": 2226331,
-   "e": 1947796,
-   "r": 3.973134,
+   "v": 2229863,
+   "e": 1950887,
+   "r": 3.981025,
    "c": 739179,
    "k": 667272,
    "q": 1024226,
@@ -26697,9 +26697,9 @@
   },
   {
    "d": "2026-07-24",
-   "v": 2226331,
-   "e": 1947796,
-   "r": 3.973134,
+   "v": 2188581,
+   "e": 1914769,
+   "r": 3.88881,
    "c": 739179,
    "k": 667272,
    "q": 1024226,
@@ -62338,15 +62338,15 @@
    "name": "RAPID MICRO BIOSYSTEMS INC-A"
   }
  ],
- "ppReferenceTtwror": 397.31,
+ "ppReferenceTtwror": 388.88,
  "ppReferenceDate": "2026-07-25",
- "ttwrorApproxSince2022": 397.31,
+ "ttwrorApproxSince2022": 388.88,
  "yearlyReturnsApprox": {
   "2022": 3.3,
   "2023": 11.8,
   "2024": 45.2,
   "2025": 50.2,
-  "2026": 97.5
+  "2026": 94.1
  },
  "holdings": [
   {
@@ -62359,15 +62359,15 @@
    "isin": "NL0010696654",
    "ccy": "USD",
    "shares": 10000.0,
-   "price": 39.43,
-   "value": 394300.0,
-   "valueEur": 344969,
-   "valueUsd": 394300,
+   "price": 38.97000122,
+   "value": 389700.01,
+   "valueEur": 340945,
+   "valueUsd": 389700,
    "basisUsd": 91996,
    "realizedUsd": 11487,
    "avgCost": 9.1996,
-   "unrealRet": 328.6,
-   "priceDate": "2026-07-23"
+   "unrealRet": 323.6,
+   "priceDate": "2026-07-24"
   },
   {
    "account": "ALL",
@@ -62379,15 +62379,15 @@
    "isin": "US18507C1036",
    "ccy": "USD",
    "shares": 18500.0,
-   "price": 14.49,
-   "value": 268065.0,
-   "valueEur": 234528,
-   "valueUsd": 268065,
+   "price": 14.11999988,
+   "value": 261220.0,
+   "valueEur": 228539,
+   "valueUsd": 261220,
    "basisUsd": 183842,
    "realizedUsd": -60391,
    "avgCost": 9.9374,
-   "unrealRet": 45.8,
-   "priceDate": "2026-07-23"
+   "unrealRet": 42.1,
+   "priceDate": "2026-07-24"
   },
   {
    "account": "ALL",
@@ -62399,15 +62399,15 @@
    "isin": "US64134X2018",
    "ccy": "USD",
    "shares": 35000.0,
-   "price": 7.01,
-   "value": 245350.0,
-   "valueEur": 214654,
-   "valueUsd": 245350,
+   "price": 6.80000019,
+   "value": 238000.01,
+   "valueEur": 208224,
+   "valueUsd": 238000,
    "basisUsd": 198036,
    "realizedUsd": 0,
    "avgCost": 5.6582,
-   "unrealRet": 23.9,
-   "priceDate": "2026-07-23"
+   "unrealRet": 20.2,
+   "priceDate": "2026-07-24"
   },
   {
    "account": "ALL",
@@ -62419,15 +62419,35 @@
    "isin": "US24661P8077",
    "ccy": "USD",
    "shares": 19000.0,
-   "price": 12.43,
-   "value": 236170.0,
-   "valueEur": 206623,
-   "valueUsd": 236170,
+   "price": 12.22000026,
+   "value": 232180.0,
+   "valueEur": 203132,
+   "valueUsd": 232180,
    "basisUsd": 181884,
    "realizedUsd": -16090,
    "avgCost": 9.5729,
-   "unrealRet": 29.8,
-   "priceDate": "2026-07-23"
+   "unrealRet": 27.7,
+   "priceDate": "2026-07-24"
+  },
+  {
+   "account": "ALL",
+   "ticker": "NKTR",
+   "name": "NEKTAR THERAPEUTICS",
+   "byPort": {
+    "SQ": 3200.0
+   },
+   "isin": "US6402683063",
+   "ccy": "USD",
+   "shares": 3200.0,
+   "price": 70.73000335,
+   "value": 226336.01,
+   "valueEur": 198019,
+   "valueUsd": 226336,
+   "basisUsd": 206731,
+   "realizedUsd": -54345,
+   "avgCost": 64.6034,
+   "unrealRet": 9.5,
+   "priceDate": "2026-07-24"
   },
   {
    "account": "ALL",
@@ -62440,35 +62460,15 @@
    "isin": "CA71385D1078",
    "ccy": "CAD",
    "shares": 1000000.0,
-   "price": 0.315,
-   "value": 315000.0,
-   "valueEur": 194721,
-   "valueUsd": 222566,
+   "price": 0.30000001,
+   "value": 300000.01,
+   "valueEur": 185448,
+   "valueUsd": 211968,
    "basisUsd": 229612,
    "realizedUsd": 0,
    "avgCost": 0.3173,
-   "unrealRet": -3.1,
-   "priceDate": "2026-07-23"
-  },
-  {
-   "account": "ALL",
-   "ticker": "NKTR",
-   "name": "NEKTAR THERAPEUTICS",
-   "byPort": {
-    "SQ": 3200.0
-   },
-   "isin": "US6402683063",
-   "ccy": "USD",
-   "shares": 3200.0,
-   "price": 69.36,
-   "value": 221952.0,
-   "valueEur": 194184,
-   "valueUsd": 221952,
-   "basisUsd": 206731,
-   "realizedUsd": -54345,
-   "avgCost": 64.6034,
-   "unrealRet": 7.4,
-   "priceDate": "2026-07-23"
+   "unrealRet": -7.7,
+   "priceDate": "2026-07-24"
   },
   {
    "account": "ALL",
@@ -62480,15 +62480,15 @@
    "isin": "US52886X1072",
    "ccy": "USD",
    "shares": 44000.0,
-   "price": 4.71,
-   "value": 207240.0,
-   "valueEur": 181312,
-   "valueUsd": 207240,
+   "price": 4.65999984,
+   "value": 205039.99,
+   "valueEur": 179388,
+   "valueUsd": 205040,
    "basisUsd": 218000,
    "realizedUsd": 0,
    "avgCost": 4.9545,
-   "unrealRet": -4.9,
-   "priceDate": "2026-07-23"
+   "unrealRet": -5.9,
+   "priceDate": "2026-07-24"
   },
   {
    "account": "ALL",
@@ -62508,7 +62508,7 @@
    "realizedUsd": 0,
    "avgCost": 2.0967,
    "unrealRet": -5.1,
-   "priceDate": "2026-07-23"
+   "priceDate": "2026-07-24"
   },
   {
    "account": "ALL",
@@ -62520,15 +62520,15 @@
    "isin": "US1420381089",
    "ccy": "USD",
    "shares": 100000.0,
-   "price": 1.63,
-   "value": 163000.0,
-   "valueEur": 142607,
-   "valueUsd": 163000,
+   "price": 1.57000005,
+   "value": 157000.01,
+   "valueEur": 137358,
+   "valueUsd": 157000,
    "basisUsd": 184177,
    "realizedUsd": 0,
    "avgCost": 1.8418,
-   "unrealRet": -11.5,
-   "priceDate": "2026-07-23"
+   "unrealRet": -14.8,
+   "priceDate": "2026-07-24"
   },
   {
    "account": "ALL",
@@ -62560,15 +62560,15 @@
    "isin": "US88032L6056",
    "ccy": "USD",
    "shares": 5000.0,
-   "price": 14.64,
-   "value": 73200.0,
-   "valueEur": 64042,
-   "valueUsd": 73200,
+   "price": 14.52999973,
+   "value": 72650.0,
+   "valueEur": 63561,
+   "valueUsd": 72650,
    "basisUsd": 57989,
    "realizedUsd": 0,
    "avgCost": 11.5977,
-   "unrealRet": 26.2,
-   "priceDate": "2026-07-23"
+   "unrealRet": 25.3,
+   "priceDate": "2026-07-24"
   }
  ],
  "txmax": "2026-07-23"
