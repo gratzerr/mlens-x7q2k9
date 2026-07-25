@@ -1,8 +1,8 @@
 {
- "fileDate": "2026-07-25 19:13",
- "generated": "2026-07-25 19:34",
+ "fileDate": "2026-07-25 19:36",
+ "generated": "2026-07-25 19:57",
  "engine": "pp-exact (verified vs PP app 2026-07-11)",
- "totalSecuritiesEur": 2026854,
+ "totalSecuritiesEur": 2032103,
  "cashEur": -112084.36,
  "cashByAccount": [
   {
@@ -30,22 +30,22 @@
    "eur": 96.6
   }
  ],
- "totalEur": 1914769,
- "ttwrorSince2022": 388.88,
- "ttwrorYtd": 94.11,
- "ttwrorAnnualized": 41.61,
- "izf": 68.46,
+ "totalEur": 1920019,
+ "ttwrorSince2022": 390.22,
+ "ttwrorYtd": 94.65,
+ "ttwrorAnnualized": 41.69,
+ "izf": 68.65,
  "yearlyReturns": {
   "2022": 3.3,
   "2023": 11.8,
   "2024": 45.2,
   "2025": 50.2,
-  "2026": 94.1
+  "2026": 94.6
  },
  "realizedEur": 851813,
- "unrealizedEur": 391914,
+ "unrealizedEur": 397163,
  "realizedUsd": 1024226,
- "unrealizedUsd": 430792,
+ "unrealizedUsd": 436792,
  "netContribEur": 667272,
  "netContribUsd": 739179,
  "earningsEur": 13297.85,
@@ -26697,9 +26697,9 @@
   },
   {
    "d": "2026-07-24",
-   "v": 2188581,
-   "e": 1914769,
-   "r": 3.88881,
+   "v": 2194581,
+   "e": 1920019,
+   "r": 3.902213,
    "c": 739179,
    "k": 667272,
    "q": 1024226,
@@ -62338,15 +62338,15 @@
    "name": "RAPID MICRO BIOSYSTEMS INC-A"
   }
  ],
- "ppReferenceTtwror": 388.88,
+ "ppReferenceTtwror": 390.22,
  "ppReferenceDate": "2026-07-25",
- "ttwrorApproxSince2022": 388.88,
+ "ttwrorApproxSince2022": 390.22,
  "yearlyReturnsApprox": {
   "2022": 3.3,
   "2023": 11.8,
   "2024": 45.2,
   "2025": 50.2,
-  "2026": 94.1
+  "2026": 94.6
  },
  "holdings": [
   {
@@ -62508,7 +62508,7 @@
    "realizedUsd": 0,
    "avgCost": 2.0967,
    "unrealRet": -5.1,
-   "priceDate": "2026-07-24"
+   "priceDate": "2026-07-23"
   },
   {
    "account": "ALL",
@@ -62520,15 +62520,15 @@
    "isin": "US1420381089",
    "ccy": "USD",
    "shares": 100000.0,
-   "price": 1.57000005,
-   "value": 157000.01,
-   "valueEur": 137358,
-   "valueUsd": 157000,
+   "price": 1.63,
+   "value": 163000.0,
+   "valueEur": 142607,
+   "valueUsd": 163000,
    "basisUsd": 184177,
    "realizedUsd": 0,
    "avgCost": 1.8418,
-   "unrealRet": -14.8,
-   "priceDate": "2026-07-24"
+   "unrealRet": -11.5,
+   "priceDate": "2026-07-23"
   },
   {
    "account": "ALL",
