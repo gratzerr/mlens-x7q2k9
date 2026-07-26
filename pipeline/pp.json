@@ -1,6 +1,6 @@
 {
- "fileDate": "2026-07-26 03:49",
- "generated": "2026-07-26 04:10",
+ "fileDate": "2026-07-26 04:11",
+ "generated": "2026-07-26 04:32",
  "engine": "pp-exact (verified vs PP app 2026-07-11)",
  "totalSecuritiesEur": 2026854,
  "cashEur": -112084.36,
@@ -62508,7 +62508,7 @@
    "realizedUsd": 0,
    "avgCost": 2.0967,
    "unrealRet": -5.1,
-   "priceDate": "2026-07-23"
+   "priceDate": "2026-07-24"
   },
   {
    "account": "ALL",
