@@ -69,6 +69,7 @@ def push():
     try:
         j = json.loads(data)
         j.pop("acts", None)
+        j.pop("social", None)   # 7-Tage-Archiv, steckt in der Seite — Push-Budget schonen
         data = json.dumps(j, ensure_ascii=False, separators=(",", ":"))
     except Exception:
         pass

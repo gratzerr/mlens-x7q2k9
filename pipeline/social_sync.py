@@ -2,7 +2,7 @@
 """Fetch latest Stocktwits posts per holding (server-side via jina proxy) and write
 social.json — baked into the page by build.py so the social feed is filled instantly
 on open. The client's live sweep then keeps it fresh. Run by the hourly job."""
-import json, os, subprocess, time
+import json, os, subprocess, time, datetime
 
 ROOT = os.path.dirname(os.path.abspath(__file__))
 ST_SYM = {"PINK": "PYNKF"}
@@ -33,12 +33,22 @@ for tk in tickers:
             body = (m.get("body") or "").strip()
             if body.count("$") > 4 or len(body) < 8:
                 continue
-            msgs.append({"ticker": tk, "user": (m.get("user") or {}).get("username"),
+            msgs.append({"ticker": tk, "id": m.get("id"),
+                "user": (m.get("user") or {}).get("username"),
                 "body": body, "time": m.get("created_at"),
                 "sentiment": ((m.get("entities") or {}).get("sentiment") or {}).get("basic"),
                 "likes": (m.get("likes") or {}).get("total") or 0})
         if msgs:
-            out[tk] = msgs[:15]
+            # 7-Tage-Archiv: neue Posts mit dem Bestand MERGEN statt ersetzen —
+            # Stocktwits liefert nur die ~30 neuesten, Historie sonst weg
+            cut = (datetime.datetime.utcnow() - datetime.timedelta(days=7)).strftime("%Y-%m-%dT%H:%M:%SZ")
+            seen, merged = set(), []
+            for m2 in sorted(msgs + (out.get(tk) or []), key=lambda x: x.get("time") or "", reverse=True):
+                k = m2.get("id") or (str(m2.get("user")) + "|" + str(m2.get("time")))
+                if k in seen or (m2.get("time") or "") < cut:
+                    continue
+                seen.add(k); merged.append(m2)
+            out[tk] = merged[:80]
     except Exception:
         pass
     time.sleep(1.5)
