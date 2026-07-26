@@ -287,7 +287,11 @@ def live_overlay():
     ok=0
     for si in held:
         tk=SEC[si]["tk"]
-        if not tk or len(tk)>10: continue          # options etc.: keep file quotes
+        if not tk: continue
+        if len(tk)>10 and not re.match(r"^[A-Z.]{1,6}\d{6}[CP]\d{8}$", tk):
+            continue   # Fremdformate: Datei-Kurse behalten. Echte OCC-Optionen werden
+                       # live quotiert — PP kann sie nicht, sonst friert der Kurs am
+                       # Kauftag ein (ABVX-Call stand 5 Tage auf 30.90, 2026-07-26)
         try:
             hist=yf.Ticker(tk).history(period="10d")["Close"]
         except Exception:
