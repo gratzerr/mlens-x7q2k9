@@ -292,23 +292,39 @@ def live_overlay():
             continue   # Fremdformate: Datei-Kurse behalten. Echte OCC-Optionen werden
                        # live quotiert — PP kann sie nicht, sonst friert der Kurs am
                        # Kauftag ein (ABVX-Call stand 5 Tage auf 30.90, 2026-07-26)
+        occ = len(tk)>10
         try:
-            hist=yf.Ticker(tk).history(period="10d")["Close"]
+            if occ:
+                # OCC-Optionssymbole: yfinance liefert dafuer leer — die Chart-API
+                # direkt kann sie (gleicher Weg wie der Client, ABVX-Call 2026-07-26)
+                rr=subprocess.run(["curl","-s","-m","15","-A","Mozilla/5.0",
+                    "https://query1.finance.yahoo.com/v8/finance/chart/"+tk+"?range=10d&interval=1d"],
+                    capture_output=True,text=True)
+                jj=json.loads(rr.stdout or "{}")
+                res=(jj.get("chart",{}).get("result") or [{}])[0]
+                tss=res.get("timestamp") or []
+                cls=((res.get("indicators",{}).get("quote") or [{}])[0].get("close") or [])
+                pairs=[(datetime.datetime.utcfromtimestamp(t).date().isoformat(), float(c))
+                       for t,c in zip(tss,cls) if c and c>0]
+                if not pairs:
+                    mp=(res.get("meta") or {}).get("regularMarketPrice")
+                    if mp: pairs=[(eff, float(mp))]
+            else:
+                h2=yf.Ticker(tk).history(period="10d")["Close"]
+                pairs=[(idx.strftime("%Y-%m-%d"), float(px)) for idx,px in h2.items()]
         except Exception:
             continue
-        if hist is None or not len(hist): continue
+        if not pairs: continue
+        pairs.sort()
         ds,vs=PRICES[si]
         last_file=ds[-1] if ds else "0000"
-        added=False
-        for idx,px in hist.items():
-            d=idx.strftime("%Y-%m-%d")
+        for d,px in pairs:
             if d<=last_file or d>eff or px!=px or px<=0: continue
-            ds.append(d); vs.append(int(float(px)*1e8)); added=True
-        if added or True:
-            lastq=float(hist.iloc[-1])
-            la=LATEST[si]
-            if lastq>0 and (la is None or eff>=la[0]):
-                LATEST[si]=(eff,int(lastq*1e8)); ok+=1
+            ds.append(d); vs.append(int(px*1e8))
+        lastq=pairs[-1][1]
+        la=LATEST[si]
+        if lastq>0 and (la is None or eff>=la[0]):
+            LATEST[si]=(eff,int(lastq*1e8)); ok+=1
     print(f"live overlay: {ok}/{len(held)} held securities quoted live (gap-filled to {eff})")
 if os.environ.get("LIVE_QUOTES","1")=="1":
     live_overlay()
