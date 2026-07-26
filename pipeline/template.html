@@ -1704,7 +1704,7 @@ function renderSocial(){
       <div class="sb">${esc(body)}</div></div>`;
   }).join('');
   if(all.length>_socShown){
-    el.innerHTML+=`<button class="morebtn" id="socmore">+ ${all.length-_socShown} ältere Posts</button>`;
+    el.innerHTML+=`<button class="morebtn" id="socmore">+ ${all.length-_socShown} older posts</button>`;
     const b=el.querySelector('#socmore'); if(b) b.onclick=()=>{ _socShown+=48; renderSocial(); };
   }
 }

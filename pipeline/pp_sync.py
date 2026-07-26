@@ -295,20 +295,19 @@ def live_overlay():
         occ = len(tk)>10
         try:
             if occ:
-                # OCC-Optionssymbole: yfinance liefert dafuer leer — die Chart-API
-                # direkt kann sie (gleicher Weg wie der Client, ABVX-Call 2026-07-26)
-                rr=subprocess.run(["curl","-s","-m","15","-A","Mozilla/5.0",
-                    "https://query1.finance.yahoo.com/v8/finance/chart/"+tk+"?range=10d&interval=1d"],
-                    capture_output=True,text=True)
-                jj=json.loads(rr.stdout or "{}")
-                res=(jj.get("chart",{}).get("result") or [{}])[0]
-                tss=res.get("timestamp") or []
-                cls=((res.get("indicators",{}).get("quote") or [{}])[0].get("close") or [])
-                pairs=[(datetime.datetime.utcfromtimestamp(t).date().isoformat(), float(c))
-                       for t,c in zip(tss,cls) if c and c>0]
-                if not pairs:
-                    mp=(res.get("meta") or {}).get("regularMarketPrice")
-                    if mp: pairs=[(eff, float(mp))]
+                # OCC-Optionen: yfinance-history ist leer, rohes curl blockt Yahoo im
+                # CI — die Optionskette (yf.option_chain) geht ueber yfinance-Cookies
+                # und funktioniert dort. Kurs = Geld/Brief-Mitte wie beim Broker.
+                m2=re.match(r"^([A-Z.]{1,6})(\d{2})(\d{2})(\d{2})([CP])(\d{8})$", tk)
+                und,yy,mm,dd,cp,kk=m2.groups()
+                oc=yf.Ticker(und).option_chain(f"20{yy}-{mm}-{dd}")
+                df=oc.calls if cp=="C" else oc.puts
+                row=df[abs(df["strike"]-int(kk)/1000.0)<1e-6]
+                if not len(row): continue
+                r0=row.iloc[0]
+                bid=float(r0.get("bid") or 0); ask=float(r0.get("ask") or 0)
+                px=(bid+ask)/2.0 if (bid>0 and ask>0) else float(r0.get("lastPrice") or 0)
+                pairs=[(eff, px)] if px>0 else []
             else:
                 h2=yf.Ticker(tk).history(period="10d")["Close"]
                 pairs=[(idx.strftime("%Y-%m-%d"), float(px)) for idx,px in h2.items()]
