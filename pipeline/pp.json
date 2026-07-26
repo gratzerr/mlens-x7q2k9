@@ -1,8 +1,8 @@
 {
- "fileDate": "2026-07-26 01:11",
- "generated": "2026-07-26 01:31",
+ "fileDate": "2026-07-26 01:33",
+ "generated": "2026-07-26 01:54",
  "engine": "pp-exact (verified vs PP app 2026-07-11)",
- "totalSecuritiesEur": 2052570,
+ "totalSecuritiesEur": 2026854,
  "cashEur": -112084.36,
  "cashByAccount": [
   {
@@ -30,22 +30,22 @@
    "eur": 96.6
   }
  ],
- "totalEur": 1940485,
- "ttwrorSince2022": 395.45,
- "ttwrorYtd": 96.72,
- "ttwrorAnnualized": 42.02,
- "izf": 69.38,
+ "totalEur": 1914769,
+ "ttwrorSince2022": 388.88,
+ "ttwrorYtd": 94.11,
+ "ttwrorAnnualized": 41.61,
+ "izf": 68.46,
  "yearlyReturns": {
   "2022": 3.3,
   "2023": 11.8,
   "2024": 45.2,
   "2025": 50.2,
-  "2026": 96.7
+  "2026": 94.1
  },
  "realizedEur": 851813,
- "unrealizedEur": 417630,
+ "unrealizedEur": 391914,
  "realizedUsd": 1024226,
- "unrealizedUsd": 460186,
+ "unrealizedUsd": 430792,
  "netContribEur": 667272,
  "netContribUsd": 739179,
  "earningsEur": 13297.85,
@@ -26681,9 +26681,9 @@
   },
   {
    "d": "2026-07-23",
-   "v": 2226331,
-   "e": 1947796,
-   "r": 3.973134,
+   "v": 2229863,
+   "e": 1950887,
+   "r": 3.981025,
    "c": 739179,
    "k": 667272,
    "q": 1024226,
@@ -26697,9 +26697,9 @@
   },
   {
    "d": "2026-07-24",
-   "v": 2217975,
-   "e": 1940485,
-   "r": 3.954468,
+   "v": 2188581,
+   "e": 1914769,
+   "r": 3.88881,
    "c": 739179,
    "k": 667272,
    "q": 1024226,
@@ -62338,15 +62338,15 @@
    "name": "RAPID MICRO BIOSYSTEMS INC-A"
   }
  ],
- "ppReferenceTtwror": 395.45,
+ "ppReferenceTtwror": 388.88,
  "ppReferenceDate": "2026-07-26",
- "ttwrorApproxSince2022": 395.45,
+ "ttwrorApproxSince2022": 388.88,
  "yearlyReturnsApprox": {
   "2022": 3.3,
   "2023": 11.8,
   "2024": 45.2,
   "2025": 50.2,
-  "2026": 96.7
+  "2026": 94.1
  },
  "holdings": [
   {
@@ -62359,15 +62359,15 @@
    "isin": "NL0010696654",
    "ccy": "USD",
    "shares": 10000.0,
-   "price": 39.43,
-   "value": 394300.0,
-   "valueEur": 344969,
-   "valueUsd": 394300,
+   "price": 38.97000122,
+   "value": 389700.01,
+   "valueEur": 340945,
+   "valueUsd": 389700,
    "basisUsd": 91996,
    "realizedUsd": 11487,
    "avgCost": 9.1996,
-   "unrealRet": 328.6,
-   "priceDate": "2026-07-23"
+   "unrealRet": 323.6,
+   "priceDate": "2026-07-24"
   },
   {
    "account": "ALL",
@@ -62379,15 +62379,15 @@
    "isin": "US18507C1036",
    "ccy": "USD",
    "shares": 18500.0,
-   "price": 14.49,
-   "value": 268065.0,
-   "valueEur": 234528,
-   "valueUsd": 268065,
+   "price": 14.11999988,
+   "value": 261220.0,
+   "valueEur": 228539,
+   "valueUsd": 261220,
    "basisUsd": 183842,
    "realizedUsd": -60391,
    "avgCost": 9.9374,
-   "unrealRet": 45.8,
-   "priceDate": "2026-07-23"
+   "unrealRet": 42.1,
+   "priceDate": "2026-07-24"
   },
   {
    "account": "ALL",
@@ -62399,15 +62399,15 @@
    "isin": "US64134X2018",
    "ccy": "USD",
    "shares": 35000.0,
-   "price": 7.01,
-   "value": 245350.0,
-   "valueEur": 214654,
-   "valueUsd": 245350,
+   "price": 6.80000019,
+   "value": 238000.01,
+   "valueEur": 208224,
+   "valueUsd": 238000,
    "basisUsd": 198036,
    "realizedUsd": 0,
    "avgCost": 5.6582,
-   "unrealRet": 23.9,
-   "priceDate": "2026-07-23"
+   "unrealRet": 20.2,
+   "priceDate": "2026-07-24"
   },
   {
    "account": "ALL",
@@ -62460,15 +62460,15 @@
    "isin": "CA71385D1078",
    "ccy": "CAD",
    "shares": 1000000.0,
-   "price": 0.315,
-   "value": 315000.0,
-   "valueEur": 194721,
-   "valueUsd": 222566,
+   "price": 0.30000001,
+   "value": 300000.01,
+   "valueEur": 185448,
+   "valueUsd": 211968,
    "basisUsd": 229612,
    "realizedUsd": 0,
    "avgCost": 0.3173,
-   "unrealRet": -3.1,
-   "priceDate": "2026-07-23"
+   "unrealRet": -7.7,
+   "priceDate": "2026-07-24"
   },
   {
    "account": "ALL",
