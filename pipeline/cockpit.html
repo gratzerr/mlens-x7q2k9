@@ -1668,6 +1668,15 @@ function relTime(iso){
   if(m<1)return 'now'; if(m<60)return m+'m'; const h=Math.round(m/60); if(h<24)return h+'h'; return Math.round(h/24)+'d';
 }
 const ST_SYM={PINK:"PYNKF"};   // Perimeter trades as PYNKF on Stocktwits
+function _socMerge(a,b){ /* 7-Tage-Archiv: neueste zuerst, dedupe per Post-ID, max 80/Ticker */
+  const cut=Date.now()-7*86400000, seen=new Set(), out=[];
+  [...(a||[]),...(b||[])].sort((x,y)=>new Date(y.time)-new Date(x.time)).forEach(m=>{
+    const k=m.id||((m.user||'')+'|'+m.time);
+    if(seen.has(k)||new Date(m.time).getTime()<cut) return;
+    seen.add(k); out.push(m);
+  });
+  return out.slice(0,80);
+}
 async function fetchStocktwits(tk){
   const r=await fetch(JINA+"https://api.stocktwits.com/api/2/streams/symbol/"+(ST_SYM[tk]||tk)+".json");
   const t=await r.text(); const i=t.indexOf('{"symbol"'); if(i<0) throw new Error('no');
@@ -1679,8 +1688,10 @@ function cleanBody(s){
     .replace(/&gt;/g,'>').replace(/&amp;/g,'&')
     .replace(/https?:\/\/\S+/g,'').replace(/\s{2,}/g,' ').trim();
 }
+let _socShown=24;
 function renderSocial(){
-  const items=(liveState.social||[]).slice(0,24);
+  const all=(liveState.social||[]);
+  const items=all.slice(0,_socShown);
   const el=document.getElementById('social'); if(!el) return;
   el.classList.add('feedmax');
   if(!items.length){ el.innerHTML=''; return; }
@@ -1692,6 +1703,10 @@ function renderSocial(){
         <span class="su">@${esc(m.user)}</span>${sent}<span class="stime">${relTime(m.time)}</span></div>
       <div class="sb">${esc(body)}</div></div>`;
   }).join('');
+  if(all.length>_socShown){
+    el.innerHTML+=`<button class="morebtn" id="socmore">+ ${all.length-_socShown} ältere Posts</button>`;
+    const b=el.querySelector('#socmore'); if(b) b.onclick=()=>{ _socShown+=48; renderSocial(); };
+  }
 }
 let _socialBusy=false, _socialRetry=[];
 async function refreshSocial(){
@@ -1713,11 +1728,11 @@ async function refreshSocial(){
           const body=(m.body||'').trim();
           if((body.match(/\$[A-Za-z.]+/g)||[]).length>4) return;   // spammy multi-ticker blasts
           if(body.length<8) return;
-          msgs.push({ticker:tk, user:m.user&&m.user.username, body,
+          msgs.push({ticker:tk, id:m.id, user:m.user&&m.user.username, body,
             time:m.created_at, sentiment:m.entities&&m.entities.sentiment&&m.entities.sentiment.basic,
             likes:(m.likes&&m.likes.total)||0});
         });
-        if(msgs.length){ liveState.socialBy[tk]=msgs; dirty=true; }
+        if(msgs.length){ liveState.socialBy[tk]=_socMerge(msgs, liveState.socialBy[tk]); dirty=true; }
         else _socialRetry.push(tk);                                 // 429/empty -> first next cycle
       }catch(e){ _socialRetry.push(tk); }
       await new Promise(r=>setTimeout(r,1200));
@@ -1726,7 +1741,7 @@ async function refreshSocial(){
       _socialPrune();
       const all=Object.values(liveState.socialBy).flat();
       all.sort((a,b)=>new Date(b.time)-new Date(a.time));
-      liveState.social=all.slice(0,40); liveState.lastSocial=new Date();
+      liveState.social=all; liveState.lastSocial=new Date();
       try{localStorage.setItem('pc-social',JSON.stringify(liveState.socialBy));}catch(e){}
       renderSocial(); setBadge();
     }
@@ -1737,10 +1752,8 @@ function loadSocialCache(){
   // overlay any newer localStorage cache, live sweep refreshes from there.
   liveState.socialBy = Object.assign({}, DATA.social||{});
   try{ const by=JSON.parse(localStorage.getItem('pc-social')||'null');
-    if(by) for(const [tk,msgs] of Object.entries(by)){
-      const cur=liveState.socialBy[tk];
-      if(!cur || (msgs[0]&&cur[0]&&new Date(msgs[0].time)>new Date(cur[0].time))) liveState.socialBy[tk]=msgs;
-    }
+    if(by) for(const [tk,msgs] of Object.entries(by))
+      liveState.socialBy[tk]=_socMerge(msgs, liveState.socialBy[tk]);
   }catch(e){}
   _socialPrune();
   const all=Object.values(liveState.socialBy).flat();
