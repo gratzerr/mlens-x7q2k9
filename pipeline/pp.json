@@ -1,6 +1,6 @@
 {
- "fileDate": "2026-07-26 10:55",
- "generated": "2026-07-26 11:15",
+ "fileDate": "2026-07-26 11:17",
+ "generated": "2026-07-26 11:38",
  "engine": "pp-exact (verified vs PP app 2026-07-11)",
  "totalSecuritiesEur": 2059880,
  "cashEur": -112084.36,
@@ -62540,7 +62540,7 @@
    "isin": "",
    "ccy": "USD",
    "shares": 4000.0,
-   "price": 30.9,
+   "price": 30.89999961,
    "value": 123600.0,
    "valueEur": 108136,
    "valueUsd": 123600,
@@ -62548,7 +62548,7 @@
    "realizedUsd": 0,
    "avgCost": 30.9902,
    "unrealRet": -0.3,
-   "priceDate": "2026-07-21"
+   "priceDate": "2026-07-24"
   },
   {
    "account": "ALL",
