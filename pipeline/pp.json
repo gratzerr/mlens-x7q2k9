@@ -1,6 +1,6 @@
 {
- "fileDate": "2026-07-26 23:33",
- "generated": "2026-07-26 23:54",
+ "fileDate": "2026-07-27 00:18",
+ "generated": "2026-07-27 00:39",
  "engine": "pp-exact (verified vs PP app 2026-07-11)",
  "totalSecuritiesEur": 2008306,
  "cashEur": -112084.36,
@@ -62339,7 +62339,7 @@
   }
  ],
  "ppReferenceTtwror": 384.15,
- "ppReferenceDate": "2026-07-26",
+ "ppReferenceDate": "2026-07-27",
  "ttwrorApproxSince2022": 384.15,
  "yearlyReturnsApprox": {
   "2022": 3.3,
