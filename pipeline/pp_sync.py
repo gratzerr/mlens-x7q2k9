@@ -37,7 +37,7 @@ XStream parsing rules (hard-won, do not simplify):
 
 Run before build.py. Refreshes fx_daily.json (ECB via frankfurter, multi-ccy).
 """
-import xml.etree.ElementTree as ET, re, bisect, json, os, subprocess, datetime, sys
+import xml.etree.ElementTree as ET, re, bisect, json, os, subprocess, datetime, sys, time
 from collections import defaultdict
 
 ROOT=os.path.dirname(os.path.abspath(__file__))
@@ -285,6 +285,13 @@ def live_overlay():
         return
     eff=us_eff_date()
     ok=0
+    # Letzte GUTE Optionskurse: die Optionsketten-Abfrage ist wackelig (Rate-Limits),
+    # und ohne Cache fiel der Kurs dann auf den PP-Datei-Wert = Kaufpreis zurueck
+    # (ABVX-Call sprang staendig zwischen 27.85 und 30.90, 2026-07-27)
+    OQ_PATH=os.path.join(ROOT,"opt_quotes.json")
+    try: oq=json.load(open(OQ_PATH))
+    except Exception: oq={}
+    oq_dirty=False
     for si in held:
         tk=SEC[si]["tk"]
         if not tk: continue
@@ -300,14 +307,27 @@ def live_overlay():
                 # und funktioniert dort. Kurs = Geld/Brief-Mitte wie beim Broker.
                 m2=re.match(r"^([A-Z.]{1,6})(\d{2})(\d{2})(\d{2})([CP])(\d{8})$", tk)
                 und,yy,mm,dd,cp,kk=m2.groups()
-                oc=yf.Ticker(und).option_chain(f"20{yy}-{mm}-{dd}")
-                df=oc.calls if cp=="C" else oc.puts
-                row=df[abs(df["strike"]-int(kk)/1000.0)<1e-6]
-                if not len(row): continue
-                r0=row.iloc[0]
-                bid=float(r0.get("bid") or 0); ask=float(r0.get("ask") or 0)
-                px=(bid+ask)/2.0 if (bid>0 and ask>0) else float(r0.get("lastPrice") or 0)
-                pairs=[(eff, px)] if px>0 else []
+                px=0.0
+                for _try in range(3):
+                    try:
+                        oc=yf.Ticker(und).option_chain(f"20{yy}-{mm}-{dd}")
+                        df=oc.calls if cp=="C" else oc.puts
+                        row=df[abs(df["strike"]-int(kk)/1000.0)<1e-6]
+                        if len(row):
+                            r0=row.iloc[0]
+                            bid=float(r0.get("bid") or 0); ask=float(r0.get("ask") or 0)
+                            px=(bid+ask)/2.0 if (bid>0 and ask>0) else float(r0.get("lastPrice") or 0)
+                        if px>0: break
+                    except Exception:
+                        pass
+                    time.sleep(1.5)
+                if px>0:
+                    oq[tk]={"d":eff,"px":px}; oq_dirty=True
+                else:
+                    c=oq.get(tk)          # Abruf gescheitert: letzten GUTEN Kurs halten,
+                    if not c: continue    # niemals auf den PP-Kaufpreis zurueckfallen
+                    px=float(c["px"])
+                pairs=[(eff, px)]
             else:
                 h2=yf.Ticker(tk).history(period="10d")["Close"]
                 pairs=[(idx.strftime("%Y-%m-%d"), float(px)) for idx,px in h2.items()]
@@ -324,6 +344,9 @@ def live_overlay():
         la=LATEST[si]
         if lastq>0 and (la is None or eff>=la[0]):
             LATEST[si]=(eff,int(lastq*1e8)); ok+=1
+    if oq_dirty:
+        try: json.dump(oq, open(OQ_PATH,"w"))
+        except Exception: pass
     print(f"live overlay: {ok}/{len(held)} held securities quoted live (gap-filled to {eff})")
 if os.environ.get("LIVE_QUOTES","1")=="1":
     live_overlay()
