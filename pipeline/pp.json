@@ -1,8 +1,8 @@
 {
- "fileDate": "2026-07-29 19:53",
- "generated": "2026-07-29 20:03",
+ "fileDate": "2026-07-29 20:04",
+ "generated": "2026-07-29 20:14",
  "engine": "pp-exact (verified vs PP app 2026-07-11)",
- "totalSecuritiesEur": 2027309,
+ "totalSecuritiesEur": 2025122,
  "cashEur": -189946.54,
  "cashByAccount": [
   {
@@ -30,22 +30,22 @@
    "eur": 137.81
   }
  ],
- "totalEur": 1837363,
- "ttwrorSince2022": 369.12,
- "ttwrorYtd": 86.27,
- "ttwrorAnnualized": 40.19,
- "izf": 65.16,
+ "totalEur": 1835175,
+ "ttwrorSince2022": 368.56,
+ "ttwrorYtd": 86.05,
+ "ttwrorAnnualized": 40.15,
+ "izf": 65.08,
  "yearlyReturns": {
   "2022": 3.3,
   "2023": 11.8,
   "2024": 45.2,
   "2025": 50.2,
-  "2026": 86.3
+  "2026": 86.0
  },
  "realizedEur": 851813,
- "unrealizedEur": 314564,
+ "unrealizedEur": 312377,
  "realizedUsd": 1024226,
- "unrealizedUsd": 342381,
+ "unrealizedUsd": 339881,
  "netContribEur": 667272,
  "netContribUsd": 739179,
  "earningsEur": 13297.85,
@@ -26777,9 +26777,9 @@
   },
   {
    "d": "2026-07-29",
-   "v": 2100106,
-   "e": 1837363,
-   "r": 3.691175,
+   "v": 2097606,
+   "e": 1835175,
+   "r": 3.68559,
    "c": 739179,
    "k": 667272,
    "q": 1024226,
@@ -62574,15 +62574,15 @@
    "name": "RAPID MICRO BIOSYSTEMS INC-A"
   }
  ],
- "ppReferenceTtwror": 369.12,
+ "ppReferenceTtwror": 368.56,
  "ppReferenceDate": "2026-07-29",
- "ttwrorApproxSince2022": 369.12,
+ "ttwrorApproxSince2022": 368.56,
  "yearlyReturnsApprox": {
   "2022": 3.3,
   "2023": 11.8,
   "2024": 45.2,
   "2025": 50.2,
-  "2026": 86.3
+  "2026": 86.0
  },
  "holdings": [
   {
@@ -62794,15 +62794,15 @@
    "isin": "",
    "ccy": "USD",
    "shares": 5000.0,
-   "price": 20.2,
-   "value": 101000.0,
-   "valueEur": 88364,
-   "valueUsd": 101000,
+   "price": 19.7,
+   "value": 98500.0,
+   "valueEur": 86177,
+   "valueUsd": 98500,
    "basisUsd": 147461,
    "realizedUsd": 0,
    "avgCost": 29.4921,
-   "unrealRet": -31.5,
-   "dayRet": -14.04,
+   "unrealRet": -33.2,
+   "dayRet": -16.17,
    "prevClose": null,
    "priceDate": "2026-07-29"
   },
