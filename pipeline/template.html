@@ -1101,6 +1101,16 @@ async function fsDataPoll(){
     if(!c.data) return;
     const fresh=JSON.parse(c.data);
     if(fresh&&fresh.generated){ liveState.lastEngine=new Date(); setBadge(); }   // poll ok = engine data is current, even without a swap
+    /* Selbstheilung: laeuft hier alter App-Code (iOS-PWA haelt die Seite ewig),
+       Caches leeren und EINMAL pro Version neu laden — nie mehr manuelles Wegwischen */
+    if(fresh && fresh.appBuild && DATA.appBuild && fresh.appBuild!==DATA.appBuild){
+      let done=null; try{ done=localStorage.getItem('pc-reloaded-for'); }catch(e){}
+      if(done!==fresh.appBuild){
+        try{ localStorage.setItem('pc-reloaded-for', fresh.appBuild); }catch(e){}
+        try{ if(window.caches) await caches.keys().then(ks=>Promise.all(ks.map(k=>caches.delete(k)))); }catch(e){}
+        location.reload(); return;
+      }
+    }
     /* NUR NEUERE Stände übernehmen — niemals rückwärts: ein haengender Firestore-Push
        lieferte tagelang den Stand vom 21.07., und "anders == neuer" liess die App
        2 s nach dem Laden auf $2,273,671 zurueckspringen (Vorfall 2026-07-24).

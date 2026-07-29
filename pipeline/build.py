@@ -475,6 +475,11 @@ data = {
     "secCik": sec_cik,
     "social": (lambda: (json.load(open(os.path.join(ROOT, "social.json"), encoding="utf-8"))
                         if os.path.exists(os.path.join(ROOT, "social.json")) else {}))(),
+    # Code-Version der App (Hash von template.html): der Client vergleicht sie mit der
+    # Version im Live-Push und laedt sich EINMAL selbst neu, wenn er veraltet laeuft —
+    # iOS-Home-Screen-Apps behalten ihre Seite sonst tagelang (Vorfall 2026-07-29)
+    "appBuild": __import__("hashlib").md5(
+        open(os.path.join(ROOT, "template.html"), "rb").read()).hexdigest()[:10],
 }
 
 DATA_JSON = json.dumps(data, ensure_ascii=True)
