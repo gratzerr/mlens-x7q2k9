@@ -70,6 +70,7 @@ if pp:
                                "finviz": "https://finviz.com/quote.ashx?t=" + tk}}
             h["shares"] = x.get("shares"); h["price"] = x.get("price")
             h["value"] = round(x.get("valueUsd") or x.get("value") or 0)
+            if x.get("dayRet") is not None: h["dayChange"] = x["dayRet"]   # Engine-Tageswert
             if x.get("unrealRet") is not None: h["unrealizedReturn"] = x["unrealRet"]
             if x.get("basisUsd"):
                 h["totalGainNet"] = round((x.get("valueUsd") or 0) - x["basisUsd"] + (x.get("realizedUsd") or 0))
@@ -101,6 +102,7 @@ if pp:
             h["occ"] = m.group(0)
             h["shares"] = x.get("shares"); h["price"] = x.get("price")
             h["value"] = round(x.get("valueUsd") or x.get("value") or 0)
+            if x.get("dayRet") is not None: h["dayChange"] = x["dayRet"]   # Engine-Tageswert
             if x.get("avgCost"): h["costPrice"] = x["avgCost"]
             if x.get("unrealRet") is not None: h["unrealizedReturn"] = x["unrealRet"]
             if x.get("basisUsd"):
@@ -369,7 +371,8 @@ for h in port["holdings"]:
     if m and m.get("price"):
         pc = m.get("prevClose") or m["price"]
         h["livePrice"] = m["price"]
-        h["dayChange"] = round((m["price"] - pc) / pc * 100, 2) if pc else 0
+        if h.get("dayChange") is None:   # Engine-Tageswert hat Vorrang (deckt sich mit der Today-Kachel)
+            h["dayChange"] = round((m["price"] - pc) / pc * 100, 2) if pc else 0
         h["hi52"] = m.get("hi52"); h["lo52"] = m.get("lo52")
         h["spark"] = m.get("spark", [])
         if h.get("hi52") and h.get("lo52") and h["hi52"] > h["lo52"]:

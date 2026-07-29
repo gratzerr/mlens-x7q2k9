@@ -1591,7 +1591,7 @@ async function refreshPrices(){
     any=true; const h=secs[idx], y=r.value;
     h.livePrice=+y.price.toFixed(y.price<1?4:2);
     const pc=y.prevClose||y.price;
-    h.dayChange = pc? +(((y.price-pc)/pc)*100).toFixed(2):0;
+    if(h.dayChange==null) h.dayChange = pc? +(((y.price-pc)/pc)*100).toFixed(2):0;   // Engine-Tageswert hat Vorrang
     if(y.hi52) h.hi52=y.hi52; if(y.lo52) h.lo52=y.lo52;
     if(h.hi52&&h.lo52&&h.hi52>h.lo52) h.pos52=+(((y.price-h.lo52)/(h.hi52-h.lo52))*100).toFixed(1);
     if(y.spark&&y.spark.length>1) h.spark=y.spark;

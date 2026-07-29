@@ -573,6 +573,18 @@ if flo*fhi<0:
         else: hi,fhi=mid,fm
     izf=(lo+hi)/2*100
 
+def _day_ret(i,px_now):
+    """Kurs heute vs. letztem Schlusskurs DAVOR, in Prozent (None wenn unbekannt)."""
+    try:
+        ds,vs=PRICES[i]
+        prev=None
+        for d,v in zip(reversed(ds),reversed(vs)):
+            if d<END and v>0: prev=v/1e8; break
+        if not prev or not px_now: return None
+        return round((px_now/prev-1)*100,2)
+    except Exception:
+        return None
+
 # ---------------- cash + holdings ----------------
 cash_by_acc=[]
 net_cash_eur=0.0
@@ -627,6 +639,10 @@ for si,a in posagg.items():
         "avgCost":round(basis_usd/a["net"],4) if (s["ccy"]=="USD" and a["net"]) else round(avg,4),
         "unrealRet":(round((to_usd(val,s["ccy"],END)/basis_usd-1)*100,1) if basis_usd
                      else (round((px-avg)/avg*100,1) if avg else 0)),
+        # Tagesveraenderung AUS DER ENGINE (Kurs heute vs. letzter Schlusskurs davor):
+        # die Yahoo-Variante im Client lief auf eigenem Takt und widersprach dem
+        # Gesamt-Tageswert der Kachel (Vorfall 2026-07-29)
+        "dayRet":_day_ret(si,px),
         "priceDate":pdate})
 holdings.sort(key=lambda h:-h["valueEur"])
 
