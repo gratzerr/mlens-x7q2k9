@@ -270,6 +270,8 @@ def us_eff_date():
     while d.weekday()>=5: d-=datetime.timedelta(days=1)
     return d.isoformat()
 
+PREV={}   # si -> Vortagesschluss desselben Kursanbieters wie der Live-Kurs
+
 def live_overlay():
     net=defaultdict(float)
     for t in txs.values():
@@ -288,6 +290,7 @@ def live_overlay():
     # Letzte GUTE Optionskurse: die Optionsketten-Abfrage ist wackelig (Rate-Limits),
     # und ohne Cache fiel der Kurs dann auf den PP-Datei-Wert = Kaufpreis zurueck
     # (ABVX-Call sprang staendig zwischen 27.85 und 30.90, 2026-07-27)
+    PREV.clear()   # Vortagesschluss AUS DERSELBEN Quelle wie der Live-Kurs
     OQ_PATH=os.path.join(ROOT,"opt_quotes.json")
     try: oq=json.load(open(OQ_PATH))
     except Exception: oq={}
@@ -322,7 +325,13 @@ def live_overlay():
                         pass
                     time.sleep(1.5)
                 if px>0:
-                    oq[tk]={"d":eff,"px":px}; oq_dirty=True
+                    c0=oq.get(tk)
+                    if c0 and c0.get("d") and c0["d"]<eff and float(c0.get("px") or 0)>0:
+                        PREV[si]=float(c0["px"])           # Stand von gestern = Vortagesschluss
+                    elif c0 and c0.get("prev"):
+                        PREV[si]=float(c0["prev"])
+                    oq[tk]={"d":eff,"px":px,
+                            "prev":PREV.get(si) or (c0 or {}).get("prev")}; oq_dirty=True
                 else:
                     c=oq.get(tk)          # Abruf gescheitert: letzten GUTEN Kurs halten,
                     if not c: continue    # niemals auf den PP-Kaufpreis zurueckfallen
@@ -331,6 +340,8 @@ def live_overlay():
             else:
                 h2=yf.Ticker(tk).history(period="10d")["Close"]
                 pairs=[(idx.strftime("%Y-%m-%d"), float(px)) for idx,px in h2.items()]
+                pv=[p for d,p in sorted(pairs) if d<eff and p>0]
+                if pv: PREV[si]=pv[-1]
         except Exception:
             continue
         if not pairs: continue
@@ -574,8 +585,10 @@ if flo*fhi<0:
     izf=(lo+hi)/2*100
 
 def _day_ret(i,px_now):
-    """Kurs heute vs. letztem Schlusskurs DAVOR, in Prozent (None wenn unbekannt)."""
+    """Kurs heute vs. Vortagesschluss, in Prozent (None wenn unbekannt)."""
     try:
+        p=PREV.get(i)
+        if p and px_now: return round((px_now/p-1)*100,2)
         ds,vs=PRICES[i]
         prev=None
         for d,v in zip(reversed(ds),reversed(vs)):
