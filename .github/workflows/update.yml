@@ -39,10 +39,10 @@ jobs:
         working-directory: pipeline
         run: |
           JOB_T0=$(date +%s)
-          for i in $(seq 1 22); do
+          for i in $(seq 1 11); do
             # Zeitbremse: Commit-Step MUSS vor dem 27-Min-Timeout laufen (Universe-Sweep
             # verlaengert Zyklen) — sonst enden Jobs als "cancelled" + Fehler-Mails
-            [ $(( $(date +%s) - JOB_T0 )) -gt 1260 ] && break
+            [ $(( $(date +%s) - JOB_T0 )) -gt 600 ] && break
             t0=$(date +%s)
             # pick up template/script pushes mid-job (otherwise a running job keeps
             # building with its old checkout for up to 22 minutes)
@@ -62,7 +62,7 @@ jobs:
             cp -f rs_prefetch.json ../rs_prefetch.json 2>/dev/null || true
             el=$(( $(date +%s) - t0 )); [ $el -lt 60 ] && sleep $((60 - el))
           done
-      - name: commit & push (einmal pro Job — schont GitHub-Pages-Limits)
+      - name: commit & push (einmal pro Job ~11 min — Pages-Limit sind ~10 Builds/h)
         if: always()   # auch bei Timeout committen — sonst gehen Zaehler (sa_budget) und Daten verloren
         run: |
           git config user.name "cockpit-bot"
