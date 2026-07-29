@@ -1,6 +1,6 @@
 {
- "fileDate": "2026-07-29 23:18",
- "generated": "2026-07-29 23:28",
+ "fileDate": "2026-07-29 23:30",
+ "generated": "2026-07-29 23:40",
  "engine": "pp-exact (verified vs PP app 2026-07-11)",
  "totalSecuritiesEur": 2028276,
  "cashEur": -189946.54,
@@ -26761,9 +26761,9 @@
   },
   {
    "d": "2026-07-28",
-   "v": 2122540,
-   "e": 1856991,
-   "r": 3.741289,
+   "v": 2119007,
+   "e": 1853900,
+   "r": 3.733398,
    "c": 739179,
    "k": 667272,
    "q": 1024226,
@@ -62693,8 +62693,8 @@
    "avgCost": 0.3173,
    "unrealRet": -6.1,
    "dayRet": -1.61,
-   "prevClose": 0.31,
-   "priceDate": "2026-07-29"
+   "prevClose": null,
+   "priceDate": "2026-07-28"
   },
   {
    "account": "ALL",
