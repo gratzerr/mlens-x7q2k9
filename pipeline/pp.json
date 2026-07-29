@@ -62691,8 +62691,8 @@
    "realizedUsd": 0,
    "avgCost": 2.0935,
    "unrealRet": -3.5,
-   "dayRet": -1.94,
-   "prevClose": 2.06,
+   "dayRet": 0.5,
+   "prevClose": 2.01,
    "priceDate": "2026-07-29"
   },
   {
@@ -62736,8 +62736,8 @@
    "realizedUsd": 0,
    "avgCost": 5.6582,
    "unrealRet": 7.0,
-   "dayRet": -7.27,
-   "prevClose": 6.53,
+   "dayRet": -10.16,
+   "prevClose": 6.74,
    "priceDate": "2026-07-29"
   },
   {
