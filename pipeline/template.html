@@ -1618,7 +1618,7 @@ async function refreshPrices(){
 }
 /* persist the enriched on-screen state (incl. livePrice/dayChange) — a page refresh
    boots from exactly what the user last saw, so no price ever visibly "jumps back" */
-function _saveLast(){ try{ DATA._savedAt=Date.now(); localStorage.setItem('pc-lastdata', JSON.stringify(DATA)); }catch(e){} }
+function _saveLast(){ try{ DATA._savedAt=Date.now(); DATA._savedBy=DATA.appBuild; localStorage.setItem('pc-lastdata', JSON.stringify(DATA)); }catch(e){} }
 
 /* ---- LIVE PORTFOLIO from Parqet (holdings, values, gains, IRR) ---- */
 
@@ -1967,7 +1967,13 @@ function boot(){
   try{
     const s=localStorage.getItem('pc-lastdata');
     if(s&&DATA){ const j=JSON.parse(s);
-      if(j&&j.generated&&(!DATA.generated||j.generated>DATA.generated)){
+      /* Stand einer ANDEREN App-Version verwerfen: die Parqet-Ära hat ihre falschen
+         Renditen mit frischem Zeitstempel gespeichert und damit die korrekten Zahlen
+         der neuen Seite verdraengt (alle Positionen gruen, Vorfall 2026-07-29) */
+      if(j&&j._savedBy&&DATA.appBuild&&j._savedBy!==DATA.appBuild){
+        try{ localStorage.removeItem('pc-lastdata'); }catch(e){}
+      }
+      else if(j&&j.generated&&(!DATA.generated||j.generated>DATA.generated)){
         /* Yahoo-Schmuckkurse altern schlecht: nach >10 min lieber den Engine-Kurs
            zeigen als einen alten livePrice (QURE-44.48-Vorfall 2026-07-23) */
         if(!j._savedAt||Date.now()-j._savedAt>600000)
