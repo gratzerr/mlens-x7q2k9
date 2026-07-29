@@ -656,6 +656,7 @@ for si,a in posagg.items():
         # die Yahoo-Variante im Client lief auf eigenem Takt und widersprach dem
         # Gesamt-Tageswert der Kachel (Vorfall 2026-07-29)
         "dayRet":_day_ret(si,px),
+        "prevClose":round(PREV[si],4) if PREV.get(si) else None,   # nachpruefbar: gegen welchen Kurs gerechnet wird
         "priceDate":pdate})
 holdings.sort(key=lambda h:-h["valueEur"])
 
