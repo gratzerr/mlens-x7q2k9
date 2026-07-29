@@ -71,6 +71,7 @@ if pp:
             h["shares"] = x.get("shares"); h["price"] = x.get("price")
             h["value"] = round(x.get("valueUsd") or x.get("value") or 0)
             if x.get("dayRet") is not None: h["dayChange"] = x["dayRet"]   # Engine-Tageswert
+            if x.get("prevClose") is not None: h["prevClose"] = x["prevClose"]
             if x.get("unrealRet") is not None: h["unrealizedReturn"] = x["unrealRet"]
             if x.get("basisUsd"):
                 h["totalGainNet"] = round((x.get("valueUsd") or 0) - x["basisUsd"] + (x.get("realizedUsd") or 0))
@@ -103,6 +104,7 @@ if pp:
             h["shares"] = x.get("shares"); h["price"] = x.get("price")
             h["value"] = round(x.get("valueUsd") or x.get("value") or 0)
             if x.get("dayRet") is not None: h["dayChange"] = x["dayRet"]   # Engine-Tageswert
+            if x.get("prevClose") is not None: h["prevClose"] = x["prevClose"]
             if x.get("avgCost"): h["costPrice"] = x["avgCost"]
             if x.get("unrealRet") is not None: h["unrealizedReturn"] = x["unrealRet"]
             if x.get("basisUsd"):
