@@ -2,18 +2,18 @@
   "ticker": "QURE",
   "news": [
     {
+      "date": "2026-07-31",
+      "headline": "Wells Fargo Lifts uniQure Target to $75 as Wall Street's Post-Earnings Price-Target Wave Continues",
+      "source": "Defense World",
+      "url": "https://www.defenseworld.net/2026/07/31/uniqure-nasdaqqure-price-target-raised-to-75-00-at-wells-fargo-company.html",
+      "summary": "Wells Fargo raised its uniQure price target to $75 from $60 while maintaining an Overweight rating, joining a broader wave of post-Q2-earnings upgrades that also saw Chardan Capital lift its target to $76 and Cantor Fitzgerald to $80. The moves follow Wolfe Research's July 29 upgrade to Outperform and add to a string of target hikes (Leerink to $70, Mizuho to $68, Goldman Sachs to $46) as analysts grow more confident in AMT-130's regulatory and commercial prospects."
+    },
+    {
       "date": "2026-07-29",
       "headline": "uniQure Reports Q2 2026 Financial Results: AMT-130 BLA on Track, $259M Offering Extends Cash Runway Into 2030",
       "source": "GlobeNewswire",
       "url": "https://www.globenewswire.com/news-release/2026/07/29/3335112/0/en/uniqure-announces-second-quarter-2026-financial-results-and-provides-company-update.html",
-      "summary": "uniQure posted Q2 2026 revenue of $5.8 million (up from $5.3 million a year earlier) and a wider-than-expected net loss of $81.1 million, or $1.22 per share, versus consensus of roughly $0.82. The company ended the quarter with $810.3 million in cash after its June offering and confirmed both the US BLA and UK MHRA marketing authorization application for AMT-130 in Huntington's disease remain on track for submission in Q3 2026, with runway now extending into 2030."
-    },
-    {
-      "date": "2026-07-29",
-      "headline": "Wolfe Research Upgrades uniQure to Outperform, $65 Price Target, as Other Banks Also Lift Targets",
-      "source": "Investing.com",
-      "url": "https://www.investing.com/news/stock-market-news/uniqure-stock-upgraded-by-wolfe-research-on-huntingtons-therapy-outlook-93CH-4761800",
-      "summary": "Wolfe Research raised its rating on uniQure from Peer Perform to Outperform with a $65 price target, modeling roughly a 70% probability of success for AMT-130 and about $2 billion in peak US sales; the firm argued the market has priced in under 50% approval odds. The same day, Leerink Partners raised its target to $70, Mizuho to $68, and Goldman Sachs to $46, coinciding with uniQure's Q2 earnings release."
+      "summary": "uniQure posted Q2 2026 revenue of $5.8 million (up from $5.3 million a year earlier) and a net loss of $81.1 million, or $1.22 per share. The company ended the quarter with $810.3 million in cash after its June offering and confirmed both the US BLA and UK MHRA marketing authorization application for AMT-130 in Huntington's disease remain on track for submission in Q3 2026, with runway now extending into 2030."
     },
     {
       "date": "2026-07-29",
@@ -82,5 +82,5 @@
       "confirmed": true
     }
   ],
-  "pulse": "uniQure has been riding a strong rally since the FDA reversed course on June 17, 2026 and agreed that 3-year AMT-130 data can support an accelerated-approval BLA for Huntington's disease, sending shares up roughly 78% in a single day. The company closed a $259 million offering in June, reported Q2 2026 results on July 29 (revenue $5.8M, cash of $810.3M runway into 2030) confirming both the US BLA and UK MHRA filings remain on track for Q3 2026, with four-year data due in September 2026 and an FDA advisory committee meeting now considered likely; the print triggered a wave of price-target increases including Wolfe Research's upgrade to Outperform ($65 target). Early, mixed-but-promising AMT-260 epilepsy data adds a second pipeline catalyst, though the stock (~$39-40) still trades well below several analysts' targets, reflecting lingering uncertainty over the AdCom and confirmatory-study design ahead of the actual filing."
+  "pulse": "uniQure remains in rally mode heading into the end of July 2026, building on the roughly 78% single-day surge triggered by the FDA's June 17 reversal that cleared 3-year AMT-130 data to support an accelerated-approval BLA for Huntington's disease. Q2 2026 results on July 29 (revenue $5.8M, cash of $810.3M after the June $259M offering, runway into 2030) confirmed both the US BLA and UK MHRA filings remain on track for Q3 2026, with four-year data due in September 2026 and an FDA advisory committee meeting now considered likely; the print triggered a fresh wave of Wall Street price-target hikes, with Wells Fargo, Chardan Capital and Cantor Fitzgerald all raising targets into the $75-80 range on July 30-31 alongside Wolfe Research's upgrade to Outperform. Early, mixed-but-promising AMT-260 epilepsy data adds a second pipeline catalyst, though the stock still trades meaningfully below most analysts' targets, reflecting lingering uncertainty over the AdCom and confirmatory-study design ahead of the actual BLA filing."
 }
