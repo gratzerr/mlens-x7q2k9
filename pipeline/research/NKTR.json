@@ -30,18 +30,18 @@
       "summary": "Nektar's compensation committee granted non-qualified stock options for 36,000 shares to 23 newly hired employees at an exercise price of $64.84 (the July 20 closing price), reflecting continued headcount build-out as the company scales its Phase 3 program."
     },
     {
-      "date": "2026-07-09",
-      "headline": "NKTR Stock Clocks Best Day In Over 2 Months As Investors Await Upcoming Clinical Data In Eczema",
-      "source": "Stocktwits",
-      "url": "https://stocktwits.com/news-articles/markets/equity/nktr-stock-clocks-best-day-in-over-2-months-as-investors-await-upcoming-clinical-data-in-eczema/cZm97YVR7jf",
-      "summary": "Nektar shares jumped roughly 10% in their best single-day move in over two months, driven by investor anticipation ahead of the imminent launch of the Phase 3 ZENITH AD atopic dermatitis program for rezpegaldesleukin."
-    },
-    {
       "date": "2026-07-02",
       "headline": "Nektar Therapeutics Stock Climbs As Immunology Sentiment Improves",
       "source": "Timothy Sykes",
       "url": "https://www.timothysykes.com/news/nektar-therapeutics-nktr-news-2026_07_02/",
       "summary": "NKTR shares rose as sentiment across inflammation-and-immunology biotech names improved following AbbVie's announced $10.9 billion acquisition of Apogee Therapeutics, with Canaccord flagging Nektar as a potential read-through beneficiary given its competing rezpegaldesleukin program in atopic dermatitis."
+    },
+    {
+      "date": "2026-06-27",
+      "headline": "Nektar Therapeutics Added to Russell 2000 Index",
+      "source": "MarketScreener / FTSE Russell",
+      "url": "https://www.marketscreener.com/news/nektar-therapeutics-nasdaqcm-nktr-added-to-russell-2000-index-ce7f5fdfda8aff20",
+      "summary": "Following the annual FTSE Russell reconstitution completed June 27, 2026, Nektar was added to a broad suite of indices including the Russell 2000, 2500 and 3000 and related growth/value benchmarks, expanding its passive-fund investor base."
     }
   ],
   "catalysts": [
@@ -70,5 +70,5 @@
       "confirmed": true
     }
   ],
-  "pulse": "Nektar shares have run up strongly through July 2026, fueled by the formal start of the pivotal Phase 3 ZENITH AD program for rezpegaldesleukin on July 21 and improving sell-side sentiment, including a new Buy rating and $153 price target from Canaccord Genuity, even as Wedbush stays cautious at Neutral/$80 given Dupixent's entrenched market position. With over $1 billion in cash providing runway into 2028, the company's near-term news flow has been mostly administrative (inducement grants, conference appearances) while investors look ahead to the next data and financial catalysts. The next confirmed events are Q2 2026 earnings on August 13 and the ZENITH AD-3 trial start in September, with a Phase 3 alopecia areata trial initiation targeted for early 2027 as a further pipeline catalyst."
+  "pulse": "Nektar shares have run up strongly through July 2026, fueled by the formal start of the pivotal Phase 3 ZENITH AD program for rezpegaldesleukin on July 21 and improving sell-side sentiment, including a new Buy rating and $153 price target from Canaccord Genuity, even as Wedbush stays cautious at Neutral/$80 given Dupixent's entrenched market position. Broad Russell index inclusion in late June expanded the passive-fund shareholder base, and sector sentiment got a further boost from AbbVie's $10.9 billion Apogee Therapeutics acquisition, seen as a read-through positive for Nektar's competing atopic-dermatitis program. With over $1 billion in cash providing runway into 2028, near-term news flow has been mostly administrative (inducement grants, index inclusion) while investors look ahead to Q2 2026 earnings on August 13 and the ZENITH AD-3 trial start in September."
 }
