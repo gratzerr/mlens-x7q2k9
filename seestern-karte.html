@@ -1,0 +1,520 @@
+<title>SEE.STERN — Speisekarte erklärt</title>
+<style>
+  :root {
+    --paper: #efe4d3;
+    --card: #f6efe2;
+    --ink: #2b2320;
+    --muted: #6f6156;
+    --pink: #e12a6b;
+    --pink-deep: #c21e59;
+    --tint: #e9d9c9;
+    --tile-a: #f9e7d8;
+    --tile-b: #f3cfd9;
+    --rule: #d9c8b4;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root {
+      --paper: #211a16;
+      --card: #2b221d;
+      --ink: #f0e6d8;
+      --muted: #b3a595;
+      --pink: #ff5f95;
+      --pink-deep: #ff7ba8;
+      --tint: #342a24;
+      --tile-a: #3a2d28;
+      --tile-b: #45262f;
+      --rule: #443830;
+    }
+  }
+  :root[data-theme="dark"] {
+    --paper: #211a16; --card: #2b221d; --ink: #f0e6d8; --muted: #b3a595;
+    --pink: #ff5f95; --pink-deep: #ff7ba8; --tint: #342a24;
+    --tile-a: #3a2d28; --tile-b: #45262f; --rule: #443830;
+  }
+  :root[data-theme="light"] {
+    --paper: #efe4d3; --card: #f6efe2; --ink: #2b2320; --muted: #6f6156;
+    --pink: #e12a6b; --pink-deep: #c21e59; --tint: #e9d9c9;
+    --tile-a: #f9e7d8; --tile-b: #f3cfd9; --rule: #d9c8b4;
+  }
+
+  * { box-sizing: border-box; }
+  body {
+    margin: 0;
+    background: var(--paper);
+    color: var(--ink);
+    font-family: "Futura", "Avenir Next", "Century Gothic", "URW Gothic", "Poppins", system-ui, sans-serif;
+    line-height: 1.55;
+    -webkit-font-smoothing: antialiased;
+  }
+  .wrap { max-width: 720px; margin: 0 auto; padding: 2.5rem 1.25rem 4rem; }
+
+  header.masthead { text-align: center; margin-bottom: 2.5rem; }
+  .wordmark {
+    color: var(--pink);
+    font-weight: 800;
+    letter-spacing: .35em;
+    font-size: 1.05rem;
+    text-transform: uppercase;
+  }
+  .wordmark small {
+    display: block;
+    font-weight: 500;
+    letter-spacing: .28em;
+    font-size: .6rem;
+    color: var(--muted);
+    margin-top: .35rem;
+  }
+  h1.title {
+    color: var(--pink);
+    font-size: clamp(3rem, 12vw, 4.5rem);
+    font-weight: 800;
+    letter-spacing: .02em;
+    text-transform: uppercase;
+    margin: 1.5rem 0 .25rem;
+    line-height: 1;
+    text-wrap: balance;
+  }
+  .subtitle { color: var(--muted); font-size: .95rem; margin: 0; }
+  .hours {
+    display: inline-block;
+    margin-top: 1rem;
+    padding: .45rem 1rem;
+    border: 1px solid var(--pink);
+    color: var(--pink);
+    font-size: .78rem;
+    letter-spacing: .12em;
+    text-transform: uppercase;
+    font-weight: 600;
+  }
+
+  .wave { display: block; margin: 2.25rem auto; width: 90px; color: var(--pink); opacity: .8; }
+
+  .note {
+    background: var(--tint);
+    border-radius: 4px;
+    padding: .9rem 1.1rem;
+    font-size: .85rem;
+    color: var(--muted);
+  }
+  .note strong { color: var(--ink); }
+
+  section.menu-section { margin-top: 3rem; }
+  .section-head {
+    color: var(--pink);
+    font-weight: 800;
+    text-transform: uppercase;
+    letter-spacing: .14em;
+    font-size: 1.05rem;
+    margin: 0 0 .35rem;
+  }
+  .section-intro {
+    color: var(--pink-deep);
+    font-size: .85rem;
+    font-weight: 600;
+    margin: 0 0 1.5rem;
+    max-width: 46ch;
+  }
+  .section-what {
+    font-size: .85rem;
+    color: var(--muted);
+    margin: 0 0 1.5rem;
+    max-width: 62ch;
+  }
+
+  .dish {
+    background: var(--card);
+    border-radius: 6px;
+    padding: 1.1rem 1.1rem 1.2rem;
+    margin-bottom: 1rem;
+    display: grid;
+    grid-template-columns: 64px 1fr;
+    gap: .9rem 1rem;
+  }
+  .tile {
+    width: 64px; height: 64px;
+    border-radius: 50%;
+    background: radial-gradient(circle at 30% 25%, var(--tile-a), var(--tile-b));
+    display: flex; align-items: center; justify-content: center;
+    font-size: 1.9rem;
+    line-height: 1;
+    user-select: none;
+  }
+  .dish-body { min-width: 0; }
+  .dish-top { display: flex; justify-content: space-between; align-items: baseline; gap: 1rem; }
+  .dish-name { font-weight: 700; font-size: 1.02rem; margin: 0; }
+  .price {
+    color: var(--pink);
+    font-weight: 700;
+    white-space: nowrap;
+    font-variant-numeric: tabular-nums;
+  }
+  .ingredients { color: var(--muted); font-size: .88rem; margin: .2rem 0 0; }
+  .extra {
+    color: var(--pink-deep);
+    font-size: .78rem;
+    font-weight: 600;
+    margin-top: .35rem;
+  }
+  .explain {
+    grid-column: 1 / -1;
+    background: var(--tint);
+    border-radius: 4px;
+    padding: .75rem .9rem;
+    font-size: .86rem;
+  }
+  .explain .label {
+    display: block;
+    color: var(--pink);
+    font-size: .64rem;
+    font-weight: 700;
+    letter-spacing: .18em;
+    text-transform: uppercase;
+    margin-bottom: .25rem;
+  }
+  .explain p { margin: 0; color: var(--ink); }
+  .explain p + p { margin-top: .4rem; }
+
+  .ritual {
+    border: 2px dashed var(--pink);
+    border-radius: 8px;
+    padding: 1.4rem 1.2rem .4rem;
+    margin-top: 1.5rem;
+  }
+  .ritual .dish { background: transparent; padding-left: 0; padding-right: 0; }
+
+  .cicchetti-list { margin: .5rem 0 0; padding: 0; list-style: none; font-size: .88rem; }
+  .cicchetti-list li {
+    display: flex; justify-content: space-between; gap: 1rem;
+    padding: .3rem 0;
+    border-bottom: 1px dotted var(--rule);
+  }
+  .cicchetti-list li:last-child { border-bottom: none; }
+  .cicchetti-list .p { color: var(--pink); font-weight: 600; font-variant-numeric: tabular-nums; white-space: nowrap; }
+
+  .allergens { margin-top: 3rem; }
+  .allergen-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(190px, 1fr));
+    gap: .35rem .9rem;
+    font-size: .84rem;
+    margin-top: 1rem;
+  }
+  .allergen-grid span b { color: var(--pink); font-weight: 700; margin-right: .4rem; }
+
+  footer {
+    margin-top: 3rem;
+    text-align: center;
+    color: var(--muted);
+    font-size: .78rem;
+  }
+
+  @media (max-width: 480px) {
+    .dish { grid-template-columns: 52px 1fr; }
+    .tile { width: 52px; height: 52px; font-size: 1.55rem; }
+  }
+</style>
+
+<div class="wrap">
+  <header class="masthead">
+    <div class="wordmark">See.Stern<small>restaurant · lounge — seestern.ws</small></div>
+    <h1 class="title">Speisen</h1>
+    <p class="subtitle">Die Karte — aufbereitet &amp; erklärt</p>
+    <div class="hours">12.00 – 16.30 Uhr &nbsp;·&nbsp; 17.00 – 22.00 Uhr</div>
+  </header>
+
+  <div class="note">
+    <strong>Gedeck</strong> (ab 17:00 Uhr) € 4,50 pro Person, mittags auf Wunsch — das ist das „Couvert“:
+    Brot samt Aufstrich zum Start. Alle Preise sind Inklusivpreise.
+    Die Bildkacheln sind symbolische Illustrationen, keine Originalfotos der Gerichte.
+  </div>
+
+  <svg class="wave" viewBox="0 0 90 12" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true">
+    <path d="M2 6 Q 13 0, 24 6 T 46 6 T 68 6 T 88 6"/>
+  </svg>
+
+  <section class="menu-section">
+    <h2 class="section-head">Sunset Sharing</h2>
+    <p class="section-intro">„Wir lieben es zu teilen. Ihr auch? Bestellt euch einfach, was ihr wollt — wir stellen alles in die Mitte und bringen die Teller dazu.“</p>
+    <p class="section-what">Sharing-Konzept: Die Gerichte kommen für den ganzen Tisch, jeder nimmt sich davon. Ideal: 2–3 Gerichte pro 2 Personen zum Start.</p>
+
+    <article class="dish">
+      <div class="tile">🥩</div>
+      <div class="dish-body">
+        <div class="dish-top"><h3 class="dish-name">Waldtartare.</h3><span class="price">€ 24</span></div>
+        <p class="ingredients">100 % Rind. Waldheidelbeeren. Schnittlauchöl. Trüffelmayo. Brot.</p>
+      </div>
+      <div class="explain"><span class="label">Was ist das?</span>
+        <p>Tatar ist fein gehacktes, <em>rohes</em> Rindfleisch, kalt angemacht und gewürzt. Die „Wald“-Version kombiniert es mit süß-säuerlichen Heidelbeeren und Trüffelmayonnaise — dazu Brot zum Aufladen. Nichts für dich, wenn du rohes Fleisch meidest.</p>
+      </div>
+    </article>
+
+    <article class="dish">
+      <div class="tile">🥂</div>
+      <div class="dish-body">
+        <div class="dish-top"><h3 class="dish-name">Cicchetti — Fingerfood-Klassiker aus Venedig.</h3><span class="price">pro Stück</span></div>
+        <ul class="cicchetti-list">
+          <li><span>Oliventapenade</span><span class="p">€ 4,20</span></li>
+          <li><span>Burrata &amp; Tomate</span><span class="p">€ 4,90</span></li>
+          <li><span>Waldtartare</span><span class="p">€ 5,50</span></li>
+          <li><span>Tuna Tatare</span><span class="p">€ 5,90</span></li>
+          <li><span>Feige &amp; Frischkäse</span><span class="p">€ 4,90</span></li>
+        </ul>
+      </div>
+      <div class="explain"><span class="label">Was ist das?</span>
+        <p>Cicchetti (gesprochen „tschi-KET-ti“) sind venezianische Mini-Häppchen, die man dort in Bars zum Aperitif isst — quasi die italienische Antwort auf Tapas. <strong>Tapenade</strong> = Olivenpaste, <strong>Burrata</strong> = Mozzarella mit cremig-flüssigem Kern, <strong>Tuna Tatare</strong> = roher, fein geschnittener Thunfisch. Perfekt, um sich einmal quer durchzuprobieren.</p>
+      </div>
+    </article>
+
+    <article class="dish">
+      <div class="tile">🌿</div>
+      <div class="dish-body">
+        <div class="dish-top"><h3 class="dish-name">Feigen Carpaccio.</h3><span class="price">€ 18</span></div>
+        <p class="ingredients">Frischkäse. Rucola. Pistazie. Olivenöl.</p>
+      </div>
+      <div class="explain"><span class="label">Was ist das?</span>
+        <p>Carpaccio heißt eigentlich nur „hauchdünn aufgeschnitten“ — klassisch mit Rindfleisch, hier vegetarisch mit süßen Feigenscheiben. Süß-salzige Kombination mit cremigem Frischkäse und Crunch von der Pistazie.</p>
+      </div>
+    </article>
+
+    <article class="dish">
+      <div class="tile">🌮</div>
+      <div class="dish-body">
+        <div class="dish-top"><h3 class="dish-name">Seestern Tacos.</h3><span class="price">€ 24</span></div>
+        <p class="ingredients">Tuna Tatar. Fermentierte Gurken. Limetten-Trüffelmajo. Wildkräutersalat. Sellerie Crunch.</p>
+      </div>
+      <div class="explain"><span class="label">Was ist das?</span>
+        <p>Kleine knusprige Tacos, gefüllt mit rohem Thunfisch-Tatar. <strong>Fermentierte Gurken</strong> sind milchsauer eingelegt — angenehm säuerlich, ähnlich wie Salzgurken. Frisch, säuerlich, knusprig: der Instagram-Teller der Karte.</p>
+      </div>
+    </article>
+
+    <article class="dish">
+      <div class="tile">🍟</div>
+      <div class="dish-body">
+        <div class="dish-top"><h3 class="dish-name">Trüffelpommes.</h3><span class="price">€ 15</span></div>
+        <p class="ingredients">Pommes Frites. Sommertrüffel. Parmesan.</p>
+        <p class="extra">Empfehlung dazu: Limetten-Trüffel-Majo + € 3,50</p>
+      </div>
+      <div class="explain"><span class="label">Was ist das?</span>
+        <p>Pommes mit frisch gehobeltem <strong>Sommertrüffel</strong> (milder und dezenter als der teure schwarze Wintertrüffel) und Parmesan. Sicherer Sharing-Kandidat für den ganzen Tisch.</p>
+      </div>
+    </article>
+  </section>
+
+  <section class="menu-section">
+    <h2 class="section-head">Knackiges vom Ufergarten</h2>
+    <p class="section-what">Die Salate — auch hier gilt: „Sharing is Caring“.</p>
+
+    <article class="dish">
+      <div class="tile">🥗</div>
+      <div class="dish-body">
+        <div class="dish-top"><h3 class="dish-name">See.Stern Salat.</h3><span class="price">€ 14</span></div>
+        <p class="ingredients">Blattsalatvariation. Feige. Pistazie. Melone.</p>
+        <p class="extra">Jede weitere Portion + € 10</p>
+      </div>
+      <div class="explain"><span class="label">Was ist das?</span>
+        <p>Der Haus-Salat: gemischte Blattsalate mit süßen Akzenten von Feige und Melone. Leicht und sommerlich — gut als Ergänzung zum Sharing.</p>
+      </div>
+    </article>
+
+    <article class="dish">
+      <div class="tile">🍉</div>
+      <div class="dish-body">
+        <div class="dish-top"><h3 class="dish-name">Pink &amp; White.</h3><span class="price">€ 17</span></div>
+        <p class="ingredients">Wassermelone. Fetakäse. Minzpesto. Blattsalat. Pinienkerne.</p>
+      </div>
+      <div class="explain"><span class="label">Was ist das?</span>
+        <p>Der Sommerklassiker süß-salzig: kalte Wassermelone („Pink“) trifft salzigen Feta („White“), dazu frische Minze. Sehr erfrischend an heißen Tagen.</p>
+      </div>
+    </article>
+  </section>
+
+  <section class="menu-section">
+    <h2 class="section-head">Genuss für Körper und Seele</h2>
+    <p class="section-what">Die Hauptgerichte für eine Person.</p>
+
+    <article class="dish">
+      <div class="tile">🥩</div>
+      <div class="dish-body">
+        <div class="dish-top"><h3 class="dish-name">Tagliata vom Dry Aged Rinderrücken.</h3><span class="price">€ 39</span></div>
+        <p class="ingredients">Kartoffeln. Rucola. Parmesan.</p>
+      </div>
+      <div class="explain"><span class="label">Was ist das?</span>
+        <p><strong>Tagliata</strong> (italienisch „geschnitten“) ist ein kurz gebratenes Steak, das bereits in Tranchen aufgeschnitten serviert wird — innen rosa. <strong>Dry Aged</strong> heißt: Das Fleisch reifte mehrere Wochen trocken am Knochen, wird dadurch zarter und schmeckt intensiver, leicht nussig.</p>
+      </div>
+    </article>
+
+    <article class="dish">
+      <div class="tile">🍤</div>
+      <div class="dish-body">
+        <div class="dish-top"><h3 class="dish-name">Gegrillte Garnelen.</h3><span class="price">€ 32</span></div>
+        <p class="ingredients">Ingwer-Miso-Butter. Püree vom Karfiol. Frittierte Salbeiblätter. Chilicrunch.</p>
+      </div>
+      <div class="explain"><span class="label">Was ist das?</span>
+        <p><strong>Miso</strong> ist eine japanische, fermentierte Sojapaste — herzhaft-würzig (umami), hier in Butter mit Ingwer. <strong>Karfiol</strong> ist das österreichische Wort für Blumenkohl. <strong>Chilicrunch</strong> = knuspriges Chili-Öl-Topping, leicht scharf.</p>
+      </div>
+    </article>
+
+    <article class="dish">
+      <div class="tile">🐟</div>
+      <div class="dish-body">
+        <div class="dish-top"><h3 class="dish-name">Filet vom Branzino.</h3><span class="price">€ 34</span></div>
+        <p class="ingredients">Weißweinrisotto. Confierte Tomaten. Kapernbutter. Frittierte Kapern. Stroh. Limette.</p>
+      </div>
+      <div class="explain"><span class="label">Was ist das?</span>
+        <p><strong>Branzino</strong> ist der italienische Name für Wolfsbarsch — ein feiner, weißer Meeresfisch mit mildem Geschmack. <strong>Confiert</strong> = langsam bei niedriger Temperatur in Öl gegart (macht die Tomaten süß und weich). „Stroh“ sind hauchdünne, frittierte Kartoffelfäden als knusprige Garnitur.</p>
+      </div>
+    </article>
+
+    <article class="dish">
+      <div class="tile">🐚</div>
+      <div class="dish-body">
+        <div class="dish-top"><h3 class="dish-name">Miesmuscheln.</h3><span class="price">€ 22 / € 28</span></div>
+        <p class="ingredients">Weissweinsauce. Weissbrot. — Vorspeise 250 g € 22 · Hauptspeise 500 g € 28</p>
+        <p class="extra">Solange der Vorrat reicht.</p>
+      </div>
+      <div class="explain"><span class="label">Was ist das?</span>
+        <p>Der Klassiker „Moules“: Muscheln, im Weißweinsud gedämpft, serviert im Topf — das Weißbrot ist zum Eintunken in den Sud gedacht. Faustregel: Muscheln, die sich beim Garen nicht geöffnet haben, liegen lassen.</p>
+      </div>
+    </article>
+  </section>
+
+  <section class="menu-section">
+    <h2 class="section-head">See.Stern.Al Dente</h2>
+    <p class="section-intro">Pasta Sharing — Pasta tischweise serviert (auch als einzelne Portion).</p>
+    <p class="section-what">„Al dente“ = bissfest gekocht. Beim Sharing kommt eine große Schüssel für den ganzen Tisch; der Preis gilt pro Portion, jede weitere Portion ist günstiger.</p>
+
+    <article class="dish">
+      <div class="tile">🍝</div>
+      <div class="dish-body">
+        <div class="dish-top"><h3 class="dish-name">Trüffelpasta.</h3><span class="price">€ 32 / Port.</span></div>
+        <p class="ingredients">Sommertrüffel. Burro ai Funghi.</p>
+        <p class="extra">Jede weitere Portion + € 26</p>
+      </div>
+      <div class="explain"><span class="label">Was ist das?</span>
+        <p><strong>Burro ai Funghi</strong> = italienische Pilzbutter, die als cremige Sauce dient. Darüber frisch gehobelter Sommertrüffel. Das reichhaltigste der drei Pasta-Gerichte.</p>
+      </div>
+    </article>
+
+    <article class="dish">
+      <div class="tile">🐙</div>
+      <div class="dish-body">
+        <div class="dish-top"><h3 class="dish-name">Pasta Pulpo.</h3><span class="price">€ 29 / Port.</span></div>
+        <p class="ingredients">Tomate. Octopus. Olivenöl. Datterini. Pernod. Limette.</p>
+        <p class="extra">Jede weitere Portion + € 23</p>
+      </div>
+      <div class="explain"><span class="label">Was ist das?</span>
+        <p><strong>Pulpo</strong> = Oktopus, zart geschmort. <strong>Datterini</strong> sind kleine, besonders süße Datteltomaten. Der Schuss <strong>Pernod</strong> (französischer Anis-Aperitif) gibt der Sauce eine feine mediterrane Anisnote — der Alkohol verkocht dabei weitgehend.</p>
+      </div>
+    </article>
+
+    <article class="dish">
+      <div class="tile">🍅</div>
+      <div class="dish-body">
+        <div class="dish-top"><h3 class="dish-name">Pasta ai Trulli.</h3><span class="price">€ 27 / Port.</span></div>
+        <p class="ingredients">Tomate. Basilikumpesto. Noilly Prat. Burrata. Pinienkerne.</p>
+        <p class="extra">Jede weitere Portion + € 21</p>
+      </div>
+      <div class="explain"><span class="label">Was ist das?</span>
+        <p>Benannt nach den <strong>Trulli</strong>, den weißen Rundhäusern Apuliens. <strong>Noilly Prat</strong> ist ein trockener französischer Wermut, der der Tomatensauce Würze und Tiefe gibt. Obendrauf: cremige Burrata und geröstete Pinienkerne — das vegetarische Sommer-Gericht.</p>
+      </div>
+    </article>
+  </section>
+
+  <section class="menu-section">
+    <div class="ritual">
+      <h2 class="section-head">Tischrituale „Von Kopf bis Kruste“</h2>
+      <p class="section-intro">Der große Auftritt: Wir filetieren und tranchieren am Tisch. Es wird geteilt und nicht getafelt.</p>
+      <p class="section-what">Show-Gerichte für mindestens 2 Personen — der Service zerlegt Fisch bzw. Steak direkt vor euch am Tisch. Vorbestellen bzw. Wartezeit einplanen lohnt sich.</p>
+
+      <article class="dish">
+        <div class="tile">🔥</div>
+        <div class="dish-body">
+          <div class="dish-top"><h3 class="dish-name">Fisch im Ganzen. <small>ab 2 Personen</small></h3><span class="price">€ 130</span></div>
+          <p class="ingredients">Aus dem Rohr. Gemüse. Kartoffeln. Kapernbutter. — ca. 1,0 kg</p>
+        </div>
+        <div class="explain"><span class="label">Was ist das?</span>
+          <p>Ein ganzer Fisch (ca. 1 kg), „aus dem Rohr“ = im Ofen gebacken, und am Tisch filetiert. Im Ganzen gegart bleibt der Fisch besonders saftig — die Kapernbutter kommt als Sauce darüber.</p>
+        </div>
+      </article>
+
+      <article class="dish">
+        <div class="tile">🔪</div>
+        <div class="dish-body">
+          <div class="dish-top"><h3 class="dish-name">Bisteccha Fiorentina. <small>ab 2 Personen</small></h3><span class="price">€ 138</span></div>
+          <p class="ingredients">Gemüse. Kartoffeln. Portweinjus. — ca. 1,2 kg</p>
+        </div>
+        <div class="explain"><span class="label">Was ist das?</span>
+          <p>Die <strong>Bistecca alla Fiorentina</strong> ist das legendäre toskanische T-Bone-Steak: sehr dick geschnitten (hier ca. 1,2 kg), außen kräftig gegrillt, innen klassisch rosa bis rare serviert und am Tisch tranchiert. <strong>Portweinjus</strong> = kräftige, mit Portwein reduzierte Bratensauce.</p>
+        </div>
+      </article>
+    </div>
+  </section>
+
+  <section class="menu-section">
+    <h2 class="section-head">Süsse Stern.Stunden</h2>
+    <p class="section-what">Die Desserts.</p>
+
+    <article class="dish">
+      <div class="tile">🍫</div>
+      <div class="dish-body">
+        <div class="dish-top"><h3 class="dish-name">Schokobrownie.</h3><span class="price">€ 12</span></div>
+        <p class="ingredients">Beeren. Mangoeis. Schokoerde.</p>
+      </div>
+      <div class="explain"><span class="label">Was ist das?</span>
+        <p>Warmer, saftiger Schokoladenkuchen mit fruchtigem Mangoeis als Kontrast. <strong>Schokoerde</strong> = krümelig gebackene Schokostreusel, die wie „Erde“ auf dem Teller angerichtet werden.</p>
+      </div>
+    </article>
+
+    <article class="dish">
+      <div class="tile">🍰</div>
+      <div class="dish-body">
+        <div class="dish-top"><h3 class="dish-name">Pistazien.Tiramisu.</h3><span class="price">€ 13</span></div>
+        <p class="ingredients">Mascarpone. Pistazie. Espressobiskotten. — „Löffel für Löffel ins Glück.“</p>
+      </div>
+      <div class="explain"><span class="label">Was ist das?</span>
+        <p>Tiramisu-Variante mit Pistaziencreme: <strong>Mascarpone</strong> (italienischer Doppelrahm-Frischkäse) geschichtet mit in Espresso getränkten Biskotten (Löffelbiskuits). Aktuell das wohl beliebteste Dessert-Upgrade Italiens.</p>
+      </div>
+    </article>
+
+    <article class="dish">
+      <div class="tile">🍮</div>
+      <div class="dish-body">
+        <div class="dish-top"><h3 class="dish-name">Topfenknödel.</h3><span class="price">€ 14</span></div>
+        <p class="ingredients">Butterbrösel. Auf saisonalem Röster.</p>
+      </div>
+      <div class="explain"><span class="label">Was ist das?</span>
+        <p>Österreichischer Klassiker: <strong>Topfen</strong> = Quark. Flaumige Quarkknödel, in gerösteten Butterbröseln gewälzt. <strong>Röster</strong> = eingekochtes Fruchtkompott (je nach Saison z. B. Marille oder Zwetschke) als fruchtige Basis.</p>
+      </div>
+    </article>
+  </section>
+
+  <svg class="wave" viewBox="0 0 90 12" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true">
+    <path d="M2 6 Q 13 0, 24 6 T 46 6 T 68 6 T 88 6"/>
+  </svg>
+
+  <section class="allergens">
+    <h2 class="section-head">Allergen-Kennzeichnung</h2>
+    <p class="section-what">Auf der Original-Karte sind die Gerichte mit kleinen Buchstaben markiert. Das bedeuten sie:</p>
+    <div class="allergen-grid">
+      <span><b>A</b> Glutenhaltiges Getreide</span>
+      <span><b>B</b> Krebstiere</span>
+      <span><b>C</b> Eier</span>
+      <span><b>D</b> Fisch</span>
+      <span><b>E</b> Erdnüsse</span>
+      <span><b>F</b> Sojabohnen</span>
+      <span><b>G</b> Milch oder Laktose</span>
+      <span><b>H</b> Schalenfrüchte (Nüsse)</span>
+      <span><b>L</b> Sellerie</span>
+      <span><b>M</b> Senf</span>
+      <span><b>N</b> Sesam</span>
+      <span><b>O</b> Sulfite (z. B. in Wein)</span>
+      <span><b>P</b> Lupinen</span>
+      <span><b>R</b> Weichtiere (Muscheln &amp; Co.)</span>
+    </div>
+    <p class="section-what" style="margin-top:1rem;">Trotz sorgfältiger Herstellung können Spuren weiterer Allergene nicht ausgeschlossen werden. Der Service informiert gerne über Zutaten, Allergene und Zubereitung.</p>
+  </section>
+
+  <footer>
+    Abgetippt von der Karte auf seestern.ws (Stand Juli 2026) · Alle Angaben ohne Gewähr · Inklusivpreise
+  </footer>
+</div>
