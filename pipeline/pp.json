@@ -1,8 +1,8 @@
 {
- "fileDate": "2026-07-31 04:09",
- "generated": "2026-07-31 04:18",
+ "fileDate": "2026-07-31 04:19",
+ "generated": "2026-07-31 04:29",
  "engine": "pp-exact (verified vs PP app 2026-07-11)",
- "totalSecuritiesEur": 2097137,
+ "totalSecuritiesEur": 2101074,
  "cashEur": -189946.54,
  "cashByAccount": [
   {
@@ -30,22 +30,22 @@
    "eur": 137.81
   }
  ],
- "totalEur": 1907190,
- "ttwrorSince2022": 386.95,
- "ttwrorYtd": 93.35,
- "ttwrorAnnualized": 41.31,
- "izf": 67.6,
+ "totalEur": 1911127,
+ "ttwrorSince2022": 387.95,
+ "ttwrorYtd": 93.75,
+ "ttwrorAnnualized": 41.37,
+ "izf": 67.74,
  "yearlyReturns": {
   "2022": 3.3,
   "2023": 11.8,
   "2024": 45.2,
   "2025": 50.2,
-  "2026": 93.3
+  "2026": 93.7
  },
  "realizedEur": 851813,
- "unrealizedEur": 384392,
+ "unrealizedEur": 388329,
  "realizedUsd": 1024226,
- "unrealizedUsd": 422194,
+ "unrealizedUsd": 426694,
  "netContribEur": 667272,
  "netContribUsd": 739179,
  "earningsEur": 13297.85,
@@ -26793,9 +26793,9 @@
   },
   {
    "d": "2026-07-30",
-   "v": 2179919,
-   "e": 1907190,
-   "r": 3.86946,
+   "v": 2184419,
+   "e": 1911127,
+   "r": 3.879512,
    "c": 739179,
    "k": 667272,
    "q": 1024226,
@@ -62590,15 +62590,15 @@
    "name": "RAPID MICRO BIOSYSTEMS INC-A"
   }
  ],
- "ppReferenceTtwror": 386.95,
+ "ppReferenceTtwror": 387.95,
  "ppReferenceDate": "2026-07-31",
- "ttwrorApproxSince2022": 386.95,
+ "ttwrorApproxSince2022": 387.95,
  "yearlyReturnsApprox": {
   "2022": 3.3,
   "2023": 11.8,
   "2024": 45.2,
   "2025": 50.2,
-  "2026": 93.3
+  "2026": 93.7
  },
  "holdings": [
   {
@@ -62810,15 +62810,15 @@
    "isin": "",
    "ccy": "USD",
    "shares": 5000.0,
-   "price": 24.1,
-   "value": 120500.0,
-   "valueEur": 105424,
-   "valueUsd": 120500,
+   "price": 25.0,
+   "value": 125000.0,
+   "valueEur": 109361,
+   "valueUsd": 125000,
    "basisUsd": 147461,
    "realizedUsd": 0,
    "avgCost": 29.4921,
-   "unrealRet": -18.3,
-   "dayRet": 2.55,
+   "unrealRet": -15.2,
+   "dayRet": 6.38,
    "prevClose": 23.5,
    "priceDate": "2026-07-30"
   },
