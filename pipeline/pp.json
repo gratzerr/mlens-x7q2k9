@@ -62707,28 +62707,6 @@
   },
   {
    "account": "ALL",
-   "ticker": "NRXS",
-   "name": "NEURAXIS INC",
-   "byPort": {
-    "IBKR": 35000.0
-   },
-   "isin": "US64134X2018",
-   "ccy": "USD",
-   "shares": 35000.0,
-   "price": 6.31500005,
-   "value": 221025.0,
-   "valueEur": 193373,
-   "valueUsd": 221025,
-   "basisUsd": 198036,
-   "realizedUsd": 0,
-   "avgCost": 5.6582,
-   "unrealRet": 11.6,
-   "dayRet": 0.56,
-   "prevClose": 6.28,
-   "priceDate": "2026-07-31"
-  },
-  {
-   "account": "ALL",
    "ticker": "RPID",
    "name": "RAPID MICRO BIOSYSTEMS INC-A",
    "byPort": {
@@ -62747,6 +62725,28 @@
    "unrealRet": 0.6,
    "dayRet": -0.24,
    "prevClose": 2.11,
+   "priceDate": "2026-07-31"
+  },
+  {
+   "account": "ALL",
+   "ticker": "NRXS",
+   "name": "NEURAXIS INC",
+   "byPort": {
+    "IBKR": 35000.0
+   },
+   "isin": "US64134X2018",
+   "ccy": "USD",
+   "shares": 35000.0,
+   "price": 6.21000003,
+   "value": 217350.0,
+   "valueEur": 190157,
+   "valueUsd": 217350,
+   "basisUsd": 198036,
+   "realizedUsd": 0,
+   "avgCost": 5.6582,
+   "unrealRet": 9.8,
+   "dayRet": -1.11,
+   "prevClose": 6.28,
    "priceDate": "2026-07-31"
   },
   {
