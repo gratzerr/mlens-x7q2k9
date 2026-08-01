@@ -1,15 +1,15 @@
 {
- "fileDate": "2026-08-01 09:21",
- "generated": "2026-08-01 09:31",
+ "fileDate": "2026-08-01 09:42",
+ "generated": "2026-08-01 09:42",
  "engine": "pp-exact (verified vs PP app 2026-07-11)",
- "totalSecuritiesEur": 2098866,
- "cashEur": -189946.54,
+ "totalSecuritiesEur": 2077212,
+ "cashEur": -169049.15,
  "cashByAccount": [
   {
    "account": "IBKR USD",
    "ccy": "USD",
-   "balance": -195905.85,
-   "eur": -171396.19
+   "balance": -172020.14,
+   "eur": -150498.81
   },
   {
    "account": "SQ USD",
@@ -30,28 +30,28 @@
    "eur": 137.81
   }
  ],
- "totalEur": 1908919,
- "ttwrorSince2022": 387.39,
- "ttwrorYtd": 93.52,
- "ttwrorAnnualized": 41.31,
- "izf": 67.57,
+ "totalEur": 1908163,
+ "ttwrorSince2022": 387.19,
+ "ttwrorYtd": 93.44,
+ "ttwrorAnnualized": 41.29,
+ "izf": 67.54,
  "yearlyReturns": {
   "2022": 3.3,
   "2023": 11.8,
   "2024": 45.2,
   "2025": 50.2,
-  "2026": 93.5
+  "2026": 93.4
  },
- "realizedEur": 851813,
- "unrealizedEur": 386120,
- "realizedUsd": 1024226,
- "unrealizedUsd": 424170,
+ "realizedEur": 817050,
+ "unrealizedEur": 420558,
+ "realizedUsd": 984426,
+ "unrealizedUsd": 463598,
  "netContribEur": 667272,
  "netContribUsd": 739179,
  "earningsEur": 13297.85,
  "earningsUsd": 14376,
- "feesEur": 8500.37,
- "feesUsd": 9704,
+ "feesEur": 8931.39,
+ "feesUsd": 10196,
  "taxesEur": 1717.1,
  "taxesUsd": 1907,
  "series": [
@@ -26697,9 +26697,9 @@
   },
   {
    "d": "2026-07-24",
-   "v": 2225873,
-   "e": 1947396,
-   "r": 3.972112,
+   "v": 2188581,
+   "e": 1914769,
+   "r": 3.88881,
    "c": 739179,
    "k": 667272,
    "q": 1024226,
@@ -26713,9 +26713,9 @@
   },
   {
    "d": "2026-07-25",
-   "v": 2225873,
-   "e": 1947396,
-   "r": 3.972112,
+   "v": 2188581,
+   "e": 1914769,
+   "r": 3.88881,
    "c": 739179,
    "k": 667272,
    "q": 1024226,
@@ -26729,9 +26729,9 @@
   },
   {
    "d": "2026-07-26",
-   "v": 2225873,
-   "e": 1947396,
-   "r": 3.972112,
+   "v": 2188581,
+   "e": 1914769,
+   "r": 3.88881,
    "c": 739179,
    "k": 667272,
    "q": 1024226,
@@ -26793,9 +26793,9 @@
   },
   {
    "d": "2026-07-30",
-   "v": 2176919,
-   "e": 1904566,
-   "r": 3.862758,
+   "v": 2184419,
+   "e": 1911127,
+   "r": 3.879512,
    "c": 739179,
    "k": 667272,
    "q": 1024226,
@@ -26809,22 +26809,36 @@
   },
   {
    "d": "2026-07-31",
-   "v": 2181895,
-   "e": 1908919,
-   "r": 3.873874,
+   "v": 2181030,
+   "e": 1908163,
+   "r": 3.871943,
    "c": 739179,
    "k": 667272,
-   "q": 1024226,
-   "Q": 851813,
+   "q": 984426,
+   "Q": 817050,
    "g": 14376,
    "G": 13298,
-   "f": 9704,
-   "F": 8500,
+   "f": 10196,
+   "F": 8931,
    "t": 1907,
    "T": 1717
   }
  ],
  "payments": [
+  {
+   "d": "2026-07-31",
+   "k": "fee",
+   "tk": "CRBU",
+   "eur": 400.52,
+   "usd": 457.8
+  },
+  {
+   "d": "2026-07-31",
+   "k": "fee",
+   "tk": "ABVX270115C00120000",
+   "eur": 30.5,
+   "usd": 34.86
+  },
   {
    "d": "2026-07-28",
    "k": "fee",
@@ -42452,23 +42466,6 @@
     14.6911
    ]
   ],
-  "CRBU": [
-   [
-    "2026-07-09",
-    80000.0,
-    1.8735
-   ],
-   [
-    "2026-07-10",
-    10000.0,
-    1.765
-   ],
-   [
-    "2026-07-16",
-    10000.0,
-    1.665
-   ]
-  ],
   "LXEO": [
    [
     "2026-07-09",
@@ -42518,6 +42515,11 @@
     "2026-07-28",
     1000.0,
     23.5
+   ],
+   [
+    "2026-07-31",
+    5000.0,
+    24.0
    ]
   ]
  },
@@ -42527,6 +42529,28 @@
   "SQ"
  ],
  "acts": [
+  {
+   "d": "2026-07-31",
+   "t": "BUY",
+   "sh": 5000.0,
+   "px": 24.0,
+   "ccy": "USD",
+   "amt": 120000.0,
+   "port": "IBKR",
+   "tk": "ABVX270115C00120000",
+   "isin": ""
+  },
+  {
+   "d": "2026-07-31",
+   "t": "SELL",
+   "sh": 100000.0,
+   "px": 1.4438,
+   "ccy": "USD",
+   "amt": 144378.37,
+   "port": "IBKR",
+   "tk": "CRBU",
+   "isin": "US1420381089"
+  },
   {
    "d": "2026-07-28",
    "t": "BUY",
@@ -58635,6 +58659,21 @@
  "trades": [
   {
    "port": "IBKR",
+   "buy": "2026-07-09",
+   "sell": "2026-07-31",
+   "days": 21,
+   "sh": 100000.0,
+   "proceedsUsd": 144378,
+   "basisUsd": 184177,
+   "gainUsd": -39799,
+   "gainEur": -34762,
+   "ret": -21.61,
+   "ticker": "CRBU",
+   "name": "CARIBOU BIOSCIENCES INC",
+   "isin": "US1420381089"
+  },
+  {
+   "port": "IBKR",
    "buy": "2026-05-05",
    "sell": "2026-07-20",
    "days": 76,
@@ -62606,15 +62645,15 @@
    "name": "RAPID MICRO BIOSYSTEMS INC-A"
   }
  ],
- "ppReferenceTtwror": 387.39,
+ "ppReferenceTtwror": 387.19,
  "ppReferenceDate": "2026-08-01",
- "ttwrorApproxSince2022": 387.39,
+ "ttwrorApproxSince2022": 387.19,
  "yearlyReturnsApprox": {
   "2022": 3.3,
   "2023": 11.8,
   "2024": 45.2,
   "2025": 50.2,
-  "2026": 93.5
+  "2026": 93.4
  },
  "holdings": [
   {
@@ -62681,6 +62720,28 @@
    "unrealRet": 26.2,
    "dayRet": 1.5,
    "prevClose": 12.04,
+   "priceDate": "2026-07-31"
+  },
+  {
+   "account": "ALL",
+   "ticker": "ABVX270115C00120000",
+   "name": "ABVX 15JAN27 120 C",
+   "byPort": {
+    "IBKR": 10000.0
+   },
+   "isin": "",
+   "ccy": "USD",
+   "shares": 10000.0,
+   "price": 24.25,
+   "value": 242500.0,
+   "valueEur": 212161,
+   "valueUsd": 242500,
+   "basisUsd": 267461,
+   "realizedUsd": 0,
+   "avgCost": 26.7461,
+   "unrealRet": -9.3,
+   "dayRet": -3.0,
+   "prevClose": 25.0,
    "priceDate": "2026-07-31"
   },
   {
@@ -62796,50 +62857,6 @@
   },
   {
    "account": "ALL",
-   "ticker": "CRBU",
-   "name": "CARIBOU BIOSCIENCES INC",
-   "byPort": {
-    "IBKR": 100000.0
-   },
-   "isin": "US1420381089",
-   "ccy": "USD",
-   "shares": 100000.0,
-   "price": 1.46000003,
-   "value": 146000.0,
-   "valueEur": 127734,
-   "valueUsd": 146000,
-   "basisUsd": 184177,
-   "realizedUsd": 0,
-   "avgCost": 1.8418,
-   "unrealRet": -20.7,
-   "dayRet": -3.31,
-   "prevClose": 1.51,
-   "priceDate": "2026-07-31"
-  },
-  {
-   "account": "ALL",
-   "ticker": "ABVX270115C00120000",
-   "name": "ABVX 15JAN27 120 C",
-   "byPort": {
-    "IBKR": 5000.0
-   },
-   "isin": "",
-   "ccy": "USD",
-   "shares": 5000.0,
-   "price": 24.25,
-   "value": 121250.0,
-   "valueEur": 106080,
-   "valueUsd": 121250,
-   "basisUsd": 147461,
-   "realizedUsd": 0,
-   "avgCost": 29.4921,
-   "unrealRet": -17.8,
-   "dayRet": -3.0,
-   "prevClose": 25.0,
-   "priceDate": "2026-07-31"
-  },
-  {
-   "account": "ALL",
    "ticker": "TENX",
    "name": "TENAX THERAPEUTICS INC",
    "byPort": {
@@ -62861,5 +62878,5 @@
    "priceDate": "2026-07-31"
   }
  ],
- "txmax": "2026-07-28"
+ "txmax": "2026-07-31"
 }
