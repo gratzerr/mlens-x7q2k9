@@ -1,15 +1,15 @@
 {
- "fileDate": "2026-08-01 09:42",
- "generated": "2026-08-01 09:42",
+ "fileDate": "2026-08-01 09:47",
+ "generated": "2026-08-01 09:54",
  "engine": "pp-exact (verified vs PP app 2026-07-11)",
  "totalSecuritiesEur": 2077212,
- "cashEur": -169049.15,
+ "cashEur": -169049.16,
  "cashByAccount": [
   {
    "account": "IBKR USD",
    "ccy": "USD",
-   "balance": -172020.14,
-   "eur": -150498.81
+   "balance": -172020.15,
+   "eur": -150498.82
   },
   {
    "account": "SQ USD",
@@ -50,7 +50,7 @@
  "netContribUsd": 739179,
  "earningsEur": 13297.85,
  "earningsUsd": 14376,
- "feesEur": 8931.39,
+ "feesEur": 8931.4,
  "feesUsd": 10196,
  "taxesEur": 1717.1,
  "taxesUsd": 1907,
@@ -26836,8 +26836,8 @@
    "d": "2026-07-31",
    "k": "fee",
    "tk": "ABVX270115C00120000",
-   "eur": 30.5,
-   "usd": 34.86
+   "eur": 30.51,
+   "usd": 34.87
   },
   {
    "d": "2026-07-28",
