@@ -1,1 +1,74 @@
-{"ticker": "NKTR", "news": [{"date": "2026-07-31", "headline": "Vanguard Capital Management discloses 5.17% beneficial stake in Nektar Therapeutics", "source": "Stock Titan (SEC Schedule 13G)", "url": "https://www.stocktitan.net/sec-filings/NKTR/schedule-13g-nektar-therapeutics-passive-investment-disclosure-5-0c45bb46de2c.html", "summary": "Vanguard and affiliated entities disclosed a passive beneficial ownership stake of 1,747,653 Nektar shares, representing 5.17% of the class, as of June 30, 2026. The Schedule 13G filing shows Vanguard holds sole dispositive power over the full position with more limited sole voting power."}, {"date": "2026-07-28", "headline": "Nektar Therapeutics to Announce Financial Results for the Second Quarter on Thursday, August 13, 2026, After Close of U.S.-Based Financial Markets", "source": "PR Newswire", "url": "https://www.prnewswire.com/news-releases/nektar-therapeutics-to-announce-financial-results-for-the-second-27w28qrkblcl.html", "summary": "Nektar confirmed it will report second-quarter 2026 financial results (quarter ended June 30, 2026) on August 13, 2026 after U.S. market close. CEO Howard Robin will host a conference call and webcast at 5:00 p.m. Eastern Time to review results."}, {"date": "2026-07-22", "headline": "Nektar Therapeutics (NASDAQ:NKTR) Coverage Initiated at Canaccord Genuity Group", "source": "MarketBeat", "url": "https://www.marketbeat.com/instant-alerts/nektar-therapeutics-nasdaqnktr-coverage-initiated-at-canaccord-genuity-group-2026-07-22/", "summary": "Canaccord Genuity initiated coverage of Nektar with a Buy rating and a $153 price target, citing the commercial potential of rezpegaldesleukin. This contrasts with Wedbush's more cautious Neutral stance and $80 target set in May 2026."}, {"date": "2026-07-21", "headline": "Nektar Therapeutics Announces Start of Phase 3 ZENITH AD Program Evaluating Novel Regulatory T-Cell Biologic Rezpegaldesleukin in Moderate-to-Severe Atopic Dermatitis", "source": "PR Newswire", "url": "https://www.prnewswire.com/news-releases/nektar-therapeutics-announces-start-of-phase-3-zenith-ad-program-evaluating-novel-regulatory-t-cell-biologic-rezpegaldesleukin-in-moderate-to-severe-atopic-dermatitis-302830206.html", "summary": "Nektar dosed the first patients in ZENITH AD-1 and ZENITH AD-2, two of three global, randomized, placebo-controlled, 510-patient Phase 3 trials of rezpegaldesleukin in patients 12+ with moderate-to-severe atopic dermatitis. A third trial, ZENITH AD-3 for patients with prior biologic/JAK inhibitor experience, is planned to start in September 2026."}, {"date": "2026-07-02", "headline": "Nektar Therapeutics Stock Climbs As Immunology Sentiment Improves", "source": "Timothy Sykes", "url": "https://www.timothysykes.com/news/nektar-therapeutics-nktr-news-2026_07_02/", "summary": "NKTR shares rose as sentiment across inflammation-and-immunology biotech names improved following AbbVie's announced $10.9 billion acquisition of Apogee Therapeutics, with Canaccord flagging Nektar as a potential read-through beneficiary given its competing rezpegaldesleukin program in atopic dermatitis."}, {"date": "2026-06-27", "headline": "Nektar Therapeutics Added to Russell 2000 Index", "source": "MarketScreener / FTSE Russell", "url": "https://www.marketscreener.com/news/nektar-therapeutics-nasdaqcm-nktr-added-to-russell-2000-index-ce7f5fdfda8aff20", "summary": "Following the annual FTSE Russell reconstitution completed June 27, 2026, Nektar was added to a broad suite of indices including the Russell 2000, 2500 and 3000 and related growth/value benchmarks, expanding its passive-fund investor base."}], "catalysts": [{"when": "2026-08-13", "label": "Q2 2026 earnings report", "detail": "Nektar has officially confirmed it will report second-quarter 2026 financial results on Thursday, August 13, 2026, after U.S. market close, with a CEO-hosted conference call and webcast at 5:00 p.m. ET.", "confirmed": true}, {"when": "September 2026", "label": "ZENITH AD-3 trial initiation", "detail": "The third and final trial of the pivotal Phase 3 ZENITH AD program, enrolling atopic dermatitis patients with prior systemic biologic and/or JAK inhibitor treatment experience, is planned to begin dosing.", "confirmed": true}, {"when": "Early 2027", "label": "Phase 3 alopecia areata trial initiation", "detail": "Following completion of its End-of-Phase 2 FDA meeting in Q2 2026, Nektar plans to initiate a single registrational Phase 3 trial of rezpegaldesleukin in severe-to-very-severe alopecia areata, pending final alignment with the FDA on trial design.", "confirmed": false}, {"when": "Mid-2028", "label": "ZENITH AD Phase 3 topline data", "detail": "Initial topline results from the two ongoing Phase 3 ZENITH AD trials in atopic dermatitis are targeted for mid-2028, with a BLA submission planned for 2029 assuming positive data.", "confirmed": true}], "pulse": "With Q2 2026 earnings now confirmed for August 13, Nektar heads into the print on a wave of positive momentum: the pivotal Phase 3 ZENITH AD program for rezpegaldesleukin officially began dosing on July 21, and Canaccord Genuity initiated coverage with a Buy rating and $153 target shortly after, even as Wedbush remains cautious at Neutral/$80 given Dupixent's entrenched position. Passive ownership has broadened following June's Russell index reconstitution and a newly disclosed 5.17% Vanguard stake, while sector sentiment got an extra lift from AbbVie's $10.9 billion Apogee Therapeutics acquisition, seen as a read-through positive for Nektar's competing atopic-dermatitis franchise. With over $1 billion in cash funding runway into 2028, investors are now watching for the ZENITH AD-3 trial start in September and any updates on the planned early-2027 Phase 3 alopecia areata trial alongside the upcoming earnings call."}
+{
+  "ticker": "NKTR",
+  "news": [
+    {
+      "date": "2026-07-31",
+      "headline": "Vanguard Capital Management discloses 5.17% beneficial stake in Nektar Therapeutics",
+      "source": "Stock Titan (SEC Schedule 13G)",
+      "url": "https://www.stocktitan.net/sec-filings/NKTR/schedule-13g-nektar-therapeutics-passive-investment-disclosure-5-0c45bb46de2c.html",
+      "summary": "Vanguard and affiliated entities disclosed a passive beneficial ownership stake of 1,747,653 Nektar shares, representing 5.17% of the class, as of June 30, 2026."
+    },
+    {
+      "date": "2026-07-28",
+      "headline": "Nektar Therapeutics to Announce Financial Results for the Second Quarter on Thursday, August 13, 2026, After Close of U.S.-Based Financial Markets",
+      "source": "PR Newswire",
+      "url": "https://www.prnewswire.com/news-releases/nektar-therapeutics-to-announce-financial-results-for-the-second-27w28qrkblcl.html",
+      "summary": "Nektar confirmed it will report Q2 2026 results after U.S. market close on August 13, 2026, with CEO Howard Robin hosting a conference call and webcast at 5:00pm ET."
+    },
+    {
+      "date": "2026-07-27",
+      "headline": "Is Nektar Therapeutics (NKTR) Undervalued On Its Phase 3 Rezpegaldesleukin Launch?",
+      "source": "Sahm Capital",
+      "url": "https://www.sahmcapital.com/news/content/is-nektar-therapeutics-nktr-undervalued-on-its-phase-3-rezpegaldesleukin-launch-2026-07-27",
+      "summary": "The analysis examines whether Nektar's valuation still lags the commercial potential of rezpegaldesleukin now that the drug has entered Phase 3 testing in atopic dermatitis."
+    },
+    {
+      "date": "2026-07-22",
+      "headline": "Nektar Therapeutics (NASDAQ:NKTR) Coverage Initiated at Canaccord Genuity Group",
+      "source": "MarketBeat",
+      "url": "https://www.marketbeat.com/instant-alerts/nektar-therapeutics-nasdaqnktr-coverage-initiated-at-canaccord-genuity-group-2026-07-22/",
+      "summary": "Canaccord Genuity initiated coverage of Nektar with a Buy rating and a $153 price target, citing the commercial potential of rezpegaldesleukin, contrasting with Wedbush's more cautious Neutral stance and $80 target."
+    },
+    {
+      "date": "2026-07-21",
+      "headline": "Nektar Therapeutics Announces Start of Phase 3 ZENITH AD Program Evaluating Novel Regulatory T-Cell Biologic Rezpegaldesleukin in Moderate-to-Severe Atopic Dermatitis",
+      "source": "PR Newswire",
+      "url": "https://www.prnewswire.com/news-releases/nektar-therapeutics-announces-start-of-phase-3-zenith-ad-program-evaluating-novel-regulatory-t-cell-biologic-rezpegaldesleukin-in-moderate-to-severe-atopic-dermatitis-302830206.html",
+      "summary": "Nektar dosed the first patients in ZENITH AD-1 and ZENITH AD-2, two of three global, randomized, placebo-controlled Phase 3 trials of rezpegaldesleukin in patients 12+ with moderate-to-severe atopic dermatitis; a third trial, ZENITH AD-3, is planned to start in September 2026."
+    },
+    {
+      "date": "2026-06-27",
+      "headline": "Nektar Therapeutics Added to Russell 2000 Index",
+      "source": "MarketScreener / FTSE Russell",
+      "url": "https://www.marketscreener.com/news/nektar-therapeutics-nasdaqcm-nktr-added-to-russell-2000-index-ce7f5fdfda8aff20",
+      "summary": "Following the annual FTSE Russell reconstitution completed June 27, 2026, Nektar was added to a broad suite of indices including the Russell 2000, 2500 and 3000, expanding its passive-fund investor base."
+    }
+  ],
+  "catalysts": [
+    {
+      "when": "2026-08-13",
+      "label": "Q2 2026 earnings report",
+      "detail": "Nektar has officially confirmed it will report second-quarter 2026 financial results on Thursday, August 13, 2026, after U.S. market close, with a CEO-hosted conference call and webcast at 5:00pm ET.",
+      "confirmed": true
+    },
+    {
+      "when": "September 2026",
+      "label": "ZENITH AD-3 trial initiation",
+      "detail": "The third and final trial of the pivotal Phase 3 ZENITH AD program, enrolling atopic dermatitis patients with prior systemic biologic and/or JAK inhibitor treatment experience, is planned to begin dosing.",
+      "confirmed": true
+    },
+    {
+      "when": "Early 2027",
+      "label": "Phase 3 alopecia areata trial initiation",
+      "detail": "Following completion of its End-of-Phase 2 FDA meeting in Q2 2026, Nektar plans to initiate a single registrational Phase 3 trial of rezpegaldesleukin in severe-to-very-severe alopecia areata, pending final alignment with the FDA on trial design.",
+      "confirmed": false
+    },
+    {
+      "when": "Mid-2028",
+      "label": "Initial ZENITH AD Phase 3 data readout",
+      "detail": "First topline results from the ZENITH AD-1 and ZENITH AD-2 registrational trials of rezpegaldesleukin in moderate-to-severe atopic dermatitis are expected, with a BLA submission planned for 2029 assuming positive data.",
+      "confirmed": true
+    }
+  ],
+  "pulse": "With Q2 2026 earnings confirmed for August 13, Nektar heads into the print on a wave of positive momentum: the pivotal Phase 3 ZENITH AD program for rezpegaldesleukin officially began dosing on July 21, and Canaccord Genuity initiated coverage with a Buy rating and $153 target shortly after, even as Wedbush remains cautious at Neutral/$80 given Dupixent's entrenched position. Passive ownership has broadened following June's Russell index reconstitution and a newly disclosed 5.17% Vanguard stake, while sector sentiment got an extra lift from AbbVie's acquisition of Apogee Therapeutics, seen as a read-through positive for Nektar's competing atopic-dermatitis franchise. Investors are now watching for the ZENITH AD-3 trial start in September alongside the upcoming earnings call, with first Phase 3 data not expected until mid-2028."
+}

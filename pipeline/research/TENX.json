@@ -1,1 +1,74 @@
-{"ticker": "TENX", "news": [{"date": "2026-07-31", "headline": "Tenax Therapeutics Reports Second Quarter 2026 Financial Results and Provides Corporate Update", "source": "GlobeNewswire", "url": "https://www.globenewswire.com/news-release/2026/07/31/3336713/12401/en/Tenax-Therapeutics-Reports-Second-Quarter-2026-Financial-Results-and-Provides-Corporate-Update.html", "summary": "Tenax reported a Q2 2026 net loss of $17.8 million and cash and cash equivalents of $118.0 million as of June 30, 2026, aided by $13.4 million in proceeds from warrant exercises that extend its runway into Q2 2028. The company reaffirmed that topline data from the Phase 3 LEVEL trial of TNX-103 (oral levosimendan) remains on track for August 2026, alongside continued enrollment in the global LEVEL-2 trial."}, {"date": "2026-07-30", "headline": "BlackRock discloses 6.4% passive stake in Tenax Therapeutics", "source": "StockTitan (SEC Schedule 13G)", "url": "https://www.stocktitan.net/sec-filings/TENX/schedule-13g-tenax-therapeutics-inc-passive-investment-disclosure-5-10b36c49f259.html", "summary": "BlackRock disclosed beneficial ownership of 1,708,335 TENX shares (6.4%) in a new Schedule 13G filing, adding to a growing roster of institutional holders positioning ahead of the Phase 3 LEVEL data readout."}, {"date": "2026-07-22", "headline": "Evercore ISI initiates Tenax Therapeutics coverage with Outperform rating and $39 price target", "source": "Investing.com", "url": "https://www.investing.com/news/analyst-ratings/evercore-isi-initiates-tenax-therapeutics-stock-coverage-with-outperform-rating-93CH-4805994", "summary": "Evercore ISI began coverage of TENX with an Outperform rating and a $39 price target, assigning roughly a 50% probability of success to the Phase 3 LEVEL trial versus the 20-25% odds it says are priced into the stock, and sees 250% to 10x upside on positive data."}, {"date": "2026-07-13", "headline": "Tenax Therapeutics CEO exercises stock options, acquires 8,719 shares", "source": "SEC Form 4 / StockTitan", "url": "https://www.stocktitan.net/sec-filings/TENX/form-4-tenax-therapeutics-inc-insider-trading-activity-2a1ba5559b93.html", "summary": "CEO Christopher Thomas Giordano exercised stock options on July 13, 2026 to acquire 8,719 common shares (8,500 at $5.94 and 219 at $3.549 per share), per an SEC Form 4 filing, ahead of the pivotal August data readout."}, {"date": "2026-07-02", "headline": "Tenax Therapeutics Announces Late-Breaking Presentation of LEVEL Clinical Trial Data at ESC Congress 2026", "source": "GlobeNewswire", "url": "https://www.globenewswire.com/news-release/2026/07/02/3321224/12401/en/Tenax-Therapeutics-Announces-Late-Breaking-Presentation-of-LEVEL-Clinical-Trial-Data-at-ESC-Congress-2026.html", "summary": "Tenax confirmed that topline Phase 3 LEVEL trial results for TNX-103 (oral levosimendan) in PH-HFpEF will be unveiled in a Late-Breaking Clinical Science session at the ESC Congress 2026 in Munich (August 28-31), presented by Prof. Sanjiv Shah of Northwestern University, pinning the long-awaited data readout to a specific late-August window."}, {"date": "2026-06-29", "headline": "Tenax and Orion secure long-term levosimendan supply deal, extend license through 2035", "source": "The Globe and Mail / SEC 8-K", "url": "https://www.theglobeandmail.com/investing/markets/stocks/TENX/pressreleases/3087032/tenax-and-orion-secure-long-term-levosimendan-supply-deal/", "summary": "Orion Corporation exercised its option to become the primary long-term manufacturer/supplier of oral levosimendan under a new five-year Supply Agreement with automatic renewals, and the parties amended their license agreement to extend the deadline for U.S. regulatory approval to December 31, 2035."}], "catalysts": [{"when": "2026-08-29", "label": "LEVEL Phase 3 topline data presented at ESC Congress 2026", "detail": "A Late-Breaking Clinical Science session in Munich (Saturday, August 29, 11:15-11:30 CEST) will present full topline results of the Phase 3 LEVEL trial of oral levosimendan (TNX-103) in PH-HFpEF, presented by Prof. Sanjiv Shah; this is the binary event the stock is currently pricing.", "confirmed": true}, {"when": "August 2026", "label": "Database lock and 6MWD primary endpoint readout", "detail": "Company guidance calls for database lock and statistical analysis on the primary 6-minute walk distance endpoint in August 2026, ahead of the ESC presentation; the trial enrolled over 230 patients and is powered above 90% to detect a 25-meter 6MWD change.", "confirmed": true}, {"when": "End of 2027", "label": "LEVEL-2 global trial enrollment completion", "detail": "The global, ex-US LEVEL-2 registrational Phase 3 trial of oral levosimendan in PH-HFpEF, initiated in December 2025, is ongoing, with site activation and enrollment targeted for completion by the end of 2027 ahead of a potential NDA filing.", "confirmed": true}, {"when": "Post-readout, timing TBD", "label": "Potential NDA filing for TNX-103", "detail": "Should the Phase 3 LEVEL trial hit its primary endpoint (25-meter change in 6-minute walk distance), investors and analysts widely expect Tenax to move toward an NDA submission for TNX-103; this has not been formally guided by the company and remains contingent on the August data.", "confirmed": false}], "pulse": "Tenax Therapeutics reported Q2 2026 results on July 31 (net loss $17.8M, cash $118.0M boosted by $13.4M of warrant exercises, runway into Q2 2028), reaffirming that topline data from its make-or-break Phase 3 LEVEL trial of oral levosimendan in PH-HFpEF remains on track for August 2026, with full results set for a late-breaking ESC Congress presentation on August 29 in Munich. Sell-side sentiment has turned increasingly bullish into the catalyst -- Evercore ISI initiated at Outperform ($39 PT) and Guggenheim raised its price target to $40 and its probability-of-success estimate to 80% -- while BlackRock's fresh 6.4% stake and a long-term Orion supply/license extension to 2035 add further confidence, even as some contributors caution the trial outcome is binary with material downside on failure. As of August 2, 2026, no actual trial data has been released yet; TENX remains essentially a leveraged bet on the imminent late-August readout."}
+{
+  "ticker": "TENX",
+  "news": [
+    {
+      "date": "2026-07-31",
+      "headline": "Tenax Therapeutics Reports Second Quarter 2026 Financial Results and Provides Corporate Update",
+      "source": "GlobeNewswire",
+      "url": "https://www.globenewswire.com/news-release/2026/07/31/3336713/12401/en/Tenax-Therapeutics-Reports-Second-Quarter-2026-Financial-Results-and-Provides-Corporate-Update.html",
+      "summary": "Tenax reported a Q2 2026 net loss of $17.8 million and cash of $118.0 million as of June 30, 2026, aided by $13.4 million in warrant-exercise proceeds that extend its runway into Q2 2028. The company reaffirmed that topline data from the Phase 3 LEVEL trial of TNX-103 (oral levosimendan) remains on track for August 2026, alongside continued enrollment in the global LEVEL-2 trial."
+    },
+    {
+      "date": "2026-07-30",
+      "headline": "BlackRock discloses 6.4% passive stake in Tenax Therapeutics",
+      "source": "StockTitan (SEC Schedule 13G)",
+      "url": "https://www.stocktitan.net/sec-filings/TENX/schedule-13g-tenax-therapeutics-inc-passive-investment-disclosure-5-10b36c49f259.html",
+      "summary": "BlackRock disclosed beneficial ownership of 1,708,335 TENX shares (6.4%) in a new Schedule 13G filing, adding to a growing roster of institutional holders positioning ahead of the Phase 3 LEVEL data readout."
+    },
+    {
+      "date": "2026-07-22",
+      "headline": "Evercore ISI initiates Tenax Therapeutics coverage with Outperform rating and $39 price target",
+      "source": "Investing.com",
+      "url": "https://www.investing.com/news/analyst-ratings/evercore-isi-initiates-tenax-therapeutics-stock-coverage-with-outperform-rating-93CH-4805994",
+      "summary": "Evercore ISI began coverage of TENX with an Outperform rating and a $39 price target, assigning roughly a 50% probability of success to the Phase 3 LEVEL trial versus the 20-25% odds it says are priced into the stock."
+    },
+    {
+      "date": "2026-07-13",
+      "headline": "Tenax Therapeutics CEO exercises stock options, acquires 8,719 shares",
+      "source": "SEC Form 4 / StockTitan",
+      "url": "https://www.stocktitan.net/sec-filings/TENX/form-4-tenax-therapeutics-inc-insider-trading-activity-2a1ba5559b93.html",
+      "summary": "CEO Christopher Giordano exercised stock options on July 13, 2026 to acquire 8,719 common shares (8,500 at $5.94 and 219 at $3.549 per share), per an SEC Form 4 filing, ahead of the pivotal August data readout."
+    },
+    {
+      "date": "2026-07-02",
+      "headline": "Tenax Therapeutics Announces Late-Breaking Presentation of LEVEL Clinical Trial Data at ESC Congress 2026",
+      "source": "GlobeNewswire",
+      "url": "https://www.globenewswire.com/news-release/2026/07/02/3321224/12401/en/Tenax-Therapeutics-Announces-Late-Breaking-Presentation-of-LEVEL-Clinical-Trial-Data-at-ESC-Congress-2026.html",
+      "summary": "Tenax confirmed that topline Phase 3 LEVEL trial results for TNX-103 (oral levosimendan) in PH-HFpEF will be unveiled in a Late-Breaking Clinical Science session at the ESC Congress 2026 in Munich (August 28-31), presented by Prof. Sanjiv Shah of Northwestern University."
+    },
+    {
+      "date": "2026-06-29",
+      "headline": "Tenax and Orion secure long-term levosimendan supply deal, extend license through 2035",
+      "source": "The Globe and Mail / SEC 8-K",
+      "url": "https://www.theglobeandmail.com/investing/markets/stocks/TENX/pressreleases/3087032/tenax-and-orion-secure-long-term-levosimendan-supply-deal/",
+      "summary": "Orion Corporation exercised its option to become the primary long-term manufacturer/supplier of oral levosimendan under a new five-year Supply Agreement with automatic renewals, and the parties amended their license agreement to extend the deadline for U.S. regulatory approval to December 31, 2035."
+    }
+  ],
+  "catalysts": [
+    {
+      "when": "2026-08-29",
+      "label": "LEVEL Phase 3 topline data presented at ESC Congress 2026",
+      "detail": "A Late-Breaking Clinical Science session in Munich (Saturday, August 29, 11:15-11:30 CEST) will present full topline results of the Phase 3 LEVEL trial of oral levosimendan (TNX-103) in PH-HFpEF, presented by Prof. Sanjiv Shah; this is the binary event the stock is currently pricing.",
+      "confirmed": true
+    },
+    {
+      "when": "August 2026",
+      "label": "Database lock and 6MWD primary endpoint readout",
+      "detail": "Company guidance calls for database lock and statistical analysis on the primary 6-minute walk distance endpoint in August 2026, ahead of the ESC presentation; the trial enrolled over 230 patients and is powered above 90% to detect a 25-meter 6MWD change.",
+      "confirmed": true
+    },
+    {
+      "when": "End of 2027",
+      "label": "LEVEL-2 global trial enrollment completion",
+      "detail": "The global, ex-US LEVEL-2 registrational Phase 3 trial of oral levosimendan in PH-HFpEF, initiated in December 2025, is ongoing, with site activation and enrollment targeted for completion by the end of 2027 ahead of a potential NDA filing.",
+      "confirmed": true
+    },
+    {
+      "when": "Post-readout, timing TBD",
+      "label": "Potential NDA filing for TNX-103",
+      "detail": "Should the Phase 3 LEVEL trial hit its primary endpoint (25-meter change in 6-minute walk distance), investors and analysts widely expect Tenax to move toward an NDA submission for TNX-103; this has not been formally guided by the company and remains contingent on the August data.",
+      "confirmed": false
+    }
+  ],
+  "pulse": "Tenax Therapeutics reported Q2 2026 results on July 31 (net loss $17.8M, cash $118.0M boosted by $13.4M of warrant exercises, runway into Q2 2028), reaffirming that topline data from its make-or-break Phase 3 LEVEL trial of oral levosimendan in PH-HFpEF remains on track for August 2026, with full results set for a late-breaking ESC Congress presentation on August 29 in Munich. Sell-side sentiment has turned increasingly bullish into the catalyst — Evercore ISI initiated at Outperform ($39 PT) — while BlackRock's fresh 6.4% stake and a long-term Orion supply/license extension to 2035 add further confidence, even as some contributors caution the trial outcome is binary with material downside on failure. As of August 2, 2026, no actual trial data has been released yet; TENX remains essentially a leveraged bet on the imminent late-August readout."
+}
