@@ -39,7 +39,12 @@ def req(method, url, body=None, tok=None):
 def pull():
     tok = access_token()
     j = req("GET", DOC, tok=tok)
-    if "fields" not in j:                       # first run: create the doc
+    if "fields" not in j:
+        # ONLY create on a definitive NOT_FOUND — a transient API error must NEVER
+        # recreate the doc with defaults (that reset Rafael's portfolio name on 2026-07-22)
+        err = (j.get("error") or {})
+        if err.get("status") != "NOT_FOUND" and err.get("code") != 404:
+            print("firestore pull: transient error, keeping local state:", str(j)[:150]); return
         body = {"fields":{
             "owner":{"stringValue":OWNER},
             "name":{"stringValue":_icfg.get("portfolioName", "Rafael's Portfolio")},
