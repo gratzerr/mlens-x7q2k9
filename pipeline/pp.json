@@ -1,8 +1,8 @@
 {
- "fileDate": "2026-08-03 19:55",
- "generated": "2026-08-03 20:05",
+ "fileDate": "2026-08-03 20:06",
+ "generated": "2026-08-03 20:16",
  "engine": "pp-exact (verified vs PP app 2026-07-11)",
- "totalSecuritiesEur": 2110927,
+ "totalSecuritiesEur": 2110074,
  "cashEur": -169049.16,
  "cashByAccount": [
   {
@@ -30,22 +30,22 @@
    "eur": 137.81
   }
  ],
- "totalEur": 1941878,
- "ttwrorSince2022": 395.8,
- "ttwrorYtd": 96.86,
- "ttwrorAnnualized": 41.75,
- "izf": 68.44,
+ "totalEur": 1941025,
+ "ttwrorSince2022": 395.58,
+ "ttwrorYtd": 96.78,
+ "ttwrorAnnualized": 41.73,
+ "izf": 68.41,
  "yearlyReturns": {
   "2022": 3.3,
   "2023": 11.8,
   "2024": 45.2,
   "2025": 50.2,
-  "2026": 96.9
+  "2026": 96.8
  },
  "realizedEur": 817050,
- "unrealizedEur": 454273,
+ "unrealizedEur": 453420,
  "realizedUsd": 984426,
- "unrealizedUsd": 502134,
+ "unrealizedUsd": 501159,
  "netContribEur": 667272,
  "netContribUsd": 739179,
  "earningsEur": 13297.85,
@@ -26857,9 +26857,9 @@
   },
   {
    "d": "2026-08-03",
-   "v": 2219566,
-   "e": 1941878,
-   "r": 3.958024,
+   "v": 2218591,
+   "e": 1941025,
+   "r": 3.955846,
    "c": 739179,
    "k": 667272,
    "q": 984426,
@@ -62693,15 +62693,15 @@
    "name": "RAPID MICRO BIOSYSTEMS INC-A"
   }
  ],
- "ppReferenceTtwror": 395.8,
+ "ppReferenceTtwror": 395.58,
  "ppReferenceDate": "2026-08-03",
- "ttwrorApproxSince2022": 395.8,
+ "ttwrorApproxSince2022": 395.58,
  "yearlyReturnsApprox": {
   "2022": 3.3,
   "2023": 11.8,
   "2024": 45.2,
   "2025": 50.2,
-  "2026": 96.9
+  "2026": 96.8
  },
  "holdings": [
   {
@@ -62780,15 +62780,15 @@
    "isin": "",
    "ccy": "USD",
    "shares": 10000.0,
-   "price": 23.5,
-   "value": 235000.0,
-   "valueEur": 205599,
-   "valueUsd": 235000,
+   "price": 23.35,
+   "value": 233500.0,
+   "valueEur": 204287,
+   "valueUsd": 233500,
    "basisUsd": 267461,
    "realizedUsd": 0,
    "avgCost": 26.7461,
-   "unrealRet": -12.1,
-   "dayRet": 4.44,
+   "unrealRet": -12.7,
+   "dayRet": 3.78,
    "prevClose": 22.5,
    "priceDate": "2026-08-03"
   },
@@ -62824,15 +62824,15 @@
    "isin": "US64134X2018",
    "ccy": "USD",
    "shares": 35000.0,
-   "price": 6.5749998,
-   "value": 230124.99,
-   "valueEur": 201334,
-   "valueUsd": 230125,
+   "price": 6.59000015,
+   "value": 230650.01,
+   "valueEur": 201794,
+   "valueUsd": 230650,
    "basisUsd": 198036,
    "realizedUsd": 0,
    "avgCost": 5.6582,
-   "unrealRet": 16.2,
-   "dayRet": 5.2,
+   "unrealRet": 16.5,
+   "dayRet": 5.44,
    "prevClose": 6.25,
    "priceDate": "2026-08-03"
   },
