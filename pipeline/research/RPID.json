@@ -1,60 +1,16 @@
 {
   "ticker": "RPID",
   "news": [
-    {
-      "date": "2026-07-24",
-      "headline": "Rapid Micro Biosystems CEO and Director Exercise Stock Options",
-      "source": "StockTitan / SEC Form 4",
-      "url": "https://www.stocktitan.net/sec-filings/RPID/form-4-rapid-micro-biosystems-inc-insider-trading-activity-aacf0a4df670.html",
-      "summary": "President and CEO Robert G. Spignesi Jr. exercised a fully-vested option for 1,402 shares at a $0.75 strike on July 22, and director Richard S. Kollender exercised options for 3,508 shares at the same price on July 24, ahead of the options' expiration."
-    },
-    {
-      "date": "2026-07-23",
-      "headline": "Rapid Micro Biosystems to Announce Second Quarter 2026 Financial Results on August 7, 2026",
-      "source": "GlobeNewswire",
-      "url": "https://www.globenewswire.com/news-release/2026/07/23/3332637/33206/en/Rapid-Micro-Biosystems-to-Announce-Second-Quarter-2026-Financial-Results-on-August-7-2026.html",
-      "summary": "Rapid Micro Biosystems confirmed it will report Q2 2026 results before market open on August 7, 2026, followed by a management webcast conference call at 8:30am ET the same day."
-    },
-    {
-      "date": "2026-07-13",
-      "headline": "Rapid Micro Biosystems (RPID) shares down roughly 11-12% since Q1 miss as investors weigh MilliporeSigma tie-up and onshoring trend",
-      "source": "Trefis",
-      "url": "https://www.trefis.com/data/companies/RPID?from=%5ERUA_movers_2026-07-11&mod=co_top_rpid",
-      "summary": "Trefis noted RPID stock had fallen roughly 11-12% between March 31 and July 13, 2026, driven by a lower price-to-sales multiple after the disappointing Q1 2026 report, while pointing to the MilliporeSigma global distribution partnership and pharma reshoring/automation demand as potential 2026 growth drivers."
-    },
-    {
-      "date": "2026-06-10",
-      "headline": "Rapid Micro Biosystems Announces Inducement Grant Under Nasdaq Listing Rule 5635(c)(4)",
-      "source": "GlobeNewswire",
-      "url": "https://www.globenewswire.com/news-release/2026/06/10/3310119/33206/en/rapid-micro-biosystems-announces-inducement-grant-under-nasdaq-listing-rule-5635-c-4.html",
-      "summary": "The company granted 60,000 restricted stock units of Class A common stock to a newly hired employee as a material inducement to employment, with the award vesting in three equal annual installments."
-    }
+    {"date": "2026-07-24", "headline": "Rapid Micro Biosystems CEO and Director Exercise Stock Options", "source": "StockTitan / SEC Form 4", "url": "https://www.stocktitan.net/sec-filings/RPID/form-4-rapid-micro-biosystems-inc-insider-trading-activity-aacf0a4df670.html", "summary": "President and CEO Robert G. Spignesi Jr. exercised a fully-vested option for 1,402 shares at a $0.75 strike on July 22, and director Richard S. Kollender exercised options for 3,508 shares at the same price on July 24, ahead of the options' expiration."},
+    {"date": "2026-07-23", "headline": "Rapid Micro Biosystems to Announce Second Quarter 2026 Financial Results on August 7, 2026", "source": "GlobeNewswire", "url": "https://www.globenewswire.com/news-release/2026/07/23/3332637/33206/en/Rapid-Micro-Biosystems-to-Announce-Second-Quarter-2026-Financial-Results-on-August-7-2026.html", "summary": "Rapid Micro Biosystems confirmed it will report Q2 2026 results before market open on August 7, 2026, followed by a management webcast conference call at 8:30am ET the same day."},
+    {"date": "2026-07-13", "headline": "Rapid Micro Biosystems (RPID) shares down roughly 11-12% since Q1 miss as investors weigh MilliporeSigma tie-up and onshoring trend", "source": "Trefis", "url": "https://www.trefis.com/data/companies/RPID?from=%5ERUA_movers_2026-07-11&mod=co_top_rpid", "summary": "Trefis noted RPID stock had fallen roughly 11-12% between March 31 and July 13, 2026, driven by a lower price-to-sales multiple after the disappointing Q1 2026 report, while pointing to the MilliporeSigma global distribution partnership and pharma reshoring/automation demand as potential 2026 growth drivers."},
+    {"date": "2026-06-10", "headline": "Rapid Micro Biosystems Announces Inducement Grant Under Nasdaq Listing Rule 5635(c)(4)", "source": "GlobeNewswire", "url": "https://www.globenewswire.com/news-release/2026/06/10/3310119/33206/en/rapid-micro-biosystems-announces-inducement-grant-under-nasdaq-listing-rule-5635-c-4.html", "summary": "The company granted 60,000 restricted stock units of Class A common stock to a newly hired employee as a material inducement to employment, with the award vesting in three equal annual installments."}
   ],
   "catalysts": [
-    {
-      "when": "2026-08-07",
-      "label": "Q2 2026 earnings release",
-      "detail": "Rapid Micro Biosystems will report second-quarter 2026 results before market open with an 8:30am ET webcast; investors will watch system placement pace, cash burn, and progress toward full-year guidance after Q1's revenue beat but wider-than-expected net loss.",
-      "confirmed": true
-    },
-    {
-      "when": "FY2026",
-      "label": "Full-year 2026 revenue and placement guidance",
-      "detail": "Management has guided to $37M-$41M total revenue and 30-38 Growth Direct system placements for 2026 with roughly 20% gross margin; the August 7 Q2 print will show whether the company is tracking to this range.",
-      "confirmed": true
-    },
-    {
-      "when": "through Feb 2027",
-      "label": "MilliporeSigma distribution agreement, year two",
-      "detail": "Rapid Micro is in year two of its five-year global co-exclusive distribution and collaboration agreement with MilliporeSigma (running roughly March 2026-February 2027), under which MilliporeSigma has a stated commitment to purchase Growth Direct systems; incremental orders under this plan year are a potential upside catalyst.",
-      "confirmed": false
-    },
-    {
-      "when": "2026",
-      "label": "Follow-on orders from anchor pharma accounts",
-      "detail": "Following large multi-system expansion orders from Amgen (Q4 2025) and Samsung Biologics (Q1 2026), additional follow-on orders from these and other big-pharma customers as they continue rolling out Growth Direct across sites remain a potential upside catalyst.",
-      "confirmed": false
-    }
+    {"when": "2026-08-07", "label": "Q2 2026 earnings release", "detail": "Rapid Micro Biosystems will report second-quarter 2026 results before market open with an 8:30am ET webcast; investors will watch system placement pace, cash burn, and progress toward full-year guidance after Q1's revenue beat but wider-than-expected net loss.", "confirmed": true},
+    {"when": "FY2026", "label": "Full-year 2026 revenue and placement guidance", "detail": "Management has guided to $37M-$41M total revenue and 30-38 Growth Direct system placements for 2026 with roughly 20% gross margin; the August 7 Q2 print will show whether the company is tracking to this range.", "confirmed": true},
+    {"when": "through Feb 2027", "label": "MilliporeSigma distribution agreement, year two", "detail": "Rapid Micro is in year two of its five-year global co-exclusive distribution and collaboration agreement with MilliporeSigma (running roughly March 2026-February 2027), under which MilliporeSigma has a stated commitment to purchase Growth Direct systems; incremental orders under this plan year are a potential upside catalyst.", "confirmed": false},
+    {"when": "2026", "label": "Follow-on orders from anchor pharma accounts", "detail": "Following large multi-system expansion orders from Amgen (Q4 2025) and Samsung Biologics (Q1 2026), additional follow-on orders from these and other big-pharma customers as they continue rolling out Growth Direct across sites remain a potential upside catalyst.", "confirmed": false}
   ],
   "pulse": "Rapid Micro Biosystems is a small-cap pharma-automation name (Growth Direct microbial QC platform) that has traded weakly since a disappointing Q1 2026 report, with shares down roughly 11-12% since March even as MilliporeSigma's global distribution partnership and pharma reshoring/automation demand are cited as potential 2026 tailwinds. News flow over the past six weeks has been light and largely administrative — a routine employee inducement grant and insider option exercises by the CEO and a director, alongside confirmation of the Q2 report date — with the August 7, 2026 earnings release the next real test of whether system placement momentum and the MilliporeSigma ramp are translating into progress toward full-year guidance of $37M-$41M revenue."
 }

@@ -1,53 +1,15 @@
 {
   "ticker": "NRXS",
   "news": [
-    {
-      "date": "2026-07-28",
-      "headline": "NeurAxis to Host Second Quarter 2026 Results and Business Update Call on Tuesday, August 11, 2026",
-      "source": "GlobeNewswire",
-      "url": "https://www.globenewswire.com/news-release/2026/07/28/3334108/0/en/NeurAxis-to-Host-Second-Quarter-2026-Results-and-Business-Update-Call-on-Tuesday-August-11-2026.html",
-      "summary": "NeurAxis confirmed it will release summarized Q2 2026 financial results (quarter ended June 30, 2026) before market open on Tuesday, August 11, 2026, followed by a conference call and webcast at 9:00am ET."
-    },
-    {
-      "date": "2026-07-09",
-      "headline": "NeurAxis Declares Q2 2026 Stock Dividend on Series B Preferred Stock",
-      "source": "StockTitan (8-K filing)",
-      "url": "https://www.stocktitan.net/sec-filings/NRXS/8-k-neuraxis-inc-reports-material-event-4c97e7c4fea7.html",
-      "summary": "NeurAxis's board declared its Q2 2026 dividend on Series B Preferred Stock payable entirely in new common shares (roughly 80,463 shares, based on accrued dividends divided by a $2.38 reference price) rather than cash, to holders of record as of July 21, 2026, with payment settling July 29, 2026."
-    },
-    {
-      "date": "2026-06-12",
-      "headline": "NeurAxis Stockholders Approve Director Elections and Equity Plan Expansion at 2026 Annual Meeting",
-      "source": "StockTitan (DEF 14A / meeting results)",
-      "url": "https://www.stocktitan.net/sec-filings/NRXS/def-14a-neuraxis-inc-definitive-proxy-statement-6a0303e55ee1.html",
-      "summary": "At its June 10, 2026 annual meeting, NeurAxis stockholders elected all six director nominees (including CEO Brian Carrico) and approved expanding the 2022 Omnibus Incentive Plan's authorized share pool from 1,482,152 to 3,400,000 shares plus a new 2025 Employee Stock Purchase Plan."
-    }
+    {"date": "2026-07-28", "headline": "NeurAxis to Host Second Quarter 2026 Results and Business Update Call on Tuesday, August 11, 2026", "source": "GlobeNewswire", "url": "https://www.globenewswire.com/news-release/2026/07/28/3334108/0/en/NeurAxis-to-Host-Second-Quarter-2026-Results-and-Business-Update-Call-on-Tuesday-August-11-2026.html", "summary": "NeurAxis said it will report summarized Q2 2026 financial results (period ended June 30, 2026) before market open on August 11, 2026, followed by a conference call and webcast at 9:00 am ET to review results and provide a business update."},
+    {"date": "2026-07-09", "headline": "NeurAxis Declares Second-Quarter 2026 Stock Dividend on Series B Preferred Stock", "source": "StockTitan / 8-K filing", "url": "https://www.stocktitan.net/sec-filings/NRXS/8-k-neuraxis-inc-reports-material-event-4c97e7c4fea7.html", "summary": "NeurAxis' board declared its Q2 2026 dividend on Series B Preferred Stock payable entirely in roughly 80,463 shares of common stock (rather than cash) on July 29, 2026, to holders of record as of July 21, 2026, conserving cash while modestly diluting common shareholders."},
+    {"date": "2026-06-12", "headline": "NeurAxis Stockholders Approve Director Slate and Equity Compensation Plans at 2026 Annual Meeting", "source": "SEC DEF 14A / 8-K filing", "url": "https://www.sec.gov/Archives/edgar/data/0001933567/000114036126017498/ny20066493x1_def14a.htm", "summary": "At its June 10, 2026 annual meeting, NeurAxis stockholders re-elected all six director nominees (including CEO Brian Carrico) and approved an amendment to the company's Omnibus Incentive Plan along with a new 2025 Employee Stock Purchase Plan."}
   ],
   "catalysts": [
-    {
-      "when": "2026-08-11",
-      "label": "Q2 2026 earnings report and business update call",
-      "detail": "NeurAxis will report Q2 2026 financial results (quarter ended June 30, 2026) before market open with a 9:00am ET conference call; investors will watch whether the +80% YoY revenue growth and margin expansion seen in Q1 2026 continued, and whether VA-channel sales are becoming visible in the numbers.",
-      "confirmed": true
-    },
-    {
-      "when": "Ongoing 2026",
-      "label": "Further payer/insurer coverage expansion",
-      "detail": "Following the AMA Category I CPT code for PENFS (effective January 1, 2026) and insurer wins covering about 1.25 million lives announced in April 2026, NeurAxis has a recurring pattern of announcing new medical policy coverage decisions that could keep expanding its reimbursed addressable market.",
-      "confirmed": false
-    },
-    {
-      "when": "2026 (unspecified)",
-      "label": "Adult IBS / expanded pediatric label FDA submissions",
-      "detail": "Management has publicly flagged plans to pursue expanded FDA indications for PENFS beyond the current pediatric/adolescent functional abdominal pain and dyspepsia clearances, including an adult IBS indication; no confirmed submission or clearance date has been disclosed.",
-      "confirmed": false
-    },
-    {
-      "when": "Ongoing 2026",
-      "label": "VA hospital system commercial rollout",
-      "detail": "NeurAxis holds a Federal Supply Schedule contract with the U.S. Department of Veterans Affairs (effective December 2025) and management said on the Q1 2026 call that early VA adoption was running ahead of internal expectations, though no analyst model yet includes VA revenue.",
-      "confirmed": false
-    }
+    {"when": "August 11, 2026", "label": "Q2 2026 earnings and business update call", "detail": "NeurAxis will release Q2 2026 financial results before market open and hold a conference call at 9:00 am ET, its next major checkpoint on revenue growth, margins, and cash burn following Q1's 80% YoY revenue growth.", "confirmed": true},
+    {"when": "H2 2026 (ongoing)", "label": "Further payer medical-policy coverage wins", "detail": "NeurAxis has a recurring cadence of announcing new commercial and Medicaid payer coverage decisions for IB-Stim/PENFS; additional insurer policies are expected to keep expanding the roughly 51-55 million already-covered lives.", "confirmed": false},
+    {"when": "FY2026", "label": "Progress toward cash-flow breakeven", "detail": "Management has guided toward reaching cash-flow breakeven during 2026, helped by the new AMA Category I CPT code (effective January 2026) that broadens reimbursement; upcoming quarterly reports will show whether the company is tracking to that goal.", "confirmed": false},
+    {"when": "~2027-2028 (estimated)", "label": "Randomized controlled trial readout (Cleveland Clinic/Stanford)", "detail": "NeurAxis is running a randomized, double-blind study of PENFS therapy at Cleveland Clinic and Stanford University in adult patients; management has indicated usable data could be available in roughly one to two years, which could support expansion into adult indications.", "confirmed": true}
   ],
-  "pulse": "NeurAxis remains in a quiet news stretch heading into its next earnings print: June and July 2026 brought routine corporate actions rather than fresh commercial catalysts, with stockholders re-electing the board and expanding the equity incentive plan at the June 10 annual meeting, a Q2 stock dividend on Series B Preferred shares declared July 9 and settled July 29, and on July 28 the company locking in August 11 as its Q2 2026 earnings date. The stock has traded well above pre-CPT-code levels, reflecting the market's reaction to Q1's 80% YoY revenue growth, expanding gross margins, and narrowing cash burn. The August 11 report is the key near-term event to confirm the reimbursement-driven growth trajectory held up in Q2, with the still-unmodeled VA rollout, ongoing payer coverage wins, and potential adult-indication FDA submissions as medium-term catalysts to watch."
+  "pulse": "NeurAxis remains a small, revenue-ramping medtech commercializing its IB-Stim (PENFS) neuromodulation device for pediatric functional abdominal pain, with growth accelerating after its new AMA Category I CPT code took effect in January 2026 and payer coverage expanded to roughly 51-55 million lives. Q1 2026 revenue grew 80% year-over-year to $1.6 million with 86.4% gross margin, and the next checkpoint is the Q2 2026 results/business update call on August 11, 2026. News flow over the past ~45 days has been light and largely administrative (a Series B preferred stock dividend paid in shares, and routine annual-meeting governance approvals), with the market's attention now turning to whether Q2 sustains the growth and margin trajectory seen in Q1."
 }
