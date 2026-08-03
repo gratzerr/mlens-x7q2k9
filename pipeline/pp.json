@@ -62860,6 +62860,50 @@
   },
   {
    "account": "ALL",
+   "ticker": "ABVX270115C00120000",
+   "name": "ABVX 15JAN27 120 C",
+   "byPort": {
+    "IBKR": 10000.0
+   },
+   "isin": "",
+   "ccy": "USD",
+   "shares": 10000.0,
+   "price": 22.9,
+   "value": 229000.0,
+   "valueEur": 200350,
+   "valueUsd": 229000,
+   "basisUsd": 267461,
+   "realizedUsd": 0,
+   "avgCost": 26.7461,
+   "unrealRet": -14.4,
+   "dayRet": 1.78,
+   "prevClose": 22.5,
+   "priceDate": "2026-08-03"
+  },
+  {
+   "account": "ALL",
+   "ticker": "NRXS",
+   "name": "NEURAXIS INC",
+   "byPort": {
+    "IBKR": 35000.0
+   },
+   "isin": "US64134X2018",
+   "ccy": "USD",
+   "shares": 35000.0,
+   "price": 6.53999996,
+   "value": 228900.0,
+   "valueEur": 200262,
+   "valueUsd": 228900,
+   "basisUsd": 198036,
+   "realizedUsd": 0,
+   "avgCost": 5.6582,
+   "unrealRet": 15.6,
+   "dayRet": 4.64,
+   "prevClose": 6.25,
+   "priceDate": "2026-08-03"
+  },
+  {
+   "account": "ALL",
    "ticker": "PINK.V",
    "name": "PERIMETER MEDICAL IMAGING AI",
    "byPort": {
