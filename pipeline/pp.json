@@ -62794,6 +62794,28 @@
   },
   {
    "account": "ALL",
+   "ticker": "RPID",
+   "name": "RAPID MICRO BIOSYSTEMS INC-A",
+   "byPort": {
+    "IBKR": 105000.0
+   },
+   "isin": "US75340L1044",
+   "ccy": "USD",
+   "shares": 105000.0,
+   "price": 2.19499993,
+   "value": 230474.99,
+   "valueEur": 201640,
+   "valueUsd": 230475,
+   "basisUsd": 219812,
+   "realizedUsd": 0,
+   "avgCost": 2.0935,
+   "unrealRet": 4.9,
+   "dayRet": 3.05,
+   "prevClose": 2.13,
+   "priceDate": "2026-08-03"
+  },
+  {
+   "account": "ALL",
    "ticker": "NKTR",
    "name": "NEKTAR THERAPEUTICS",
    "byPort": {
