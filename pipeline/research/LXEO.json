@@ -2,6 +2,20 @@
   "ticker": "LXEO",
   "news": [
     {
+      "date": "2026-07-28",
+      "headline": "Lexeo Therapeutics Raised to \"Strong-Buy\" at Chardan Capital",
+      "source": "Chardan Capital (via Daily Political)",
+      "url": "https://www.dailypolitical.com/2026/07/31/lexeo-therapeutics-nasdaqlxeo-raised-to-strong-buy-at-chardan-capital.html",
+      "summary": "Chardan Capital upgraded Lexeo Therapeutics from Buy to Strong-Buy, reflecting growing analyst confidence in the LX2006 registrational program following June's regulatory and trial-design update. The upgrade added to a string of bullish sell-side calls on the stock over the summer."
+    },
+    {
+      "date": "2026-06-25",
+      "headline": "JPMorgan Lowers Lexeo Therapeutics Price Target to $9 from $12, Maintains Overweight",
+      "source": "Investing.com / Insider Monkey",
+      "url": "https://www.insidermonkey.com/blog/is-lexeo-therapeutics-inc-lxeo-stock-still-a-gene-therapy-opportunity-after-analyst-valuation-update-1793955/",
+      "summary": "JPMorgan trimmed its price target on LXEO to $9 from $12 while reiterating an Overweight rating, citing an updated valuation model that still implies over 90% upside from the then-current share price. The revision followed Lexeo's finalized SUNRISE-FA 2 pivotal trial protocol."
+    },
+    {
       "date": "2026-06-17",
       "headline": "Lexeo Therapeutics Announces Publication in JAMA Cardiology of Phase I/II Data for LX2006 in Friedreich Ataxia",
       "source": "GlobeNewswire",
@@ -18,10 +32,10 @@
   ],
   "catalysts": [
     {
-      "when": "H2 2026 (exact date TBA)",
+      "when": "2026-08-19",
       "label": "Q2 2026 earnings report",
-      "detail": "Lexeo is expected to report second-quarter 2026 financial results and provide an operational/pipeline update; the exact date had not been officially confirmed as of early August 2026.",
-      "confirmed": false
+      "detail": "Lexeo is scheduled to report second-quarter 2026 financial results and provide an operational/pipeline update on August 19, 2026.",
+      "confirmed": true
     },
     {
       "when": "Q4 2026",
@@ -42,5 +56,5 @@
       "confirmed": true
     }
   ],
-  "pulse": "Lexeo Therapeutics is a clinical-stage genetic medicine company whose lead program, LX2006, is an AAV-based gene therapy for Friedreich ataxia cardiomyopathy now moving into the SUNRISE-FA 2 pivotal trial after the company finalized the trial protocol in mid-June 2026 and published supportive Phase I/II data in JAMA Cardiology. The stock has traded well below its 52-week high amid broader gene-therapy sector weakness, even as the company reported roughly $227.6 million in cash as of Q1 2026 (runway into 2028) and multiple FDA designations (Breakthrough Therapy, RMAT, Orphan Drug, Fast Track) for LX2006. Near-term catalysts include a Q2 2026 earnings update, a Q4 2026 data update for the LX2020 PKP2 cardiomyopathy program, and a SUNRISE-FA 2 topline readout targeted for the second half of 2027 ahead of a planned 2028 BLA submission."
+  "pulse": "Lexeo Therapeutics is a clinical-stage genetic medicine company whose lead program, LX2006, is an AAV-based gene therapy for Friedreich ataxia cardiomyopathy now enrolling in the SUNRISE-FA 2 pivotal trial after the company finalized the trial protocol in mid-June 2026 and published supportive Phase I/II data in JAMA Cardiology. Sell-side sentiment has been mixed but broadly constructive over the summer, with JPMorgan trimming its price target on a model update in late June even as Chardan Capital upgraded the stock to Strong-Buy in late July, all against a backdrop of roughly $227.6 million in cash (runway into 2028) and multiple FDA designations for LX2006. The next major catalyst is the Q2 2026 earnings update on August 19, 2026, followed by a Q4 2026 data update for the LX2020 PKP2 cardiomyopathy program and a SUNRISE-FA 2 topline readout targeted for the second half of 2027 ahead of a planned 2028 BLA submission."
 }
