@@ -1,8 +1,8 @@
 {
- "fileDate": "2026-08-04 04:13",
- "generated": "2026-08-04 04:23",
+ "fileDate": "2026-08-04 04:24",
+ "generated": "2026-08-04 04:34",
  "engine": "pp-exact (verified vs PP app 2026-07-11)",
- "totalSecuritiesEur": 2069338,
+ "totalSecuritiesEur": 2069776,
  "cashEur": -169049.16,
  "cashByAccount": [
   {
@@ -30,22 +30,22 @@
    "eur": 137.81
   }
  ],
- "totalEur": 1900289,
- "ttwrorSince2022": 385.18,
- "ttwrorYtd": 92.65,
- "ttwrorAnnualized": 41.08,
- "izf": 66.97,
+ "totalEur": 1900727,
+ "ttwrorSince2022": 385.3,
+ "ttwrorYtd": 92.69,
+ "ttwrorAnnualized": 41.09,
+ "izf": 66.99,
  "yearlyReturns": {
   "2022": 3.3,
   "2023": 11.8,
   "2024": 45.2,
   "2025": 50.2,
-  "2026": 92.6
+  "2026": 92.7
  },
  "realizedEur": 817050,
- "unrealizedEur": 412684,
+ "unrealizedEur": 413121,
  "realizedUsd": 984426,
- "unrealizedUsd": 454598,
+ "unrealizedUsd": 455098,
  "netContribEur": 667272,
  "netContribUsd": 739179,
  "earningsEur": 13297.85,
@@ -26857,9 +26857,9 @@
   },
   {
    "d": "2026-08-03",
-   "v": 2172030,
-   "e": 1900289,
-   "r": 3.851839,
+   "v": 2172530,
+   "e": 1900727,
+   "r": 3.852956,
    "c": 739179,
    "k": 667272,
    "q": 984426,
@@ -62693,15 +62693,15 @@
    "name": "RAPID MICRO BIOSYSTEMS INC-A"
   }
  ],
- "ppReferenceTtwror": 385.18,
+ "ppReferenceTtwror": 385.3,
  "ppReferenceDate": "2026-08-04",
- "ttwrorApproxSince2022": 385.18,
+ "ttwrorApproxSince2022": 385.3,
  "yearlyReturnsApprox": {
   "2022": 3.3,
   "2023": 11.8,
   "2024": 45.2,
   "2025": 50.2,
-  "2026": 92.6
+  "2026": 92.7
  },
  "holdings": [
   {
@@ -62780,15 +62780,15 @@
    "isin": "",
    "ccy": "USD",
    "shares": 10000.0,
-   "price": 23.35,
-   "value": 233500.0,
-   "valueEur": 204287,
-   "valueUsd": 233500,
+   "price": 23.4,
+   "value": 234000.0,
+   "valueEur": 204724,
+   "valueUsd": 234000,
    "basisUsd": 267461,
    "realizedUsd": 0,
    "avgCost": 26.7461,
-   "unrealRet": -12.7,
-   "dayRet": 3.78,
+   "unrealRet": -12.5,
+   "dayRet": 4.0,
    "prevClose": 22.5,
    "priceDate": "2026-08-03"
   },
