@@ -1,15 +1,15 @@
 {
- "fileDate": "2026-08-05 08:11",
- "generated": "2026-08-05 08:12",
+ "fileDate": "2026-08-05 08:17",
+ "generated": "2026-08-05 08:23",
  "engine": "pp-exact (verified vs PP app 2026-07-11)",
- "totalSecuritiesEur": 2085302,
- "cashEur": -143075.43,
+ "totalSecuritiesEur": 2107840,
+ "cashEur": -165476.84,
  "cashByAccount": [
   {
    "account": "IBKR USD",
    "ccy": "USD",
-   "balance": -172020.15,
-   "eur": -150498.82
+   "balance": -197624.96,
+   "eur": -172900.23
   },
   {
    "account": "SQ EUR",
@@ -30,11 +30,11 @@
    "eur": 93.1
   }
  ],
- "totalEur": 1942227,
- "ttwrorSince2022": 389.17,
- "ttwrorYtd": 94.23,
- "ttwrorAnnualized": 41.3,
- "izf": 67.44,
+ "totalEur": 1942363,
+ "ttwrorSince2022": 389.21,
+ "ttwrorYtd": 94.24,
+ "ttwrorAnnualized": 41.31,
+ "izf": 67.45,
  "yearlyReturns": {
   "2022": 3.3,
   "2023": 11.8,
@@ -43,15 +43,15 @@
   "2026": 94.2
  },
  "realizedEur": 817050,
- "unrealizedEur": 428648,
+ "unrealizedEur": 428788,
  "realizedUsd": 984426,
- "unrealizedUsd": 472845,
+ "unrealizedUsd": 473005,
  "netContribEur": 693272,
  "netContribUsd": 768897,
  "earningsEur": 13297.85,
  "earningsUsd": 14376,
- "feesEur": 8931.4,
- "feesUsd": 10196,
+ "feesEur": 8935.61,
+ "feesUsd": 10201,
  "taxesEur": 1717.1,
  "taxesUsd": 1907,
  "series": [
@@ -26873,22 +26873,29 @@
   },
   {
    "d": "2026-08-04",
-   "v": 2219965,
-   "e": 1942227,
-   "r": 3.891723,
+   "v": 2220121,
+   "e": 1942363,
+   "r": 3.892065,
    "c": 768897,
    "k": 693272,
    "q": 984426,
    "Q": 817050,
    "g": 14376,
    "G": 13298,
-   "f": 10196,
-   "F": 8931,
+   "f": 10201,
+   "F": 8936,
    "t": 1907,
    "T": 1717
   }
  ],
  "payments": [
+  {
+   "d": "2026-08-04",
+   "k": "fee",
+   "tk": "CLPT",
+   "eur": 4.21,
+   "usd": 4.81
+  },
   {
    "d": "2026-08-01",
    "k": "deposit",
@@ -42348,6 +42355,11 @@
     "2026-07-28",
     1500.0,
     14.0483
+   ],
+   [
+    "2026-08-04",
+    2000.0,
+    12.8
    ]
   ],
   "DCTH": [
@@ -42600,6 +42612,17 @@
   "SQ"
  ],
  "acts": [
+  {
+   "d": "2026-08-04",
+   "t": "BUY",
+   "sh": 2000.0,
+   "px": 12.8,
+   "ccy": "USD",
+   "amt": 25600.0,
+   "port": "IBKR",
+   "tk": "CLPT",
+   "isin": "US18507C1036"
+  },
   {
    "d": "2026-07-31",
    "t": "BUY",
@@ -62716,9 +62739,9 @@
    "name": "RAPID MICRO BIOSYSTEMS INC-A"
   }
  ],
- "ppReferenceTtwror": 389.17,
+ "ppReferenceTtwror": 389.21,
  "ppReferenceDate": "2026-08-05",
- "ttwrorApproxSince2022": 389.17,
+ "ttwrorApproxSince2022": 389.21,
  "yearlyReturnsApprox": {
   "2022": 3.3,
   "2023": 11.8,
@@ -62751,6 +62774,28 @@
   },
   {
    "account": "ALL",
+   "ticker": "CLPT",
+   "name": "CLEARPOINT NEURO INC",
+   "byPort": {
+    "IBKR": 22000.0
+   },
+   "isin": "US18507C1036",
+   "ccy": "USD",
+   "shares": 22000.0,
+   "price": 12.88000011,
+   "value": 283360.0,
+   "valueEur": 247909,
+   "valueUsd": 283360,
+   "basisUsd": 230515,
+   "realizedUsd": -60391,
+   "avgCost": 10.4779,
+   "unrealRet": 22.9,
+   "dayRet": -16.25,
+   "prevClose": 15.38,
+   "priceDate": "2026-08-04"
+  },
+  {
+   "account": "ALL",
    "ticker": "DCTH",
    "name": "Delcath Systems, Inc.",
    "byPort": {
@@ -62769,28 +62814,6 @@
    "unrealRet": 35.7,
    "dayRet": 0.77,
    "prevClose": 13.04,
-   "priceDate": "2026-08-04"
-  },
-  {
-   "account": "ALL",
-   "ticker": "CLPT",
-   "name": "CLEARPOINT NEURO INC",
-   "byPort": {
-    "IBKR": 20000.0
-   },
-   "isin": "US18507C1036",
-   "ccy": "USD",
-   "shares": 20000.0,
-   "price": 12.88000011,
-   "value": 257600.0,
-   "valueEur": 225372,
-   "valueUsd": 257600,
-   "basisUsd": 204915,
-   "realizedUsd": -60391,
-   "avgCost": 10.2457,
-   "unrealRet": 25.7,
-   "dayRet": -16.25,
-   "prevClose": 15.38,
    "priceDate": "2026-08-04"
   },
   {
