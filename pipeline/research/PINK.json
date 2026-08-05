@@ -9,6 +9,13 @@
       "summary": "Brookline Capital Markets initiated research coverage on Perimeter Medical Imaging AI with a Buy rating and a C$1.54 price target, citing Claire's FDA Breakthrough Device status and the company's pending CMS New Technology APC reimbursement filing, with a decision expected by year-end 2026. The stock had closed at C$0.32 on July 13, 2026 ahead of the initiation."
     },
     {
+      "date": "2026-07-06",
+      "headline": "Paradigm Capital names Perimeter a healthcare Top Pick",
+      "source": "BioTuesdays",
+      "url": "https://biotuesdays.com/2026/07/06/paradigm-capital-names-perimeter-and-maintains-profound-as-healthcare-top-picks/",
+      "summary": "Paradigm Capital named Perimeter Medical Imaging AI a new healthcare Top Pick with a speculative buy rating and a C$0.95 price target, following the FDA's March 2026 premarket approval of the Claire OCT imaging device for intraoperative breast cancer margin assessment. Paradigm was also a lead agent on Perimeter's spring 2026 financings."
+    },
+    {
       "date": "2026-06-15",
       "headline": "Perimeter Medical Imaging AI to Participate in the Planet MicroCap Showcase in Las Vegas",
       "source": "PR Newswire",
@@ -20,7 +27,7 @@
       "headline": "Perimeter Selected for INOVAIT Pilot Fund to Advance AI for Breast Cancer Surgery",
       "source": "PR Newswire",
       "url": "https://www.prnewswire.com/news-releases/perimeter-selected-for-inovait-pilot-fund-to-advance-ai-for-breast-cancer-surgery-302795289.html",
-      "summary": "Perimeter Medical Imaging AI was selected to receive a contribution from the INOVAIT Pilot Fund to help advance next-generation AI capabilities for its flagship Claire imaging device. The funding supports continued development of the AI-enabled OCT platform used for real-time breast cancer surgical margin assessment."
+      "summary": "Perimeter Medical Imaging AI was selected to receive a contribution from the INOVAIT Pilot Fund, plus a Mitacs award, to help advance next-generation AI capabilities for its flagship Claire imaging device. The funding supports continued development of the AI-enabled OCT platform used for real-time breast cancer surgical margin assessment."
     },
     {
       "date": "2026-06-08",
@@ -44,11 +51,11 @@
       "confirmed": false
     },
     {
-      "when": "Expected August/September 2026",
+      "when": "Expected early September 2026",
       "label": "Second quarter 2026 financial results",
-      "detail": "Perimeter is expected to report Q2 2026 (period ended June 30, 2026) financial and operating results; based on the Q1 2026 reporting cadence (results issued May 28, 2026), no official Q2 date had been announced as of August 4, 2026.",
+      "detail": "Perimeter is expected to report Q2 2026 (period ended June 30, 2026) financial and operating results; third-party earnings calendars project a report date around September 1, 2026, though no official date had been announced by the company as of August 5, 2026. This will be the first quarter to include any Claire procedure revenue.",
       "confirmed": false
     }
   ],
-  "pulse": "Perimeter Medical Imaging AI continues commercializing Claire, the first FDA-approved AI-enabled OCT imaging device for real-time intraoperative breast cancer margin assessment, while expanding its base of S-Series OCT hospital placements; June 2026 brought an INOVAIT pilot grant to advance Claire's AI capabilities and the close of a CDN$6.04 million convertible debenture financing (heavily backed by CEO Adrian Mendes), extending the company's cash runway. The stock, still pre-profitability and reliant on dilutive financing, got a fresh vote of confidence in mid-July when Brookline Capital Markets initiated coverage with a Buy rating and a C$1.54 price target built largely around the pending CMS New Technology APC reimbursement decision expected by year-end 2026. Company-specific news flow has been quiet since the Brookline initiation, with the next major catalyst likely to be Q2 2026 financial results (expected August/September, date not yet announced) followed by progress on the Medicare reimbursement pathway seen as key to broader hospital adoption economics."
+  "pulse": "Perimeter Medical Imaging AI continues commercializing Claire, the first FDA-approved AI-enabled OCT imaging device for real-time intraoperative breast cancer margin assessment, while expanding its base of S-Series OCT hospital placements; June 2026 brought an INOVAIT pilot grant to advance Claire's AI capabilities and the close of a CDN$6.04 million convertible debenture financing (heavily backed by CEO Adrian Mendes), extending the company's cash runway. Sell-side sentiment turned notably more constructive in early-to-mid July, with Paradigm Capital naming Perimeter a healthcare Top Pick (speculative buy, C$0.95 target) on July 6 and Brookline Capital Markets initiating coverage with a Buy rating and a C$1.54 price target on July 14, both anchored on the pending CMS New Technology APC reimbursement decision expected by year-end 2026. Company-specific news flow has been quiet since the Brookline initiation, with the next major catalyst likely to be Q2 2026 financial results (third-party trackers point to early September, not yet officially confirmed) followed by progress on the Medicare reimbursement pathway seen as key to broader hospital adoption economics."
 }

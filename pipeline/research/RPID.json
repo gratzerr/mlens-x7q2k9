@@ -2,6 +2,13 @@
   "ticker": "RPID",
   "news": [
     {
+      "date": "2026-08-03",
+      "headline": "Rapid Micro Biosystems Announces Inducement Grants Under Nasdaq Listing Rule 5635(c)(4)",
+      "source": "GlobeNewswire",
+      "url": "https://investors.rapidmicrobio.com/news-releases/news-release-details/rapid-micro-biosystems-announces-inducement-grants-under-3/",
+      "summary": "Rapid Micro Biosystems granted a new employee 90,000 restricted stock units and a non-qualified option to purchase 170,000 shares as a material inducement to employment, approved by independent directors under the company's Inducement Plan. The RSUs vest annually over three years, one-third per anniversary of the grant date."
+    },
+    {
       "date": "2026-07-24",
       "headline": "Rapid Micro Biosystems Director Richard Kollender Exercises Stock Options",
       "source": "SEC Form 4 (via StockTitan)",
@@ -21,13 +28,20 @@
       "source": "StockTitan (SEC Form 4 filing)",
       "url": "https://www.stocktitan.net/sec-filings/RPID/form-4-rapid-micro-biosystems-inc-insider-trading-activity-aacf0a4df670.html",
       "summary": "President and CEO Robert G. Spignesi Jr. exercised a fully vested stock option for 1,402 Class A shares at $0.75 per share on July 22, 2026, ahead of the option's August 11, 2026 expiration. No shares were sold in the filing, leaving Spignesi with 1,191,973 directly held shares."
+    },
+    {
+      "date": "2026-07-08",
+      "headline": "RPID Affiliate Files Form 144 to Sell 10,000 Class A Shares",
+      "source": "SEC Form 144 (via StockTitan)",
+      "url": "https://www.stocktitan.net/sec-filings/RPID/144-rapid-micro-biosystems-inc-sec-filing-15df3a9aed2f.html",
+      "summary": "A company affiliate filed notice on July 8, 2026 of intent to sell 10,000 Class A shares acquired via stock option exercise, part of a pattern of periodic smaller insider sales (5,000 shares on 6/10, 3,688 on 6/22, 6,312 on 7/1) rather than a single large disposal."
     }
   ],
   "catalysts": [
     {
       "when": "2026-08-07",
       "label": "Q2 2026 earnings release and conference call",
-      "detail": "Rapid Micro Biosystems will report second-quarter 2026 financial results before market open on August 7, 2026, followed by a management webcast at 8:30 a.m. ET; investors will be watching for progress against the FY2026 guidance of $37M-$41M revenue and 30-38 Growth Direct system placements after Q1's $8.0M revenue print.",
+      "detail": "Rapid Micro Biosystems will report second-quarter 2026 financial results before market open on August 7, 2026, followed by a management webcast at 8:30 a.m. ET; investors will be watching for progress against the FY2026 guidance of $37M-$41M revenue and 30-38 Growth Direct system placements after Q1's $8.0M revenue print and a wider-than-expected net loss.",
       "confirmed": true
     },
     {
@@ -37,5 +51,5 @@
       "confirmed": false
     }
   ],
-  "pulse": "Rapid Micro Biosystems continues to grow its Growth Direct automated microbial QC installed base, following a record Q4 2025 and a Q1 2026 with $8.0M revenue (+11% YoY) and reaffirmed FY2026 guidance of $37M-$41M, but the stock trades near multi-year lows (roughly $2, market cap under $100M) after a May 2026 dilutive equity-and-warrant offering and a wider-than-expected Q1 net loss. News flow has been quiet over the past six weeks, limited to routine insider stock-option-exercise filings from the CEO and a board member, with the next major catalyst being the Q2 2026 earnings report on August 7, 2026 that will show whether system-placement and margin momentum is holding up."
+  "pulse": "Rapid Micro Biosystems heads into its Q2 2026 earnings report (August 7, before the open) still working through the fallout of a disappointing Q1 -- an 11% revenue gain to $8.0M was overshadowed by a wider-than-expected net loss and a dilutive ~$9.8M equity-and-warrant offering priced at $1.955/share in May, leaving the stock around $2 and a sub-$100M market cap despite reaffirmed FY2026 guidance of $37M-$41M revenue and 30-38 Growth Direct placements. News flow over the past six weeks has stayed routine -- inducement equity grants tied to continued hiring (August 3 and June 10) and small option-exercise/insider-sale filings from the CEO, a director, and other affiliates -- with no new customer orders, partnerships, or analyst rating changes disclosed since Samsung Biologics' follow-on order in March; sell-side coverage remains split between bullish (KeyBanc and Lake Street, Overweight/Buy, $8 targets) and cautious (Morgan Stanley, Equal-Weight, $2.75), with Friday's Q2 print set to be the next real test of whether system-placement and margin momentum is holding up."
 }

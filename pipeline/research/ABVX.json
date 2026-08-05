@@ -16,13 +16,6 @@
       "summary": "Morgan Stanley raised its price target on Abivax to $180 while reiterating an Overweight rating, one of several sell-side upgrades (Piper Sandler to $175, Truist to $155) following the company's strong ABTECT maintenance data and positive FDA pre-NDA feedback. The moves lifted the Street's average target well above prior levels."
     },
     {
-      "date": "2026-07-23",
-      "headline": "Abivax Strengthens Commercial Capabilities With Strategic Leadership Appointments",
-      "source": "GlobeNewswire",
-      "url": "https://www.globenewswire.com/news-release/2026/07/23/3332548/0/en/Abivax-Strengthens-Commercial-Capabilities-With-Strategic-Leadership-Appointments.html",
-      "summary": "Abivax named four new commercial leaders spanning marketing, patient services, sales/commercial operations, and market access as it builds out its U.S. commercial organization. The hires come ahead of a planned Q4 2026 NDA submission for obefazimod and signal preparation for a potential U.S. product launch."
-    },
-    {
       "date": "2026-07-17",
       "headline": "Abivax Shares Soar Amid Renewed Takeover Chatter",
       "source": "MarketScreener",
@@ -30,11 +23,11 @@
       "summary": "Abivax shares surged roughly 26% after French outlet La Lettre reported the company had re-engaged investment bank Centerview amid renewed acquisition interest from large pharmaceutical companies. The report reignited long-running M&A speculation around the French biotech following its strong obefazimod Phase 3 data, though no formal bid was confirmed."
     },
     {
-      "date": "2026-07-10",
-      "headline": "Abivax $920 Million Cash Haul Lets It Prepare for Solo U.S. Launch Instead of Relying on a Buyer, CEO Tells CNBC",
-      "source": "CNBC",
-      "url": "https://www.cnbc.com/2026/07/10/abivax-stock-takeover-us-launch-obefazimod-ulcerative-colitis.html",
-      "summary": "Abivax's CEO told CNBC that the company's newly closed $920 million capital raise gives it the option to pursue an independent U.S. commercial launch of obefazimod rather than depend on being acquired by a larger pharma partner. The financing is expected to fund operations into 2029, including U.S. commercialization efforts for the ulcerative colitis drug."
+      "date": "2026-07-16",
+      "headline": "Valerio Therapeutics Announces Development Collaboration with Abivax and Provides Pipeline Update",
+      "source": "BusinessWire",
+      "url": "https://www.businesswire.com/news/home/20260716084841/en/Valerio-Therapeutics-Announces-Development-Collaboration-with-Abivax-and-Provides-Pipeline-Update",
+      "summary": "Abivax and fellow French RNA biotech Valerio Therapeutics signed a binding term-sheet for an exclusive global R&D collaboration to identify and evaluate next-generation RNA-based therapeutic candidates for immune-mediated inflammatory diseases. Valerio is eligible for an upfront payment of up to about EUR 2.4 million plus development, commercial milestones and royalties, subject to a definitive license agreement."
     },
     {
       "date": "2026-07-06",
@@ -77,11 +70,17 @@
       "confirmed": false
     },
     {
+      "when": "12-24 months (from July 2026)",
+      "label": "Valerio Therapeutics RNA collaboration candidate nominations",
+      "detail": "Under the July 2026 binding term-sheet with Valerio Therapeutics, the partners target nomination of up to two development candidates for immune-mediated inflammatory diseases within 12-18 months and advancement of at least one program into first-in-human studies within 18-24 months, pending signature of a definitive license agreement.",
+      "confirmed": false
+    },
+    {
       "when": "Following NDA review (~2027 estimate)",
       "label": "Potential FDA approval and U.S. launch of obefazimod",
       "detail": "Abivax has built out a U.S. commercial leadership team ahead of a possible launch of obefazimod for ulcerative colitis, contingent on FDA acceptance and review of the planned NDA.",
       "confirmed": false
     }
   ],
-  "pulse": "Abivax enters August 2026 riding strong momentum from positive Phase 3 ABTECT maintenance and long-term safety data for lead drug obefazimod in ulcerative colitis, a positive late-July pre-NDA meeting with the FDA, and a $920 million capital raise that funds operations into 2029 and a build-out of U.S. commercial leadership ahead of a planned Q4 2026 NDA filing. Sell-side analysts (Morgan Stanley, Piper Sandler, Truist) raised price targets sharply in late July, while the stock remains highly volatile and subject to recurring, unconfirmed takeover speculation involving major pharmaceutical companies, most recently renewed Centerview-linked buyout chatter in mid-July, even as management emphasizes it can pursue an independent U.S. commercialization strategy. Near-term catalysts to watch are NDA submission progress, the September 21, 2026 H1 results release, the eventual Crohn's disease Phase 2b readout, and whether the ongoing M&A speculation resolves into a formal bid."
+  "pulse": "Abivax enters August 2026 riding strong momentum from positive Phase 3 ABTECT maintenance data, a positive late-July pre-NDA meeting with the FDA, and a $920 million capital raise that funds operations into 2029 and a build-out of U.S. commercial leadership ahead of a planned Q4 2026 NDA filing. Sell-side analysts (Morgan Stanley, Piper Sandler, Truist) raised price targets sharply in late July, the company signed a new RNA-therapeutics R&D collaboration with Valerio Therapeutics, and the stock remains highly volatile and subject to recurring, unconfirmed takeover speculation involving major pharmaceutical companies, most recently renewed Centerview-linked buyout chatter in mid-July, even as management emphasizes it can pursue an independent U.S. commercialization strategy. Near-term catalysts to watch are NDA submission progress, the September 21, 2026 H1 results release, the eventual Crohn's disease Phase 2b readout, and whether the ongoing M&A speculation resolves into a formal bid."
 }
