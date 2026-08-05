@@ -23,6 +23,13 @@
       "summary": "Delcath granted restricted stock units totaling 17,000 shares of common stock to four new employees who joined the company in May and June 2026, issued July 1, 2026 under its 2023 Inducement Plan. The RSUs vest one-third on the first anniversary of grant, with the remainder vesting in equal annual installments over the following two years."
     },
     {
+      "date": "2026-07-14",
+      "headline": "HEPZATO-KIT Market Forecast to 2034 Highlights Growth Drivers, Sales Potential and Competitive Landscape Across the 7MM",
+      "source": "DelveInsight (via GlobeNewswire)",
+      "url": "https://www.globenewswire.com/news-release/2026/07/14/3327123/0/en/hepzato-kit-market-forecast-to-2034-highlights-growth-drivers-sales-potential-and-competitive-landscape-across-the-7mm.html",
+      "summary": "A third-party pharma market-intelligence report assessed HEPZATO KIT's commercial outlook across the seven major markets (US, Germany, France, Italy, Spain, UK, Japan), forecasting country-level sales, peak-sales potential and pricing through 2034. It also reviewed pipeline expansion opportunities in liver cancer and cholangiocarcinoma alongside the competitive landscape."
+    },
+    {
       "date": "2026-07-09",
       "headline": "Delcath Systems Announces First Patient Dosed in Phase 2 Clinical Trial of HEPZATO in Liver-Dominant Metastatic Breast Cancer",
       "source": "BusinessWire",
@@ -44,11 +51,23 @@
       "confirmed": true
     },
     {
+      "when": "2026 (year-end)",
+      "label": "Target of 40 active HEPZATO treatment centers",
+      "detail": "Delcath is working to expand from 28 active US treatment centers at end-2025 toward a 40-center target by year-end 2026, a key driver of continued HEPZATO KIT volume growth.",
+      "confirmed": true
+    },
+    {
       "when": "2026 (ongoing)",
       "label": "DELUMA Phase 2 trial enrollment (liver-dominant metastatic breast cancer)",
       "detail": "Following the first patient dosed in July 2026, continued enrollment across ~20 US and European sites in the ~90-patient randomized trial of HEPZATO plus standard of care is a pipeline catalyst to watch for expansion beyond the approved uveal melanoma indication.",
       "confirmed": true
+    },
+    {
+      "when": "2026 (ongoing)",
+      "label": "Colorectal and other liver-dominant indication expansion",
+      "detail": "Delcath continues to advance investigator-initiated and company-sponsored studies of HEPZATO/CHEMOSAT in additional liver-dominant cancers (including colorectal cancer, under an FDA-cleared IND), representing longer-term label-expansion optionality beyond uveal melanoma.",
+      "confirmed": false
     }
   ],
-  "pulse": "Delcath remains in commercial execution mode heading into its Q2 2026 results on August 6, 2026, with Q1 2026 revenue of $25.0 million (up from $19.8 million a year earlier) and full-year 2026 guidance of at least $100 million; the stock has traded roughly in the $11-13 range in recent weeks with a market cap near $400 million. Beyond the print, the company is broadening its pipeline outside the approved uveal-melanoma indication, having dosed the first patient in its Phase 2 DELUMA trial testing HEPZATO in liver-dominant metastatic breast cancer, and continues routine investor outreach with a Canaccord Genuity conference appearance on August 11. No major regulatory, safety, or financing surprises have surfaced in the past six weeks; the near-term focus is squarely on whether Q2 HEPZATO volume growth is tracking toward the $100M full-year target."
+  "pulse": "Delcath remains in commercial execution mode heading into its Q2 2026 results on August 6, 2026, with Q1 2026 revenue of $25.0 million (up from $19.8 million a year earlier) and full-year 2026 guidance of at least $100 million; the stock has traded roughly in the $11-13 range in recent weeks. Beyond the print, the company is broadening its pipeline outside the approved uveal-melanoma indication, having dosed the first patient in its Phase 2 DELUMA trial testing HEPZATO in liver-dominant metastatic breast cancer, and continues routine investor outreach with a Canaccord Genuity conference appearance on August 11. No major regulatory, safety, or financing surprises have surfaced in the past several weeks; the near-term focus is squarely on whether Q2 HEPZATO volume and treatment-center activation are tracking toward the $100M full-year target and the 40-center year-end goal."
 }

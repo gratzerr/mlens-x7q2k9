@@ -1,1 +1,74 @@
-{"ticker": "RPID", "news": [{"date": "2026-08-04", "headline": "Rapid Micro Biosystems Announces Inducement Grants Under Nasdaq Listing Rule 5635(c)(4)", "source": "Yahoo Finance UK", "url": "https://news.google.com/rss/articles/CBMilwFBVV95cUxOeWhzaTJKUFg0SmNPeUNFbE1FMlMyTnpzNFp4eUhMNVlzbmhNZGRfNEdNY0VGem1yRDNqRGtKUGZFZUU2THY2dDlMQlphNXNiTGlFWUg3UEt2MGZTMHVUNzN0Q1RwaDNVNDhqMEQtb0Z5YUwtV0k3bzFpOHl6QkdxcnZwTXNDOFIxVkcyR0w0RXFhSW5PX204?oc=5", "summary": ""}, {"date": "2026-08-04", "headline": "Rapid Micro Biosystems New Hire Receives 90,000 RSUs and Option", "source": "Stock Titan", "url": "https://news.google.com/rss/articles/CBMiugFBVV95cUxQbXpqa2NIZnhGUVhPb3F4NFpHSU81bEVzWWMySVlQTjJwR0dxdnVyVmxMSGc1LUdDV3lPU1F6U2lnMm44LWpfWXdZSUFCeEtYNHNMSkthWHlWaXlJVl9QVUd4WnVtVFo0UmR2cHNaMTVuRTlDcjZma0s0a2REM05xY2h3UkFjRDQ3SWJneHRYdUZKdU1zT1NHeUx3VGNCY3VtRW1aYzRSTVB6dmhnR3l4QmRTVmtoeEZGTkE?oc=5", "summary": ""}, {"date": "2026-07-24", "headline": "Rapid Micro Biosystems Director Richard Kollender Exercises Stock Options", "source": "SEC Form 4 (via StockTitan)", "url": "https://www.stocktitan.net/sec-filings/RPID/form-4-rapid-micro-biosystems-inc-insider-trading-activity-de72035a26fe.html", "summary": "Board member Richard S. Kollender exercised vested stock options on July 24, 2026, converting them into 3,508 Class A shares, bringing his direct holding to roughly 130,000 shares. No shares were sold in the filing."}, {"date": "2026-07-23", "headline": "Rapid Micro Biosystems to Announce Second Quarter 2026 Financial Results on August 7, 2026", "source": "GlobeNewswire", "url": "https://www.globenewswire.com/news-release/2026/07/23/3332637/0/en/Rapid-Micro-Biosystems-to-Announce-Second-Quarter-2026-Financial-Results-on-August-7-2026.html", "summary": "Rapid Micro Biosystems said it will report second-quarter 2026 financial results before market open on Friday, August 7, 2026. Management will host a webcast conference call at 8:30 a.m. ET the same day to discuss the results."}, {"date": "2026-07-22", "headline": "Rapid Micro Biosystems (RPID) CEO Exercises Stock Options and Boosts Holdings", "source": "StockTitan (SEC Form 4 filing)", "url": "https://www.stocktitan.net/sec-filings/RPID/form-4-rapid-micro-biosystems-inc-insider-trading-activity-aacf0a4df670.html", "summary": "President and CEO Robert G. Spignesi Jr. exercised a fully vested stock option for 1,402 Class A shares at $0.75 per share on July 22, 2026, ahead of the option's August 11, 2026 expiration. No shares were sold in the filing, leaving Spignesi with 1,191,973 directly held shares."}], "catalysts": [{"when": "2026-08-07", "label": "Q2 2026 earnings release and conference call", "detail": "Rapid Micro Biosystems will report second-quarter 2026 financial results before market open on August 7, 2026, followed by a management webcast at 8:30 a.m. ET; investors will be watching for progress against the FY2026 guidance of $37M-$41M revenue and 30-38 Growth Direct system placements after Q1's $8.0M revenue print.", "confirmed": true}, {"when": "Q3/Q4 2026", "label": "Third-quarter 2026 earnings report", "detail": "No specific date has been announced yet, but based on prior-year cadence a Q3 2026 results release would be expected around early-to-mid November 2026, providing the next read on system placements and gross-margin trajectory.", "confirmed": false}], "pulse": "Rapid Micro Biosystems continues to grow its Growth Direct automated microbial QC installed base, following a record Q4 2025 and a Q1 2026 with $8.0M revenue (+11% YoY) and reaffirmed FY2026 guidance of $37M-$41M, but the stock trades near multi-year lows (roughly $2, market cap under $100M) after a May 2026 dilutive equity-and-warrant offering and a wider-than-expected Q1 net loss. News flow has been quiet over the past six weeks, limited to routine insider stock-option-exercise filings from the CEO and a board member, with the next major catalyst being the Q2 2026 earnings report on August 7, 2026 that will show whether system-placement and margin momentum is holding up."}
+{
+  "ticker": "RPID",
+  "news": [
+    {
+      "date": "2026-08-04",
+      "headline": "Rapid Micro Biosystems Announces Inducement Grants Under Nasdaq Listing Rule 5635(c)(4)",
+      "source": "GlobeNewswire",
+      "url": "https://www.globenewswire.com/news-release/2026/08/04/3338867/33206/en/Rapid-Micro-Biosystems-Announces-Inducement-Grants-Under-Nasdaq-Listing-Rule-5635-c-4.html",
+      "summary": "The company granted a newly hired employee 90,000 restricted stock units and a non-qualified option to purchase 170,000 Class A shares as a material inducement to employment, approved by independent directors under the company's Inducement Plan."
+    },
+    {
+      "date": "2026-07-24",
+      "headline": "Rapid Micro Biosystems Director Richard Kollender Exercises Stock Options",
+      "source": "SEC Form 4 (via StockTitan)",
+      "url": "https://www.stocktitan.net/sec-filings/RPID/form-4-rapid-micro-biosystems-inc-insider-trading-activity-de72035a26fe.html",
+      "summary": "Board member Richard S. Kollender exercised vested stock options on July 24, 2026, converting them into 3,508 Class A shares, bringing his direct holding to roughly 130,000 shares. No shares were sold in the filing."
+    },
+    {
+      "date": "2026-07-23",
+      "headline": "Rapid Micro Biosystems to Announce Second Quarter 2026 Financial Results on August 7, 2026",
+      "source": "GlobeNewswire",
+      "url": "https://www.globenewswire.com/news-release/2026/07/23/3332637/0/en/Rapid-Micro-Biosystems-to-Announce-Second-Quarter-2026-Financial-Results-on-August-7-2026.html",
+      "summary": "Rapid Micro Biosystems said it will report second-quarter 2026 financial results before market open on Friday, August 7, 2026, with a management webcast conference call at 8:30 a.m. ET the same day."
+    },
+    {
+      "date": "2026-07-22",
+      "headline": "Rapid Micro Biosystems (RPID) CEO Exercises Stock Options and Boosts Holdings",
+      "source": "SEC Form 4 (via StockTitan)",
+      "url": "https://www.stocktitan.net/sec-filings/RPID/form-4-rapid-micro-biosystems-inc-insider-trading-activity-aacf0a4df670.html",
+      "summary": "President and CEO Robert G. Spignesi Jr. exercised a fully vested stock option for 1,402 Class A shares at $0.75 per share on July 22, 2026, ahead of the option's August 11, 2026 expiration, lifting his directly held stake to 1,191,973 shares with no shares sold."
+    },
+    {
+      "date": "2026-07-01",
+      "headline": "Form 144 Filing Shows Former COO John Wilson Continuing to Sell Vested Shares",
+      "source": "Investing.com (SEC Form 144 filing)",
+      "url": "https://ca.investing.com/news/stock-market-news/form-144-rapid-micro-biosystems-for-1-july-93CH-4716829",
+      "summary": "A Rule 144 notice disclosed a proposed sale of 6,312 Class A shares from an option exercise on July 1, 2026 by former Chief Operating Officer John Wilson, following earlier disposals of 5,000 shares on June 10 and 3,688 shares on June 22 as he continues winding down his equity position after his April 2026 departure."
+    },
+    {
+      "date": "2026-06-10",
+      "headline": "Rapid Micro Biosystems Announces Inducement Grant Under Nasdaq Listing Rule 5635(c)(4)",
+      "source": "GlobeNewswire",
+      "url": "https://www.globenewswire.com/news-release/2026/06/10/3310119/33206/en/Rapid-Micro-Biosystems-Announces-Inducement-Grant-Under-Nasdaq-Listing-Rule-5635-c-4.html",
+      "summary": "The company granted a newly hired employee 60,000 restricted stock units, vesting in three equal annual installments, as a material inducement to employment under its Nasdaq-compliant Inducement Plan."
+    }
+  ],
+  "catalysts": [
+    {
+      "when": "2026-08-07",
+      "label": "Q2 2026 earnings release and conference call",
+      "detail": "Rapid Micro Biosystems will report second-quarter 2026 financial results before market open on August 7, 2026, followed by a management webcast at 8:30 a.m. ET; investors will watch for progress against FY2026 guidance of $37M-$41M revenue and 30-38 Growth Direct system placements after Q1's $8.0M revenue and wider-than-expected net loss.",
+      "confirmed": true
+    },
+    {
+      "when": "~November 2026",
+      "label": "Third-quarter 2026 earnings report",
+      "detail": "No specific date has been announced yet, but based on prior-year cadence a Q3 2026 results release would be expected in early-to-mid November 2026, providing the next read on system placements and gross-margin trajectory.",
+      "confirmed": false
+    },
+    {
+      "when": "FY2026 (through Dec 2026)",
+      "label": "Full-year system-placement and revenue guidance",
+      "detail": "Management has reaffirmed FY2026 guidance of $37M-$41M total revenue, 30-38 Growth Direct system placements, at least 25 system validations, and roughly 20% gross margin — a benchmark investors will track each quarter for signs of acceleration or shortfall.",
+      "confirmed": true
+    },
+    {
+      "when": "Through February 2027",
+      "label": "MilliporeSigma global distribution partnership ramp",
+      "detail": "Rapid Micro's global co-exclusive distribution agreement with MilliporeSigma includes a 'meaningful commitment' to purchase Growth Direct systems during the plan year running from early March 2026 through February 2027, a key channel management is counting on for incremental placements.",
+      "confirmed": true
+    }
+  ],
+  "pulse": "News flow around Rapid Micro Biosystems has stayed quiet through the summer, limited mainly to routine new-hire inducement equity grants and insider stock-option exercises/Rule 144 disposals by the CEO, a board member, and a departed COO, with no new commercial orders or partnership announcements since the March 2026 Samsung Biologics follow-on order. The stock remains depressed near multi-year lows (roughly $2, down over 50% year-over-year) after May 2026's dilutive warrant-backed offering and a wider-than-expected Q1 net loss, even as management reaffirms FY2026 guidance of $37M-$41M revenue and 30-38 Growth Direct placements. The next major catalyst is the Q2 2026 earnings report on August 7, 2026, which will show whether system-placement momentum and the MilliporeSigma distribution partnership are translating into results that justify analyst price targets still well above the current share price."
+}
