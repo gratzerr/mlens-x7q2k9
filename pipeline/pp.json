@@ -1,6 +1,6 @@
 {
- "fileDate": "2026-08-06 05:26",
- "generated": "2026-08-06 05:35",
+ "fileDate": "2026-08-06 05:36",
+ "generated": "2026-08-06 05:46",
  "engine": "pp-exact (verified vs PP app 2026-07-11)",
  "totalSecuritiesEur": 2100126,
  "cashEur": -165476.84,
@@ -62827,10 +62827,10 @@
    "basisUsd": 193634,
    "realizedUsd": -16090,
    "avgCost": 9.6817,
-   "unrealRet": 35.7,
-   "dayRet": 0.77,
-   "prevClose": 13.04,
-   "priceDate": "2026-08-04"
+   "unrealRet": 30.5,
+   "dayRet": -3.88,
+   "prevClose": 13.14,
+   "priceDate": "2026-08-05"
   },
   {
    "account": "ALL",
@@ -62852,28 +62852,6 @@
    "unrealRet": 12.9,
    "dayRet": 0.45,
    "prevClose": 72.76,
-   "priceDate": "2026-08-05"
-  },
-  {
-   "account": "ALL",
-   "ticker": "NRXS",
-   "name": "NEURAXIS INC",
-   "byPort": {
-    "IBKR": 35000.0
-   },
-   "isin": "US64134X2018",
-   "ccy": "USD",
-   "shares": 35000.0,
-   "price": 6.78999996,
-   "value": 237650.0,
-   "valueEur": 207918,
-   "valueUsd": 237650,
-   "basisUsd": 198036,
-   "realizedUsd": 0,
-   "avgCost": 5.6582,
-   "unrealRet": 20.0,
-   "dayRet": -3.14,
-   "prevClose": 7.01,
    "priceDate": "2026-08-05"
   },
   {
