@@ -5,7 +5,7 @@ on:
   # Minutentakt (2026-08-06). Kette + externe Waechter starten die Laeufe.
   workflow_dispatch: {}
   push:
-    paths: ['.github/ping']   # Waechter-Sessions ohne API-Zugriff beleben die Kette per Git
+    paths: ['.github/ping']   # manueller Not-Hebel: menschlicher Push auf die Datei startet die Kette (Claude-App-Pushes triggern hier NICHT)
 permissions:
   contents: write
   actions: write               # self-dispatch: der Job kettet sich am Ende selbst neu an
