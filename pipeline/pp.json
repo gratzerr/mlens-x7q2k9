@@ -1,6 +1,6 @@
 {
- "fileDate": "2026-08-06 03:21",
- "generated": "2026-08-06 03:31",
+ "fileDate": "2026-08-06 03:32",
+ "generated": "2026-08-06 03:42",
  "engine": "pp-exact (verified vs PP app 2026-07-11)",
  "totalSecuritiesEur": 2103626,
  "cashEur": -165476.84,
@@ -62806,8 +62806,8 @@
    "realizedUsd": -60391,
    "avgCost": 10.4779,
    "unrealRet": 25.6,
-   "dayRet": 2.17,
-   "prevClose": 12.88,
+   "dayRet": -14.43,
+   "prevClose": 15.38,
    "priceDate": "2026-08-05"
   },
   {
