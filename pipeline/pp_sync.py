@@ -342,6 +342,23 @@ def live_overlay():
                 pairs=[(idx.strftime("%Y-%m-%d"), float(px)) for idx,px in h2.items()]
                 pv=[p for d,p in sorted(pairs) if d<eff and p>0]
                 if pv: PREV[si]=pv[-1]
+                # Yahoo liefert fuer HEUTE keinen Balken (Datenstau wie am 2026-08-06:
+                # alle Kurse standen auf dem Vortagesschluss, DCTH real ~15 vs. 12.63):
+                # Stooq als unabhaengige Zweitquelle fuer den laufenden Kurs — nur
+                # US-Plain-Ticker; PREV bleibt der offizielle Yahoo-Schlusskurs
+                if not any(d>=eff for d,_ in pairs) and re.match(r"^[A-Z]{1,5}$", tk):
+                    try:
+                        rr=subprocess.run(["curl","-s","-m","12",
+                            f"https://stooq.com/q/l/?s={tk.lower()}.us&f=sd2t2ohlcv&h&e=csv"],
+                            capture_output=True,text=True)
+                        rows=rr.stdout.strip().split("\n")
+                        if len(rows)>=2:
+                            c=rows[1].split(",")
+                            sq_d, sq_px = c[1], float(c[6])
+                            if sq_px>0 and sq_d>=eff:
+                                pairs.append((eff, sq_px))
+                    except Exception:
+                        pass
         except Exception:
             continue
         if not pairs: continue
