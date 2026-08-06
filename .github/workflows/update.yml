@@ -4,6 +4,8 @@ on:
   # von der Self-Dispatch-Kette verdraengt wurden -> "cancelled"-Fehlermails im
   # Minutentakt (2026-08-06). Kette + externe Waechter starten die Laeufe.
   workflow_dispatch: {}
+  push:
+    paths: ['.github/ping']   # Waechter-Sessions ohne API-Zugriff beleben die Kette per Git
 permissions:
   contents: write
   actions: write               # self-dispatch: der Job kettet sich am Ende selbst neu an
