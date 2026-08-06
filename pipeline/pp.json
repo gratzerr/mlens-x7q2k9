@@ -1,8 +1,8 @@
 {
- "fileDate": "2026-08-06 04:07",
- "generated": "2026-08-06 04:17",
+ "fileDate": "2026-08-06 04:18",
+ "generated": "2026-08-06 04:28",
  "engine": "pp-exact (verified vs PP app 2026-07-11)",
- "totalSecuritiesEur": 2103626,
+ "totalSecuritiesEur": 2100126,
  "cashEur": -165476.84,
  "cashByAccount": [
   {
@@ -30,22 +30,22 @@
    "eur": 93.1
   }
  ],
- "totalEur": 1938149,
- "ttwrorSince2022": 388.15,
- "ttwrorYtd": 93.82,
- "ttwrorAnnualized": 41.21,
- "izf": 67.2,
+ "totalEur": 1934649,
+ "ttwrorSince2022": 387.26,
+ "ttwrorYtd": 93.47,
+ "ttwrorAnnualized": 41.15,
+ "izf": 67.08,
  "yearlyReturns": {
   "2022": 3.3,
   "2023": 11.8,
   "2024": 45.2,
   "2025": 50.2,
-  "2026": 93.8
+  "2026": 93.5
  },
  "realizedEur": 817050,
- "unrealizedEur": 424574,
+ "unrealizedEur": 421074,
  "realizedUsd": 984426,
- "unrealizedUsd": 468188,
+ "unrealizedUsd": 464188,
  "netContribEur": 693272,
  "netContribUsd": 768897,
  "earningsEur": 13297.85,
@@ -26889,9 +26889,9 @@
   },
   {
    "d": "2026-08-05",
-   "v": 2215304,
-   "e": 1938149,
-   "r": 3.881452,
+   "v": 2211304,
+   "e": 1934649,
+   "r": 3.872638,
    "c": 768897,
    "k": 693272,
    "q": 984426,
@@ -62755,15 +62755,15 @@
    "name": "RAPID MICRO BIOSYSTEMS INC-A"
   }
  ],
- "ppReferenceTtwror": 388.15,
+ "ppReferenceTtwror": 387.26,
  "ppReferenceDate": "2026-08-06",
- "ttwrorApproxSince2022": 388.15,
+ "ttwrorApproxSince2022": 387.26,
  "yearlyReturnsApprox": {
   "2022": 3.3,
   "2023": 11.8,
   "2024": 45.2,
   "2025": 50.2,
-  "2026": 93.8
+  "2026": 93.5
  },
  "holdings": [
   {
@@ -62856,28 +62856,6 @@
   },
   {
    "account": "ALL",
-   "ticker": "ABVX270115C00120000",
-   "name": "ABVX 15JAN27 120 C",
-   "byPort": {
-    "IBKR": 10000.0
-   },
-   "isin": "",
-   "ccy": "USD",
-   "shares": 10000.0,
-   "price": 23.8,
-   "value": 238000.0,
-   "valueEur": 208224,
-   "valueUsd": 238000,
-   "basisUsd": 267461,
-   "realizedUsd": 0,
-   "avgCost": 26.7461,
-   "unrealRet": -11.0,
-   "dayRet": 1.71,
-   "prevClose": 23.4,
-   "priceDate": "2026-08-05"
-  },
-  {
-   "account": "ALL",
    "ticker": "NRXS",
    "name": "NEURAXIS INC",
    "byPort": {
@@ -62896,6 +62874,28 @@
    "unrealRet": 20.0,
    "dayRet": -3.14,
    "prevClose": 7.01,
+   "priceDate": "2026-08-05"
+  },
+  {
+   "account": "ALL",
+   "ticker": "ABVX270115C00120000",
+   "name": "ABVX 15JAN27 120 C",
+   "byPort": {
+    "IBKR": 10000.0
+   },
+   "isin": "",
+   "ccy": "USD",
+   "shares": 10000.0,
+   "price": 23.4,
+   "value": 234000.0,
+   "valueEur": 204724,
+   "valueUsd": 234000,
+   "basisUsd": 267461,
+   "realizedUsd": 0,
+   "avgCost": 26.7461,
+   "unrealRet": -12.5,
+   "dayRet": 0.0,
+   "prevClose": 23.4,
    "priceDate": "2026-08-05"
   },
   {
