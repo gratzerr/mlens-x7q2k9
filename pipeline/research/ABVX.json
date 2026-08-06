@@ -16,13 +16,6 @@
       "summary": "Morgan Stanley raised its price target on Abivax to $180 while reiterating an Overweight rating, one of several sell-side upgrades (Piper Sandler to $175, Truist to $155) following the company's strong ABTECT maintenance data and positive FDA pre-NDA feedback. The moves lifted the Street's average target well above prior levels, with the consensus rating now Strong Buy across roughly a dozen covering analysts."
     },
     {
-      "date": "2026-07-23",
-      "headline": "Abivax Strengthens Commercial Capabilities With Strategic Leadership Appointments",
-      "source": "GlobeNewswire",
-      "url": "https://www.globenewswire.com/news-release/2026/07/23/3332548/0/en/Abivax-Strengthens-Commercial-Capabilities-With-Strategic-Leadership-Appointments.html",
-      "summary": "Abivax named four new commercial leaders spanning marketing, patient services, sales/commercial operations, and market access as it builds out its U.S. commercial organization, including a Global Head of Marketing who previously worked on Amgen's TEZSPIRE and Takeda's ENTYVIO. The hires come ahead of a planned Q4 2026 NDA submission for obefazimod and signal preparation for a potential U.S. product launch."
-    },
-    {
       "date": "2026-07-17",
       "headline": "Abivax Shares Soar Amid Renewed Takeover Chatter",
       "source": "MarketScreener",
@@ -59,6 +52,12 @@
       "confirmed": true
     },
     {
+      "when": "Second half of 2026",
+      "label": "Marketing Authorization Application (MAA) submission to the EMA",
+      "detail": "Building on positive Phase 3 maintenance results, Abivax intends to submit an MAA for obefazimod to the European Medicines Agency in H2 2026, in parallel with its U.S. NDA filing.",
+      "confirmed": false
+    },
+    {
       "when": "September 21, 2026",
       "label": "H1 2026 financial results release",
       "detail": "Abivax's investor relations financial calendar lists half-year 2026 financial results for release on September 21, 2026, which should include an updated cash runway and NDA preparation timeline.",
@@ -83,5 +82,5 @@
       "confirmed": false
     }
   ],
-  "pulse": "Abivax enters August 2026 riding strong momentum from positive Phase 3 ABTECT maintenance and long-term safety data for lead drug obefazimod in ulcerative colitis, a positive late-July pre-NDA meeting with the FDA, and a $920 million capital raise that funds operations into 2029 and a build-out of U.S. commercial leadership ahead of a planned Q4 2026 NDA filing. Sell-side analysts (Morgan Stanley, Piper Sandler, Truist) raised price targets sharply in late July to a Strong Buy consensus, while the stock remains highly volatile and subject to recurring, unconfirmed takeover speculation involving major pharmaceutical companies, most recently renewed Centerview-linked buyout chatter in mid-July, even as management emphasizes it can pursue an independent U.S. commercialization strategy. Near-term catalysts to watch are NDA submission progress, the September 21, 2026 H1 results release, the eventual Crohn's disease Phase 2b readout, and whether the ongoing M&A speculation resolves into a formal bid."
+  "pulse": "Abivax enters August 2026 riding strong momentum from positive Phase 3 ABTECT maintenance and long-term safety data for lead drug obefazimod in ulcerative colitis, a positive late-July pre-NDA meeting with the FDA, and a $920 million capital raise that funds operations into 2029 and a build-out of U.S. commercial leadership ahead of a planned Q4 2026 NDA filing (with a parallel EMA MAA filing targeted for H2 2026). Sell-side analysts (Morgan Stanley, Piper Sandler, Truist) raised price targets sharply in late July to a Strong Buy consensus, while the stock remains highly volatile and subject to recurring, unconfirmed takeover speculation involving major pharmaceutical companies, most recently renewed Centerview-linked buyout chatter in mid-July, even as management emphasizes it can pursue an independent U.S. commercialization strategy. No major new company-specific news has emerged in the first week of August; near-term catalysts to watch remain NDA/MAA submission progress, the September 21, 2026 H1 results release, the eventual Crohn's disease Phase 2b readout, and whether the ongoing M&A speculation resolves into a formal bid."
 }
