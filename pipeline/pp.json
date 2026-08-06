@@ -1,6 +1,6 @@
 {
- "fileDate": "2026-08-06 02:24",
- "generated": "2026-08-06 02:34",
+ "fileDate": "2026-08-06 02:35",
+ "generated": "2026-08-06 02:45",
  "engine": "pp-exact (verified vs PP app 2026-07-11)",
  "totalSecuritiesEur": 2103626,
  "cashEur": -165476.84,
@@ -62784,8 +62784,8 @@
    "realizedUsd": 11487,
    "avgCost": 9.1996,
    "unrealRet": 380.9,
-   "dayRet": 1.28,
-   "prevClose": 43.68,
+   "dayRet": 0.41,
+   "prevClose": 44.06,
    "priceDate": "2026-08-05"
   },
   {
@@ -62828,8 +62828,8 @@
    "realizedUsd": -16090,
    "avgCost": 9.6817,
    "unrealRet": 30.5,
-   "dayRet": -3.88,
-   "prevClose": 13.14,
+   "dayRet": -3.14,
+   "prevClose": 13.04,
    "priceDate": "2026-08-05"
   },
   {
@@ -62850,8 +62850,8 @@
    "realizedUsd": -54345,
    "avgCost": 64.7669,
    "unrealRet": 12.9,
-   "dayRet": 0.45,
-   "prevClose": 72.76,
+   "dayRet": 3.54,
+   "prevClose": 70.59,
    "priceDate": "2026-08-05"
   },
   {
@@ -62916,8 +62916,8 @@
    "realizedUsd": 0,
    "avgCost": 2.0935,
    "unrealRet": 0.8,
-   "dayRet": 2.43,
-   "prevClose": 2.06,
+   "dayRet": -0.47,
+   "prevClose": 2.12,
    "priceDate": "2026-08-05"
   },
   {
@@ -62938,8 +62938,8 @@
    "realizedUsd": 0,
    "avgCost": 4.9152,
    "unrealRet": -9.5,
-   "dayRet": 0.91,
-   "prevClose": 4.41,
+   "dayRet": 5.95,
+   "prevClose": 4.2,
    "priceDate": "2026-08-05"
   },
   {
@@ -62983,8 +62983,8 @@
    "realizedUsd": 0,
    "avgCost": 11.5977,
    "unrealRet": 12.5,
-   "dayRet": -5.57,
-   "prevClose": 13.82,
+   "dayRet": -8.93,
+   "prevClose": 14.33,
    "priceDate": "2026-08-05"
   }
  ],
