@@ -1,0 +1,32 @@
+name: chain watchdog
+# Die update.yml-Kette haelt sich per Self-Dispatch am Leben. Bekommt ein Lauf keinen
+# Runner (GitHub-Kapazitaet, Vorfall 2026-08-06: 1,5 h Stillstand), reisst die Kette
+# ab und niemand startet sie neu. Dieser Waechter prueft stuendlich und belebt sie.
+on:
+  schedule:
+    - cron: '17 * * * *'   # Minute 17: abseits der gedrosselten :00-Welle
+  workflow_dispatch: {}
+permissions:
+  actions: write
+jobs:
+  revive:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - name: restart update chain if dead
+        run: |
+          count() {
+            curl -s -H "Authorization: Bearer ${{ github.token }}" \
+              "https://api.github.com/repos/${{ github.repository }}/actions/workflows/update.yml/runs?status=$1&per_page=1" \
+              | python3 -c "import json,sys; print(json.load(sys.stdin).get('total_count',0))"
+          }
+          ACTIVE=$(count in_progress); QUEUED=$(count queued)
+          echo "in_progress=$ACTIVE queued=$QUEUED"
+          if [ "$ACTIVE" = "0" ] && [ "$QUEUED" = "0" ]; then
+            curl -s -X POST -H "Authorization: Bearer ${{ github.token }}" \
+              -H "Accept: application/vnd.github+json" \
+              "https://api.github.com/repos/${{ github.repository }}/actions/workflows/update.yml/dispatches" \
+              -d '{"ref":"main"}' && echo "chain restarted"
+          else
+            echo "chain alive — nothing to do"
+          fi
