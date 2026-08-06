@@ -52,7 +52,7 @@ jobs:
             MISSING_ONLY=1 python bench_fetch.py || true
             python sec_prefetch.py || true
             python sa_fetch.py || true
-            python pp_sync.py 2>&1 | tail -2 || true
+            python pp_sync.py 2>&1 | tail -4 || true
             if [ $((i % 5)) -eq 1 ]; then python social_sync.py || true; fi
             if [ $((i % 2)) -eq 1 ]; then python ir_sweep.py || true; fi
             python build.py | tail -1 || true

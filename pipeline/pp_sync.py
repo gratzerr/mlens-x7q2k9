@@ -272,6 +272,17 @@ def us_eff_date():
 
 PREV={}   # si -> Vortagesschluss desselben Kursanbieters wie der Live-Kurs
 
+def _fi_num(fi,*names):
+    """fast_info robust auslesen (Key- ODER Attribut-Zugriff, je nach yfinance-Version)."""
+    for n in names:
+        v=None
+        try: v=fi[n]
+        except Exception: v=getattr(fi,n,None)
+        if v:
+            try: return float(v)
+            except Exception: pass
+    return 0.0
+
 def live_overlay():
     net=defaultdict(float)
     for t in txs.values():
@@ -338,10 +349,23 @@ def live_overlay():
                     px=float(c["px"])
                 pairs=[(eff, px)]
             else:
-                h2=yf.Ticker(tk).history(period="10d")["Close"]
+                T=yf.Ticker(tk)
+                # Intraday-Kurs + offizieller Vortagesschluss direkt aus der Quote-API:
+                # die Tageshistorie enthaelt den heutigen Balken nicht zuverlaessig —
+                # dann standen Kurs und Vortagesschluss identisch da (0,0 %, 2026-08-06)
+                lp=pc=0.0
+                try:
+                    fi=T.fast_info
+                    lp=_fi_num(fi,"last_price","lastPrice","regularMarketPrice")
+                    pc=_fi_num(fi,"previous_close","previousClose","regularMarketPreviousClose")
+                except Exception:
+                    pass
+                h2=T.history(period="10d")["Close"]
                 pairs=[(idx.strftime("%Y-%m-%d"), float(px)) for idx,px in h2.items()]
                 pv=[p for d,p in sorted(pairs) if d<eff and p>0]
-                if pv: PREV[si]=pv[-1]
+                if pc>0: PREV[si]=pc
+                elif pv: PREV[si]=pv[-1]
+                if lp>0: pairs.append((eff, lp))   # heutiger Kurs, auch ohne Tagesbalken
         except Exception:
             continue
         if not pairs: continue
