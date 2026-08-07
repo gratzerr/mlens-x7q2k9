@@ -1,8 +1,8 @@
 {
- "fileDate": "2026-08-07 19:52",
- "generated": "2026-08-07 20:01",
+ "fileDate": "2026-08-07 20:03",
+ "generated": "2026-08-07 20:13",
  "engine": "pp-exact (verified vs PP app 2026-07-11)",
- "totalSecuritiesEur": 2252240,
+ "totalSecuritiesEur": 2249178,
  "cashEur": -166007.31,
  "cashByAccount": [
   {
@@ -30,22 +30,22 @@
    "eur": 93.1
   }
  ],
- "totalEur": 2086233,
- "ttwrorSince2022": 425.44,
- "ttwrorYtd": 108.63,
- "ttwrorAnnualized": 43.43,
- "izf": 72.07,
+ "totalEur": 2083171,
+ "ttwrorSince2022": 424.67,
+ "ttwrorYtd": 108.33,
+ "ttwrorAnnualized": 43.38,
+ "izf": 71.97,
  "yearlyReturns": {
   "2022": 3.3,
   "2023": 11.8,
   "2024": 45.2,
   "2025": 50.2,
-  "2026": 108.6
+  "2026": 108.3
  },
  "realizedEur": 817050,
- "unrealizedEur": 573189,
+ "unrealizedEur": 570126,
  "realizedUsd": 984426,
- "unrealizedUsd": 638055,
+ "unrealizedUsd": 634555,
  "netContribEur": 693272,
  "netContribUsd": 768897,
  "earningsEur": 12767.38,
@@ -26921,9 +26921,9 @@
   },
   {
    "d": "2026-08-07",
-   "v": 2384564,
-   "e": 2086233,
-   "r": 4.254419,
+   "v": 2381064,
+   "e": 2083171,
+   "r": 4.246707,
    "c": 768897,
    "k": 693272,
    "q": 984426,
@@ -62815,15 +62815,15 @@
    "name": "RAPID MICRO BIOSYSTEMS INC-A"
   }
  ],
- "ppReferenceTtwror": 425.44,
+ "ppReferenceTtwror": 424.67,
  "ppReferenceDate": "2026-08-07",
- "ttwrorApproxSince2022": 425.44,
+ "ttwrorApproxSince2022": 424.67,
  "yearlyReturnsApprox": {
   "2022": 3.3,
   "2023": 11.8,
   "2024": 45.2,
   "2025": 50.2,
-  "2026": 108.6
+  "2026": 108.3
  },
  "holdings": [
   {
@@ -62902,15 +62902,15 @@
    "isin": "",
    "ccy": "USD",
    "shares": 10000.0,
-   "price": 28.85,
-   "value": 288500.0,
-   "valueEur": 252406,
-   "valueUsd": 288500,
+   "price": 28.5,
+   "value": 285000.0,
+   "valueEur": 249344,
+   "valueUsd": 285000,
    "basisUsd": 267461,
    "realizedUsd": 0,
    "avgCost": 26.7461,
-   "unrealRet": 7.9,
-   "dayRet": 4.15,
+   "unrealRet": 6.6,
+   "dayRet": 2.89,
    "prevClose": 27.7,
    "priceDate": "2026-08-07"
   },
