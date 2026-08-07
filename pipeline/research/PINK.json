@@ -14,13 +14,41 @@
       "source": "BioTuesdays",
       "url": "https://biotuesdays.com/2026/07/06/paradigm-capital-names-perimeter-and-maintains-profound-as-healthcare-top-picks/",
       "summary": "Paradigm Capital named Perimeter a new Top Pick with a speculative buy rating and C$0.95 price target, versus a C$0.275 close on July 3. The analyst cited the March 2026 FDA PMA approval of Claire as positioning the company to accelerate commercial rollout and draw more market interest."
+    },
+    {
+      "date": "2026-06-17",
+      "headline": "Perimeter Presents Company Update at Planet MicroCap Showcase in Las Vegas",
+      "source": "PR Newswire",
+      "url": "https://www.prnewswire.com/news-releases/perimeter-medical-imaging-ai-to-participate-in-the-planet-microcap-showcase-in-las-vegas-302800736.html",
+      "summary": "CEO Adrian Mendes presented a company update on Perimeter's commercial strategy for Claire OCT+AI and discussed upcoming milestones to investors at the Planet MicroCap Showcase. The event offered one-on-one investor meetings alongside the presentation, part of the company's push to broaden its small-cap investor base."
+    },
+    {
+      "date": "2026-06-08",
+      "headline": "Perimeter Closes Final Tranche of Non-Brokered Convertible Debenture Placement",
+      "source": "PR Newswire",
+      "url": "https://ir.perimetermed.com/news-events/press-releases/detail/210/perimeter-medical-imaging-ai-closes-final-tranche-of",
+      "summary": "Perimeter closed the second and final tranche of its non-brokered private placement of 3.59% convertible debentures maturing April 2029, issuing CDN$3.28 million and bringing the total raised across both tranches to CDN$6.04 million. Proceeds are earmarked for working capital and general corporate purposes as the company scales Claire's commercial launch."
+    },
+    {
+      "date": "2026-05-28",
+      "headline": "Perimeter Reports Q1 2026 Results: Net Loss Narrows 31% as Recurring Revenue Grows",
+      "source": "PR Newswire",
+      "url": "https://www.prnewswire.com/news-releases/perimeter-announces-first-quarter-2026-financial-results-302785009.html",
+      "summary": "Perimeter reported Q1 2026 revenue of about $385,000, all recurring, and a net loss of roughly $3.0 million (versus $4.3 million a year earlier), with operating cash burn down 41% year-over-year. Including subsequent debenture and LIFE offering proceeds, management cited over $9.5 million in pro forma liquidity providing roughly a 12-month runway."
+    },
+    {
+      "date": "2026-03-03",
+      "headline": "FDA Grants PMA Approval to Claire, First AI-Enabled Imaging Device for Breast Cancer Surgery",
+      "source": "PR Newswire / BioTuesdays",
+      "url": "https://biotuesdays.com/2026/03/03/fda-approves-perimeters-claire-first-ai-imaging-device-for-breast-cancer-surgery/",
+      "summary": "Perimeter's Claire OCT+AI device received full FDA premarket approval, becoming the first AI-enabled imaging device cleared in the U.S. for intraoperative breast-cancer margin assessment, with 88.1% margin accuracy demonstrated in its pivotal trial. The approval, built on Breakthrough Device designation, underpins the commercial rollout and analyst coverage that followed through mid-2026."
     }
   ],
   "catalysts": [
     {
       "when": "By year-end 2026 (effective date ~Jan 2027 if approved)",
       "label": "CMS New Technology APC reimbursement decision",
-      "detail": "Perimeter is pursuing Medicare reimbursement for Claire via the New Technology APC (and TCET) pathway; a favorable CMS decision would be a major catalyst for hospital adoption economics, but no official CMS decision date has been confirmed.",
+      "detail": "Perimeter is pursuing Medicare reimbursement for Claire via the New Technology APC (and TCET) pathway; Claire's Breakthrough Device status should speed CMS review, and a favorable decision would be a major catalyst for hospital adoption economics, but no official CMS decision date has been confirmed.",
       "confirmed": false
     },
     {
@@ -32,9 +60,9 @@
     {
       "when": "Ongoing through 2026",
       "label": "Continued commercial rollout of Claire OCT+AI",
-      "detail": "Following March 2026 FDA PMA approval, Perimeter is scaling commercial placements of Claire (successor to the S-Series) across existing hospital relationships (e.g., Intermountain Health, Medical City Dallas) and pursuing new health-system agreements; incremental placement/adoption announcements are a recurring near-term catalyst.",
+      "detail": "Following March 2026 FDA PMA approval, Perimeter is scaling commercial placements of Claire (successor to the S-Series) across existing hospital relationships (e.g., Intermountain Health, Medical City Dallas) and pursuing new health-system agreements from a sales funnel of close to 50 qualified leads; incremental placement/adoption announcements are a recurring near-term catalyst.",
       "confirmed": false
     }
   ],
-  "pulse": "Perimeter continues commercializing its FDA-approved Claire OCT+AI device for intraoperative breast-cancer margin assessment, with analyst attention building: Paradigm Capital (Top Pick, C$0.95 target) and Brookline Capital Markets (Buy, C$1.54 target) both initiated bullish coverage in the first half of July 2026. No major company-specific news has emerged since mid-July, leaving the CMS New Technology APC reimbursement decision and the still-undated Q2 2026 earnings release as the key near-term catalysts to watch."
+  "pulse": "Perimeter continues commercializing its FDA-approved Claire OCT+AI device for intraoperative breast-cancer margin assessment, with analyst attention building: Paradigm Capital (Top Pick, C$0.95 target) and Brookline Capital Markets (Buy, C$1.54 target) both initiated bullish coverage in the first half of July 2026, following a Q1 2026 print that showed a 31% narrower net loss and improving cash burn. No major company-specific news has emerged since mid-July, leaving the CMS New Technology APC reimbursement decision and the still-undated Q2 2026 earnings release as the key near-term catalysts to watch."
 }
