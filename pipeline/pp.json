@@ -1,15 +1,15 @@
 {
- "fileDate": "2026-08-07 09:14",
- "generated": "2026-08-07 09:23",
+ "fileDate": "2026-08-07 09:25",
+ "generated": "2026-08-07 09:35",
  "engine": "pp-exact (verified vs PP app 2026-07-11)",
  "totalSecuritiesEur": 2209529,
- "cashEur": -165476.84,
+ "cashEur": -166007.31,
  "cashByAccount": [
   {
    "account": "IBKR USD",
    "ccy": "USD",
-   "balance": -197624.96,
-   "eur": -172900.23
+   "balance": -198147.8,
+   "eur": -173357.66
   },
   {
    "account": "SQ EUR",
@@ -20,8 +20,8 @@
   {
    "account": "IBKR EUR",
    "ccy": "EUR",
-   "balance": 903.79,
-   "eur": 903.79
+   "balance": 830.75,
+   "eur": 830.75
   },
   {
    "account": "SQ USD",
@@ -30,11 +30,11 @@
    "eur": 93.1
   }
  ],
- "totalEur": 2044052,
- "ttwrorSince2022": 414.82,
- "ttwrorYtd": 104.41,
+ "totalEur": 2043522,
+ "ttwrorSince2022": 414.68,
+ "ttwrorYtd": 104.36,
  "ttwrorAnnualized": 42.82,
- "izf": 70.76,
+ "izf": 70.74,
  "yearlyReturns": {
   "2022": 3.3,
   "2023": 11.8,
@@ -48,8 +48,8 @@
  "unrealizedUsd": 589236,
  "netContribEur": 693272,
  "netContribUsd": 768897,
- "earningsEur": 13297.85,
- "earningsUsd": 14376,
+ "earningsEur": 12767.38,
+ "earningsUsd": 13770,
  "feesEur": 8935.61,
  "feesUsd": 10201,
  "taxesEur": 1717.1,
@@ -26889,15 +26889,15 @@
   },
   {
    "d": "2026-08-05",
-   "v": 2211304,
-   "e": 1934649,
-   "r": 3.872638,
+   "v": 2210698,
+   "e": 1934119,
+   "r": 3.871302,
    "c": 768897,
    "k": 693272,
    "q": 984426,
    "Q": 817050,
-   "g": 14376,
-   "G": 13298,
+   "g": 13770,
+   "G": 12767,
    "f": 10201,
    "F": 8936,
    "t": 1907,
@@ -26905,15 +26905,15 @@
   },
   {
    "d": "2026-08-06",
-   "v": 2336352,
-   "e": 2044052,
-   "r": 4.148183,
+   "v": 2335746,
+   "e": 2043522,
+   "r": 4.146847,
    "c": 768897,
    "k": 693272,
    "q": 984426,
    "Q": 817050,
-   "g": 14376,
-   "G": 13298,
+   "g": 13770,
+   "G": 12767,
    "f": 10201,
    "F": 8936,
    "t": 1907,
@@ -26921,6 +26921,34 @@
   }
  ],
  "payments": [
+  {
+   "d": "2026-08-05",
+   "k": "interest",
+   "tk": null,
+   "eur": -79.39,
+   "usd": -90.74
+  },
+  {
+   "d": "2026-08-05",
+   "k": "interest",
+   "tk": null,
+   "eur": 6.35,
+   "usd": 7.26
+  },
+  {
+   "d": "2026-08-05",
+   "k": "interest",
+   "tk": null,
+   "eur": -467.31,
+   "usd": -534.14
+  },
+  {
+   "d": "2026-08-05",
+   "k": "interest",
+   "tk": null,
+   "eur": 9.89,
+   "usd": 11.3
+  },
   {
    "d": "2026-08-04",
    "k": "fee",
@@ -62771,9 +62799,9 @@
    "name": "RAPID MICRO BIOSYSTEMS INC-A"
   }
  ],
- "ppReferenceTtwror": 414.82,
+ "ppReferenceTtwror": 414.68,
  "ppReferenceDate": "2026-08-07",
- "ttwrorApproxSince2022": 414.82,
+ "ttwrorApproxSince2022": 414.68,
  "yearlyReturnsApprox": {
   "2022": 3.3,
   "2023": 11.8,
@@ -63004,5 +63032,5 @@
    "priceDate": "2026-08-06"
   }
  ],
- "txmax": "2026-08-04"
+ "txmax": "2026-08-05"
 }
