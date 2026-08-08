@@ -37,21 +37,22 @@
       "summary": "uniQure closed its upsized offering of 5,686,813 ordinary shares at $45.50/share, raising about $259 million gross to fund commercialization readiness for AMT-130, a confirmatory study, and general corporate purposes."
     },
     {
-      "date": "2026-06-19",
-      "headline": "uniQure Presents Positive Early AMT-260 Data in Refractory Epilepsy",
-      "source": "Epilepsy Foundation Pipeline Conference / NeurologyLive",
-      "url": "https://www.neurologylive.com/view/gene-therapy-amt-260-shows-early-seizure-reductions-refractory-mesial-temporal-lobe-epilepsy-phase-1-cohort",
-      "summary": "Six-month data from the first low-dose cohort of the GenTLE Phase 1/2a trial showed seizure reductions of 79%-100% in three of six patients, with no related serious adverse events and no immunosuppression required."
+      "date": "2026-06-17",
+      "headline": "uniQure Announces Plan for BLA Submission for AMT-130 in Huntington's Disease After FDA Reverses Course",
+      "source": "GlobeNewswire / uniQure",
+      "url": "https://www.globenewswire.com/news-release/2026/06/17/3313322/0/en/uniqure-announces-plan-for-bla-submission-for-amt-130-in-huntington-s-disease.html",
+      "summary": "Following a Type B meeting, the FDA told uniQure that the ~3-year Phase I/II data can serve as the primary basis for an accelerated-approval BLA for AMT-130, reversing an earlier 2025/early-2026 regulatory setback; shares surged roughly 70-78% on the news as the company confirmed plans to submit the BLA (and a UK MAA) in Q3 2026."
     }
   ],
   "catalysts": [
     {"when": "September 2026", "label": "AMT-130 four-year topline data", "detail": "uniQure expects to release topline four-year data from the AMT-130 Phase I/II Huntington's disease study.", "confirmed": true},
-    {"when": "Q3 2026", "label": "US BLA submission for AMT-130", "detail": "Company reaffirmed at Q2 2026 earnings it remains on track to submit a Biologics License Application to the FDA under the accelerated approval pathway, based on 3-year Phase I/II data.", "confirmed": true},
+    {"when": "Q3 2026", "label": "US BLA submission for AMT-130", "detail": "Company reaffirmed at Q2 2026 earnings it remains on track to submit a Biologics License Application to the FDA under the accelerated approval pathway, based on 3-year Phase I/II data, following the FDA's June 2026 alignment on this pathway.", "confirmed": true},
     {"when": "Q3 2026", "label": "UK MAA submission for AMT-130", "detail": "Following a successful MHRA pre-submission meeting, uniQure plans to submit a Marketing Authorization Application in the UK based on the 3-year analysis.", "confirmed": true},
+    {"when": "ahead of/alongside BLA filing", "label": "Agreement with FDA on confirmatory study design", "detail": "FDA has asked uniQure to finalize the design of a required post-approval confirmatory trial, expected to be a randomized, standard-of-care-controlled study with Total Functional Capacity at 36 months as the primary endpoint.", "confirmed": true},
     {"when": "Q3 2026", "label": "AMT-260 second dose cohort enrollment completion", "detail": "uniQure expects to complete enrollment of the second dose cohort in the GenTLE Phase I/IIa epilepsy study.", "confirmed": true},
     {"when": "late 2026 / early 2027", "label": "FDA priority review decision on AMT-130", "detail": "Potential accelerated approval decision timeline following BLA submission and (if granted) priority review; exact PDUFA date not yet set.", "confirmed": false},
     {"when": "H1 2027", "label": "AMT-260 updated Phase I/IIa data", "detail": "uniQure plans to present updated results from the epilepsy gene therapy program including further dose-cohort follow-up.", "confirmed": true},
     {"when": "~November 2026", "label": "Q3 2026 earnings report", "detail": "Based on prior-year cadence (Q3 2025 reported Nov 10, 2025); exact date not yet announced.", "confirmed": false}
   ],
-  "pulse": "uniQure's regulatory momentum continued to build through late July/August 2026: Q2 results confirmed $810.3M in cash funding operations into 2030 and reaffirmed the AMT-130 BLA and UK MAA filings remain on track for Q3 2026, with pivotal four-year data due in September. Analyst sentiment has turned increasingly bullish (Wolfe upgrade to Outperform, price-target hikes from Wells Fargo to $75 and H.C. Wainwright to $80) even as the stock trades on speculative, pre-revenue valuation metrics and posted another quarterly earnings miss. Near-term catalysts (September data readout, Q3 BLA/MAA filings) are the key swing factors for the stock into year-end."
+  "pulse": "uniQure's fortunes reversed sharply in mid-June 2026 when the FDA reaffirmed that ~3-year AMT-130 data can support an accelerated-approval BLA, sending shares up roughly 70-78% in a single session and triggering a wave of analyst upgrades (Wolfe to Outperform; price targets raised by H.C. Wainwright to $80 and Wells Fargo to $75). The company backstopped the opportunity with a $259M equity raise (cash now funding operations into 2030) and used Q2 2026 earnings to reaffirm that the US BLA and UK MAA filings remain on track for Q3 2026, alongside pivotal four-year AMT-130 data due in September. Key near-term swing factors are the September data readout, the Q3 filings themselves, and finalizing the FDA-mandated confirmatory trial design, even as the stock still trades on speculative, pre-revenue valuation metrics."
 }
