@@ -41,14 +41,14 @@
       "headline": "Lexeo finalizes SUNRISE-FA 2 pivotal trial design for LX2006",
       "source": "GlobeNewswire",
       "url": "https://www.globenewswire.com/news-release/2026/06/15/3311662/0/en/lexeo-therapeutics-announces-regulatory-update-and-registrational-trial-design-for-lx2006-gene-therapy-in-friedreich-ataxia.html",
-      "summary": "Lexeo finalized the protocol and statistical analysis plan for the SUNRISE-FA 2 pivotal trial of LX2006 in Friedreich ataxia cardiomyopathy, targeting a BLA submission under the FDA accelerated approval pathway; the trial was on track to begin dosing in Q2 2026."
+      "summary": "Lexeo finalized the protocol and statistical analysis plan for the SUNRISE-FA 2 pivotal trial of LX2006 in Friedreich ataxia cardiomyopathy, targeting a BLA submission under the FDA accelerated approval pathway; the trial was on track to begin dosing by end of Q2 2026, with commercial-scale drug product already available for dosing."
     }
   ],
   "catalysts": [
     {
       "when": "~2026-08-19",
       "label": "Q2 2026 earnings report",
-      "detail": "Consensus/analyst-estimated date (per Investing.com and other trackers) for Lexeo's Q2 2026 financial results and business update; as of Aug 8, 2026 Lexeo has not yet issued its own press release confirming the date.",
+      "detail": "Consensus/analyst-estimated date (per Investing.com and other trackers) for Lexeo's Q2 2026 financial results and business update; as of Aug 9, 2026 Lexeo has not yet issued its own press release confirming the date.",
       "confirmed": false
     },
     {
@@ -60,7 +60,7 @@
     {
       "when": "2H 2027",
       "label": "SUNRISE-FA 2 topline data",
-      "detail": "Topline readout expected from the pivotal SUNRISE-FA 2 trial of LX2006 in Friedreich ataxia cardiomyopathy, whose protocol and SAP were finalized in June 2026.",
+      "detail": "Topline efficacy readout expected from the pivotal SUNRISE-FA 2 trial of LX2006 in Friedreich ataxia cardiomyopathy (13 treated vs. 13 untreated-control design), whose protocol and SAP were finalized in June 2026.",
       "confirmed": true
     },
     {
@@ -70,5 +70,5 @@
       "confirmed": true
     }
   ],
-  "pulse": "Lexeo's newsflow has been strongly positive over the past six weeks, headlined by FDA RMAT designation for LX2020 in PKP2 cardiomyopathy (Aug 5) and a Chardan Strong-Buy upgrade (Jul 31), alongside finalized SUNRISE-FA 2 pivotal trial design and a JAMA Cardiology publication validating LX2006's early efficacy signal in Friedreich ataxia. Analyst sentiment remains constructive overall (mostly Buy/Strong-Buy/Overweight ratings, consensus target around $18-19) despite JPMorgan trimming its price target to $9 in late June, and the key near-term catalyst is Q2 2026 earnings expected around Aug 19 (not yet formally confirmed by the company), followed by LX2020 12-month high-dose data in Q4 2026."
+  "pulse": "Lexeo's newsflow has stayed positive over the past six weeks, headlined by FDA RMAT designation for LX2020 in PKP2 cardiomyopathy (Aug 5, adding to existing Orphan Drug and Fast Track status) and a Chardan Strong-Buy upgrade (Jul 31), building on a finalized SUNRISE-FA 2 pivotal trial design and a JAMA Cardiology publication that validated LX2006's early efficacy signal in Friedreich ataxia. Despite this string of good news, the stock still trades near its 52-week low (roughly $4-5, vs. a $3.99-$10.99 range) and well below the sell-side's still-bullish consensus (mostly Buy/Strong-Buy/Overweight, average target near $18-19), a gap that JPMorgan's price-target cut to $9 in late June (while keeping Overweight) partly reflects. The next scheduled catalyst is Q2 2026 earnings expected around Aug 19 (not yet formally confirmed by the company), ahead of LX2020 12-month high-dose data anticipated in Q4 2026."
 }

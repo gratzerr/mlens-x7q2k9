@@ -28,13 +28,20 @@
       "source": "SEC Form 8-K / StockTitan",
       "url": "https://www.stocktitan.net/sec-filings/NRXS/8-k-neuraxis-inc-reports-material-event-4c97e7c4fea7.html",
       "summary": "The Board approved a Q2 2026 stock dividend on Series B Preferred Stock, to be paid entirely in common shares (approximately 80,463 shares at a $2.38 calculation rate) on July 29, 2026 to holders of record as of July 21, 2026."
+    },
+    {
+      "date": "2026-05-12",
+      "headline": "NeurAxis Reports Record First Quarter 2026 Financial Results Driven by 80% Year Over Year Revenue Growth",
+      "source": "GlobeNewswire",
+      "url": "https://www.globenewswire.com/news-release/2026/05/12/3292697/0/en/NeurAxis-Reports-Record-First-Quarter-2026-Financial-Results-Driven-by-80-Year-Over-Year-Revenue-Growth.html",
+      "summary": "Q1 2026 revenue rose 80% YoY to $1.6M with gross margin of 86.4% and a 24% narrower operating loss, marking the company's seventh straight quarter of double-digit growth; kept as anchor context since it is the most recent full earnings print ahead of the Aug 11, 2026 Q2 report."
     }
   ],
   "catalysts": [
     {
       "when": "2026-08-11",
       "label": "Q2 2026 earnings release and conference call",
-      "detail": "NeurAxis will report Q2 2026 (period ended June 30, 2026) results before market open with a call at 9:00 am ET, just after this research cutoff. Q1 2026 showed 80% YoY revenue growth to $1.6M and 86.4% gross margin, so the market will watch whether that growth pace and margin trend held.",
+      "detail": "NeurAxis will report Q2 2026 (period ended June 30, 2026) results before market open with a call at 9:00 am ET, two days after this research cutoff. Q1 2026 showed 80% YoY revenue growth to $1.6M and 86.4% gross margin, so the market will watch whether that growth pace and margin trend held.",
       "confirmed": true
     },
     {
@@ -62,5 +69,5 @@
       "confirmed": false
     }
   ],
-  "pulse": "NeurAxis remains in steady commercial-execution mode: IB-Stim keeps adding payer coverage (latest Mid-Atlantic policy expansion Aug 4, 500k+ lives) on top of the Category I CPT code that already unlocked 50M+ covered lives nationally, while the RED device and new VA Federal Supply Schedule channel are both ramping after resuming/launching earlier in 2026. A new S-3 resale registration (July 23) adds modest overhang alongside the existing ATM facility, keeping dilution a live risk even though no fresh capital raise has been announced. All eyes now turn to Q2 2026 earnings on August 11, which will show whether the 80% revenue growth pace from Q1 continued and whether the company is tracking toward its ~$15M revenue cash-flow-breakeven target."
+  "pulse": "NeurAxis heads into its Q2 2026 earnings report (August 11) still in steady commercial-execution mode: IB-Stim keeps adding regional payer coverage (latest Mid-Atlantic expansion Aug 4, 500k+ lives) on top of the Category I CPT code that already unlocked 50M+ covered lives nationally, while the RED device and VA Federal Supply Schedule channel continue to ramp. A July 23 S-3 resale filing and the routine Series B preferred stock dividend add modest dilution/overhang, but with Q1 2026 revenue up 80% YoY to $1.6M and 86.4% gross margin, attention is now on whether that growth pace held into Q2 and whether the company is tracking toward its ~$15M revenue cash-flow-breakeven target."
 }
