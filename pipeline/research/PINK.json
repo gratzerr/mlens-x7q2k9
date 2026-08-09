@@ -13,7 +13,7 @@
       "headline": "Claire vs. the Competition: How Perimeter's Device Stacks Up Against a New Rival and the Old Standby",
       "source": "Micro Cap Opportunities (Substack)",
       "url": "https://microcapopportunities.substack.com/p/claire-vs-the-competition-how-perimeters",
-      "summary": "An independent investor analysis compared Perimeter's newly FDA-approved Claire OCT+AI to Dilon Technologies' MarginProbe 2, a rival real-time margin-assessment device that received FDA clearance in December 2025 and posted 76.8% sensitivity in its U.S. pivotal trial, as well as to routine cavity shaving. The piece framed the competitive stakes for reducing breast-cancer lumpectomy reoperation rates as Claire begins its U.S. commercial rollout."
+      "summary": "An independent investor analysis compared Perimeter's newly FDA-approved Claire OCT+AI to Dilon Technologies' MarginProbe 2, a rival real-time margin-assessment device that received FDA clearance in December 2025 and posted 76.8% sensitivity but only 49.1% specificity in its U.S. pivotal trial, versus Claire's 91% standalone specificity. The piece also noted Claire has a defined reimbursement pathway targeting January 2027 that MarginProbe still lacks after thirteen years on the market."
     },
     {
       "date": "2026-07-06",
@@ -45,17 +45,17 @@
       "confirmed": false
     },
     {
-      "when": "Expected Aug/Sep 2026",
+      "when": "Expected late Aug/Sep 2026",
       "label": "Q2 2026 financial results",
-      "detail": "Perimeter has not yet announced a specific date for its Q2 2026 (quarter ended June 30) earnings release and conference call as of Aug 8, 2026; third-party estimate trackers show unconfirmed placeholder dates ranging from late Aug to Sep 2026.",
+      "detail": "Perimeter has not yet announced a specific date for its Q2 2026 (quarter ended June 30) earnings release and conference call as of Aug 9, 2026. Q1 2026 results were released May 28, 2026 and Q2 2025 results were released in late August 2025, suggesting a similar late-August-to-September 2026 window this year; no official date confirmed.",
       "confirmed": false
     },
     {
       "when": "Ongoing through 2026",
       "label": "Continued commercial rollout of Claire OCT+AI amid rising competition",
-      "detail": "Following March 2026 FDA PMA approval, Perimeter is scaling commercial placements of Claire across existing hospital relationships (e.g., Intermountain Health, Medical City Dallas) and pursuing new health-system agreements, while facing a newly FDA-cleared rival device (Dilon Technologies' MarginProbe 2); incremental placement/adoption announcements are a recurring near-term catalyst.",
+      "detail": "Following March 2026 FDA PMA approval, Perimeter is scaling commercial placements of Claire across existing hospital relationships (e.g., Intermountain Health, Medical City Dallas) and pursuing new health-system agreements from a sales funnel of roughly 50 qualified leads (per Q1 2026 results), while facing a newly FDA-cleared rival device (Dilon Technologies' MarginProbe 2); incremental placement/adoption announcements are a recurring near-term catalyst.",
       "confirmed": false
     }
   ],
-  "pulse": "Perimeter continues commercializing its FDA-approved Claire OCT+AI device for intraoperative breast-cancer margin assessment, with sell-side attention building: Paradigm Capital (Top Pick, C$0.95 target) and Brookline Capital Markets (Buy, C$1.54 target) both initiated bullish coverage in early-to-mid July 2026, even as independent analysts flag a newly FDA-cleared competitor (Dilon's MarginProbe 2) entering the same margin-assessment market. The stock trades around US$0.21 (~C$0.29) as of early August 2026, with no major company-specific news since mid-July, leaving the pending CMS New Technology APC/MEARIS reimbursement decision (likely effective January 2027) and the still-undated Q2 2026 earnings release as the key near-term catalysts to watch."
+  "pulse": "Perimeter continues commercializing its FDA-approved Claire OCT+AI device for intraoperative breast-cancer margin assessment, with sell-side momentum still the dominant storyline: Paradigm Capital (Top Pick, C$0.95 target) and Brookline Capital Markets (Buy, C$1.54 target) both initiated bullish coverage in early-to-mid July 2026, and independent analysts continue to argue Claire's higher specificity and clearer reimbursement path give it an edge over newly FDA-cleared rival Dilon MarginProbe 2. No major company-specific news has surfaced since the mid-July analyst initiations; the stock trades around US$0.21 (~C$0.29, ~$31M market cap) as of early August 2026, with the pending CMS New Technology APC/MEARIS reimbursement decision (targeted effective January 2027) and a still-undated Q2 2026 earnings release remaining the key near-term catalysts to watch."
 }
