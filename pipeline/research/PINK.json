@@ -2,6 +2,27 @@
   "ticker": "PINK",
   "news": [
     {
+      "date": "2026-08-10",
+      "headline": "A Third Way to Read a Margin: What XEOS's AURA 10 Means for the Perimeter Thesis",
+      "source": "Micro Cap Opportunities (Substack)",
+      "url": "https://microcapopportunities.substack.com/p/a-third-way-to-read-a-margin-what",
+      "summary": "An independent investor analysis examined XEOS's AURA 10 specimen PET-CT imager, whose large multicenter BrIMA study was published in JAMA Surgery, as a third distinct approach to intraoperative margin assessment alongside Perimeter's Claire OCT+AI and Dilon's MarginProbe 2. The piece assessed what the molecular-imaging alternative means for Perimeter's competitive positioning and investment thesis."
+    },
+    {
+      "date": "2026-08-03",
+      "headline": "AI in Healthcare: Perimeter CEO on Clinical AI",
+      "source": "TechEdge AI",
+      "url": "https://techedgeai.com/what-an-ai-hardware-veteran-learned-applying-silicon-valley-lessons-to-breast-cancer-surgery/",
+      "summary": "A profile/interview with Perimeter CEO Adrian Mendes covered how his prior experience scaling AI-hardware company Groq informs his approach to developing and commercializing Claire's clinical AI for breast-conserving surgery. Date is approximate (published in the first days of August 2026)."
+    },
+    {
+      "date": "2026-07-24",
+      "headline": "Perimeter Announces Date for Second Quarter 2026 Earnings Call",
+      "source": "GlobeNewswire (via Manila Times)",
+      "url": "https://www.manilatimes.net/2026/07/24/tmt-newswire/globenewswire/perimeter-announces-date-for-second-quarter-2026-earnings-call/2390746",
+      "summary": "Perimeter formally announced it will report second quarter 2026 (quarter ended June 30) financial results and host a conference call, giving investors a confirmed near-term reporting event after weeks of only unconfirmed placeholder estimates from third-party trackers."
+    },
+    {
       "date": "2026-07-14",
       "headline": "Brookline Capital Markets Initiates Coverage with Buy Rating, C$1.54 Price Target",
       "source": "BioTuesdays",
@@ -21,23 +42,15 @@
       "source": "BioTuesdays",
       "url": "https://biotuesdays.com/2026/07/06/paradigm-capital-names-perimeter-and-maintains-profound-as-healthcare-top-picks/",
       "summary": "Paradigm Capital named Perimeter a new Top Pick with a speculative buy rating and C$0.95 price target, versus a C$0.275 close on July 3. The analyst cited the March 2026 FDA PMA approval of Claire as positioning the company to accelerate commercial rollout and draw more market interest."
-    },
-    {
-      "date": "2026-06-17",
-      "headline": "Perimeter CEO Presents Commercial Strategy and Milestones at Planet MicroCap Showcase in Las Vegas",
-      "source": "PR Newswire",
-      "url": "https://www.prnewswire.com/news-releases/perimeter-medical-imaging-ai-to-participate-in-the-planet-microcap-showcase-in-las-vegas-302800736.html",
-      "summary": "CEO Adrian Mendes presented a company update on Perimeter's current commercial strategy for Claire OCT+AI and discussed upcoming milestones at the Planet MicroCap Showcase, with a live and archived webcast made available to investors."
-    },
-    {
-      "date": "2026-06-09",
-      "headline": "INOVAIT Selects Perimeter for Contribution to Advance AI for Breast Cancer Surgery",
-      "source": "BioTuesdays",
-      "url": "https://biotuesdays.com/2026/06/09/inovate-selects-perimeter-for-contribution-to-advance-ai-for-breast-cancer-surgery/",
-      "summary": "Perimeter was selected to receive up to nearly C$148,000 from the INOVAIT Pilot Fund, plus an additional $100,000 Mitacs Business Strategy Internship award, to advance next-generation AI capabilities for its flagship Claire OCT+AI device."
     }
   ],
   "catalysts": [
+    {
+      "when": "Announced July 24, 2026; exact report date not confirmed in available sources (prior third-party trackers pointed to late Aug/early Sep 2026)",
+      "label": "Q2 2026 financial results & earnings call",
+      "detail": "Perimeter officially confirmed on July 24, 2026 that it will report second quarter 2026 (quarter ended June 30) financial results and host a conference call. This is a key near-term readout for commercial-rollout metrics (Claire placements, sales funnel, revenue) and, per independent investor commentary, could include the company's first disclosure of VA (Veterans Affairs) revenue.",
+      "confirmed": true
+    },
     {
       "when": "CMS decision expected effective Jan 1, 2027 (Oct 1, 2026 possible but unlikely)",
       "label": "CMS New Technology APC / MEARIS reimbursement decision",
@@ -45,17 +58,11 @@
       "confirmed": false
     },
     {
-      "when": "Expected Aug/Sep 2026",
-      "label": "Q2 2026 financial results",
-      "detail": "Perimeter has not yet announced a specific date for its Q2 2026 (quarter ended June 30) earnings release and conference call as of Aug 8, 2026; third-party estimate trackers show unconfirmed placeholder dates ranging from late Aug to Sep 2026.",
-      "confirmed": false
-    },
-    {
       "when": "Ongoing through 2026",
-      "label": "Continued commercial rollout of Claire OCT+AI amid rising competition",
-      "detail": "Following March 2026 FDA PMA approval, Perimeter is scaling commercial placements of Claire across existing hospital relationships (e.g., Intermountain Health, Medical City Dallas) and pursuing new health-system agreements, while facing a newly FDA-cleared rival device (Dilon Technologies' MarginProbe 2); incremental placement/adoption announcements are a recurring near-term catalyst.",
+      "label": "Continued commercial rollout of Claire OCT+AI amid a widening competitive field",
+      "detail": "Following March 2026 FDA PMA approval, Perimeter is scaling commercial placements of Claire across existing hospital relationships (e.g., Intermountain Health, Medical City Dallas) and pursuing new health-system agreements. The competitive field has broadened beyond FDA-cleared rival Dilon Technologies' MarginProbe 2 to include XEOS's AURA 10 specimen PET-CT imager, backed by a newly published multicenter BrIMA study; incremental placement/adoption announcements and competitive differentiation remain a recurring near-term catalyst.",
       "confirmed": false
     }
   ],
-  "pulse": "Perimeter continues commercializing its FDA-approved Claire OCT+AI device for intraoperative breast-cancer margin assessment, with sell-side attention building: Paradigm Capital (Top Pick, C$0.95 target) and Brookline Capital Markets (Buy, C$1.54 target) both initiated bullish coverage in early-to-mid July 2026, even as independent analysts flag a newly FDA-cleared competitor (Dilon's MarginProbe 2) entering the same margin-assessment market. The stock trades around US$0.21 (~C$0.29) as of early August 2026, with no major company-specific news since mid-July, leaving the pending CMS New Technology APC/MEARIS reimbursement decision (likely effective January 2027) and the still-undated Q2 2026 earnings release as the key near-term catalysts to watch."
+  "pulse": "Perimeter continues commercializing its FDA-approved Claire OCT+AI device for intraoperative breast-cancer margin assessment, with the competitive landscape broadening as independent analysts now weigh a third rival approach (XEOS's AURA 10 specimen PET-CT) alongside Dilon's MarginProbe 2, even as sell-side sentiment stays bullish following Paradigm Capital (Top Pick, C$0.95 target) and Brookline Capital Markets (Buy, C$1.54 target) initiations in early-to-mid July 2026. The stock trades around US$0.26 as of August 10, 2026, and the company has now formally confirmed its Q2 2026 earnings call (announced July 24) as the next hard catalyst, potentially including a first VA revenue disclosure, alongside the still-pending CMS New Technology APC/MEARIS reimbursement decision likely effective January 2027."
 }

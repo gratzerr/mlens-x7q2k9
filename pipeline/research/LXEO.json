@@ -48,7 +48,7 @@
     {
       "when": "~2026-08-19",
       "label": "Q2 2026 earnings report",
-      "detail": "Consensus/analyst-estimated date (per Investing.com and other trackers) for Lexeo's Q2 2026 financial results and business update; as of Aug 8, 2026 Lexeo has not yet issued its own press release confirming the date.",
+      "detail": "Consensus/analyst-estimated date (per Investing.com and other trackers) for Lexeo's Q2 2026 financial results and business update; as of Aug 10, 2026 Lexeo has not yet issued its own press release confirming the date.",
       "confirmed": false
     },
     {
@@ -70,5 +70,5 @@
       "confirmed": true
     }
   ],
-  "pulse": "Lexeo's newsflow has been strongly positive over the past six weeks, headlined by FDA RMAT designation for LX2020 in PKP2 cardiomyopathy (Aug 5) and a Chardan Strong-Buy upgrade (Jul 31), alongside finalized SUNRISE-FA 2 pivotal trial design and a JAMA Cardiology publication validating LX2006's early efficacy signal in Friedreich ataxia. Analyst sentiment remains constructive overall (mostly Buy/Strong-Buy/Overweight ratings, consensus target around $18-19) despite JPMorgan trimming its price target to $9 in late June, and the key near-term catalyst is Q2 2026 earnings expected around Aug 19 (not yet formally confirmed by the company), followed by LX2020 12-month high-dose data in Q4 2026."
+  "pulse": "Lexeo's newsflow has stayed positive through the summer, headlined by FDA RMAT designation for LX2020 in PKP2 cardiomyopathy (Aug 5) and a Chardan Strong-Buy upgrade (Jul 31), building on finalized SUNRISE-FA 2 pivotal trial design and a JAMA Cardiology publication validating LX2006's early efficacy signal in Friedreich ataxia. Analyst sentiment remains constructive overall (mostly Buy/Strong-Buy/Overweight ratings, consensus target around $18-19) despite JPMorgan trimming its price target to $9 in late June, and the key near-term catalyst is Q2 2026 earnings expected around Aug 19 (not yet formally confirmed by the company), followed by LX2020 12-month high-dose data in Q4 2026."
 }
