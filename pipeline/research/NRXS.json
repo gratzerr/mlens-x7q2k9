@@ -6,61 +6,27 @@
       "headline": "NeurAxis Expands Payer Coverage with New Policies",
       "source": "GlobeNewswire",
       "url": "https://www.globenewswire.com/news-release/2026/08/04/3338132/0/en/NeurAxis-Expands-Payer-Coverage-with-New-Policies.html",
-      "summary": "NeurAxis announced additional medical policy coverage for its PENFS/IB-Stim therapy representing over 500,000 covered lives, expanding incremental access for beneficiaries in the Mid-Atlantic region."
+      "summary": "NeurAxis announced additional medical policy coverage for its PENFS (IB-Stim) therapy, adding over 500,000 covered lives in the Mid-Atlantic region. This extends the company's push toward comprehensive nationwide reimbursement following the January 2026 CPT Category I code activation."
     },
     {
       "date": "2026-07-28",
       "headline": "NeurAxis to Host Second Quarter 2026 Results and Business Update Call on Tuesday, August 11, 2026",
       "source": "GlobeNewswire",
       "url": "https://www.globenewswire.com/news-release/2026/07/28/3334108/0/en/neuraxis-to-host-second-quarter-2026-results-and-business-update-call-on-tuesday-august-11-2026.html",
-      "summary": "NeurAxis confirmed it will report Q2 2026 financial results (period ended June 30, 2026) before market open on August 11, 2026, with a conference call at 9:00 am ET the same day."
-    },
-    {
-      "date": "2026-07-23",
-      "headline": "NeurAxis Files Form S-3 Resale Registration Statement",
-      "source": "SEC EDGAR",
-      "url": "https://www.sec.gov/Archives/edgar/data/0001933567/000149315226034417/forms-3.htm",
-      "summary": "NeurAxis filed an S-3 registering the resale of 1,923,194 shares of common stock by selling stockholders/directors (999,418 resale shares plus 923,776 shares underlying RSUs), a technical filing that creates potential future selling pressure but is not itself a capital raise."
+      "summary": "NeurAxis confirmed it will report Q2 2026 (period ended June 30, 2026) financial results before market open on August 11, 2026, followed by a conference call at 9:00am ET to discuss results and provide a business update."
     },
     {
       "date": "2026-07-09",
-      "headline": "NeurAxis Declares Q2 2026 Series B Preferred Stock Dividend",
-      "source": "SEC Form 8-K / StockTitan",
-      "url": "https://www.stocktitan.net/sec-filings/NRXS/8-k-neuraxis-inc-reports-material-event-4c97e7c4fea7.html",
-      "summary": "The Board approved a Q2 2026 stock dividend on Series B Preferred Stock, to be paid entirely in common shares (approximately 80,463 shares at a $2.38 calculation rate) on July 29, 2026 to holders of record as of July 21, 2026."
+      "headline": "NeurAxis, Inc. Declares Stock Dividend on Series B Preferred Stock",
+      "source": "Quiver Quantitative (GlobeNewswire release)",
+      "url": "https://www.quiverquant.com/news/NeurAxis,+Inc.+Declares+Stock+Dividend+on+Series+B+Preferred+Stock",
+      "summary": "NeurAxis's board declared a Q2 2026 stock dividend on its Series B Preferred Stock, payable in roughly 80,463 shares of common stock (paid July 29 to holders of record July 21), conserving cash while modestly diluting common holders."
     }
   ],
   "catalysts": [
-    {
-      "when": "2026-08-11",
-      "label": "Q2 2026 earnings release and conference call",
-      "detail": "NeurAxis reports Q2 2026 (period ended June 30, 2026) results before market open with a call at 9:00 am ET tomorrow. Q1 2026 showed 80% YoY revenue growth to $1.6M and 86.4% gross margin, so the market will watch whether that growth pace and margin trend held, and for updated commentary on the ~$15M breakeven target.",
-      "confirmed": true
-    },
-    {
-      "when": "Ongoing through 2026",
-      "label": "Continued payer coverage expansion",
-      "detail": "Company continues to add regional/national medical policy coverage decisions for PENFS/IB-Stim (most recently 500k+ covered lives in the Mid-Atlantic on Aug 4, 2026), building on the Category I CPT code (effective Jan 1, 2026) that already unlocked over 50 million covered lives nationally.",
-      "confirmed": false
-    },
-    {
-      "when": "During 2026 (target)",
-      "label": "Cash-flow breakeven target",
-      "detail": "Management has guided to roughly $15M in annualized revenue needed for cash-flow breakeven, alongside a targeted burn rate of about $1M/quarter or less for the remainder of 2026.",
-      "confirmed": false
-    },
-    {
-      "when": "Ongoing through 2026",
-      "label": "RED (Rectal Expulsion Device) and VA channel ramp",
-      "detail": "Commercialization of the RED chronic-constipation device continues alongside the VA Federal Supply Schedule contract (effective Dec 2025, VA sales launched Jan 2026); management said on the Q1 2026 call that VA adoption was running ahead of initial expectations, making the pace of RED/VA revenue contribution a swing factor for 2026 growth.",
-      "confirmed": false
-    },
-    {
-      "when": "~November 2026 (estimate)",
-      "label": "Q3 2026 earnings",
-      "detail": "Based on the company's quarterly reporting cadence, Q3 2026 results would be expected around mid-November 2026; no date has been officially announced yet.",
-      "confirmed": false
-    }
+    {"when": "2026-08-11", "label": "Q2 2026 earnings release and conference call", "detail": "NeurAxis reports summarized Q2 2026 (period ended June 30, 2026) financial results before market open, with a call at 9:00am ET; watch for whether the Q1 2026 revenue acceleration (+80% YoY) driven by the new PENFS CPT Category I code continued into Q2.", "confirmed": true},
+    {"when": "Ongoing, 2026", "label": "Further payer/medical-policy coverage decisions for PENFS/IB-Stim", "detail": "Company has been announcing incremental regional insurer coverage wins roughly monthly (April and August 2026 so far) as it works toward comprehensive nationwide reimbursement policy coverage; additional insurer announcements are a recurring near-term catalyst but no specific dates are confirmed.", "confirmed": false},
+    {"when": "Ongoing, 2026", "label": "VA (Veterans Affairs) commercial ramp", "detail": "Following its Federal Supply Schedule contract award (effective Dec 2025) and VA commercial launch (Jan 2026), continued adoption progress within the VA hospital system (nearly 7 million veterans) is an ongoing catalyst, though no specific milestone dates are confirmed.", "confirmed": false}
   ],
-  "pulse": "NeurAxis remains in steady commercial-execution mode heading into its Q2 2026 print: IB-Stim keeps adding payer coverage (latest Mid-Atlantic policy expansion Aug 4, 500k+ lives) on top of the Category I CPT code that already unlocked 50M+ covered lives nationally, while the RED device and VA Federal Supply Schedule channel continue ramping. A Series B preferred stock dividend (paid in shares, July 29) and a new S-3 resale registration (July 23) both add modest incremental share-count/overhang alongside the existing ATM facility, keeping dilution a live but non-dramatic risk. All eyes now turn to Q2 2026 earnings on August 11 (tomorrow), which will show whether the 80% revenue growth pace from Q1 continued and whether the company is tracking toward its ~$15M revenue cash-flow-breakeven target."
+  "pulse": "NeurAxis continues to execute a reimbursement-driven growth strategy for its IB-Stim/PENFS pediatric neuromodulation device, with Q1 2026 revenue up 80% YoY on the strength of the new CPT Category I code and expanding payer coverage, and an early-August Mid-Atlantic coverage win adding another 500,000+ covered lives. Q2 2026 results land August 11, 2026, and will be the key near-term signal on whether the coverage-driven revenue acceleration held through the June quarter. The company remains a small-cap, cash-constrained story funding itself partly via share-based Series B preferred dividends while it works toward nationwide reimbursement and VA system adoption."
 }
