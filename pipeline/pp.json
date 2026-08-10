@@ -1,8 +1,8 @@
 {
- "fileDate": "2026-08-10 04:08",
- "generated": "2026-08-10 04:18",
+ "fileDate": "2026-08-10 04:20",
+ "generated": "2026-08-10 04:29",
  "engine": "pp-exact (verified vs PP app 2026-07-11)",
- "totalSecuritiesEur": 2252881,
+ "totalSecuritiesEur": 2257256,
  "cashEur": -166007.31,
  "cashByAccount": [
   {
@@ -30,22 +30,22 @@
    "eur": 93.1
   }
  ],
- "totalEur": 2086874,
- "ttwrorSince2022": 425.6,
- "ttwrorYtd": 108.7,
- "ttwrorAnnualized": 43.44,
- "izf": 72.09,
+ "totalEur": 2091248,
+ "ttwrorSince2022": 426.71,
+ "ttwrorYtd": 109.13,
+ "ttwrorAnnualized": 43.5,
+ "izf": 72.24,
  "yearlyReturns": {
   "2022": 3.3,
   "2023": 11.8,
   "2024": 45.2,
   "2025": 50.2,
-  "2026": 108.7
+  "2026": 109.1
  },
  "realizedEur": 817050,
- "unrealizedEur": 573830,
+ "unrealizedEur": 578204,
  "realizedUsd": 984426,
- "unrealizedUsd": 638788,
+ "unrealizedUsd": 643788,
  "netContribEur": 693272,
  "netContribUsd": 768897,
  "earningsEur": 12767.38,
@@ -26921,9 +26921,9 @@
   },
   {
    "d": "2026-08-07",
-   "v": 2385297,
-   "e": 2086874,
-   "r": 4.256034,
+   "v": 2390297,
+   "e": 2091248,
+   "r": 4.267051,
    "c": 768897,
    "k": 693272,
    "q": 984426,
@@ -62815,15 +62815,15 @@
    "name": "RAPID MICRO BIOSYSTEMS INC-A"
   }
  ],
- "ppReferenceTtwror": 425.6,
+ "ppReferenceTtwror": 426.71,
  "ppReferenceDate": "2026-08-10",
- "ttwrorApproxSince2022": 425.6,
+ "ttwrorApproxSince2022": 426.71,
  "yearlyReturnsApprox": {
   "2022": 3.3,
   "2023": 11.8,
   "2024": 45.2,
   "2025": 50.2,
-  "2026": 108.7
+  "2026": 109.1
  },
  "holdings": [
   {
@@ -62902,15 +62902,15 @@
    "isin": "",
    "ccy": "USD",
    "shares": 10000.0,
-   "price": 28.5,
-   "value": 285000.0,
-   "valueEur": 249344,
-   "valueUsd": 285000,
+   "price": 29.0,
+   "value": 290000.0,
+   "valueEur": 253718,
+   "valueUsd": 290000,
    "basisUsd": 267461,
    "realizedUsd": 0,
    "avgCost": 26.7461,
-   "unrealRet": 6.6,
-   "dayRet": 2.89,
+   "unrealRet": 8.4,
+   "dayRet": 4.69,
    "prevClose": 27.7,
    "priceDate": "2026-08-07"
   },
