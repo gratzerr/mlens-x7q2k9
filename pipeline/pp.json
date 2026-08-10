@@ -1,8 +1,8 @@
 {
- "fileDate": "2026-08-10 20:05",
- "generated": "2026-08-10 20:15",
+ "fileDate": "2026-08-10 20:16",
+ "generated": "2026-08-10 20:26",
  "engine": "pp-exact (verified vs PP app 2026-07-11)",
- "totalSecuritiesEur": 2194291,
+ "totalSecuritiesEur": 2194729,
  "cashEur": -166007.31,
  "cashByAccount": [
   {
@@ -30,22 +30,22 @@
    "eur": 93.1
   }
  ],
- "totalEur": 2028284,
- "ttwrorSince2022": 410.85,
- "ttwrorYtd": 102.84,
- "ttwrorAnnualized": 42.46,
- "izf": 69.83,
+ "totalEur": 2028722,
+ "ttwrorSince2022": 410.96,
+ "ttwrorYtd": 102.88,
+ "ttwrorAnnualized": 42.47,
+ "izf": 69.84,
  "yearlyReturns": {
   "2022": 3.3,
   "2023": 11.8,
   "2024": 45.2,
   "2025": 50.2,
-  "2026": 102.8
+  "2026": 102.9
  },
  "realizedEur": 817050,
- "unrealizedEur": 515240,
+ "unrealizedEur": 515677,
  "realizedUsd": 984426,
- "unrealizedUsd": 571819,
+ "unrealizedUsd": 572319,
  "netContribEur": 693272,
  "netContribUsd": 768897,
  "earningsEur": 12767.38,
@@ -26969,9 +26969,9 @@
   },
   {
    "d": "2026-08-10",
-   "v": 2318329,
-   "e": 2028284,
-   "r": 4.108468,
+   "v": 2318829,
+   "e": 2028722,
+   "r": 4.10957,
    "c": 768897,
    "k": 693272,
    "q": 984426,
@@ -62863,15 +62863,15 @@
    "name": "RAPID MICRO BIOSYSTEMS INC-A"
   }
  ],
- "ppReferenceTtwror": 410.85,
+ "ppReferenceTtwror": 410.96,
  "ppReferenceDate": "2026-08-10",
- "ttwrorApproxSince2022": 410.85,
+ "ttwrorApproxSince2022": 410.96,
  "yearlyReturnsApprox": {
   "2022": 3.3,
   "2023": 11.8,
   "2024": 45.2,
   "2025": 50.2,
-  "2026": 102.8
+  "2026": 102.9
  },
  "holdings": [
   {
@@ -62950,15 +62950,15 @@
    "isin": "",
    "ccy": "USD",
    "shares": 10000.0,
-   "price": 26.29999999,
-   "value": 263000.0,
-   "valueEur": 230096,
-   "valueUsd": 263000,
+   "price": 26.35,
+   "value": 263500.0,
+   "valueEur": 230534,
+   "valueUsd": 263500,
    "basisUsd": 267461,
    "realizedUsd": 0,
    "avgCost": 26.7461,
-   "unrealRet": -1.7,
-   "dayRet": -9.31,
+   "unrealRet": -1.5,
+   "dayRet": -9.14,
    "prevClose": 29.0,
    "priceDate": "2026-08-10"
   },
