@@ -1,86 +1,20 @@
 {
   "ticker": "NKTR",
   "news": [
-    {
-      "date": "2026-07-28",
-      "headline": "Nektar Therapeutics to Announce Q2 2026 Financial Results on August 13",
-      "source": "BioSpace / PR Newswire",
-      "url": "https://www.biospace.com/press-releases/nektar-therapeutics-to-announce-financial-results-for-the-second-quarter-on-thursday-august-13-2026-after-close-of-u-s-based-financial-markets",
-      "summary": "Nektar confirmed it will report Q2 2026 results after market close on Thursday, August 13, 2026, with CEO Howard Robin hosting a conference call at 5:00pm ET; as of this refresh (Aug 10) the report is just three days out and remains the next major catalyst."
-    },
-    {
-      "date": "2026-07-22",
-      "headline": "Canaccord Genuity Initiates Nektar at Buy With $153 Price Target",
-      "source": "MarketBeat",
-      "url": "https://www.marketbeat.com/instant-alerts/nektar-therapeutics-nasdaqnktr-coverage-initiated-at-canaccord-genuity-group-2026-07-22/",
-      "summary": "Canaccord Genuity analyst Edward Nash initiated coverage of Nektar with a Buy rating and $153 price target, citing the rezpegaldesleukin Phase 3 opportunity in atopic dermatitis and alopecia areata; the call continued to circulate in follow-on coverage through early August, with consensus now Strong Buy around a $153-154 average target across roughly 10 analysts."
-    },
-    {
-      "date": "2026-07-21",
-      "headline": "Nektar Announces Start of Phase 3 ZENITH AD Program for Rezpegaldesleukin",
-      "source": "PR Newswire / Nektar Therapeutics",
-      "url": "https://www.prnewswire.com/news-releases/nektar-therapeutics-announces-start-of-phase-3-zenith-ad-program-evaluating-novel-regulatory-t-cell-biologic-rezpegaldesleukin-in-moderate-to-severe-atopic-dermatitis-302830206.html",
-      "summary": "Nektar dosed the first patients in ZENITH AD-1 and ZENITH AD-2, two 510-patient global registrational Phase 3 trials of rezpegaldesleukin in moderate-to-severe atopic dermatitis, with shares up about 5.9% on the news; a third trial, ZENITH AD-3, is set to begin in September 2026, completing a ~1,530-patient program with initial topline data expected mid-2028 and a targeted BLA submission in 2029."
-    },
-    {
-      "date": "2026-07-20",
-      "headline": "Nektar Reports Inducement Grants to 23 New Hires Under Nasdaq Rule 5635(c)(4)",
-      "source": "PR Newswire / Nektar Therapeutics",
-      "url": "https://www.prnewswire.com/news-releases/nektar-therapeutics-reports-inducement-grants-under-nasdaq-listing-rule-5635c4-302834255.html",
-      "summary": "Nektar's Organization and Compensation Committee granted non-qualified stock options for 36,000 shares to 23 newly-hired employees at a $64.84 strike (the July 20 closing price), a routine but notable disclosure signaling continued headcount build-out to support the newly launched ZENITH AD Phase 3 program."
-    },
-    {
-      "date": "2026-07-03",
-      "headline": "Nektar Stock Climbs 10.65% as Immunology Sector Sentiment Improves",
-      "source": "Timothy Sykes",
-      "url": "https://www.timothysykes.com/news/nektar-therapeutics-nktr-news-2026_07_02/",
-      "summary": "NKTR shares jumped as sentiment across inflammation/immunology names improved on read-through from AbbVie's prospective acquisition of Apogee Therapeutics, with Nektar stock having climbed from the mid-$50s to the low-$70s over the prior weeks."
-    },
-    {
-      "date": "2026-06-27",
-      "headline": "Nektar Therapeutics Added to Russell 2000, 2500 and 3000 Indexes",
-      "source": "MarketScreener",
-      "url": "https://www.marketscreener.com/news/nektar-therapeutics-nasdaqcm-nktr-added-to-russell-2000-index-ce7f5fdfda8aff20",
-      "summary": "In the annual FTSE Russell reconstitution effective June 27, 2026, Nektar was added to a wide suite of Russell indexes, including the Russell 2000, 2500 and 3000 plus several associated growth and value benchmarks, broadening the passive/index-fund ownership base ahead of the stock's summer rally."
-    }
+    {"date": "2026-07-28", "headline": "Nektar Therapeutics to Announce Financial Results for the Second Quarter on Thursday, August 13, 2026", "source": "PR Newswire / Morningstar", "url": "https://www.morningstar.com/news/pr-newswire/20260728sf14170/nektar-therapeutics-to-announce-financial-results-for-the-second-quarter-on-thursday-august-13-2026-after-close-of-us-based-financial-markets", "summary": "Nektar announced it will report Q2 2026 financial results after market close on Thursday, August 13, 2026, with CEO Howard Robin hosting a conference call at 5:00pm ET to discuss results."},
+    {"date": "2026-07-27", "headline": "Is Nektar Therapeutics (NKTR) Undervalued On Its Phase 3 Rezpegaldesleukin Launch?", "source": "Sahm Capital", "url": "https://www.sahmcapital.com/news/content/is-nektar-therapeutics-nktr-undervalued-on-its-phase-3-rezpegaldesleukin-launch-2026-07-27", "summary": "An analysis examined whether Nektar's stock valuation adequately reflects the newly launched Phase 3 program for rezpegaldesleukin in atopic dermatitis and the drug's market potential."},
+    {"date": "2026-07-21", "headline": "Nektar Therapeutics Announces Start of Phase 3 ZENITH AD Program Evaluating Rezpegaldesleukin in Moderate-to-Severe Atopic Dermatitis", "source": "PR Newswire", "url": "https://www.prnewswire.com/news-releases/nektar-therapeutics-announces-start-of-phase-3-zenith-ad-program-evaluating-novel-regulatory-t-cell-biologic-rezpegaldesleukin-in-moderate-to-severe-atopic-dermatitis-302830206.html", "summary": "Nektar initiated the first two global registrational Phase 3 trials (ZENITH AD-1 and ZENITH AD-2), each enrolling ~510 biologic/JAK-naive patients 12+ years old; a third trial (ZENITH AD-3) for treatment-experienced patients is set to begin in September 2026, with topline data expected mid-2028 and a targeted BLA submission in 2029."},
+    {"date": "2026-07-20", "headline": "Nektar Therapeutics Reports Inducement Grants Under Nasdaq Listing Rule 5635(c)(4)", "source": "PR Newswire", "url": "https://www.prnewswire.com/news-releases/nektar-therapeutics-reports-inducement-grants-under-nasdaq-listing-rule-5635c4-302834255.html", "summary": "Nektar's Board granted non-qualified stock options for 36,000 shares to 23 newly hired employees under its 2025 Inducement Plan, with an exercise price of $64.84 (the July 20 closing price) vesting over four years."},
+    {"date": "2026-07-02", "headline": "Nektar Therapeutics Stock Climbs As Immunology Sentiment Improves", "source": "Timothy Sykes", "url": "https://www.timothysykes.com/news/nektar-therapeutics-nktr-news-2026_07_02/", "summary": "NKTR shares rose about 10.6% as sentiment toward immunology/inflammation biotechs improved, with analysts flagging Nektar as a beneficiary of the read-through from AbbVie's reported pursuit of Apogee Therapeutics."},
+    {"date": "2026-06-30", "headline": "Insider Sell: Jonathan Zalevsky Sells Shares of Nektar Therapeutics (NKTR)", "source": "GuruFocus", "url": "https://www.gurufocus.com/news/8944009/insider-sell-jonathan-zalevsky-sells-shares-of-nektar-therapeutics-nktr", "summary": "Chief Research and Development Officer Jonathan Zalevsky sold 5,681 shares of Nektar common stock on June 30, 2026, per an SEC Form 4 filing."}
   ],
   "catalysts": [
-    {
-      "when": "2026-08-13",
-      "label": "Q2 2026 earnings (after market close)",
-      "detail": "Officially confirmed date, three days out as of this refresh (2026-08-10). CEO Howard Robin will host a conference call at 5:00pm ET/2:00pm PT covering results and pipeline progress, including cash runway update following the ZENITH AD Phase 3 launch.",
-      "confirmed": true
-    },
-    {
-      "when": "September 2026",
-      "label": "ZENITH AD-3 trial start",
-      "detail": "Third pivotal Phase 3 trial (~510 biologic/JAK-inhibitor-experienced atopic dermatitis patients) set to begin dosing, completing the ~1,530-patient global ZENITH AD registrational program alongside AD-1/AD-2, which started dosing July 21, 2026.",
-      "confirmed": true
-    },
-    {
-      "when": "H2 2026",
-      "label": "NKTR-0165 preclinical data presentation",
-      "detail": "Preclinical data for NKTR-0165, a TNFR2 agonist antibody being developed with UCSF for multiple sclerosis, expected to be presented at a scientific conference.",
-      "confirmed": false
-    },
-    {
-      "when": "Early 2027",
-      "label": "Alopecia areata Phase 3 trial start",
-      "detail": "Planned initiation of a registrational Phase 3 trial for rezpegaldesleukin in alopecia areata, building on strong 52-week REZOLVE-AA Phase 2b extension data reported in April 2026 and existing FDA Fast Track designation.",
-      "confirmed": false
-    },
-    {
-      "when": "2027",
-      "label": "Type 1 diabetes Phase 2 data",
-      "detail": "Phase 2 data expected for rezpegaldesleukin in patients with new-onset Type 1 diabetes mellitus.",
-      "confirmed": false
-    },
-    {
-      "when": "Mid-2028",
-      "label": "ZENITH AD Phase 3 initial topline data",
-      "detail": "Initial topline readout from the ZENITH AD-1/AD-2 trials expected mid-2028, with a BLA submission targeted for 2029.",
-      "confirmed": true
-    }
+    {"when": "2026-08-13", "label": "Q2 2026 earnings", "detail": "Nektar reports second-quarter 2026 financial results after market close, with a CEO-hosted conference call at 5:00pm ET.", "confirmed": true},
+    {"when": "September 2026", "label": "ZENITH AD-3 trial start", "detail": "Third Phase 3 trial in the ZENITH AD program (rezpegaldesleukin in biologic/JAK treatment-experienced atopic dermatitis patients) is set to begin enrollment.", "confirmed": true},
+    {"when": "Early 2027", "label": "Alopecia areata Phase 3 trial start", "detail": "Planned initiation of a single registrational Phase 3 trial for rezpegaldesleukin in alopecia areata, following End-of-Phase 2 FDA meetings and EMA scientific advice.", "confirmed": true},
+    {"when": "2027", "label": "Type 1 diabetes Phase 2 (TrialNet) initial data", "detail": "Initial data expected from the TrialNet-sponsored Phase 2 study of rezpegaldesleukin in new-onset stage 3 Type 1 diabetes.", "confirmed": true},
+    {"when": "Mid-2028", "label": "ZENITH AD Phase 3 topline data", "detail": "Company-guided timeline for initial topline results from the ZENITH AD-1/AD-2 registrational trials in atopic dermatitis.", "confirmed": true},
+    {"when": "2029", "label": "Targeted BLA submission", "detail": "Nektar's targeted timeline for a Biologics License Application submission for rezpegaldesleukin in atopic dermatitis, pending positive Phase 3 results.", "confirmed": true}
   ],
-  "pulse": "Nektar remains in pivotal execution mode heading into its August 13, 2026 Q2 earnings call: it dosed first patients in the ZENITH AD-1/AD-2 Phase 3 atopic dermatitis trials on July 21, with ZENITH AD-3 set to start in September, and continues hiring against the newly launched program (36,000-option inducement grant to 23 new employees on July 20). The stock has rallied from the mid-$50s into the low-$70s since late June on improving immunology-sector sentiment, broad Russell index inclusion (June 27), and fresh bullish sell-side coverage (Canaccord initiated Buy, $153 PT, on July 22, with consensus now Strong Buy near $153-154). The next major catalyst is Q2 earnings on August 13, where investors will watch R&D spend tied to the Phase 3 launch and cash runway (funded into roughly Q3 2028 per the Q1 update) after $700M+ in equity raises over the past year that have meaningfully diluted shareholders; overall sentiment stays bullish on rezpegaldesleukin's multi-indication Treg biologic potential, tempered by the dilution overhang and a long wait to the mid-2028 pivotal readout."
+  "pulse": "Nektar's story now centers almost entirely on rezpegaldesleukin's Phase 3 ZENITH AD program in atopic dermatitis, which began dosing patients on July 21, 2026, with topline data not expected until mid-2028 — leaving a long, binary wait ahead. Near-term stock moves have been driven more by sector-wide immunology sentiment (e.g., the AbbVie/Apogee read-through) than company-specific news, while routine insider selling continues in the background. Q2 2026 earnings on August 13, 2026 will be the next concrete checkpoint, with investors watching cash runway against the newly ramped Phase 3 spend."
 }
