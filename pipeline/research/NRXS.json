@@ -2,6 +2,13 @@
   "ticker": "NRXS",
   "news": [
     {
+      "date": "2026-08-11",
+      "headline": "NeurAxis Reports Record Second Quarter 2026 Financial Results Driven by 116% Year Over Year Revenue Growth",
+      "source": "GlobeNewswire",
+      "url": "https://www.globenewswire.com/news-release/2026/08/11/3342584/0/en/neuraxis-reports-record-second-quarter-2026-financial-results-driven-by-116-year-over-year-revenue-growth.html",
+      "summary": "NeurAxis reported Q2 2026 revenue of $1.9 million, up 116% year-over-year, with gross margin expanding 230 basis points and cash on hand of $8.3 million as of June 30, 2026. Growth was driven by the new Category I CPT code for PENFS that took effect January 1, 2026, which substantially broadened payer reimbursement for IB-Stim."
+    },
+    {
       "date": "2026-08-04",
       "headline": "NeurAxis Expands Payer Coverage with New Policies",
       "source": "GlobeNewswire",
@@ -13,7 +20,7 @@
       "headline": "NeurAxis to Host Second Quarter 2026 Results and Business Update Call on Tuesday, August 11, 2026",
       "source": "GlobeNewswire",
       "url": "https://www.globenewswire.com/news-release/2026/07/28/3334108/0/en/neuraxis-to-host-second-quarter-2026-results-and-business-update-call-on-tuesday-august-11-2026.html",
-      "summary": "NeurAxis confirmed it will report Q2 2026 financial results (period ended June 30, 2026) before market open on August 11, 2026, with a conference call at 9:00 am ET the same day."
+      "summary": "NeurAxis announced it would report Q2 2026 financial results (period ended June 30, 2026) before market open on August 11, 2026, with a conference call at 9:00 am ET the same day, setting the stage for the subsequent record-revenue report."
     },
     {
       "date": "2026-07-23",
@@ -32,10 +39,10 @@
   ],
   "catalysts": [
     {
-      "when": "2026-08-11",
-      "label": "Q2 2026 earnings release and conference call",
-      "detail": "NeurAxis reports Q2 2026 (period ended June 30, 2026) results before market open today with a call at 9:00 am ET; results were not yet publicly available as of this update. Q1 2026 showed 80% YoY revenue growth to $1.6M and 86.4% gross margin, so the market will watch whether that growth pace and margin trend held, and for updated commentary on the ~$15M breakeven target.",
-      "confirmed": true
+      "when": "Q3 2026 (expected around November 2026)",
+      "label": "Q3 2026 earnings and business update call",
+      "detail": "Following its quarterly reporting cadence (Q1 on May 12, Q2 on Aug 11), NeurAxis is expected to report Q3 2026 results and host a business update call, which should show whether the CPT-code-driven 116% revenue growth pace is sustainable.",
+      "confirmed": false
     },
     {
       "when": "Ongoing through 2026",
@@ -54,13 +61,7 @@
       "label": "RED (Rectal Expulsion Device) and VA channel ramp",
       "detail": "Commercialization of the RED chronic-constipation device continues alongside the VA Federal Supply Schedule contract (effective Dec 2025, VA sales launched Jan 2026); management said on the Q1 2026 call that VA adoption was running ahead of initial expectations, making the pace of RED/VA revenue contribution a swing factor for 2026 growth.",
       "confirmed": false
-    },
-    {
-      "when": "~November 2026 (estimate)",
-      "label": "Q3 2026 earnings",
-      "detail": "Based on the company's quarterly reporting cadence, Q3 2026 results would be expected around mid-November 2026; no date has been officially announced yet.",
-      "confirmed": false
     }
   ],
-  "pulse": "NeurAxis remains in steady commercial-execution mode as it reports Q2 2026 results today (Aug 11, before market open): IB-Stim keeps adding payer coverage (latest Mid-Atlantic policy expansion Aug 4, 500k+ lives) on top of the Category I CPT code that already unlocked 50M+ covered lives nationally, while the RED device and VA Federal Supply Schedule channel continue ramping. A Series B preferred stock dividend (paid in shares, July 29) and a new S-3 resale registration (July 23) both add modest incremental share-count/overhang alongside the existing ATM facility, keeping dilution a live but non-dramatic risk. All eyes are on today's Q2 print, which will show whether the 80% revenue growth pace from Q1 continued and whether the company is tracking toward its ~$15M revenue cash-flow-breakeven target; shares recently traded around $8.5, up sharply over the past year on the coverage-expansion and growth narrative."
+  "pulse": "NeurAxis posted record Q2 2026 results on August 11, with revenue up 116% year-over-year to $1.9 million and gross margin expanding 230 basis points, as the new Category I CPT code for PENFS (effective January 2026) continues to drive payer reimbursement and unit growth for IB-Stim. The company keeps stacking incremental payer wins, most recently a Mid-Atlantic policy expansion on August 4 covering over 500,000 additional lives, while ending the quarter with $8.3 million in cash. Sentiment remains bullish following the beat, with the next major catalyst being Q3 2026 earnings expected in the fall to confirm whether the reimbursement-driven revenue ramp toward the company's ~$15M breakeven target is sustainable."
 }
