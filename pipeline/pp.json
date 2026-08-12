@@ -1,8 +1,8 @@
 {
- "fileDate": "2026-08-12 07:19",
- "generated": "2026-08-12 07:29",
+ "fileDate": "2026-08-12 07:30",
+ "generated": "2026-08-12 07:40",
  "engine": "pp-exact (verified vs PP app 2026-07-11)",
- "totalSecuritiesEur": 2206426,
+ "totalSecuritiesEur": 2201601,
  "cashEur": -166007.31,
  "cashByAccount": [
   {
@@ -30,22 +30,22 @@
    "eur": 93.1
   }
  ],
- "totalEur": 2040419,
- "ttwrorSince2022": 413.9,
- "ttwrorYtd": 104.05,
- "ttwrorAnnualized": 42.62,
- "izf": 70.14,
+ "totalEur": 2035594,
+ "ttwrorSince2022": 412.69,
+ "ttwrorYtd": 103.57,
+ "ttwrorAnnualized": 42.54,
+ "izf": 69.97,
  "yearlyReturns": {
   "2022": 3.3,
   "2023": 11.8,
   "2024": 45.2,
   "2025": 50.2,
-  "2026": 104.0
+  "2026": 103.6
  },
  "realizedEur": 817050,
- "unrealizedEur": 527374,
+ "unrealizedEur": 522549,
  "realizedUsd": 984426,
- "unrealizedUsd": 585689,
+ "unrealizedUsd": 580174,
  "netContribEur": 693272,
  "netContribUsd": 768897,
  "earningsEur": 12767.38,
@@ -26985,9 +26985,9 @@
   },
   {
    "d": "2026-08-11",
-   "v": 2332199,
-   "e": 2040419,
-   "r": 4.139031,
+   "v": 2326684,
+   "e": 2035594,
+   "r": 4.126878,
    "c": 768897,
    "k": 693272,
    "q": 984426,
@@ -62879,15 +62879,15 @@
    "name": "RAPID MICRO BIOSYSTEMS INC-A"
   }
  ],
- "ppReferenceTtwror": 413.9,
+ "ppReferenceTtwror": 412.69,
  "ppReferenceDate": "2026-08-12",
- "ttwrorApproxSince2022": 413.9,
+ "ttwrorApproxSince2022": 412.69,
  "yearlyReturnsApprox": {
   "2022": 3.3,
   "2023": 11.8,
   "2024": 45.2,
   "2025": 50.2,
-  "2026": 104.0
+  "2026": 103.6
  },
  "holdings": [
   {
@@ -62900,17 +62900,17 @@
    "isin": "NL0010696654",
    "ccy": "USD",
    "shares": 10000.0,
-   "price": 46.06000137,
-   "value": 460600.01,
-   "valueEur": 402975,
-   "valueUsd": 460600,
+   "price": 45.0,
+   "value": 450000.0,
+   "valueEur": 393701,
+   "valueUsd": 450000,
    "basisUsd": 91996,
    "realizedUsd": 11487,
    "avgCost": 9.1996,
-   "unrealRet": 400.7,
-   "dayRet": -0.0,
+   "unrealRet": 389.1,
+   "dayRet": -2.3,
    "prevClose": 46.06,
-   "priceDate": "2026-08-06"
+   "priceDate": "2026-08-11"
   },
   {
    "account": "ALL",
@@ -62922,17 +62922,17 @@
    "isin": "US24661P8077",
    "ccy": "USD",
    "shares": 20000.0,
-   "price": 16.67000007,
-   "value": 333400.0,
-   "valueEur": 291689,
-   "valueUsd": 333400,
+   "price": 17.21999931,
+   "value": 344399.99,
+   "valueEur": 301312,
+   "valueUsd": 344400,
    "basisUsd": 193634,
    "realizedUsd": -16090,
    "avgCost": 9.6817,
-   "unrealRet": 72.2,
-   "dayRet": -0.0,
+   "unrealRet": 77.9,
+   "dayRet": 3.3,
    "prevClose": 16.67,
-   "priceDate": "2026-08-06"
+   "priceDate": "2026-08-11"
   },
   {
    "account": "ALL",
@@ -62944,17 +62944,17 @@
    "isin": "US18507C1036",
    "ccy": "USD",
    "shares": 22000.0,
-   "price": 14.56999969,
-   "value": 320539.99,
-   "valueEur": 280437,
-   "valueUsd": 320540,
+   "price": 14.89999961,
+   "value": 327799.99,
+   "valueEur": 286789,
+   "valueUsd": 327800,
    "basisUsd": 230515,
    "realizedUsd": -60391,
    "avgCost": 10.4779,
-   "unrealRet": 39.1,
-   "dayRet": -0.0,
+   "unrealRet": 42.2,
+   "dayRet": 2.26,
    "prevClose": 14.57,
-   "priceDate": "2026-08-06"
+   "priceDate": "2026-08-11"
   },
   {
    "account": "ALL",
@@ -63002,28 +63002,6 @@
   },
   {
    "account": "ALL",
-   "ticker": "NRXS",
-   "name": "NEURAXIS INC",
-   "byPort": {
-    "IBKR": 35000.0
-   },
-   "isin": "US64134X2018",
-   "ccy": "USD",
-   "shares": 35000.0,
-   "price": 6.86999988,
-   "value": 240450.0,
-   "valueEur": 210367,
-   "valueUsd": 240450,
-   "basisUsd": 198036,
-   "realizedUsd": 0,
-   "avgCost": 5.6582,
-   "unrealRet": 21.4,
-   "dayRet": -0.0,
-   "prevClose": 6.87,
-   "priceDate": "2026-08-06"
-  },
-  {
-   "account": "ALL",
    "ticker": "PINK.V",
    "name": "PERIMETER MEDICAL IMAGING AI",
    "byPort": {
@@ -63055,17 +63033,39 @@
    "isin": "US52886X1072",
    "ccy": "USD",
    "shares": 47500.0,
-   "price": 4.63000011,
-   "value": 219925.01,
-   "valueEur": 192410,
-   "valueUsd": 219925,
+   "price": 4.7800002,
+   "value": 227050.01,
+   "valueEur": 198644,
+   "valueUsd": 227050,
    "basisUsd": 233470,
    "realizedUsd": 0,
    "avgCost": 4.9152,
-   "unrealRet": -5.8,
-   "dayRet": -0.0,
+   "unrealRet": -2.7,
+   "dayRet": 3.24,
    "prevClose": 4.63,
-   "priceDate": "2026-08-06"
+   "priceDate": "2026-08-11"
+  },
+  {
+   "account": "ALL",
+   "ticker": "NRXS",
+   "name": "NEURAXIS INC",
+   "byPort": {
+    "IBKR": 35000.0
+   },
+   "isin": "US64134X2018",
+   "ccy": "USD",
+   "shares": 35000.0,
+   "price": 6.3499999,
+   "value": 222250.0,
+   "valueEur": 194444,
+   "valueUsd": 222250,
+   "basisUsd": 198036,
+   "realizedUsd": 0,
+   "avgCost": 5.6582,
+   "unrealRet": 12.2,
+   "dayRet": -7.57,
+   "prevClose": 6.87,
+   "priceDate": "2026-08-11"
   },
   {
    "account": "ALL",
@@ -63077,17 +63077,17 @@
    "isin": "US75340L1044",
    "ccy": "USD",
    "shares": 105000.0,
-   "price": 1.71000003,
-   "value": 179550.0,
-   "valueEur": 157087,
-   "valueUsd": 179550,
+   "price": 1.69000005,
+   "value": 177450.01,
+   "valueEur": 155249,
+   "valueUsd": 177450,
    "basisUsd": 219812,
    "realizedUsd": 0,
    "avgCost": 2.0935,
-   "unrealRet": -18.3,
-   "dayRet": -0.0,
+   "unrealRet": -19.3,
+   "dayRet": -1.17,
    "prevClose": 1.71,
-   "priceDate": "2026-08-06"
+   "priceDate": "2026-08-11"
   },
   {
    "account": "ALL",
