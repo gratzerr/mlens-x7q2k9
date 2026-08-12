@@ -2,11 +2,18 @@
   "ticker": "QURE",
   "news": [
     {
+      "date": "2026-08-12",
+      "headline": "uniQure Receives $65.00 Consensus Price Target from Brokerages",
+      "source": "MarketBeat (via Daily Political)",
+      "url": "https://www.dailypolitical.com/2026/08/12/uniqure-n-v-nasdaqqure-receives-65-00-consensus-price-target-from-brokerages.html",
+      "summary": "Seventeen brokerages now cover uniQure with an average 'Moderate Buy' rating (13 buy, 3 hold, 1 sell) and a consensus 12-month price target of $65.00, reflecting the recent wave of bullish revisions from analysts such as Wolfe Research and Wells Fargo."
+    },
+    {
       "date": "2026-08-01",
-      "headline": "Wall Street Zen Downgrades uniQure to Sell",
-      "source": "Wall Street Zen (via MarketBeat/Daily Political)",
-      "url": "https://www.dailypolitical.com/2026/08/02/uniqure-nasdaqqure-lowered-to-sell-rating-by-wall-street-zen.html",
-      "summary": "Wall Street Zen cut its rating on uniQure from Hold to Sell, citing lingering regulatory uncertainty around AMT-130, making it an outlier bearish voice versus the broadly bullish sell-side consensus (11 buy ratings, average target near $65-70)."
+      "headline": "Wall Street Zen Downgrades uniQure to Sell, Reverses to Hold a Day Later",
+      "source": "Wall Street Zen (via MarketBeat)",
+      "url": "https://www.marketbeat.com/instant-alerts/uniqure-nasdaqqure-stock-rating-lowered-by-wall-street-zen-2026-08-01/",
+      "summary": "Wall Street Zen cut uniQure from Hold to Sell on August 1, citing lingering regulatory uncertainty around AMT-130, then reversed the call back to Hold just a day later, underscoring how jumpy sentiment remains ahead of September's data readout."
     },
     {
       "date": "2026-07-31",
@@ -17,17 +24,10 @@
     },
     {
       "date": "2026-07-30",
-      "headline": "AdCom Expected for uniQure's Huntington's Gene Therapy, Chief Medical Officer Says",
-      "source": "BioSpace / Pharmaceutical Technology",
-      "url": "https://www.pharmaceutical-technology.com/news/adcom-expected-for-uniqures-huntingtons-gene-therapy-chief-medical-officer-says/",
-      "summary": "During uniQure's Q2 2026 earnings call, Chief Medical Officer Walid Abi-Saab said the company believes an FDA advisory committee (AdCom) meeting for AMT-130 is likely and stated \"we welcome it,\" while AMT-130 is still expected to be eligible for priority review given its Breakthrough Therapy and RMAT designations."
-    },
-    {
-      "date": "2026-07-30",
-      "headline": "Wolfe Research Upgrades uniQure to Outperform, $65 Price Target",
-      "source": "Wolfe Research / Investing.com / GuruFocus",
-      "url": "https://www.investing.com/news/analyst-ratings/uniqure-stock-upgraded-by-wolfe-research-on-huntingtons-therapy-outlook-93CH-4821823",
-      "summary": "Analyst Rudy Li upgraded QURE from Peer Perform to Outperform, arguing the market is underpricing AMT-130's approval odds (Wolfe estimates ~70% probability) and projecting peak U.S. sales of about $2 billion."
+      "headline": "Barclays Trims uniQure Price Target to $60 After Q2 Results, Keeps Overweight",
+      "source": "Barclays (via Investing.com)",
+      "url": "https://www.investing.com/news/analyst-ratings/barclays-reiterates-uniqure-stock-rating-after-fda-meeting-update-93CH-4747634",
+      "summary": "Barclays trimmed its price target on uniQure from $65 to $60 while keeping an Overweight rating, updating its model after Q2 2026 results but maintaining a positive view on the AMT-130 regulatory pathway."
     },
     {
       "date": "2026-07-29",
@@ -37,11 +37,11 @@
       "summary": "Revenue of $5.8M missed estimates and the quarterly net loss widened to roughly $81M, but shares jumped as the company reaffirmed cash of $810.3M funding operations into 2030, confirmed the AMT-130 BLA/UK MAA submissions remain on track for Q3 2026, and reiterated four-year topline AMT-130 data due in September 2026."
     },
     {
-      "date": "2026-06-29",
-      "headline": "H.C. Wainwright Raises uniQure Price Target to $80, Maintains Buy",
-      "source": "H.C. Wainwright & Co. (via GuruFocus/Moomoo)",
-      "url": "https://www.gurufocus.com/news/8935799/qure-maintained-by-hc-wainwright-co-price-target-raised-to-80",
-      "summary": "H.C. Wainwright raised its price target from $50 to $80 while reiterating a Buy rating, reflecting increased confidence following FDA's alignment on an accelerated-approval BLA pathway for AMT-130."
+      "date": "2026-07-29",
+      "headline": "Wolfe Research Upgrades uniQure to Outperform, $65 Price Target",
+      "source": "Wolfe Research / Investing.com / GuruFocus",
+      "url": "https://www.investing.com/news/analyst-ratings/uniqure-stock-upgraded-by-wolfe-research-on-huntingtons-therapy-outlook-93CH-4821823",
+      "summary": "Analyst Rudy Li upgraded QURE from Peer Perform to Outperform, arguing the market is underpricing AMT-130's approval odds (Wolfe estimates ~70% probability) and projecting peak U.S. sales of about $2 billion."
     }
   ],
   "catalysts": [
@@ -55,5 +55,5 @@
     {"when": "H1 2027", "label": "AMT-260 updated Phase I/IIa data", "detail": "uniQure plans to present updated results from the epilepsy gene therapy program including further dose-cohort follow-up.", "confirmed": true},
     {"when": "~November 2026", "label": "Q3 2026 earnings report", "detail": "Based on prior-year cadence (Q3 2025 reported Nov 10, 2025); exact date not yet announced.", "confirmed": false}
   ],
-  "pulse": "uniQure shares (~$44-46, up over 240% year-on-year) remain in a strongly positive news cycle following June 2026's FDA reversal that reopened an accelerated-approval path for AMT-130 in Huntington's disease: Q2 2026 earnings (July 29) reaffirmed Q3 2026 BLA/UK MAA filings and cash runway into 2030, and a string of analyst upgrades/price-target hikes (Wolfe to Outperform; Wells Fargo to $75; H.C. Wainwright to $80) reflect rising confidence in approval odds (~70% per Wolfe) and a multi-billion-dollar peak sales opportunity, though Wall Street Zen bucked the trend with a rare Sell downgrade on August 1 citing lingering regulatory risk. The company backstopped this window with a $259M equity raise in late June. The next major swing factor is the September 2026 four-year AMT-130 data readout, followed closely by the actual BLA/MAA filings and clarity on confirmatory-trial design and any AdCom timing."
+  "pulse": "uniQure shares remain caught between strong sell-side conviction and pockets of caution as the market awaits the pivotal September 2026 four-year AMT-130 data readout. Q2 2026 earnings (July 29) reaffirmed Q3 2026 BLA/UK MAA filings and cash runway into 2030 (bolstered by a $259M June equity raise), and the 17-analyst consensus now sits at a $65 average price target (13 buy/3 hold/1 sell) even as Barclays trimmed its target to $60 post-earnings and Wall Street Zen briefly cut to Sell before reversing to Hold within a day. The next major swing factors remain the September four-year data readout, the actual BLA/MAA filings, and clarity on confirmatory-trial design and any FDA AdCom timing."
 }
