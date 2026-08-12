@@ -4,9 +4,9 @@
     {
       "date": "2026-08-10",
       "headline": "Lexeo Therapeutics holds consensus \"Buy\" rating from brokerages",
-      "source": "MarketBeat",
-      "url": "https://www.marketbeat.com/stocks/NASDAQ/LXEO/",
-      "summary": "Wall Street coverage of Lexeo remains constructive, with a consensus \"Buy\" rating across the eight analysts tracked by MarketBeat and an average price target near $18.75, well above the current share price."
+      "source": "Daily Political / MarketBeat",
+      "url": "https://www.dailypolitical.com/2026/08/10/lexeo-therapeutics-inc-nasdaqlxeo-given-average-rating-of-buy-by-brokerages.html",
+      "summary": "Wall Street coverage of Lexeo remains constructive, with a consensus \"Buy\" rating across the analysts tracked by MarketBeat and an average price target in the high-teens, well above the current share price."
     },
     {
       "date": "2026-08-05",
@@ -20,7 +20,7 @@
       "headline": "Chardan Capital upgrades LXEO to Strong-Buy",
       "source": "Daily Political",
       "url": "https://www.dailypolitical.com/2026/07/31/lexeo-therapeutics-nasdaqlxeo-raised-to-strong-buy-at-chardan-capital.html",
-      "summary": "Chardan Capital raised its rating on Lexeo Therapeutics from Buy to Strong-Buy, citing confidence in the company's cardiac gene therapy pipeline ahead of key regulatory and clinical milestones."
+      "summary": "Chardan Capital raised its rating on Lexeo Therapeutics from Buy to Strong-Buy on July 28, citing confidence in the company's cardiac gene therapy pipeline ahead of key regulatory and clinical milestones."
     },
     {
       "date": "2026-06-25",
@@ -30,11 +30,11 @@
       "summary": "JPMorgan lowered its price target on Lexeo from $12 to $9 while reiterating an Overweight rating, reflecting an updated valuation model that still implies significant upside from current levels."
     },
     {
-      "date": "2026-06-25",
-      "headline": "Lexeo shareholders re-elect directors, ratify KPMG as auditor",
-      "source": "TipRanks",
-      "url": "https://www.tipranks.com/news/company-announcements/lexeo-shareholders-reelect-directors-ratify-kpmg-auditor",
-      "summary": "At its virtual 2026 annual meeting, Lexeo stockholders re-elected three Class III directors, including CEO R. Nolan Townsend, and ratified KPMG LLP as independent auditor for fiscal 2026."
+      "date": "2026-06-17",
+      "headline": "Phase I/II data for LX2006 in Friedreich ataxia published in JAMA Cardiology",
+      "source": "GlobeNewswire",
+      "url": "https://www.globenewswire.com/news-release/2026/06/17/3313795/0/en/lexeo-therapeutics-announces-publication-in-jama-cardiology-of-phase-i-ii-data-for-lx2006-in-friedreich-ataxia.html",
+      "summary": "Lexeo announced peer-reviewed publication of Phase I/II results for LX2006 in Friedreich ataxia cardiomyopathy, showing the therapy was generally well tolerated across 17 dosed participants with no Grade 3+ serious adverse events and stabilization over time in mFARS neurological scores. One participant had a possibly treatment-related Grade 2 asymptomatic myocarditis event roughly a year after dosing."
     },
     {
       "date": "2026-06-15",
@@ -48,7 +48,7 @@
     {
       "when": "~2026-08-19",
       "label": "Q2 2026 earnings report",
-      "detail": "Consensus/analyst-estimated date (per Investing.com and other trackers) for Lexeo's Q2 2026 financial results and business update; as of Aug 11, 2026 Lexeo has not yet issued its own press release confirming the date.",
+      "detail": "Consensus/analyst-estimated date (per Investing.com and other trackers) for Lexeo's Q2 2026 financial results and business update; as of Aug 12, 2026 Lexeo has not yet issued its own press release confirming the date.",
       "confirmed": false
     },
     {
@@ -70,5 +70,5 @@
       "confirmed": true
     }
   ],
-  "pulse": "Lexeo's newsflow has stayed positive through the summer, headlined by FDA RMAT designation for LX2020 in PKP2 cardiomyopathy (Aug 5) and a Chardan Strong-Buy upgrade (Jul 31), building on finalized SUNRISE-FA 2 pivotal trial design in June. Analyst sentiment remains constructive overall (consensus \"Buy\" rating, average target around $18-19) despite JPMorgan trimming its price target to $9 in late June, and the key near-term catalyst is Q2 2026 earnings expected around Aug 19 (not yet formally confirmed by the company), followed by LX2020 12-month high-dose data in Q4 2026 and SUNRISE-FA 2 topline data in 2H 2027."
+  "pulse": "Lexeo's newsflow has stayed positive through the summer, headlined by FDA RMAT designation for LX2020 in PKP2 cardiomyopathy (Aug 5) and a Chardan Strong-Buy upgrade (Jul 28), building on a JAMA Cardiology publication of encouraging LX2006 Phase I/II data and finalized SUNRISE-FA 2 pivotal trial design in June. Analyst sentiment remains constructive overall (consensus \"Buy\" rating) despite JPMorgan trimming its price target to $9 in late June, and the key near-term catalyst is Q2 2026 earnings expected around Aug 19 (not yet formally confirmed by the company), followed by LX2020 12-month high-dose data in Q4 2026 and SUNRISE-FA 2 topline data in 2H 2027."
 }
