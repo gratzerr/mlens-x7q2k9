@@ -1,6 +1,6 @@
 {
- "fileDate": "2026-08-13 12:06",
- "generated": "2026-08-13 12:16",
+ "fileDate": "2026-08-13 12:29",
+ "generated": "2026-08-13 12:39",
  "engine": "pp-exact (verified vs PP app 2026-07-11)",
  "totalSecuritiesEur": 2164798,
  "cashEur": -131641.2,
@@ -26985,9 +26985,9 @@
   },
   {
    "d": "2026-08-11",
-   "v": 2315414,
-   "e": 2025734,
-   "r": 4.102046,
+   "v": 2326489,
+   "e": 2035423,
+   "r": 4.12645,
    "c": 768897,
    "k": 693272,
    "q": 886311,
@@ -63112,8 +63112,8 @@
    "realizedUsd": 0,
    "avgCost": 4.9152,
    "unrealRet": -0.9,
-   "dayRet": 1.88,
-   "prevClose": 4.78,
+   "dayRet": 5.18,
+   "prevClose": 4.63,
    "priceDate": "2026-08-12"
   },
   {
@@ -63134,8 +63134,8 @@
    "realizedUsd": 0,
    "avgCost": 5.6582,
    "unrealRet": 10.8,
-   "dayRet": -1.26,
-   "prevClose": 6.35,
+   "dayRet": -8.73,
+   "prevClose": 6.87,
    "priceDate": "2026-08-12"
   }
  ],
