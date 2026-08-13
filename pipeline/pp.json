@@ -1,6 +1,6 @@
 {
- "fileDate": "2026-08-13 13:15",
- "generated": "2026-08-13 13:24",
+ "fileDate": "2026-08-13 13:37",
+ "generated": "2026-08-13 13:47",
  "engine": "pp-exact (verified vs PP app 2026-07-11)",
  "totalSecuritiesEur": 2175904,
  "cashEur": -131641.2,
@@ -26985,9 +26985,9 @@
   },
   {
    "d": "2026-08-11",
-   "v": 2326489,
-   "e": 2035423,
-   "r": 4.12645,
+   "v": 2315414,
+   "e": 2025734,
+   "r": 4.102046,
    "c": 768897,
    "k": 693272,
    "q": 886311,
@@ -63009,15 +63009,15 @@
    "isin": "",
    "ccy": "USD",
    "shares": 15000.0,
-   "price": 27.0,
-   "value": 405000.0,
-   "valueEur": 354331,
-   "valueUsd": 405000,
+   "price": 23.7,
+   "value": 355500.0,
+   "valueEur": 311024,
+   "valueUsd": 355500,
    "basisUsd": 407413,
    "realizedUsd": 0,
    "avgCost": 27.1609,
-   "unrealRet": -0.6,
-   "dayRet": 0.0,
+   "unrealRet": -12.7,
+   "dayRet": -12.22,
    "prevClose": 27.0,
    "priceDate": "2026-08-13"
   },
@@ -63112,12 +63112,12 @@
   },
   {
    "account": "ALL",
-   "ticker": "LXEO",
-   "name": "LEXEO THERAPEUTICS INC",
+   "ticker": "NKTR",
+   "name": "NEKTAR THERAPEUTICS",
    "byPort": {
-    "SQ": 47500.0
+    "SQ": 3300.0
    },
-   "isin": "US52886X1072",
+   "isin": "US6402683063",
    "ccy": "USD",
    "shares": 47500.0,
    "price": 4.92000007,
@@ -63149,10 +63149,32 @@
    "basisUsd": 198036,
    "realizedUsd": 0,
    "avgCost": 5.6582,
-   "unrealRet": 10.8,
-   "dayRet": -8.73,
-   "prevClose": 6.87,
-   "priceDate": "2026-08-12"
+   "unrealRet": 13.8,
+   "dayRet": 2.68,
+   "prevClose": 6.27,
+   "priceDate": "2026-08-13"
+  },
+  {
+   "account": "ALL",
+   "ticker": "LXEO",
+   "name": "LEXEO THERAPEUTICS INC",
+   "byPort": {
+    "SQ": 47500.0
+   },
+   "isin": "US52886X1072",
+   "ccy": "USD",
+   "shares": 47500.0,
+   "price": 4.73999977,
+   "value": 225149.99,
+   "valueEur": 196982,
+   "valueUsd": 225150,
+   "basisUsd": 233470,
+   "realizedUsd": 0,
+   "avgCost": 4.9152,
+   "unrealRet": -3.6,
+   "dayRet": -2.67,
+   "prevClose": 4.87,
+   "priceDate": "2026-08-13"
   }
  ],
  "txmax": "2026-08-11"
