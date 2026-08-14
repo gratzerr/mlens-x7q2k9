@@ -3,64 +3,38 @@
   "news": [
     {
       "date": "2026-08-11",
-      "headline": "NeurAxis Reports Record Second Quarter 2026 Financial Results Driven by 116% Year-Over-Year Revenue Growth",
-      "source": "GlobeNewswire / Motley Fool (Q2 2026 earnings release & call)",
+      "headline": "NeurAxis Reports Record Second Quarter 2026 Financial Results Driven by 116% Year Over Year Revenue Growth",
+      "source": "GlobeNewswire",
       "url": "https://www.globenewswire.com/news-release/2026/08/11/3342584/0/en/neuraxis-reports-record-second-quarter-2026-financial-results-driven-by-116-year-over-year-revenue-growth.html",
-      "summary": "Q2 revenue rose 116% YoY (and ~20% QoQ) to about $1.93M, IB-Stim unit deliveries grew 60% YoY, gross margin expanded ~230bps, and cash stood at $8.3M, but revenue landed just under the roughly $2.0M consensus estimate and shares fell on the print despite the record growth. CEO Brian Carrico reiterated an aim to expand PENFS covered lives well past 200M by 2027, while flagging that cash burn should rise in H2 2026 as the company invests in sales, marketing, and clinical research."
+      "summary": "NeurAxis posted Q2 2026 revenue of $1.9M, up 116% year over year, with unit deliveries up 60% and gross margin expanding 230bps on the back of the new Category I CPT code for PENFS. Cash on hand was $8.3M after raising $2.5M via its ATM facility and warrant redemptions, with operating cash burn narrowing to $1.0M from $1.5M a year earlier."
     },
     {
       "date": "2026-08-04",
       "headline": "NeurAxis Expands Payer Coverage with New Policies",
       "source": "GlobeNewswire",
-      "url": "https://www.globenewswire.com/news-release/2026/08/04/3338132/0/en/NeurAxis-Expands-Payer-Coverage-with-New-Policies.html",
-      "summary": "NeurAxis announced additional medical policy coverage for PENFS/IB-Stim adding over 500,000 covered lives, concentrated in the Mid-Atlantic region, extending the reimbursement build-out that followed the new Category I CPT code."
+      "url": "https://www.globenewswire.com/news-release/2026/08/04/3338132/0/en/neuraxis-expands-payer-coverage-with-new-policies.html",
+      "summary": "NeurAxis announced additional medical policy coverage decisions for its PENFS/IB-Stim therapy, extending access to over 500,000 covered lives in the Mid-Atlantic region. The expansion continues the post-CPT-code wave of payer wins that is driving unit volume growth."
     },
     {
       "date": "2026-07-28",
       "headline": "NeurAxis to Host Second Quarter 2026 Results and Business Update Call on Tuesday, August 11, 2026",
-      "source": "GlobeNewswire / BioSpace",
+      "source": "GlobeNewswire",
       "url": "https://www.globenewswire.com/news-release/2026/07/28/3334108/0/en/neuraxis-to-host-second-quarter-2026-results-and-business-update-call-on-tuesday-august-11-2026.html",
-      "summary": "NeurAxis confirmed it would report Q2 2026 financial results before market open on August 11, 2026, with a same-day 9:00am ET conference call and webcast."
+      "summary": "NeurAxis confirmed it would report Q2 2026 results before market open on August 11, 2026, with a conference call at 9:00am ET to review results and provide a business update."
     },
     {
       "date": "2026-07-09",
-      "headline": "NeurAxis Declares Q2 2026 Stock Dividend on Series B Preferred Stock",
-      "source": "SEC Form 8-K / TipRanks",
+      "headline": "NeurAxis Declares Q2 Stock Dividend on Series B Preferred",
+      "source": "TipRanks / 8-K Filing",
       "url": "https://www.tipranks.com/news/company-announcements/neuraxis-declares-q2-stock-dividend-on-series-b",
-      "summary": "The board authorized a Q2 dividend on Series B Preferred Stock payable in roughly 80,463 shares of common stock (calculated at $2.38/share) rather than cash, conserving cash at the cost of modest additional dilution to common holders."
+      "summary": "NeurAxis's board declared a second-quarter 2026 stock dividend on its Series B Preferred Stock, payable in roughly 80,463 shares of common stock (rather than cash) on July 29 to holders of record as of July 21."
     }
   ],
   "catalysts": [
-    {
-      "when": "H2 2026 - 2027",
-      "label": "Larger payer/customer wins and continued reimbursement expansion",
-      "detail": "Management is guiding to bigger commercial and payer wins in H2 2026 into 2027, building on the Category I CPT code; CEO has said he'd be \"highly disappointed\" if PENFS covered lives were not above 200M by 2027.",
-      "confirmed": false
-    },
-    {
-      "when": "Ongoing into 2027",
-      "label": "VA Federal Supply Schedule ramp",
-      "detail": "IB-Stim's VA FSS listing (effective Dec 2025) opens access to ~7M VA patients annually; management expects this channel to contribute more meaningfully through 2027.",
-      "confirmed": true
-    },
-    {
-      "when": "~Nov 2026 (est.)",
-      "label": "Q3 2026 earnings and business update call",
-      "detail": "Based on prior-quarter cadence (Mar/May/Aug reporting dates), the next quarterly report is expected mid-to-late November 2026; exact date not yet announced.",
-      "confirmed": false
-    },
-    {
-      "when": "1-2 years out",
-      "label": "Clinical trial data readouts",
-      "detail": "Multiple ongoing studies could generate data over time, including an investigator-initiated adult functional dyspepsia RCT, a pediatric Cyclic Vomiting Syndrome RCT, an NIH-funded adult study with Emory/Atlanta VA, and a randomized double-blind study at Cleveland Clinic and Stanford.",
-      "confirmed": true
-    },
-    {
-      "when": "Ongoing",
-      "label": "Going-concern / capital needs",
-      "detail": "The company continues to carry a going-concern qualification and relies on its at-the-market facility and other financing to fund operations until it reaches cash-flow breakeven, which remains a watch item for H2 2026.",
-      "confirmed": true
-    }
+    {"when": "Q3 2026", "label": "Continued payer coverage wins", "detail": "Management flagged new agreements with major national insurers as the next major catalyst, as the company works to convert the remaining un-covered lives following the January 2026 Category I CPT code for PENFS.", "confirmed": false},
+    {"when": "Q3 2026", "label": "Commercial sales force expansion", "detail": "NeurAxis is deepening a strategic market initiative in six to eight states with strong payer coverage, adding regional sales reps and a VP of Healthcare Economics and Policy to support payer advocacy and prior-authorization execution.", "confirmed": true},
+    {"when": "Q3/Q4 2026", "label": "Q3 2026 earnings report", "detail": "Next quarterly results and business update call, expected roughly in line with the prior year's early-to-mid November reporting cadence (date not yet formally announced).", "confirmed": false},
+    {"when": "Ongoing 2026", "label": "Adult functional dyspepsia indication ramp", "detail": "Continued commercial rollout of IB-Stim under the October 2025 FDA clearance for adult functional dyspepsia with nausea, expanding the addressable market beyond the core pediatric IBS/FAP indication.", "confirmed": true}
   ],
-  "pulse": "NeurAxis posted its strongest quarter yet on Aug 11 (revenue +116% YoY to ~$1.9M, unit deliveries +60% YoY, cash of $8.3M) but shares sold off because the print landed just shy of consensus, even as management doubled down on ambitious payer-coverage and VA channel targets for H2 2026 into 2027. A further payer-coverage expansion (Aug 4, +500K covered lives) and a routine Series B preferred stock dividend (Jul 9) round out the last six weeks of news, with no major catalyst since the earnings call. The going-concern qualification and reliance on the ATM facility remain the key overhangs as the company pushes toward cash-flow breakeven."
+  "pulse": "NeurAxis is in the early innings of monetizing its January 2026 Category I CPT code for PENFS, posting record Q2 2026 revenue (+116% YoY to $1.9M) alongside expanding gross margins and a still-thin but improving cash position ($8.3M). The near-term story is almost entirely about payer coverage execution — most recently a Mid-Atlantic expansion to 500,000+ covered lives — and sales-force scaling in states where reimbursement is already in place, rather than new clinical or regulatory catalysts. With no lawsuits or roundup noise in the window, the next real markers to watch are additional national payer wins and the Q3 2026 earnings update."
 }

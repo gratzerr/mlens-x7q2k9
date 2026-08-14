@@ -3,53 +3,46 @@
   "news": [
     {
       "date": "2026-08-11",
-      "headline": "Delcath Management Presents at Canaccord Genuity 46th Annual Growth Conference",
-      "source": "BioSpace / StockTitan",
-      "url": "https://www.stocktitan.net/news/DCTH/delcath-systems-to-participate-at-the-canaccord-genuity-46th-annual-009zp3gicxvx.html",
-      "summary": "Delcath management presented to investors in Boston days after the Q2 beat-and-raise, reiterating the HEPZATO KIT commercial ramp and center-expansion story; Canaccord Genuity has maintained a Buy rating on the stock."
+      "headline": "Delcath Systems to Participate at the Canaccord Genuity 46th Annual Growth Conference",
+      "source": "BioSpace",
+      "url": "https://www.biospace.com/press-releases/delcath-systems-to-participate-at-the-canaccord-genuity-46th-annual-growth-conference",
+      "summary": "Delcath management confirmed it will present at the Canaccord Genuity growth conference in Boston on August 11, 2026, part of a broader push to keep the stock in front of generalist and specialist healthcare investors following the Q2 beat."
     },
     {
       "date": "2026-08-07",
-      "headline": "Wall Street Raises Price Targets on Delcath After Q2 Beat",
-      "source": "Investing.com / TipRanks (The Fly)",
-      "url": "https://www.investing.com/news/analyst-ratings/delcath-systems-stock-retains-buy-rating-as-craighallum-raises-price-target-by-17-93CH-3819157",
-      "summary": "Following the Q2 report, H.C. Wainwright lifted its target to $32 from $30, BTIG to $21 from $17, and Clear Street to $27 from $26, all reiterating Buy ratings on continued HEPZATO volume growth and margin strength."
-    },
-    {
-      "date": "2026-08-07",
-      "headline": "Delcath: Temporary Headwinds Are Fading While Larger Opportunities Approach",
-      "source": "Seeking Alpha (Richard Durant / Narweena)",
-      "url": "https://seekingalpha.com/article/4933385-delcath-temporary-headwinds-are-fading-while-larger-opportunities-approach",
-      "summary": "A bullish deep-dive argues Q3 seasonality will be less pronounced than prior years and that the bigger long-term opportunity is expanding HEPZATO into larger cancer populations (breast, colorectal), though pivotal data isn't expected before late 2027/2028."
+      "headline": "H.C. Wainwright Raises Delcath Systems Price Target to $32 from $30, Reiterates Buy",
+      "source": "TipRanks / The Fly",
+      "url": "https://www.tipranks.com/news/topic/dcth",
+      "summary": "H.C. Wainwright lifted its price target on DCTH shares following the strong Q2 print, citing accelerating HEPZATO volumes and the raised full-year revenue outlook."
     },
     {
       "date": "2026-08-06",
-      "headline": "Delcath Reports Q2 2026 Results, Raises Full-Year Guidance to $104-108M",
-      "source": "BusinessWire / Delcath Investor Relations",
+      "headline": "Delcath Systems Reports Second Quarter 2026 Results and Business Highlights",
+      "source": "BioSpace / Business Wire",
       "url": "https://www.biospace.com/press-releases/delcath-systems-reports-second-quarter-2026-results-and-business-highlights",
-      "summary": "Total revenue rose to $29.1M ($27.1M from HEPZATO KIT) versus $24.2M a year earlier, with 90% gross margin and ~30% YoY HEPZATO volume growth; management raised FY2026 revenue guidance to $104-108M and reiterated the 2026 treatment-center expansion plan."
+      "summary": "Q2 revenue rose 20% year-over-year to $29.1M ($27.1M from HEPZATO KIT), gross margin expanded to 90%, and net income held at $2.7M; management raised full-year 2026 revenue guidance to $104M-$108M and reaffirmed a target of 37 active U.S. treatment centers by year-end."
     },
     {
-      "date": "2026-07-16",
-      "headline": "Delcath Announces Inducement Grants Under Nasdaq Listing Rule 5635(c)(4)",
-      "source": "BioSpace / BusinessWire",
-      "url": "https://www.biospace.com/press-releases/delcath-systems-inc-announces-inducement-grants-under-nasdaq-listing-rule-5635c4-july-16-2026",
-      "summary": "Delcath granted 17,000 RSUs to new employee hires as an inducement award, a routine filing that nonetheless signals continued headcount growth to support the commercial and clinical-trial expansion."
+      "date": "2026-07-13",
+      "headline": "BTIG Raises Delcath Systems Price Target to $17 from $16, Maintains Buy",
+      "source": "TipRanks / The Fly",
+      "url": "https://www.tipranks.com/news/topic/dcth",
+      "summary": "BTIG nudged its price target higher ahead of Q2 earnings, pointing to continued HEPZATO commercial momentum and site-expansion progress."
     },
     {
       "date": "2026-07-09",
-      "headline": "First Patient Dosed in Phase 2 DELUMA Trial of HEPZATO in Metastatic Breast Cancer",
-      "source": "BusinessWire / Delcath Investor Relations",
+      "headline": "Delcath Systems Announces First Patient Dosed in Phase 2 Clinical Trial of HEPZATO in Liver-Dominant Metastatic Breast Cancer",
+      "source": "Business Wire",
       "url": "https://www.businesswire.com/news/home/20260709141093/en/Delcath-Systems-Announces-First-Patient-Dosed-in-Phase-2-Clinical-Trial-of-HEPZATO-in-Liver-Dominant-Metastatic-Breast-Cancer",
-      "summary": "Delcath dosed the first patient at the European Institute of Oncology in Milan in its global Phase 2 DELUMA trial evaluating HEPZATO plus standard of care versus standard of care alone in liver-dominant HER2-negative metastatic breast cancer, opening a second major pipeline indication beyond uveal melanoma."
+      "summary": "The first patient was dosed at the European Institute of Oncology in Milan in a new investigator-initiated Phase 2 study of HEPZATO in HER2-negative, liver-dominant metastatic breast cancer, extending the platform beyond uveal melanoma."
     }
   ],
   "catalysts": [
-    {"when": "~early November 2026 (date TBA)", "label": "Q3 2026 earnings report", "detail": "Next quarterly checkpoint against the raised FY2026 revenue guidance of $104-108M; will show whether H2 seasonality is as muted as bulls expect.", "confirmed": false},
-    {"when": "Through year-end 2026", "label": "Treatment-center network expansion to ~37 active sites", "detail": "Company guidance calls for roughly six more REMS-certified HEPZATO center activations in H2 2026 (from 31 currently) as the 9-region commercial team scales, targeting ~40 centers longer-term.", "confirmed": true},
-    {"when": "Ongoing enrollment; hepatic-PFS data expected ~2028, OS data ~2029", "label": "DELUMA Phase 2 breast cancer trial", "detail": "First patient dosed July 2026 (IEO Milan); trial evaluates HEPZATO + SOC vs. SOC alone in liver-dominant HER2-negative metastatic breast cancer across 20+ US/EU sites.", "confirmed": true},
-    {"when": "Ongoing enrollment; readout timeline not yet disclosed", "label": "Phase 2 colorectal cancer (mCRC) trial", "detail": "Global trial (~90 patients, 20+ sites) evaluating HEPZATO combined with trifluridine-tipiracil/bevacizumab in third-line liver-dominant mCRC; represents a much larger addressable population than uveal melanoma.", "confirmed": true},
-    {"when": "Ongoing", "label": "Phase 2 HCC / intrahepatic cholangiocarcinoma program", "detail": "Additional liver-cancer indications in the global Phase 2 program that could further broaden HEPZATO's label over time.", "confirmed": true}
+    {"when": "H2 2026 (ongoing)", "label": "US site network expansion", "detail": "Company guidance calls for roughly six more HEPZATO treatment centers to go live, reaching 37 active US sites by year-end 2026 (31 active as of Q2), with 40 centers targeted by Q1 2027.", "confirmed": true},
+    {"when": "Later in 2026", "label": "FDA pre-IND meetings for new indications", "detail": "Management plans pre-IND discussions with the FDA to pursue additional HEPZATO indications beyond uveal melanoma, building on early breast and colorectal cancer signal data.", "confirmed": true},
+    {"when": "Ongoing, H2 2026", "label": "Phase 2 metastatic breast cancer trial enrollment", "detail": "Investigator-initiated Phase 2 study of HEPZATO in HER2-negative liver-dominant metastatic breast cancer is enrolling across six activated sites following the first patient dosed in July 2026; independent ESMO data previously showed hepatic partial responses in 9 of 15 pretreated patients.", "confirmed": true},
+    {"when": "Ongoing, ~2028 primary endpoint", "label": "Phase 2 metastatic colorectal cancer trial", "detail": "Sponsored Phase 2 trial of HEPZATO as add-on therapy in liver-dominant metastatic colorectal cancer now has 13 centers actively screening across the US and Europe; primary endpoint results are anticipated around mid-2028.", "confirmed": true},
+    {"when": "Expected ~November 2026", "label": "Q3 2026 earnings report", "detail": "Delcath's next quarterly results and updated guidance/site-activation commentary are expected in the November 2026 reporting window (exact date not yet announced).", "confirmed": false}
   ],
-  "pulse": "Delcath is riding a strong post-earnings wave: the August 6 Q2 beat-and-raise (revenue $29.1M, FY26 guidance lifted to $104-108M) triggered a cluster of price-target hikes from H.C. Wainwright, BTIG and Clear Street and a bullish Seeking Alpha thesis, with management reinforcing the story at the Canaccord Genuity conference on August 11. The near-term narrative remains execution on center expansion toward ~37 sites by year-end, while the bigger optionality (DELUMA breast cancer and colorectal Phase 2 trials, both newly dosing patients) won't read out until 2027-2029."
+  "pulse": "Delcath enters the back half of 2026 from a position of commercial strength: Q2 revenue jumped 20% year-over-year to $29.1M on roughly 30% HEPZATO volume growth, prompting management to raise FY26 revenue guidance to $104M-$108M and triggering a round of analyst price-target increases (H.C. Wainwright to $32, BTIG to $17). The story is broadening beyond core uveal melanoma commercialization, with the US treatment-center network expanding toward 37 sites by year-end and newly dosed Phase 2 trials in metastatic breast and colorectal cancer signaling a push toward a multi-indication liver-directed therapy platform. Near-term catalysts are execution-driven (site activations, FDA pre-IND discussions on new indications) rather than binary regulatory events, with the next major data readout (colorectal primary endpoint) not expected until around 2028."
 }
