@@ -63061,6 +63061,28 @@
   },
   {
    "account": "ALL",
+   "ticker": "DCTH",
+   "name": "Delcath Systems, Inc.",
+   "byPort": {
+    "IBKR": 20000.0
+   },
+   "isin": "US24661P8077",
+   "ccy": "USD",
+   "shares": 20000.0,
+   "price": 16.89999961,
+   "value": 337999.99,
+   "valueEur": 295713,
+   "valueUsd": 338000,
+   "basisUsd": 193634,
+   "realizedUsd": -16090,
+   "avgCost": 9.6817,
+   "unrealRet": 74.6,
+   "dayRet": -2.65,
+   "prevClose": 17.36,
+   "priceDate": "2026-08-14"
+  },
+  {
+   "account": "ALL",
    "ticker": "ABVX270115C00120000",
    "name": "ABVX 15JAN27 120 C",
    "byPort": {
