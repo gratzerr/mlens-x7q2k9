@@ -6,7 +6,7 @@
       "headline": "NeurAxis Reports Record Second Quarter 2026 Financial Results Driven by 116% Year Over Year Revenue Growth",
       "source": "GlobeNewswire",
       "url": "https://www.globenewswire.com/news-release/2026/08/11/3342584/0/en/neuraxis-reports-record-second-quarter-2026-financial-results-driven-by-116-year-over-year-revenue-growth.html",
-      "summary": "NeurAxis posted Q2 2026 revenue of $1.9M, up 116% year over year, with unit deliveries up 60% and gross margin expanding 230bps on the back of the new Category I CPT code for PENFS. Cash on hand was $8.3M after raising $2.5M via its ATM facility and warrant redemptions, with operating cash burn narrowing to $1.0M from $1.5M a year earlier."
+      "summary": "NeurAxis posted Q2 2026 revenue of $1.9M, up 116% year over year, with unit deliveries up 60% and gross margin expanding on the back of the new Category I CPT code for PENFS. Cash on hand was $8.3M after raising $2.5M via its ATM facility and warrant redemptions, with operating cash burn narrowing to $1.0M from $1.5M a year earlier."
     },
     {
       "date": "2026-08-04",
@@ -24,17 +24,18 @@
     },
     {
       "date": "2026-07-09",
-      "headline": "NeurAxis Declares Q2 Stock Dividend on Series B Preferred",
-      "source": "TipRanks / 8-K Filing",
-      "url": "https://www.tipranks.com/news/company-announcements/neuraxis-declares-q2-stock-dividend-on-series-b",
-      "summary": "NeurAxis's board declared a second-quarter 2026 stock dividend on its Series B Preferred Stock, payable in roughly 80,463 shares of common stock (rather than cash) on July 29 to holders of record as of July 21."
+      "headline": "NeurAxis Declares Q2 2026 Stock Dividend on Series B Preferred Stock",
+      "source": "GlobeNewswire / 8-K Filing",
+      "url": "https://www.stocktitan.net/sec-filings/NRXS/8-k-neuraxis-inc-reports-material-event-4c97e7c4fea7.html",
+      "summary": "NeurAxis's board declared a second-quarter 2026 stock dividend on its Series B Preferred Stock, payable in roughly 80,463 shares of common stock (rather than cash) on July 29, 2026 to holders of record as of July 21, 2026. The dividend rate was calculated at $2.38 per share of accrued preferred dividends."
     }
   ],
   "catalysts": [
     {"when": "Q3 2026", "label": "Continued payer coverage wins", "detail": "Management flagged new agreements with major national insurers as the next major catalyst, as the company works to convert the remaining un-covered lives following the January 2026 Category I CPT code for PENFS.", "confirmed": false},
     {"when": "Q3 2026", "label": "Commercial sales force expansion", "detail": "NeurAxis is deepening a strategic market initiative in six to eight states with strong payer coverage, adding regional sales reps and a VP of Healthcare Economics and Policy to support payer advocacy and prior-authorization execution.", "confirmed": true},
     {"when": "Q3/Q4 2026", "label": "Q3 2026 earnings report", "detail": "Next quarterly results and business update call, expected roughly in line with the prior year's early-to-mid November reporting cadence (date not yet formally announced).", "confirmed": false},
-    {"when": "Ongoing 2026", "label": "Adult functional dyspepsia indication ramp", "detail": "Continued commercial rollout of IB-Stim under the October 2025 FDA clearance for adult functional dyspepsia with nausea, expanding the addressable market beyond the core pediatric IBS/FAP indication.", "confirmed": true}
+    {"when": "Ongoing 2026", "label": "Adult functional dyspepsia indication ramp", "detail": "Continued commercial rollout of IB-Stim under the October 2025 FDA clearance for adult functional dyspepsia with nausea, expanding the addressable market beyond the core pediatric IBS/FAP indication.", "confirmed": true},
+    {"when": "Ongoing 2026", "label": "VA Federal Supply Schedule ramp", "detail": "Continued rollout of IB-Stim under the Veterans Affairs Federal Supply Schedule contract, opening a federal commercial channel into the VA health system alongside the core commercial-payer business.", "confirmed": true}
   ],
   "pulse": "NeurAxis is in the early innings of monetizing its January 2026 Category I CPT code for PENFS, posting record Q2 2026 revenue (+116% YoY to $1.9M) alongside expanding gross margins and a still-thin but improving cash position ($8.3M). The near-term story is almost entirely about payer coverage execution — most recently a Mid-Atlantic expansion to 500,000+ covered lives — and sales-force scaling in states where reimbursement is already in place, rather than new clinical or regulatory catalysts. With no lawsuits or roundup noise in the window, the next real markers to watch are additional national payer wins and the Q3 2026 earnings update."
 }
