@@ -1,15 +1,15 @@
 {
- "fileDate": "2026-08-15 08:02",
- "generated": "2026-08-15 08:12",
+ "fileDate": "2026-08-15 08:22",
+ "generated": "2026-08-15 08:23",
  "engine": "pp-exact (verified vs PP app 2026-07-11)",
- "totalSecuritiesEur": 2103519,
- "cashEur": -131641.2,
+ "totalSecuritiesEur": 2135015,
+ "cashEur": -157871.95,
  "cashByAccount": [
   {
    "account": "IBKR USD",
    "ccy": "USD",
-   "balance": -158867.34,
-   "eur": -138991.55
+   "balance": -188849.09,
+   "eur": -165222.3
   },
   {
    "account": "SQ EUR",
@@ -30,28 +30,28 @@
    "eur": 93.1
   }
  ],
- "totalEur": 1971878,
- "ttwrorSince2022": 396.64,
- "ttwrorYtd": 97.2,
- "ttwrorAnnualized": 41.48,
- "izf": 67.51,
+ "totalEur": 1977144,
+ "ttwrorSince2022": 397.97,
+ "ttwrorYtd": 97.72,
+ "ttwrorAnnualized": 41.56,
+ "izf": 67.69,
  "yearlyReturns": {
   "2022": 3.3,
   "2023": 11.8,
   "2024": 45.2,
   "2025": 50.2,
-  "2026": 97.2
+  "2026": 97.7
  },
- "realizedEur": 731561,
- "unrealizedEur": 544719,
- "realizedUsd": 886311,
- "unrealizedUsd": 605916,
+ "realizedEur": 644169,
+ "unrealizedEur": 637389,
+ "realizedUsd": 786421,
+ "unrealizedUsd": 711838,
  "netContribEur": 693272,
  "netContribUsd": 768897,
  "earningsEur": 12767.38,
  "earningsUsd": 13770,
- "feesEur": 9331.42,
- "feesUsd": 10654,
+ "feesEur": 9344.32,
+ "feesUsd": 10668,
  "taxesEur": 1717.1,
  "taxesUsd": 1907,
  "series": [
@@ -26985,9 +26985,9 @@
   },
   {
    "d": "2026-08-11",
-   "v": 2315414,
-   "e": 2025734,
-   "r": 4.102046,
+   "v": 2326489,
+   "e": 2035424,
+   "r": 4.12645,
    "c": 768897,
    "k": 693272,
    "q": 886311,
@@ -27017,9 +27017,9 @@
   },
   {
    "d": "2026-08-13",
-   "v": 2386002,
-   "e": 2087491,
-   "r": 4.257588,
+   "v": 2311002,
+   "e": 2021874,
+   "r": 4.092325,
    "c": 768897,
    "k": 693272,
    "q": 886311,
@@ -27033,22 +27033,36 @@
   },
   {
    "d": "2026-08-14",
-   "v": 2253857,
-   "e": 1971878,
-   "r": 3.966403,
+   "v": 2259875,
+   "e": 1977144,
+   "r": 3.979665,
    "c": 768897,
    "k": 693272,
-   "q": 886311,
-   "Q": 731561,
+   "q": 786421,
+   "Q": 644169,
    "g": 13770,
    "G": 12767,
-   "f": 10654,
-   "F": 9331,
+   "f": 10668,
+   "F": 9344,
    "t": 1907,
    "T": 1717
   }
  ],
  "payments": [
+  {
+   "d": "2026-08-14",
+   "k": "fee",
+   "tk": "ABVX270115C00120000",
+   "eur": 9.44,
+   "usd": 10.79
+  },
+  {
+   "d": "2026-08-14",
+   "k": "fee",
+   "tk": "ABVX270319C00120000",
+   "eur": 3.46,
+   "usd": 3.96
+  },
   {
    "d": "2026-08-11",
    "k": "fee",
@@ -42763,26 +42777,11 @@
     4.42
    ]
   ],
-  "ABVX270115C00120000": [
+  "ABVX270319C00120000": [
    [
-    "2026-07-20",
-    4000.0,
-    30.9902
-   ],
-   [
-    "2026-07-28",
-    1000.0,
-    23.5
-   ],
-   [
-    "2026-07-31",
-    5000.0,
-    24.0
-   ],
-   [
-    "2026-08-10",
-    5000.0,
-    27.9905
+    "2026-08-14",
+    15000.0,
+    22.4994
    ]
   ]
  },
@@ -42792,6 +42791,28 @@
   "SQ"
  ],
  "acts": [
+  {
+   "d": "2026-08-14",
+   "t": "BUY",
+   "sh": 15000.0,
+   "px": 22.4994,
+   "ccy": "USD",
+   "amt": 337491.0,
+   "port": "IBKR",
+   "tk": "ABVX270319C00120000",
+   "isin": ""
+  },
+  {
+   "d": "2026-08-14",
+   "t": "SELL",
+   "sh": 15000.0,
+   "px": 20.5016,
+   "ccy": "USD",
+   "amt": 307524.0,
+   "port": "IBKR",
+   "tk": "ABVX270115C00120000",
+   "isin": ""
+  },
   {
    "d": "2026-08-11",
    "t": "SELL",
@@ -58966,6 +58987,21 @@
  "trades": [
   {
    "port": "IBKR",
+   "buy": "2026-07-20",
+   "sell": "2026-08-14",
+   "days": 14,
+   "sh": 15000.0,
+   "proceedsUsd": 307524,
+   "basisUsd": 407413,
+   "gainUsd": -99889,
+   "gainEur": -87392,
+   "ret": -24.52,
+   "ticker": "ABVX270115C00120000",
+   "name": "ABVX 15JAN27 120 C",
+   "isin": ""
+  },
+  {
+   "port": "IBKR",
    "buy": "2026-06-11",
    "sell": "2026-08-11",
    "days": 53,
@@ -62982,15 +63018,15 @@
    "name": "RAPID MICRO BIOSYSTEMS INC-A"
   }
  ],
- "ppReferenceTtwror": 396.64,
+ "ppReferenceTtwror": 397.97,
  "ppReferenceDate": "2026-08-15",
- "ttwrorApproxSince2022": 396.64,
+ "ttwrorApproxSince2022": 397.97,
  "yearlyReturnsApprox": {
   "2022": 3.3,
   "2023": 11.8,
   "2024": 45.2,
   "2025": 50.2,
-  "2026": 97.2
+  "2026": 97.7
  },
  "holdings": [
   {
@@ -63061,24 +63097,24 @@
   },
   {
    "account": "ALL",
-   "ticker": "ABVX270115C00120000",
-   "name": "ABVX 15JAN27 120 C",
+   "ticker": "ABVX270319C00120000",
+   "name": "ABVX 19MAR27 120 C",
    "byPort": {
     "IBKR": 15000.0
    },
    "isin": "",
    "ccy": "USD",
    "shares": 15000.0,
-   "price": 19.55,
-   "value": 293250.0,
-   "valueEur": 256562,
-   "valueUsd": 293250,
-   "basisUsd": 407413,
+   "price": 21.95,
+   "value": 329250.0,
+   "valueEur": 288058,
+   "valueUsd": 329250,
+   "basisUsd": 337491,
    "realizedUsd": 0,
-   "avgCost": 27.1609,
-   "unrealRet": -28.0,
-   "dayRet": -11.14,
-   "prevClose": 22.0,
+   "avgCost": 22.4994,
+   "unrealRet": -2.4,
+   "dayRet": -12.51,
+   "prevClose": null,
    "priceDate": "2026-08-14"
   },
   {
@@ -63171,5 +63207,5 @@
    "priceDate": "2026-08-14"
   }
  ],
- "txmax": "2026-08-11"
+ "txmax": "2026-08-14"
 }
