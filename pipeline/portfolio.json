@@ -4,10 +4,10 @@
  "source": "Parqet (live)",
  "portfolioId": "66e18c9426cf62020ccc7ee7",
  "totalValue": 2379073,
- "cashValue": 39000,
+ "cashValue": -180448,
  "netGainUnrealized": 772404,
  "unrealizedReturn": 48.1,
- "izf": 97.8,
+ "izf": 68.97,
  "ttwror": 331.6,
  "realizedAllTime": 1075764,
  "chartYtd": "__CHART_YTD__",
@@ -16,7 +16,7 @@
    "ticker": "Cash",
    "name": "Net Cash (PP)",
    "assetType": "cash",
-   "value": -73327,
+   "value": -180448,
    "unrealizedReturn": 0,
    "totalGainNet": 0,
    "thesis": "SQ USD/EUR + IBKR EUR/USD incl. margin",
@@ -27,9 +27,9 @@
    "ticker": "QURE",
    "name": "uniQure",
    "assetType": "security",
-   "value": 426465,
-   "unrealizedReturn": 363.3,
-   "totalGainNet": 345864,
+   "value": 479700,
+   "unrealizedReturn": 421.4,
+   "totalGainNet": 399191,
    "thesis": "AMT-130 gene therapy for Huntington's disease",
    "ySym": "QURE",
    "gquery": "uniQure",
@@ -38,16 +38,20 @@
     "stocktwits": "https://stocktwits.com/symbol/QURE",
     "x": "https://x.com/search?q=%24QURE&f=live",
     "finviz": "https://finviz.com/quote.ashx?t=QURE"
-   }
+   },
+   "shares": 10000.0,
+   "price": 47.97000122,
+   "dayChange": -1.34,
+   "prevClose": 48.62
   },
   {
    "pid": "hld_695f994d700de118b95a7054",
    "ticker": "CLPT",
    "name": "ClearPoint Neuro",
    "assetType": "security",
-   "value": 306250,
-   "unrealizedReturn": 81.3,
-   "totalGainNet": 76655,
+   "value": 341000,
+   "unrealizedReturn": 47.9,
+   "totalGainNet": 50094,
    "thesis": "Neuro-navigation / gene-therapy delivery",
    "ySym": "CLPT",
    "gquery": "ClearPoint Neuro",
@@ -56,52 +60,20 @@
     "stocktwits": "https://stocktwits.com/symbol/CLPT",
     "x": "https://x.com/search?q=%24CLPT&f=live",
     "finviz": "https://finviz.com/quote.ashx?t=CLPT"
-   }
-  },
-  {
-   "pid": "hld_69958ddb69baa58c8f1f8c4d",
-   "ticker": "NRXS",
-   "name": "Neuraxis",
-   "assetType": "security",
-   "value": 215100,
-   "unrealizedReturn": 31.4,
-   "totalGainNet": 51455,
-   "thesis": "IB-Stim / PENFS neuromodulation (pediatrics)",
-   "ySym": "NRXS",
-   "gquery": "Neuraxis",
-   "links": {
-    "ir": "https://ir.neuraxis.com/",
-    "stocktwits": "https://stocktwits.com/symbol/NRXS",
-    "x": "https://x.com/search?q=%24NRXS&f=live",
-    "finviz": "https://finviz.com/quote.ashx?t=NRXS"
-   }
-  },
-  {
-   "pid": "hld_6a183e2a547bdef260161491",
-   "ticker": "NKTR",
-   "name": "Nektar Therapeutics",
-   "assetType": "security",
-   "value": 211109,
-   "unrealizedReturn": 9.1,
-   "totalGainNet": 17581,
-   "thesis": "Rezpegaldesleukin (immunology / Treg biologic)",
-   "ySym": "NKTR",
-   "gquery": "Nektar Therapeutics",
-   "links": {
-    "ir": "https://ir.nektar.com/",
-    "stocktwits": "https://stocktwits.com/symbol/NKTR",
-    "x": "https://x.com/search?q=%24NKTR&f=live",
-    "finviz": "https://finviz.com/quote.ashx?t=NKTR"
-   }
+   },
+   "shares": 22000.0,
+   "price": 15.5,
+   "dayChange": 1.04,
+   "prevClose": 15.34
   },
   {
    "pid": "hld_6967705c8236bd47c52f5c3c",
    "ticker": "DCTH",
    "name": "Delcath Systems",
    "assetType": "security",
-   "value": 208266,
-   "unrealizedReturn": 44.9,
-   "totalGainNet": 48191,
+   "value": 341000,
+   "unrealizedReturn": 76.1,
+   "totalGainNet": 131276,
    "thesis": "HEPZATO KIT (interventional oncology)",
    "ySym": "DCTH",
    "gquery": "Delcath",
@@ -110,16 +82,20 @@
     "stocktwits": "https://stocktwits.com/symbol/DCTH",
     "x": "https://x.com/search?q=%24DCTH&f=live",
     "finviz": "https://finviz.com/quote.ashx?t=DCTH"
-   }
+   },
+   "shares": 20000.0,
+   "price": 17.04999923,
+   "dayChange": 1.91,
+   "prevClose": 16.73
   },
   {
    "pid": "hld_6a05e98db13dd7dd2991e731",
    "ticker": "PINK",
    "name": "Perimeter Medical Imaging AI",
    "assetType": "security",
-   "value": 228362,
-   "unrealizedReturn": -0.6,
-   "totalGainNet": -1282,
+   "value": 282623,
+   "unrealizedReturn": 23.1,
+   "totalGainNet": 53011,
    "thesis": "Claire OCT imaging (breast-cancer margins)",
    "ySym": "PINK.V",
    "gquery": "Perimeter Medical Imaging",
@@ -128,16 +104,42 @@
     "stocktwits": "https://stocktwits.com/symbol/PYNKF",
     "x": "https://x.com/search?q=%24PINK&f=live",
     "finviz": "https://finviz.com/quote.ashx?t=PYNKF"
-   }
+   },
+   "shares": 1000000.0,
+   "price": 0.4,
+   "dayChange": 8.11,
+   "prevClose": 0.37
+  },
+  {
+   "pid": "hld_6a183e2a547bdef260161491",
+   "ticker": "NKTR",
+   "name": "Nektar Therapeutics",
+   "assetType": "security",
+   "value": 239811,
+   "unrealizedReturn": 12.2,
+   "totalGainNet": -28265,
+   "thesis": "Rezpegaldesleukin (immunology / Treg biologic)",
+   "ySym": "NKTR",
+   "gquery": "Nektar Therapeutics",
+   "links": {
+    "ir": "https://ir.nektar.com/",
+    "stocktwits": "https://stocktwits.com/symbol/NKTR",
+    "x": "https://x.com/search?q=%24NKTR&f=live",
+    "finviz": "https://finviz.com/quote.ashx?t=NKTR"
+   },
+   "shares": 3300.0,
+   "price": 72.66999816,
+   "dayChange": -0.48,
+   "prevClose": 73.02
   },
   {
    "pid": "hld_6a50a76ca01cf4bd3026a819",
    "ticker": "LXEO",
    "name": "Lexeo Therapeutics",
    "assetType": "security",
-   "value": 192396,
-   "unrealizedReturn": -3.5,
-   "totalGainNet": -7003,
+   "value": 236550,
+   "unrealizedReturn": 1.3,
+   "totalGainNet": 3080,
    "thesis": "Gene therapy (cardiac / APOE4 Alzheimer's)",
    "ySym": "LXEO",
    "gquery": "Lexeo Therapeutics",
@@ -146,18 +148,44 @@
     "stocktwits": "https://stocktwits.com/symbol/LXEO",
     "x": "https://x.com/search?q=%24LXEO&f=live",
     "finviz": "https://finviz.com/quote.ashx?t=LXEO"
-   }
+   },
+   "shares": 47500.0,
+   "price": 4.98000001,
+   "dayChange": 2.89,
+   "prevClose": 4.84
+  },
+  {
+   "pid": "hld_69958ddb69baa58c8f1f8c4d",
+   "ticker": "NRXS",
+   "name": "Neuraxis",
+   "assetType": "security",
+   "value": 219800,
+   "unrealizedReturn": 11.0,
+   "totalGainNet": 21764,
+   "thesis": "IB-Stim / PENFS neuromodulation (pediatrics)",
+   "ySym": "NRXS",
+   "gquery": "Neuraxis",
+   "links": {
+    "ir": "https://ir.neuraxis.com/",
+    "stocktwits": "https://stocktwits.com/symbol/NRXS",
+    "x": "https://x.com/search?q=%24NRXS&f=live",
+    "finviz": "https://finviz.com/quote.ashx?t=NRXS"
+   },
+   "shares": 35000.0,
+   "price": 6.2800002,
+   "dayChange": -0.32,
+   "prevClose": 6.3
   },
   {
    "ticker": "ABVX",
    "name": "Abivax — Mar-2027 $120 Call",
    "assetType": "option",
-   "value": 337650,
-   "shares": 15000,
-   "price": 22.51,
+   "value": 352500,
+   "shares": 15000.0,
+   "price": 23.5,
    "costPrice": 22.4994,
-   "unrealizedReturn": 0.0,
-   "totalGainNet": 159,
+   "unrealizedReturn": 4.4,
+   "totalGainNet": 15009,
    "thesis": "Long call on Abivax (exp Mar 2027, strike $120) — leveraged bet on obefazimod, the oral anti-inflammatory miR-124 enhancer in ulcerative colitis",
    "links": {
     "ir": "https://www.abivax.com/investors/",
@@ -165,8 +193,12 @@
     "x": "https://x.com/search?q=%24ABVX&f=live",
     "finviz": "https://finviz.com/quote.ashx?t=ABVX"
    },
-   "gquery": "Abivax"
+   "gquery": "Abivax",
+   "occ": "ABVX270319C00120000",
+   "dayChange": 4.4,
+   "prevClose": 22.51
   }
  ],
- "ttwrorYtd": 76.4
+ "ttwrorYtd": 102.33,
+ "since2022": 409.57
 }
