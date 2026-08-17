@@ -2,11 +2,11 @@
   "ticker": "CLPT",
   "news": [
     {
-      "date": "2026-08-17",
+      "date": "2026-08-12",
       "headline": "MAK Capital group discloses 7.8% passive ownership stake in ClearPoint Neuro via Schedule 13G/A",
       "source": "StockTitan / SEC EDGAR",
       "url": "https://www.stocktitan.net/sec-filings/CLPT/schedule-13g-a-clear-point-neuro-inc-amended-passive-investment-discl-68dc7086232f.html",
-      "summary": "MAK Capital Fund, MAK Capital One and Michael A. Kaufman jointly reported 2,375,861 CLPT shares (7.8% of shares outstanding as of June 30, 2026), up from a 6.3% stake disclosed in an earlier filing. The increased passive stake shows continued institutional accumulation despite the post-earnings share-price weakness."
+      "summary": "MAK Capital Fund, MAK Capital One and Michael A. Kaufman jointly reported 2,375,861 CLPT shares (7.8% of shares outstanding) with shared voting and dispositive power, up from a 6.3% stake disclosed earlier in the year. The increased passive stake shows continued institutional accumulation despite the post-earnings share-price weakness."
     },
     {
       "date": "2026-08-04",
@@ -48,7 +48,7 @@
     {
       "when": "Q3 2026",
       "label": "uniQure AMT-130 BLA submission",
-      "detail": "uniQure still guides to filing the BLA for AMT-130 in Huntington's disease under accelerated approval in Q3 2026, backed by RMAT, Breakthrough and Fast Track designations. ClearPoint's SmartFlow cannula and navigation platform is the delivery system, making this the single most important partner milestone for the CLPT thesis.",
+      "detail": "uniQure confirmed after a Type B FDA meeting that it will submit the BLA for AMT-130 in Huntington's disease under accelerated approval in Q3 2026, using the 3-year Phase I/II analysis (75% slowing of cUHDRS progression vs. external controls) as the primary basis. ClearPoint's SmartFlow cannula and navigation platform is the delivery system, making this the single most important partner milestone for the CLPT thesis.",
       "confirmed": true
     },
     {
@@ -78,9 +78,9 @@
     {
       "when": "2027",
       "label": "Potential FDA decision on AMT-130",
-      "detail": "Assuming a Q3 2026 filing with priority review, an FDA decision on the first Huntington's gene therapy could arrive around mid-2027. Approval would establish recurring per-procedure delivery revenue for ClearPoint and be the first commercial validation of the platform.",
+      "detail": "Assuming a Q3 2026 filing with rolling/priority review, an FDA decision on the first Huntington's gene therapy could arrive around mid-2027. Approval would establish recurring per-procedure delivery revenue for ClearPoint and be the first commercial validation of the platform.",
       "confirmed": false
     }
   ],
-  "pulse": "The story remains in show-me mode after the early-August guidance cut: Q2 revenue missed by ~$1.8M, opex jumped 51%, cash fell to $29.4M and FY2026 guidance was lowered to $48-52M, prompting Stifel to trim its price target to $22 (still Buy) even as management unveiled a long-term $500M revenue ambition built around gene-therapy delivery, the new CAL preclinical facility, focused ultrasound and robotics. Sentiment is mixed but not capitulating: a mid-August 13G/A shows MAK Capital increasing its stake to 7.8%, signalling patient institutional money is still accumulating through the weakness. Near term the stock trades on partner milestones rather than its own P&L - uniQure's Q3 2026 BLA filing for AMT-130, Aspen's fresh RMAT designation in Parkinson's, and the ramp toward 10-15 enrolling partner trials - against a shrinking cash runway that keeps financing risk as the key offsetting factor to watch."
+  "pulse": "The story remains in show-me mode after the early-August guidance cut: Q2 revenue missed by ~$1.8M, opex jumped 51%, cash fell to $29.4M and FY2026 guidance was lowered to $48-52M, prompting Stifel to trim its price target to $22 (still Buy) even as management unveiled a long-term $500M revenue ambition built around gene-therapy delivery, the new CAL preclinical facility, focused ultrasound and robotics. Sentiment is mixed but not capitulating: a mid-August 13G/A shows MAK Capital increasing its stake to 7.8%, signalling patient institutional money is still accumulating through the weakness. Near term the stock trades on partner milestones rather than its own P&L - uniQure's confirmed Q3 2026 BLA filing for AMT-130, Aspen's fresh RMAT designation in Parkinson's, and the ramp toward 10-15 enrolling partner trials - against a shrinking cash runway that keeps financing risk as the key offsetting factor to watch."
 }
