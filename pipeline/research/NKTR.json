@@ -1,1 +1,86 @@
-{"ticker": "NKTR", "news": [{"date": "2026-08-13", "headline": "Nektar Therapeutics Announces Second Quarter 2026 Financial Results", "source": "PR Newswire / Nektar Therapeutics", "url": "http://www.prnewswire.com/news-releases/nektar-therapeutics-announces-second-quarter-2026-financial-results-302851330.html", "summary": "Nektar reported Q2 2026 revenue of $10.13 million and a net loss of $1.23/share (beating consensus loss estimates), ending the quarter with $1.02 billion in cash and investments, a runway extending into Q3 2028 that covers it past the first Phase 3 ZENITH AD data readouts expected in mid-2028. Despite the EPS beat, shares slipped in after-hours trading as investors weighed a small revenue miss and the long timeline to potential commercialization."}, {"date": "2026-07-22", "headline": "Nektar Therapeutics (NASDAQ:NKTR) Coverage Initiated at Canaccord Genuity Group", "source": "MarketBeat", "url": "https://www.marketbeat.com/instant-alerts/nektar-therapeutics-nasdaqnktr-coverage-initiated-at-canaccord-genuity-group-2026-07-22/", "summary": "Canaccord Genuity analyst Edward Nash initiated coverage of Nektar with a Buy rating and a $153 price target, adding to a mostly bullish Wall Street stance built around rezpegaldesleukin's newly launched Phase 3 program. The initiation came one day after Nektar started its first pivotal atopic dermatitis trials, drawing fresh analyst attention to the roughly $2.5 billion company."}, {"date": "2026-07-21", "headline": "Nektar Therapeutics Announces Start of Phase 3 ZENITH AD Program Evaluating Novel Regulatory T-Cell Biologic Rezpegaldesleukin in Moderate-to-Severe Atopic Dermatitis", "source": "PR Newswire / Nektar Therapeutics", "url": "https://www.prnewswire.com/news-releases/nektar-therapeutics-announces-start-of-phase-3-zenith-ad-program-evaluating-novel-regulatory-t-cell-biologic-rezpegaldesleukin-in-moderate-to-severe-atopic-dermatitis-302830206.html", "summary": "Nektar dosed the first patients in ZENITH AD-1 and ZENITH AD-2, two 510-patient global registrational trials of rezpegaldesleukin in patients 12 and older with moderate-to-severe atopic dermatitis, with a third trial (ZENITH AD-3) planned for biologic/JAK-experienced patients. The company also outlined plans to start a single registrational Phase 3 alopecia areata study in early 2027, targeting a first BLA submission in 2029."}, {"date": "2026-07-02", "headline": "Nektar Therapeutics Stock Climbs As Immunology Sentiment Improves", "source": "Timothy Sykes / TradersUnion (market news)", "url": "https://www.timothysykes.com/news/nektar-therapeutics-nktr-news-2026_07_02/", "summary": "NKTR shares jumped about 10.65% after AbbVie agreed to acquire Apogee Therapeutics for roughly $10.9 billion to bolster its late-stage eczema and asthma pipeline, with Canaccord flagging Nektar as one of the immunology names best positioned to benefit from the read-through in investor sentiment. The move underscored how a large pharma reaching for niche immunology/dermatology assets tends to lift comparable clinical-stage peers like Nektar."}, {"date": "2026-08-13", "headline": "Is Nektar Therapeutics (NKTR) Still Below Fair Value After Its Recent Run Up?", "source": "Sahm Capital", "url": "https://www.sahmcapital.com/news/content/is-nektar-therapeutics-nktr-still-below-fair-value-after-its-recent-run-up-2026-08-13", "summary": "Following a roughly 75% year-to-date share price gain and the Phase 3 ZENITH AD launch, analysts noted NKTR trades far above pharma peer multiples (about 47.6x sales versus an industry average near 4.8x), even as fair-value estimates in the $144 range still implied some further upside. The piece highlighted a widening gap between the stock's past returns and the risk/reward embedded in its current valuation given the company remains pre-revenue with a first BLA not expected until 2029."}], "catalysts": [{"when": "mid-2028", "label": "ZENITH AD Phase 3 topline data", "detail": "Initial topline results from the ZENITH AD-1 and ZENITH AD-2 registrational atopic dermatitis trials are expected, the first major readout of the Phase 3 program.", "confirmed": true}, {"when": "early 2027", "label": "Alopecia areata Phase 3 start", "detail": "Nektar plans to initiate a single registrational Phase 3 trial of rezpegaldesleukin in severe-to-very-severe alopecia areata, building on positive Phase 2b REZOLVE-AA data.", "confirmed": true}, {"when": "2029", "label": "Targeted first BLA submission", "detail": "Company guidance points to a first Biologics License Application filing for rezpegaldesleukin in atopic dermatitis in 2029, contingent on Phase 3 success.", "confirmed": true}, {"when": "Q3 2028", "label": "Cash runway horizon", "detail": "Following a $1.02 billion cash and investments balance at Q2 2026 (aided by an April 2026 public offering), Nektar's runway is guided to extend into Q3 2028, covering the initial Phase 3 data readouts.", "confirmed": true}, {"when": "H2 2026", "label": "NKTR-0165 first-in-human study", "detail": "Nektar plans to begin the first clinical study of NKTR-0165, a TNFR2 antibody being developed for multiple sclerosis with UCSF, expanding the pipeline beyond rezpegaldesleukin.", "confirmed": false}, {"when": "~November 2026", "label": "Q3 2026 earnings report", "detail": "Nektar's next quarterly financial results and pipeline update, following its established quarterly reporting cadence (Q2 results were released August 13, 2026).", "confirmed": false}], "pulse": "NKTR has been one of 2026's stronger biotech performers, up roughly 75% year-to-date and trading near $75-76, driven by the July 21 launch of the pivotal Phase 3 ZENITH AD program for rezpegaldesleukin in atopic dermatitis and strong Phase 2b data supporting a planned 2027 alopecia areata Phase 3 start. The company is well-capitalized with just over $1 billion in cash (runway into Q3 2028) after an April 2026 offering, and Wall Street sentiment is largely bullish (Canaccord initiated Buy/$153 in July; consensus is Strong Buy), though some analysts flag a stretched valuation given the company remains pre-revenue with its first BLA not expected until 2029. Nektar has also drawn speculative M&A attention as a possible immunology takeout target following AbbVie's $10.9 billion Apogee Therapeutics acquisition, though its rich valuation is seen as a deterrent to a near-term deal."}
+{
+  "ticker": "NKTR",
+  "news": [
+    {
+      "date": "2026-08-13",
+      "headline": "Nektar Therapeutics (NKTR) Stock Slides As Cash Burn Clouds Pipeline Progress",
+      "source": "Simply Wall St",
+      "url": "https://simplywall.st/stocks/us/pharmaceuticals-biotech/nasdaq-nktr/nektar-therapeutics/news/nektar-therapeutics-nktr-stock-slides-as-cash-burn-clouds-pi",
+      "summary": "Shares fell despite an EPS beat as investors weighed continued heavy cash burn against a rich revenue multiple for a company still years from commercial revenue."
+    },
+    {
+      "date": "2026-08-13",
+      "headline": "Nektar Therapeutics Announces Second Quarter 2026 Financial Results",
+      "source": "BioSpace / PR Newswire",
+      "url": "https://www.biospace.com/press-releases/nektar-therapeutics-announces-second-quarter-2026-financial-results",
+      "summary": "Q2 revenue was $10.1 million and net loss was $40.6 million, with cash and investments of $1.02 billion (up from $245.8 million at year-end 2025) giving runway into Q3 2028; CEO Howard Robin reiterated 2029 as the target for a first BLA submission for rezpegaldesleukin."
+    },
+    {
+      "date": "2026-08-06",
+      "headline": "Pretrial conference held in Nektar Therapeutics v. Eli Lilly & Co.; jury trial set for September 8, 2026",
+      "source": "CourtListener / Law360",
+      "url": "https://www.courtlistener.com/docket/67670334/nektar-therapeutics-v-eli-lilly-co/",
+      "summary": "The breach-of-contract suit, in which Nektar accuses former partner Eli Lilly of miscalculating and misrepresenting rezpegaldesleukin trial results, moved toward trial after an earlier postponement, with a jury trial now scheduled for September 8, 2026."
+    },
+    {
+      "date": "2026-07-21",
+      "headline": "Nektar Therapeutics Announces Start of Phase 3 ZENITH AD Program Evaluating Novel Regulatory T-Cell Biologic Rezpegaldesleukin in Moderate-to-Severe Atopic Dermatitis",
+      "source": "BioSpace / PR Newswire",
+      "url": "https://www.biospace.com/press-releases/nektar-therapeutics-announces-start-of-phase-3-zenith-ad-program-evaluating-novel-regulatory-t-cell-biologic-rezpegaldesleukin-in-moderate-to-severe-atopic-dermatitis",
+      "summary": "Nektar dosed patients in the first two of three global registrational ZENITH AD trials (ZENITH AD-1 and AD-2) in patients 12 and older with moderate-to-severe atopic dermatitis; initial Phase 3 data are expected mid-2028."
+    },
+    {
+      "date": "2026-07-20",
+      "headline": "Nektar Therapeutics Reports Inducement Grants Under Nasdaq Listing Rule 5635(c)(4)",
+      "source": "PR Newswire",
+      "url": "https://www.prnewswire.com/news-releases/nektar-therapeutics-reports-inducement-grants-under-nasdaq-listing-rule-5635c4-302834255.html",
+      "summary": "Nektar granted options for 36,000 shares to 23 newly hired employees under its 2025 Inducement Plan, a routine disclosure signaling continued hiring ahead of the Phase 3 program ramp-up."
+    },
+    {
+      "date": "2026-07-02",
+      "headline": "Nektar Therapeutics Stock Climbs As Immunology Sentiment Improves",
+      "source": "StocksToTrade / Timothy Sykes",
+      "url": "https://www.timothysykes.com/news/nektar-therapeutics-nktr-news-2026_07_02/",
+      "summary": "NKTR shares jumped roughly 10.6% as AbbVie's prospective acquisition of Apogee Therapeutics lifted sentiment across inflammation-and-immunology names, with Canaccord flagging Nektar as a beneficiary."
+    }
+  ],
+  "catalysts": [
+    {
+      "when": "Late September 2026",
+      "label": "ZENITH AD-3 trial start",
+      "detail": "Third pivotal atopic dermatitis trial, enrolling patients with prior biologic/JAK-inhibitor experience, expected to begin.",
+      "confirmed": true
+    },
+    {
+      "when": "September 8, 2026",
+      "label": "Nektar v. Eli Lilly jury trial",
+      "detail": "Court-set jury trial date for Nektar's breach-of-contract suit against Eli Lilly over mishandled rezpegaldesleukin trial data; outcome could affect damages/IP narrative.",
+      "confirmed": true
+    },
+    {
+      "when": "Early 2027",
+      "label": "Alopecia areata Phase 3 start",
+      "detail": "Company guided to starting a single registrational Phase 3 study of rezpegaldesleukin in severe-to-very-severe alopecia areata.",
+      "confirmed": true
+    },
+    {
+      "when": "Mid-2028",
+      "label": "ZENITH AD Phase 3 topline data",
+      "detail": "Initial Phase 3 readout for rezpegaldesleukin in moderate-to-severe atopic dermatitis.",
+      "confirmed": true
+    },
+    {
+      "when": "2029",
+      "label": "First BLA submission",
+      "detail": "Company's guided target for filing the first Biologics License Application for rezpegaldesleukin (atopic dermatitis).",
+      "confirmed": true
+    },
+    {
+      "when": "TBD 2026-2027",
+      "label": "Type 1 diabetes Phase 2 (TrialNet) data",
+      "detail": "Rezpegaldesleukin Phase 2 study in new-onset stage 3 Type 1 diabetes, initiated with TrialNet in May 2026; readout timing not yet specified.",
+      "confirmed": false
+    }
+  ],
+  "pulse": "Nektar enters the back half of 2026 well-funded ($1.02B cash, runway into Q3 2028) and fully committed to its Phase 3 ZENITH AD program for rezpegaldesleukin in atopic dermatitis, which began dosing in July with a mid-2028 data readout and 2029 BLA target, while a registrational alopecia areata study is slated for early 2027. Sentiment is bullish on Wall Street (Strong Buy consensus, ~$150-153 price targets) and lifted further by sector M&A read-through, but the stock wobbled after Q2 earnings on cash-burn/valuation concerns. The unresolved breach-of-contract jury trial against former partner Eli Lilly, now set for September 8, 2026, remains a background legal overhang unrelated to the core clinical thesis."
+}
