@@ -1,1 +1,74 @@
-{"ticker": "RPID", "news": [{"date": "2026-08-07", "headline": "Rapid Micro Biosystems Reports Second Quarter 2026 Financial Results", "source": "GlobeNewswire", "url": "https://www.globenewswire.com/news-release/2026/08/07/3341032/33206/en/rapid-micro-biosystems-reports-second-quarter-2026-financial-results.html", "summary": "Q2 2026 revenue rose 11% year-over-year to $8.1 million, with consumables revenue up more than 20% and gross margin improving to a record 15% from 4% a year earlier, though net loss widened to $12.9 million. The company reaffirmed full-year 2026 revenue guidance of $37-41 million, raised its validation target to at least 27, and guided Q3 2026 revenue of at least $9.5 million with at least 7 new system placements."}, {"date": "2026-08-07", "headline": "Rapid Micro Biosystems Marks 200th Growth Direct System Placement", "source": "Stock Titan", "url": "https://www.stocktitan.net/news/RPID/rapid-micro-biosystems-reports-second-quarter-2026-financial-k7rz0rtc2d8s.html", "summary": "Alongside Q2 earnings, the company announced it placed its 200th Growth Direct system globally, with four placements and nine validations completed during the quarter, underscoring growing commercial adoption of its automated microbial detection platform."}, {"date": "2026-08-04", "headline": "Rapid Micro Biosystems Announces Inducement Grants Under Nasdaq Listing Rule 5635(c)(4)", "source": "GlobeNewswire", "url": "https://www.globenewswire.com/news-release/2026/08/04/3338867/33206/en/Rapid-Micro-Biosystems-Announces-Inducement-Grants-Under-Nasdaq-Listing-Rule-5635-c-4.html", "summary": "The company granted 90,000 RSUs and a non-qualified option to purchase 170,000 shares (exercise price $2.12) as a material inducement to a new employee, issued under its Inducement Plan per Nasdaq Rule 5635(c)(4)."}, {"date": "2026-07-24", "headline": "Rapid Micro Biosystems director exercises options for 3,508 shares", "source": "Stock Titan (SEC Form 4)", "url": "https://www.stocktitan.net/sec-filings/RPID/form-4-rapid-micro-biosystems-inc-insider-trading-activity-00b09bf32ca3.html", "summary": "RPID director Richard S. Kollender exercised fully-vested options for 3,508 Class A shares at a $0.75 exercise price in two tranches, a routine insider transaction that left him holding 133,826 shares directly."}, {"date": "2026-07-23", "headline": "Rapid Micro Biosystems to Announce Second Quarter 2026 Financial Results on August 7, 2026", "source": "GlobeNewswire", "url": "https://www.globenewswire.com/news-release/2026/07/23/3332637/33206/en/Rapid-Micro-Biosystems-to-Announce-Second-Quarter-2026-Financial-Results-on-August-7-2026.html", "summary": "The company confirmed it would release Q2 2026 results before market open on August 7, 2026, with a management webcast/conference call at 8:30 a.m. ET the same day."}, {"date": "2026-07-22", "headline": "Rapid Micro Biosystems CEO exercises stock options and boosts holdings", "source": "Stock Titan (SEC Form 4)", "url": "https://www.stocktitan.net/sec-filings/RPID/form-4-rapid-micro-biosystems-inc-insider-trading-activity-aacf0a4df670.html", "summary": "President and CEO Robert G. Spignesi Jr. exercised a fully-vested option for 1,402 Class A shares at $0.75 (set to expire August 11, 2026), lifting his direct holdings to 1,191,973 shares with no shares sold."}], "catalysts": [{"when": "~November 2026", "label": "Q3 2026 earnings report", "detail": "Next quarterly report expected roughly three months after Q2, per the company's standard reporting cadence. Management guided Q3 2026 revenue of at least $9.5 million with at least 7 Growth Direct system placements.", "confirmed": false}, {"when": "Q3 2026", "label": "10 millionth Growth Direct consumable kit shipment", "detail": "On the Q2 2026 earnings call, management said it expects to ship its 10 millionth Growth Direct consumable kit during Q3 2026, a milestone reflecting growing routine use of the installed base.", "confirmed": false}, {"when": "October 2026", "label": "European Growth Direct Day", "detail": "Planned customer event in Europe organized with distribution partner MilliporeSigma to support customer engagement, education, and commercial pipeline development across the region, following a similarly-themed U.S. event in March 2026.", "confirmed": true}, {"when": "FY2026", "label": "Full-year 2026 guidance: $37-41M revenue, 30-38 system placements", "detail": "Reaffirmed at Q2 2026 earnings: total revenue guidance of $37.0-$41.0 million, 30-38 Growth Direct system placements, at least 27 system validations (raised from 25 previously), and gross margin of approximately 20%, with Q4 gross margin expected to reach the mid-to-high 20% range.", "confirmed": true}, {"when": "Through Feb 2027", "label": "MilliporeSigma distribution partnership", "detail": "Year two of a five-year co-exclusive global distribution agreement with MilliporeSigma for Growth Direct systems and consumables; management said the partnership's contribution to placements is expected to increase meaningfully in the second half of 2026 and into 2027.", "confirmed": true}], "pulse": "Rapid Micro Biosystems reported Q2 2026 revenue of $8.1 million (up 11% year-over-year), with record consumables growth and gross margin improving to 15% from 4% a year ago, while placing its 200th Growth Direct system globally and reaffirming full-year 2026 revenue guidance of $37-41 million. The company guided Q3 2026 revenue of at least $9.5 million with at least 7 new system placements, raised its 2026 validation target to at least 27, and flagged a cost-efficiency program targeting roughly $1 million in savings in 2026 and $3 million annually from 2027, supporting a path to positive cash flow by end of 2028. Aside from routine insider option exercises and a new-hire inducement grant, news flow was otherwise quiet since the earnings release, with the MilliporeSigma partnership and an October 2026 European Growth Direct Day cited as near-term commercial growth drivers."}
+{
+ "ticker": "RPID",
+ "news": [
+  {
+   "date": "2026-08-14",
+   "headline": "Bain Capital Life Sciences discloses ~18.5% combined stake (Schedule 13G/A)",
+   "source": "Stock Titan / SEC",
+   "url": "https://www.stocktitan.net/sec-filings/RPID/schedule-13g-a-rapid-micro-biosystems-inc-amended-passive-investment--9af732317825.html",
+   "summary": "Bain Capital Life Sciences Fund and BCIP Life Sciences Associates report 7,651,369 and 783,191 Class A shares respectively (16.8% + 1.7%), as of June 30, 2026. Warrant exercise is capped so Bain's group stays under 9.99% voting ownership."
+  },
+  {
+   "date": "2026-08-14",
+   "headline": "Armistice Capital discloses new 7.29% stake (Schedule 13G)",
+   "source": "Stock Titan / SEC",
+   "url": "https://www.stocktitan.net/sec-filings/RPID/schedule-13g-rapid-micro-biosystems-inc-passive-investment-disclosure-9d6cc530c016.html",
+   "summary": "Armistice Capital and Steven Boyd report beneficial ownership of 3,328,000 Class A shares, stemming from participation in the company's May 2026 underwritten offering."
+  },
+  {
+   "date": "2026-08-12",
+   "headline": "Zacks upgrades RPID to Rank #2 (Buy) on rising earnings estimates",
+   "source": "Zacks",
+   "url": "https://www.zacks.com/stock/news/2973708/rapid-micro-biosystems-rpid-upgraded-to-buy-what-does-it-mean-for-the-stock",
+   "summary": "Zacks cites an upward trend in earnings estimate revisions, with the consensus estimate up 3.2% over the past three months, as the driver of the upgrade following the Q2 print."
+  },
+  {
+   "date": "2026-08-11",
+   "headline": "Lake Street reiterates Buy, trims price target to $7",
+   "source": "The Globe and Mail",
+   "url": "https://www.theglobeandmail.com/investing/markets/stocks/RPID-Q/pressreleases/3779636/rapid-micro-biosystems-rpid-receives-a-buy-from-lake-street/",
+   "summary": "Analyst Thomas Flaten kept his Buy rating on RPID but lowered the price target from $8 to $7 following the Q2 2026 report."
+  },
+  {
+   "date": "2026-08-07",
+   "headline": "Q2 2026 results: revenue beats at $8.1M (+11% YoY), record 15% gross margin, 200th Growth Direct system placed",
+   "source": "GlobeNewswire",
+   "url": "https://www.globenewswire.com/news-release/2026/08/07/3341032/33206/en/rapid-micro-biosystems-reports-second-quarter-2026-financial-results.html",
+   "summary": "Consumables grew over 20% YoY and recurring revenue hit 63% of total; cash fell to $20.1M from $38.6M at year-end 2025. Management launched an efficiency program (~$1M savings in H2 2026, ~$3M annually from 2027) and reaffirmed FY26 guidance of $37-41M revenue with at least 27 system validations."
+  },
+  {
+   "date": "2026-08-04",
+   "headline": "Inducement grants awarded to new employee under Nasdaq Rule 5635(c)(4)",
+   "source": "GlobeNewswire",
+   "url": "https://www.globenewswire.com/news-release/2026/08/04/3338867/33206/en/Rapid-Micro-Biosystems-Announces-Inducement-Grants-Under-Nasdaq-Listing-Rule-5635-c-4.html",
+   "summary": "The company granted 90,000 RSUs and an option to purchase 170,000 shares to a newly hired employee as a material inducement to employment."
+  }
+ ],
+ "catalysts": [
+  {
+   "when": "2026-11",
+   "label": "Q3 2026 earnings",
+   "detail": "Based on the company's typical reporting cadence (Q2 2026 reported Aug 7), Q3 results are likely in early-to-mid November 2026. Watch system placement pace, consumables growth, gross margin progression toward the ~20% FY26 target, and updated cash runway after Q2's $20.1M balance.",
+   "confirmed": false
+  },
+  {
+   "when": "Q3 2026",
+   "label": "10 millionth Growth Direct consumable shipped",
+   "detail": "Management indicated on the Q2 2026 call that the company expects to ship its 10 millionth consumable unit in Q3 2026, a symbolic adoption/throughput milestone for the installed base.",
+   "confirmed": false
+  },
+  {
+   "when": "H2 2026",
+   "label": "Trinity Capital $10M tranche unlock",
+   "detail": "The company expects to achieve commercial/operational milestones later in 2026 that would unlock access to a $10M tranche under its Trinity Capital term loan facility, adding non-dilutive runway.",
+   "confirmed": false
+  },
+  {
+   "when": "mid-2027",
+   "label": "Second $10M Trinity Capital tranche",
+   "detail": "A further $10M tranche under the Trinity Capital facility is available in mid-2027, subject to achievement of applicable milestones, per the Q2 2026 earnings call commentary.",
+   "confirmed": false
+  }
+ ],
+ "pulse": "Rapid Micro Biosystems sells the Growth Direct automated microbial QC platform to pharma manufacturers, monetizing through system placements that seed recurring, higher-margin consumables and service revenue as the installed base (now 200 systems) matures. Q2 2026 beat on revenue and margin (record 15% gross margin, consumables +20% YoY) and management reaffirmed FY26 guidance of $37-41M, but cash dropped to $20.1M and losses stayed heavy, keeping the balance sheet the central risk even after a new efficiency program and additional Trinity Capital debt tranches on the table. Fresh institutional buying (Bain now ~18.5%, Armistice a new 7.29% stake) and analyst upgrades (Lake Street Buy, Zacks Rank #2) suggest growing confidence, but the story is still a race between placement/consumables growth and cash runway toward management's 2028 cash-flow-positive target."
+}
