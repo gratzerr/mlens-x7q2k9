@@ -37,18 +37,18 @@
       "summary": "Abivax closed its upsized, oversubscribed ADS offering priced at $125 per share, raising roughly $874 million in net proceeds and extending its cash runway into Q4 2029 to fund the obefazimod launch."
     },
     {
-      "date": "2026-07-02",
-      "headline": "Abivax Announces Full Exercise of Underwriters' Option to Purchase Additional ADSs, Bringing Gross Proceeds of Offering to $920M (€807M)",
-      "source": "GlobeNewswire",
-      "url": "https://www.globenewswire.com/news-release/2026/07/02/3321105/0/en/Abivax-Announces-Full-Exercise-of-Underwriters-Option-to-Purchase-Additional-ADSs-Bringing-Gross-Proceeds-of-Offering-to-920M-807M.html",
-      "summary": "Underwriters fully exercised their option on Abivax's public offering, lifting total shares sold to 7.36 million ADSs and total gross proceeds to $920 million, up from the initial $800 million upsized deal priced July 1."
+      "date": "2026-06-29",
+      "headline": "Abivax Reports Positive ABTECT Maintenance Part 2 Results for Obefazimod, Demonstrating Meaningful Clinical Benefit in Refractory Ulcerative Colitis Patients",
+      "source": "Abivax / GlobeNewswire",
+      "url": "https://ir.abivax.com/news-releases/news-release-details/abivax-reports-positive-abtect-maintenance-part-2-results/",
+      "summary": "Supplemental Phase 3 maintenance data showed 37.2% of induction non-responders achieved clinical remission at Week 44 on continued 50mg obefazimod, and exposure-adjusted malignancy rates across the integrated Phase 2/3 program remained within expected ulcerative colitis background ranges. The results strengthened the safety database ahead of the planned Q4 2026 NDA filing and helped trigger the subsequent $920M capital raise."
     }
   ],
   "catalysts": [
     {
       "when": "Late Q4 2026",
       "label": "FDA NDA submission for obefazimod (ulcerative colitis)",
-      "detail": "Abivax plans to submit its first New Drug Application to the FDA for obefazimod in moderately to severely active ulcerative colitis; a positive pre-NDA meeting on July 30, 2026 confirmed alignment on content/format.",
+      "detail": "Abivax plans to submit its first New Drug Application to the FDA for obefazimod in moderately to severely active ulcerative colitis; a positive pre-NDA meeting on July 30, 2026 confirmed alignment on content/format, and no new safety signals have emerged since.",
       "confirmed": true
     },
     {
@@ -58,9 +58,9 @@
       "confirmed": true
     },
     {
-      "when": "September 2026 (exact date ~Sept 14-21, per financial calendar)",
+      "when": "September 21, 2026",
       "label": "H1 2026 financial results",
-      "detail": "Abivax is scheduled to report first-half 2026 financial results and provide a business update, including cash runway and regulatory progress.",
+      "detail": "Abivax's financial calendar sets September 21, 2026 for its first-half 2026 results and business update, including cash runway and regulatory progress; Q3 2026 results are calendared for December 14, 2026.",
       "confirmed": true
     },
     {
@@ -70,11 +70,17 @@
       "confirmed": false
     },
     {
+      "when": "Late 2026 to mid-2027 (guidance has varied)",
+      "label": "ENHANCE-CD Phase 2b Crohn's disease induction data",
+      "detail": "Obefazimod's Phase 2b induction trial in moderate-to-severely active Crohn's disease (ENHANCE-CD) is ongoing; company guidance on the induction readout timing has ranged from late 2026 to mid-2027.",
+      "confirmed": false
+    },
+    {
       "when": "Ongoing / unscheduled",
       "label": "M&A / takeover speculation",
-      "detail": "Reports earlier in 2026 linked Eli Lilly to a potential ~€15bn takeover of Abivax; no formal offer has been confirmed, and the CEO has emphasized a path to going it alone after the large capital raise.",
+      "detail": "Eli Lilly was reported (Jan 2026) to be circling a ~€15bn takeover, and French media reported AstraZeneca had exclusive data-room access with a March 23, 2026 deadline to bid; Abivax denied that report, no formal offer from either party has been confirmed, and the CEO has since emphasized a path to going it alone after the $920M raise.",
       "confirmed": false
     }
   ],
-  "pulse": "Abivax enters the second half of 2026 well-capitalized and de-risked on the regulatory front: a $920M ADS offering closed in early July extended cash runway into Q4 2029, and a positive July 30 pre-NDA meeting with the FDA kept the company on track for a late-Q4 2026 NDA filing for obefazimod in ulcerative colitis, alongside a planned H2 2026 EU MAA filing. New commercial leadership hires signal the company is building toward an independent U.S. launch rather than a sale, even as persistent takeover chatter (previously involving Eli Lilly) and lingering investor caution over a cancer signal flagged in the maintenance-trial data (from earlier in 2026) remain overhangs. Near-term watch items are the H1 2026 results update (expected September) and any further FDA/EMA regulatory milestones ahead of the year-end NDA submission."
+  "pulse": "Abivax enters the second half of 2026 well-capitalized and de-risked on the regulatory front: positive ABTECT Maintenance Part 2 data in late June (with malignancy rates in line with UC background levels) cleared the way for a $920M ADS offering that closed in early July, extending cash runway into Q4 2029, and a positive July 30 pre-NDA meeting with the FDA kept the company on track for a late-Q4 2026 NDA filing for obefazimod in ulcerative colitis, alongside a planned H2 2026 EU MAA filing. New commercial leadership hires signal the company is building toward an independent U.S. launch rather than a sale, even as earlier-2026 takeover chatter (Eli Lilly in January, an AstraZeneca report in March that was denied) remains an overhang analysts still reference. No major company-specific news has broken since the July 30 FDA update; the next scheduled catalyst is the H1 2026 results release on September 21, 2026."
 }
