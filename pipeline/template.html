@@ -318,6 +318,21 @@
   .act .again{font-size:10.5px;font-weight:600;white-space:nowrap;margin-top:1px}
   .act .again.up{color:var(--up)} .act .again.down{color:var(--down)}
   .actempty{padding:18px 2px;color:var(--muted);font-size:13px}
+  .socialtools{margin:2px 0 10px}
+  .socialsearchrow{display:flex;gap:7px;align-items:center}
+  .socialtools input[type=search]{flex:1;min-width:0;background:var(--surface-2);border:1px solid var(--border);
+    border-radius:8px;padding:7px 9px;font:inherit;font-size:12px;color:var(--ink)}
+  .socialrow{display:grid;grid-template-columns:52px minmax(0,1fr);gap:8px;align-items:start;margin-top:8px}
+  .sfl{padding-top:7px;color:var(--muted);font-size:10px;font-weight:700;letter-spacing:.55px;text-transform:uppercase}
+  .sfb{display:flex;flex-wrap:wrap;gap:6px;min-width:0}
+  .sfb button{display:inline-flex;align-items:center;gap:5px;border:1px solid var(--border);background:var(--surface-2);
+    color:var(--ink-2);border-radius:8px;padding:5px 9px;font:inherit;font-size:11.5px;cursor:pointer;line-height:1.6}
+  .sfb button:hover{color:var(--ink);border-color:color-mix(in srgb,var(--accent) 38%,var(--border))}
+  .sfb button[aria-pressed="true"]{background:var(--accent);border-color:var(--accent);color:#fff}
+  .sfb button .nlogo{width:16px;height:16px;margin:0;border-radius:5px}
+  .sfb .cnt{opacity:.7;font-size:10px;font-variant-numeric:tabular-nums}
+  .sfstatus{margin:8px 0 0 60px;color:var(--muted);font-size:10.5px}
+  .socialempty{padding:16px 2px;color:var(--muted);font-size:13px}
   .sd-tx{min-width:520px;font-size:12.5px}
   .sd-tx th,.sd-tx td{padding:6px 8px;white-space:nowrap}
   .sd-tx tfoot td{border-top:1px solid var(--border);font-weight:650}
@@ -386,6 +401,11 @@
     .themebtn,.sd-x{width:36px;height:36px}
     /* iOS zooms into focused inputs below 16px — keep the layout still */
     #rs-search,input[type=date],input[type=text]{font-size:16px!important}
+    /* phone: label above its chip row, bigger tap targets */
+    .socialrow{grid-template-columns:1fr;gap:4px}
+    .sfl{padding-top:0}
+    .sfb button{padding:7px 10px}
+    .sfstatus{margin-left:0}
     .sd-ranges button{padding:6px 11px}
     header.top{margin-bottom:14px}
   }
@@ -558,6 +578,15 @@
     </div>
     <div class="panel">
       <h2><span class="live"></span>Social buzz · Stocktwits</h2>
+      <div class="socialtools" id="socialtools" hidden>
+        <div class="socialsearchrow">
+          <input id="social-search" type="search" placeholder="Search posts or users…" aria-label="Search Stocktwits posts or users">
+          <button type="button" class="minibtn" id="social-reset" hidden>Reset</button>
+        </div>
+        <div class="socialrow"><span class="sfl">Mood</span><div class="sfb" id="social-mood" aria-label="Filter by sentiment"></div></div>
+        <div class="socialrow"><span class="sfl">Stock</span><div class="sfb" id="social-tickers" aria-label="Filter by stock"></div></div>
+        <div class="sfstatus" id="social-status" aria-live="polite"></div>
+      </div>
       <div class="feed social" id="social"></div>
     </div>
   </div>
@@ -1879,12 +1908,68 @@ function cleanBody(s){
     .replace(/https?:\/\/\S+/g,'').replace(/\s{2,}/g,' ').trim();
 }
 let _socShown=24;
+/* ---- Social buzz filters ----
+   Mood + stock chips carry their own counts, so you can see where the noise is
+   before clicking. Filtering never refetches: it works on the posts already
+   swept, and the counts always describe the full sweep, not the visible slice. */
+const socF={q:'',tk:'all',mood:'all'};
+const socMood=m=>{ const v=String(m&&m.sentiment||'').toLowerCase();
+  return v==='bullish'?'bullish':v==='bearish'?'bearish':'neutral'; };
+function initSocialFilters(){
+  const search=document.getElementById('social-search'); if(!search||search.dataset.hooked) return;
+  search.dataset.hooked='1';
+  const rerun=()=>{ _socShown=48; renderSocial(); };
+  search.addEventListener('input',()=>{ socF.q=search.value.trim().toLowerCase(); rerun(); });
+  search.addEventListener('keydown',e=>{ if(e.key==='Escape'&&search.value){ search.value=''; socF.q=''; rerun(); } });
+  document.getElementById('social-reset').addEventListener('click',()=>{
+    socF.q=''; socF.tk='all'; socF.mood='all'; search.value=''; rerun(); search.focus();
+  });
+  document.getElementById('social-mood').addEventListener('click',e=>{
+    const b=e.target.closest('button[data-mood]'); if(!b) return; socF.mood=b.dataset.mood; rerun(); });
+  document.getElementById('social-tickers').addEventListener('click',e=>{
+    const b=e.target.closest('button[data-stk]'); if(!b) return; socF.tk=b.dataset.stk; rerun(); });
+}
+function renderSocialFilters(all,matched,shown){
+  const tools=document.getElementById('socialtools'); if(!tools) return;
+  if(!all.length){ tools.hidden=true; return; }
+  tools.hidden=false; initSocialFilters();
+  const search=document.getElementById('social-search');
+  if(search&&search.value!==socF.q) search.value=socF.q;
+  const cnt={all:all.length,bullish:0,bearish:0,neutral:0}, byTk={};
+  all.forEach(m=>{ cnt[socMood(m)]++;
+    const t=String(m.ticker||'').toUpperCase(); if(t) byTk[t]=(byTk[t]||0)+1; });
+  if(socF.tk!=='all'&&!byTk[socF.tk]) socF.tk='all';        // sold position drops out of the sweep
+  document.getElementById('social-mood').innerHTML=
+    [['all','All'],['bullish','Bullish'],['bearish','Bearish'],['neutral','Neutral']]
+    .map(([k,l])=>`<button type="button" data-mood="${k}" aria-pressed="${socF.mood===k}">${l} <span class="cnt">${cnt[k]}</span></button>`).join('');
+  document.getElementById('social-tickers').innerHTML=
+    `<button type="button" data-stk="all" aria-pressed="${socF.tk==='all'}">All <span class="cnt">${all.length}</span></button>`+
+    Object.entries(byTk).sort((a,b)=>b[1]-a[1]||a[0].localeCompare(b[0]))
+      .map(([t,n])=>`<button type="button" data-stk="${esc(t)}" aria-pressed="${socF.tk===t}">${logoImg(tickerLogos(t),'nlogo',t)}${esc(t)} <span class="cnt">${n}</span></button>`).join('');
+  const active=!!socF.q||socF.tk!=='all'||socF.mood!=='all';
+  document.getElementById('social-reset').hidden=!active;
+  document.getElementById('social-status').textContent=active
+    ? `${matched} matching ${matched===1?'post':'posts'} · ${all.length} loaded`
+    : `Showing ${shown} of ${all.length} loaded posts`;
+}
 function renderSocial(){
   const all=(liveState.social||[]);
-  const items=all.slice(0,_socShown);
   const el=document.getElementById('social'); if(!el) return;
   el.classList.add('feedmax');
-  if(!items.length){ el.innerHTML=''; return; }
+  if(!all.length){ renderSocialFilters([],0,0); el.innerHTML=''; return; }
+  const filtered=all.filter(m=>{
+    const t=String(m.ticker||'').toUpperCase();
+    if(socF.tk!=='all'&&t!==socF.tk) return false;
+    if(socF.mood!=='all'&&socMood(m)!==socF.mood) return false;
+    if(!socF.q) return true;
+    return [t,m.user,cleanBody(m.body)].join(' ').toLowerCase().includes(socF.q);
+  });
+  const items=filtered.slice(0,_socShown);
+  renderSocialFilters(all,filtered.length,items.length);
+  if(!items.length){
+    el.innerHTML='<div class="socialempty">No posts match these filters. Try another stock, mood, or search.</div>';
+    return;
+  }
   el.innerHTML=items.map(m=>{
     const sent=m.sentiment==='Bullish'?'<span class="sent bull">BULL</span>':m.sentiment==='Bearish'?'<span class="sent bear">BEAR</span>':'';
     const body=cleanBody(m.body); if(!body) return '';
@@ -1893,8 +1978,8 @@ function renderSocial(){
         <span class="su">@${esc(m.user)}</span>${sent}<span class="stime">${relTime(m.time)}</span></div>
       <div class="sb">${esc(body)}</div></div>`;
   }).join('');
-  if(all.length>_socShown){
-    el.innerHTML+=`<button class="morebtn" id="socmore">+ ${all.length-_socShown} older posts</button>`;
+  if(filtered.length>_socShown){
+    el.innerHTML+=`<button class="morebtn" id="socmore">+ ${filtered.length-_socShown} older posts</button>`;
     const b=el.querySelector('#socmore'); if(b) b.onclick=()=>{ _socShown+=48; renderSocial(); };
   }
 }
