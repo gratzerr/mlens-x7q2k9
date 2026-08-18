@@ -1,80 +1,20 @@
 {
-  "ticker": "NKTR",
-  "news": [
-    {
-      "date": "2026-08-16",
-      "headline": "Nektar Therapeutics (NKTR) Stock Slides As Cash Burn Clouds Pipeline Progress",
-      "source": "Simply Wall St",
-      "url": "https://simplywall.st/stocks/us/pharmaceuticals-biotech/nasdaq-nktr/nektar-therapeutics/news/nektar-therapeutics-nktr-stock-slides-as-cash-burn-clouds-pi",
-      "summary": "Despite raised year-end cash guidance of $815-840 million, quarterly revenue fell 9.4% year over year to $10.13 million and the trailing 12-month net loss widened 28.5% to $157.13 million, leaving investors focused on the burn rate even as ZENITH AD-3 tracks toward a late-September 2026 start. Institutional ownership has fallen sharply quarter over quarter and insider activity has been sales-only in recent months."
-    },
-    {
-      "date": "2026-08-13",
-      "headline": "Nektar Therapeutics Announces Second Quarter 2026 Financial Results",
-      "source": "PR Newswire",
-      "url": "http://www.prnewswire.com/news-releases/nektar-therapeutics-announces-second-quarter-2026-financial-results-302851330.html",
-      "summary": "Cash and investments stood at $1,023.4 million on June 30, 2026, up sharply from $245.8 million at year-end 2025, giving runway into Q3 2028, past the targeted mid-2028 ZENITH AD readout. Net loss narrowed to $40.6 million ($1.23/share) from $41.6 million ($2.95/share) a year earlier, and the company reaffirmed plans to start a single registrational Phase 3 alopecia areata study in early 2027."
-    },
-    {
-      "date": "2026-08-13",
-      "headline": "Earnings Call Transcript: Nektar Beats Q2 2026 EPS but Stock Slips After Hours",
-      "source": "Investing.com",
-      "url": "https://www.investing.com/news/transcripts/earnings-call-transcript-nektar-beats-q2-2026-eps-but-stock-slips-after-hours-93CH-4859475",
-      "summary": "Nektar's loss per share beat consensus by roughly $0.74, but shares slipped after hours as investors weighed rising R&D spend from the Phase 3 ramp (guidance raised to $210-230 million) against the strengthened cash position. Management reiterated the ZENITH AD-3 start for biologic/JAK-experienced patients and the early-2027 alopecia areata Phase 3 initiation on the call."
-    },
-    {
-      "date": "2026-07-24",
-      "headline": "Nektar Grants Inducement Awards for 36,000 Shares to 23 Newly Hired Employees",
-      "source": "StockTitan / PR Newswire",
-      "url": "https://www.stocktitan.net/news/NKTR/nektar-therapeutics-reports-inducement-grants-under-nasdaq-listing-z08uw4g84paz.html",
-      "summary": "Nektar disclosed Nasdaq 5635(c)(4) inducement grants covering 36,000 options at a $64.84 exercise price for 23 new hires, following a similar June grant to seven hires. The steady hiring cadence reflects the staffing build-out for the newly launched Phase 3 program."
-    },
-    {
-      "date": "2026-07-22",
-      "headline": "Canaccord Genuity Initiates Coverage of Nektar Therapeutics with Buy Rating and $153 Price Target",
-      "source": "MarketBeat",
-      "url": "https://www.marketbeat.com/instant-alerts/nektar-therapeutics-nasdaqnktr-coverage-initiated-at-canaccord-genuity-group-2026-07-22/",
-      "summary": "Canaccord Genuity started NKTR at Buy with a $153 target one day after the Phase 3 launch, joining a broadly constructive sell-side (roughly 10-16 Buy/Strong Buy vs. a handful of Hold). Citi separately raised its target to $151 from $123 around the same time, citing the strength of the alopecia areata data package."
-    },
-    {
-      "date": "2026-07-21",
-      "headline": "Nektar Announces Start of Phase 3 ZENITH AD Program for Rezpegaldesleukin in Moderate-to-Severe Atopic Dermatitis",
-      "source": "PR Newswire",
-      "url": "https://www.prnewswire.com/news-releases/nektar-therapeutics-announces-start-of-phase-3-zenith-ad-program-evaluating-novel-regulatory-t-cell-biologic-rezpegaldesleukin-in-moderate-to-severe-atopic-dermatitis-302830206.html",
-      "summary": "Nektar started ZENITH AD-1 and AD-2, two 510-patient global registrational trials in biologic/JAK-naive patients aged 12 and older, with a third study (ZENITH AD-3) in treatment-experienced patients due to follow. The program was designed after FDA end-of-Phase 2 meetings and EMA scientific advice, targets initial topline data in mid-2028 and a BLA in 2029."
-    }
-  ],
-  "catalysts": [
-    {
-      "when": "2026-09",
-      "label": "ZENITH AD-3 initiation (biologic/JAK-experienced patients)",
-      "detail": "The third 510-patient Phase 3 study, enrolling patients with prior systemic biologic and/or JAK inhibitor experience, is guided to begin by late September 2026. It completes the registrational package for both U.S. and European filings and tests rezpeg in the harder-to-treat population.",
-      "confirmed": true
-    },
-    {
-      "when": "early 2027",
-      "label": "Phase 3 alopecia areata study start",
-      "detail": "Management reaffirmed on the Q2 call that it will start a single registrational Phase 3 study in severe alopecia areata in early 2027, based on the Phase 2b REZOLVE-AA proof-of-concept data. This adds a second, funded value driver alongside atopic dermatitis.",
-      "confirmed": true
-    },
-    {
-      "when": "2026-H2",
-      "label": "Additional REZOLVE-AD / REZOLVE-AA data at medical conferences",
-      "detail": "Nektar has signalled further presentations of longer-term Phase 2b atopic dermatitis and alopecia areata data, including off-treatment durability after discontinuation in severe-to-very-severe alopecia areata. Durability of the Treg effect off drug remains a key swing factor ahead of the AA Phase 3 start.",
-      "confirmed": false
-    },
-    {
-      "when": "2026-11",
-      "label": "Q3 2026 earnings",
-      "detail": "Nektar's next quarterly report should update cash burn against the raised year-end guidance of $815-840 million, ZENITH AD-3 enrollment status, and preparations for the early-2027 alopecia areata Phase 3 start. Exact date not yet announced.",
-      "confirmed": false
-    },
-    {
-      "when": "2028-H1",
-      "label": "First ZENITH AD Phase 3 topline readout",
-      "detail": "Initial registrational efficacy data for rezpeg in moderate-to-severe atopic dermatitis, the decisive binary event for the equity, ahead of a targeted 2029 BLA submission. Cash runway now extends into Q3 2028, covering this readout.",
-      "confirmed": true
-    }
-  ],
-  "pulse": "Nektar's Q2 2026 report on August 13 confirmed the balance-sheet story: cash and investments of $1.02 billion (runway into Q3 2028) comfortably fund the ZENITH AD Phase 3 program through its mid-2028 readout, and management reaffirmed both the ZENITH AD-3 start (late September 2026) and a new registrational alopecia areata study for early 2027. Despite an EPS beat, shares have drifted lower since the print as investors focus on rising R&D burn (net loss widened, R&D guidance raised to $210-230 million) and a still-distant catalyst, with the stock closing around $71.90 on August 18 (down roughly 4% on the day) versus a 52-week high near $109. Sell-side sentiment stays firmly bullish (Citi at Buy/$151, Canaccord and Piper Sandler both reiterating Buy in mid-August; consensus target near $153 against a Strong Buy-leaning analyst base) - watch ZENITH AD-3 enrollment progress and any interim REZOLVE-AD/AA durability data in H2 as near-term sentiment drivers into 2027."
+ "ticker": "NKTR",
+ "news": [
+  {"date": "2026-08-14", "headline": "Analysts Reiterate Buy Ratings, Raise Price Targets After Q2 Beat", "source": "MarketBeat / StockTitan", "url": "https://www.marketbeat.com/instant-alerts/nektar-therapeutics-q2-earnings-call-highlights-2026-08-13/", "summary": "Following the Q2 print, Piper Sandler and Canaccord Genuity reiterated Buy ratings on Nektar, with price targets ranging from $153 to $185, citing the strengthened cash position and rezpegaldesleukin's Phase 3 momentum."},
+  {"date": "2026-08-14", "headline": "Nektar Therapeutics Stock Slides as Cash Burn Clouds Pipeline Progress", "source": "Simply Wall St News", "url": "https://simplywall.st/stocks/us/pharmaceuticals-biotech/nasdaq-nktr/nektar-therapeutics/news/nektar-therapeutics-nktr-stock-slides-as-cash-burn-clouds-pi", "summary": "Shares fell roughly 4% after management raised FY2026 guidance to $210-230 million in R&D spend and $60-65 million in G&A, stoking investor concern about the pace of cash burn even as the balance sheet strengthened."},
+  {"date": "2026-08-13", "headline": "Nektar Therapeutics Announces Second Quarter 2026 Financial Results", "source": "PR Newswire / Nektar IR", "url": "http://www.prnewswire.com/news-releases/nektar-therapeutics-announces-second-quarter-2026-financial-results-302851330.html", "summary": "Q2 revenue was $10.1 million with a net loss of $40.6 million (-$1.23/share, beating consensus of -$2.04); cash and investments reached $1.02 billion versus $245.8 million at year-end 2025, extending the runway into Q3 2028."},
+  {"date": "2026-08-13", "headline": "Nektar Outlines REZPEG Phase 3 Timeline With Mid-2028 Data and 2029 BLA Plan", "source": "Seeking Alpha", "url": "https://seekingalpha.com/news/4633008-nektar-outlines-rezpeg-phase-iii-timeline-with-midminus-2028-data-and-2029-bla-plan", "summary": "On the Q2 call, management confirmed that following an End-of-Phase 2 meeting with the FDA it finalized the design of a single registrational Phase 3 trial in alopecia areata (start early 2027) and reiterated a first BLA submission for rezpegaldesleukin in 2029."},
+  {"date": "2026-07-21", "headline": "Nektar Therapeutics Announces Start of Phase 3 ZENITH AD Program", "source": "PR Newswire / Nektar IR", "url": "https://www.prnewswire.com/news-releases/nektar-therapeutics-announces-start-of-phase-3-zenith-ad-program-evaluating-novel-regulatory-t-cell-biologic-rezpegaldesleukin-in-moderate-to-severe-atopic-dermatitis-302830206.html", "summary": "Nektar dosed the first patients in ZENITH AD-1 and ZENITH AD-2, two of three global registrational Phase 3 trials of rezpegaldesleukin in moderate-to-severe atopic dermatitis targeting about 1,530 patients total, with initial data expected mid-2028."},
+  {"date": "2026-07-20", "headline": "Nektar Reports Inducement Grants Under Nasdaq Listing Rule 5635(c)(4)", "source": "PR Newswire", "url": "https://www.prnewswire.com/news-releases/nektar-therapeutics-reports-inducement-grants-under-nasdaq-listing-rule-5635c4-302834255.html", "summary": "Nektar granted stock options on an aggregate of 36,000 shares to 23 newly hired employees at a $64.84 exercise price, reflecting continued headcount build-out to support the Phase 3 ZENITH AD program."}
+ ],
+ "catalysts": [
+  {"when": "2026-09", "label": "ZENITH AD-3 trial start", "detail": "Third pivotal Phase 3 trial (treatment-experienced atopic dermatitis patients) expected to begin enrollment, completing the ZENITH AD registrational program.", "confirmed": true},
+  {"when": "2026-10-01", "label": "EADV Congress data presentations", "detail": "Nektar plans to present longer-term REZOLVE-AD and REZOLVE-AA Phase 2b maintenance-period results for rezpegaldesleukin at the European Academy of Dermatology and Venereology Congress.", "confirmed": true},
+  {"when": "2026-Q4", "label": "Q3 2026 earnings report", "detail": "Next quarterly financial results and pipeline update; specific date not yet announced.", "confirmed": false},
+  {"when": "2027-Q1", "label": "Alopecia areata Phase 3 trial start", "detail": "Single registrational Phase 3 study of rezpegaldesleukin in severe-to-very-severe alopecia areata, designed after FDA End-of-Phase 2 meeting, planned to begin.", "confirmed": true},
+  {"when": "2028-Q2", "label": "ZENITH AD Phase 3 readout", "detail": "First topline data expected from the ZENITH AD-1/AD-2 pivotal atopic dermatitis trials.", "confirmed": true},
+  {"when": "2029", "label": "First BLA submission for rezpegaldesleukin", "detail": "Company's stated target for filing the first Biologics License Application, pending positive Phase 3 atopic dermatitis data.", "confirmed": true}
+ ],
+ "pulse": "Nektar is now fully committed to advancing rezpegaldesleukin through Phase 3, having dosed the first ZENITH AD atopic-dermatitis patients in July and, following its August 13 Q2 print, finalized an FDA-aligned Phase 3 design for alopecia areata (start early 2027). The roughly $1.02 billion cash position funds operations into Q3 2028, past the mid-2028 ZENITH AD readouts, though raised R&D/G&A guidance triggered some post-earnings share weakness on cash-burn concerns even as sell-side analysts reiterated Buy ratings with targets of $153-$185. Watch for the ZENITH AD-3 trial start (~September 2026), EADV data presentations (October 1, 2026), and Q3 earnings for further timeline detail."
 }

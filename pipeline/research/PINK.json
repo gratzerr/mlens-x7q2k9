@@ -1,17 +1,54 @@
-{"ticker": "PINK",
+{
+ "ticker": "PINK",
  "news": [
-  {"date": "2026-08-13", "headline": "Intermountain Health Brings Perimeter's Claire™ to the Operating Room, a Landmark in Breast Cancer Surgery Using AI", "source": "PR Newswire / Perimeter IR", "url": "https://ir.perimetermed.com/news-events/press-releases/detail/213/intermountain-health-brings-perimeters-claire-to-the", "summary": "Intermountain Health became the first U.S. health system to commercially deploy Claire, now live at LDS Hospital and American Fork Hospital under a systemwide agreement covering 34 hospitals and 400 clinics. This is the first real commercial placement since March's FDA PMA approval, and shares jumped on the news."},
-  {"date": "2026-08-13", "headline": "Perimeter Schedules Second Quarter 2026 Financial Results Conference Call for August 20th", "source": "Perimeter IR / PR Newswire", "url": "https://ir.perimetermed.com/news-events/press-releases/detail/214/perimeter-schedules-second-quarter-2026-financial-results", "summary": "Perimeter confirmed it will report Q2 2026 results after market close on Thursday, August 20, with a conference call and webcast at 5:00pm ET. This will be the first quarterly update covering commentary on the Intermountain Health launch and cash burn since the spring financings."},
-  {"date": "2026-07-14", "headline": "Brookline Capital Markets Initiates Perimeter at Buy, PT C$1.54", "source": "BioTuesdays", "url": "https://biotuesdays.com/2026/07/14/brookline-starts-perimeter-at-buy-pt-c1-54/", "summary": "Analyst Kemp Doliver started coverage with a Buy rating and C$1.54 target (stock at C$0.32), citing Claire's Breakthrough Device status as a tailwind for a faster CMS New Technology APC reimbursement decision expected by year-end, and modeling over 9% lumpectomy penetration by 2035."},
-  {"date": "2026-07-06", "headline": "Paradigm Capital names Perimeter and maintains Profound as healthcare Top Picks", "source": "BioTuesdays", "url": "https://biotuesdays.com/2026/07/06/paradigm-capital-names-perimeter-and-maintains-profound-as-healthcare-top-picks/", "summary": "Paradigm Capital initiated Perimeter as a healthcare Top Pick with a Speculative Buy and a C$0.95 price target (stock at C$0.275 on July 3). The analyst frames the March FDA approval of Claire as the accelerant for U.S. commercialization and flags M&A optionality, noting the stock trades far below comparable MedTech takeout multiples."},
-  {"date": "2026-06-09", "headline": "Perimeter Selected for INOVAIT Pilot Fund to Advance AI for Breast Cancer Surgery", "source": "Perimeter IR / PR Newswire", "url": "https://ir.perimetermed.com/news-events/press-releases/detail/211/", "summary": "Perimeter secured up to ~C$148,000 from Canada's INOVAIT Pilot Fund plus C$100,000 in Mitacs funding to develop the next AI generation for Claire alongside the University of Toronto. The amount is small, but it is non-dilutive external validation of the AI platform."},
-  {"date": "2026-06-08", "headline": "Perimeter Medical Imaging AI Closes Final Tranche of Non-Brokered Private Placement", "source": "Perimeter IR / PR Newswire", "url": "https://ir.perimetermed.com/news-events/press-releases/detail/210/", "summary": "Perimeter closed the final tranche of its convertible-debenture placement, bringing the total to C$6.04M. Insider alignment was strong: CEO Mendes subscribed C$2.76M and Chamath Palihapitiya's SC Master Holdings (Social Capital) C$2.78M, though the notes add potential dilution."}
+  {
+   "date": "2026-08-13",
+   "headline": "Intermountain Health Brings Perimeter's Claire to the Operating Room, a Landmark in Breast Cancer Surgery Using AI",
+   "source": "BioTuesdays / PR Newswire",
+   "url": "https://biotuesdays.com/2026/08/13/intermountain-health-becomes-first-to-bring-perimeters-claire-to-the-operating-room/",
+   "summary": "Intermountain Health became the first U.S. health system to commercially deploy Perimeter's FDA-approved Claire OCT+AI system for live intraoperative breast-cancer margin assessment, installing it at LDS Hospital and American Fork Hospital in Utah under the systemwide agreement signed in January 2026. It marks Claire's first real-world clinical use since receiving FDA premarket approval in March 2026."
+  },
+  {
+   "date": "2026-07-23",
+   "headline": "Perimeter Announces Date for Second Quarter 2026 Earnings Call",
+   "source": "GlobeNewswire",
+   "url": "https://www.globenewswire.com/news-release/2026/07/23/3332624/0/en/Perimeter-Announces-Date-for-Second-Quarter-2026-Earnings-Call.html",
+   "summary": "Perimeter confirmed it will report second-quarter 2026 financial and operating results after market close on Thursday, August 20, 2026, followed by a management webcast and conference call. The update is expected to include commentary on Claire's commercial rollout and cash position."
+  },
+  {
+   "date": "2026-07-14",
+   "headline": "Brookline Capital Markets Starts Perimeter Medical Imaging at Buy; PT C$1.54",
+   "source": "BioTuesdays",
+   "url": "https://biotuesdays.com/2026/07/14/brookline-starts-perimeter-at-buy-pt-c1-54/",
+   "summary": "Analyst Kemp Doliver initiated coverage with a Buy rating and C$1.54 (US$1.11) price target, versus a July 13 close of C$0.32, citing Claire's FDA Breakthrough Device status as likely to speed CMS review of a planned New Technology APC reimbursement filing under Medicare's outpatient payment system. A decision on that filing is expected by year-end 2026."
+  },
+  {
+   "date": "2026-07-06",
+   "headline": "Paradigm Capital Names Perimeter a Healthcare Top Pick, Maintains Profound",
+   "source": "BioTuesdays",
+   "url": "https://biotuesdays.com/2026/07/06/paradigm-capital-names-perimeter-and-maintains-profound-as-healthcare-top-picks/",
+   "summary": "Analyst Scott McAuley named Perimeter a new Top Pick with a Speculative Buy rating and C$0.95 price target (stock closed C$0.275 on July 3), pointing to the March 2026 FDA PMA approval of Claire as setting up an accelerating commercial rollout. He noted intraoperative margin assessment is becoming a near-term focus area for medtech strategic acquirers."
+  }
  ],
  "catalysts": [
-  {"when": "2026-08-20", "label": "Q2 2026 financial results", "detail": "Perimeter reports Q2 2026 results after market close on August 20 (two days from today), with a call/webcast at 5:00pm ET. Watch for the first commentary on the Intermountain Health commercial launch, new placements from the ~50-lead funnel, and cash burn versus the spring financings.", "confirmed": true},
-  {"when": "2026-H2", "label": "Additional Claire hospital placements", "detail": "With Intermountain Health now live as the first commercial deployment, the market is watching for additional U.S. hospital systems to sign on from Perimeter's pipeline of qualified leads in active Prospecting/Developing/Validating/Contracting stages.", "confirmed": false},
-  {"when": "2026-Q4", "label": "CMS New Technology APC / reimbursement decision", "detail": "Management is pursuing a CMS New Technology APC / Category III T-code pathway for intraoperative AI-enabled OCT margin assessment, aided by Claire's Breakthrough Device Designation. Brookline Capital's July note flagged a CMS decision expected by year-end 2026; this remains a company/analyst target, not a confirmed CMS date, and would be a major driver of Claire's U.S. adoption economics.", "confirmed": false},
-  {"when": "2026-H2", "label": "Possible Nasdaq up-listing", "detail": "Cited by sell-side analysts as a potential catalyst to broaden U.S. investor access following FDA approval and commercial launch; no official timeline has been announced by the company.", "confirmed": false}
+  {
+   "when": "2026-08-20",
+   "label": "Q2 2026 earnings call",
+   "detail": "Perimeter reports second-quarter 2026 financial results after market close and hosts a webcast/conference call expected to cover Claire's commercial traction at Intermountain Health, installed base growth, and cash runway.",
+   "confirmed": true
+  },
+  {
+   "when": "2026-Q4",
+   "label": "CMS New Technology APC reimbursement decision",
+   "detail": "Claire's FDA Breakthrough Device designation is expected to accelerate CMS review of Perimeter's New Technology APC filing under Medicare's Hospital Outpatient Prospective Payment System; a decision is anticipated by year-end 2026, with coverage effective as early as October 1, 2026 (more likely January 1, 2027 under the standard MEARIS quarterly schedule) if granted.",
+   "confirmed": false
+  },
+  {
+   "when": "2026-H2",
+   "label": "Broader nationwide Claire commercial rollout / additional health-system agreements",
+   "detail": "Following the first live deployment at Intermountain Health, Perimeter has signaled plans to expand Claire placements to additional high-volume surgical centers across the U.S. as part of its nationwide commercial launch.",
+   "confirmed": false
+  }
  ],
- "pulse": "Perimeter enters its August 20 Q2 2026 print on a high note: the August 13 Intermountain Health go-live was the first real commercial proof point since March's FDA approval, following back-to-back sell-side initiations in July from Brookline Capital (Buy, C$1.54 PT) and Paradigm Capital (Speculative Buy, C$0.95 PT) that both frame FDA clearance as the trigger for an accelerating U.S. adoption curve. With no material news since the August 13 double-header (deployment plus the earnings-date announcement), the market's attention is now squarely on Thursday's call for evidence of funnel conversion (roughly 50 qualified hospital leads), incremental placements beyond Intermountain, and cash runway following the spring convertible-debenture raise. Beyond earnings, the next structural catalysts are further hospital placements and a CMS reimbursement decision (New Technology APC) that analysts expect by year-end 2026, but the balance sheet still depends on further financing, so this remains a high-beta, news-driven micro-cap heading into a binary-feeling print."
+ "pulse": "Perimeter is pivoting from regulatory milestone to commercial execution: Intermountain Health became the first U.S. health system to put the FDA-approved Claire OCT+AI margin-assessment system into live surgical use in August 2026. Sell-side sentiment has turned more constructive, with Paradigm Capital naming the stock a Top Pick and Brookline Capital Markets initiating at Buy, both flagging Claire's Breakthrough Device status as a tailwind for an expected CMS reimbursement (New Technology APC) decision by year-end 2026. Watch the August 20, 2026 Q2 earnings call for updates on installed-base growth, cash burn, and the reimbursement timeline given the stock's small-cap, pre-profitability risk profile."
 }
