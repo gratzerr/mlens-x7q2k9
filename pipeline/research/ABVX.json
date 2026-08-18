@@ -13,7 +13,7 @@
       "headline": "Morgan Stanley Raises Abivax Price Target to $180 from $132, Maintains Overweight",
       "source": "Moomoo / Morgan Stanley research note",
       "url": "https://www.moomoo.com/news/post/73506815/morgan-stanley-maintains-abivax-sa-abvxus-with-buy-rating-raises",
-      "summary": "Morgan Stanley lifted its price target well above the prevailing share price, citing growing confidence in the obefazimod UC data package and NDA timeline following the positive maintenance results and pre-NDA FDA feedback. It was one of several sell-side target hikes through July 2026."
+      "summary": "Morgan Stanley lifted its price target well above the prevailing share price, citing growing confidence in the obefazimod UC data package and NDA timeline following the positive maintenance results and pre-NDA FDA feedback. It was one of several sell-side target hikes through July 2026, part of a broader run of price-target increases (analyst consensus has since moved into the $140-$180 range)."
     },
     {
       "date": "2026-07-23",
@@ -46,15 +46,21 @@
   ],
   "catalysts": [
     {
-      "when": "2026-Q3",
+      "when": "2026-09-21",
       "label": "H1 2026 financial results",
-      "detail": "Abivax typically reports half-year results in September; the update should refresh the cash position (last guided into Q4 2029 after the $920M raise), R&D spend trajectory, and pipeline/NDA-preparation commentary. Exact date not yet announced by the company.",
-      "confirmed": false
+      "detail": "Abivax has scheduled its half-year 2026 results for September 21, 2026, which should refresh the cash position (last guided into Q4 2029 after the $920M raise), R&D spend trajectory, and pipeline/NDA-preparation commentary ahead of the planned year-end NDA filing.",
+      "confirmed": true
     },
     {
       "when": "2026-Q4",
       "label": "NDA submission to FDA for obefazimod in ulcerative colitis",
       "detail": "Following positive Phase 3 ABTECT induction and maintenance data and a constructive pre-NDA meeting with the FDA (July 30, 2026), Abivax plans to submit its first New Drug Application for obefazimod in moderately-to-severely active UC by year-end 2026. This is the single biggest near-term de-risking event for the story and the key gate before any FDA review clock starts.",
+      "confirmed": true
+    },
+    {
+      "when": "2026-12-14",
+      "label": "Q3 2026 financial results",
+      "detail": "Abivax has scheduled its Q3 2026 financial communication for December 14, 2026, likely to land close to or shortly after the targeted NDA submission and to provide an updated cash/runway picture.",
       "confirmed": true
     },
     {
@@ -70,5 +76,5 @@
       "confirmed": false
     }
   ],
-  "pulse": "Abivax spent July 2026 de-risking the obefazimod UC story on multiple fronts: positive ABTECT maintenance data even in refractory patients, a constructive pre-NDA meeting confirming the FDA is aligned with an on-time Q4 2026 NDA filing, an upsized $920M raise pushing cash runway to Q4 2029, and a build-out of U.S. commercial leadership signaling Abivax intends to launch solo rather than simply sell itself - all while sell-side targets (Morgan Stanley to $180) have moved well above the current share price. The stock has nonetheless pulled back from its late-July highs (~$128-130) to around $103 in mid-August, leaving it noticeably below the $120 strike on the March-2027 call and reflecting some post-financing digestion plus lingering binary risk around the still-unfiled NDA and persistent (unresolved) takeover speculation. For this leveraged, time-limited position the key things to watch into expiry are the Q4 2026 NDA filing itself, any read-through from H1 2026 results in September, and whether renewed acquisition chatter or a sustained re-rating toward analyst targets can push shares back above $120 before March 2027."
+  "pulse": "Abivax spent July 2026 de-risking the obefazimod UC story on multiple fronts - positive ABTECT maintenance data even in refractory patients, a constructive pre-NDA FDA meeting confirming an on-track Q4 2026 NDA filing, an upsized $920M raise pushing cash runway to Q4 2029, and new U.S. commercial leadership hires signaling Abivax intends to launch solo rather than simply sell itself - while sell-side targets (Morgan Stanley to $180) moved well above the share price. News flow has been quieter through the first half of August (mainly routine share-capital disclosures), with the next scheduled catalyst being H1 2026 results now confirmed for September 21, 2026. The stock has since climbed back to roughly the $120-125 area, putting it back around or just above the $120 strike on the March-2027 call for the first time since the late-July highs; for this leveraged, time-limited position the key things to watch into expiry remain the Q4 2026 NDA filing, any read-through from the September results, and whether renewed acquisition chatter or continued re-rating toward analyst targets can sustain a move meaningfully above $120 well ahead of March 2027."
 }
