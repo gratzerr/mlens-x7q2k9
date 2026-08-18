@@ -124,6 +124,21 @@
   .feed .ft a:hover{border-bottom-color:var(--accent);color:var(--accent)}
   .feed .fs{font-size:12.5px;color:var(--ink-2);margin-top:3px}
   .feed .fm{font-size:11.5px;color:var(--muted);margin-top:3px}
+  /* company chip: logo + ticker in the company's own colour. The hue is derived from
+     the ticker itself, so a new position is coloured the moment it appears - no
+     hand-kept table that goes stale on the next trade. */
+  .co{--brand:var(--brand-light);display:inline-flex;align-items:center;gap:6px;min-width:0;vertical-align:middle}
+  /* follows the palette's own light/dark rules exactly, so the chip can never end up
+     with the light colour on a dark card during the first paint */
+  @media (prefers-color-scheme:dark){:root:not([data-theme="light"]) .co{--brand:var(--brand-dark)}}
+  :root[data-theme="dark"] .co{--brand:var(--brand-dark)}
+  .co .nlogo{width:22px;height:22px;border-radius:6px;margin:0;vertical-align:0;flex:none}
+  .cotk{color:var(--brand);background:color-mix(in srgb,var(--brand) 12%,var(--surface-2));
+    border:1px solid color-mix(in srgb,var(--brand) 28%,var(--border));border-radius:5px;
+    padding:2px 6px;font-size:11px;font-weight:760;letter-spacing:.045em;line-height:1.35;flex:none;white-space:nowrap}
+  .co.sec{--brand:var(--down)}
+  :root[data-theme="dark"] .co.sec{--brand:var(--down)}
+  .feed .co{margin-bottom:5px}
   .tkr{font-weight:700;font-size:11px;padding:1px 6px;border-radius:4px;color:#fff;vertical-align:middle}
   .tkr.neutral{background:var(--chip);color:var(--chip-ink)}
   .tkr.sec{background:var(--down);color:#fff}
@@ -665,6 +680,23 @@ const liveState = {news:null, fx:1.37, lastPrice:null, lastNews:null};
 const cvar = n => getComputedStyle(document.documentElement).getPropertyValue(n).trim();
 /* Parqet-style hue sweep for the donut: deep blue -> indigo -> violet -> pink -> orange,
    assigned by portfolio weight (largest position starts the wheel) */
+/* stable brand colour per ticker (FNV-1a hash): QURE is always the same colour, in
+   every list, and keeps it when weights, holdings or the theme change. The hue snaps
+   to a 24-step wheel and a second bit picks a saturation variant - two tickers then
+   either look clearly different or exactly alike, never almost-alike (which reads as
+   a rendering bug). Hashing beats a curated table here: a new position is coloured
+   the moment it is bought, with nothing to maintain. */
+function tickerBrand(tk){
+  let h=0x811c9dc5; const s=String(tk||'').toUpperCase();
+  for(let i=0;i<s.length;i++){ h^=s.charCodeAt(i); h=Math.imul(h,0x01000193)>>>0; }
+  const hue=(h%24)*15, dim=((h>>>7)%2)===1;
+  return {light:`hsl(${hue} ${dim?46:64}% ${dim?30:32}%)`, dark:`hsl(${hue} ${dim?52:74}% ${dim?73:71}%)`};
+}
+function coChip(tk,extra){
+  const b=tickerBrand(tk);
+  return `<span class="co${extra?' '+extra:''}" style="--brand-light:${b.light};--brand-dark:${b.dark}">`+
+    logoImg(tickerLogos(tk),'nlogo',tk)+`<span class="cotk">${esc(tk||'—')}</span></span>`;
+}
 function isDarkTheme(){
   const t=document.documentElement.getAttribute('data-theme');
   return t? t==='dark' : window.matchMedia('(prefers-color-scheme:dark)').matches;
@@ -816,7 +848,7 @@ function renderFeed(){
     const hd=n.url?`<a href="${esc(n.url)}" target="_blank" rel="noopener">${esc(n.headline)}</a>`:esc(n.headline);
     return `<div class="fi">
       <div class="fd">${n._sec?'<span style="color:var(--down)">SEC</span>':enDate(n.date)}</div>
-      <div><div class="ft">${logoImg(tickerLogos(n.ticker),'nlogo')}<span class="tkr ${n._sec?'sec':'neutral'}">${esc(n.ticker)}</span> ${hd}</div>
+      <div>${coChip(n.ticker,n._sec?'sec':'')}<div class="ft">${hd}</div>
       ${n.summary?`<div class="fs">${esc(n.summary)}</div>`:''}
       <div class="fm">${esc(n.source)}</div></div></div>`;
   }).join('');
@@ -1631,7 +1663,7 @@ function renderTimeline(){
       return `<div class="tl-item">
         <div class="tl-when"><span class="cf" style="background:${cf}"></span>${esc(c.when)}</div>
         <div class="tl-body">
-          <div class="lb" style="display:flex;align-items:center;gap:6px">${logoImg(tickerLogos(c.ticker),'nlogo')}<span class="tkr neutral" style="white-space:nowrap;flex-shrink:0">${esc(c.ticker)}</span> <span style="min-width:0">${esc(c.label)}</span>${catCountdown(c.when)}</div>
+          <div class="lb" style="display:flex;align-items:center;gap:7px">${coChip(c.ticker)}<span style="min-width:0">${esc(c.label)}</span>${catCountdown(c.when)}</div>
           <div class="dt">${esc(c.detail)}</div>
         </div></div>`;
     }).join('')).join('');
@@ -1974,7 +2006,7 @@ function renderSocial(){
     const sent=m.sentiment==='Bullish'?'<span class="sent bull">BULL</span>':m.sentiment==='Bearish'?'<span class="sent bear">BEAR</span>':'';
     const body=cleanBody(m.body); if(!body) return '';
     return `<div class="si">
-      <div class="sm">${logoImg(tickerLogos(m.ticker),'nlogo')}<span class="tkr neutral">${esc(m.ticker)}</span>
+      <div class="sm">${coChip(m.ticker)}
         <span class="su">@${esc(m.user)}</span>${sent}<span class="stime">${relTime(m.time)}</span></div>
       <div class="sb">${esc(body)}</div></div>`;
   }).join('');
