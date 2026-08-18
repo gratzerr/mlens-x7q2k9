@@ -97,6 +97,16 @@
 
   /* portfolio chart */
   .chartbox{position:relative}
+  .chart-controls{display:flex;gap:8px;flex-wrap:wrap;align-items:center}
+  .chart-legend{display:flex;gap:7px;flex-wrap:wrap;margin-top:10px}
+  .chart-legend button{display:inline-flex;align-items:center;gap:6px;border:1px solid var(--border);
+    background:var(--surface-2);border-radius:999px;padding:4px 10px 4px 7px;font:inherit;font-size:11.5px;
+    color:var(--ink-2);cursor:pointer;line-height:1.5}
+  .chart-legend button:hover{color:var(--ink);border-color:color-mix(in srgb,var(--accent) 38%,var(--border))}
+  .chart-legend button.off{opacity:.45}
+  .chart-legend .sw{width:14px;height:3px;border-radius:2px;flex:none}
+  .chart-legend .lv{font-variant-numeric:tabular-nums;font-weight:640}
+  .chart-legend button[disabled]{cursor:default;opacity:.5}
   svg.line{display:block;width:100%;height:210px;overflow:visible}
   .cross{stroke:var(--line);stroke-width:1}
   .tip{position:absolute;pointer-events:none;background:var(--ink);color:var(--surface);
@@ -500,13 +510,17 @@
 
   <div class="panel" data-tab="portfolio">
     <div class="chart-head">
-      <h2 style="margin:0">Portfolio Value <span id="chart-ret"></span></h2>
-      <div class="tfsel" id="tfsel"></div>
+      <h2 style="margin:0"><span id="chart-title">Portfolio Value</span> <span id="chart-ret"></span></h2>
+      <div class="chart-controls">
+        <div class="tfsel" id="chartmode" aria-label="Chart measure"></div>
+        <div class="tfsel" id="tfsel"></div>
+      </div>
     </div>
     <div class="chartbox">
       <svg class="line" id="chart" preserveAspectRatio="none"></svg>
       <div class="tip" id="tip"></div>
     </div>
+    <div class="chart-legend" id="chart-legend" aria-label="Chart series"></div>
   </div>
 
   <div class="panel" data-tab="portfolio" style="position:relative">
@@ -800,30 +814,88 @@ function renderChartRet(pts){
   const lab=(TFS.find(t=>t.k===curTf)||{}).l||curTf;
   el.innerHTML=`<span class="rl">TTWROR ${esc(lab)}</span> <span class="rv ${tw>=0?'up':'down'}">${fmtPct(tw)}</span>`;
 }
+function chartLegendLabel(l,returns){
+  const v=l.pts[l.pts.length-1].y;
+  return (returns||l.key!=='portfolio'&&l.key!=='invested')?fmtPct(v)
+    :(_priv?MASK:curSym()+Math.round(v).toLocaleString('en-US'));
+}
+/* ---- Portfolio chart ----
+   Two measures: VALUE (money + invested capital) and TTWROR (%, comparable to the
+   indices). Benchmarks only exist in the TTWROR view - comparing an index level with
+   a portfolio value would be meaningless. S&P 500 is the only line on by default;
+   every other series is switched on from the legend and remembered per device. */
+const CHART_MODES=[['value','Value'],['ttwror','TTWROR']];
+let chartMode=(()=>{ try{ const v=localStorage.getItem('pc-chartmode');
+  return CHART_MODES.some(m=>m[0]===v)?v:'value'; }catch(e){ return 'value'; } })();
+const CHART_OFF_DEFAULT=['QQQ','VWCE.DE','XBI'];      // present in the data, off until asked for
+function chartHidden(){
+  try{ const raw=localStorage.getItem('pc-charthide');
+    if(raw) return new Set(JSON.parse(raw)); }catch(e){}
+  return new Set(CHART_OFF_DEFAULT);
+}
+function chartToggle(key){
+  const h=chartHidden(); h.has(key)?h.delete(key):h.add(key);
+  try{ localStorage.setItem('pc-charthide', JSON.stringify([...h])); }catch(e){}
+  renderChart();
+}
+function renderChartMode(){
+  const el=document.getElementById('chartmode'); if(!el) return;
+  el.innerHTML=CHART_MODES.map(([k,l])=>`<button data-cm="${k}" class="${k===chartMode?'on':''}" aria-pressed="${k===chartMode}">${l}</button>`).join('');
+  el.querySelectorAll('[data-cm]').forEach(b=>b.addEventListener('click',()=>{
+    chartMode=b.dataset.cm; try{localStorage.setItem('pc-chartmode',chartMode);}catch(e){}
+    renderChartMode(); renderChart();
+  }));
+}
 function renderChart(){
-  const svg=document.getElementById('chart'), tip=document.getElementById('tip');
+  const svg=document.getElementById('chart'), tip=document.getElementById('tip'),
+        legend=document.getElementById('chart-legend'), title=document.getElementById('chart-title');
   const box=svg.getBoundingClientRect(); const W=box.width||900, H=220;
   const pad={l:0,r:0,t:14,b:22};
   const pts=chartSlice();
+  const returns=chartMode==='ttwror';
+  if(title) title.textContent=returns?'TTWROR Performance':'Portfolio Value';
   renderChartRet(pts);
-  if(pts.length<2){svg.innerHTML='';return;}
+  if(pts.length<2){svg.innerHTML='';if(legend)legend.innerHTML='';return;}
   const val=p=>(_ccy==='EUR'&&p.e!=null)?p.e:p.v;   // exact daily-FX EUR series when toggled
+  const acc=cvar('--ink'), gc=cvar('--grid'), mc=cvar('--muted');   // Parqet-style: ink line (black/white)
+  const hidden=chartHidden();
+  const base=pts[0].r;
+  const series=[{key:'portfolio', name:'Portfolio', col:acc, width:2.4, area:true,
+    pts:pts.map(p=>({d:p.d, y:returns?((1+p.r)/(1+base)-1)*100:val(p)}))}];
+  if(returns){
+    const BM=benchMeta();
+    Object.keys(DATA.bench||{}).forEach(sym=>{
+      const meta=BM[sym]; if(!meta) return;                 // retired series stay out
+      const b=benchSeries(sym,pts); if(!b) return;
+      series.push({key:sym, name:meta.label, col:meta.col, width:1.8,
+        pts:b.map(x=>({d:x.d, y:x.r*100}))});
+    });
+  } else {
+    const cap=pts.map(p=>({d:p.d, y:_ccy==='EUR'?(p.k!=null?p.k:p.c):(p.c!=null?p.c:p.k)}))
+                 .filter(x=>Number.isFinite(x.y));
+    if(cap.length>1) series.push({key:'invested', name:'Invested capital',
+      col:cvar('--accent'), width:2, dash:'6 4', pts:cap});
+  }
+  const lines=series.filter(x=>x.key==='portfolio'||!hidden.has(x.key));
   const T=d=>new Date(d).getTime();
   const t0=T(pts[0].d), t1=T(pts[pts.length-1].d), tspan=(t1-t0)||1;
   const spanDays=tspan/86400000;
-  const vs=pts.map(val); const vmin=Math.min(...vs), vmax=Math.max(...vs);
+  const vs=lines.flatMap(l=>l.pts.map(x=>x.y));
+  let vmin=Math.min(...vs), vmax=Math.max(...vs);
+  if(returns){ const vpad=(vmax-vmin)*.04||1; vmin-=vpad; vmax+=vpad; }
   const X=d=>pad.l + (T(d)-t0)/tspan*(W-pad.l-pad.r);
   const Y=v=>pad.t + (1-(v-vmin)/(vmax-vmin||1))*(H-pad.t-pad.b);
-  const line=pts.map((p,i)=>`${i?'L':'M'}${X(p.d).toFixed(1)},${Y(val(p)).toFixed(1)}`).join(' ');
-  const area=line+` L${X(pts[pts.length-1].d).toFixed(1)},${H-pad.b} L${X(pts[0].d).toFixed(1)},${H-pad.b} Z`;
-  const acc=cvar('--ink'), gc=cvar('--grid'), mc=cvar('--muted');   // Parqet-style: ink line (black/white)
-  // y gridlines at NICE round steps ($250k / $500k / ...), compact labels ($1.5M)
+  lines.forEach(l=>{ l.path=l.pts.map((x,i)=>`${i?'L':'M'}${X(x.d).toFixed(1)},${Y(x.y).toFixed(1)}`).join(' '); });
+  const main=lines[0];
+  const area=main.path+` L${X(main.pts[main.pts.length-1].d).toFixed(1)},${H-pad.b} L${X(main.pts[0].d).toFixed(1)},${H-pad.b} Z`;
+  // y gridlines at NICE round steps ($250k / $500k / ... or +25% / +50% / ...)
   let grid='';
   {
     const span=(vmax-vmin)||1, raw=span/4;
     const mag=Math.pow(10,Math.floor(Math.log10(raw)));
     const step=[1,2,2.5,5,10].map(m=>m*mag).find(s=>span/s<=5)||5*mag;
-    const fmtTick=v=>{ if(_priv) return ''; const cs=curSym();
+    const fmtTick=v=>{ if(returns) return (v>0?'+':'')+v.toFixed(Math.abs(v)<10?1:0)+'%';
+      if(_priv) return ''; const cs=curSym();
       return v>=1e6? cs+(v/1e6).toFixed(v%1e6?1:0).replace(/\.0$/,'')+'M'
            : v>=1e3? cs+Math.round(v/1e3)+'k' : cs+Math.round(v); };
     for(let v=Math.ceil(vmin/step)*step; v<=vmax+1e-9; v+=step){
@@ -856,32 +928,57 @@ function renderChart(){
        <stop offset="0" stop-color="${acc}" stop-opacity="0.10"/>
        <stop offset="1" stop-color="${acc}" stop-opacity="0"/></linearGradient></defs>`+
     `<path d="${area}" fill="url(#g)"/>`+
-    `<path d="${line}" fill="none" stroke="${acc}" stroke-width="2.4" stroke-linejoin="round" stroke-linecap="round"/>`+
+    lines.map(l=>`<path d="${l.path}" fill="none" stroke="${esc(l.col)}" stroke-width="${l.width}"`+
+      `${l.dash?` stroke-dasharray="${l.dash}"`:''} stroke-linejoin="round" stroke-linecap="round"/>`).join('')+
     `<line class="cross" id="cx" x1="0" y1="${pad.t}" x2="0" y2="${yb}" style="opacity:0"/>`+
-    `<circle id="cd" r="4.5" fill="${acc}" stroke="${cvar('--surface')}" stroke-width="2" style="opacity:0"/>`;
-  const cx=svg.querySelector('#cx'), cd=svg.querySelector('#cd');
+    lines.map((l,i)=>`<circle class="cdot" data-s="${i}" r="${i?3.5:4.5}" fill="${esc(l.col)}" stroke="${cvar('--surface')}" stroke-width="2" style="opacity:0"/>`).join('');
+  // legend: click switches a comparison line on or off (the portfolio itself stays)
+  if(legend){
+    /* a switched-off series still shows its number - that is how you decide whether
+       it is worth switching on */
+    legend.innerHTML=series.map(l=>{
+      const off=l.key!=='portfolio'&&hidden.has(l.key);
+      const v=chartLegendLabel(l,returns);
+      return `<button type="button" data-cs="${esc(l.key)}" class="${off?'off':''}" aria-pressed="${!off}"
+        ${l.key==='portfolio'?'disabled':''}><span class="sw" style="background:${esc(l.col)}"></span>${esc(l.name)}${v?` <span class="lv">${v}</span>`:''}</button>`;
+    }).join('');
+    legend.querySelectorAll('[data-cs]').forEach(b=>{ if(b.disabled) return;
+      b.addEventListener('click',()=>chartToggle(b.dataset.cs)); });
+  }
+  const cx=svg.querySelector('#cx'), dots=[...svg.querySelectorAll('.cdot')];
+  const fmtY=v=>returns?fmtPct(v):(_priv?MASK:curSym()+Math.abs(Math.round(v)).toLocaleString('en-US'));
   function move(e){
     const r=svg.getBoundingClientRect();
     const mx=(e.touches?e.touches[0].clientX:e.clientX)-r.left;
     const targT=t0 + Math.max(0,Math.min(1,mx/r.width))*tspan;
     let bi=0,bd=1e18; for(let i=0;i<pts.length;i++){const dd=Math.abs(T(pts[i].d)-targT); if(dd<bd){bd=dd;bi=i;}}
-    const p=pts[bi], px=X(p.d), py=Y(val(p));
+    const day=pts[bi].d, px=X(day);
     cx.setAttribute('x1',px);cx.setAttribute('x2',px);cx.style.opacity=1;
-    cd.setAttribute('cx',px);cd.setAttribute('cy',py);cd.style.opacity=1;
-    const dt=new Date(p.d).toLocaleDateString('en-US',{day:'2-digit',month:'short',year:'numeric'});
-    const tv=_priv?MASK:(curSym()+Math.abs(Math.round(val(p))).toLocaleString('en-US'));
-    tip.innerHTML=`<span class="tv">${tv}</span> · ${dt}`;
+    const rows=[];
+    lines.forEach((l,i)=>{
+      let j=0,jd=1e18; for(let k=0;k<l.pts.length;k++){const dd=Math.abs(T(l.pts[k].d)-T(day)); if(dd<jd){jd=dd;j=k;}}
+      const hit=l.pts[j], on=jd<=3*86400000;                 // no dot where a series has no data yet
+      const dot=dots[i];
+      if(on){ dot.setAttribute('cx',X(hit.d)); dot.setAttribute('cy',Y(hit.y)); dot.style.opacity=1;
+        rows.push({name:l.name,col:l.col,y:hit.y,py:Y(hit.y)}); }
+      else dot.style.opacity=0;
+    });
+    const dt=new Date(day).toLocaleDateString('en-US',{day:'2-digit',month:'short',year:'numeric'});
+    tip.innerHTML=(rows.length>1
+      ? `<span class="tv">${fmtY(rows[0].y)}</span> · ${dt}<br>`+
+        rows.slice(1).map(r=>`<span style="color:${esc(r.col)}">■</span> ${esc(r.name)} ${fmtY(r.y)}`).join('<br>')
+      : `<span class="tv">${fmtY(rows[0]?rows[0].y:0)}</span> · ${dt}`);
     /* clamp inside the chart: at the edges (e.g. Jahresanfang bei YTD) the centered
        tooltip would otherwise be cut off — especially on phones */
     tip.style.opacity=1;
     const tw=tip.offsetWidth||120, th=tip.offsetHeight||28;
     const lx=Math.max(tw/2+4, Math.min(r.width-tw/2-4, px/W*r.width));
-    const ty=Math.max(th+10, py/H*r.height);
+    const ty=Math.max(th+10, (rows[0]?rows[0].py:0)/H*r.height);
     tip.style.left=lx+'px'; tip.style.top=ty+'px';
   }
   svg.addEventListener('mousemove',move);
   svg.addEventListener('touchmove',move,{passive:true});
-  svg.addEventListener('mouseleave',()=>{cx.style.opacity=0;cd.style.opacity=0;tip.style.opacity=0;});
+  svg.addEventListener('mouseleave',()=>{cx.style.opacity=0;dots.forEach(d=>d.style.opacity=0);tip.style.opacity=0;});
 }
 
 /* ---- sparkline (per card): pixel-true, colored by DAY change, interactive hover ---- */
@@ -2205,7 +2302,7 @@ function boot(){
   document.getElementById('hcount').textContent=DATA.holdings.filter(h=>h.assetType!=='cash').length;
   document.getElementById('foot').innerHTML='Snapshot built '+esc(DATA.generated)+
     ' · When hosted live, prices refresh every 3 min (Yahoo) and headlines every 15 min (GDELT), computed in your browser · Curated news &amp; catalysts refreshed twice daily · Not investment advice.<br>Green dot = confirmed date, amber dot = estimated.';
-  initTheme(); applyName(); initTabs(); pfInitToolbar(); initWatchlist(); loadConfig(); loadSocialCache(); renderPbar(); renderKpis(); renderTfSel(); renderSocial(); rerender(); initSecAlerts(); initHtSettings(); initAppSettings(); startLive();
+  initTheme(); applyName(); initTabs(); pfInitToolbar(); initWatchlist(); loadConfig(); loadSocialCache(); renderPbar(); renderKpis(); renderChartMode(); renderTfSel(); renderSocial(); rerender(); initSecAlerts(); initHtSettings(); initAppSettings(); startLive();
   window._lastW=window.innerWidth;
   window.addEventListener('resize',()=>{clearTimeout(window._rz);window._rz=setTimeout(()=>{
     if(window.innerWidth===window._lastW) return; /* height-only = mobile keyboard, keep focused inputs alive */
