@@ -2052,8 +2052,14 @@ function actsFiltered(){
   });
 }
 function renderActFilters(){
-  const el=document.getElementById('actfilters'); if(!el||el.dataset.ready) return;
+  const el=document.getElementById('actfilters'); if(!el) return;
   const acts=DATA.acts||[];
+  /* rebuild when the engine delivers a new booking (a fresh ticker must show up in
+     the dropdown without a reload) - but never while the user is typing in a field */
+  const sig=acts.length+':'+((acts[0]||{}).d||'');
+  if(el.dataset.sig===sig) return;
+  if(el.dataset.sig&&el.contains(document.activeElement)) return;
+  const keep={...(_actF)};
   const types=ACT_TYPES.filter(t=>acts.some(a=>a.t===t[0]));
   const secs=[...new Set(acts.map(a=>a.tk).filter(Boolean))]
     .map(v=>({v,l:actTk({tk:v}).tk})).sort((a,b)=>a.l.localeCompare(b.l));
@@ -2074,7 +2080,8 @@ function renderActFilters(){
     el.querySelectorAll('[data-af]').forEach(c=>c.value='');
     _actShown=50; renderActivities();
   });
-  el.dataset.ready='1';
+  el.querySelectorAll('[data-af]').forEach(c=>{ if(keep[c.dataset.af]) c.value=keep[c.dataset.af]; });
+  el.dataset.sig=sig;
 }
 function renderActivities(){
   const el=document.getElementById('activities'); if(!el)return;
