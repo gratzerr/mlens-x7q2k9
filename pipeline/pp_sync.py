@@ -528,11 +528,13 @@ for t in ptx:
     elif ty=="SELL": g=t["amount"]+t["fee"]+t["tax"]
     else: g=t["amount"]
     eur=to_eur(g,t["ccy"],t["date"]);usd=to_usd(g,t["ccy"],t["date"])
+    act_row=None
     if sh>1e-9 and ty in ("BUY","SELL","DELIVERY_INBOUND","DELIVERY_OUTBOUND"):
-        acts.append({"d":t["date"],"t":"BUY" if ty in ("BUY","DELIVERY_INBOUND") else "SELL",
-                     "sec":s,"sh":round(sh,4),"px":round(g/sh,4),
-                     "ccy":t["ccy"],"amt":round(g,2),
-                     "port":(portfolios.get(t["owner"]) or {}).get("name")})
+        act_row={"d":t["date"],"t":"BUY" if ty in ("BUY","DELIVERY_INBOUND") else "SELL",
+                 "sec":s,"sh":round(sh,4),"px":round(g/sh,4),
+                 "ccy":t["ccy"],"amt":round(g,2),
+                 "port":(portfolios.get(t["owner"]) or {}).get("name")}
+        acts.append(act_row)
     if ty in ("BUY","DELIVERY_INBOUND"):
         lots[s].append([sh,eur,usd,t["date"]])
         if sh>1e-9:
@@ -554,6 +556,9 @@ for t in ptx:
         if ty=="SELL":
             realized_eur+=eur-basis;realized_usd+=usd-basis_u
             rz_usd_by_sec[s]+=usd-basis_u
+            if act_row is not None:      # Activities feed shows the gain of each single sell
+                act_row["gEur"]=round(eur-basis,2); act_row["gUsd"]=round(usd-basis_u,2)
+                act_row["ret"]=round((usd-basis_u)/basis_u*100,2) if basis_u>1e-6 else None
             rz_day[t["date"]][0]+=eur-basis;rz_day[t["date"]][1]+=usd-basis_u
             trades.append({"sec":s,
                 "port":(portfolios.get(t["owner"]) or {}).get("name"),
@@ -706,6 +711,12 @@ out={"fileDate":datetime.datetime.fromtimestamp(os.path.getmtime(DEPOT)).strftim
          [[d, round(v[0],2), round(v[1]/v[0],4)] for d,v in sorted(dm.items()) if v[0]>1e-9]
          for si,dm in buys_by_sec.items()
          if sum(l[0] for l in lots.get(si,[]))>1e-6 },
+     # open FIFO lots per ticker: the individual purchases that make up the CURRENT
+     # position (date, shares, remaining basis EUR/USD) - sums to the position's cost
+     "lotsByTicker":{ (SEC[si]["tk"] or (SEC[si]["name"] or "")[:10]):
+         [{"d":l[3],"sh":round(l[0],4),"eur":round(l[1],2),"usd":round(l[2],2)}
+          for l in q if l[0]>1e-9]
+         for si,q in lots.items() if sum(l[0] for l in q)>1e-6 },
      "ports":sorted({(portfolios.get(t["owner"]) or {}).get("name") for t in txs.values()
                      if t["kind"]=="port" and t["owner"]} - {None}),
      "acts":sorted(({**{k:v for k,v in a.items() if k!="sec"},

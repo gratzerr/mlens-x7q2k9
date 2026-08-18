@@ -225,6 +225,10 @@
   .tfsel button{border:0;background:none;color:var(--ink-2);font-size:12px;font-weight:600;padding:5px 10px;border-radius:6px;cursor:pointer;font-family:inherit}
   .tfsel button.on{background:var(--surface);color:var(--ink);box-shadow:0 1px 2px rgba(0,0,0,.12)}
   .tfsel button:hover:not(.on){color:var(--ink)}
+  .pbar{width:max-content;max-width:100%;margin:0 0 12px;overflow-x:auto}
+  .minibtn{border:1px solid var(--border);background:var(--surface-2);color:var(--ink-2);border-radius:8px;
+    padding:5px 10px;font:inherit;font-size:11px;font-weight:600;cursor:pointer;letter-spacing:.2px;text-transform:none}
+  .minibtn:hover{color:var(--ink);border-color:color-mix(in srgb,var(--accent) 38%,var(--border))}
   /* holdings table (Parqet-style stacked cells) */
   .htable{width:100%;border-collapse:collapse;min-width:680px}
   .htable th{font-size:10.5px;text-transform:uppercase;letter-spacing:.5px;color:var(--muted);
@@ -294,6 +298,20 @@
   .act .aname{font-weight:640}
   .act .asub{font-size:11.5px;color:var(--muted)}
   .act .aval{text-align:right;font-weight:640;white-space:nowrap}
+  .actfilters{display:flex;flex-wrap:wrap;gap:7px;margin:2px 0 8px}
+  .actfilters input,.actfilters select{background:var(--surface-2);border:1px solid var(--border);border-radius:8px;
+    padding:7px 9px;font:inherit;font-size:12px;color:var(--ink);min-width:0}
+  .actfilters input[type=search]{flex:1 1 170px;min-width:150px}
+  .actfilters .actreset{margin-left:auto}
+  .act .aleft{display:contents}
+  .act .aright{text-align:right;min-width:0}
+  .act .again{font-size:10.5px;font-weight:600;white-space:nowrap;margin-top:1px}
+  .act .again.up{color:var(--up)} .act .again.down{color:var(--down)}
+  .actempty{padding:18px 2px;color:var(--muted);font-size:13px}
+  .sd-tx{min-width:520px;font-size:12.5px}
+  .sd-tx th,.sd-tx td{padding:6px 8px;white-space:nowrap}
+  .sd-tx tfoot td{border-top:1px solid var(--border);font-weight:650}
+  .sd-tx .atype{display:inline-block}
   .act .aval .fee{display:block;font-size:10.5px;color:var(--muted);font-weight:500}
   .breaking{position:sticky;top:8px;z-index:30;background:var(--down);color:#fff;padding:10px 14px;
     border-radius:11px;margin-bottom:14px;display:none;align-items:center;gap:9px;font-size:13.5px;font-weight:600;
@@ -385,6 +403,23 @@
     .sparkrow{flex-direction:column;align-items:stretch;gap:8px}
     .rng{width:auto}
   }
+  /* Handy-Layout der Activities: MUSS nach dem 860er Block stehen, sonst setzt dessen
+     .act-Raster diese Spalten wieder zurueck. Zwei Zeilen: Name+Betrag oben,
+     Datum+Typ darunter, Gewinn unter dem Betrag — sonst wird der Ticker zerquetscht */
+  @media(max-width:640px){
+    .act{grid-template-columns:24px minmax(0,1fr) minmax(92px,auto);
+      grid-template-areas:"logo main val" "logo meta val";gap:9px;row-gap:2px;font-size:12.5px}
+    .act .aleft{display:flex;align-items:center;gap:7px;grid-area:meta;min-width:0;overflow:hidden}
+    .act .alogo{grid-area:logo;align-self:center}
+    .act .amain{grid-area:main}
+    .act .aright{grid-area:val;align-self:center}
+    .act .aname{white-space:normal}                 /* Optionsnamen duerfen umbrechen */
+    .act .glab,.act .gpct{display:none}             /* das SELL-Badge sagt es bereits */
+    .act .ad{font-size:10.5px}
+    .act .atype{font-size:9px;padding:1px 5px;letter-spacing:.2px;white-space:nowrap}
+    .actfilters input,.actfilters select{flex:1 1 44%}
+    .actfilters input[type=search]{flex:1 1 100%}
+  }
   /* ---- security detail overlay (Parqet-style) ---- */
   .secov{position:fixed;inset:0;z-index:var(--z-modal);background:rgba(15,19,28,.55);backdrop-filter:blur(3px);
     display:none;align-items:flex-start;justify-content:center;overflow-y:auto;padding:34px 16px}
@@ -457,6 +492,8 @@
     <button data-tabbtn="research">Research</button>
   </nav>
 
+  <div class="pbar tfsel" id="pbar" data-tab="portfolio" role="group" aria-label="Reporting period"></div>
+
   <div class="kpis" id="kpis" data-tab="portfolio"></div>
 
   <div class="panel" data-tab="portfolio" id="nextcat" style="display:none;padding:12px 18px"></div>
@@ -481,7 +518,8 @@
 
   <div class="cols eq" data-tab="portfolio">
     <div class="panel">
-      <h2>Allocation</h2>
+      <h2 style="display:flex;align-items:center;justify-content:space-between;gap:10px"><span>Allocation</span>
+        <button type="button" class="minibtn" id="alloc-cash-toggle" aria-pressed="true">Hide cash</button></h2>
       <div id="allocdonut"></div>
     </div>
     <div class="panel">
@@ -493,6 +531,7 @@
   <div class="cols" data-tab="portfolio">
     <div class="panel" style="grid-column:1 / -1">
       <h2><span class="live"></span>Activities</h2>
+      <div class="actfilters" id="actfilters"></div>
       <div class="feedmax" id="activities"></div>
       <button class="morebtn" id="actmore" style="display:none">Load more</button>
     </div>
@@ -655,7 +694,10 @@ function _renderKpis(){
      cls:_today&&_today.pct>=0?'up':'down'},
     {lab:'Unrealized Gain', val:money(un,d.ppUnrealizedEur), note:'current holdings · FIFO vs cost', cls:gn?'up':'down'},
     {lab:'Realized Gain', val:money(rl,d.ppRealizedEur), note:'booked from sells since 2022', cls:rz?'up':'down'},
-    {lab:'Return YTD', val:fmtPct(d.ttwrorYtd||0), note:'since inception (2022) '+fmtPct(d.since2022!=null?d.since2022:(d.pp&&d.pp.ppReferenceTtwror)||0)+'<br>IRR '+(d.izf||0).toFixed(2)+'%', cls:(d.ttwrorYtd||0)>=0?'up':'down'},
+    (()=>{ const r=pbReturn();
+      return {lab:'Return · '+pbLabel(), val:r?fmtPct(r.pct):'—',
+        note:(r?r.note+'<br>':'')+'since inception (2022) '+fmtPct(d.since2022!=null?d.since2022:(d.pp&&d.pp.ppReferenceTtwror)||0)+' · IRR '+(d.izf||0).toFixed(2)+'%',
+        cls:r&&r.pct>=0?'up':'down'}; })(),
   ];
   document.getElementById('kpis').innerHTML = tiles.map(t=>
     `<div class="tile${t.hero?' hero':''}"><div class="lab">${t.lab}</div>
@@ -670,6 +712,32 @@ function _renderKpis(){
         if(k<1&&window._pvShown===to) requestAnimationFrame(step); };
       requestAnimationFrame(step); }
   }
+}
+
+/* ---- reporting period of the Portfolio tab: scopes the Return tile ----
+   Same series and the same TTWROR maths as the Performance tab (period return =
+   end factor / start factor), so both tabs can never disagree. */
+function _allocCash(){ try{ return localStorage.getItem('pc-alloccash')!=='0'; }catch(e){ return true; } }
+const PBP=[['all','All'],['ytd','YTD'],['1y','1Y'],['3m','3M'],['1w','1W'],['1d','1D']];
+let _pbp=(()=>{ const v=localStorage.getItem('pc-pbp'); return PBP.some(x=>x[0]===v)?v:'ytd'; })();
+function pbLabel(){ return (PBP.find(x=>x[0]===_pbp)||PBP[1])[1]; }
+function pbReturn(){
+  const enDate=x=>new Date(x+'T00:00:00Z').toLocaleDateString('en-US',{month:'short',day:'2-digit',year:'numeric'});
+  if(_pbp==='1d'){                                  // last trading day that actually moved
+    const m=pfMetrics({k:'rel',v:'1m'});
+    return m&&m.lastD?{pct:m.lastR*100,note:enDate(m.lastD)}:null;
+  }
+  const m=pfMetrics({k:'rel',v:_pbp});
+  if(!m||!m.pts.length) return null;
+  return {pct:m.tt*100, note:enDate(m.pts[0].d)+' → '+enDate(m.pts[m.pts.length-1].d)};
+}
+function renderPbar(){
+  const el=document.getElementById('pbar'); if(!el) return;
+  el.innerHTML=PBP.map(([k,l])=>`<button data-pb="${k}" class="${k===_pbp?'on':''}" aria-pressed="${k===_pbp}">${l}</button>`).join('');
+  el.querySelectorAll('[data-pb]').forEach(b=>b.addEventListener('click',()=>{
+    _pbp=b.dataset.pb; try{localStorage.setItem('pc-pbp',_pbp);}catch(e){}
+    renderPbar(); renderKpis();
+  }));
 }
 
 /* ---- PP total-portfolio strip (from depot.xml via pp_sync.py) ---- */
@@ -1291,7 +1359,8 @@ function initHtSettings(){
 /* ---- allocation donut (interactive: hover slice/row -> details in the center) ---- */
 function renderAlloc(){
   const el=document.getElementById('allocdonut'); if(!el) return;
-  const hs=[...DATA.holdings].filter(h=>h.value>0).sort((a,b)=>b.value-a.value);   // sorted by weight, largest first
+  const showCash=_allocCash();
+  const hs=[...DATA.holdings].filter(h=>h.value>0&&(showCash||h.assetType!=='cash')).sort((a,b)=>b.value-a.value);
   const total=hs.reduce((s,h)=>s+h.value,0)||1;
   const cx=115,cy=115,r=101,rin=66; let a0=-Math.PI/2, segs='';
   const colOf=h=>h.assetType==='cash'?cvar('--muted'):colorFor(tIdx(h.ticker));
@@ -1306,8 +1375,12 @@ function renderAlloc(){
     a0=a1;
   });
   // negative cash (margin) can't be a slice — net it into the center total + its own legend row
-  const cash=DATA.holdings.find(h=>h.assetType==='cash'&&h.value<0);
+  const cash=showCash?DATA.holdings.find(h=>h.assetType==='cash'&&h.value<0):null;
   const net=total+(cash?cash.value:0);
+  const tgl=document.getElementById('alloc-cash-toggle');
+  if(tgl){ const has=DATA.holdings.some(h=>h.assetType==='cash'&&h.value!==0);
+    tgl.hidden=!has; tgl.textContent=showCash?'Hide cash':'Show cash'; tgl.setAttribute('aria-pressed',showCash?'true':'false');
+    tgl.onclick=()=>{ try{localStorage.setItem('pc-alloccash',showCash?'0':'1');}catch(e){} renderAlloc(); }; }
   const legend=hs.map((h,ai)=>`<div class="lg2" data-ai="${ai}"><span class="dot" style="background:${colOf(h)}"></span>
     ${logoImg(h.logos,'llogo')}<span class="lt">${esc(h.ticker)}</span>
     <span class="lv">${fmtUsd(h.value)}</span><span class="lp">${(100*h.value/total).toFixed(1)}%</span></div>`).join('')
@@ -1324,7 +1397,7 @@ function renderAlloc(){
   const c1=el.querySelector('#dc1'), c2=el.querySelector('#dc2'), c3=el.querySelector('#dc3');
   const setCenter=ai=>{
     if(ai===null){ c1.textContent=fmtUsd(net); c2.textContent=hs.filter(h=>h.assetType!=='cash').length+' positions';
-      c3.textContent=cash?('net of '+fmtShort(cash.value)+' margin'):''; }
+      c3.textContent=cash?('net of '+fmtShort(cash.value)+' margin'):(showCash?'incl. cash':'securities only'); }
     else if(ai==='cash'){ c1.textContent=fmtUsd(cash.value); c2.textContent='Cash · margin';
       c3.textContent='gross '+fmtShort(total)+' → net '+fmtShort(net); }
     else { const h=hs[ai]; c1.textContent=fmtUsd(h.value); c2.textContent=h.ticker; c3.textContent=(100*h.value/total).toFixed(1)+'% of invested'; }
@@ -1890,40 +1963,150 @@ function tickerLogos(tk){
   if(typeof wlSyms==='function'&&wlSyms().includes(tk)) return wlLogos(tk);
   return [];
 }
+/* ---- position detail: the individual purchases ----
+   secLots = the FIFO tranches still held (they sum to the position's cost basis),
+   secTx   = every booking of that security, newest first. Both come straight from
+   the engine (depot.xml), so they can never drift from the depot. */
+const dFull=d=>new Date(String(d)+'T00:00:00Z').toLocaleDateString('en-US',{month:'short',day:'2-digit',year:'2-digit'});
+function secLots(h){
+  const lots=(DATA.lots||{})[h.ticker]||[];
+  if(!lots.length) return '';
+  const px=(h.livePrice!=null?h.livePrice:h.price), fx=(h.valueUsd!=null&&h.value)?1:1;
+  const rows=lots.map(l=>{
+    const cost=+l.usd, entry=l.sh?cost/l.sh:null;
+    const val=px!=null?l.sh*px:null, g=(val!=null)?val-cost:null;
+    const gp=(g!=null&&cost>0)?g/cost*100:null;
+    return `<tr><td>${dFull(l.d)}</td><td class="tnum">${maskable(l.sh.toLocaleString('en-US'))}</td>
+      <td class="tnum">${entry==null?'—':'$'+entry.toLocaleString('en-US',{minimumFractionDigits:2,maximumFractionDigits:4})}</td>
+      <td class="tnum">${maskable(fmtUsd(cost))}</td>
+      <td class="tnum">${val==null?'—':maskable(fmtUsd(val))}</td>
+      <td class="tnum ${g==null?'':(g>=0?'up':'down')}">${g==null?'—':maskable((g>=0?'+':'−')+fmtUsd(Math.abs(g)).replace('$','$'))+(gp==null?'':' <span class="asub">'+(gp>=0?'+':'')+gp.toFixed(1)+'%</span>')}</td></tr>`;
+  }).join('');
+  const shs=lots.reduce((a,l)=>a+l.sh,0), cst=lots.reduce((a,l)=>a+ +l.usd,0);
+  return `<div class="sd-sec">Your purchases · still held</div>
+    <div style="overflow-x:auto"><table class="htable sd-tx"><thead><tr>
+      <th>Bought</th><th>Shares</th><th>Entry</th><th>Cost</th><th>Value</th><th>Gain</th></tr></thead>
+      <tbody>${rows}</tbody>
+      <tfoot><tr><td>Total</td><td class="tnum">${maskable(shs.toLocaleString('en-US'))}</td>
+        <td class="tnum">$${(shs?cst/shs:0).toLocaleString('en-US',{minimumFractionDigits:2,maximumFractionDigits:4})}</td>
+        <td class="tnum">${maskable(fmtUsd(cst))}</td><td></td><td></td></tr></tfoot></table></div>`;
+}
+function secTx(tk){
+  const rows=(DATA.acts||[]).filter(a=>a.tk===tk);
+  if(!rows.length) return '';
+  const body=rows.slice(0,40).map(a=>{
+    const ty=actLabel(a.t), sign=actSign(a.t), sym=CCY_SYM[a.ccy]||((a.ccy||'USD')+' ');
+    const g=a.gUsd;
+    return `<tr><td>${dFull(a.d)}</td><td><span class="atype ${actCls(ty)}">${esc(ty.toUpperCase())}</span></td>
+      <td class="tnum">${a.sh?maskable(Number(a.sh).toLocaleString('en-US')):'—'}</td>
+      <td class="tnum">${a.px?sym+(+a.px).toLocaleString('en-US',{minimumFractionDigits:2,maximumFractionDigits:4}):'—'}</td>
+      <td class="tnum">${maskable(sign+sym+Math.abs(+a.amt||0).toLocaleString('en-US',{maximumFractionDigits:0}))}</td>
+      <td class="tnum ${g==null?'':(g>=0?'up':'down')}">${g==null?'—':maskable((g>=0?'+':'−')+fmtUsd(Math.abs(g)))}</td>
+      <td>${esc(a.port||'')}</td></tr>`;
+  }).join('');
+  return `<div class="sd-sec">All transactions</div>
+    <div style="overflow-x:auto"><table class="htable sd-tx"><thead><tr>
+      <th>Date</th><th>Type</th><th>Shares</th><th>Price</th><th>Amount</th><th>Realized</th><th>Depot</th>
+      </tr></thead><tbody>${body}</tbody></table></div>`
+    +(rows.length>40?`<div class="asub" style="margin-top:6px">${rows.length-40} older bookings — see the Activities feed.</div>`:'');
+}
 function actCls(t){
   if(t==="Buy")return "buy"; if(t==="Sell")return "sell";
-  if(/Dividend|Interest/.test(t))return "div"; return "oth";
+  if(t==="Interest Charge"||t==="Withdrawal")return "oth";   // debits stay neutral, never "income blue"
+  if(/Dividend|Interest|Deposit/.test(t))return "div"; return "oth";
+}
+/* type keys as they arrive from the engine -> label + sign. Interest is one PP kind
+   with a sign; the engine splits it, so a charge reads as a debit and never as "+". */
+const ACT_TYPES=[['BUY','Buy','−'],['SELL','Sell','+'],['DIVIDEND','Dividend','+'],
+  ['INTEREST','Interest','+'],['INTEREST_CHARGE','Interest Charge','−'],
+  ['DEPOSIT','Deposit','+'],['WITHDRAWAL','Withdrawal','−']];
+const actLabel=t=>(ACT_TYPES.find(x=>x[0]===t)||[t,String(t||'').replace(/_/g,' ').replace(/([a-z])([A-Z])/g,'$1 $2')])[1];
+const actSign=t=>(ACT_TYPES.find(x=>x[0]===t)||['','','+'])[2];
+const _actF={from:'',to:'',type:'',sec:'',depot:'',q:''};
+/* option OCC symbol -> readable label (ABVX270115C00120000 -> ABVX Jan-2027 $120 Call) */
+function actTk(a){
+  const raw=a.tk||'—', occ=raw.match(/^([A-Z.]{1,6})(\d{2})(\d{2})(\d{2})([CP])(\d{8})$/);
+  if(!occ) return {tk:raw, base:raw};
+  const M=['','Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
+  return {tk:occ[1]+' '+M[+occ[3]]+'-20'+occ[2]+' $'+(+occ[6]/1000)+' '+(occ[5]==='C'?'Call':'Put'), base:occ[1]};
+}
+function actName2(a){
+  const {tk,base}=actTk(a);
+  /* options: match the EXACT contract - two series of the same underlying (Jan-27 vs
+     Mar-27 calls) must never borrow each other's name */
+  const h=DATA.holdings.find(x=>x.ticker===(base===tk?base:a.tk));
+  const sec=DATA.secByIsin&&DATA.secByIsin[a.isin||''];
+  return (h&&h.name)||(sec&&sec.name)||'';
+}
+function actsFiltered(){
+  const q=_actF.q.toLowerCase();
+  return (DATA.acts||[]).filter(a=>{
+    const d=a.d||'';
+    if(_actF.from&&d<_actF.from) return false;
+    if(_actF.to&&d>_actF.to) return false;
+    if(_actF.type&&a.t!==_actF.type) return false;
+    if(_actF.sec&&(a.tk||'')!==_actF.sec) return false;
+    if(_actF.depot&&(a.port||'')!==_actF.depot) return false;
+    if(q&&![a.tk,actTk(a).tk,actName2(a),actLabel(a.t),a.port,a.isin,a.d].join(' ').toLowerCase().includes(q)) return false;
+    return true;
+  });
+}
+function renderActFilters(){
+  const el=document.getElementById('actfilters'); if(!el||el.dataset.ready) return;
+  const acts=DATA.acts||[];
+  const types=ACT_TYPES.filter(t=>acts.some(a=>a.t===t[0]));
+  const secs=[...new Set(acts.map(a=>a.tk).filter(Boolean))]
+    .map(v=>({v,l:actTk({tk:v}).tk})).sort((a,b)=>a.l.localeCompare(b.l));
+  const depots=[...new Set(acts.map(a=>a.port).filter(Boolean))].sort();
+  el.innerHTML=`
+    <input data-af="from" type="date" aria-label="From date">
+    <input data-af="to" type="date" aria-label="To date">
+    <select data-af="type" aria-label="Type"><option value="">All types</option>${types.map(t=>`<option value="${t[0]}">${esc(t[1])}</option>`).join('')}</select>
+    <select data-af="sec" aria-label="Security"><option value="">All securities</option>${secs.map(x=>`<option value="${esc(x.v)}">${esc(x.l)}</option>`).join('')}</select>
+    ${depots.length>1?`<select data-af="depot" aria-label="Depot"><option value="">All depots</option>${depots.map(v=>`<option>${esc(v)}</option>`).join('')}</select>`:''}
+    <input data-af="q" type="search" placeholder="Search activities…" aria-label="Search activities">
+    <button type="button" class="minibtn actreset" id="actreset">Reset</button>`;
+  el.querySelectorAll('[data-af]').forEach(c=>c.addEventListener('input',()=>{
+    _actF[c.dataset.af]=c.value.trim(); _actShown=50; renderActivities();
+  }));
+  el.querySelector('#actreset').addEventListener('click',()=>{
+    Object.keys(_actF).forEach(k=>_actF[k]='');
+    el.querySelectorAll('[data-af]').forEach(c=>c.value='');
+    _actShown=50; renderActivities();
+  });
+  el.dataset.ready='1';
 }
 function renderActivities(){
   const el=document.getElementById('activities'); if(!el)return;
-  const all=DATA.acts||[];
+  renderActFilters();
+  const all=actsFiltered();
   el.innerHTML=all.slice(0,_actShown).map(a=>{
     const sym=CCY_SYM[a.ccy]||((a.ccy||'USD')+" ");
     const dt=new Date(a.d).toLocaleDateString('en-US',{month:'short',day:'2-digit',year:'2-digit'});
-    let tk=a.tk||'—';
-    const occ=tk.match(/^([A-Z.]{1,6})(\d{2})(\d{2})(\d{2})([CP])(\d{8})$/);
-    if(occ){ const M=['','Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
-      tk=occ[1]+' '+M[+occ[3]]+'-20'+occ[2]+' $'+(+occ[6]/1000)+' '+(occ[5]==='C'?'Call':'Put'); }
-    const h=DATA.holdings.find(x=>x.ticker===(occ?occ[1]:tk));
-    const sec=DATA.secByIsin&&DATA.secByIsin[a.isin||''];
-    const nm=(h&&h.name)||(sec&&sec.name)||'';
-    const ty=a.t==='BUY'?'Buy':a.t==='SELL'?'Sell':a.t==='DIVIDEND'?'Dividend':'Interest';
+    const {tk,base}=actTk(a);
+    const nm=actName2(a);
+    const ty=actLabel(a.t), sign=actSign(a.t);
     const isTrade=!!(a.sh&&a.px);
-    const sub=isTrade? (Number(a.sh).toLocaleString('en-US')+" @ "+sym+(+a.px).toLocaleString('en-US',{minimumFractionDigits:2,maximumFractionDigits:4})):"";
-    const sign=ty==="Buy"?"−":"+";
+    const sub=isTrade? (Number(a.sh).toLocaleString('en-US')+" @ "+sym+(+a.px).toLocaleString('en-US',{minimumFractionDigits:2,maximumFractionDigits:4}))
+      : (a.port||"");
     const isin=a.isin||(DATA.isinByTicker&&DATA.isinByTicker[tk])||'';
-    const cur=tickerLogos(occ?occ[1]:tk);
+    const cur=tickerLogos(base);
     const cands=cur.length?cur:[].concat(isin?["https://assets.parqet.com/logos/isin/"+isin+"?format=png&size=64"]:[],
-      (tk&&tk!=='—')?["https://assets.parqet.com/logos/symbol/"+encodeURIComponent((occ?occ[1]:tk).split(' ')[0])+"?format=png&size=64"]:[]);
+      (base&&base!=='—')?["https://assets.parqet.com/logos/symbol/"+encodeURIComponent(base.split(' ')[0])+"?format=png&size=64"]:[]);
+    const g=a.gUsd;                                   // FIFO result of exactly this sell
+    const gTxt=g==null?'':'<span class="glab">Gain </span>'+(g>=0?'+':'−')+'$'+Math.abs(g).toLocaleString('en-US',{maximumFractionDigits:0})
+      +(a.ret!=null?'<span class="gpct"> · '+(a.ret>=0?'+':'')+a.ret.toFixed(1)+'%</span>':'');
+    const label=a.tk?tk:'Cash';                        // cash bookings carry no ticker; the badge names the type
     return `<div class="act">
-      <div class="ad">${dt}</div>
-      <div class="atype ${actCls(ty)}">${esc(ty.toUpperCase())}</div>
-      ${logoImg(cands,'alogo',tk)}
-      <div class="amain"><div class="aname">${esc(tk)}${nm&&nm!==tk?' <span class="asub">'+esc(nm)+'</span>':''}</div>
+      <div class="aleft"><div class="ad">${dt}</div>
+      <div class="atype ${actCls(ty)}">${esc(ty.toUpperCase())}</div></div>
+      ${a.tk?logoImg(cands,'alogo',base):'<span class="alogo" style="visibility:hidden"></span>'}
+      <div class="amain"><div class="aname">${esc(label)}${nm&&nm!==label?' <span class="asub">'+esc(nm)+'</span>':''}</div>
         ${sub?`<div class="asub">${maskable(esc(sub))}</div>`:''}</div>
-      <div class="aval tnum">${maskable(sign+sym+Math.abs(+a.amt||0).toLocaleString('en-US',{minimumFractionDigits:2,maximumFractionDigits:2}))}</div>
+      <div class="aright"><div class="aval tnum">${maskable(sign+sym+Math.abs(+a.amt||0).toLocaleString('en-US',{minimumFractionDigits:2,maximumFractionDigits:2}))}</div>
+        ${gTxt?`<div class="again tnum ${g>=0?'up':'down'}">${maskable(gTxt)}</div>`:''}</div>
     </div>`;
-  }).join('');
+  }).join('')||'<div class="actempty">No activity matches these filters.</div>';
   const btn=document.getElementById('actmore');
   if(btn){ btn.style.display=_actShown<all.length?'':'none';
     btn.textContent='Load more ('+Math.max(0,all.length-_actShown).toLocaleString('en-US')+' older)'; }
@@ -2015,7 +2198,7 @@ function boot(){
   document.getElementById('hcount').textContent=DATA.holdings.filter(h=>h.assetType!=='cash').length;
   document.getElementById('foot').innerHTML='Snapshot built '+esc(DATA.generated)+
     ' · When hosted live, prices refresh every 3 min (Yahoo) and headlines every 15 min (GDELT), computed in your browser · Curated news &amp; catalysts refreshed twice daily · Not investment advice.<br>Green dot = confirmed date, amber dot = estimated.';
-  initTheme(); applyName(); initTabs(); pfInitToolbar(); initWatchlist(); loadConfig(); loadSocialCache(); renderKpis(); renderTfSel(); renderSocial(); rerender(); initSecAlerts(); initHtSettings(); initAppSettings(); startLive();
+  initTheme(); applyName(); initTabs(); pfInitToolbar(); initWatchlist(); loadConfig(); loadSocialCache(); renderPbar(); renderKpis(); renderTfSel(); renderSocial(); rerender(); initSecAlerts(); initHtSettings(); initAppSettings(); startLive();
   window._lastW=window.innerWidth;
   window.addEventListener('resize',()=>{clearTimeout(window._rz);window._rz=setTimeout(()=>{
     if(window.innerWidth===window._lastW) return; /* height-only = mobile keyboard, keep focused inputs alive */
@@ -2099,7 +2282,7 @@ function pfSliceP(p){
   if(p.k==='rel'){
     if(p.v==='all') return s;
     if(p.v==='ytd') from=last.slice(0,4)+'-01-01';
-    else{ const days={'1m':30,'3m':91,'6m':182,'1y':365,'2y':730,'3y':1095,'5y':1825}[p.v]||0;
+    else{ const days={'1w':7,'1m':30,'3m':91,'6m':182,'1y':365,'2y':730,'3y':1095,'5y':1825}[p.v]||0;
       from=new Date(new Date(last).getTime()-days*86400000).toISOString().slice(0,10); }
   } else if(p.k==='year'){ from=p.y+'-01-01'; to=p.y+'-12-31'; }
   else if(p.k==='since'){ from=p.from; }
@@ -3392,7 +3575,8 @@ function openSecDetail(tk){
       ${cell('Unreal. gain',gain==null?'—':money(gain,null),gain>=0?'up':'down')}
       ${cell('Unreal. %',gpct==null?'—':fmtPct(gpct),gpct>=0?'up':'down')}
       ${cell('Realized',h.ppRealizedUsd==null?'—':money(h.ppRealizedUsd,null),(h.ppRealizedUsd||0)>=0?'up':'down')}
-      ${cell('52w pos',h.pos52!=null?h.pos52.toFixed(0)+'%':'—')}</div>`;
+      ${cell('52w pos',h.pos52!=null?h.pos52.toFixed(0)+'%':'—')}</div>`
+      +secLots(h)+secTx(tk);
   } else {
     const cell=(l,v)=>`<div class="sd-stat"><div class="l">${l}</div><div class="v">${v}</div></div>`;
     stats=`<div class="sd-sec">Snapshot</div><div class="sd-stats">
@@ -3400,7 +3584,8 @@ function openSecDetail(tk){
       ${cell('Avg vol',fmtBig(wm.avgVol))}
       ${cell('Mkt cap',wm.mcap!=null?'$'+fmtBig(wm.mcap):'—')}
       ${cell('52w high',fmtP((live&&live.hi52)||wm.hi52))}</div>
-      <div style="font-size:12.5px;color:var(--muted);margin-top:8px">On your watchlist — not currently held.</div>`;
+      <div style="font-size:12.5px;color:var(--muted);margin-top:8px">On your watchlist — not currently held.</div>`
+      +secTx(tk);          // sold out? the history of that position stays readable
   }
   /* research: catalysts + news for this ticker (holdings only) */
   const r=(h&&h.research)||{};
@@ -3491,7 +3676,7 @@ function payRange(p){   // [from, to] ISO dates for a PF-style reporting period
   let from=s[0].d, to=last;
   if(p.k==='rel'&&p.v!=='all'){
     if(p.v==='ytd') from=last.slice(0,4)+'-01-01';
-    else{ const days={'1m':30,'3m':91,'6m':182,'1y':365,'2y':730,'3y':1095,'5y':1825}[p.v]||0;
+    else{ const days={'1w':7,'1m':30,'3m':91,'6m':182,'1y':365,'2y':730,'3y':1095,'5y':1825}[p.v]||0;
       from=new Date(new Date(last).getTime()-days*86400000).toISOString().slice(0,10); }
   } else if(p.k==='year'){ from=p.y+'-01-01'; to=p.y+'-12-31'; }
   else if(p.k==='since'){ from=p.from; }

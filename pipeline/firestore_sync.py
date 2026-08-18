@@ -64,9 +64,22 @@ def pull():
     json.dump(state, open(os.path.join(ROOT,"site_state.json"),"w"))
     print(f"firestore pull: name={state['name']!r} public={state['public']}")
 
+# Firestore rejects any document over 1 MiB. The snapshot grew when the Activities
+# feed took in deposits/interest, so keep a valve: rather than letting the push fail
+# (which silently freezes the whole site), drop the activity history - the client
+# keeps the copy baked into the page whenever the live payload carries none.
+MAX_DOC = 1_000_000
+
 def push():
     tok = access_token()
     data = open(os.path.join(ROOT,"data.json"), encoding="utf-8").read()
+    if len(data.encode("utf-8")) > MAX_DOC:
+        try:
+            j = json.loads(data); j.pop("acts", None)
+            data = json.dumps(j, ensure_ascii=True)
+            print("firestore push: snapshot over 1 MiB — activity history left out of the live push")
+        except Exception as e:
+            print("firestore push: trim failed:", e)
     # Firestore-Dokumente sind auf ~1 MiB begrenzt: die volle Trade-Historie (acts)
     # sprengte das Limit und liess den Push tagelang scheitern (Vorfall 2026-07-24,
     # eingefrorener Stand vom 21.07.). acts steckt in der gebackenen Seite — der

@@ -447,16 +447,26 @@ data = {
     "chartPP": pp.get("series", []) if pp else [],
     "trades": pp_trades,
     # Activities feed from the engine: trades + dividends/interest, shown ISINs only
+    # Activities feed = trades + every cash-relevant booking (PP's transaction list):
+    # dividends/interest received, interest charged, deposits, withdrawals. Interest
+    # is one PP kind with a sign - split it so a charge reads as a debit, not "+".
     "acts": (lambda: (
         sorted(
           [a for a in (pp.get("acts", []) if pp else [])
              if (a.get("port") in _disp_ports if (a.get("port") and _disp_ports)
                  else (_shown_isins is None or a.get("isin") in _shown_isins or not a.get("isin")))]
           + [{"d": p["d"], "t": p["k"].upper(), "tk": p["tk"], "amt": p["usd"], "ccy": "USD"}
-             for p in _pays if p["k"] in ("dividend", "interest") and p.get("tk")
-             and (_shown_isins is None or any(s.get("ticker") == p["tk"] for s in pp.get("securities", [])))],
+             for p in _pays if p["k"] == "dividend" and p.get("tk")
+             and (_shown_isins is None or any(s.get("ticker") == p["tk"] for s in pp.get("securities", [])))]
+          + [{"d": p["d"], "t": "INTEREST" if p["usd"] >= 0 else "INTEREST_CHARGE",
+              "tk": p.get("tk"), "amt": abs(p["usd"]), "ccy": "USD"}
+             for p in _pays if p["k"] == "interest" and abs(p.get("usd") or 0) >= 0.005]
+          + [{"d": p["d"], "t": p["k"].upper(), "tk": None, "amt": abs(p["usd"]), "ccy": "USD"}
+             for p in _pays if p["k"] in ("deposit", "withdrawal")],
           key=lambda a: a["d"], reverse=True)
     ))(),
+    # the individual purchases still held per ticker (open FIFO lots)
+    "lots": (pp.get("lotsByTicker", {}) if pp else {}),
     "tradeLogos": trade_logos,
     "payments": pay_journal,
     # security name map for Activities — ONLY ISINs shown in this portfolio (dividend
