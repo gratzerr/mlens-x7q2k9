@@ -2220,6 +2220,54 @@ function secLots(h){
         <td class="tnum">$${(shs?cst/shs:0).toLocaleString('en-US',{minimumFractionDigits:2,maximumFractionDigits:4})}</td>
         <td class="tnum">${maskable(fmtUsd(cst))}</td><td></td><td></td></tr></tfoot></table></div>`;
 }
+/* ---- what this position actually did ----
+   Every number comes from the engine's own FIFO round-trips and the payment journal,
+   so the block agrees with the Trading record and the Payments tab by construction. */
+function secResult(tk){
+  const trades=(DATA.trades||[]).filter(t=>t.ticker===tk);
+  const acts=(DATA.acts||[]).filter(a=>a.tk===tk);
+  const h=DATA.holdings.find(x=>x.ticker===tk);
+  const proceeds=trades.reduce((a,t)=>a+(t.proceedsUsd||0),0);
+  const basis=trades.reduce((a,t)=>a+(t.basisUsd||0),0);
+  const realized=trades.reduce((a,t)=>a+(t.gainUsd||0),0);
+  const divs=acts.filter(a=>a.t==='DIVIDEND').reduce((a,x)=>a+(+x.amt||0),0);
+  const cost=(DATA.payments||[]).filter(p=>p[2]===tk&&(p[1]==='fee'||p[1]==='tax'))
+    .reduce((a,p)=>a+(_ccy==='EUR'?p[3]:p[4]),0);
+  /* holding periods = how often the position was built up and fully closed again */
+  let sh=0, episodes=0, open=false;
+  [...acts].reverse().forEach(a=>{
+    if(a.t==='BUY'){ sh+=(+a.sh||0); if(!open){ open=true; episodes++; } }
+    else if(a.t==='SELL'){ sh-=(+a.sh||0); if(sh<=1e-6&&open){ open=false; sh=0; } }
+  });
+  const unreal=(h&&h.ppBasisUsd!=null)?(h.value-h.ppBasisUsd):null;
+  const total=realized+divs-cost+(unreal||0);
+  return {trades,proceeds,basis,realized,divs,cost,episodes,unreal,total,
+    ret:basis>1e-6?realized/basis*100:null, held:!!h};
+}
+function secResultBlock(tk){
+  const r=secResult(tk);
+  if(!r.trades.length&&!r.divs&&!r.held) return '';
+  const cell=(l,v,c)=>`<div class="sd-stat"><div class="l">${l}</div><div class="v ${c||''}">${v}</div></div>`;
+  const m=v=>money(v,null);
+  return `<div class="sd-sec">Position result</div><div class="sd-stats">
+    ${cell('Return · realized',r.ret==null?'—':fmtPct(r.ret),r.ret==null?'':(r.ret>=0?'up':'down'))}
+    ${cell('Realized gain',r.trades.length?m(r.realized):'—',r.realized>=0?'up':'down')}
+    ${cell('Proceeds',r.trades.length?m(r.proceeds):'—')}
+    ${cell('Cost of sold',r.trades.length?m(r.basis):'—')}
+    ${cell('Distributions',r.divs?m(r.divs):'—',r.divs?'up':'')}
+    ${cell('Fees + taxes',r.cost?m(r.cost):'—',r.cost?'down':'')}
+    ${cell('Holding periods',r.episodes||'—')}
+    ${cell(r.held?'Total result · incl. open':'Total result',m(r.total),r.total>=0?'up':'down')}</div>`
+    +(r.trades.length?`<div style="overflow-x:auto;margin-top:10px"><table class="htable sd-tx"><thead><tr>
+      <th>Bought</th><th>Sold</th><th>Held</th><th>Shares</th><th>Proceeds</th><th>Return</th><th>Gain</th><th>Depot</th>
+      </tr></thead><tbody>${r.trades.map(t=>`<tr>
+      <td>${dFull(t.buy)}</td><td>${dFull(t.sell)}</td><td class="tnum">${t.days}d</td>
+      <td class="tnum">${maskable(Number(t.sh).toLocaleString('en-US'))}</td>
+      <td class="tnum">${maskable(m(t.proceedsUsd))}</td>
+      <td class="tnum ${t.ret==null?'':(t.ret>=0?'up':'down')}">${t.ret==null?'—':fmtPct(t.ret)}</td>
+      <td class="tnum ${(t.gainUsd||0)>=0?'up':'down'}">${maskable(m(t.gainUsd))}</td>
+      <td>${esc(t.port||'')}</td></tr>`).join('')}</tbody></table></div>`:'');
+}
 function secTx(tk){
   const rows=(DATA.acts||[]).filter(a=>a.tk===tk);
   if(!rows.length) return '';
@@ -3841,7 +3889,7 @@ function openSecDetail(tk){
       ${cell('Unreal. %',gpct==null?'—':fmtPct(gpct),gpct>=0?'up':'down')}
       ${cell('Realized',h.ppRealizedUsd==null?'—':money(h.ppRealizedUsd,null),(h.ppRealizedUsd||0)>=0?'up':'down')}
       ${cell('52w pos',h.pos52!=null?h.pos52.toFixed(0)+'%':'—')}</div>`
-      +secLots(h)+secTx(tk);
+      +secLots(h)+secResultBlock(tk)+secTx(tk);
   } else {
     const cell=(l,v)=>`<div class="sd-stat"><div class="l">${l}</div><div class="v">${v}</div></div>`;
     stats=`<div class="sd-sec">Snapshot</div><div class="sd-stats">
@@ -3850,7 +3898,7 @@ function openSecDetail(tk){
       ${cell('Mkt cap',wm.mcap!=null?'$'+fmtBig(wm.mcap):'—')}
       ${cell('52w high',fmtP((live&&live.hi52)||wm.hi52))}</div>
       <div style="font-size:12.5px;color:var(--muted);margin-top:8px">On your watchlist — not currently held.</div>`
-      +secTx(tk);          // sold out? the history of that position stays readable
+      +secResultBlock(tk)+secTx(tk);   // sold out? its whole record stays readable
   }
   /* research: catalysts + news for this ticker (holdings only) */
   const r=(h&&h.research)||{};
@@ -4403,7 +4451,17 @@ function drawPnlChart(w,card){
   const s=pnlSeries(); if(!s){ svg.innerHTML=''; return; }
   const lines=[{name:'Portfolio value',col:cvar('--ink'),pts:s.value,w:2.2},
                {name:'Invested capital',col:cvar('--accent'),pts:s.invested,w:1.8,dash:'6 4'}];
-  drawLines(svg,tip,lines,s.pts,{fmt:'money',band:true});
+  const flowByDay={};
+  (DATA.payments||[]).forEach(p=>{ if(p[1]!=='deposit'&&p[1]!=='withdrawal') return;
+    const v=(_ccy==='EUR'?p[3]:p[4])*(p[1]==='withdrawal'?-1:1);
+    flowByDay[p[0]]=(flowByDay[p[0]]||0)+v; });
+  drawLines(svg,tip,lines,s.pts,{fmt:'money',band:true,
+    tipRows:(day,picks,fmtV)=>{
+      const val=picks[0].p.y, inv=picks[1].p.y, gain=val-inv, f=flowByDay[picks[0].p.d];
+      return `Portfolio value: <b>${fmtV(val)}</b><br>Invested capital: <b>${fmtV(inv)}</b>`+
+        `<br>Result: <b class="${gain>=0?'up':'down'}">${fmtV(gain)}</b>`+
+        (f?`<br>${f>0?'Paid in':'Taken out'}: <b>${fmtV(Math.abs(f))}</b>`:'');
+    }});
   const gain=s.value[s.value.length-1].y-s.invested[s.invested.length-1].y;
   if(lg) lg.innerHTML=lines.map(l=>{const last=l.pts[l.pts.length-1];
       return `<span><span style="display:inline-block;width:16px;height:3px;background:${l.col};border-radius:2px;vertical-align:3px;margin-right:6px"></span>${esc(l.name)} <b class="tnum">${fmtUsd(last.y)}</b></span>`;}).join('')
@@ -4441,7 +4499,13 @@ function drawPnlPctChart(w,card){
     const inv=s.invested[i].y, basis=Math.max(1,inv);
     return {d:p.d,y:(p.y-inv)/basis*100};
   });
-  drawLines(svg,tip,[{name:'Result on capital',col:cvar('--up'),pts:pct,w:2.2}],s.pts);
+  drawLines(svg,tip,[{name:'Result on capital',col:cvar('--up'),pts:pct,w:2.2}],s.pts,{
+    tipRows:(day,picks)=>{
+      const i=s.value.findIndex(x=>x.d===picks[0].p.d), j=i<0?s.value.length-1:i;
+      const val=s.value[j].y, inv=s.invested[j].y;
+      return `Result on capital: <b class="${picks[0].p.y>=0?'up':'down'}">${fmtPct(picks[0].p.y)}</b>`+
+        `<br>Result: <b>${fmtUsd(val-inv)}</b><br>Capital at work: <b>${fmtUsd(inv)}</b>`;
+    }});
   const last=pct[pct.length-1];
   if(lg) lg.innerHTML=`<span><span style="display:inline-block;width:16px;height:3px;background:${cvar('--up')};border-radius:2px;vertical-align:3px;margin-right:6px"></span>Result on invested capital <b class="tnum ${last.y>=0?'up':'down'}">${fmtPct(last.y)}</b></span>`;
 }
@@ -4504,11 +4568,15 @@ function drawLines(svg,tip,lines,pts,opt){
     const targ=t0+Math.max(0,Math.min(1,fx/rct.width))*ts;
     const px=(targ-t0)/ts*W;
     cx.setAttribute('x1',px); cx.setAttribute('x2',px); cx.style.opacity=1;
-    const vals=lines.map(l=>{ let best=l.pts[0];
+    const picks=lines.map(l=>{ let best=l.pts[0];
       for(const p of l.pts){ if(T(p.d)<=targ) best=p; else break; }
-      return `${esc(l.name)}: <b>${fmtPct(best.y)}</b>`; });
+      return {l,p:best}; });
+    const fmtV=money?(v=>fmtUsd(v)):(v=>fmtPct(v));
+    const day=new Date(targ).toISOString().slice(0,10);
+    const rows=opt.tipRows? opt.tipRows(day,picks,fmtV)
+      : picks.map(x=>`${esc(x.l.name)}: <b>${fmtV(x.p.y)}</b>`).join('<br>');
     tip.style.opacity=1; tip.style.left=(px/W*rct.width)+'px'; tip.style.top='14px';
-    tip.innerHTML=new Date(targ).toISOString().slice(0,10)+'<br>'+vals.join('<br>');
+    tip.innerHTML=(picks[0]&&picks[0].p.d?picks[0].p.d:day)+'<br>'+rows;
   };
   svg.addEventListener('mousemove',move);
   svg.addEventListener('touchmove',move,{passive:true});
