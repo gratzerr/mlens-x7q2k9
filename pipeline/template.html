@@ -215,10 +215,22 @@
   #sptip{position:fixed;transform:translate(-50%,-100%);background:var(--ink);color:var(--surface);
     padding:3px 8px;border-radius:6px;font-size:11.5px;font-weight:650;pointer-events:none;z-index:60;
     display:none;font-variant-numeric:tabular-nums;white-space:nowrap}
-  .rng{width:120px;flex:none}
-  .rng .rtrack{height:5px;background:var(--surface-2);border-radius:3px;position:relative;margin:8px 0 3px}
-  .rng .rdot{position:absolute;top:50%;width:9px;height:9px;border-radius:50%;transform:translate(-50%,-50%);border:2px solid var(--surface)}
-  .rng .rlab{display:flex;justify-content:space-between;font-size:10.5px;color:var(--muted);font-variant-numeric:tabular-nums}
+  /* 52-week range: the filled part shows how far into the range today's price sits,
+     so the position reads at a glance instead of only from the dot */
+  .rng{width:140px;flex:none}
+  .rng .rtrack{height:7px;border:1px solid color-mix(in srgb,var(--accent) 52%,var(--border));border-radius:999px;
+    position:relative;margin:8px 0 5px;background:color-mix(in srgb,var(--accent) 14%,var(--surface-2));
+    box-shadow:inset 0 1px 2px color-mix(in srgb,var(--ink) 14%,transparent);overflow:visible}
+  .rng .rtrack::before{content:"";position:absolute;inset:0 auto 0 0;width:var(--range-position,50%);border-radius:inherit;
+    background:linear-gradient(90deg,color-mix(in srgb,var(--accent) 58%,var(--surface)),var(--accent));opacity:.88}
+  .rng .rdot{position:absolute;z-index:1;top:50%;width:13px;height:13px;border-radius:50%;transform:translate(-50%,-50%);
+    background:var(--accent);border:2px solid var(--surface);
+    box-shadow:0 0 0 2px color-mix(in srgb,var(--accent) 32%,transparent),var(--shadow)}
+  .rng .rlab{display:grid;grid-template-columns:minmax(0,1fr) auto minmax(0,1fr);align-items:center;gap:4px;
+    font-size:10.5px;color:var(--muted);font-variant-numeric:tabular-nums;white-space:nowrap}
+  .rng .rlab span:first-child{text-align:left}
+  .rng .rlab span:last-child{text-align:right}
+  .rng .rper{font-size:9.5px;font-weight:700;letter-spacing:.25px}
   .thesis{font-size:12.5px;color:var(--muted);margin:9px 0 0}
   .metaline{display:flex;gap:14px;margin:9px 0 2px;font-size:12px;color:var(--ink-2);flex-wrap:wrap}
   .metaline b{color:var(--ink);font-weight:660}
@@ -680,12 +692,10 @@ const liveState = {news:null, fx:1.37, lastPrice:null, lastNews:null};
 const cvar = n => getComputedStyle(document.documentElement).getPropertyValue(n).trim();
 /* Parqet-style hue sweep for the donut: deep blue -> indigo -> violet -> pink -> orange,
    assigned by portfolio weight (largest position starts the wheel) */
-/* stable brand colour per ticker (FNV-1a hash): QURE is always the same colour, in
-   every list, and keeps it when weights, holdings or the theme change. The hue snaps
-   to a 24-step wheel and a second bit picks a saturation variant - two tickers then
-   either look clearly different or exactly alike, never almost-alike (which reads as
-   a rendering bug). Hashing beats a curated table here: a new position is coloured
-   the moment it is bought, with nothing to maintain. */
+/* Fallback tone for a ticker whose logo the pipeline could not read (FNV-1a hash):
+   stable per ticker, snapped to a 24-step wheel with a second saturation variant, so
+   two tickers look either clearly different or exactly alike - never almost-alike,
+   which reads as a rendering bug. */
 function tickerBrand(tk){
   let h=0x811c9dc5; const s=String(tk||'').toUpperCase();
   for(let i=0;i<s.length;i++){ h^=s.charCodeAt(i); h=Math.imul(h,0x01000193)>>>0; }
@@ -693,7 +703,10 @@ function tickerBrand(tk){
   return {light:`hsl(${hue} ${dim?46:64}% ${dim?30:32}%)`, dark:`hsl(${hue} ${dim?52:74}% ${dim?73:71}%)`};
 }
 function coChip(tk,extra){
-  const b=tickerBrand(tk);
+  /* the company's OWN colour, read from its logo by the pipeline; the hashed tone is
+     only the stand-in until a logo exists for that ticker */
+  const lc=(DATA.logoCol||{})[String(tk||'').toUpperCase()];
+  const b=lc?{light:lc.l,dark:lc.d}:tickerBrand(tk);
   return `<span class="co${extra?' '+extra:''}" style="--brand-light:${b.light};--brand-dark:${b.dark}">`+
     logoImg(tickerLogos(tk),'nlogo',tk)+`<span class="cotk">${esc(tk||'—')}</span></span>`;
 }
@@ -1711,8 +1724,10 @@ function renderHoldings(){
     // 52-week range widget
     let rng='';
     if(h.pos52!==undefined){
-      rng=`<div class="rng"><div class="rtrack"><div class="rdot" style="left:${h.pos52}%;background:${cvar('--accent')}"></div></div>
-        <div class="rlab"><span>$${h.lo52}</span><span>52w</span><span>$${h.hi52}</span></div></div>`;
+      const rp=Math.max(0,Math.min(100,+h.pos52||0)).toFixed(1);
+      rng=`<div class="rng" role="img" title="52-week range $${h.lo52} – $${h.hi52} · today ${rp}% into the range">
+        <div class="rtrack" style="--range-position:${rp}%"><div class="rdot" style="left:${rp}%"></div></div>
+        <div class="rlab"><span>$${h.lo52}</span><span class="rper">52W</span><span>$${h.hi52}</span></div></div>`;
     }
     const spark=sparkSvg(h);
     return `<div class="card">
@@ -2477,7 +2492,7 @@ function benchMeta(){
   });
   return m;
 }
-const PF_REL=[['all','All data'],['ytd','Year to date'],['1m','1 month'],['3m','3 months'],['6m','6 months'],['1y','1 year'],['2y','2 years'],['3y','3 years'],['5y','5 years']];
+const PF_REL=[['all','All data'],['ytd','Year to date'],['1d','1 day'],['1w','1 week'],['1m','1 month'],['3m','3 months'],['6m','6 months'],['1y','1 year'],['2y','2 years'],['3y','3 years'],['5y','5 years']];
 const PF_SCHEMES=[['traffic','Traffic light (PP)'],['classic','Green / Red'],['blue','Blue / Orange'],['mono','Monochrome']];
 
 /* ---- reporting periods (PP ReportingPeriod equivalents) ---- */
@@ -2771,6 +2786,8 @@ function renderPeriodBar(){
   const p=normP(PF_P);
   const yearsAvail=[...new Set((DATA.chartPP||[]).map(x=>x.d.slice(0,4)))];
   bar.innerHTML=`<span style="font-size:11px;text-transform:uppercase;letter-spacing:.6px;color:var(--muted);font-weight:660">Reporting period</span>
+    <div class="tfsel" id="pf-quick" role="group" aria-label="Common reporting periods">${PBP.map(([k,l])=>
+      `<button type="button" data-pfq="${k}" class="${p.k==='rel'&&p.v===k?'on':''}" aria-pressed="${p.k==='rel'&&p.v===k}">${l}</button>`).join('')}</div>
     <select id="pf-psel" style="background:var(--surface);border:1px solid var(--border);border-radius:9px;padding:7px 10px;font:inherit;font-size:13px;color:var(--ink);box-shadow:var(--shadow)">
       <optgroup label="Relative">${PF_REL.map(([k,l])=>`<option value="rel:${k}" ${p.k==='rel'&&p.v===k?'selected':''}>${l}</option>`).join('')}</optgroup>
       <optgroup label="Year">${yearsAvail.map(y=>`<option value="year:${y}" ${p.k==='year'&&String(p.y)===y?'selected':''}>Year ${y}</option>`).join('')}</optgroup>
@@ -2801,6 +2818,12 @@ function renderPeriodBar(){
     try{localStorage.setItem('pc-pfperiod',JSON.stringify(PF_P));}catch(e){}
     renderPerf();
   };
+  /* shortcuts drive the same state as the dropdown, so both always agree */
+  bar.querySelectorAll('[data-pfq]').forEach(b=>b.addEventListener('click',()=>{
+    hideDates(); PF_P={k:'rel',v:b.dataset.pfq};
+    try{localStorage.setItem('pc-pfperiod',JSON.stringify(PF_P));}catch(e){}
+    renderPeriodBar(); renderPerf();
+  }));
   sel.addEventListener('change',apply);
   /* debounced: Chromium fires 'change' per completed segment — rendering the whole
      dashboard synchronously mid-entry can kick the caret out of the field */

@@ -348,6 +348,18 @@ for tr in (pp.get("trades", []) if pp else []):
     if tr["ticker"] not in trade_logos:          # one logo set per ticker, not per row
         trade_logos[tr["ticker"]] = logo_candidates(tr)
 
+# ---- brand colours from the logos (chips in News / Social / Catalysts) ----
+try:
+    import logo_colors
+    _logo_tks = ({h["ticker"] for h in port["holdings"] if h.get("assetType") != "cash"}
+                 | set(trade_logos.keys())
+                 | {n.get("ticker") for n in (research_news if "research_news" in dir() else [])})
+    def _logo_urls(tk):
+        return logo_candidates({"ticker": tk, "links": {}})
+    _logo_colors = logo_colors.colors_for(_logo_tks, _logo_urls)
+except Exception as e:
+    print("logo colours skipped:", e); _logo_colors = {}
+
 # ---- payments ledger for the Payments tab ----
 # COMPLETE journal (compact arrays) — tiles/chart/div-by-security all aggregate
 # client-side from this one source, so day-exact reporting periods stay exact
@@ -481,6 +493,10 @@ data = {
     "holdings": port["holdings"],
     "catalysts": merged,
     "latestNews": all_news,
+    # brand colour per ticker, read out of the company's own logo (logo_colors.py):
+    # the chips in News / Social / Catalysts carry the company's tone instead of an
+    # invented one. Cached by logo source, so the minute loop costs no requests.
+    "logoCol": (lambda: _logo_colors)(),
     # only the single field the template reads — NOT the whole pp.json (which contains
     # the full securities list of every depot; that would leak the separate depots' names)
     "pp": {"ppReferenceTtwror": pp.get("ppReferenceTtwror")} if pp else None,
