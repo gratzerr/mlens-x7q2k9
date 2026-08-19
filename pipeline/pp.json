@@ -1,8 +1,8 @@
 {
- "fileDate": "2026-08-19 04:51",
- "generated": "2026-08-19 05:00",
+ "fileDate": "2026-08-19 05:02",
+ "generated": "2026-08-19 05:11",
  "engine": "pp-exact (verified vs PP app 2026-07-11)",
- "totalSecuritiesEur": 2166387,
+ "totalSecuritiesEur": 2164309,
  "cashEur": -157871.95,
  "cashByAccount": [
   {
@@ -30,22 +30,22 @@
    "eur": 93.1
   }
  ],
- "totalEur": 2008515,
- "ttwrorSince2022": 405.87,
- "ttwrorYtd": 100.86,
- "ttwrorAnnualized": 41.92,
- "izf": 68.37,
+ "totalEur": 2006437,
+ "ttwrorSince2022": 405.34,
+ "ttwrorYtd": 100.65,
+ "ttwrorAnnualized": 41.89,
+ "izf": 68.3,
  "yearlyReturns": {
   "2022": 3.3,
   "2023": 11.8,
   "2024": 45.2,
   "2025": 50.2,
-  "2026": 100.9
+  "2026": 100.7
  },
  "realizedEur": 644169,
- "unrealizedEur": 668760,
+ "unrealizedEur": 666683,
  "realizedUsd": 786421,
- "unrealizedUsd": 747695,
+ "unrealizedUsd": 745320,
  "netContribEur": 693272,
  "netContribUsd": 768897,
  "earningsEur": 12767.38,
@@ -27097,9 +27097,9 @@
   },
   {
    "d": "2026-08-18",
-   "v": 2295732,
-   "e": 2008515,
-   "r": 4.058677,
+   "v": 2293357,
+   "e": 2006437,
+   "r": 4.053443,
    "c": 768897,
    "k": 693272,
    "q": 786421,
@@ -64102,15 +64102,15 @@
    "name": "RAPID MICRO BIOSYSTEMS INC-A"
   }
  ],
- "ppReferenceTtwror": 405.87,
+ "ppReferenceTtwror": 405.34,
  "ppReferenceDate": "2026-08-19",
- "ttwrorApproxSince2022": 405.87,
+ "ttwrorApproxSince2022": 405.34,
  "yearlyReturnsApprox": {
   "2022": 3.3,
   "2023": 11.8,
   "2024": 45.2,
   "2025": 50.2,
-  "2026": 100.9
+  "2026": 100.7
  },
  "holdings": [
   {
@@ -64256,17 +64256,17 @@
    "isin": "US52886X1072",
    "ccy": "USD",
    "shares": 47500.0,
-   "price": 4.98000001,
-   "value": 236550.0,
-   "valueEur": 206955,
-   "valueUsd": 236550,
+   "price": 4.92999982,
+   "value": 234174.99,
+   "valueEur": 204878,
+   "valueUsd": 234175,
    "basisUsd": 233470,
    "realizedUsd": 0,
    "avgCost": 4.9152,
-   "unrealRet": 1.3,
-   "dayRet": -0.0,
+   "unrealRet": 0.3,
+   "dayRet": -1.0,
    "prevClose": 4.98,
-   "priceDate": "2026-08-14"
+   "priceDate": "2026-08-18"
   },
   {
    "account": "ALL",
