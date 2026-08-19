@@ -1,8 +1,8 @@
 {
- "fileDate": "2026-08-19 06:08",
- "generated": "2026-08-19 06:17",
+ "fileDate": "2026-08-19 06:19",
+ "generated": "2026-08-19 06:28",
  "engine": "pp-exact (verified vs PP app 2026-07-11)",
- "totalSecuritiesEur": 2175893,
+ "totalSecuritiesEur": 2176650,
  "cashEur": -157871.95,
  "cashByAccount": [
   {
@@ -30,22 +30,22 @@
    "eur": 93.1
   }
  ],
- "totalEur": 2018021,
- "ttwrorSince2022": 408.26,
- "ttwrorYtd": 101.81,
- "ttwrorAnnualized": 42.07,
- "izf": 68.69,
+ "totalEur": 2018778,
+ "ttwrorSince2022": 408.45,
+ "ttwrorYtd": 101.89,
+ "ttwrorAnnualized": 42.08,
+ "izf": 68.72,
  "yearlyReturns": {
   "2022": 3.3,
   "2023": 11.8,
   "2024": 45.2,
   "2025": 50.2,
-  "2026": 101.8
+  "2026": 101.9
  },
  "realizedEur": 644169,
- "unrealizedEur": 678267,
+ "unrealizedEur": 679023,
  "realizedUsd": 786421,
- "unrealizedUsd": 758561,
+ "unrealizedUsd": 759426,
  "netContribEur": 693272,
  "netContribUsd": 768897,
  "earningsEur": 12767.38,
@@ -27097,9 +27097,9 @@
   },
   {
    "d": "2026-08-18",
-   "v": 2306598,
-   "e": 2018021,
-   "r": 4.082619,
+   "v": 2307463,
+   "e": 2018778,
+   "r": 4.084525,
    "c": 768897,
    "k": 693272,
    "q": 786421,
@@ -64102,15 +64102,15 @@
    "name": "RAPID MICRO BIOSYSTEMS INC-A"
   }
  ],
- "ppReferenceTtwror": 408.26,
+ "ppReferenceTtwror": 408.45,
  "ppReferenceDate": "2026-08-19",
- "ttwrorApproxSince2022": 408.26,
+ "ttwrorApproxSince2022": 408.45,
  "yearlyReturnsApprox": {
   "2022": 3.3,
   "2023": 11.8,
   "2024": 45.2,
   "2025": 50.2,
-  "2026": 101.8
+  "2026": 101.9
  },
  "holdings": [
   {
@@ -64159,28 +64159,6 @@
   },
   {
    "account": "ALL",
-   "ticker": "DCTH",
-   "name": "Delcath Systems, Inc.",
-   "byPort": {
-    "IBKR": 20000.0
-   },
-   "isin": "US24661P8077",
-   "ccy": "USD",
-   "shares": 20000.0,
-   "price": 17.04999923,
-   "value": 340999.98,
-   "valueEur": 298338,
-   "valueUsd": 341000,
-   "basisUsd": 193634,
-   "realizedUsd": -16090,
-   "avgCost": 9.6817,
-   "unrealRet": 76.1,
-   "dayRet": -0.0,
-   "prevClose": 17.05,
-   "priceDate": "2026-08-14"
-  },
-  {
-   "account": "ALL",
    "ticker": "CLPT",
    "name": "CLEARPOINT NEURO INC",
    "byPort": {
@@ -64189,16 +64167,38 @@
    "isin": "US18507C1036",
    "ccy": "USD",
    "shares": 22000.0,
-   "price": 15.1800003,
-   "value": 333960.01,
-   "valueEur": 292178,
-   "valueUsd": 333960,
+   "price": 15.5,
+   "value": 341000.0,
+   "valueEur": 298338,
+   "valueUsd": 341000,
    "basisUsd": 230515,
    "realizedUsd": -60391,
    "avgCost": 10.4779,
-   "unrealRet": 44.9,
-   "dayRet": -2.06,
+   "unrealRet": 47.9,
+   "dayRet": 0.0,
    "prevClose": 15.5,
+   "priceDate": "2026-08-14"
+  },
+  {
+   "account": "ALL",
+   "ticker": "DCTH",
+   "name": "Delcath Systems, Inc.",
+   "byPort": {
+    "IBKR": 20000.0
+   },
+   "isin": "US24661P8077",
+   "ccy": "USD",
+   "shares": 20000.0,
+   "price": 16.86000061,
+   "value": 337200.01,
+   "valueEur": 295013,
+   "valueUsd": 337200,
+   "basisUsd": 193634,
+   "realizedUsd": -16090,
+   "avgCost": 9.6817,
+   "unrealRet": 74.1,
+   "dayRet": -1.11,
+   "prevClose": 17.05,
    "priceDate": "2026-08-18"
   },
   {
@@ -64256,17 +64256,17 @@
    "isin": "US52886X1072",
    "ccy": "USD",
    "shares": 47500.0,
-   "price": 4.98000001,
-   "value": 236550.0,
-   "valueEur": 206955,
-   "valueUsd": 236550,
+   "price": 4.92999982,
+   "value": 234174.99,
+   "valueEur": 204878,
+   "valueUsd": 234175,
    "basisUsd": 233470,
    "realizedUsd": 0,
    "avgCost": 4.9152,
-   "unrealRet": 1.3,
-   "dayRet": -0.0,
+   "unrealRet": 0.3,
+   "dayRet": -1.0,
    "prevClose": 4.98,
-   "priceDate": "2026-08-14"
+   "priceDate": "2026-08-18"
   },
   {
    "account": "ALL",
