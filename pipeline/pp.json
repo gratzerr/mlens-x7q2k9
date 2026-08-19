@@ -1,8 +1,8 @@
 {
- "fileDate": "2026-08-19 05:57",
- "generated": "2026-08-19 06:07",
+ "fileDate": "2026-08-19 06:08",
+ "generated": "2026-08-19 06:17",
  "engine": "pp-exact (verified vs PP app 2026-07-11)",
- "totalSecuritiesEur": 2185026,
+ "totalSecuritiesEur": 2175893,
  "cashEur": -157871.95,
  "cashByAccount": [
   {
@@ -30,22 +30,22 @@
    "eur": 93.1
   }
  ],
- "totalEur": 2027154,
- "ttwrorSince2022": 410.56,
- "ttwrorYtd": 102.72,
- "ttwrorAnnualized": 42.21,
- "izf": 69.0,
+ "totalEur": 2018021,
+ "ttwrorSince2022": 408.26,
+ "ttwrorYtd": 101.81,
+ "ttwrorAnnualized": 42.07,
+ "izf": 68.69,
  "yearlyReturns": {
   "2022": 3.3,
   "2023": 11.8,
   "2024": 45.2,
   "2025": 50.2,
-  "2026": 102.7
+  "2026": 101.8
  },
  "realizedEur": 644169,
- "unrealizedEur": 687400,
+ "unrealizedEur": 678267,
  "realizedUsd": 786421,
- "unrealizedUsd": 769000,
+ "unrealizedUsd": 758561,
  "netContribEur": 693272,
  "netContribUsd": 768897,
  "earningsEur": 12767.38,
@@ -27097,9 +27097,9 @@
   },
   {
    "d": "2026-08-18",
-   "v": 2317037,
-   "e": 2027154,
-   "r": 4.105621,
+   "v": 2306598,
+   "e": 2018021,
+   "r": 4.082619,
    "c": 768897,
    "k": 693272,
    "q": 786421,
@@ -64102,15 +64102,15 @@
    "name": "RAPID MICRO BIOSYSTEMS INC-A"
   }
  ],
- "ppReferenceTtwror": 410.56,
+ "ppReferenceTtwror": 408.26,
  "ppReferenceDate": "2026-08-19",
- "ttwrorApproxSince2022": 410.56,
+ "ttwrorApproxSince2022": 408.26,
  "yearlyReturnsApprox": {
   "2022": 3.3,
   "2023": 11.8,
   "2024": 45.2,
   "2025": 50.2,
-  "2026": 102.7
+  "2026": 101.8
  },
  "holdings": [
   {
@@ -64123,17 +64123,17 @@
    "isin": "NL0010696654",
    "ccy": "USD",
    "shares": 10000.0,
-   "price": 47.97000122,
-   "value": 479700.01,
-   "valueEur": 419685,
-   "valueUsd": 479700,
+   "price": 47.38000106,
+   "value": 473800.01,
+   "valueEur": 414523,
+   "valueUsd": 473800,
    "basisUsd": 91996,
    "realizedUsd": 11487,
    "avgCost": 9.1996,
-   "unrealRet": 421.4,
-   "dayRet": -0.0,
+   "unrealRet": 415.0,
+   "dayRet": -1.23,
    "prevClose": 47.97,
-   "priceDate": "2026-08-14"
+   "priceDate": "2026-08-18"
   },
   {
    "account": "ALL",
@@ -64159,28 +64159,6 @@
   },
   {
    "account": "ALL",
-   "ticker": "CLPT",
-   "name": "CLEARPOINT NEURO INC",
-   "byPort": {
-    "IBKR": 22000.0
-   },
-   "isin": "US18507C1036",
-   "ccy": "USD",
-   "shares": 22000.0,
-   "price": 15.5,
-   "value": 341000.0,
-   "valueEur": 298338,
-   "valueUsd": 341000,
-   "basisUsd": 230515,
-   "realizedUsd": -60391,
-   "avgCost": 10.4779,
-   "unrealRet": 47.9,
-   "dayRet": 0.0,
-   "prevClose": 15.5,
-   "priceDate": "2026-08-14"
-  },
-  {
-   "account": "ALL",
    "ticker": "DCTH",
    "name": "Delcath Systems, Inc.",
    "byPort": {
@@ -64200,6 +64178,28 @@
    "dayRet": -0.0,
    "prevClose": 17.05,
    "priceDate": "2026-08-14"
+  },
+  {
+   "account": "ALL",
+   "ticker": "CLPT",
+   "name": "CLEARPOINT NEURO INC",
+   "byPort": {
+    "IBKR": 22000.0
+   },
+   "isin": "US18507C1036",
+   "ccy": "USD",
+   "shares": 22000.0,
+   "price": 15.1800003,
+   "value": 333960.01,
+   "valueEur": 292178,
+   "valueUsd": 333960,
+   "basisUsd": 230515,
+   "realizedUsd": -60391,
+   "avgCost": 10.4779,
+   "unrealRet": 44.9,
+   "dayRet": -2.06,
+   "prevClose": 15.5,
+   "priceDate": "2026-08-18"
   },
   {
    "account": "ALL",
@@ -64234,17 +64234,17 @@
    "isin": "US6402683063",
    "ccy": "USD",
    "shares": 3300.0,
-   "price": 72.66999816,
-   "value": 239810.99,
-   "valueEur": 209808,
-   "valueUsd": 239811,
+   "price": 73.63999938,
+   "value": 243012.0,
+   "valueEur": 212609,
+   "valueUsd": 243012,
    "basisUsd": 213731,
    "realizedUsd": -54345,
    "avgCost": 64.7669,
-   "unrealRet": 12.2,
-   "dayRet": -0.0,
+   "unrealRet": 13.7,
+   "dayRet": 1.33,
    "prevClose": 72.67,
-   "priceDate": "2026-08-14"
+   "priceDate": "2026-08-18"
   },
   {
    "account": "ALL",
@@ -64278,17 +64278,17 @@
    "isin": "US64134X2018",
    "ccy": "USD",
    "shares": 35000.0,
-   "price": 6.2800002,
-   "value": 219800.01,
-   "valueEur": 192301,
-   "valueUsd": 219800,
+   "price": 6.26000022,
+   "value": 219100.01,
+   "valueEur": 191689,
+   "valueUsd": 219100,
    "basisUsd": 198036,
    "realizedUsd": 0,
    "avgCost": 5.6582,
-   "unrealRet": 11.0,
-   "dayRet": -0.0,
+   "unrealRet": 10.6,
+   "dayRet": -0.32,
    "prevClose": 6.28,
-   "priceDate": "2026-08-14"
+   "priceDate": "2026-08-18"
   }
  ],
  "txmax": "2026-08-14"
