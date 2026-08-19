@@ -901,15 +901,15 @@ function chartLegendLabel(l,returns){
 const CHART_MODES=[['value','Value'],['ttwror','TTWROR']];
 let chartMode=(()=>{ try{ const v=localStorage.getItem('pc-chartmode');
   return CHART_MODES.some(m=>m[0]===v)?v:'value'; }catch(e){ return 'value'; } })();
-const CHART_OFF_DEFAULT=['QQQ','VWCE.DE','XBI'];      // present in the data, off until asked for
-function chartHidden(){
-  try{ const raw=localStorage.getItem('pc-charthide');
+const CHART_ON_DEFAULT=['SPY','invested'];   // everything else waits to be switched on
+function chartShown(){
+  try{ const raw=localStorage.getItem('pc-charton');
     if(raw) return new Set(JSON.parse(raw)); }catch(e){}
-  return new Set(CHART_OFF_DEFAULT);
+  return new Set(CHART_ON_DEFAULT);
 }
 function chartToggle(key){
-  const h=chartHidden(); h.has(key)?h.delete(key):h.add(key);
-  try{ localStorage.setItem('pc-charthide', JSON.stringify([...h])); }catch(e){}
+  const v=chartShown(); v.has(key)?v.delete(key):v.add(key);
+  try{ localStorage.setItem('pc-charton', JSON.stringify([...v])); }catch(e){}
   renderChart();
 }
 function renderChartMode(){
@@ -932,7 +932,7 @@ function renderChart(){
   if(pts.length<2){svg.innerHTML='';if(legend)legend.innerHTML='';return;}
   const val=p=>(_ccy==='EUR'&&p.e!=null)?p.e:p.v;   // exact daily-FX EUR series when toggled
   const acc=cvar('--ink'), gc=cvar('--grid'), mc=cvar('--muted');   // Parqet-style: ink line (black/white)
-  const hidden=chartHidden();
+  const shown=chartShown();
   const base=pts[0].r;
   const series=[{key:'portfolio', name:'Portfolio', col:acc, width:2.4, area:true,
     pts:pts.map(p=>({d:p.d, y:returns?((1+p.r)/(1+base)-1)*100:val(p)}))}];
@@ -950,7 +950,7 @@ function renderChart(){
     if(cap.length>1) series.push({key:'invested', name:'Invested capital',
       col:cvar('--accent'), width:2, dash:'6 4', pts:cap});
   }
-  const lines=series.filter(x=>x.key==='portfolio'||!hidden.has(x.key));
+  const lines=series.filter(x=>x.key==='portfolio'||shown.has(x.key));
   const T=d=>new Date(d).getTime();
   const t0=T(pts[0].d), t1=T(pts[pts.length-1].d), tspan=(t1-t0)||1;
   const spanDays=tspan/86400000;
@@ -1011,7 +1011,7 @@ function renderChart(){
     /* a switched-off series still shows its number - that is how you decide whether
        it is worth switching on */
     legend.innerHTML=series.map(l=>{
-      const off=l.key!=='portfolio'&&hidden.has(l.key);
+      const off=l.key!=='portfolio'&&!shown.has(l.key);
       const v=chartLegendLabel(l,returns);
       return `<button type="button" data-cs="${esc(l.key)}" class="${off?'off':''}" aria-pressed="${!off}"
         ${l.key==='portfolio'?'disabled':''}><span class="sw" style="background:${esc(l.col)}"></span>${esc(l.name)}${v?` <span class="lv">${v}</span>`:''}</button>`;
@@ -2479,7 +2479,8 @@ function initTabs(){
    specific year, since-date, from–to), benchmarks (incl. user-added tickers), colors.
    Reorder via drag & drop. Layout persists in localStorage 'pc-pfw'. Formulas: PP Risk.java. */
 const BENCH_BASE={SPY:{label:'S&P 500',col:'#6d92c4'},QQQ:{label:'Nasdaq 100',col:'#bd93b4'},
-  'VWCE.DE':{label:'All-World',col:'#5bb98c'}};
+  'VWCE.DE':{label:'All-World',col:'#5bb98c'},'URTH':{label:'MSCI World',col:'#8f7ad6'},
+  '^STOXX':{label:'STOXX Europe 600',col:'#c9a227'},'^ATX':{label:'ATX',col:'#e07671'}};
 function benchMeta(){
   const m=JSON.parse(JSON.stringify(BENCH_BASE));
   const cols=['#e07671','#8f7ad6','#4db6ac','#c9a227','#7a9d54','#d06fa8','#5d8aa8','#b8860b'];
@@ -2630,6 +2631,10 @@ const PF_WIDGETS={
     const s=(m.ann!=null?m.ann:m.tt)/(m.volDaily*Math.sqrt(252));return IND(s.toFixed(2),s>=1?'up':'','risk-free 0%');}},
   chart:{lab:'Performance chart',big:1,opts:['bench'],render:w=>`<div class="chartbox"><svg class="line pfw-chart" preserveAspectRatio="none" style="height:230px"></svg><div class="tip"></div></div><div class="pfw-legend" style="display:flex;gap:14px;flex-wrap:wrap;margin-top:8px;font-size:12px;color:var(--ink-2)"></div>`,
     after:(w,el)=>drawPerfChart(w,el)},
+  pnl:{lab:'Overall performance',big:1,opts:[],render:()=>`<div class="chartbox"><svg class="line pfw-chart" preserveAspectRatio="none" style="height:230px"></svg><div class="tip"></div></div><svg class="pfw-flow" preserveAspectRatio="none" style="height:74px;width:100%;display:block"></svg><div class="pfw-legend" style="display:flex;gap:14px;flex-wrap:wrap;margin-top:8px;font-size:12px;color:var(--ink-2)"></div>`,
+    after:(w,el)=>drawPnlChart(w,el)},
+  pnlpct:{lab:'Overall performance (%)',big:1,opts:[],render:()=>`<div class="chartbox"><svg class="line pfw-chart" preserveAspectRatio="none" style="height:200px"></svg><div class="tip"></div></div><div class="pfw-legend" style="display:flex;gap:14px;flex-wrap:wrap;margin-top:8px;font-size:12px;color:var(--ink-2)"></div>`,
+    after:(w,el)=>drawPnlPctChart(w,el)},
   ddchart:{lab:'Drawdown chart',big:1,opts:[],render:()=>`<div class="chartbox"><svg class="line pfw-chart" preserveAspectRatio="none" style="height:180px"></svg><div class="tip"></div></div>`,
     after:(w,el)=>drawDDChart(w,el)},
   calc:{lab:'Calculation',big:1,opts:[],render:()=>{
@@ -2740,8 +2745,11 @@ const PF_WIDGETS={
     h+='<div style="overflow-x:auto"><table style="border-collapse:collapse;font-size:13px;width:100%;min-width:560px">'+
       `<tr>${TCOLS.map(([k,c],i)=>`<th data-tsort="${k}" style="cursor:pointer;text-align:${i>1?'right':'left'};color:var(--muted);font-weight:650;font-size:11.5px;padding:4px 8px 6px;border-bottom:1px solid var(--line)">${c}${srt.key===k?(srt.dir<0?' ▾':' ▴'):''}</th>`).join('')}</tr>`+
       show.map(t=>{const up=(t.gainUsd||0)>=0;
+        /* option contracts read as their human label and open their UNDERLYING —
+           the OCC symbol has no chart, no fundamentals and no news of its own */
+        const tt=actTk({tk:t.ticker});
         return `<tr>
-          <td style="padding:6px 8px;border-top:1px solid var(--grid)"><div class="hname">${logoImg((DATA.tradeLogos||{})[t.ticker]||[],'llogo',t.ticker)}<span style="font-weight:650">${esc(t.ticker)}</span></div></td>
+          <td style="padding:6px 8px;border-top:1px solid var(--grid)"><div class="hname sd-clk" data-sd="${esc(tt.base)}" title="Open ${esc(tt.base)}">${logoImg((DATA.tradeLogos||{})[t.ticker]||[],'llogo',tt.base)}<span style="font-weight:650">${esc(tt.tk)}</span></div></td>
           <td style="padding:6px 8px;border-top:1px solid var(--grid)"><span style="font-size:11px;background:var(--surface-2);border:1px solid var(--border);border-radius:6px;padding:2px 7px;color:var(--muted);font-weight:640">${esc(t.port||'—')}</span></td>
           <td class="tnum" style="text-align:right;padding:6px 8px;border-top:1px solid var(--grid);color:var(--muted)">${t.sell}</td>
           <td class="tnum" style="text-align:right;padding:6px 8px;border-top:1px solid var(--grid)">${t.days}d</td>
@@ -2753,6 +2761,9 @@ const PF_WIDGETS={
     return h;},
     after:(w,card)=>{const b=card.querySelector('[data-texp]');
       if(b) b.addEventListener('click',()=>{ w.exp=!w.exp; pfSave(); renderPerf(); });
+      /* a closed trade opens the same detail panel as a holding — with its purchases,
+         its full transaction list and the chart of what happened after the sale */
+      card.querySelectorAll('[data-sd]').forEach(c=>c.addEventListener('click',()=>openSecDetail(c.dataset.sd)));
       card.querySelectorAll('[data-tsort]').forEach(th=>th.addEventListener('click',()=>{
         const k=th.dataset.tsort, s=w.sort||{key:'sell',dir:-1};
         w.sort=s.key===k?{key:k,dir:-s.dir}:{key:k,dir:-1};
@@ -2768,10 +2779,10 @@ const PF_WIDGETS={
         <span class="tnum ${up?'up':'down'}" style="width:64px;text-align:right">${fmtPct(h.unrealizedReturn||0)}</span></div>`;}).join('');}}
 };
 /* canonical layout order — new widgets are inserted at their logical place */
-const PF_ORDER=['chart','ttwror','ttwror_ann','irr','lastday','abs','delta','invested',
+const PF_ORDER=['chart','pnl','pnlpct','ttwror','ttwror_ann','irr','lastday','abs','delta','invested',
   'earnings','fees','taxes','total','maxdd','curdd','dddur','vola','semivola','sharpe',
   'calc','years','heat','trades','contrib','ddchart'];
-const PF_DEFAULT=[{t:'chart',p:'all',bench:['SPY']},
+const PF_DEFAULT=[{t:'chart',p:'all',bench:['SPY']},{t:'pnl'},{t:'pnlpct'},
   {t:'ttwror',p:'all'},{t:'ttwror_ann',p:'all'},{t:'irr'},{t:'lastday'},
   {t:'abs',p:'all'},{t:'delta',p:'all'},{t:'invested'},{t:'total',p:'all'},
   {t:'maxdd',p:'all'},{t:'dddur',p:'all'},{t:'vola',p:'all'},{t:'semivola',p:'all'},
@@ -2855,6 +2866,16 @@ try{if(!localStorage.getItem('pc-tradesv1')){
     pfW.splice(at,0,{t:'trades'});
   }
   localStorage.setItem('pc-tradesv1','1');localStorage.setItem('pc-pfw',JSON.stringify(pfW));}}catch(e){}
+/* one-time additive: bring the two result graphs into layouts that already exist,
+   without reordering anything else or resurrecting widgets that were removed */
+try{if(!localStorage.getItem('pc-pnlv1')){
+  const rk=s=>{const r=PF_ORDER.indexOf(s);return r<0?PF_ORDER.length:r;};
+  ['pnl','pnlpct'].forEach(t=>{
+    if(pfW.some(x=>x.t===t)) return;
+    let at=0; pfW.forEach((e,i)=>{ if(rk(e.t)<=rk(t)) at=i+1; });
+    pfW.splice(at,0,{t});
+  });
+  localStorage.setItem('pc-pnlv1','1');localStorage.setItem('pc-pfw',JSON.stringify(pfW));}}catch(e){}
 const pfSave=()=>{try{localStorage.setItem('pc-pfw',JSON.stringify(pfW));}catch(e){}};
 /* instant benchmark series fetched in the browser (CORS proxy → Yahoo chart API);
    the cloud series (yfinance, adjusted closes) replaces it within ~1 minute */
@@ -4362,24 +4383,113 @@ function drawPerfChart(w,card){
   if(lg) lg.innerHTML=lines.map(l=>{ const last=l.pts[l.pts.length-1];
     return `<span><span style="display:inline-block;width:16px;height:3px;background:${l.col};border-radius:2px;vertical-align:3px;margin-right:6px"></span>${esc(l.name)} <b class="tnum ${last.y>=0?'up':'down'}">${fmtPct(last.y)}</b></span>`; }).join('');
 }
+/* ---- Overall performance ----
+   What the money did, not the time-weighted rate: the portfolio value against the
+   capital actually paid in. The gap between the two lines IS the result, so it is
+   shaded, and the strip underneath shows the deposits and withdrawals that move the
+   lower line — a step there explains a jump that is not a gain. */
+function pnlSeries(){
+  const pts=pfSliceP(PF_P); if(pts.length<2) return null;
+  const val=p=>(_ccy==='EUR'&&p.e!=null)?p.e:p.v;
+  const cap=p=>(_ccy==='EUR'?(p.k!=null?p.k:p.c):(p.c!=null?p.c:p.k));
+  const base=cap(pts[0])-val(pts[0]);         // invested capital rebased to the period start
+  const value=pts.map(p=>({d:p.d,y:val(p)}));
+  const invested=pts.map(p=>({d:p.d,y:cap(p)-base}));
+  return {pts,value,invested};
+}
+function drawPnlChart(w,card){
+  const svg=card.querySelector('svg.pfw-chart'), tip=card.querySelector('.tip'),
+        flow=card.querySelector('svg.pfw-flow'), lg=card.querySelector('.pfw-legend');
+  const s=pnlSeries(); if(!s){ svg.innerHTML=''; return; }
+  const lines=[{name:'Portfolio value',col:cvar('--ink'),pts:s.value,w:2.2},
+               {name:'Invested capital',col:cvar('--accent'),pts:s.invested,w:1.8,dash:'6 4'}];
+  drawLines(svg,tip,lines,s.pts,{fmt:'money',band:true});
+  const gain=s.value[s.value.length-1].y-s.invested[s.invested.length-1].y;
+  if(lg) lg.innerHTML=lines.map(l=>{const last=l.pts[l.pts.length-1];
+      return `<span><span style="display:inline-block;width:16px;height:3px;background:${l.col};border-radius:2px;vertical-align:3px;margin-right:6px"></span>${esc(l.name)} <b class="tnum">${fmtUsd(last.y)}</b></span>`;}).join('')
+    +`<span><span style="display:inline-block;width:10px;height:10px;background:${gain>=0?cvar('--up'):cvar('--down')};border-radius:2px;vertical-align:-1px;margin-right:6px"></span>Result <b class="tnum ${gain>=0?'up':'down'}">${fmtUsd(gain)}</b></span>`;
+  drawFlowBars(flow,s.pts);
+}
+function drawFlowBars(svg,pts){
+  if(!svg) return;
+  const d0=pts[0].d, d1=pts[pts.length-1].d;
+  const rows=(DATA.payments||[]).filter(p=>(p[1]==='deposit'||p[1]==='withdrawal')&&p[0]>=d0&&p[0]<=d1);
+  const W=svg.getBoundingClientRect().width||900, H=parseFloat(svg.style.height)||74, pad={t:6,b:14};
+  const T=d=>new Date(d).getTime(), t0=T(d0), t1=T(d1), ts=(t1-t0)||1;
+  if(!rows.length){ svg.setAttribute('viewBox',`0 0 ${W} ${H}`);
+    svg.innerHTML=`<text x="4" y="${H/2}" fill="${cvar('--muted')}" font-size="11" font-family="system-ui">No deposits or withdrawals in this period</text>`; return; }
+  const amt=p=>(_ccy==='EUR'?p[3]:p[4])*(p[1]==='withdrawal'?-1:1);
+  const max=Math.max(...rows.map(p=>Math.abs(amt(p))))||1;
+  const mid=pad.t+(H-pad.t-pad.b)/2;
+  const bars=rows.map(p=>{
+    const x=((T(p[0])-t0)/ts*W), v=amt(p), h=Math.abs(v)/max*((H-pad.t-pad.b)/2);
+    return `<rect x="${(x-2).toFixed(1)}" y="${(v>=0?mid-h:mid).toFixed(1)}" width="4" height="${Math.max(1.5,h).toFixed(1)}" rx="1.5"
+      fill="${v>=0?cvar('--up'):cvar('--down')}" opacity=".85"><title>${esc(p[0])} · ${v>=0?'deposit':'withdrawal'} ${fmtUsd(Math.abs(v))}</title></rect>`;
+  }).join('');
+  const add=rows.filter(p=>amt(p)>0).reduce((a,p)=>a+amt(p),0);
+  const out=rows.filter(p=>amt(p)<0).reduce((a,p)=>a-amt(p),0);
+  svg.setAttribute('viewBox',`0 0 ${W} ${H}`);
+  svg.innerHTML=`<line x1="0" y1="${mid}" x2="${W}" y2="${mid}" stroke="${cvar('--grid')}" stroke-width="1"/>${bars}`+
+    `<text x="4" y="${H-3}" fill="${cvar('--muted')}" font-size="10.5" font-family="system-ui">paid in ${esc(fmtUsd(add))} · taken out ${esc(fmtUsd(out))}</text>`;
+}
+function drawPnlPctChart(w,card){
+  const svg=card.querySelector('svg.pfw-chart'), tip=card.querySelector('.tip'), lg=card.querySelector('.pfw-legend');
+  const s=pnlSeries(); if(!s){ svg.innerHTML=''; return; }
+  /* result measured against the money at work: gain ÷ capital base. Unlike TTWROR
+     this one DOES feel the timing of deposits — that is the point of showing both. */
+  const pct=s.value.map((p,i)=>{
+    const inv=s.invested[i].y, basis=Math.max(1,inv);
+    return {d:p.d,y:(p.y-inv)/basis*100};
+  });
+  drawLines(svg,tip,[{name:'Result on capital',col:cvar('--up'),pts:pct,w:2.2}],s.pts);
+  const last=pct[pct.length-1];
+  if(lg) lg.innerHTML=`<span><span style="display:inline-block;width:16px;height:3px;background:${cvar('--up')};border-radius:2px;vertical-align:3px;margin-right:6px"></span>Result on invested capital <b class="tnum ${last.y>=0?'up':'down'}">${fmtPct(last.y)}</b></span>`;
+}
 function drawDDChart(w,card){
   const svg=card.querySelector('svg.pfw-chart'), tip=card.querySelector('.tip');
   const m=pfMetrics(PF_P); if(!m) return;
   drawLines(svg,tip,[{name:'Drawdown',col:cvar('--down'),pts:m.dd.serie,w:1.8,fill:true}],m.pts);
 }
-function drawLines(svg,tip,lines,pts){
+function drawLines(svg,tip,lines,pts,opt){
+  opt=opt||{};
+  const money=opt.fmt==='money';
   const W=svg.getBoundingClientRect().width||900, H=parseFloat(svg.style.height)||230, pad={t:12,b:20};
   const all=lines.flatMap(l=>l.pts.map(p=>p.y));
-  const ymin=Math.min(0,...all), ymax=Math.max(0,...all);
+  const ymin=Math.min(money?Math.min(...all):0,...all), ymax=Math.max(0,...all);
   const T=d=>new Date(d).getTime();
   const t0=T(pts[0].d), t1=T(pts[pts.length-1].d), ts=(t1-t0)||1;
   const X=d=>(T(d)-t0)/ts*W, Y=v=>pad.t+(1-(v-ymin)/(ymax-ymin||1))*(H-pad.t-pad.b);
   const gc=cvar('--grid'), mc=cvar('--muted');
   let grid='';
-  const span=ymax-ymin, step=[5,10,20,25,50,100,200,400].find(s=>span/s<=6)||400;
+  const span=(ymax-ymin)||1;
+  const tick=money?(v=>{ if(_priv) return ''; const cs=curSym();
+      return Math.abs(v)>=1e6? cs+(v/1e6).toFixed(Math.abs(v)%1e6?1:0).replace(/\.0$/,'')+'M'
+           : Math.abs(v)>=1e3? cs+Math.round(v/1e3)+'k' : cs+Math.round(v); })
+    :(v=>(v>0?'+':'')+v+'%');
+  let step;
+  if(money){ const raw=span/4, mag=Math.pow(10,Math.floor(Math.log10(raw)));
+    step=[1,2,2.5,5,10].map(m=>m*mag).find(x=>span/x<=5)||5*mag; }
+  else step=[5,10,20,25,50,100,200,400].find(x=>span/x<=6)||400;
   for(let v=Math.ceil(ymin/step)*step; v<=ymax; v+=step)
     grid+=`<line x1="0" y1="${Y(v).toFixed(1)}" x2="${W}" y2="${Y(v).toFixed(1)}" stroke="${gc}" stroke-width="${v===0?1.6:1}"/>`+
-      `<text x="4" y="${(Y(v)-4).toFixed(1)}" fill="${mc}" font-size="10.5" font-family="system-ui">${v>0?'+':''}${v}%</text>`;
+      `<text x="4" y="${(Y(v)-4).toFixed(1)}" fill="${mc}" font-size="10.5" font-family="system-ui">${tick(v)}</text>`;
+  /* the gap between two lines carries the message in the result chart: green while the
+     portfolio is above the money paid in, red below */
+  if(opt.band&&lines.length>1){
+    const a=lines[0].pts, b=lines[1].pts;
+    const up=a.map((p,i)=>({d:p.d,y:p.y,o:(b[i]||b[b.length-1]).y}));
+    const seg=(cond,col)=>{ let d='',open=false;
+      up.forEach((p,i)=>{ const on=cond(p);
+        if(on&&!open){ d+=`M${X(p.d).toFixed(1)},${Y(p.o).toFixed(1)}`; open=true; }
+        if(on) d+=` L${X(p.d).toFixed(1)},${Y(p.y).toFixed(1)}`;
+        const next=up[i+1];
+        if(open&&(!next||!cond(next))){
+          for(let j=i;j>=0&&cond(up[j]);j--) d+=` L${X(up[j].d).toFixed(1)},${Y(up[j].o).toFixed(1)}`;
+          d+=' Z'; open=false; }
+      });
+      return d?`<path d="${d}" fill="${col}" opacity=".14"/>`:''; };
+    grid+=seg(p=>p.y>=p.o,cvar('--up'))+seg(p=>p.y<p.o,cvar('--down'));
+  }
   svg.setAttribute('viewBox',`0 0 ${W} ${H}`);
   svg.innerHTML=grid+lines.map(l=>{
     const d=l.pts.map((p,i)=>`${i?'L':'M'}${X(p.d).toFixed(1)},${Y(p.y).toFixed(1)}`).join(' ');

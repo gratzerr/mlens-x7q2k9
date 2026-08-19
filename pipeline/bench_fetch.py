@@ -7,7 +7,9 @@ warnings.filterwarnings("ignore")
 
 ROOT = os.path.dirname(os.path.abspath(__file__))
 OUT = os.path.join(ROOT, "bench.json")
-BASE = ["SPY", "QQQ", "VWCE.DE"]
+# S&P 500, Nasdaq-100, FTSE All-World, MSCI World, STOXX Europe 600, ATX — the last
+# two make the European/Austrian side comparable, which US-only ETFs cannot show
+BASE = ["SPY", "QQQ", "VWCE.DE", "URTH", "^STOXX", "^ATX"]
 def all_syms():
     syms = list(BASE)
     try:
