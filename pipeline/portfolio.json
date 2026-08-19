@@ -4,10 +4,10 @@
  "source": "Parqet (live)",
  "portfolioId": "66e18c9426cf62020ccc7ee7",
  "totalValue": 2379073,
- "cashValue": -180448,
+ "cashValue": -180329,
  "netGainUnrealized": 772404,
  "unrealizedReturn": 48.1,
- "izf": 68.97,
+ "izf": 67.75,
  "ttwror": 331.6,
  "realizedAllTime": 1075764,
  "chartYtd": "__CHART_YTD__",
@@ -16,7 +16,7 @@
    "ticker": "Cash",
    "name": "Net Cash (PP)",
    "assetType": "cash",
-   "value": -180448,
+   "value": -180329,
    "unrealizedReturn": 0,
    "totalGainNet": 0,
    "thesis": "SQ USD/EUR + IBKR EUR/USD incl. margin",
@@ -40,9 +40,7 @@
     "finviz": "https://finviz.com/quote.ashx?t=QURE"
    },
    "shares": 10000.0,
-   "price": 47.97000122,
-   "dayChange": -1.34,
-   "prevClose": 48.62
+   "price": 47.97000122
   },
   {
    "pid": "hld_695f994d700de118b95a7054",
@@ -62,9 +60,7 @@
     "finviz": "https://finviz.com/quote.ashx?t=CLPT"
    },
    "shares": 22000.0,
-   "price": 15.5,
-   "dayChange": 1.04,
-   "prevClose": 15.34
+   "price": 15.5
   },
   {
    "pid": "hld_6967705c8236bd47c52f5c3c",
@@ -84,18 +80,16 @@
     "finviz": "https://finviz.com/quote.ashx?t=DCTH"
    },
    "shares": 20000.0,
-   "price": 17.04999923,
-   "dayChange": 1.91,
-   "prevClose": 16.73
+   "price": 17.04999923
   },
   {
    "pid": "hld_6a05e98db13dd7dd2991e731",
    "ticker": "PINK",
    "name": "Perimeter Medical Imaging AI",
    "assetType": "security",
-   "value": 282623,
-   "unrealizedReturn": 23.1,
-   "totalGainNet": 53011,
+   "value": 288616,
+   "unrealizedReturn": 25.7,
+   "totalGainNet": 59004,
    "thesis": "Claire OCT imaging (breast-cancer margins)",
    "ySym": "PINK.V",
    "gquery": "Perimeter Medical Imaging",
@@ -106,9 +100,7 @@
     "finviz": "https://finviz.com/quote.ashx?t=PYNKF"
    },
    "shares": 1000000.0,
-   "price": 0.4,
-   "dayChange": 8.11,
-   "prevClose": 0.37
+   "price": 0.4
   },
   {
    "pid": "hld_6a183e2a547bdef260161491",
@@ -128,9 +120,7 @@
     "finviz": "https://finviz.com/quote.ashx?t=NKTR"
    },
    "shares": 3300.0,
-   "price": 72.66999816,
-   "dayChange": -0.48,
-   "prevClose": 73.02
+   "price": 72.66999816
   },
   {
    "pid": "hld_6a50a76ca01cf4bd3026a819",
@@ -150,9 +140,7 @@
     "finviz": "https://finviz.com/quote.ashx?t=LXEO"
    },
    "shares": 47500.0,
-   "price": 4.98000001,
-   "dayChange": 2.89,
-   "prevClose": 4.84
+   "price": 4.98000001
   },
   {
    "pid": "hld_69958ddb69baa58c8f1f8c4d",
@@ -172,20 +160,18 @@
     "finviz": "https://finviz.com/quote.ashx?t=NRXS"
    },
    "shares": 35000.0,
-   "price": 6.2800002,
-   "dayChange": -0.32,
-   "prevClose": 6.3
+   "price": 6.2800002
   },
   {
    "ticker": "ABVX",
    "name": "Abivax — Mar-2027 $120 Call",
    "assetType": "option",
-   "value": 352500,
+   "value": 337650,
    "shares": 15000.0,
-   "price": 23.5,
+   "price": 22.51,
    "costPrice": 22.4994,
-   "unrealizedReturn": 4.4,
-   "totalGainNet": 15009,
+   "unrealizedReturn": 0.0,
+   "totalGainNet": 159,
    "thesis": "Long call on Abivax (exp Mar 2027, strike $120) — leveraged bet on obefazimod, the oral anti-inflammatory miR-124 enhancer in ulcerative colitis",
    "links": {
     "ir": "https://www.abivax.com/investors/",
@@ -194,11 +180,9 @@
     "finviz": "https://finviz.com/quote.ashx?t=ABVX"
    },
    "gquery": "Abivax",
-   "occ": "ABVX270319C00120000",
-   "dayChange": 4.4,
-   "prevClose": 22.51
+   "occ": "ABVX270319C00120000"
   }
  ],
- "ttwrorYtd": 102.33,
- "since2022": 409.57
+ "ttwrorYtd": 98.72,
+ "since2022": 400.48
 }
