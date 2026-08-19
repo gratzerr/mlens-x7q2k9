@@ -1,8 +1,8 @@
 {
- "fileDate": "2026-08-19 13:20",
- "generated": "2026-08-19 13:30",
+ "fileDate": "2026-08-19 13:32",
+ "generated": "2026-08-19 13:41",
  "engine": "pp-exact (verified vs PP app 2026-07-11)",
- "totalSecuritiesEur": 2178653,
+ "totalSecuritiesEur": 2192113,
  "cashEur": -157871.95,
  "cashByAccount": [
   {
@@ -30,22 +30,22 @@
    "eur": 93.1
   }
  ],
- "totalEur": 2020781,
- "ttwrorSince2022": 408.96,
- "ttwrorYtd": 102.09,
- "ttwrorAnnualized": 42.11,
- "izf": 68.79,
+ "totalEur": 2034241,
+ "ttwrorSince2022": 412.35,
+ "ttwrorYtd": 103.43,
+ "ttwrorAnnualized": 42.28,
+ "izf": 69.14,
  "yearlyReturns": {
   "2022": 3.3,
   "2023": 11.8,
   "2024": 45.2,
   "2025": 50.2,
-  "2026": 102.1
+  "2026": 103.4
  },
  "realizedEur": 644169,
- "unrealizedEur": 681027,
+ "unrealizedEur": 694487,
  "realizedUsd": 786421,
- "unrealizedUsd": 761715,
+ "unrealizedUsd": 777100,
  "netContribEur": 693272,
  "netContribUsd": 768897,
  "earningsEur": 12767.38,
@@ -27097,9 +27097,25 @@
   },
   {
    "d": "2026-08-18",
-   "v": 2309752,
-   "e": 2020781,
-   "r": 4.08957,
+   "v": 2274007,
+   "e": 1989508,
+   "r": 4.010805,
+   "c": 768897,
+   "k": 693272,
+   "q": 786421,
+   "Q": 644169,
+   "g": 13770,
+   "G": 12767,
+   "f": 10668,
+   "F": 9344,
+   "t": 1907,
+   "T": 1717
+  },
+  {
+   "d": "2026-08-19",
+   "v": 2325137,
+   "e": 2034241,
+   "r": 4.123471,
    "c": 768897,
    "k": 693272,
    "q": 786421,
@@ -64102,15 +64118,15 @@
    "name": "RAPID MICRO BIOSYSTEMS INC-A"
   }
  ],
- "ppReferenceTtwror": 408.96,
+ "ppReferenceTtwror": 412.35,
  "ppReferenceDate": "2026-08-19",
- "ttwrorApproxSince2022": 408.96,
+ "ttwrorApproxSince2022": 412.35,
  "yearlyReturnsApprox": {
   "2022": 3.3,
   "2023": 11.8,
   "2024": 45.2,
   "2025": 50.2,
-  "2026": 102.1
+  "2026": 103.4
  },
  "holdings": [
   {
@@ -64123,17 +64139,17 @@
    "isin": "NL0010696654",
    "ccy": "USD",
    "shares": 10000.0,
-   "price": 47.90000152,
-   "value": 479000.02,
-   "valueEur": 419073,
-   "valueUsd": 479000,
+   "price": 47.52000045,
+   "value": 475200.0,
+   "valueEur": 415748,
+   "valueUsd": 475200,
    "basisUsd": 91996,
    "realizedUsd": 11487,
    "avgCost": 9.1996,
-   "unrealRet": 420.7,
-   "dayRet": -0.15,
-   "prevClose": 47.97,
-   "priceDate": "2026-08-18"
+   "unrealRet": 416.5,
+   "dayRet": 0.3,
+   "prevClose": 47.38,
+   "priceDate": "2026-08-19"
   },
   {
    "account": "ALL",
@@ -64153,9 +64169,9 @@
    "realizedUsd": 0,
    "avgCost": 22.4994,
    "unrealRet": 5.8,
-   "dayRet": -2.86,
-   "prevClose": 24.5,
-   "priceDate": "2026-08-18"
+   "dayRet": 0.0,
+   "prevClose": 23.8,
+   "priceDate": "2026-08-19"
   },
   {
    "account": "ALL",
@@ -64167,17 +64183,17 @@
    "isin": "US24661P8077",
    "ccy": "USD",
    "shares": 20000.0,
-   "price": 17.12999916,
-   "value": 342599.98,
-   "valueEur": 299738,
-   "valueUsd": 342600,
+   "price": 17.20499992,
+   "value": 344100.0,
+   "valueEur": 301050,
+   "valueUsd": 344100,
    "basisUsd": 193634,
    "realizedUsd": -16090,
    "avgCost": 9.6817,
-   "unrealRet": 76.9,
-   "dayRet": 0.47,
-   "prevClose": 17.05,
-   "priceDate": "2026-08-18"
+   "unrealRet": 77.7,
+   "dayRet": 2.05,
+   "prevClose": 16.86,
+   "priceDate": "2026-08-19"
   },
   {
    "account": "ALL",
@@ -64189,17 +64205,17 @@
    "isin": "US18507C1036",
    "ccy": "USD",
    "shares": 22000.0,
-   "price": 15.39999961,
-   "value": 338799.99,
-   "valueEur": 296413,
-   "valueUsd": 338800,
+   "price": 15.53999996,
+   "value": 341880.0,
+   "valueEur": 299108,
+   "valueUsd": 341880,
    "basisUsd": 230515,
    "realizedUsd": -60391,
    "avgCost": 10.4779,
-   "unrealRet": 47.0,
-   "dayRet": -0.65,
-   "prevClose": 15.5,
-   "priceDate": "2026-08-18"
+   "unrealRet": 48.3,
+   "dayRet": 2.37,
+   "prevClose": 15.18,
+   "priceDate": "2026-08-19"
   },
   {
    "account": "ALL",
@@ -64220,31 +64236,9 @@
    "realizedUsd": 0,
    "avgCost": 0.3173,
    "unrealRet": 18.5,
-   "dayRet": -3.75,
-   "prevClose": 0.4,
-   "priceDate": "2026-08-18"
-  },
-  {
-   "account": "ALL",
-   "ticker": "NKTR",
-   "name": "NEKTAR THERAPEUTICS",
-   "byPort": {
-    "SQ": 3300.0
-   },
-   "isin": "US6402683063",
-   "ccy": "USD",
-   "shares": 3300.0,
-   "price": 75.0,
-   "value": 247500.0,
-   "valueEur": 216535,
-   "valueUsd": 247500,
-   "basisUsd": 213731,
-   "realizedUsd": -54345,
-   "avgCost": 64.7669,
-   "unrealRet": 15.8,
-   "dayRet": 3.21,
-   "prevClose": 72.67,
-   "priceDate": "2026-08-18"
+   "dayRet": -1.28,
+   "prevClose": 0.39,
+   "priceDate": "2026-08-19"
   },
   {
    "account": "ALL",
@@ -64256,17 +64250,39 @@
    "isin": "US52886X1072",
    "ccy": "USD",
    "shares": 47500.0,
-   "price": 4.92999982,
-   "value": 234174.99,
-   "valueEur": 204878,
-   "valueUsd": 234175,
+   "price": 5.26000022,
+   "value": 249850.01,
+   "valueEur": 218591,
+   "valueUsd": 249850,
    "basisUsd": 233470,
    "realizedUsd": 0,
    "avgCost": 4.9152,
-   "unrealRet": 0.3,
-   "dayRet": -1.0,
-   "prevClose": 4.98,
-   "priceDate": "2026-08-18"
+   "unrealRet": 7.0,
+   "dayRet": 6.69,
+   "prevClose": 4.93,
+   "priceDate": "2026-08-19"
+  },
+  {
+   "account": "ALL",
+   "ticker": "NKTR",
+   "name": "NEKTAR THERAPEUTICS",
+   "byPort": {
+    "SQ": 3300.0
+   },
+   "isin": "US6402683063",
+   "ccy": "USD",
+   "shares": 3300.0,
+   "price": 75.09999847,
+   "value": 247829.99,
+   "valueEur": 216824,
+   "valueUsd": 247830,
+   "basisUsd": 213731,
+   "realizedUsd": -54345,
+   "avgCost": 64.7669,
+   "unrealRet": 16.0,
+   "dayRet": 1.98,
+   "prevClose": 73.64,
+   "priceDate": "2026-08-19"
   },
   {
    "account": "ALL",
@@ -64278,17 +64294,17 @@
    "isin": "US64134X2018",
    "ccy": "USD",
    "shares": 35000.0,
-   "price": 6.26000022,
-   "value": 219100.01,
-   "valueEur": 191689,
-   "valueUsd": 219100,
+   "price": 6.21999979,
+   "value": 217699.99,
+   "valueEur": 190464,
+   "valueUsd": 217700,
    "basisUsd": 198036,
    "realizedUsd": 0,
    "avgCost": 5.6582,
-   "unrealRet": 10.6,
-   "dayRet": -0.32,
-   "prevClose": 6.28,
-   "priceDate": "2026-08-18"
+   "unrealRet": 9.9,
+   "dayRet": -0.64,
+   "prevClose": 6.26,
+   "priceDate": "2026-08-19"
   }
  ],
  "txmax": "2026-08-14"
