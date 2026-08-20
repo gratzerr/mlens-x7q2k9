@@ -4193,13 +4193,14 @@ function renderSectors(){
     .map(([sym,r])=>({sym,...r}))
     .sort((a,b)=>b.fromHigh-a.fromHigh);
   if(!rows.length){ el.innerHTML='<tr><td style="color:var(--muted);font-size:13px;padding:8px 2px">Sector ranges are refreshed by the cloud run — nothing yet.</td></tr>'; return; }
-  el.innerHTML='<thead><tr>'+['Sector','ETF','Price','52-week range','From high'].map((c,i)=>
-      `<th style="text-align:${i>1?'right':'left'}">${c}</th>`).join('')+'</tr></thead><tbody>'+
+  el.innerHTML='<thead><tr>'+['Sector','Price','52-week range','From high'].map((c,i)=>
+      `<th style="text-align:${i>0?'right':'left'}">${c}</th>`).join('')+'</tr></thead><tbody>'+
     rows.map(r=>{
       const rp=Math.max(0,Math.min(100,+r.pos||0)).toFixed(1);
-      return `<tr><td><div class="hname sd-clk" data-sd="${esc(r.sym)}" title="Open ${esc(r.sym)}">${logoImg(tickerLogos(r.sym),'llogo',r.sym)}
-          <div style="min-width:0"><div class="c1">${esc(r.name)}</div><div class="nm2">${esc(r.sym)}</div></div></div></td>
-        <td><div class="c1">${esc(r.sym)}</div></td>
+      /* name and ticker in one cell: a separate ETF column repeated the same symbol,
+         and a logo tile for XL* funds is just two grey letters */
+      return `<tr><td><div class="sd-clk" data-sd="${esc(r.sym)}" title="Open ${esc(r.sym)}" style="min-width:0">
+          <div class="c1">${esc(r.name)}</div><div class="nm2">${esc(r.sym)}</div></div></td>
         <td style="text-align:right"><div class="c1 tnum">$${(+r.px).toFixed(2)}</div></td>
         <td style="min-width:170px"><div class="rng" style="width:100%" title="52-week range $${r.lo} – $${r.hi} · ${rp}% into the range">
           <div class="rtrack" style="--range-position:${rp}%"><div class="rdot" style="left:${rp}%"></div></div>
