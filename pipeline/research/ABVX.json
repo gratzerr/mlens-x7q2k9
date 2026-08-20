@@ -27,14 +27,14 @@
       "headline": "Morgan Stanley Raises Abivax Price Target to $180 from $132, Maintains Overweight",
       "source": "Moomoo / Morgan Stanley research note",
       "url": "https://www.moomoo.com/news/post/73506815/morgan-stanley-maintains-abivax-sa-abvxus-with-buy-rating-raises",
-      "summary": "Morgan Stanley lifted its target well above the prevailing share price, citing growing confidence in the obefazimod UC data package and the NDA timeline after the maintenance results and pre-NDA FDA feedback. It was one of several sell-side hikes that have pushed the consensus target to roughly $160-166 (Piper Sandler and Guggenheim at $175)."
+      "summary": "Morgan Stanley lifted its target well above the prevailing share price, citing growing confidence in the obefazimod UC data package and the NDA timeline after the maintenance results and pre-NDA FDA feedback. It was one of several sell-side hikes that have pushed the consensus target toward the $150-180 area (Piper Sandler and Guggenheim near $175)."
     },
     {
-      "date": "2026-07-23",
-      "headline": "Abivax Strengthens Commercial Capabilities With Strategic Leadership Appointments",
-      "source": "GlobeNewswire",
-      "url": "https://www.globenewswire.com/news-release/2026/07/23/3332548/0/en/Abivax-Strengthens-Commercial-Capabilities-With-Strategic-Leadership-Appointments.html",
-      "summary": "Abivax hired four senior commercial executives covering marketing, patient services, sales operations and market access/pricing to build a standalone U.S. commercial organization ahead of a potential obefazimod launch. The move signals the company is preparing to launch on its own rather than depending on a partner or acquirer."
+      "date": "2026-07-17",
+      "headline": "Biotech Abivax Re-Engages Investment Bank Centerview for Big Pharma Takeover Talks",
+      "source": "La Lettre (via Sahm Capital)",
+      "url": "https://www.sahmcapital.com/news/content/biotech-abivax-re-engages-investment-bank-centerview-for-big-pharma-takeover-talks-la-lettre-2026-07-17",
+      "summary": "French outlet La Lettre reported that Abivax has re-engaged Centerview to resume exploratory conversations with large pharmaceutical companies, reviving M&A speculation just after the $920 million capital raise closed. CEO Marc de Garidel has publicly downplayed urgency to sell, framing the cash position as giving Abivax leverage rather than a need to deal."
     },
     {
       "date": "2026-07-10",
@@ -58,9 +58,9 @@
       "confirmed": true
     },
     {
-      "when": "2026-Q4 / 2027-H1",
+      "when": "2026-H2",
       "label": "MAA submission to the EMA for obefazimod in ulcerative colitis",
-      "detail": "Abivax has guided to filing a Marketing Authorization Application in Europe alongside the U.S. NDA, contingent on the (now positive) maintenance data. The company's most recent communication emphasises the Q4 2026 FDA filing and has not restated a precise EMA date, so exact MAA timing remains unconfirmed.",
+      "detail": "Abivax has guided to filing a Marketing Authorization Application in Europe in the second half of 2026, alongside the U.S. NDA, contingent on the (now positive) maintenance data. The company's most recent communication emphasises the Q4 2026 FDA filing and has not restated a precise EMA date, so exact MAA timing remains unconfirmed.",
       "confirmed": false
     },
     {
@@ -76,5 +76,5 @@
       "confirmed": false
     }
   ],
-  "pulse": "Abivax has fully recovered from its post-financing wobble: the ADS trades around $120-121 as of August 19, 2026 (market cap ~$10.4bn, 52-week range $67-$149), right back at the $120 strike after dipping near $103 in early August. The story is now almost entirely execution rather than science - Phase 3 ABTECT induction and 44-week maintenance data are positive (including refractory patients), the July 30 pre-NDA meeting confirmed FDA alignment on an end-2026 NDA filing, and the $920m raise funds a solo U.S. launch into Q4 2029, with August news flow limited to 13G filings showing TCG Crossover at 7.0% and Invus at 6.0%. For the March-2027 $120 call the position is roughly at-the-money and hinges on the Q4 2026 NDA submission landing on time, the September H1 report, mid-2027 Crohn's expectations building early, and whether renewed takeover speculation or a re-rating toward the ~$166 average analyst target pushes shares decisively above the strike before expiry."
+  "pulse": "Abivax's news flow has quieted since the flurry of July catalysts: the July 30 pre-NDA meeting confirmed FDA alignment on an end-2026 obefazimod NDA filing, Morgan Stanley lifted its target to $180, and La Lettre reported Abivax has re-engaged Centerview for renewed Big Pharma takeover conversations even as the company builds a standalone U.S. commercial organization funded by the $920m July raise (runway into Q4 2029). August activity has been limited to 13G/A ownership filings showing TCG Crossover at 7.0% and Invus at 6.0%, with the ADS holding broadly in the $120s (52-week range roughly $67-$149) - essentially at-the-money versus the March-2027 $120 call. The story remains almost entirely execution risk rather than science risk: the September H1 report and the Q4 2026 NDA submission are the next hard catalysts, while recurring takeover chatter and the mid-2027 Crohn's data add optionality before the option expires."
 }

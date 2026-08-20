@@ -42,13 +42,6 @@
       "source": "StockTitan / SEC EDGAR",
       "url": "https://www.stocktitan.net/sec-filings/CLPT/schedule-13g-a-clear-point-neuro-inc-amended-passive-investment-discl-d7fa3c6e9790.html",
       "summary": "BlackRock reported beneficial ownership of 2,118,912 CLPT shares, or 7.1% of the common stock, with sole voting power over 2,087,782 shares in an amended Schedule 13G. Together with MAK Capital's 7.8%, it puts roughly 15% of the float in the hands of two large passive holders ahead of the Q2 print."
-    },
-    {
-      "date": "2026-07-14",
-      "headline": "EpilepsyGTx partners with ClearPoint Neuro for targeted delivery of lead epilepsy gene therapy",
-      "source": "News-Medical",
-      "url": "https://www.news-medical.net/news/20260714/EpilepsyGTx-partners-with-ClearPoint-Neuro-to-support-targeted-delivery-of-lead-gene-therapy-in-epilepsy.aspx",
-      "summary": "EpilepsyGTx selected the ClearPoint SmartFlow Cannula and Navigation System to administer its lead candidate EPY201 in a planned first-in-human Phase 1/2a trial for focal refractory epilepsy. The deal adds another pharma partner to ClearPoint's gene-therapy delivery pipeline beyond the flagship uniQure program."
     }
   ],
   "catalysts": [
@@ -67,7 +60,7 @@
     {
       "when": "H2 2026",
       "label": "EpilepsyGTx EPY201 Phase 1/2a start",
-      "detail": "EpilepsyGTx plans a first-in-human Phase 1/2a trial of EPY201 for focal refractory epilepsy using ClearPoint's SmartFlow Cannula and Navigation System. Trial initiation would convert the July partnership announcement into actual procedure and service revenue.",
+      "detail": "EpilepsyGTx plans a first-in-human Phase 1/2a trial of EPY201 for focal refractory epilepsy using ClearPoint's SmartFlow Cannula and Navigation System, following the July 2026 partnership announcement. Trial initiation would convert the deal into actual procedure and service revenue.",
       "confirmed": false
     },
     {
@@ -79,7 +72,7 @@
     {
       "when": "2026-11",
       "label": "Q3 2026 earnings",
-      "detail": "Next quarterly print, expected in early November 2026 (date not yet formally announced; the IR calendar shows no scheduled events). After the FY cut to $48-52M, cash down to $29.4M and opex up 51%, investors will focus on cash burn, whether opex growth moderates, and whether a capital raise becomes necessary.",
+      "detail": "Next quarterly print, expected in early November 2026 (date not yet formally announced; the IR calendar shows no scheduled events as of mid-August). After the FY cut to $48-52M, cash down to $29.4M and opex up 51%, investors will focus on cash burn, whether opex growth moderates, and whether a capital raise becomes necessary.",
       "confirmed": false
     },
     {
@@ -101,5 +94,5 @@
       "confirmed": false
     }
   ],
-  "pulse": "CLPT is still in the penalty box after the August 3 print: Q2 revenue of $10.9M missed by about $1.8M, opex jumped 51%, cash fell to $29.4M and FY2026 guidance was cut to $48-52M, sending the stock down roughly 16% and leaving it far below its $30.10 52-week high, while management simultaneously unveiled a $500M long-term revenue ambition built on gene-therapy delivery, the new CAL preclinical facility, the SONOCARE focused-ultrasound partnership and a cranial robot. Sentiment is split rather than capitulating: Stifel and Lake Street both kept Buy ratings while trimming targets to $22-$25, and 13G filings show BlackRock at 7.1% and MAK Capital raising its stake to 7.8%, so patient institutional money is accumulating into the weakness. The next few months trade on partner milestones rather than the P&L - uniQure's confirmed Q3 2026 BLA filing for AMT-130 is the dominant near-term event, backed by Aspen's fresh RMAT in Parkinson's and the EpilepsyGTx trial start - against a shrinking cash runway that keeps financing risk the key offsetting factor."
+  "pulse": "CLPT has traded quietly since mid-August, with no new price-moving news since the Aug 12 disclosure that MAK Capital raised its passive stake to 7.8%, following BlackRock's 7.1% stake filed in late July - together nearly 15% of the float held by patient institutional money accumulating into the post-earnings weakness. The stock remains well off its $30.10 52-week high after the August 3 print, when Q2 revenue of $10.9M missed by about $1.8M, opex jumped 51%, cash fell to $29.4M and FY2026 guidance was cut to $48-52M, even as management unveiled a $500M long-term revenue ambition built on gene-therapy delivery, the new CAL preclinical facility, the SONOCARE focused-ultrasound partnership and a cranial robot; Stifel and Lake Street both kept Buy ratings while trimming targets to $22-$25. The next catalysts are partner-driven rather than internal - uniQure's confirmed Q3 2026 BLA filing for AMT-130 is the dominant near-term event, backed by Aspen's fresh RMAT in Parkinson's and the pending EpilepsyGTx trial start - with the Q3 2026 earnings print (expected early November) the next hard checkpoint on cash burn and whether biologics revenue reaccelerates as promised."
 }
