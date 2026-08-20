@@ -443,6 +443,9 @@ data = {
     # watchlist quotes (separate from bench so they never appear as benchmark chips)
     "watch": (lambda: (json.load(open(os.path.join(ROOT, "watch.json")))
                        if os.path.exists(os.path.join(ROOT, "watch.json")) else {}))(),
+    # sector ETFs with their 52-week band (bench_fetch.fetch_sectors, hourly)
+    "sectors": (lambda: (json.load(open(os.path.join(ROOT, "sectors.json")))
+                         if os.path.exists(os.path.join(ROOT, "sectors.json")) else {}))(),
     "watchMeta": (lambda: (json.load(open(os.path.join(ROOT, "watch_meta.json")))
                            if os.path.exists(os.path.join(ROOT, "watch_meta.json")) else {}))(),
     "fund": (lambda: (json.load(open(os.path.join(ROOT, "fund.json")))

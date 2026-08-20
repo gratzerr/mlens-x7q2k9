@@ -71,6 +71,47 @@ def watch_syms():
     except Exception:
         return []
 
+# Sector ranges for the Watchlist tab: where each part of the market sits inside its
+# own 52-week band. Biotech carries most of the portfolio, so XBI/IBB belong here as
+# much as the eleven S&P sector ETFs.
+SECTORS = [("XLK", "Technology"), ("XLV", "Health Care"), ("XBI", "Biotech"),
+           ("IBB", "Biotech · large"), ("XLF", "Financials"), ("XLY", "Consumer Discretionary"),
+           ("XLP", "Consumer Staples"), ("XLE", "Energy"), ("XLI", "Industrials"),
+           ("XLB", "Materials"), ("XLU", "Utilities"), ("XLRE", "Real Estate"),
+           ("XLC", "Communication Services")]
+SECTOR_OUT = os.path.join(ROOT, "sectors.json")
+
+def fetch_sectors():
+    """Price plus 52-week band per sector ETF. Refreshed hourly; the old file is kept
+    on failure so the table never empties out because one call timed out."""
+    if _fresh(SECTOR_OUT, 1):
+        return
+    import yfinance as yf
+    out = {}
+    try:
+        old = json.load(open(SECTOR_OUT))
+    except Exception:
+        old = {}
+    for sym, name in SECTORS:
+        try:
+            fi = yf.Ticker(sym).fast_info
+            px, lo, hi = float(fi["last_price"]), float(fi["year_low"]), float(fi["year_high"])
+            if not (px > 0 and 0 < lo <= hi):
+                raise ValueError("range unusable")
+            out[sym] = {"name": name, "px": round(px, 2), "lo": round(lo, 2), "hi": round(hi, 2),
+                        "pos": round((px - lo) / (hi - lo) * 100, 1) if hi > lo else 50.0,
+                        "fromHigh": round((px / hi - 1) * 100, 2)}
+        except Exception as e:
+            if sym in old:
+                out[sym] = old[sym]            # keep the last good row rather than a gap
+            else:
+                print(f"sectors: {sym} failed ({e})")
+    if out:
+        import time
+        out["_ts"] = time.time()
+        json.dump(out, open(SECTOR_OUT, "w"), separators=(",", ":"))
+        print("sectors.json:", len([k for k in out if not k.startswith('_')]), "ETFs")
+
 WATCH_META = os.path.join(ROOT, "watch_meta.json")
 def _fast_meta(sym):
     """Fundamentals for the watchlist row (Seeking-Alpha-style columns)."""
@@ -253,6 +294,8 @@ def main():
 if __name__ == "__main__":
     main()
     fetch_watch(os.environ.get("MISSING_ONLY") == "1")
+    try: fetch_sectors()
+    except Exception as e: print("sectors skipped:", e)
     try: fetch_fund()
     except Exception as e: print("fund fetch skipped:", e)
     try: fetch_estimates()

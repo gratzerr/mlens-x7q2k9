@@ -683,6 +683,12 @@
     <div style="overflow-x:auto"><table class="htable" id="watchtable"></table></div>
   </div>
 
+  <div class="panel" data-tab="watchlist">
+    <h2 style="display:flex;align-items:baseline;gap:10px"><span>Sector 52-week ranges</span>
+      <span style="font-size:11.5px;color:var(--muted);font-weight:500;text-transform:none;letter-spacing:0">where each part of the market sits in its own year · closest to its high first</span></h2>
+    <div style="overflow-x:auto"><table class="htable" id="sectortable"></table></div>
+  </div>
+
   <div class="foot" id="foot"></div>
 </div>
 
@@ -1342,7 +1348,7 @@ async function loadConfig(){
   applyName(); applyVisibility();
   const i=document.getElementById('pnamein'); if(i) i.value=_cfg.name;
   /* the Firestore lists may replace the baked fallback — repaint if user is looking */
-  if(_tab==='watchlist') renderWatchlist();
+  if(_tab==='watchlist'){ renderWatchlist(); renderSectors(); }
   refreshWatch().catch(()=>{});
 }
 /* poll Firestore for the minute-fresh snapshot the cloud loop uploads — visitors get
@@ -2522,7 +2528,7 @@ function switchTab(t){
   try{ history.replaceState(null,'','#'+t); }catch(e){}
   if(t==='portfolio'){ renderChart(); hydrateSparks(); }
   if(t==='performance'){ renderPerf(); }
-  if(t==='watchlist'){ renderWatchlist(); }
+  if(t==='watchlist'){ renderWatchlist(); renderSectors(); }
   if(t==='payments'){ renderPayments(); }
   if(t==='research'){ rsInit(); }
   if(changed) scrollAppTop();
@@ -4175,6 +4181,32 @@ function wlSpark(tail,up){
     <polyline points="${pts}" fill="none" stroke="${col}" stroke-width="1.8" stroke-linejoin="round" stroke-linecap="round"/>
     <circle cx="${w}" cy="${P(tail[tail.length-1],tail.length-1).split(',')[1]}" r="2.6" fill="${col}"/></svg>`;
 }
+/* ---- Sector 52-week ranges ----
+   The same bar as a holding's 52-week range, one row per sector ETF: how far into its
+   own year each part of the market is trading. Sorted by distance from the high, so
+   what is running and what is lagging reads off the top and bottom of the list. */
+function renderSectors(){
+  const el=document.getElementById('sectortable'); if(!el) return;
+  const raw=DATA.sectors||{};
+  const rows=Object.entries(raw).filter(([k])=>!k.startsWith('_'))
+    .map(([sym,r])=>({sym,...r}))
+    .sort((a,b)=>b.fromHigh-a.fromHigh);
+  if(!rows.length){ el.innerHTML='<tr><td style="color:var(--muted);font-size:13px;padding:8px 2px">Sector ranges are refreshed by the cloud run — nothing yet.</td></tr>'; return; }
+  el.innerHTML='<thead><tr>'+['Sector','ETF','Price','52-week range','From high'].map((c,i)=>
+      `<th style="text-align:${i>1?'right':'left'}">${c}</th>`).join('')+'</tr></thead><tbody>'+
+    rows.map(r=>{
+      const rp=Math.max(0,Math.min(100,+r.pos||0)).toFixed(1);
+      return `<tr><td><div class="hname sd-clk" data-sd="${esc(r.sym)}" title="Open ${esc(r.sym)}">${logoImg(tickerLogos(r.sym),'llogo',r.sym)}
+          <div style="min-width:0"><div class="c1">${esc(r.name)}</div><div class="nm2">${esc(r.sym)}</div></div></div></td>
+        <td><div class="c1">${esc(r.sym)}</div></td>
+        <td style="text-align:right"><div class="c1 tnum">$${(+r.px).toFixed(2)}</div></td>
+        <td style="min-width:170px"><div class="rng" style="width:100%" title="52-week range $${r.lo} – $${r.hi} · ${rp}% into the range">
+          <div class="rtrack" style="--range-position:${rp}%"><div class="rdot" style="left:${rp}%"></div></div>
+          <div class="rlab"><span>$${r.lo}</span><span class="rper">52W</span><span>$${r.hi}</span></div></div></td>
+        <td style="text-align:right"><div class="c1 tnum ${r.fromHigh>=-2?'up':(r.fromHigh<-10?'down':'')}">${fmtPct(r.fromHigh)}</div></td></tr>`;
+    }).join('')+'</tbody>';
+  el.querySelectorAll('[data-sd]').forEach(c=>c.addEventListener('click',()=>openSecDetail(c.dataset.sd)));
+}
 function renderWatchlist(){
   const el=document.getElementById('watchtable'); if(!el) return;
   const own=isOwner();
@@ -4234,7 +4266,7 @@ async function refreshWatch(){
   const syms=wlSyms(); if(!syms.length) return;
   const rs=await Promise.allSettled(syms.map(s=>fetchYahoo(s)));
   rs.forEach((r,i)=>{ if(r.status==='fulfilled'&&r.value.price) window._watchLive[syms[i]]=r.value; });
-  if(_tab==='watchlist') renderWatchlist();
+  if(_tab==='watchlist'){ renderWatchlist(); renderSectors(); }
 }
 function renderPerf(){
   const grid=document.getElementById('pf-grid'); if(!grid) return;
