@@ -807,25 +807,38 @@ function _renderKpis(){
    end factor / start factor), so both tabs can never disagree. */
 function _allocCash(){ try{ return localStorage.getItem('pc-alloccash')!=='0'; }catch(e){ return true; } }
 const PBP=[['all','All'],['ytd','YTD'],['1y','1Y'],['3m','3M'],['1w','1W'],['1d','1D']];
-let _pbp=(()=>{ const v=localStorage.getItem('pc-pbp'); return PBP.some(x=>x[0]===v)?v:'ytd'; })();
-function pbLabel(){ return (PBP.find(x=>x[0]===_pbp)||PBP[1])[1]; }
+/* the Portfolio tab's period is a full period object like the other two tabs;
+   layouts saved before that stored a bare key string — migrate those in place */
+let PB_P=(()=>{ try{ const raw=localStorage.getItem('pc-pbp');
+    if(!raw) return {k:'rel',v:'ytd'};
+    if(raw.charAt(0)==='{'){ const o=JSON.parse(raw); return o&&o.k?o:{k:'rel',v:'ytd'}; }
+    return {k:'rel',v:PBP.some(x=>x[0]===raw)?raw:'ytd'};
+  }catch(e){ return {k:'rel',v:'ytd'}; } })();
+function pbLabel(){
+  const p=normP(PB_P);
+  if(p.k==='rel'){ const q=PBP.find(x=>x[0]===p.v); if(q) return q[1];
+    return (PF_REL.find(x=>x[0]===p.v)||['','All'])[1]; }
+  if(p.k==='year') return String(p.y);
+  if(p.k==='since') return 'since '+p.from;
+  if(p.k==='range') return p.from+' – '+p.to;
+  return 'All';
+}
 function pbReturn(){
   const enDate=x=>new Date(x+'T00:00:00Z').toLocaleDateString('en-US',{month:'short',day:'2-digit',year:'numeric'});
-  if(_pbp==='1d'){                                  // last trading day that actually moved
+  const pp=normP(PB_P);
+  if(pp.k==='rel'&&pp.v==='1d'){                    // last trading day that actually moved
     const m=pfMetrics({k:'rel',v:'1m'});
     return m&&m.lastD?{pct:m.lastR*100,note:enDate(m.lastD)}:null;
   }
-  const m=pfMetrics({k:'rel',v:_pbp});
+  const m=pfMetrics(PB_P);
   if(!m||!m.pts.length) return null;
   return {pct:m.tt*100, note:enDate(m.pts[0].d)+' → '+enDate(m.pts[m.pts.length-1].d)};
 }
 function renderPbar(){
-  const el=document.getElementById('pbar'); if(!el) return;
-  el.innerHTML=PBP.map(([k,l])=>`<button data-pb="${k}" class="${k===_pbp?'on':''}" aria-pressed="${k===_pbp}">${l}</button>`).join('');
-  el.querySelectorAll('[data-pb]').forEach(b=>b.addEventListener('click',()=>{
-    _pbp=b.dataset.pb; try{localStorage.setItem('pc-pbp',_pbp);}catch(e){}
+  renderPeriodControl(document.getElementById('pbar'), PB_P, p=>{
+    PB_P=p; try{localStorage.setItem('pc-pbp',JSON.stringify(PB_P));}catch(e){}
     renderPbar(); renderKpis();
-  }));
+  });
 }
 
 /* ---- PP total-portfolio strip (from depot.xml via pp_sync.py) ---- */
@@ -2837,58 +2850,65 @@ const PF_DEFAULT=[{t:'chart',p:'all',bench:['SPY']},{t:'pnl'},{t:'pnlpct'},
   {t:'calc'},{t:'years',bench:['SPY'],scheme:'traffic'},
   {t:'heat',p:'all',scheme:'traffic'},{t:'trades'},{t:'ddchart',p:'all'}];
 let PF_P=(()=>{try{const p=JSON.parse(localStorage.getItem('pc-pfperiod')||'null');return p&&p.k?p:{k:'rel',v:'all'};}catch(e){return {k:'rel',v:'all'};}})();
-function renderPeriodBar(){
-  const bar=document.getElementById('pf-period'); if(!bar) return;
-  /* never rebuild while the user is typing in the bar — the minute poll and
+/* ---- ONE reporting-period control for Portfolio, Performance and Payments ----
+   Quick buttons for the common windows, a dropdown for calendar years and custom
+   ranges, two date fields. All three tabs render from this one function, so they
+   cannot drift apart in look or behaviour. Fields are addressed by data-attribute,
+   never by id, so several bars can live on the same page. */
+function renderPeriodControl(bar, state, commit){
+  if(!bar) return;
+  /* never rebuild while the user is typing in the bar — the minute poll and the
      mobile-keyboard resize would destroy the focused date field mid-entry */
   if(bar.contains(document.activeElement)&&document.activeElement!==bar) return;
-  const p=normP(PF_P);
-  const yearsAvail=[...new Set((DATA.chartPP||[]).map(x=>x.d.slice(0,4)))];
+  const p=normP(state);
+  const years=[...new Set((DATA.chartPP||[]).map(x=>x.d.slice(0,4)))];
+  const fld='background:var(--surface);border:1px solid var(--border);border-radius:9px;font:inherit;color:var(--ink)';
   bar.innerHTML=`<span style="font-size:11px;text-transform:uppercase;letter-spacing:.6px;color:var(--muted);font-weight:660">Reporting period</span>
-    <div class="tfsel" id="pf-quick" role="group" aria-label="Common reporting periods">${PBP.map(([k,l])=>
-      `<button type="button" data-pfq="${k}" class="${p.k==='rel'&&p.v===k?'on':''}" aria-pressed="${p.k==='rel'&&p.v===k}">${l}</button>`).join('')}</div>
-    <select id="pf-psel" style="background:var(--surface);border:1px solid var(--border);border-radius:9px;padding:7px 10px;font:inherit;font-size:13px;color:var(--ink);box-shadow:var(--shadow)">
+    <div class="tfsel" role="group" aria-label="Common reporting periods">${PBP.map(([k,l])=>
+      `<button type="button" data-pq="${k}" class="${p.k==='rel'&&p.v===k?'on':''}" aria-pressed="${p.k==='rel'&&p.v===k}">${l}</button>`).join('')}</div>
+    <select data-psel aria-label="Reporting period" style="${fld};padding:7px 10px;font-size:13px;box-shadow:var(--shadow)">
       <optgroup label="Relative">${PF_REL.map(([k,l])=>`<option value="rel:${k}" ${p.k==='rel'&&p.v===k?'selected':''}>${l}</option>`).join('')}</optgroup>
-      <optgroup label="Year">${yearsAvail.map(y=>`<option value="year:${y}" ${p.k==='year'&&String(p.y)===y?'selected':''}>Year ${y}</option>`).join('')}</optgroup>
+      <optgroup label="Year">${years.map(y=>`<option value="year:${y}" ${p.k==='year'&&String(p.y)===y?'selected':''}>Year ${y}</option>`).join('')}</optgroup>
       <optgroup label="Custom"><option value="since" ${p.k==='since'?'selected':''}>Since date…</option>
       <option value="range" ${p.k==='range'?'selected':''}>From – to…</option></optgroup>
     </select>
-    <input type="date" id="pf-from" value="${p.from||''}" style="display:${p.k==='since'||p.k==='range'?'inline-block':'none'};background:var(--surface);border:1px solid var(--border);border-radius:9px;padding:6px 9px;font:inherit;font-size:12.5px;color:var(--ink)">
-    <input type="date" id="pf-to" value="${p.to||''}" style="display:${p.k==='range'?'inline-block':'none'};background:var(--surface);border:1px solid var(--border);border-radius:9px;padding:6px 9px;font:inherit;font-size:12.5px;color:var(--ink)">`;
-  const sel=document.getElementById('pf-psel'), from=document.getElementById('pf-from'), to=document.getElementById('pf-to');
+    <input type="date" data-pfrom value="${p.from||''}" aria-label="Start date" style="display:${p.k==='since'||p.k==='range'?'inline-block':'none'};${fld};padding:6px 9px;font-size:12.5px">
+    <input type="date" data-pto value="${p.to||''}" aria-label="End date" style="display:${p.k==='range'?'inline-block':'none'};${fld};padding:6px 9px;font-size:12.5px">`;
+  const sel=bar.querySelector('[data-psel]'), from=bar.querySelector('[data-pfrom]'), to=bar.querySelector('[data-pto]');
   const d0=(DATA.chartPP&&DATA.chartPP[0]||{}).d||'2021-12-30', d1=(DATA.chartPP&&DATA.chartPP[DATA.chartPP.length-1]||{}).d||'';
   [from,to].forEach(x=>{x.min=d0; if(d1)x.max=d1;});
-  /* Chromium commits a 'change' after EVERY typed year digit (0002 → 0020 → 0202 → 2026);
+  /* Chromium commits a 'change' after EVERY typed year digit (0002 → 0020 → 2026);
      only accept dates that can be real, so half-typed years never apply */
-  const okDate=s=>s&&s>=d0.slice(0,4)+'-01-01'&&(!d1||s<=d1);
+  const okDate=v=>v&&v>=d0.slice(0,4)+'-01-01'&&(!d1||v<=d1);
   const hideDates=()=>{ from.style.display='none'; to.style.display='none'; from.value=''; to.value=''; };
   const apply=()=>{
     const v=sel.value;
-    if(v.startsWith('rel:')){ hideDates(); PF_P={k:'rel',v:v.slice(4)}; }
-    else if(v.startsWith('year:')){ hideDates(); PF_P={k:'year',y:+v.slice(5)}; }
+    let next=null;
+    if(v.startsWith('rel:')){ hideDates(); next={k:'rel',v:v.slice(4)}; }
+    else if(v.startsWith('year:')){ hideDates(); next={k:'year',y:+v.slice(5)}; }
     else if(v==='since'){ from.style.display='inline-block'; to.style.display='none';
-      if(!from.value){ from.value=d0; from.focus(); } /* prefill: all segments set, overtyping always works */
-      if(!okDate(from.value)) return; PF_P={k:'since',from:from.value}; }
+      if(!from.value){ from.value=d0; from.focus(); }          // prefilled: overtyping always works
+      if(!okDate(from.value)) return; next={k:'since',from:from.value}; }
     else if(v==='range'){ from.style.display='inline-block'; to.style.display='inline-block';
       if(!from.value){ from.value=d0; from.focus(); }
       if(!to.value){ to.value=d1||d0; }
       if(!okDate(from.value)||!okDate(to.value)||from.value>to.value) return;
-      PF_P={k:'range',from:from.value,to:to.value}; }
-    try{localStorage.setItem('pc-pfperiod',JSON.stringify(PF_P));}catch(e){}
-    renderPerf();
+      next={k:'range',from:from.value,to:to.value}; }
+    if(next) commit(next);
   };
-  /* shortcuts drive the same state as the dropdown, so both always agree */
-  bar.querySelectorAll('[data-pfq]').forEach(b=>b.addEventListener('click',()=>{
-    hideDates(); PF_P={k:'rel',v:b.dataset.pfq};
-    try{localStorage.setItem('pc-pfperiod',JSON.stringify(PF_P));}catch(e){}
-    renderPeriodBar(); renderPerf();
-  }));
   sel.addEventListener('change',apply);
-  /* debounced: Chromium fires 'change' per completed segment — rendering the whole
+  /* debounced: Chromium fires 'change' per completed segment — re-rendering a whole
      dashboard synchronously mid-entry can kick the caret out of the field */
-  const dApply=()=>{clearTimeout(window._pfDeb);window._pfDeb=setTimeout(apply,350);};
-  from.addEventListener('change',dApply);
-  to.addEventListener('change',dApply);
+  const deb=()=>{ clearTimeout(bar._deb); bar._deb=setTimeout(apply,350); };
+  from.addEventListener('change',deb);
+  to.addEventListener('change',deb);
+  bar.querySelectorAll('[data-pq]').forEach(b=>b.addEventListener('click',()=>commit({k:'rel',v:b.dataset.pq})));
+}
+function renderPeriodBar(){
+  renderPeriodControl(document.getElementById('pf-period'), PF_P, p=>{
+    PF_P=p; try{localStorage.setItem('pc-pfperiod',JSON.stringify(PF_P));}catch(e){}
+    renderPeriodBar(); renderPerf();
+  });
 }
 let pfW=(()=>{try{const w=JSON.parse(localStorage.getItem('pc-pfw')||'null');
   return Array.isArray(w)&&w.length?w.filter(x=>PF_WIDGETS[x.t]):JSON.parse(JSON.stringify(PF_DEFAULT));}
@@ -3999,43 +4019,10 @@ function payRange(p){   // [from, to] ISO dates for a PF-style reporting period
 /* same reporting-period bar as the Performance tab — with the same protections:
    never rebuild while focused, prefilled date fields, half-typed years ignored */
 function renderPayPeriodBar(){
-  const bar=document.getElementById('pay-period'); if(!bar) return;
-  if(bar.contains(document.activeElement)&&document.activeElement!==bar) return;
-  const p=normP(PAY_P);
-  const yearsAvail=[...new Set((DATA.chartPP||[]).map(x=>x.d.slice(0,4)))];
-  bar.innerHTML=`<span style="font-size:11px;text-transform:uppercase;letter-spacing:.6px;color:var(--muted);font-weight:660">Reporting period</span>
-    <select id="pay-psel" style="background:var(--surface);border:1px solid var(--border);border-radius:9px;padding:7px 10px;font:inherit;font-size:13px;color:var(--ink);box-shadow:var(--shadow)">
-      <optgroup label="Relative">${PF_REL.map(([k,l])=>`<option value="rel:${k}" ${p.k==='rel'&&p.v===k?'selected':''}>${l}</option>`).join('')}</optgroup>
-      <optgroup label="Year">${yearsAvail.map(y=>`<option value="year:${y}" ${p.k==='year'&&String(p.y)===y?'selected':''}>Year ${y}</option>`).join('')}</optgroup>
-      <optgroup label="Custom"><option value="since" ${p.k==='since'?'selected':''}>Since date…</option>
-      <option value="range" ${p.k==='range'?'selected':''}>From – to…</option></optgroup>
-    </select>
-    <input type="date" id="pay-from" value="${p.from||''}" style="display:${p.k==='since'||p.k==='range'?'inline-block':'none'};background:var(--surface);border:1px solid var(--border);border-radius:9px;padding:6px 9px;font:inherit;font-size:12.5px;color:var(--ink)">
-    <input type="date" id="pay-to" value="${p.to||''}" style="display:${p.k==='range'?'inline-block':'none'};background:var(--surface);border:1px solid var(--border);border-radius:9px;padding:6px 9px;font:inherit;font-size:12.5px;color:var(--ink)">`;
-  const sel=document.getElementById('pay-psel'), from=document.getElementById('pay-from'), to=document.getElementById('pay-to');
-  const d0=(DATA.chartPP&&DATA.chartPP[0]||{}).d||'2021-12-30', d1=(DATA.chartPP&&DATA.chartPP[DATA.chartPP.length-1]||{}).d||'';
-  [from,to].forEach(x=>{x.min=d0; if(d1)x.max=d1;});
-  const okDate=s=>s&&s>=d0.slice(0,4)+'-01-01'&&(!d1||s<=d1);
-  const hideDates=()=>{ from.style.display='none'; to.style.display='none'; from.value=''; to.value=''; };
-  const apply=()=>{
-    const v=sel.value;
-    if(v.startsWith('rel:')){ hideDates(); PAY_P={k:'rel',v:v.slice(4)}; }
-    else if(v.startsWith('year:')){ hideDates(); PAY_P={k:'year',y:+v.slice(5)}; }
-    else if(v==='since'){ from.style.display='inline-block'; to.style.display='none';
-      if(!from.value){ from.value=d0; from.focus(); }
-      if(!okDate(from.value)) return; PAY_P={k:'since',from:from.value}; }
-    else if(v==='range'){ from.style.display='inline-block'; to.style.display='inline-block';
-      if(!from.value){ from.value=d0; from.focus(); }
-      if(!to.value){ to.value=d1||d0; }
-      if(!okDate(from.value)||!okDate(to.value)||from.value>to.value) return;
-      PAY_P={k:'range',from:from.value,to:to.value}; }
-    try{localStorage.setItem('pc-payperiod',JSON.stringify(PAY_P));}catch(e){}
-    _payExp=false; renderPayments();
-  };
-  sel.addEventListener('change',apply);
-  const dApply=()=>{clearTimeout(window._payDeb);window._payDeb=setTimeout(apply,350);};
-  from.addEventListener('change',dApply);
-  to.addEventListener('change',dApply);
+  renderPeriodControl(document.getElementById('pay-period'), PAY_P, p=>{
+    PAY_P=p; try{localStorage.setItem('pc-payperiod',JSON.stringify(PAY_P));}catch(e){}
+    _payExp=false; renderPayPeriodBar(); renderPayments();
+  });
 }
 function payChip(lab,on,attr,val){
   return `<button ${attr}="${val}" class="secbtn" style="margin:0;padding:5px 12px;font-size:12px;${on?'background:var(--accent);color:#fff;border-color:var(--accent)':''}">${lab}</button>`;
