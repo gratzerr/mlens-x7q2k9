@@ -1,8 +1,8 @@
 {
- "fileDate": "2026-08-20 20:02",
- "generated": "2026-08-20 20:12",
+ "fileDate": "2026-08-20 20:13",
+ "generated": "2026-08-20 20:23",
  "engine": "pp-exact (verified vs PP app 2026-07-11)",
- "totalSecuritiesEur": 2133806,
+ "totalSecuritiesEur": 2134025,
  "cashEur": -157871.95,
  "cashByAccount": [
   {
@@ -30,9 +30,9 @@
    "eur": 93.1
   }
  ],
- "totalEur": 1975934,
- "ttwrorSince2022": 397.66,
- "ttwrorYtd": 97.6,
+ "totalEur": 1976153,
+ "ttwrorSince2022": 397.72,
+ "ttwrorYtd": 97.62,
  "ttwrorAnnualized": 41.37,
  "izf": 67.08,
  "yearlyReturns": {
@@ -43,9 +43,9 @@
   "2026": 97.6
  },
  "realizedEur": 644169,
- "unrealizedEur": 636180,
+ "unrealizedEur": 636398,
  "realizedUsd": 786421,
- "unrealizedUsd": 710455,
+ "unrealizedUsd": 710705,
  "netContribEur": 693272,
  "netContribUsd": 768897,
  "earningsEur": 12767.38,
@@ -27129,9 +27129,9 @@
   },
   {
    "d": "2026-08-20",
-   "v": 2258492,
-   "e": 1975934,
-   "r": 3.976618,
+   "v": 2258742,
+   "e": 1976153,
+   "r": 3.977169,
    "c": 768897,
    "k": 693272,
    "q": 786421,
@@ -64134,9 +64134,9 @@
    "name": "RAPID MICRO BIOSYSTEMS INC-A"
   }
  ],
- "ppReferenceTtwror": 397.66,
+ "ppReferenceTtwror": 397.72,
  "ppReferenceDate": "2026-08-20",
- "ttwrorApproxSince2022": 397.66,
+ "ttwrorApproxSince2022": 397.72,
  "yearlyReturnsApprox": {
   "2022": 3.3,
   "2023": 11.8,
@@ -64221,15 +64221,15 @@
    "isin": "",
    "ccy": "USD",
    "shares": 15000.0,
-   "price": 21.5,
-   "value": 322500.0,
-   "valueEur": 282152,
-   "valueUsd": 322500,
+   "price": 21.39999999,
+   "value": 321000.0,
+   "valueEur": 280840,
+   "valueUsd": 321000,
    "basisUsd": 337491,
    "realizedUsd": 0,
    "avgCost": 22.4994,
-   "unrealRet": -4.4,
-   "dayRet": -9.66,
+   "unrealRet": -4.9,
+   "dayRet": -10.08,
    "prevClose": 23.8,
    "priceDate": "2026-08-20"
   },
@@ -64310,15 +64310,15 @@
    "isin": "US64134X2018",
    "ccy": "USD",
    "shares": 35000.0,
-   "price": 6.21999979,
-   "value": 217699.99,
-   "valueEur": 190464,
-   "valueUsd": 217700,
+   "price": 6.26999998,
+   "value": 219450.0,
+   "valueEur": 191995,
+   "valueUsd": 219450,
    "basisUsd": 198036,
    "realizedUsd": 0,
    "avgCost": 5.6582,
-   "unrealRet": 9.9,
-   "dayRet": -2.51,
+   "unrealRet": 10.8,
+   "dayRet": -1.72,
    "prevClose": 6.38,
    "priceDate": "2026-08-20"
   }
