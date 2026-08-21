@@ -1,8 +1,8 @@
 {
- "fileDate": "2026-08-21 13:18",
- "generated": "2026-08-21 13:28",
+ "fileDate": "2026-08-21 13:30",
+ "generated": "2026-08-21 13:38",
  "engine": "pp-exact (verified vs PP app 2026-07-11)",
- "totalSecuritiesEur": 2127463,
+ "totalSecuritiesEur": 2107835,
  "cashEur": -157871.95,
  "cashByAccount": [
   {
@@ -30,22 +30,22 @@
    "eur": 93.1
   }
  ],
- "totalEur": 1969591,
- "ttwrorSince2022": 396.06,
- "ttwrorYtd": 96.97,
- "ttwrorAnnualized": 41.27,
- "izf": 66.86,
+ "totalEur": 1949963,
+ "ttwrorSince2022": 391.12,
+ "ttwrorYtd": 95.0,
+ "ttwrorAnnualized": 40.93,
+ "izf": 66.09,
  "yearlyReturns": {
   "2022": 3.3,
   "2023": 11.8,
   "2024": 45.2,
   "2025": 50.2,
-  "2026": 97.0
+  "2026": 95.0
  },
  "realizedEur": 644169,
- "unrealizedEur": 629837,
+ "unrealizedEur": 610209,
  "realizedUsd": 786421,
- "unrealizedUsd": 703205,
+ "unrealizedUsd": 680771,
  "netContribEur": 693272,
  "netContribUsd": 768897,
  "earningsEur": 12767.38,
@@ -27129,9 +27129,25 @@
   },
   {
    "d": "2026-08-20",
-   "v": 2251242,
-   "e": 1969591,
-   "r": 3.960643,
+   "v": 2275392,
+   "e": 1990720,
+   "r": 4.013858,
+   "c": 768897,
+   "k": 693272,
+   "q": 786421,
+   "Q": 644169,
+   "g": 13770,
+   "G": 12767,
+   "f": 10668,
+   "F": 9344,
+   "t": 1907,
+   "T": 1717
+  },
+  {
+   "d": "2026-08-21",
+   "v": 2228808,
+   "e": 1949963,
+   "r": 3.911208,
    "c": 768897,
    "k": 693272,
    "q": 786421,
@@ -64134,15 +64150,15 @@
    "name": "RAPID MICRO BIOSYSTEMS INC-A"
   }
  ],
- "ppReferenceTtwror": 396.06,
+ "ppReferenceTtwror": 391.12,
  "ppReferenceDate": "2026-08-21",
- "ttwrorApproxSince2022": 396.06,
+ "ttwrorApproxSince2022": 391.12,
  "yearlyReturnsApprox": {
   "2022": 3.3,
   "2023": 11.8,
   "2024": 45.2,
   "2025": 50.2,
-  "2026": 97.0
+  "2026": 95.0
  },
  "holdings": [
   {
@@ -64155,17 +64171,17 @@
    "isin": "NL0010696654",
    "ccy": "USD",
    "shares": 10000.0,
-   "price": 48.88999938,
-   "value": 488899.99,
-   "valueEur": 427734,
-   "valueUsd": 488900,
+   "price": 49.4679985,
+   "value": 494679.98,
+   "valueEur": 432791,
+   "valueUsd": 494680,
    "basisUsd": 91996,
    "realizedUsd": 11487,
    "avgCost": 9.1996,
-   "unrealRet": 431.4,
-   "dayRet": 0.27,
-   "prevClose": 48.76,
-   "priceDate": "2026-08-20"
+   "unrealRet": 437.7,
+   "dayRet": 1.18,
+   "prevClose": 48.89,
+   "priceDate": "2026-08-21"
   },
   {
    "account": "ALL",
@@ -64177,17 +64193,17 @@
    "isin": "US24661P8077",
    "ccy": "USD",
    "shares": 20000.0,
-   "price": 16.75,
-   "value": 335000.0,
-   "valueEur": 293088,
-   "valueUsd": 335000,
+   "price": 16.95999908,
+   "value": 339199.98,
+   "valueEur": 296763,
+   "valueUsd": 339200,
    "basisUsd": 193634,
    "realizedUsd": -16090,
    "avgCost": 9.6817,
-   "unrealRet": 73.0,
-   "dayRet": -2.33,
-   "prevClose": 17.15,
-   "priceDate": "2026-08-20"
+   "unrealRet": 75.2,
+   "dayRet": 1.25,
+   "prevClose": 16.75,
+   "priceDate": "2026-08-21"
   },
   {
    "account": "ALL",
@@ -64199,17 +64215,17 @@
    "isin": "US18507C1036",
    "ccy": "USD",
    "shares": 22000.0,
-   "price": 15.18999958,
-   "value": 334179.99,
-   "valueEur": 292371,
-   "valueUsd": 334180,
+   "price": 15.15999984,
+   "value": 333520.0,
+   "valueEur": 291794,
+   "valueUsd": 333520,
    "basisUsd": 230515,
    "realizedUsd": -60391,
    "avgCost": 10.4779,
-   "unrealRet": 45.0,
-   "dayRet": -4.82,
-   "prevClose": 15.96,
-   "priceDate": "2026-08-20"
+   "unrealRet": 44.7,
+   "dayRet": -0.2,
+   "prevClose": 15.19,
+   "priceDate": "2026-08-21"
   },
   {
    "account": "ALL",
@@ -64229,32 +64245,9 @@
    "realizedUsd": 0,
    "avgCost": 22.4994,
    "unrealRet": -7.1,
-   "dayRet": -12.18,
-   "prevClose": 23.8,
-   "priceDate": "2026-08-20"
-  },
-  {
-   "account": "ALL",
-   "ticker": "PINK.V",
-   "name": "PERIMETER MEDICAL IMAGING AI",
-   "byPort": {
-    "IBKR": 500000.0,
-    "SQ": 500000.0
-   },
-   "isin": "CA71385D1078",
-   "ccy": "CAD",
-   "shares": 1000000.0,
-   "price": 0.36000001,
-   "value": 360000.01,
-   "valueEur": 222538,
-   "valueUsd": 254361,
-   "basisUsd": 229612,
-   "realizedUsd": 0,
-   "avgCost": 0.3173,
-   "unrealRet": 10.8,
-   "dayRet": -2.7,
-   "prevClose": 0.37,
-   "priceDate": "2026-08-20"
+   "dayRet": -0.0,
+   "prevClose": 20.9,
+   "priceDate": "2026-08-21"
   },
   {
    "account": "ALL",
@@ -64266,17 +64259,17 @@
    "isin": "US6402683063",
    "ccy": "USD",
    "shares": 3300.0,
-   "price": 74.52999877,
-   "value": 245949.0,
-   "valueEur": 215178,
-   "valueUsd": 245949,
+   "price": 75.32499694,
+   "value": 248572.49,
+   "valueEur": 217474,
+   "valueUsd": 248572,
    "basisUsd": 213731,
    "realizedUsd": -54345,
    "avgCost": 64.7669,
-   "unrealRet": 15.1,
-   "dayRet": -2.04,
-   "prevClose": 76.08,
-   "priceDate": "2026-08-20"
+   "unrealRet": 16.3,
+   "dayRet": 1.07,
+   "prevClose": 74.53,
+   "priceDate": "2026-08-21"
   },
   {
    "account": "ALL",
@@ -64288,17 +64281,17 @@
    "isin": "US52886X1072",
    "ccy": "USD",
    "shares": 47500.0,
-   "price": 5.05999994,
-   "value": 240350.0,
-   "valueEur": 210280,
-   "valueUsd": 240350,
+   "price": 5.07999992,
+   "value": 241300.0,
+   "valueEur": 211111,
+   "valueUsd": 241300,
    "basisUsd": 233470,
    "realizedUsd": 0,
    "avgCost": 4.9152,
-   "unrealRet": 2.9,
-   "dayRet": -5.77,
-   "prevClose": 5.37,
-   "priceDate": "2026-08-20"
+   "unrealRet": 3.4,
+   "dayRet": 0.4,
+   "prevClose": 5.06,
+   "priceDate": "2026-08-21"
   },
   {
    "account": "ALL",
@@ -64318,9 +64311,32 @@
    "realizedUsd": 0,
    "avgCost": 5.6582,
    "unrealRet": 10.8,
-   "dayRet": -1.72,
-   "prevClose": 6.38,
-   "priceDate": "2026-08-20"
+   "dayRet": -0.0,
+   "prevClose": 6.27,
+   "priceDate": "2026-08-21"
+  },
+  {
+   "account": "ALL",
+   "ticker": "PINK.V",
+   "name": "PERIMETER MEDICAL IMAGING AI",
+   "byPort": {
+    "IBKR": 500000.0,
+    "SQ": 500000.0
+   },
+   "isin": "CA71385D1078",
+   "ccy": "CAD",
+   "shares": 1000000.0,
+   "price": 0.31,
+   "value": 310000.0,
+   "valueEur": 191630,
+   "valueUsd": 219033,
+   "basisUsd": 229612,
+   "realizedUsd": 0,
+   "avgCost": 0.3173,
+   "unrealRet": -4.6,
+   "dayRet": -13.89,
+   "prevClose": 0.36,
+   "priceDate": "2026-08-21"
   }
  ],
  "txmax": "2026-08-14"
