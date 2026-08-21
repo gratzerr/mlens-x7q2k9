@@ -2,78 +2,111 @@
   "ticker": "CLPT",
   "news": [
     {
+      "date": "2026-08-12",
+      "headline": "MAK Capital group discloses 7.8% passive stake in ClearPoint Neuro via Schedule 13G/A",
+      "source": "StockTitan / SEC EDGAR",
+      "url": "https://www.stocktitan.net/sec-filings/CLPT/schedule-13g-a-clear-point-neuro-inc-amended-passive-investment-discl-68dc7086232f.html",
+      "summary": "MAK Capital Fund, MAK Capital One and Michael A. Kaufman jointly reported 2,375,861 CLPT shares (7.8% of shares outstanding) with shared voting and dispositive power, up from 6.3% disclosed earlier in the year. Filed nine days after the post-earnings selloff, the larger passive position points to institutional accumulation into the weakness, alongside BlackRock's 7.1% 13G from July 27."
+    },
+    {
       "date": "2026-08-11",
-      "headline": "Analysts cut price targets after Q2 revenue miss and guidance reduction",
-      "source": "Investing.com / TipRanks (The Fly)",
-      "url": "https://uk.investing.com/news/analyst-ratings/stifel-raises-clearpoint-neuro-stock-target-to-25-on-growth-potential-93CH-4008630",
-      "summary": "Stifel lowered its CLPT price target to $22 from $25 and Lake Street cut its target to $25 from $30, both maintaining Buy ratings, after ClearPoint's Q2 revenue miss and lowered FY26 guidance; the stock had fallen roughly 15% after hours on August 3."
+      "headline": "Q2 2026 earnings call transcript: management calls the shortfall service timing, not lost demand",
+      "source": "AOL / Motley Fool",
+      "url": "https://www.aol.com/clearpoint-neuro-clpt-q2-2026-140036718.html",
+      "summary": "On the call management attributed the miss to slipped biologics service timing, pointing to 10-15 partner trials expected to be enrolling within 18 months, roughly 10 partner data readouts, and a return to growth in biologics and drug delivery in Q3 once the new ClearPoint Advanced Laboratories site contributes. Executives also said several biopharma partners have received positive FDA feedback on potential BLA submissions, with more cell and gene therapies expected to reach the market by end-2027."
+    },
+    {
+      "date": "2026-08-08",
+      "headline": "Wall Street Zen cuts ClearPoint Neuro from Sell to Strong Sell after the Q2 print",
+      "source": "MarketBeat / Daily Political",
+      "url": "https://www.dailypolitical.com/2026/08/08/equities-research-analysts-downgrades-for-august-8th-abtc-aciw-adnt-adtn-adv-aee-aeva-ago-ahco-alrm.html",
+      "summary": "Quantitative research house Wall Street Zen moved CLPT from Sell to Strong Sell following the revenue miss, deepening cash burn and the guidance cut. It is the outlier on the sell side: the three covering brokers still average a Buy/Strong Buy consensus with a mean target near $25.67 against a share price of about $15."
+    },
+    {
+      "date": "2026-08-04",
+      "headline": "Stifel cuts price target to $22 and Lake Street to $25, both keeping Buy after the Q2 miss",
+      "source": "Investing.com / Moomoo",
+      "url": "https://th.investing.com/news/analyst-ratings/article-93CH-743594",
+      "summary": "Stifel trimmed its target from $25 to $22 and Lake Street to $25, both maintaining Buy ratings after Q2 revenue of $10.9M came in roughly $1.8M below consensus and full-year guidance was cut about 7%. Shares fell another 16% in the August 4 session, leaving the stock at less than half its $30.10 52-week high."
     },
     {
       "date": "2026-08-03",
-      "headline": "ClearPoint Neuro reports Q2 2026 revenue miss, cuts full-year guidance to $48M-$52M",
-      "source": "AccessNewswire / StockTitan / SEC 8-K",
-      "url": "https://www.accessnewswire.com/newsroom/en/biotechnology/clearpoint-neuro-reports-second-quarter-2026-results-1200753",
-      "summary": "Q2 revenue was $10.9 million (+18% YoY) but about $1.8 million below the $12.7 million consensus, with EPS of -$0.38 versus -$0.29 expected; the company lowered 2026 revenue guidance to $48M-$52M from $52M-$56M and ended the quarter with $29.4 million in cash, down from $45.9 million at year-end 2025. Shares dropped roughly 15% in after-hours trading."
+      "headline": "ClearPoint Neuro reports Q2 2026 revenue of $10.9M (+18%), misses estimates and cuts FY guidance to $48-52M",
+      "source": "ClearPoint Neuro IR / ACCESS Newswire",
+      "url": "https://ir.clearpointneuro.com/news-events/press-releases/detail/1156/clearpoint-neuro-reports-second-quarter-2026-results",
+      "summary": "Q2 revenue rose 18% to $10.9M but landed about $1.8M below the $12.73M consensus, with neurosurgery navigation and therapy up 62% to $5.6M while biologics and drug delivery fell 15% to $4.0M. Opex jumped 51% to $17.0M, widening the net loss to $11.3M (adj. -$0.38 vs -$0.29 expected) and cutting cash to $29.4M from $45.9M at year-end; full-year 2026 guidance was lowered from $52-56M to $48-52M."
     },
     {
       "date": "2026-08-03",
-      "headline": "Company unveils long-term $500 million revenue target and five-pillar growth strategy",
-      "source": "Investing.com (earnings-call slides)",
+      "headline": "Investor deck lays out $500M long-term revenue target built on CAL, focused ultrasound and robotics",
+      "source": "Investing.com",
       "url": "https://www.investing.com/news/company-news/clearpoint-neuro-aug-2026-slides-500m-revenue-target-amid-q2-miss-93CH-4832435",
-      "summary": "Alongside the Q2 miss, management presented a strategic plan targeting $500 million in annual revenue built around cell/gene therapy delivery, citing 60+ active biopharma partners, a reorganized commercial structure, and roughly 10 anticipated clinical data readouts over the next 18 months."
+      "summary": "Alongside the Q2 print management presented a five-pillar strategy targeting $500M in annual revenue, built on cell and gene therapy delivery to the brain, the newly possessed 30,000 sq ft ClearPoint Advanced Laboratories (CAL) site in Torrey Pines, the 10-year SONOCARE focused-ultrasound partnership at Sungkyunkwan University, a cranial robot shaped by feedback from 50+ neurosurgeons, and Harmony software. The deck cited 175+ active global centers, 60+ pharma partners and CAL lifting preclinical service capacity from roughly $8M to over $60M annually."
     },
     {
       "date": "2026-07-31",
-      "headline": "Partner Aspen Neuroscience receives FDA RMAT designation for Parkinson's cell therapy delivered via ClearPoint system",
-      "source": "AccessNewswire / BioSpace",
-      "url": "https://www.biospace.com/press-releases/clearpoint-neuro-congratulates-partner-aspen-neuroscience-on-fda-regenerative-medicine-advanced-therapy-rmat-designation-for-sasineprocel",
-      "summary": "The FDA granted Regenerative Medicine Advanced Therapy (RMAT) designation to Aspen Neuroscience's sasineprocel (ANPD001), an autologous dopaminergic neuron therapy for Parkinson's disease delivered using ClearPoint's navigation technology, potentially speeding its path toward approval."
+      "headline": "ClearPoint congratulates partner Aspen Neuroscience on FDA RMAT designation for sasineprocel",
+      "source": "ClearPoint Neuro IR",
+      "url": "https://ir.clearpointneuro.com/news-events/press-releases/detail/1155/clearpoint-neuro-congratulates-partner-aspen-neuroscience",
+      "summary": "The FDA granted Regenerative Medicine Advanced Therapy designation to Aspen's autologous dopaminergic cell therapy sasineprocel (ANPD001) for Parkinson's disease, based on the ongoing Phase 1/2a ASPIRO trial. The ClearPoint Navigation System and SmartFlow cannula are used for the transplantation procedure, so the designation and its potential priority review or accelerated approval advance a second major partner program running on ClearPoint's platform."
     },
     {
       "date": "2026-07-14",
-      "headline": "EpilepsyGTx partners with ClearPoint Neuro to deliver gene therapy EPY201 in first-in-human epilepsy trial",
-      "source": "News-Medical / Contract Pharma",
+      "headline": "EpilepsyGTx partners with ClearPoint Neuro for targeted delivery of lead epilepsy gene therapy",
+      "source": "News-Medical / PharmaTimes",
       "url": "https://www.news-medical.net/news/20260714/EpilepsyGTx-partners-with-ClearPoint-Neuro-to-support-targeted-delivery-of-lead-gene-therapy-in-epilepsy.aspx",
-      "summary": "UK biotech EpilepsyGTx will use ClearPoint's SmartFlow Cannula and Neuro Navigation System for MRI-guided delivery of its investigational gene therapy EPY201 in an upcoming Phase I/IIa trial for focal refractory epilepsy, adding another biopharma partner to ClearPoint's delivery ecosystem."
+      "summary": "EpilepsyGTx selected the ClearPoint SmartFlow Cannula and Navigation System to administer its lead candidate EPY201 in a planned first-in-human Phase 1/2a trial for focal refractory epilepsy. The deal adds another pharma partner to ClearPoint's gene-therapy delivery pipeline beyond the flagship uniQure program."
     }
   ],
   "catalysts": [
     {
-      "when": "2026-Q3 (likely early November)",
-      "label": "Q3 2026 earnings release",
-      "detail": "Next quarterly report; investors will watch whether the Biologics and Drug Delivery segment returns to growth as guided (aided by the newly acquired ClearPoint Advanced Laboratories facility) and whether full-year guidance of $48M-$52M holds.",
+      "when": "2026-Q3",
+      "label": "uniQure AMT-130 BLA submission for Huntington's disease",
+      "detail": "After its June 2026 Type B meeting, uniQure confirmed the FDA will accept the 3-year Phase I/II analysis as the primary basis of a BLA for AMT-130 under accelerated approval, and that it intends to file in Q3 2026 with a Priority Review request that would shorten review from ten to about six months. High-dose AMT-130 showed a statistically significant 75% slowing of disease progression on the cUHDRS at three years, and ClearPoint's SmartFlow cannula and navigation platform is the delivery system for the procedure. This is the single most important and nearest-dated partner milestone for the CLPT thesis; as of August 21 the filing has not yet been announced, leaving roughly six weeks in the guided window.",
+      "confirmed": true
+    },
+    {
+      "when": "2026-11",
+      "label": "Q3 2026 earnings: biologics back to growth and cash-burn check",
+      "detail": "Management said the CAL preclinical facility came into ClearPoint's possession in July and that new services revenue should return the biologics and drug delivery segment (down 15% to $4.0M in Q2) to growth in Q3. The print is the first hard checkpoint on whether the cut to $48-52M was a genuine timing shift or a demand problem, and with cash at $29.4M and opex up 51%, investors will watch whether opex growth moderates or a capital raise becomes necessary. No date has been formally announced; the IR calendar shows no scheduled events yet.",
       "confirmed": false
     },
     {
-      "when": "Next 12-18 months (per Aug 3, 2026 investor update)",
-      "label": "~10 clinical data readouts from biopharma partners",
-      "detail": "Management guided to roughly 10 partner data readouts and 10-15 enrolling clinical trials using ClearPoint delivery systems over the next 18 months, spanning partners such as AskBio, BlueRock, Kenai Therapeutics, REGENXBIO, AviadoBio, Neurona, PTC Therapeutics, Siren Biotechnology, uniQure, EpilepsyGTx and Aspen Neuroscience.",
+      "when": "2026-H2",
+      "label": "EpilepsyGTx EPY201 Phase 1/2a start",
+      "detail": "EpilepsyGTx plans a first-in-human Phase 1/2a trial of EPY201 for focal refractory epilepsy using ClearPoint's SmartFlow Cannula and Navigation System. Trial initiation would convert the July partnership announcement into actual procedure and service revenue and add to the 10-15 trials management expects to be enrolling within 18 months.",
       "confirmed": false
     },
     {
-      "when": "2026 (ongoing)",
-      "label": "CE Mark for 3.x navigation software and iCT upgrades",
-      "detail": "Company roadmap targets CE Mark clearance for its 3.x software version and iCT compatibility upgrades to its navigation platform during 2026, ahead of Harmony 1.0 sub-nuclei segmentation targeted for 2027.",
+      "when": "2026-H2",
+      "label": "Aspen Neuroscience post-RMAT regulatory alignment",
+      "detail": "With RMAT designation in hand for sasineprocel, Aspen gains early and frequent FDA interactions and potential eligibility for accelerated approval in Parkinson's. An announced pivotal trial design or expanded ASPIRO enrollment would add a second near-term approval pathway running on ClearPoint hardware.",
       "confirmed": false
     },
     {
-      "when": "2027 target (per RMAT track)",
-      "label": "Aspen Neuroscience potential BLA / accelerated pathway progress",
-      "detail": "RMAT designation for sasineprocel gives Aspen more frequent FDA interaction and potential eligibility for priority/accelerated review; any BLA filing or additional FDA feedback would be a catalyst for ClearPoint's co-delivery role.",
+      "when": "2026-Q4",
+      "label": "Further partner BLA filings flagged on the Q2 call",
+      "detail": "Management stated that multiple biopharma partners have recently received positive FDA feedback on potential BLA submissions and that additional cell and gene therapies should become commercially available by the end of 2027. Each partner filing beyond uniQure widens the base of recurring per-procedure delivery revenue and is the clearest way for ClearPoint to prove the platform thesis without relying on a single program.",
       "confirmed": false
     },
     {
-      "when": "Ongoing through 2026-2027",
-      "label": "Long-term $500M revenue strategy execution",
-      "detail": "Management's five-pillar plan (device sales, biologics/drug delivery services, capital equipment, focused ultrasound, and robotics) aims at $500M annual revenue longer-term; execution updates typically come each quarterly call.",
+      "when": "2026-2027",
+      "label": "Partner trial ramp and roughly 10 data readouts",
+      "detail": "Management guided on the Q2 call to 10-15 clinical trials using ClearPoint technology enrolling patients over the next 18 months, plus roughly 10 partner data readouts. This is the core driver of the biologics and drug-delivery revenue line and the main evidence needed to validate the $500M long-term revenue ambition.",
       "confirmed": false
     },
     {
-      "when": "10-year term from May 2026",
-      "label": "Focused ultrasound partnership milestones with Sungkyunkwan University (SONOCARE Lab)",
-      "detail": "Preclinical blood-brain-barrier tracer delivery results were already reported; further preclinical/clinical progress under this 10-year focused ultrasound development partnership is a watch item for entering that market.",
+      "when": "2027-H1",
+      "label": "First GLP IND-enabling study completed at CAL; robotics prototypes in preclinical use",
+      "detail": "ClearPoint signed its first GLP statement of work for the CAL facility, targeted for completion in the first half of 2027, and expects functioning cranial robot prototypes to be used preclinically at CAL and to generate incremental service revenue in 2027. Delivering both would prove out the capacity expansion from roughly $8M to over $60M in annual preclinical service capacity that underpins the new strategy.",
+      "confirmed": false
+    },
+    {
+      "when": "2027",
+      "label": "Potential FDA decision on AMT-130",
+      "detail": "Assuming a Q3 2026 filing with Priority Review, an FDA decision on the first Huntington's gene therapy could arrive around mid-2027. Approval would establish recurring per-procedure delivery revenue for ClearPoint and be the first commercial validation of the delivery platform in a large chronic indication.",
       "confirmed": false
     }
   ],
-  "pulse": "ClearPoint Neuro's stock has been under pressure since its August 3, 2026 Q2 report, which missed revenue and EPS estimates and forced a cut to full-year guidance ($48M-$52M from $52M-$56M), triggering analyst price-target reductions (Stifel to $22, Lake Street to $25) even as both kept Buy ratings. Despite the near-term miss, the long-term bull case remains intact: management unveiled a $500M revenue ambition built on its expanding biopharma partner ecosystem (60+ partners), and partners continue to hit regulatory milestones, including Aspen Neuroscience's FDA RMAT designation (July 31) and a new EpilepsyGTx delivery partnership (mid-July). As of August 21, 2026, CLPT trades well off its 52-week high near $30, with the next major catalyst being Q3 2026 earnings and the roughly 10 partner clinical data readouts management guided to over the next 18 months."
+  "pulse": "CLPT is still digesting the August 3 print: Q2 revenue of $10.9M missed by about $1.8M, opex jumped 51%, cash fell to $29.4M and FY2026 guidance was cut from $52-56M to $48-52M, sending the stock down roughly 16% before it stabilised near $15 - half the $30.10 52-week high - with no company news on the wire since mid-August. Management used the same day to unveil a $500M long-term revenue ambition built on gene-therapy delivery, the new CAL preclinical facility, the SONOCARE focused-ultrasound partnership and a cranial robot, arguing the shortfall is service timing rather than lost demand; sentiment is split, with Stifel and Lake Street keeping Buy at $22-$25 targets while Wall Street Zen cut to Strong Sell, and 13G filings show BlackRock at 7.1% and MAK Capital lifting its stake to 7.8%. The next few months trade on partner milestones rather than the P&L - uniQure's guided Q3 2026 BLA filing for AMT-130 is the dominant event and is still pending with about six weeks left in the window - against a shrinking cash runway that keeps financing risk the key offsetting factor."
 }
