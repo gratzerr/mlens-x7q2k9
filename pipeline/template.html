@@ -560,7 +560,6 @@
       <h2 style="margin:0"><span id="chart-title">Portfolio Value</span> <span id="chart-ret"></span></h2>
       <div class="chart-controls">
         <div class="tfsel" id="chartmode" aria-label="Chart measure"></div>
-        <div class="tfsel" id="tfsel"></div>
       </div>
     </div>
     <div class="chartbox">
@@ -763,8 +762,29 @@ function renderKpis(){
   if(left>0){ clearTimeout(_kpiTmr); _kpiTmr=setTimeout(_renderKpis,left); return; }
   _renderKpis();
 }
+/* Realized and unrealized within the selected window.
+   The daily series carries the cumulative Calculation rows PP itself reports —
+   realized (q/Q), earnings (g/G), fees (f/F), taxes (t/T) — so the realized part of a
+   window is a straight difference. Unrealized has no daily column; it comes out of
+   PP's own identity instead:
+     Δvalue = Δrealized + Δunrealized + Δearnings − Δfees − Δtaxes + Δtransfers
+   which makes every tile agree with the value curve above it by construction. */
+function periodGains(){
+  const pts=pfSliceP(PB_P);
+  if(pts.length<2) return null;
+  const a=pts[0], b=pts[pts.length-1], eur=_ccy==='EUR';
+  const f=(p,u,e)=>(eur?(p[e]||0):(p[u]||0));
+  const dv =(eur?(b.e||0):(b.v||0))-(eur?(a.e||0):(a.v||0));
+  const dc =(eur?(b.k||0):(b.c||0))-(eur?(a.k||0):(a.c||0));
+  const dr =f(b,'q','Q')-f(a,'q','Q');
+  const de =f(b,'g','G')-f(a,'g','G');
+  const df =f(b,'f','F')-f(a,'f','F');
+  const dt =f(b,'t','T')-f(a,'t','T');
+  return {realized:dr, unrealized:dv-dc-dr-de+df+dt, from:a.d, to:b.d};
+}
 function _renderKpis(){
   const d=DATA;
+  const pg=periodGains(), pAll=normP(PB_P).k==='rel'&&normP(PB_P).v==='all';
   // capital gains from the PP-exact FIFO engine (depot.xml), USD at tx-date FX
   const un=d.ppUnrealizedUsd!=null?d.ppUnrealizedUsd:d.netGainUnrealized;
   const rl=d.ppRealizedUsd!=null?d.ppRealizedUsd:d.realizedAllTime;
@@ -786,8 +806,18 @@ function _renderKpis(){
     {lab:'Today', val:_today?fmtPct(_today.pct):'—',
      note:_today?(_priv?MASK:fmtUsd(_today.usd))+' vs yesterday':'—',
      cls:_today&&_today.pct>=0?'up':'down'},
-    {lab:'Unrealized Gain', val:money(un,d.ppUnrealizedEur), note:'current holdings · FIFO vs cost', cls:gn?'up':'down'},
-    {lab:'Realized Gain', val:money(rl,d.ppRealizedEur), note:'booked from sells since 2022', cls:rz?'up':'down'},
+    (()=>{ const use=pg&&!pAll;
+      const v=use?pg.unrealized:un;
+      return {lab:use?'Unrealized · '+pbLabel():'Unrealized Gain',
+        val:_priv?MASK:(_ccy==='EUR'?fmtE(v):fmtUsd(v)),
+        note:use?'value change of the holdings in this period':'current holdings · FIFO vs cost',
+        cls:(v||0)>=0?'up':'down'}; })(),
+    (()=>{ const use=pg&&!pAll;
+      const v=use?pg.realized:rl;
+      return {lab:use?'Realized · '+pbLabel():'Realized Gain',
+        val:_priv?MASK:(_ccy==='EUR'?fmtE(v):fmtUsd(v)),
+        note:use?'booked from sells in this period':'booked from sells since 2022',
+        cls:(v||0)>=0?'up':'down'}; })(),
     (()=>{ const r=pbReturn();
       return {lab:'Return · '+pbLabel(), val:r?fmtPct(r.pct):'—',
         note:(r?r.note+'<br>':'')+'since inception (2022) '+fmtPct(d.since2022!=null?d.since2022:(d.pp&&d.pp.ppReferenceTtwror)||0)+' · IRR '+(d.izf||0).toFixed(2)+'%',
@@ -815,11 +845,7 @@ function _allocCash(){ try{ return localStorage.getItem('pc-alloccash')!=='0'; }
 const PBP=[['all','All'],['ytd','YTD'],['1y','1Y'],['3m','3M'],['1w','1W'],['1d','1D']];
 /* the Portfolio tab's period is a full period object like the other two tabs;
    layouts saved before that stored a bare key string — migrate those in place */
-let PB_P=(()=>{ try{ const raw=localStorage.getItem('pc-pbp');
-    if(!raw) return {k:'rel',v:'ytd'};
-    if(raw.charAt(0)==='{'){ const o=JSON.parse(raw); return o&&o.k?o:{k:'rel',v:'ytd'}; }
-    return {k:'rel',v:PBP.some(x=>x[0]===raw)?raw:'ytd'};
-  }catch(e){ return {k:'rel',v:'ytd'}; } })();
+let PB_P=loadPeriod('pc-pbp',{k:'rel',v:'ytd'});
 function pbLabel(){
   const p=normP(PB_P);
   if(p.k==='rel'){ const q=PBP.find(x=>x[0]===p.v); if(q) return q[1];
@@ -842,7 +868,7 @@ function pbReturn(){
 }
 function renderPbar(){
   renderPeriodControl(document.getElementById('pbar'), PB_P, p=>{
-    PB_P=p; try{localStorage.setItem('pc-pbp',JSON.stringify(PB_P));}catch(e){}
+    savePeriod('pc-pbp',p,PB_P); PB_P=p;
     renderPbar(); renderKpis();
   });
 }
@@ -894,17 +920,13 @@ function tfStartDate(k){
   const days={'1y':365,'6m':182,'3m':91,'1m':30}[k]||0;
   return new Date(new Date(last).getTime()-days*86400000).toISOString().slice(0,10);
 }
-function chartSlice(){
-  const s=(DATA.chartPP||[]).filter(p=>p.v>0);
-  if(curTf==='max'||!s.length) return s;
-  const from=tfStartDate(curTf);
-  const i=s.findIndex(p=>p.d>=from);
-  return i<=0? s : s.slice(i-1);   // keep one base point so the period return starts at 0
-}
+/* the chart reads the reporting period at the top of the tab — one control for the
+   whole Portfolio tab instead of a second, competing range picker over the chart */
+function chartSlice(){ return pfSliceP(PB_P); }
 function renderChartRet(pts){
   const el=document.getElementById('chart-ret'); if(!el||pts.length<2) return;
   const tw=((1+pts[pts.length-1].r)/(1+pts[0].r)-1)*100;
-  const lab=(TFS.find(t=>t.k===curTf)||{}).l||curTf;
+  const lab=pbLabel();
   el.innerHTML=`<span class="rl">TTWROR ${esc(lab)}</span> <span class="rv ${tw>=0?'up':'down'}">${fmtPct(tw)}</span>`;
 }
 function chartLegendLabel(l,returns){
@@ -1901,7 +1923,8 @@ function _saveLast(){ try{ DATA._savedAt=Date.now(); DATA._savedBy=DATA.appBuild
 const TFS=[{k:'max',l:'Since inception'},{k:'ytd',l:'YTD'},{k:'1y',l:'1Y'},{k:'6m',l:'6M'},{k:'3m',l:'3M'},{k:'1m',l:'1M'}];
 let curTf='max';
 function renderTfSel(){
-  document.getElementById('tfsel').innerHTML=TFS.map(t=>
+  const el=document.getElementById('tfsel'); if(!el) return;   // retired: the top bar drives the chart
+  el.innerHTML=TFS.map(t=>
     `<button data-tf="${t.k}" class="${t.k===curTf?'on':''}">${t.l}</button>`).join('');
   document.querySelectorAll('#tfsel button').forEach(b=>b.addEventListener('click',()=>{
     curTf=b.dataset.tf; renderTfSel(); renderChart();
@@ -2855,12 +2878,39 @@ const PF_DEFAULT=[{t:'chart',p:'all',bench:['SPY']},{t:'pnl'},{t:'pnlpct'},
   {t:'maxdd',p:'all'},{t:'dddur',p:'all'},{t:'vola',p:'all'},{t:'semivola',p:'all'},
   {t:'calc'},{t:'years',bench:['SPY'],scheme:'traffic'},
   {t:'heat',p:'all',scheme:'traffic'},{t:'trades'},{t:'ddchart',p:'all'}];
-let PF_P=(()=>{try{const p=JSON.parse(localStorage.getItem('pc-pfperiod')||'null');return p&&p.k?p:{k:'rel',v:'all'};}catch(e){return {k:'rel',v:'all'};}})();
+let PF_P=loadPeriod('pc-pfperiod',{k:'rel',v:'all'});
 /* ---- ONE reporting-period control for Portfolio, Performance and Payments ----
    Quick buttons for the common windows, a dropdown for calendar years and custom
    ranges, two date fields. All three tabs render from this one function, so they
    cannot drift apart in look or behaviour. Fields are addressed by data-attribute,
    never by id, so several bars can live on the same page. */
+/* ---- what a reporting period remembers ----
+   A relative window (All/YTD/1Y/…) means the same thing tomorrow, so it is kept for
+   good. A calendar year or a hand-typed date does NOT: coming back days later to a
+   page silently scoped to "since 28.06.2023" is how every number on it starts looking
+   wrong. Those expire after PERIOD_TTL and fall back to the last relative window. */
+function loadPeriod(key, def){
+  /* local, not a module-level const: the Portfolio bar reads its period near the top
+     of the script, before a const further down would be initialised */
+  const PERIOD_TTL=8*3600000;
+  try{
+    const raw=localStorage.getItem(key); if(!raw) return def;
+    if(raw.charAt(0)!=='{') return {k:'rel',v:raw};        // pre-object layouts
+    const o=JSON.parse(raw); if(!o) return def;
+    const p=o.p||o;                                        // {p,ts,rel} or a bare period
+    if(!p||!p.k) return def;
+    if(p.k==='rel') return p;
+    if(o.ts&&Date.now()-o.ts<PERIOD_TTL) return p;
+    return (o.rel&&o.rel.k)?o.rel:def;                     // expired -> last relative window
+  }catch(e){ return def; }
+}
+function savePeriod(key, p, prev){
+  try{
+    const rel=(p.k==='rel')?p:((prev&&prev.k==='rel')?prev
+      :(JSON.parse(localStorage.getItem(key)||'{}').rel||null));
+    localStorage.setItem(key, JSON.stringify({p, ts:Date.now(), rel}));
+  }catch(e){}
+}
 function renderPeriodControl(bar, state, commit){
   if(!bar) return;
   /* never rebuild while the user is typing in the bar — the minute poll and the
@@ -2913,7 +2963,7 @@ function renderPeriodControl(bar, state, commit){
 }
 function renderPeriodBar(){
   renderPeriodControl(document.getElementById('pf-period'), PF_P, p=>{
-    PF_P=p; try{localStorage.setItem('pc-pfperiod',JSON.stringify(PF_P));}catch(e){}
+    savePeriod('pc-pfperiod',p,PF_P); PF_P=p;
     renderPeriodBar(); renderPerf();
   });
 }
@@ -4006,7 +4056,7 @@ function closeSecDetail(){
 const PAY_KINDS={dividend:{lab:'Dividends',flow:1},interest:{lab:'Interest',flow:1},
   fee:{lab:'Fees',flow:-1},tax:{lab:'Taxes',flow:-1},
   deposit:{lab:'Deposits',flow:0},withdrawal:{lab:'Withdrawals',flow:0}};
-let PAY_P=(()=>{try{const p=JSON.parse(localStorage.getItem('pc-payperiod')||'null');return p&&p.k?p:{k:'rel',v:'all'};}catch(e){return {k:'rel',v:'all'};}})();
+let PAY_P=loadPeriod('pc-payperiod',{k:'rel',v:'all'});
 let _payK=(()=>{try{return localStorage.getItem('pc-paycat')||'dividend';}catch(e){return 'dividend';}})();
 let _payExp=false;
 function payRange(p){   // [from, to] ISO dates for a PF-style reporting period
@@ -4027,7 +4077,7 @@ function payRange(p){   // [from, to] ISO dates for a PF-style reporting period
    never rebuild while focused, prefilled date fields, half-typed years ignored */
 function renderPayPeriodBar(){
   renderPeriodControl(document.getElementById('pay-period'), PAY_P, p=>{
-    PAY_P=p; try{localStorage.setItem('pc-payperiod',JSON.stringify(PAY_P));}catch(e){}
+    savePeriod('pc-payperiod',p,PAY_P); PAY_P=p;
     _payExp=false; renderPayPeriodBar(); renderPayments();
   });
 }
