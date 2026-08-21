@@ -260,7 +260,10 @@
   #chart-ret .rl{color:var(--muted);font-weight:600;text-transform:uppercase;letter-spacing:.4px;font-size:11px}
   .tfsel{display:flex;gap:2px;background:var(--surface-2);border-radius:8px;padding:3px}
   .tfsel button{border:0;background:none;color:var(--ink-2);font-size:12px;font-weight:600;padding:5px 10px;border-radius:6px;cursor:pointer;font-family:inherit}
-  .tfsel button.on{background:var(--surface);color:var(--ink);box-shadow:0 1px 2px rgba(0,0,0,.12)}
+  /* the chosen segment is filled with the accent: on the dark theme a --surface chip
+     inside a --surface-2 group is nearly the same tone, which read as "nothing selected" */
+  .tfsel button.on{background:var(--accent);color:#fff;box-shadow:0 1px 2px rgba(0,0,0,.18)}
+  .tfsel button.on:hover{color:#fff}
   .tfsel button:hover:not(.on){color:var(--ink)}
   .pbar{display:flex;gap:8px;align-items:center;flex-wrap:wrap;margin:0 0 12px}
   .minibtn{border:1px solid var(--border);background:var(--surface-2);color:var(--ink-2);border-radius:8px;
@@ -869,7 +872,7 @@ function pbReturn(){
 function renderPbar(){
   renderPeriodControl(document.getElementById('pbar'), PB_P, p=>{
     savePeriod('pc-pbp',p,PB_P); PB_P=p;
-    renderPbar(); renderKpis();
+    renderPbar(); renderKpis(); renderChart();   // the chart reads this period too
   });
 }
 
@@ -2913,9 +2916,12 @@ function savePeriod(key, p, prev){
 }
 function renderPeriodControl(bar, state, commit){
   if(!bar) return;
-  /* never rebuild while the user is typing in the bar — the minute poll and the
-     mobile-keyboard resize would destroy the focused date field mid-entry */
-  if(bar.contains(document.activeElement)&&document.activeElement!==bar) return;
+  /* never rebuild while a DATE FIELD is being typed into — the minute poll and the
+     mobile-keyboard resize would destroy it mid-entry. It must not cover the buttons:
+     a clicked button takes focus, so the old blanket guard swallowed exactly the
+     redraw that moves the highlight, and the bar looked as if nothing was selected. */
+  const ae=document.activeElement;
+  if(ae&&bar.contains(ae)&&ae.tagName==='INPUT'&&ae.type==='date') return;
   const p=normP(state);
   const years=[...new Set((DATA.chartPP||[]).map(x=>x.d.slice(0,4)))];
   const fld='background:var(--surface);border:1px solid var(--border);border-radius:9px;font:inherit;color:var(--ink)';
@@ -2959,7 +2965,10 @@ function renderPeriodControl(bar, state, commit){
   const deb=()=>{ clearTimeout(bar._deb); bar._deb=setTimeout(apply,350); };
   from.addEventListener('change',deb);
   to.addEventListener('change',deb);
-  bar.querySelectorAll('[data-pq]').forEach(b=>b.addEventListener('click',()=>commit({k:'rel',v:b.dataset.pq})));
+  bar.querySelectorAll('[data-pq]').forEach(b=>b.addEventListener('click',()=>{
+    const k=b.dataset.pq; commit({k:'rel',v:k});
+    const again=bar.querySelector(`[data-pq="${k}"]`); if(again&&ae!==document.body) again.focus();
+  }));
 }
 function renderPeriodBar(){
   renderPeriodControl(document.getElementById('pf-period'), PF_P, p=>{
