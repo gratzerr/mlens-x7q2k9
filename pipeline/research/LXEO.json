@@ -1,1 +1,86 @@
-{"ticker": "LXEO", "news": [{"date": "2026-08-19", "headline": "Lexeo insiders file Form 4s: CEO, CFO and COO sell shares to cover RSU taxes", "source": "StockTitan (SEC Form 4 filings)", "url": "https://www.stocktitan.net/sec-filings/LXEO/form-4-lexeo-therapeutics-inc-insider-trading-activity-252933b72a63.html", "summary": "CEO Nolan Townsend sold 3,345 shares on August 18 at a weighted average price of $4.9512 (trades between $4.83 and $5.01), retaining 374,472 shares directly; the CFO and COO filed parallel sale-to-cover Form 4s, with the COO left holding about 136,000 shares. The filings are routine RSU tax withholding rather than discretionary selling, but they mark the stock near $5, far below the roughly $18 average sell-side target."}, {"date": "2026-08-16", "headline": "Wall Street Zen downgrades Lexeo Therapeutics to Strong Sell", "source": "Daily Political", "url": "https://www.dailypolitical.com/2026/08/16/lexeo-therapeutics-nasdaqlxeo-lowered-to-strong-sell-rating-by-wall-street-zen.html", "summary": "Wall Street Zen cut Lexeo from Hold to Strong Sell after the Q2 print, in which the company missed on EPS at $(0.30) versus a $(0.29) consensus. It is a bearish outlier against nine covering analysts whose consensus remains Buy with an average target near $18.4, and it underlines that burn and valuation concerns persist despite the RMAT designation."}, {"date": "2026-08-14", "headline": "Cluster of institutional investors discloses 5%+ stakes in Lexeo Therapeutics", "source": "StockTitan (SEC Schedule 13G filings)", "url": "https://www.stocktitan.net/sec-filings/LXEO/schedule-13g-a-lexeo-therapeutics-inc-amended-passive-investment-disc-1536abebb98d.html", "summary": "OrbiMed, Paradigm BioCapital, Balyasny Asset Management (7.84M shares, capped at 9.99%), Affinity Asset Advisors (8.4%) and State Street (5.5%) all filed Schedule 13G disclosures in the days around Q2 earnings and the LX2020 RMAT designation. Dimensional Fund Advisors separately increased its position, pointing to continued institutional presence in the cardiac gene therapy story even as the share price sits near multi-year lows."}, {"date": "2026-08-12", "headline": "Lexeo reports Q2 2026 results: $234.2M cash into 2028, SUNRISE-FA 2 enrolling", "source": "GlobeNewswire", "url": "https://www.globenewswire.com/news-release/2026/08/12/3343500/0/en/lexeo-therapeutics-reports-second-quarter-2026-financial-results-and-operational-highlights.html", "summary": "Lexeo posted a Q2 net loss of $25.9 million, or $(0.30) per share (R&D $19.0M, G&A $9.0M), and ended June with $234.2 million in cash, cash equivalents and investments, guided to fund operations into 2028. Management confirmed the first patient was enrolled in the pivotal SUNRISE-FA 2 trial for LX2006 in June with site activation and CLARITY-FA natural history enrollment ongoing, keeping topline data on track for 2H 2027 and a potential BLA in 1H 2028."}, {"date": "2026-08-05", "headline": "FDA grants RMAT designation to LX2020 for PKP2 arrhythmogenic cardiomyopathy", "source": "GlobeNewswire", "url": "https://www.globenewswire.com/news-release/2026/08/05/3339165/0/en/Lexeo-Therapeutics-Receives-FDA-Regenerative-Medicine-Advanced-Therapy-RMAT-Designation-for-LX2020-for-the-Treatment-of-PKP2-Arrhythmogenic-Cardiomyopathy.html", "summary": "The FDA granted Regenerative Medicine Advanced Therapy designation to LX2020 based on interim HEROIC-PKP2 Phase I/II data from ten dosed participants showing dose-dependent PKP2 protein restoration (93% mean increase at low dose, 162% at high dose) and improved or stabilised arrhythmia burden in the majority. LX2020 now holds RMAT, Orphan Drug and Fast Track status, unlocking earlier and more frequent FDA interaction on a registrational path in a US population estimated at roughly 60,000 patients with no disease-modifying therapy."}, {"date": "2026-07-31", "headline": "Chardan Capital upgrades Lexeo Therapeutics to Strong-Buy", "source": "Daily Political", "url": "https://www.dailypolitical.com/2026/07/31/lexeo-therapeutics-nasdaqlxeo-raised-to-strong-buy-at-chardan-capital.html", "summary": "Chardan Capital raised Lexeo to Strong-Buy ahead of Q2 earnings and the August regulatory news flow, reflecting sell-side conviction in the cardiac gene therapy franchise. The upgrade opened a stretch of mixed analyst commentary that ended with Wall Street Zen's Strong Sell call two weeks later."}], "catalysts": [{"when": "2026-Q4", "label": "LX2020 12-month HEROIC-PKP2 data (all high-dose participants)", "detail": "Twelve-month efficacy and safety update for all high-dose participants in the HEROIC-PKP2 Phase I/II trial in PKP2-associated arrhythmogenic cardiomyopathy, guided for Q4 2026; enrollment completed in Q4 2025. The decisive question flagged by the sell side is whether non-sustained ventricular tachycardia improves in the same patients who showed PVC reductions, and whether PKP2 protein restoration is durable - this determines whether a registrational LX2020 study is credible.", "confirmed": true}, {"when": "2026-H2", "label": "FDA regulatory engagement updates (LX2020 and LX2006)", "detail": "Lexeo has committed to sharing additional clinical and regulatory updates before year end, covering the registrational path for LX2020 under its new RMAT designation and the confirmatory-evidence strategy for LX2006 that would support full approval after any accelerated approval.", "confirmed": false}, {"when": "2026-11", "label": "Q3 2026 earnings report", "detail": "Next quarterly results with pipeline progress, SUNRISE-FA 2 enrollment pace and updated cash-runway commentary. Date approximate, based on the prior-year cadence (Q3 2025 reported November 12) after the August 12 Q2 2026 report.", "confirmed": false}, {"when": "2027-H2", "label": "SUNRISE-FA 2 topline data (LX2006)", "detail": "Pivotal open-label readout in 13 participants aged 16 and over dosed with high-dose LX2006 (1.2x10^12 vg/kg) versus untreated comparators, with change in left ventricular mass index at 6 months as the primary endpoint. Enrollment has been underway since the June 2026 first-patient dosing, with site activation still ongoing.", "confirmed": true}, {"when": "2028-H1", "label": "LX2006 BLA submission (accelerated approval)", "detail": "Planned Biologics License Application to the FDA under the accelerated-approval pathway based on SUNRISE-FA 2 evidence, per the protocol and statistical analysis plan finalised with the agency in June 2026 and subject to PPQ and process-validation timing.", "confirmed": false}], "pulse": "Operationally Lexeo is in its strongest position yet - the August 5 RMAT designation for LX2020 stacked on June's FDA-aligned SUNRISE-FA 2 protocol, and the August 12 Q2 print showed $234.2 million in cash funding operations into 2028 with the pivotal LX2006 trial already enrolling. The market is not paying for it: the stock trades near $5 against a roughly $18 sell-side consensus, Wall Street Zen cut to Strong Sell after the small Q2 EPS miss, and CEO, CFO and COO all filed RSU tax sale-to-cover Form 4s at around $4.95 on August 18, while OrbiMed, Balyasny, Paradigm, Affinity and State Street remain disclosed 5%+ holders. The next hard test is the Q4 2026 twelve-month HEROIC-PKP2 high-dose readout, where the key risk is that arrhythmia benefit again looks directionally constructive but not conviction-building; beyond that it is a long execution wait, with the pivotal LX2006 data not due until 2H 2027 and any approval stretching into 2028."}
+{
+  "ticker": "LXEO",
+  "news": [
+    {
+      "date": "2026-08-16",
+      "headline": "Wall Street Zen downgrades LXEO to \"Strong Sell\"",
+      "source": "Daily Political / Wall Street Zen",
+      "url": "https://www.dailypolitical.com/2026/08/16/lexeo-therapeutics-nasdaqlxeo-lowered-to-strong-sell-rating-by-wall-street-zen.html",
+      "summary": "Wall Street Zen cut its rating on Lexeo from Hold to Strong Sell days after the Q2 print, one of the more bearish notes on the stock this year."
+    },
+    {
+      "date": "2026-08-15",
+      "headline": "Chardan and H.C. Wainwright slash price targets after Q2 report",
+      "source": "TipRanks / The Fly",
+      "url": "https://www.tipranks.com/news/the-fly/lexeo-therapeutics-price-target-raised-to-15-from-9-at-h-c-wainwright-thefly",
+      "summary": "Following the Q2 update, Chardan Capital cut its target from $20 to $15 and H.C. Wainwright cut its target from $15 to $9, both keeping bullish ratings but reflecting reduced conviction on near-term catalysts."
+    },
+    {
+      "date": "2026-08-12",
+      "headline": "Lexeo reports second quarter 2026 financial results and operational highlights",
+      "source": "GlobeNewswire / BioSpace",
+      "url": "https://www.globenewswire.com/news-release/2026/08/12/3343500/0/en/lexeo-therapeutics-reports-second-quarter-2026-financial-results-and-operational-highlights.html",
+      "summary": "Net loss was $25.9M ($0.30/share); cash, cash equivalents and investments of $234.2M are expected to fund operations into 2028. SUNRISE-FA 2, the pivotal registrational study for LX2006 in Friedreich ataxia cardiomyopathy, is now enrolling after dosing its first patient in June."
+    },
+    {
+      "date": "2026-08-05",
+      "headline": "FDA grants RMAT designation to LX2020 for PKP2 arrhythmogenic cardiomyopathy",
+      "source": "GlobeNewswire / BioSpace",
+      "url": "https://www.globenewswire.com/news-release/2026/08/05/3339165/0/en/Lexeo-Therapeutics-Receives-FDA-Regenerative-Medicine-Advanced-Therapy-RMAT-Designation-for-LX2020-for-the-Treatment-of-PKP2-Arrhythmogenic-Cardiomyopathy.html",
+      "summary": "Based on interim HEROIC-PKP2 Phase I/II data, the FDA awarded Regenerative Medicine Advanced Therapy designation to LX2020, adding to its existing Orphan Drug and Fast Track designations and paving the way for closer, more frequent FDA interaction."
+    },
+    {
+      "date": "2026-07-30",
+      "headline": "Weiss Ratings further downgrades Lexeo Therapeutics",
+      "source": "Defense World / Weiss Ratings",
+      "url": "https://www.defenseworld.net/2026/08/12/lexeo-therapeutics-lxeo-projected-to-release-earnings-on-thursday.html",
+      "summary": "Weiss Ratings cut Lexeo from a \"sell (d-)\" to a \"sell (e+)\" rating, one of the more bearish independent rating actions in the run-up to Q2 earnings."
+    },
+    {
+      "date": "2026-07-28",
+      "headline": "Chardan Capital upgrades Lexeo to \"Strong-Buy\"",
+      "source": "Daily Political / Chardan Capital",
+      "url": "https://www.dailypolitical.com/2026/07/31/lexeo-therapeutics-nasdaqlxeo-raised-to-strong-buy-at-chardan-capital.html",
+      "summary": "Chardan raised its rating to Strong-Buy ahead of Q2 results, citing confidence in the LX2006/LX2020 cardiac gene therapy pipeline (a rating Chardan would keep even as it trimmed its price target two weeks later)."
+    }
+  ],
+  "catalysts": [
+    {
+      "when": "2026-Q4",
+      "label": "HEROIC-PKP2 12-month high-dose data update (LX2020, PKP2-ACM)",
+      "detail": "Company-guided milestone: 12-month follow-up data from all high-dose HEROIC-PKP2 participants, to be accompanied by additional regulatory updates following the August 2026 RMAT designation.",
+      "confirmed": true
+    },
+    {
+      "when": "Ongoing/2026-2027",
+      "label": "SUNRISE-FA 2 pivotal trial enrollment (LX2006, Friedreich ataxia cardiomyopathy)",
+      "detail": "Open-label registrational study (13 treated vs. 13 untreated controls) initiated June 2026 under an accelerated-approval-aligned design; continued enrollment and execution is the near-term focus.",
+      "confirmed": true
+    },
+    {
+      "when": "2027-H2",
+      "label": "SUNRISE-FA 2 topline data (LX2006)",
+      "detail": "Topline results from the pivotal study are expected in the second half of 2027, the key long-range value driver for the cardiac franchise.",
+      "confirmed": true
+    },
+    {
+      "when": "~2026-11",
+      "label": "Q3 2026 earnings report",
+      "detail": "Next quarterly financial results and operational update, following the Aug 12 Q2 report and Aug 17 earnings call.",
+      "confirmed": false
+    },
+    {
+      "when": "2028 (guided)",
+      "label": "Potential LX2006 BLA submission / accelerated approval",
+      "detail": "Management has guided toward a possible BLA filing and launch under the accelerated approval pathway around 2028, pending continued positive FDA interactions and SUNRISE-FA 2 progress.",
+      "confirmed": false
+    },
+    {
+      "when": "Unscheduled",
+      "label": "LX1001 (APOE4 Alzheimer's) program update",
+      "detail": "LX1001 holds FDA Fast Track designation; no new clinical update has been disclosed since October 2024 interim data, but investors are watching for next steps/next-phase guidance.",
+      "confirmed": false
+    }
+  ],
+  "pulse": "As of August 21, 2026, Lexeo's cardiac gene therapy franchise is the dominant story: SUNRISE-FA 2 (LX2006) is enrolling as the pivotal registrational study, and LX2020 just picked up FDA RMAT designation on top of Orphan Drug/Fast Track status for PKP2-associated arrhythmogenic cardiomyopathy. Q2 2026 results (Aug 12) showed a $25.9M quarterly net loss with $234.2M in cash carrying the company into 2028, but the stock has faced a choppy analyst reaction since, with Chardan and H.C. Wainwright cutting price targets and Wall Street Zen swinging to Strong Sell even as most sell-side coverage remains constructive. The APOE4 Alzheimer's asset LX1001 has gone quiet on the news front, leaving the cardiac pipeline (LX2006, LX2020) as the near-term catalyst path into the Q4 2026 HEROIC-PKP2 data update and 2H 2027 SUNRISE-FA 2 topline readout."
+}

@@ -1,19 +1,92 @@
-{"ticker": "QURE",
- "news": [
-  {"date": "2026-08-14", "headline": "RTW Investments and Susquehanna disclose sizeable uniQure stakes in Schedule 13G filings", "source": "StockTitan (SEC filings)", "url": "https://www.stocktitan.net/sec-filings/QURE/schedule-13g-uni-qure-n-v-passive-investment-disclosure-5-dd4d86427d6d.html", "summary": "RTW Investments and Roderick Wong reported shared beneficial ownership of 3,941,572 ordinary shares, or 5.7% of the class based on 63,067,485 shares outstanding plus the 5,686,813 shares issued in the June 2026 offering. Affiliated Susquehanna entities separately disclosed 3,339,231 shares (4.8%) as of June 30, adding to a July 17 JPMorgan 13G showing a 7.0% stake of 4,866,211 shares."},
-  {"date": "2026-08-13", "headline": "Stifel reiterates Buy on uniQure with $71 price target into the September readout", "source": "Moomoo", "url": "https://www.moomoo.com/news/post/71796771/stifel-maintains-uniqure-nv-qureus-with-buy-rating-raises-target", "summary": "Stifel maintained its Buy rating and $71 target, pointing to the cleared FDA accelerated-approval pathway for AMT-130 and the four-year Phase I/II data as the next major stock catalyst. Sell-side sentiment has stayed broadly constructive since the June FDA reversal, with published consensus targets clustering between roughly $65 and $71 across 17-22 covering analysts."},
-  {"date": "2026-07-31", "headline": "uniQure says an FDA advisory committee for AMT-130 is likely and welcomes the scrutiny", "source": "BioSpace", "url": "https://www.biospace.com/fda/uniqure-welcomes-possible-adcomm-for-huntingtons-asset-as-regulatory-jitters-spread-through-biopharma", "summary": "Chief Medical Officer Walid Abi-Saab said the company considers an advisory committee meeting for its Huntington's gene therapy probable and is preparing for one, saying \"we welcome it,\" even though the FDA has not formally requested a meeting. His comments came as regulatory uncertainty over unpredictable FDA advisory practices spread across biopharma."},
-  {"date": "2026-07-30", "headline": "Wolfe Research upgrades uniQure to Outperform, sees a clear path to approval for AMT-130", "source": "TipRanks / The Fly", "url": "https://www.tipranks.com/news/the-fly/wolfe-upgrades-uniqure-to-outperform-sees-clear-path-to-approval-for-amt-130-thefly-news", "summary": "Wolfe moved to Outperform with a $65 target, arguing the market prices AMT-130 approval odds below 50% while Wolfe models roughly 70%, with peak U.S. sales potential near $2 billion. The upgrade followed the FDA's June 17 agreement to accept the three-year Phase I/II analysis as the primary basis for an accelerated-approval BLA."},
-  {"date": "2026-07-29", "headline": "uniQure reports Q2 2026 results, confirms Q3 BLA timeline and cash runway into 2030", "source": "GlobeNewswire", "url": "https://www.globenewswire.com/news-release/2026/07/29/3335112/0/en/uniqure-announces-second-quarter-2026-financial-results-and-provides-company-update.html", "summary": "Revenue was $5.8M and cash plus investments stood at $810.3M as of June 30 after the $259M June raise, funding operations into 2030, while the net loss widened to $81.1M on commercial-readiness spending. Management said final FDA meeting minutes received in July confirmed the accelerated-approval alignment, kept the AMT-130 BLA and UK MAA on track for Q3 2026, guided to four-year Phase I/II data in September from a June 30 data cut, and detailed the confirmatory study design (randomized standard-of-care control, Total Functional Capacity at 36 months)."},
-  {"date": "2026-07-09", "headline": "Roche ends both of its Huntington's disease programs, clearing the field for uniQure", "source": "Fierce Biotech", "url": "https://www.fiercebiotech.com/biotech/roche-ends-2-huntingtons-disease-programs-including-ionis-partnered-tominersen", "summary": "Roche discontinued its two remaining Huntington's programs, the Ionis-partnered tominersen and RG6496, after tominersen lowered mutant huntingtin and neurofilament light but failed to slow clinical progression. The exit removes uniQure's most advanced competitor just as AMT-130 heads into its BLA submission."}
- ],
- "catalysts": [
-  {"when": "2026-09", "label": "Four-year AMT-130 data readout", "detail": "uniQure plans to present four-year follow-up data on all 24 patients from the first two Phase I/II cohorts (12 high-dose, 12 low-dose), plus additional three-year follow-up on three more high-dose patients, from a June 30, 2026 data cut. The comparator uses an updated Enroll-HD external control database of roughly 26,000 participants. Stifel and Wolfe both flag this as the key near-term catalyst ahead of the BLA and any advisory committee.", "confirmed": true},
-  {"when": "2026-Q3", "label": "AMT-130 US BLA submission", "detail": "uniQure remains on track to submit the BLA for AMT-130 in Huntington's disease under the FDA accelerated-approval pathway by the end of Q3 2026, based on final June/July meeting minutes confirming that the three-year analysis (75% slowing of cUHDRS progression at the high dose, p=0.003) can serve as the primary clinical basis. Not yet filed as of August 21.", "confirmed": true},
-  {"when": "2026-Q3", "label": "UK MHRA marketing authorization application", "detail": "Following a successful MHRA pre-submission meeting, uniQure plans a parallel UK MAA for AMT-130 in Q3 2026 on the same three-year data package, giving a second potential approval route independent of the FDA.", "confirmed": true},
-  {"when": "2026-H2", "label": "FDA advisory committee (AdCom) meeting", "detail": "Management believes an advisory committee review is likely for what would be the first gene therapy for Huntington's disease and says it is preparing for one, but the FDA has not confirmed a meeting or a date. Timing would follow BLA acceptance.", "confirmed": false},
-  {"when": "2026-H2", "label": "Confirmatory trial initiation", "detail": "The FDA requires a randomized, concurrent standard-of-care-controlled confirmatory study with Total Functional Capacity at 36 months as the primary endpoint, replacing the earlier sham-surgery design that investigators and patient advocates opposed on ethical grounds. uniQure says it intends to start this global trial as soon as possible after the BLA submission.", "confirmed": false},
-  {"when": "2026-H2", "label": "Additional international regulatory pathways", "detail": "uniQure said it is actively pursuing further registration routes for AMT-130 beyond the US and UK, including other international markets, and expects to give an update in the second half of 2026.", "confirmed": false},
-  {"when": "2027", "label": "Potential accelerated approval decision; AMT-260 and Fabry updates", "detail": "If the BLA is accepted with priority review, an FDA decision on the first potential Huntington's gene therapy could land around mid-2027; uniQure also plans further clinical updates for its AMT-260 refractory mesial temporal lobe epilepsy program and its AMT-191 Fabry disease program in H1 2027.", "confirmed": false}
- ],
- "pulse": "QURE remains a catalyst-driven, binary story, but the setup has kept improving: the June 17 FDA reversal accepting three-year AMT-130 data for an accelerated-approval BLA was confirmed by final meeting minutes in July, Roche's July 9 exit from Huntington's removed the last late-stage competitor, and the July 29 Q2 print locked in $810.3M of cash and runway into 2030 on just $5.8M of quarterly revenue. Sell-side and institutional sentiment has followed, with Wolfe upgrading to Outperform ($65, ~70% approval odds), Stifel reiterating Buy at $71, Wells Fargo raising its target to $75 on the back of encouraging AMT-260 epilepsy data, and JPMorgan, RTW and Susquehanna disclosing stakes of 7.0%, 5.7% and 4.8% in July/August 13G filings. As of August 21 the stock is consolidating in the high $40s (~$47-48) with no material new company newsflow since the mid-August 13G filings and the BLA still unfiled. The September four-year Phase I/II readout is the next real test, followed by the Q3 US BLA and UK MAA filings and a likely-but-unconfirmed advisory committee, and after the summer re-rating any softening in the four-year durability data or a contentious AdCom is the main downside risk."}
+{
+  "ticker": "QURE",
+  "news": [
+    {
+      "date": "2026-08-14",
+      "headline": "RTW Investments/Roderick Wong file Schedule 13G/A reaffirming ~5.7% stake in uniQure",
+      "source": "SEC EDGAR / StockTitan",
+      "url": "https://www.stocktitan.net/sec-filings/QURE/schedule-13g-a-uni-qure-n-v-amended-passive-investment-disclosure-b424820bd784.html",
+      "summary": "Biotech-focused fund RTW Investments (with Dr. Roderick Wong) refiled its passive ownership disclosure showing roughly 3.9 million shares (~5.7%), signaling continued large specialist-investor positioning heading into the September data readout."
+    },
+    {
+      "date": "2026-07-31",
+      "headline": "Wells Fargo raises uniQure price target to $75 from $60, keeps Overweight/Buy",
+      "source": "Defense World / Yahoo Finance",
+      "url": "https://www.defenseworld.net/2026/07/31/uniqure-nasdaqqure-price-target-raised-to-75-00-at-wells-fargo-company.html",
+      "summary": "Following Q2 results and the confirmed Q3 2026 BLA/UK MAA timeline, Wells Fargo lifted its 12-month target to $75, citing de-risked regulatory pathway and cash runway extension into 2030."
+    },
+    {
+      "date": "2026-07-30",
+      "headline": "Wolfe Research upgrades QURE to Outperform ($65 PT); shares volatile on Sept. data-delay concerns",
+      "source": "Investing.com / TipRanks",
+      "url": "https://www.tipranks.com/news/catalyst/uniqure-stock-slides-as-investors-eye-data-delays",
+      "summary": "Wolfe upgraded uniQure from Peerperform, modeling ~70% probability of AMT-130 success, even as some shares gave back gains on reminders that pivotal four-year data (and thus BLA certainty) won't arrive until September, keeping the stock in a quiet-period lull."
+    },
+    {
+      "date": "2026-07-29",
+      "headline": "uniQure reports Q2 2026 results: BLA and UK MAA on track for Q3, $259M raise extends runway to 2030",
+      "source": "GlobeNewswire (company press release)",
+      "url": "https://www.globenewswire.com/news-release/2026/07/29/3335112/0/en/uniqure-announces-second-quarter-2026-financial-results-and-provides-company-update.html",
+      "summary": "uniQure confirmed AMT-130's US BLA and UK MHRA MAA submissions remain on track for Q3 2026, with topline four-year data due in September; it also reported early positive signals from AMT-260 (epilepsy) and an AMT-191 (Fabry) update, ending the quarter with $810.3M in cash after a $259M offering (loss of $1.22/share, revenue up 11% to $5.8M, missing estimates)."
+    },
+    {
+      "date": "2026-07-16",
+      "headline": "JPMorgan Chase discloses 7.0% passive stake in uniQure via Schedule 13G",
+      "source": "SEC EDGAR / StockTitan",
+      "url": "https://www.stocktitan.net/sec-filings/QURE/schedule-13g-uni-qure-n-v-passive-investment-disclosure-5-d1a76ec62177.html",
+      "summary": "JPMorgan reported beneficial ownership of roughly 4.87 million shares (7%), adding to a run of large institutional 13G filings that underscore growing fund exposure to QURE ahead of key catalysts."
+    },
+    {
+      "date": "2026-07-09",
+      "headline": "Roche discontinues its Huntington's disease programs (including tominersen)",
+      "source": "Fierce Biotech",
+      "url": "https://www.fiercebiotech.com/biotech/roche-ends-2-huntingtons-disease-programs-including-ionis-partnered-tominersen",
+      "summary": "Roche's decision to end its Huntington's disease pipeline removes a major rival approach to the disease, reinforcing uniQure's position as the most advanced Huntington's-modifying therapy in development."
+    }
+  ],
+  "catalysts": [
+    {
+      "when": "2026-09",
+      "label": "Four-year AMT-130 data readout",
+      "detail": "Topline four-year Phase I/II follow-up data (building on the 75% cUHDRS slowing at 3 years) confirmed by management as the key near-term catalyst; company is effectively in a quiet period until this releases.",
+      "confirmed": true
+    },
+    {
+      "when": "2026-Q3",
+      "label": "US BLA submission for AMT-130 (accelerated approval)",
+      "detail": "FDA and uniQure aligned (June 2026 Type B meeting) that 3-year data can serve as primary evidence; company reaffirmed Q3 2026 filing plan at Q2 2026 earnings (July 29). Not yet filed as of August 21.",
+      "confirmed": true
+    },
+    {
+      "when": "2026-Q3",
+      "label": "UK MHRA Marketing Authorisation Application (MAA)",
+      "detail": "Positive MHRA pre-submission meeting completed; filing based on 3-year Phase I/II data (75% slowing, p=0.003) planned for Q3 2026 as a parallel/second regulatory path.",
+      "confirmed": true
+    },
+    {
+      "when": "2026-H2",
+      "label": "Confirmatory trial design & initiation",
+      "detail": "FDA and uniQure have shifted from a sham-surgery-controlled design to a randomized standard-of-care-controlled confirmatory study with total functional capacity at 36 months as primary endpoint; company aims to start it as expeditiously as possible, but no confirmed start date yet.",
+      "confirmed": false
+    },
+    {
+      "when": "2026-H2",
+      "label": "Additional ex-US regulatory pathways",
+      "detail": "Management said it is pursuing further international regulatory routes for AMT-130 beyond the US/UK and would provide updates in H2 2026; no specifics disclosed yet.",
+      "confirmed": false
+    },
+    {
+      "when": "Unconfirmed",
+      "label": "Potential FDA advisory committee (AdCom)",
+      "detail": "Earlier speculation about an AdCom review persists, but no confirmed date has surfaced since the FDA/uniQure alignment on the accelerated approval pathway; status remains unclear/unconfirmed.",
+      "confirmed": false
+    },
+    {
+      "when": "2027",
+      "label": "Possible accelerated approval decision for AMT-130; AMT-260/AMT-191 updates",
+      "detail": "Contingent on a clean September 2026 four-year readout and a successful Q3 2026 BLA filing/review. AMT-260 (refractory mesial temporal lobe epilepsy) showed early biological activity signals in its first cohort at the Q2 2026 update; AMT-191 (Fabry) showed durable enzyme activity gains through Feb 2026 with all dosed patients off ERT, with further updates expected.",
+      "confirmed": false
+    }
+  ],
+  "pulse": "uniQure remains in a largely quiet holding pattern as it awaits the pivotal September 2026 four-year AMT-130 data readout, with the stock trading near $47-48 on continued analyst upgrades (Wolfe, Wells Fargo) and heavy institutional accumulation (JPMorgan, RTW, Susquehanna all disclosing meaningful stakes through mid-August). Regulatory momentum is firmly positive: FDA and uniQure are aligned on a Q3 2026 accelerated-approval BLA using 3-year data plus a standard-of-care (not sham) confirmatory trial, a parallel UK MHRA filing is on track for the same quarter, and Roche's exit from Huntington's disease removes uniQure's most significant near-term rival. The company is well-funded (cash into 2030 after a $259M raise), leaving the September data readout and subsequent BLA/MAA review process as the dominant swing factors for the stock into 2027."
+}
