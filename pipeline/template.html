@@ -2088,9 +2088,18 @@ function renderSecFilters(rows){
       <option value="closed">Sold out</option>
     </select>
     ${depots.length>1?`<select data-sf="depot" aria-label="Depot"><option value="">All depots</option>${depots.map(d=>`<option>${esc(d)}</option>`).join('')}</select>`:''}
+    <div class="tfsel" role="group" aria-label="Currency">
+      <button type="button" data-secccy="USD" class="${_ccy==='USD'?'on':''}" aria-pressed="${_ccy==='USD'}">$</button>
+      <button type="button" data-secccy="EUR" class="${_ccy==='EUR'?'on':''}" aria-pressed="${_ccy==='EUR'}">€</button>
+    </div>
     <button type="button" class="minibtn" id="sec-reset">Reset</button>`;
   el.querySelectorAll('[data-sf]').forEach(c=>{ c.value=_secF[c.dataset.sf]||(c.dataset.sf==='state'?'all':'');
     c.addEventListener('input',()=>{ _secF[c.dataset.sf]=c.value.trim(); renderSecurities(); }); });
+  el.querySelectorAll('[data-secccy]').forEach(b=>b.addEventListener('click',()=>{
+    _ccy=b.dataset.secccy; try{localStorage.setItem('pc-ccy',_ccy);}catch(e){}
+    el.dataset.stale='1';                       // the switch itself has to redraw
+    refreshAllMoney(); renderSecurities();
+  }));
   el.querySelector('#sec-reset').addEventListener('click',()=>{
     _secF.q=''; _secF.state='all'; _secF.depot=''; renderSecurities(); });
   el.dataset.sig=sig; delete el.dataset.stale;
@@ -2113,7 +2122,7 @@ function renderSecurities(){
   });
   const m=v=>_priv?MASK:(_ccy==='EUR'?fmtE(v):fmtUsd(v));
   const cnt=document.getElementById('sec-count');
-  if(cnt) cnt.textContent=`${all.filter(r=>r.state==='held').length} held · ${all.filter(r=>r.state==='closed').length} closed`;
+  if(cnt) cnt.textContent=`${all.filter(r=>r.state==='held').length} held · ${all.filter(r=>r.state==='closed').length} closed · amounts in ${_ccy}`;
   const sum=document.getElementById('sec-summary');
   if(sum){
     const t=(l,v,c)=>`<div style="min-width:104px"><div style="font-size:10.5px;text-transform:uppercase;letter-spacing:.5px;color:var(--muted);font-weight:660">${l}</div><div class="tnum ${c||''}" style="font-size:16px;font-weight:680">${v}</div></div>`;
