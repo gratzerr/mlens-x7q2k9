@@ -338,6 +338,13 @@
   .act .aname{font-weight:640}
   .act .asub{font-size:11.5px;color:var(--muted)}
   .act .aval{text-align:right;font-weight:640;white-space:nowrap}
+  .secfilters{display:flex;flex-wrap:wrap;gap:7px;margin:2px 0 10px;align-items:center}
+  .secfilters input[type=search],.secfilters select{background:var(--surface-2);border:1px solid var(--border);
+    border-radius:8px;padding:7px 9px;font:inherit;font-size:12px;color:var(--ink);min-width:0}
+  .secfilters input[type=search]{flex:1 1 200px;min-width:150px}
+  #sectable{min-width:900px}
+  #sectable th{cursor:pointer;white-space:nowrap}
+  #sectable td{white-space:nowrap}
   .actfilters{display:flex;flex-wrap:wrap;gap:7px;margin:2px 0 8px}
   .actfilters input,.actfilters select{background:var(--surface-2);border:1px solid var(--border);border-radius:8px;
     padding:7px 9px;font:inherit;font-size:12px;color:var(--ink);min-width:0}
@@ -525,6 +532,7 @@
   <button data-tabbtn="news"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 22h16a2 2 0 0 0 2-2V4a2 2 0 0 0-2-2H8a2 2 0 0 0-2 2v16a2 2 0 0 1-4 0V6"/><path d="M18 14h-8M15 18h-5M10 6h8v4h-8z"/></svg>News</button>
   <button data-tabbtn="performance"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="22 7 13.5 15.5 8.5 10.5 2 17"/><polyline points="16 7 22 7 22 13"/></svg>Perf</button>
   <button data-tabbtn="payments"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M16 8h-6a2 2 0 1 0 0 4h4a2 2 0 1 1 0 4H8M12 6v2m0 8v2"/></svg>Pay</button>
+  <button data-tabbtn="securities"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 6h16M4 12h16M4 18h10"/></svg>Papers</button>
   <button data-tabbtn="watchlist"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M2 12s3-7 10-7 10 7 10 7-3 7-10 7-10-7-10-7Z"/><circle cx="12" cy="12" r="3"/></svg>Watch</button>
   <button data-tabbtn="research"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.3-4.3"/></svg>Research</button>
 </nav>
@@ -548,6 +556,7 @@
     <button data-tabbtn="news">News</button>
     <button data-tabbtn="performance">Performance</button>
     <button data-tabbtn="payments">Payments</button>
+    <button data-tabbtn="securities">Securities</button>
     <button data-tabbtn="watchlist">Watchlist</button>
     <button data-tabbtn="research">Research</button>
   </nav>
@@ -673,6 +682,14 @@
   </div>
 
   <!-- ============ WATCHLIST TAB — tickers on the radar, quotes like holdings ============ -->
+  <div class="panel" data-tab="securities">
+    <h2 style="display:flex;align-items:center;justify-content:space-between;gap:10px;flex-wrap:wrap">
+      <span>Securities</span><span class="asub" id="sec-count"></span></h2>
+    <div class="secfilters" id="sec-filters"></div>
+    <div id="sec-summary" style="display:flex;gap:22px;flex-wrap:wrap;padding:4px 2px 12px"></div>
+    <div style="overflow-x:auto"><table class="htable" id="sectable"></table></div>
+  </div>
+
   <div class="panel" data-tab="watchlist">
     <h2>Watchlist</h2>
     <div id="wl-owner" style="display:none;gap:8px;align-items:center;margin:2px 0 12px">
@@ -2021,6 +2038,121 @@ function cleanBody(s){
     .replace(/https?:\/\/\S+/g,'').replace(/\s{2,}/g,' ').trim();
 }
 let _socShown=24;
+/* ---- Securities: one row per paper you have ever held ----
+   Portfolio Performance's security view, with the same reading: current positions and
+   sold-out ones side by side, each with what it actually produced. Every figure comes
+   from secResult(), so a row here and the position panel behind it can never disagree. */
+const _secF={q:'',state:'all',depot:''};
+let _secSort={key:'total',dir:-1};
+function securitiesRows(){
+  const held=new Map((DATA.holdings||[]).filter(h=>h.assetType!=='cash').map(h=>[h.ticker,h]));
+  const seen=new Set([...held.keys()]);
+  (DATA.trades||[]).forEach(t=>seen.add(t.ticker));
+  (DATA.acts||[]).forEach(a=>{ if(a.tk) seen.add(a.tk); });
+  const eur=_ccy==='EUR';
+  return [...seen].map(tk=>{
+    const h=held.get(tk)||null, r=secResult(tk);
+    const acts=(DATA.acts||[]).filter(a=>a.tk===tk);
+    const depots=[...new Set(acts.map(a=>a.port).filter(Boolean))];
+    const sec=(DATA.trades||[]).find(t=>t.ticker===tk);
+    const name=(h&&h.name)||(sec&&sec.name)||((DATA.secByIsin||{})[(acts.find(a=>a.isin)||{}).isin||'']||{}).name||'';
+    const value=h?inCcy(h.value):0;                       // live value, page currency
+    const basis=h?(eur&&h.ppBasisEur!=null?h.ppBasisEur:h.ppBasisUsd):null;   // cost at tx-date FX
+    const unreal=(h&&basis!=null)?value-basis:null;
+    const invested=r.basis+(basis||0);
+    return {tk,name,h,depots,
+      ccy:h?(h.liveCcy||h.ppCcy||h.ccy||'USD'):'USD',
+      shares:h?h.ppShares:0,
+      entry:h?h.ppAvgCost:null,
+      price:h?(h.livePrice!=null?h.livePrice:h.price):null,
+      day:h?h.dayChange:null,
+      value, unreal,
+      unrealPct:(unreal!=null&&basis)?unreal/basis*100:null,
+      realized:r.realized, divs:r.divs, cost:r.cost,
+      total:r.realized+r.divs-r.cost+(unreal||0),
+      ret:invested>1e-6?((r.realized+r.divs-r.cost+(unreal||0))/invested*100):null,
+      trades:r.trades.length, episodes:r.episodes,
+      state:h?'held':'closed'};
+  });
+}
+function renderSecFilters(rows){
+  const el=document.getElementById('sec-filters'); if(!el) return;
+  const sig=rows.length+':'+_ccy;
+  if(el.dataset.sig===sig&&!el.dataset.stale) { return; }
+  const depots=[...new Set(rows.flatMap(r=>r.depots))].sort();
+  el.innerHTML=`
+    <input data-sf="q" type="search" placeholder="Search security…" aria-label="Search securities" value="${esc(_secF.q)}">
+    <select data-sf="state" aria-label="Holding state">
+      <option value="all">All securities</option>
+      <option value="held">Currently held</option>
+      <option value="closed">Sold out</option>
+    </select>
+    ${depots.length>1?`<select data-sf="depot" aria-label="Depot"><option value="">All depots</option>${depots.map(d=>`<option>${esc(d)}</option>`).join('')}</select>`:''}
+    <button type="button" class="minibtn" id="sec-reset">Reset</button>`;
+  el.querySelectorAll('[data-sf]').forEach(c=>{ c.value=_secF[c.dataset.sf]||(c.dataset.sf==='state'?'all':'');
+    c.addEventListener('input',()=>{ _secF[c.dataset.sf]=c.value.trim(); renderSecurities(); }); });
+  el.querySelector('#sec-reset').addEventListener('click',()=>{
+    _secF.q=''; _secF.state='all'; _secF.depot=''; renderSecurities(); });
+  el.dataset.sig=sig; delete el.dataset.stale;
+}
+function renderSecurities(){
+  const table=document.getElementById('sectable'); if(!table) return;
+  const all=securitiesRows();
+  renderSecFilters(all);
+  const q=_secF.q.toLowerCase();
+  const rows=all.filter(r=>{
+    if(_secF.state!=='all'&&r.state!==_secF.state) return false;
+    if(_secF.depot&&!r.depots.includes(_secF.depot)) return false;
+    if(q&&!((r.tk+' '+r.name).toLowerCase().includes(q))) return false;
+    return true;
+  }).sort((a,b)=>{
+    const k=_secSort.key, va=a[k], vb=b[k];
+    if(typeof va==='string'||typeof vb==='string')
+      return _secSort.dir*String(va||'').localeCompare(String(vb||''));
+    return _secSort.dir*(((va==null)-(vb==null))||(va>vb?1:va<vb?-1:0));
+  });
+  const m=v=>_priv?MASK:(_ccy==='EUR'?fmtE(v):fmtUsd(v));
+  const cnt=document.getElementById('sec-count');
+  if(cnt) cnt.textContent=`${all.filter(r=>r.state==='held').length} held · ${all.filter(r=>r.state==='closed').length} closed`;
+  const sum=document.getElementById('sec-summary');
+  if(sum){
+    const t=(l,v,c)=>`<div style="min-width:104px"><div style="font-size:10.5px;text-transform:uppercase;letter-spacing:.5px;color:var(--muted);font-weight:660">${l}</div><div class="tnum ${c||''}" style="font-size:16px;font-weight:680">${v}</div></div>`;
+    const R=rows.reduce((a,r)=>({rz:a.rz+r.realized,un:a.un+(r.unreal||0),dv:a.dv+r.divs,co:a.co+r.cost,to:a.to+r.total}),{rz:0,un:0,dv:0,co:0,to:0});
+    sum.innerHTML=t('Securities',rows.length)+t('Unrealized',m(R.un),R.un>=0?'up':'down')
+      +t('Realized',m(R.rz),R.rz>=0?'up':'down')+t('Distributions',m(R.dv),R.dv?'up':'')
+      +t('Fees + taxes',m(R.co),R.co?'down':'')+t('Total result',m(R.to),R.to>=0?'up':'down');
+  }
+  const COLS=[['tk','Position',0],['shares','Shares',1],['entry','Entry',1],['price','Quote',1],
+    ['day','Day',1],['value','Value',1],['unreal','Unrealized',1],['realized','Realized',1],
+    ['divs','Distributions',1],['cost','Fees + taxes',1],['total','Total result',1],['ret','Return',1]];
+  const fmtP2=(v,ccy)=>v==null?'—':(CCY_SYM[ccy]||'$')+(+v).toLocaleString('en-US',{minimumFractionDigits:2,maximumFractionDigits:2});
+  table.innerHTML='<thead><tr>'+COLS.map(([k,c,r])=>
+      `<th data-ssort="${k}" style="text-align:${r?'right':'left'}">${c}${_secSort.key===k?(_secSort.dir<0?' ▾':' ▴'):''}</th>`).join('')+'</tr></thead><tbody>'+
+    (rows.length?rows.map(r=>`<tr>
+      <td><div class="hname sd-clk" data-sd="${esc(r.tk)}" title="Open ${esc(r.tk)}">${logoImg(tickerLogos(r.tk),'llogo',r.tk)}
+        <div style="min-width:0"><div class="c1">${esc(actTk({tk:r.tk}).tk)}${r.state==='closed'?' <span class="asub">closed</span>':''}</div>
+        ${r.name?`<div class="nm2">${esc(r.name)}</div>`:''}</div></div></td>
+      <td style="text-align:right" class="tnum">${r.shares?maskable(Number(r.shares).toLocaleString('en-US')):'—'}</td>
+      <td style="text-align:right" class="tnum">${r.entry==null?'—':fmtP2(r.entry,r.ccy)}</td>
+      <td style="text-align:right" class="tnum">${r.price==null?'—':fmtP2(r.price,r.ccy)}</td>
+      <td style="text-align:right" class="tnum ${r.day==null?'':(r.day>=0?'up':'down')}">${r.day==null?'—':fmtPct(r.day)}</td>
+      <td style="text-align:right" class="tnum">${r.h?maskable(m(r.value)):'—'}</td>
+      <td style="text-align:right" class="tnum ${r.unreal==null?'':(r.unreal>=0?'up':'down')}">${r.unreal==null?'—':maskable(m(r.unreal))+(r.unrealPct==null?'':' <span class="asub">'+fmtPct(r.unrealPct)+'</span>')}</td>
+      <td style="text-align:right" class="tnum ${r.realized>=0?'up':'down'}">${r.trades?maskable(m(r.realized)):'—'}</td>
+      <td style="text-align:right" class="tnum ${r.divs?'up':''}">${r.divs?maskable(m(r.divs)):'—'}</td>
+      <td style="text-align:right" class="tnum ${r.cost?'down':''}">${r.cost?maskable(m(r.cost)):'—'}</td>
+      <td style="text-align:right" class="tnum ${r.total>=0?'up':'down'}" style="font-weight:650">${maskable(m(r.total))}</td>
+      <td style="text-align:right" class="tnum ${r.ret==null?'':(r.ret>=0?'up':'down')}">${r.ret==null?'—':fmtPct(r.ret)}</td>
+    </tr>`).join('')
+    :'<tr><td colspan="12" style="padding:16px 2px;color:var(--muted)">No security matches these filters.</td></tr>')+'</tbody>';
+  table.querySelectorAll('[data-ssort]').forEach(th=>th.addEventListener('click',()=>{
+    const k=th.dataset.ssort;
+    _secSort=_secSort.key===k?{key:k,dir:-_secSort.dir}:{key:k,dir:k==='tk'?1:-1};
+    renderSecurities();
+  }));
+  table.querySelectorAll('[data-sd]').forEach(c=>c.addEventListener('click',()=>openSecDetail(c.dataset.sd)));
+}
+
 /* ---- Social buzz filters ----
    Mood + stock chips carry their own counts, so you can see where the noise is
    before clicking. Filtering never refetches: it works on the posts already
@@ -2311,7 +2443,7 @@ function secResult(tk){
     else if(a.t==='SELL'){ sh-=(+a.sh||0); if(sh<=1e-6&&open){ open=false; sh=0; } }
   });
   const unreal=(h&&h.ppBasisUsd!=null)
-    ?((eur&&h.ppBasisEur!=null&&h.valueEur!=null)?(h.valueEur-h.ppBasisEur):(h.value-h.ppBasisUsd))
+    ?(eur&&h.ppBasisEur!=null?inCcy(h.value)-h.ppBasisEur:h.value-h.ppBasisUsd)
     :null;
   const total=realized+divs-cost+(unreal||0);
   return {trades,proceeds,basis,realized,divs,cost,episodes,unreal,total,
@@ -2582,6 +2714,7 @@ function switchTab(t){
   try{ history.replaceState(null,'','#'+t); }catch(e){}
   if(t==='portfolio'){ renderChart(); hydrateSparks(); }
   if(t==='performance'){ renderPerf(); }
+  if(t==='securities'){ renderSecurities(); }
   if(t==='watchlist'){ renderWatchlist(); renderSectors(); }
   if(t==='payments'){ renderPayments(); }
   if(t==='research'){ rsInit(); }
@@ -2590,7 +2723,7 @@ function switchTab(t){
 function initTabs(){
   document.querySelectorAll('[data-tabbtn]').forEach(b=>b.addEventListener('click',()=>switchTab(b.dataset.tabbtn)));
   const h=(location.hash||'').replace('#','');
-  switchTab(['portfolio','news','performance','payments','watchlist','research'].includes(h)?h:'portfolio');
+  switchTab(['portfolio','news','performance','payments','securities','watchlist','research'].includes(h)?h:'portfolio');
 }
 
 /* ===================== PERFORMANCE TAB (formulas replicated from PP source: Risk.java) ===================== */
