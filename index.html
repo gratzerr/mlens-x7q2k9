@@ -512,7 +512,7 @@
 
 <!-- static boot veil: visible from the VERY FIRST paint — nothing (skeleton or stale
      numbers) shows until boot() decides the data is fresh and lifts it -->
-<div id="bootveil" style="position:fixed;inset:0;z-index:10001;background:var(--bg);display:flex;align-items:center;justify-content:center">
+<div id="bootveil" style="position:fixed;inset:0;z-index:10001;background:var(--plane);display:flex;align-items:center;justify-content:center">
   <div style="width:34px;height:34px;border:3px solid var(--line);border-top-color:var(--up);border-radius:50%;animation:bvspin .8s linear infinite"></div>
   <style>@keyframes bvspin{to{transform:rotate(360deg)}}</style>
 </div>
@@ -1368,9 +1368,11 @@ async function loadConfig(){
     Object.assign(_cfg,{name:c.name,public:c.public,hidden:c.hidden,owner:c.owner}); cfgLists(c);
   }catch(e){
     if(String(e.message).includes('403')){ _cfg.public=false; }   // private -> rules deny anon reads
-    else return;                                                   // offline/CSP -> keep defaults
+    else { if(window._visResolved) window._visResolved(); return; } // offline/CSP -> keep defaults
   }
   applyName(); applyVisibility();
+  try{ localStorage.setItem('pc-vis',(_cfg.public===false||_cfg.hidden===true)?'0':'1'); }catch(e){}
+  if(window._visResolved) window._visResolved();
   const i=document.getElementById('pnamein'); if(i) i.value=_cfg.name;
   /* the Firestore lists may replace the baked fallback — repaint if user is looking */
   if(_tab==='watchlist'){ renderWatchlist(); renderSectors(); }
@@ -2472,7 +2474,7 @@ function boot(){
      Make that impossible to mistake for the live app. */
   if(!/(^|\.)github\.io$|^localhost$|^127\./.test(location.hostname)){
     const o=document.createElement('div');
-    o.style.cssText='position:fixed;inset:0;z-index:10000;background:var(--bg);display:flex;flex-direction:column;align-items:center;justify-content:center;gap:14px;padding:24px;text-align:center';
+    o.style.cssText='position:fixed;inset:0;z-index:10000;background:var(--plane);display:flex;flex-direction:column;align-items:center;justify-content:center;gap:14px;padding:24px;text-align:center';
     o.innerHTML='<div style="font-size:34px">🧊</div>'
       +'<div style="font-size:17px;font-weight:700">Das ist nur ein eingefrorener Snapshot</div>'
       +'<div style="font-size:13.5px;color:var(--muted);max-width:420px">Kurse und Depotwerte aktualisieren sich hier NICHT. Die Live-Version läuft auf GitHub Pages.</div>'
@@ -2485,6 +2487,9 @@ function boot(){
      index.html must not flash a days-old total before the Firestore poll lands */
   /* the baked default name must never flash — use the locally remembered one */
   try{ const n=localStorage.getItem('pc-name'); if(n){ _cfg.name=n; applyName(); } }catch(e){}
+  /* zuletzt bekannte Sichtbarkeit SOFORT anwenden: ein wiederkehrender Gast sieht bei
+     "privat" keinen Erst-Anstrich mehr, nicht mal fuer den Firestore-Roundtrip */
+  try{ if(localStorage.getItem('pc-vis')==='0') _cfg.hidden=true; }catch(e){}
   let _fromStore=false;
   try{
     const s=localStorage.getItem('pc-lastdata');
@@ -2506,7 +2511,22 @@ function boot(){
      Lift it immediately when the data on this device is fresh (<3 min); otherwise
      keep it until the immediate Firestore poll swaps in the live build
      (sub-second on a normal connection; 3.5s hard fallback so offline still renders) */
-  window._veilOff=()=>{ const e=document.getElementById('bootveil'); if(e) e.remove(); window._veilOff=null; };
+  /* Werte duerfen NIE aufblitzen, bevor die Sichtbarkeit feststeht (Rafael 2026-08-22:
+     "obwohl ich auf privat stelle sieht man fuer eine Sekunde den Wert"). Owner-Geraete
+     booten wie bisher sofort; Gaeste-Geraete halten den Schleier, bis loadConfig()
+     geantwortet hat — sonst malt der gebackene Datensatz die Zahlen waehrend des Fetches. */
+  window._visKnown=ownerDev();
+  window._veilOff=()=>{
+    if(!window._visKnown){ window._veilPending=true; return; }
+    const e=document.getElementById('bootveil'); if(e) e.remove(); window._veilOff=null; };
+  window._visResolved=()=>{ window._visKnown=true;
+    if(window._veilPending && window._veilOff){ window._veilPending=false; window._veilOff(); } };
+  /* Notausgang: antwortet Firestore gar nicht, gilt der zuletzt bekannte Stand —
+     "privat" bleibt dann gesperrt statt zu leaken, "oeffentlich" malt normal */
+  setTimeout(()=>{ if(!window._visKnown){
+    let c=null; try{ c=localStorage.getItem('pc-vis'); }catch(e){}
+    if(c==='0'){ _cfg.hidden=true; applyVisibility(); }
+    window._visResolved(); } },5000);
   /* Firestore-Abruf SOFORT starten — nicht erst nach dem kompletten UI-Aufbau:
      der frische Engine-Stand soll den Erst-Anstrich in <1s korrigieren */
   fsDataPoll().catch(()=>{});
