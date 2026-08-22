@@ -93,13 +93,21 @@ print("using depot:",DEPOT)
 
 # ---------------- FX (ECB daily, EUR base, multi-currency) ----------------
 def refresh_fx():
+    """Freshness comes from the CONTENT, never from the file's mtime: a CI checkout
+    stamps every file with the current time, so the old mtime gate reported "fetched
+    today" on every cloud run and the rates silently froze (they sat at 10 Jul 2026
+    for six weeks, which quietly bent every EUR figure the engine produced)."""
     need=True
+    latest_have=""
     if os.path.exists(FXFILE):
         try:
-            sample=json.load(open(FXFILE))["rates"]
-            latest=sample[sorted(sample)[-1]]
-            age=(datetime.datetime.now()-datetime.datetime.fromtimestamp(os.path.getmtime(FXFILE))).days
-            need=age>=1 or "CAD" not in latest   # daily refresh; force once for multi-ccy upgrade
+            doc=json.load(open(FXFILE)); sample=doc["rates"]
+            latest_have=sorted(sample)[-1]
+            latest=sample[latest_have]
+            # ECB publishes on business days; anything older than the last workday is stale
+            d=datetime.date.today()
+            while d.weekday()>=5: d-=datetime.timedelta(days=1)
+            need=(latest_have < d.isoformat()) or ("CAD" not in latest)
         except Exception:
             need=True
     if need:
@@ -109,10 +117,13 @@ def refresh_fx():
             subprocess.run(["curl","-s","-m","30","-H","User-Agent: Mozilla/5.0",
                 f"https://api.frankfurter.dev/v1/2021-10-01..{end}?base=EUR&symbols={FX_SYMBOLS}",
                 "-o",tmp],check=True)
-            json.load(open(tmp))["rates"]   # validate before replacing
+            fresh=json.load(open(tmp))["rates"]   # validate before replacing
+            if sorted(fresh)[-1] < latest_have:   # never regress on a partial answer
+                raise ValueError("fx feed older than the file we have")
             os.replace(tmp,FXFILE)
-        except Exception:
-            pass  # keep old file
+            print(f"fx refreshed: {latest_have or 'none'} -> {sorted(fresh)[-1]}")
+        except Exception as e:
+            print("fx refresh failed, keeping old rates:", e)
 refresh_fx()
 FXD=json.load(open(FXFILE))["rates"]
 fx_dates=sorted(FXD)
@@ -566,6 +577,7 @@ for t in ptx:
                 "days":round(wdays/taken) if taken>1e-9 else 0,
                 "sh":round(sh,4),
                 "proceedsUsd":round(usd),"basisUsd":round(basis_u),
+                "proceedsEur":round(eur),"basisEur":round(basis),
                 "gainUsd":round(usd-basis_u),"gainEur":round(eur-basis),
                 "ret":round((usd-basis_u)/basis_u*100,2) if basis_u>1e-6 else None})
 # attach cumulative Calculation rows to the daily series: q/Q realized, g/G earnings,
@@ -660,13 +672,15 @@ for si,a in posagg.items():
     veur=to_eur(val,s["ccy"],END)
     tot_sec_eur+=veur
     basis_usd=sum(l[2] for l in lots.get(si,[]))   # FIFO remaining cost basis (USD, tx-date FX)
+    basis_eur=sum(l[1] for l in lots.get(si,[]))   # ...and the same basis in EUR, so an EUR
+                                                   # page never mixes a USD cost into a EUR value
     byport={n:round(v,4) for n,v in sh_by_port.get(si,{}).items() if v>1e-6}
     holdings.append({"account":"ALL","ticker":s["tk"] or (s["name"] or "")[:10],"name":s["name"],
         "byPort":byport,
         "isin":s["isin"],"ccy":s["ccy"],"shares":round(a["net"],4),"price":px,
         "value":round(val,2),"valueEur":round(veur),
         "valueUsd":round(to_usd(val,s["ccy"],END)),
-        "basisUsd":round(basis_usd),
+        "basisUsd":round(basis_usd),"basisEur":round(basis_eur),
         "realizedUsd":round(rz_usd_by_sec.get(si,0.0)),
         # entry price = FIFO REMAINING basis / shares (matches Parqet purchasePrice);
         # the naive all-buys average is wrong once some lots were sold. Non-USD (PINK/CAD)

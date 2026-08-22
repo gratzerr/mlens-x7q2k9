@@ -330,6 +330,7 @@ for h in port["holdings"]:
         h["ppShares"] = px["shares"]
         h["ppAvgCost"] = px["avgCost"]          # native ccy (USD, PINK: CAD)
         h["ppBasisUsd"] = px.get("basisUsd")    # FIFO remaining cost basis
+        h["ppBasisEur"] = px.get("basisEur")    # same basis at transaction-date FX
         h["ppRealizedUsd"] = px.get("realizedUsd")
         h["ppPrice"] = px["price"]
         h["ppCcy"] = px["ccy"]

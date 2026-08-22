@@ -2268,11 +2268,12 @@ function secLots(h){
   if(!lots.length) return '';
   const px=(h.livePrice!=null?h.livePrice:h.price), fx=(h.valueUsd!=null&&h.value)?1:1;
   const rows=lots.map(l=>{
-    const cost=+l.usd, entry=l.sh?cost/l.sh:null;
-    const val=px!=null?l.sh*px:null, g=(val!=null)?val-cost:null;
+    const cost=+(_ccy==='EUR'&&l.eur!=null?l.eur:l.usd), entry=l.sh?cost/l.sh:null;
+    const pxc=(_ccy==='EUR'&&h.valueEur!=null&&h.value)?px*(h.valueEur/h.value):px;   // same FX the position uses
+    const val=pxc!=null?l.sh*pxc:null, g=(val!=null)?val-cost:null;
     const gp=(g!=null&&cost>0)?g/cost*100:null;
     return `<tr><td>${dFull(l.d)}</td><td class="tnum">${maskable(l.sh.toLocaleString('en-US'))}</td>
-      <td class="tnum">${entry==null?'—':'$'+entry.toLocaleString('en-US',{minimumFractionDigits:2,maximumFractionDigits:4})}</td>
+      <td class="tnum">${entry==null?'—':curSym()+entry.toLocaleString('en-US',{minimumFractionDigits:2,maximumFractionDigits:4})}</td>
       <td class="tnum">${maskable(fmtUsd(cost))}</td>
       <td class="tnum">${val==null?'—':maskable(fmtUsd(val))}</td>
       <td class="tnum ${g==null?'':(g>=0?'up':'down')}">${g==null?'—':maskable((g>=0?'+':'−')+fmtUsd(Math.abs(g)).replace('$','$'))+(gp==null?'':' <span class="asub">'+(gp>=0?'+':'')+gp.toFixed(1)+'%</span>')}</td></tr>`;
@@ -2293,9 +2294,13 @@ function secResult(tk){
   const trades=(DATA.trades||[]).filter(t=>t.ticker===tk);
   const acts=(DATA.acts||[]).filter(a=>a.tk===tk);
   const h=DATA.holdings.find(x=>x.ticker===tk);
-  const proceeds=trades.reduce((a,t)=>a+(t.proceedsUsd||0),0);
-  const basis=trades.reduce((a,t)=>a+(t.basisUsd||0),0);
-  const realized=trades.reduce((a,t)=>a+(t.gainUsd||0),0);
+  /* every figure in the currency the page is displaying — mixing a USD gain into a
+     EUR page is what made these numbers disagree with Portfolio Performance */
+  const eur=_ccy==='EUR';
+  const pick=(t,u,e)=>+( (eur?(t[e]!=null?t[e]:t[u]):t[u]) ||0);
+  const proceeds=trades.reduce((a,t)=>a+pick(t,'proceedsUsd','proceedsEur'),0);
+  const basis=trades.reduce((a,t)=>a+pick(t,'basisUsd','basisEur'),0);
+  const realized=trades.reduce((a,t)=>a+pick(t,'gainUsd','gainEur'),0);
   const divs=acts.filter(a=>a.t==='DIVIDEND').reduce((a,x)=>a+(+x.amt||0),0);
   const cost=(DATA.payments||[]).filter(p=>p[2]===tk&&(p[1]==='fee'||p[1]==='tax'))
     .reduce((a,p)=>a+(_ccy==='EUR'?p[3]:p[4]),0);
@@ -2305,7 +2310,9 @@ function secResult(tk){
     if(a.t==='BUY'){ sh+=(+a.sh||0); if(!open){ open=true; episodes++; } }
     else if(a.t==='SELL'){ sh-=(+a.sh||0); if(sh<=1e-6&&open){ open=false; sh=0; } }
   });
-  const unreal=(h&&h.ppBasisUsd!=null)?(h.value-h.ppBasisUsd):null;
+  const unreal=(h&&h.ppBasisUsd!=null)
+    ?((eur&&h.ppBasisEur!=null&&h.valueEur!=null)?(h.valueEur-h.ppBasisEur):(h.value-h.ppBasisUsd))
+    :null;
   const total=realized+divs-cost+(unreal||0);
   return {trades,proceeds,basis,realized,divs,cost,episodes,unreal,total,
     ret:basis>1e-6?realized/basis*100:null, held:!!h};
@@ -2314,7 +2321,7 @@ function secResultBlock(tk){
   const r=secResult(tk);
   if(!r.trades.length&&!r.divs&&!r.held) return '';
   const cell=(l,v,c)=>`<div class="sd-stat"><div class="l">${l}</div><div class="v ${c||''}">${v}</div></div>`;
-  const m=v=>money(v,null);
+  const m=v=>_priv?MASK:(_ccy==='EUR'?fmtE(v):fmtUsd(v));
   return `<div class="sd-sec">Position result</div><div class="sd-stats">
     ${cell('Return · realized',r.ret==null?'—':fmtPct(r.ret),r.ret==null?'':(r.ret>=0?'up':'down'))}
     ${cell('Realized gain',r.trades.length?m(r.realized):'—',r.realized>=0?'up':'down')}
@@ -2329,9 +2336,9 @@ function secResultBlock(tk){
       </tr></thead><tbody>${r.trades.map(t=>`<tr>
       <td>${dFull(t.buy)}</td><td>${dFull(t.sell)}</td><td class="tnum">${t.days}d</td>
       <td class="tnum">${maskable(Number(t.sh).toLocaleString('en-US'))}</td>
-      <td class="tnum">${maskable(m(t.proceedsUsd))}</td>
+      <td class="tnum">${maskable(m(_ccy==='EUR'&&t.proceedsEur!=null?t.proceedsEur:t.proceedsUsd))}</td>
       <td class="tnum ${t.ret==null?'':(t.ret>=0?'up':'down')}">${t.ret==null?'—':fmtPct(t.ret)}</td>
-      <td class="tnum ${(t.gainUsd||0)>=0?'up':'down'}">${maskable(m(t.gainUsd))}</td>
+      <td class="tnum ${(t.gainUsd||0)>=0?'up':'down'}">${maskable(m(_ccy==='EUR'&&t.gainEur!=null?t.gainEur:t.gainUsd))}</td>
       <td>${esc(t.port||'')}</td></tr>`).join('')}</tbody></table></div>`:'');
 }
 function secTx(tk){
