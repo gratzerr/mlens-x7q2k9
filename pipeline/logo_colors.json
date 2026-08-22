@@ -459,6 +459,11 @@
   "l": "hsl(221 40% 31%)",
   "src": "file:PINK.png:7629"
  },
+ "PINK.V": {
+  "d": "hsl(220 45% 71%)",
+  "l": "hsl(220 38% 31%)",
+  "src": "https://assets.parqet.com/logos/isin/CA71385D1078?format=png&size=64"
+ },
  "PLMR": {
   "d": "hsl(98 45% 71%)",
   "l": "hsl(98 38% 31%)",
