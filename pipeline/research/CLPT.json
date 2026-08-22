@@ -17,24 +17,17 @@
     },
     {
       "date": "2026-08-08",
-      "headline": "Wall Street Zen cuts ClearPoint Neuro from Sell to Strong Sell after the Q2 print",
-      "source": "MarketBeat / Daily Political",
+      "headline": "Analysts split after the Q2 miss: Stifel and Lake Street trim targets but keep Buy, Wall Street Zen cuts to Strong Sell",
+      "source": "MarketBeat / Investing.com",
       "url": "https://www.dailypolitical.com/2026/08/08/equities-research-analysts-downgrades-for-august-8th-abtc-aciw-adnt-adtn-adv-aee-aeva-ago-ahco-alrm.html",
-      "summary": "Quantitative research house Wall Street Zen moved CLPT from Sell to Strong Sell following the revenue miss, deepening cash burn and the guidance cut. It is the outlier on the sell side: the three covering brokers still average a Buy/Strong Buy consensus with a mean target near $25.67 against a share price of about $15."
-    },
-    {
-      "date": "2026-08-04",
-      "headline": "Stifel cuts price target to $22 and Lake Street to $25, both keeping Buy after the Q2 miss",
-      "source": "Investing.com / Moomoo",
-      "url": "https://th.investing.com/news/analyst-ratings/article-93CH-743594",
-      "summary": "Stifel trimmed its target from $25 to $22 and Lake Street to $25, both maintaining Buy ratings after Q2 revenue of $10.9M came in roughly $1.8M below consensus and full-year guidance was cut about 7%. Shares fell another 16% in the August 4 session, leaving the stock at less than half its $30.10 52-week high."
+      "summary": "Following the revenue miss and guidance cut, Stifel lowered its target from $25 to $22 and Lake Street to $25, both keeping Buy ratings, while quantitative research house Wall Street Zen moved CLPT from Sell to Strong Sell, the lone bearish outlier. The three brokers covering the stock still average a Buy/Strong Buy consensus near a $25.67 target against a share price around $15."
     },
     {
       "date": "2026-08-03",
       "headline": "ClearPoint Neuro reports Q2 2026 revenue of $10.9M (+18%), misses estimates and cuts FY guidance to $48-52M",
       "source": "ClearPoint Neuro IR / ACCESS Newswire",
       "url": "https://ir.clearpointneuro.com/news-events/press-releases/detail/1156/clearpoint-neuro-reports-second-quarter-2026-results",
-      "summary": "Q2 revenue rose 18% to $10.9M but landed about $1.8M below the $12.73M consensus, with neurosurgery navigation and therapy up 62% to $5.6M while biologics and drug delivery fell 15% to $4.0M. Opex jumped 51% to $17.0M, widening the net loss to $11.3M (adj. -$0.38 vs -$0.29 expected) and cutting cash to $29.4M from $45.9M at year-end; full-year 2026 guidance was lowered from $52-56M to $48-52M."
+      "summary": "Q2 revenue rose 18% to $10.9M but landed about $1.8M below the $12.73M consensus, with neurosurgery navigation and therapy up 62% to $5.6M while biologics and drug delivery fell 15% to $4.0M. Opex jumped 51% to $17.0M, widening the net loss to $11.3M (adj. -$0.38 vs -$0.29 expected) and cutting cash to $29.4M from $45.9M at year-end; full-year 2026 guidance was lowered from $52-56M to $48-52M, and shares fell roughly 16% in the following session."
     },
     {
       "date": "2026-08-03",
@@ -49,20 +42,13 @@
       "source": "ClearPoint Neuro IR",
       "url": "https://ir.clearpointneuro.com/news-events/press-releases/detail/1155/clearpoint-neuro-congratulates-partner-aspen-neuroscience",
       "summary": "The FDA granted Regenerative Medicine Advanced Therapy designation to Aspen's autologous dopaminergic cell therapy sasineprocel (ANPD001) for Parkinson's disease, based on the ongoing Phase 1/2a ASPIRO trial. The ClearPoint Navigation System and SmartFlow cannula are used for the transplantation procedure, so the designation and its potential priority review or accelerated approval advance a second major partner program running on ClearPoint's platform."
-    },
-    {
-      "date": "2026-07-14",
-      "headline": "EpilepsyGTx partners with ClearPoint Neuro for targeted delivery of lead epilepsy gene therapy",
-      "source": "News-Medical / PharmaTimes",
-      "url": "https://www.news-medical.net/news/20260714/EpilepsyGTx-partners-with-ClearPoint-Neuro-to-support-targeted-delivery-of-lead-gene-therapy-in-epilepsy.aspx",
-      "summary": "EpilepsyGTx selected the ClearPoint SmartFlow Cannula and Navigation System to administer its lead candidate EPY201 in a planned first-in-human Phase 1/2a trial for focal refractory epilepsy. The deal adds another pharma partner to ClearPoint's gene-therapy delivery pipeline beyond the flagship uniQure program."
     }
   ],
   "catalysts": [
     {
       "when": "2026-Q3",
       "label": "uniQure AMT-130 BLA submission for Huntington's disease",
-      "detail": "After its June 2026 Type B meeting, uniQure confirmed the FDA will accept the 3-year Phase I/II analysis as the primary basis of a BLA for AMT-130 under accelerated approval, and that it intends to file in Q3 2026 with a Priority Review request that would shorten review from ten to about six months. High-dose AMT-130 showed a statistically significant 75% slowing of disease progression on the cUHDRS at three years, and ClearPoint's SmartFlow cannula and navigation platform is the delivery system for the procedure. This is the single most important and nearest-dated partner milestone for the CLPT thesis; as of August 21 the filing has not yet been announced, leaving roughly six weeks in the guided window.",
+      "detail": "After its June 2026 Type B meeting, uniQure confirmed the FDA will accept the 3-year Phase I/II analysis as the primary basis of a BLA for AMT-130 under accelerated approval, and that it intends to file in Q3 2026 with a Priority Review request that would shorten review from ten to about six months. High-dose AMT-130 showed a statistically significant 75% slowing of disease progression on the cUHDRS at three years, and ClearPoint's SmartFlow cannula and navigation platform is the delivery system for the procedure. This is the single most important and nearest-dated partner milestone for the CLPT thesis; as of August 22 the filing has not yet been announced, leaving roughly five weeks in the guided Q3 window.",
       "confirmed": true
     },
     {
@@ -108,5 +94,5 @@
       "confirmed": false
     }
   ],
-  "pulse": "CLPT is still digesting the August 3 print: Q2 revenue of $10.9M missed by about $1.8M, opex jumped 51%, cash fell to $29.4M and FY2026 guidance was cut from $52-56M to $48-52M, sending the stock down roughly 16% before it stabilised near $15 - half the $30.10 52-week high - with no company news on the wire since mid-August. Management used the same day to unveil a $500M long-term revenue ambition built on gene-therapy delivery, the new CAL preclinical facility, the SONOCARE focused-ultrasound partnership and a cranial robot, arguing the shortfall is service timing rather than lost demand; sentiment is split, with Stifel and Lake Street keeping Buy at $22-$25 targets while Wall Street Zen cut to Strong Sell, and 13G filings show BlackRock at 7.1% and MAK Capital lifting its stake to 7.8%. The next few months trade on partner milestones rather than the P&L - uniQure's guided Q3 2026 BLA filing for AMT-130 is the dominant event and is still pending with about six weeks left in the window - against a shrinking cash runway that keeps financing risk the key offsetting factor."
+  "pulse": "CLPT remains in the post-earnings trough that opened on August 3, when Q2 revenue of $10.9M missed by about $1.8M, opex jumped 51%, cash fell to $29.4M and FY2026 guidance was cut to $48-52M; the stock has stabilized in the $15-16 range (roughly half its $30.10 52-week high), with no fresh company news since MAK Capital's August 12 13G/A raised its stake to 7.8%, joining BlackRock at 7.1% in accumulating into the weakness. Wall Street is split - Stifel and Lake Street trimmed targets to $22 and $25 while keeping Buy, whereas Wall Street Zen downgraded to Strong Sell - as management argues the miss is service timing rather than lost demand, pointing to a new $500M long-term revenue strategy built on the CAL facility, focused ultrasound and robotics. The next catalyst is entirely partner-driven: uniQure's guided Q3 2026 BLA filing for AMT-130 in Huntington's remains unannounced with about five weeks left in the quarter, keeping the story on hold pending that filing and the November Q3 print that will test whether biologics revenue actually reaccelerates."
 }

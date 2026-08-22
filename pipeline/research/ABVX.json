@@ -10,17 +10,10 @@
     },
     {
       "date": "2026-08-14",
-      "headline": "TCG Crossover and Chen Yu Report 7.0% Stake in Abivax After the July Offering",
-      "source": "Stock Titan (SEC Schedule 13G/A)",
+      "headline": "TCG Crossover and Invus Disclose a Combined ~13% Stake in Abivax After the July Offering",
+      "source": "Stock Titan (SEC Schedule 13G/A filings)",
       "url": "https://www.stocktitan.net/sec-filings/ABVX/schedule-13g-a-abivax-s-a-amended-passive-investment-disclosure-8741cb45e81c.html",
-      "summary": "Healthcare crossover investor TCG Crossover (Funds I and II, via managing partner Chen Yu) disclosed beneficial ownership of 6,007,834 ADSs, or 7.0% of Abivax, based on 86.09 million shares outstanding after the July 2, 2026 offering. It confirms that a dedicated biotech specialist held on through the large equity raise rather than selling into strength."
-    },
-    {
-      "date": "2026-08-13",
-      "headline": "Invus Entities Disclose 6.0% Beneficial Stake in Abivax",
-      "source": "Stock Titan (SEC Schedule 13G/A)",
-      "url": "https://www.stocktitan.net/sec-filings/ABVX/schedule-13g-a-abivax-s-a-amended-passive-investment-disclosure-a60edefd9648.html",
-      "summary": "Long-standing shareholder Invus (together with the Avicenna Fund) reported 4,825,759 ordinary shares and ADSs, equal to 6.0% of Abivax as of June 30, 2026. Alongside the TCG filing it rounds out an August picture of a stable, concentrated institutional register ahead of the NDA filing."
+      "summary": "Healthcare crossover investor TCG Crossover (via managing partner Chen Yu) disclosed 6,007,834 ADSs (7.0%), while Invus and the Avicenna Fund separately disclosed 4,825,759 shares/ADSs (6.0%) as of the periods around Abivax's $920 million July offering. Together the filings show two long-standing biotech specialists held on through the large equity raise rather than selling into strength, pointing to a stable, concentrated institutional register ahead of the NDA filing."
     },
     {
       "date": "2026-07-30",
@@ -53,10 +46,10 @@
   ],
   "catalysts": [
     {
-      "when": "2026-Q3 (Sep)",
+      "when": "2026-09-21",
       "label": "H1 2026 financial results and pipeline update",
-      "detail": "Abivax normally reports half-year results in September. The update should refresh the post-raise cash position (guided into Q4 2029), R&D spend trajectory, NDA-preparation progress and the U.S. pre-launch commercial build-out. No exact date has been announced by the company yet.",
-      "confirmed": false
+      "detail": "Abivax's investor-relations financial calendar confirms half-year 2026 results on September 21, 2026. The update should refresh the post-raise cash position (guided into Q4 2029), R&D spend trajectory, NDA-preparation progress and the U.S. pre-launch commercial build-out.",
+      "confirmed": true
     },
     {
       "when": "2026-Q4 (Oct)",
@@ -68,6 +61,12 @@
       "when": "2026-Q4",
       "label": "NDA submission to FDA for obefazimod in ulcerative colitis",
       "detail": "After positive Phase 3 ABTECT induction and 44-week maintenance data and the constructive pre-NDA meeting on July 30, 2026, Abivax plans to submit its first NDA for obefazimod in moderately-to-severely active UC in late Q4 2026. This is the single biggest near-term de-risking event and the gate that starts the FDA review clock.",
+      "confirmed": true
+    },
+    {
+      "when": "2026-12-14",
+      "label": "Q3 2026 financial results",
+      "detail": "Abivax's financial calendar lists Q3 2026 results for December 14, 2026, which should give an updated read on cash burn, NDA-preparation costs and commercial build-out spend heading into the year-end NDA filing.",
       "confirmed": true
     },
     {
@@ -89,5 +88,5 @@
       "confirmed": false
     }
   ],
-  "pulse": "Abivax trades around $122 per ADS in late August 2026 (market cap roughly $10.5bn), fully recovered from the July financing wobble and sitting right on the $120 strike, with the average sell-side target near $155-166 and Morgan Stanley at $180. The story is now execution rather than science: Phase 3 ABTECT induction and Week-44 maintenance data are strong (about 51% remission vs 10% placebo, 37% of induction non-responders converted at 50 mg), the July 30 pre-NDA meeting locked in FDA alignment for an end-2026 NDA, and the $920m raise funds a solo U.S. launch into Q4 2029; the August 19 data review adding that there is no apparent dose-dependent malignancy signal further chips away at the June cancer-signal overhang. For the March-2027 $120 call the position is roughly at-the-money and depends on the Q4 2026 NDA landing on time, the September H1 report, a possible autumn congress presentation of the full safety dataset, and whether renewed takeover speculation re-rates the shares decisively above the strike before expiry."
+  "pulse": "Abivax trades around $128 per ADS in late August 2026 (market cap roughly $11bn), comfortably above the $120 strike and up from the July financing wobble, with the average sell-side target near $155-166 and Morgan Stanley at $180. The story is now execution rather than science: Phase 3 ABTECT induction and Week-44 maintenance data are strong (about 51% remission vs 10% placebo, 37% of induction non-responders converted at 50 mg) with no apparent dose-dependent malignancy signal through Week 44, the July 30 pre-NDA meeting locked in FDA alignment for an end-2026 NDA, and the $920m raise funds a solo U.S. commercial build-out into Q4 2029, reinforced by mid-August 13G filings showing large crossover investors held their stakes through the offering. For the March-2027 $120 call the position is now in-the-money and depends on H1 results confirmed for September 21, the Q4 2026 NDA landing on time, a possible autumn congress presentation of the full safety dataset, and whether renewed takeover speculation (Eli Lilly, AstraZeneca reports earlier in 2026) re-rates the shares further before expiry."
 }
