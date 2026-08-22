@@ -10,17 +10,10 @@
     },
     {
       "date": "2026-08-14",
-      "headline": "TCG Crossover and Chen Yu Report 7.0% Stake in Abivax After the July Offering",
-      "source": "Stock Titan (SEC Schedule 13G/A)",
+      "headline": "TCG Crossover and Invus Entities Each Disclose 6-7% Stakes in Abivax After the July Offering",
+      "source": "Stock Titan (SEC Schedule 13G/A filings)",
       "url": "https://www.stocktitan.net/sec-filings/ABVX/schedule-13g-a-abivax-s-a-amended-passive-investment-disclosure-8741cb45e81c.html",
-      "summary": "Healthcare crossover investor TCG Crossover (Funds I and II, via managing partner Chen Yu) disclosed beneficial ownership of 6,007,834 ADSs, or 7.0% of Abivax, based on 86.09 million shares outstanding after the July 2, 2026 offering. It confirms that a dedicated biotech specialist held on through the large equity raise rather than selling into strength."
-    },
-    {
-      "date": "2026-08-13",
-      "headline": "Invus Entities Disclose 6.0% Beneficial Stake in Abivax",
-      "source": "Stock Titan (SEC Schedule 13G/A)",
-      "url": "https://www.stocktitan.net/sec-filings/ABVX/schedule-13g-a-abivax-s-a-amended-passive-investment-disclosure-a60edefd9648.html",
-      "summary": "Long-standing shareholder Invus (together with the Avicenna Fund) reported 4,825,759 ordinary shares and ADSs, equal to 6.0% of Abivax as of June 30, 2026. Alongside the TCG filing it rounds out an August picture of a stable, concentrated institutional register ahead of the NDA filing."
+      "summary": "Healthcare crossover investor TCG Crossover disclosed 7.0% beneficial ownership (6,007,834 ADSs) and long-standing holder Invus, together with the Avicenna Fund, disclosed 6.0% ownership (4,825,759 shares/ADSs) as of the post-offering share count of about 86.09 million. The pair of filings shows dedicated biotech specialists held on through the large July equity raise rather than selling into strength, pointing to a stable, concentrated institutional register ahead of the NDA filing."
     },
     {
       "date": "2026-07-30",
@@ -89,5 +82,5 @@
       "confirmed": false
     }
   ],
-  "pulse": "Abivax trades around $122 per ADS in late August 2026 (market cap roughly $10.5bn), fully recovered from the July financing wobble and sitting right on the $120 strike, with the average sell-side target near $155-166 and Morgan Stanley at $180. The story is now execution rather than science: Phase 3 ABTECT induction and Week-44 maintenance data are strong (about 51% remission vs 10% placebo, 37% of induction non-responders converted at 50 mg), the July 30 pre-NDA meeting locked in FDA alignment for an end-2026 NDA, and the $920m raise funds a solo U.S. launch into Q4 2029; the August 19 data review adding that there is no apparent dose-dependent malignancy signal further chips away at the June cancer-signal overhang. For the March-2027 $120 call the position is roughly at-the-money and depends on the Q4 2026 NDA landing on time, the September H1 report, a possible autumn congress presentation of the full safety dataset, and whether renewed takeover speculation re-rates the shares decisively above the strike before expiry."
+  "pulse": "Abivax trades in the low-to-mid $120s per ADS in late August 2026 (market cap roughly $10bn), holding its post-offering gains near the $120 strike, with the average sell-side target near $155-166 and Morgan Stanley at $180. The story is now execution rather than science: Phase 3 ABTECT induction and Week-44 maintenance data are strong (about 51% remission vs 10% placebo, 37% of induction non-responders converted at 50 mg), the July 30 pre-NDA meeting locked in FDA alignment for an end-2026 NDA, and the $920m raise funds a solo U.S. launch into Q4 2029; an August 19 clinical-data review reiterated that there is no apparent dose-dependent malignancy signal, further chipping away at the June cancer-signal overhang, while institutional holders TCG Crossover and Invus both disclosed they held through the raise. For the March-2027 $120 call the position is roughly at-the-money and depends on the Q4 2026 NDA landing on time, the September H1 report, a possible autumn congress presentation of the full safety dataset, and whether renewed takeover speculation re-rates the shares decisively above the strike before expiry."
 }
