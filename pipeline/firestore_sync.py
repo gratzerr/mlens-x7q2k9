@@ -64,22 +64,18 @@ def pull():
     json.dump(state, open(os.path.join(ROOT,"site_state.json"),"w"))
     print(f"firestore pull: name={state['name']!r} public={state['public']}")
 
-# Firestore rejects any document over 1 MiB. The snapshot grew when the Activities
-# feed took in deposits/interest, so keep a valve: rather than letting the push fail
-# (which silently freezes the whole site), drop the activity history - the client
-# keeps the copy baked into the page whenever the live payload carries none.
+# Firestore rejects any document over 1 MiB, and the raw snapshot passed that line.
+# Dropping data to fit was the wrong trade: a client then keeps whatever history it
+# already had, so a device that had not fetched the new HTML showed current holdings
+# next to yesterday's activity list. Gzip instead — the whole snapshot travels, four
+# times smaller than before, and the phone downloads a quarter of the bytes.
 MAX_DOC = 1_000_000
 
 def push():
+    import gzip, base64
     tok = access_token()
     data = open(os.path.join(ROOT,"data.json"), encoding="utf-8").read()
-    if len(data.encode("utf-8")) > MAX_DOC:
-        try:
-            j = json.loads(data); j.pop("acts", None)
-            data = json.dumps(j, ensure_ascii=True)
-            print("firestore push: snapshot over 1 MiB — activity history left out of the live push")
-        except Exception as e:
-            print("firestore push: trim failed:", e)
+    packed = base64.b64encode(gzip.compress(data.encode("utf-8"), 6)).decode("ascii")
     # Firestore-Dokumente sind auf ~1 MiB begrenzt: die volle Trade-Historie (acts)
     # sprengte das Limit und liess den Push tagelang scheitern (Vorfall 2026-07-24,
     # eingefrorener Stand vom 21.07.). acts steckt in der gebackenen Seite — der
@@ -91,12 +87,18 @@ def push():
         data = json.dumps(j, ensure_ascii=False, separators=(",", ":"))
     except Exception:
         pass
+    # the old plain field is cleared in the SAME patch: it counts towards the 1 MiB
+    # document limit even when nothing writes to it any more
     body = {"fields":{
-        "data":{"stringValue":data},
+        "dataz":{"stringValue":packed},
+        "data":{"stringValue":""},
         "updated":{"stringValue":datetime.datetime.utcnow().isoformat()+"Z"}}}
-    j = req("PATCH", DOC+"?updateMask.fieldPaths=data&updateMask.fieldPaths=updated", body, tok)
+    if len(packed) > MAX_DOC:
+        print("firestore push: compressed snapshot still over 1 MiB — nothing pushed"); return
+    j = req("PATCH", DOC+"?updateMask.fieldPaths=dataz&updateMask.fieldPaths=data&updateMask.fieldPaths=updated", body, tok)
     ok = "fields" in j
-    print("firestore push:", "ok" if ok else ("FAILED "+str(j)[:200]), f"({len(data)//1024} KB)")
+    print("firestore push:", "ok" if ok else ("FAILED "+str(j)[:200]),
+          f"({len(data)//1024} KB raw -> {len(packed)//1024} KB gzipped)")
 
 if __name__ == "__main__":
     (pull if (sys.argv[1:2] or ["pull"])[0]=="pull" else push)()

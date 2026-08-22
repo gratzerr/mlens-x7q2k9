@@ -1338,6 +1338,14 @@ async function onAuthChange(){
 }
 
 /* ---- Firestore REST (reads work anonymously while public; owner uses idToken) ---- */
+/* the snapshot travels gzipped (it outgrew Firestore's 1 MiB document limit).
+   `dataz` is base64 gzip; the plain `data` field stays readable so a page still
+   running older code keeps working until it picks up this build. */
+async function fsUnpack(b64){
+  const bin=Uint8Array.from(atob(b64),c=>c.charCodeAt(0));
+  const stream=new Blob([bin]).stream().pipeThrough(new DecompressionStream('gzip'));
+  return await new Response(stream).text();
+}
 function fsParse(j){
   const f=(j&&j.fields)||{};
   const arr=k=>f[k]?((f[k].arrayValue||{}).values||[]).map(v=>v.stringValue).filter(Boolean):null;
@@ -1348,6 +1356,7 @@ function fsParse(j){
            benchmarks:arr('benchmarks'),
            watchlist:arr('watchlist'),
            saReq:arr('saReq'),
+           dataz:f.dataz?f.dataz.stringValue:'',
            data:f.data?f.data.stringValue:'' };
 }
 function cfgLists(c){ /* only overwrite when the doc actually has the field */
@@ -1378,11 +1387,18 @@ async function loadConfig(){
 }
 /* poll Firestore for the minute-fresh snapshot the cloud loop uploads — visitors get
    new engine data (~60s old) without waiting for a GitHub Pages redeploy */
+async function fsSnapshot(c){
+  if(c.dataz){
+    try{ return JSON.parse(await fsUnpack(c.dataz)); }
+    catch(e){ /* browser without DecompressionStream: fall through to the plain field */ }
+  }
+  return c.data?JSON.parse(c.data):null;
+}
 async function fsDataPoll(){
   try{
     const c=await fsGet(isOwner());
-    if(!c.data) return;
-    const fresh=JSON.parse(c.data);
+    const fresh=await fsSnapshot(c);
+    if(!fresh) return;
     if(fresh&&fresh.generated){ liveState.lastEngine=new Date(); setBadge(); }   // poll ok = engine data is current, even without a swap
     /* Selbstheilung: laeuft hier alter App-Code (iOS-PWA haelt die Seite ewig),
        Caches leeren und EINMAL pro Version neu laden — nie mehr manuelles Wegwischen */
@@ -1401,7 +1417,11 @@ async function fsDataPoll(){
     if(fresh && fresh.generated && fresh.generated>String(DATA.generated||'')){
       const live={};                             // keep client-side live enrichments
       DATA.holdings.forEach(h=>{ live[h.ticker]={lp:h.livePrice,dc:h.dayChange,hi:h.hi52,lo:h.lo52,sp:h.spark,pos:h.pos52}; });
-      const keepActs=(!fresh.acts||!fresh.acts.length)?DATA.acts:null;   // Live-Push traegt keine Historie (Firestore 1-MiB-Limit)
+      /* the live push carries the full history again (gzipped); keep the local copy
+         only if a payload really arrives without one, and say so instead of silently
+         showing yesterday's activity list next to today's holdings */
+      const keepActs=(!fresh.acts||!fresh.acts.length)?DATA.acts:null;
+      if(keepActs&&keepActs.length) console.warn('live snapshot carried no activity history — keeping the baked copy');
       DATA=fresh;
       if(keepActs&&keepActs.length) DATA.acts=keepActs;
       /* nur ERGAENZEN, nie ueberschreiben: der Tageswert kommt jetzt aus der Engine —
@@ -1435,7 +1455,8 @@ async function fsLoadData(){
   try{
     const c=await fsGet(true);
     Object.assign(_cfg,{name:c.name,public:c.public,hidden:c.hidden,owner:c.owner}); cfgLists(c);
-    if(c.data){ DATA=JSON.parse(c.data); applyName(); applyVisibility();
+    const snap=await fsSnapshot(c);
+    if(snap){ DATA=snap; applyName(); applyVisibility();
       document.querySelector('.wrap').style.display=''; boot(); }
   }catch(e){}
 }
