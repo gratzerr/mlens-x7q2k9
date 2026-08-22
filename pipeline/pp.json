@@ -1,15 +1,15 @@
 {
- "fileDate": "2026-08-22 12:46",
- "generated": "2026-08-22 12:46",
+ "fileDate": "2026-08-22 12:54",
+ "generated": "2026-08-22 12:58",
  "engine": "pp-exact (verified vs PP app 2026-07-11)",
- "totalSecuritiesEur": 2055043,
- "cashEur": -154227.51,
+ "totalSecuritiesEur": 2059458,
+ "cashEur": -159201.67,
  "cashByAccount": [
   {
    "account": "IBKR USD",
    "ccy": "USD",
-   "balance": -188849.09,
-   "eur": -165222.3
+   "balance": -194532.53,
+   "eur": -170194.69
   },
   {
    "account": "SQ EUR",
@@ -26,32 +26,38 @@
   {
    "account": "IBKR EUR",
    "ccy": "EUR",
-   "balance": 830.75,
-   "eur": 830.75
+   "balance": 828.9,
+   "eur": 828.9
+  },
+  {
+   "account": "IBKR CAD",
+   "ccy": "CAD",
+   "balance": 0.13,
+   "eur": 0.08
   }
  ],
- "totalEur": 1900815,
- "ttwrorSince2022": 378.74,
- "ttwrorYtd": 90.09,
- "ttwrorAnnualized": 40.16,
- "izf": 64.29,
+ "totalEur": 1900256,
+ "ttwrorSince2022": 378.6,
+ "ttwrorYtd": 90.03,
+ "ttwrorAnnualized": 40.15,
+ "izf": 64.18,
  "yearlyReturns": {
   "2022": 3.3,
   "2023": 11.8,
   "2024": 45.2,
   "2025": 50.2,
-  "2026": 90.1
+  "2026": 90.0
  },
- "realizedEur": 649403,
- "unrealizedEur": 554118,
- "realizedUsd": 789393,
- "unrealizedUsd": 619670,
+ "realizedEur": 644897,
+ "unrealizedEur": 555994,
+ "realizedUsd": 782769,
+ "unrealizedUsd": 623288,
  "netContribEur": 693272,
  "netContribUsd": 768897,
  "earningsEur": 12767.38,
  "earningsUsd": 13770,
- "feesEur": 10055.36,
- "feesUsd": 11481,
+ "feesEur": 10557.06,
+ "feesUsd": 12055,
  "taxesEur": 1717.1,
  "taxesUsd": 1907,
  "series": [
@@ -27129,38 +27135,101 @@
   },
   {
    "d": "2026-08-20",
-   "v": 2235923,
-   "e": 1956189,
-   "r": 3.926887,
+   "v": 2234208,
+   "e": 1954687,
+   "r": 3.923106,
    "c": 768897,
    "k": 693272,
    "q": 792021,
    "Q": 649144,
    "g": 13770,
    "G": 12767,
-   "f": 11207,
-   "F": 9816,
+   "f": 11211,
+   "F": 9819,
    "t": 1907,
    "T": 1717
   },
   {
    "d": "2026-08-21",
-   "v": 2172632,
-   "e": 1900815,
-   "r": 3.787423,
+   "v": 2171992,
+   "e": 1900256,
+   "r": 3.786014,
    "c": 768897,
    "k": 693272,
-   "q": 789393,
-   "Q": 649403,
+   "q": 782769,
+   "Q": 644897,
    "g": 13770,
    "G": 12767,
-   "f": 11481,
-   "F": 10055,
+   "f": 12055,
+   "F": 10557,
    "t": 1907,
    "T": 1717
   }
  ],
  "payments": [
+  {
+   "d": "2026-08-21",
+   "k": "fee",
+   "tk": "PINK.V",
+   "eur": 48.77,
+   "usd": 55.75
+  },
+  {
+   "d": "2026-08-21",
+   "k": "fee",
+   "tk": "PINK.V",
+   "eur": 45.74,
+   "usd": 52.28
+  },
+  {
+   "d": "2026-08-21",
+   "k": "fee",
+   "tk": "PINK.V",
+   "eur": 78.12,
+   "usd": 89.29
+  },
+  {
+   "d": "2026-08-21",
+   "k": "fee",
+   "tk": "PINK.V",
+   "eur": 122.56,
+   "usd": 140.09
+  },
+  {
+   "d": "2026-08-21",
+   "k": "fee",
+   "tk": "PINK.V",
+   "eur": 41.5,
+   "usd": 47.43
+  },
+  {
+   "d": "2026-08-21",
+   "k": "fee",
+   "tk": "PINK.V",
+   "eur": 149.14,
+   "usd": 170.47
+  },
+  {
+   "d": "2026-08-21",
+   "k": "fee",
+   "tk": "PINK.V",
+   "eur": 10.17,
+   "usd": 11.62
+  },
+  {
+   "d": "2026-08-21",
+   "k": "fee",
+   "tk": null,
+   "eur": 1.85,
+   "usd": 2.11
+  },
+  {
+   "d": "2026-08-21",
+   "k": "fee",
+   "tk": "NKTR",
+   "eur": 0.47,
+   "usd": 0.54
+  },
   {
    "d": "2026-08-21",
    "k": "fee",
@@ -27181,6 +27250,13 @@
    "tk": "NKTR",
    "eur": 112.29,
    "usd": 128.35
+  },
+  {
+   "d": "2026-08-20",
+   "k": "fee",
+   "tk": "NKTR",
+   "eur": 3.37,
+   "usd": 3.85
   },
   {
    "d": "2026-08-20",
@@ -42904,26 +42980,14 @@
     70.0
    ],
    [
+    "2026-08-20",
+    1600.0,
+    75.6
+   ],
+   [
     "2026-08-21",
     1700.0,
     75.5
-   ]
-  ],
-  "PINK.V": [
-   [
-    "2026-05-12",
-    450000.0,
-    0.3198
-   ],
-   [
-    "2026-05-21",
-    450000.0,
-    0.3187
-   ],
-   [
-    "2026-07-09",
-    100000.0,
-    0.29
    ]
   ],
   "ABVX270319C00120000": [
@@ -43130,9 +43194,9 @@
   "NKTR": [
    {
     "d": "2026-05-27",
-    "sh": 2000.0,
-    "eur": 112417.12,
-    "usd": 130819.8
+    "sh": 1900.0,
+    "eur": 106796.26,
+    "usd": 124278.81
    },
    {
     "d": "2026-05-29",
@@ -43165,36 +43229,16 @@
     "usd": 7000.0
    },
    {
+    "d": "2026-08-20",
+    "sh": 1600.0,
+    "eur": 105826.77,
+    "usd": 120960.0
+   },
+   {
     "d": "2026-08-21",
     "sh": 1700.0,
     "eur": 112292.21,
     "usd": 128350.0
-   }
-  ],
-  "PINK.V": [
-   {
-    "d": "2026-05-21",
-    "sh": 200000.0,
-    "eur": 39436.2,
-    "usd": 45742.05
-   },
-   {
-    "d": "2026-05-21",
-    "sh": 100000.0,
-    "eur": 20035.06,
-    "usd": 23238.67
-   },
-   {
-    "d": "2026-05-21",
-    "sh": 100000.0,
-    "eur": 20296.46,
-    "usd": 23541.86
-   },
-   {
-    "d": "2026-07-09",
-    "sh": 100000.0,
-    "eur": 17899.02,
-    "usd": 20467.53
    }
   ],
   "ABVX270319C00120000": [
@@ -43238,14 +43282,126 @@
   {
    "d": "2026-08-21",
    "t": "SELL",
+   "sh": 45000.0,
+   "px": 0.3051,
+   "ccy": "CAD",
+   "amt": 13730.0,
+   "port": "IBKR",
+   "gEur": -447.33,
+   "gUsd": -786.49,
+   "ret": -7.5,
+   "tk": "PINK.V",
+   "isin": "CA71385D1078"
+  },
+  {
+   "d": "2026-08-21",
+   "t": "SELL",
+   "sh": 44000.0,
+   "px": 0.3,
+   "ccy": "CAD",
+   "amt": 13200.0,
+   "port": "IBKR",
+   "gEur": -590.35,
+   "gUsd": -944.27,
+   "ret": -9.19,
+   "tk": "PINK.V",
+   "isin": "CA71385D1078"
+  },
+  {
+   "d": "2026-08-21",
+   "t": "SELL",
+   "sh": 81500.0,
+   "px": 0.2903,
+   "ccy": "CAD",
+   "amt": 23660.0,
+   "port": "IBKR",
+   "gEur": -1563.93,
+   "gUsd": -2286.21,
+   "ret": -12.03,
+   "tk": "PINK.V",
+   "isin": "CA71385D1078"
+  },
+  {
+   "d": "2026-08-21",
+   "t": "SELL",
+   "sh": 119000.0,
+   "px": 0.3,
+   "ccy": "CAD",
+   "amt": 35700.0,
+   "port": "IBKR",
+   "gEur": -1588.47,
+   "gUsd": -2544.25,
+   "ret": -9.16,
+   "tk": "PINK.V",
+   "isin": "CA71385D1078"
+  },
+  {
+   "d": "2026-08-21",
+   "t": "SELL",
+   "sh": 38500.0,
+   "px": 0.3,
+   "ccy": "CAD",
+   "amt": 11550.0,
+   "port": "IBKR",
+   "gEur": -518.12,
+   "gUsd": -828.07,
+   "ret": -9.21,
+   "tk": "PINK.V",
+   "isin": "CA71385D1078"
+  },
+  {
+   "d": "2026-08-21",
+   "t": "SELL",
+   "sh": 161500.0,
+   "px": 0.3,
+   "ccy": "CAD",
+   "amt": 48450.0,
+   "port": "IBKR",
+   "gEur": -2229.68,
+   "gUsd": -3429.65,
+   "ret": -9.11,
+   "tk": "PINK.V",
+   "isin": "CA71385D1078"
+  },
+  {
+   "d": "2026-08-21",
+   "t": "SELL",
+   "sh": 10500.0,
+   "px": 0.295,
+   "ccy": "CAD",
+   "amt": 3097.5,
+   "port": "IBKR",
+   "gEur": -188.93,
+   "gUsd": -251.49,
+   "ret": -10.31,
+   "tk": "PINK.V",
+   "isin": "CA71385D1078"
+  },
+  {
+   "d": "2026-08-21",
+   "t": "SELL",
+   "sh": 100.0,
+   "px": 73.565,
+   "ccy": "USD",
+   "amt": 7356.5,
+   "port": "IBKR",
+   "gEur": 815.28,
+   "gUsd": 815.51,
+   "ret": 12.47,
+   "tk": "NKTR",
+   "isin": "US6402683063"
+  },
+  {
+   "d": "2026-08-21",
+   "t": "SELL",
    "sh": 250000.0,
    "px": 0.3448,
    "ccy": "CAD",
    "amt": 86195.0,
    "port": "SQ",
-   "gEur": 3607.99,
-   "gUsd": 2593.95,
-   "ret": 4.45,
+   "gEur": 3828.71,
+   "gUsd": 3540.44,
+   "ret": 6.17,
    "tk": "PINK.V",
    "isin": "CA71385D1078"
   },
@@ -43257,11 +43413,22 @@
    "ccy": "CAD",
    "amt": 75140.0,
    "port": "SQ",
-   "gEur": -3349.3,
-   "gUsd": -5222.78,
-   "ret": -8.96,
+   "gEur": -1764.35,
+   "gUsd": -2537.91,
+   "ret": -4.56,
    "tk": "PINK.V",
    "isin": "CA71385D1078"
+  },
+  {
+   "d": "2026-08-20",
+   "t": "BUY",
+   "sh": 1600.0,
+   "px": 75.6,
+   "ccy": "USD",
+   "amt": 120960.0,
+   "port": "IBKR",
+   "tk": "NKTR",
+   "isin": "US6402683063"
   },
   {
    "d": "2026-08-20",
@@ -60180,31 +60347,151 @@
  ],
  "trades": [
   {
-   "port": "SQ",
+   "port": "IBKR",
    "buy": "2026-05-12",
    "sell": "2026-08-21",
    "days": 101,
+   "sh": 45000.0,
+   "proceedsUsd": 9701,
+   "basisUsd": 10488,
+   "gainUsd": -786,
+   "gainEur": -447,
+   "ret": -7.5,
+   "ticker": "PINK.V",
+   "name": "PERIMETER MEDICAL IMAGING AI",
+   "isin": "CA71385D1078"
+  },
+  {
+   "port": "IBKR",
+   "buy": "2026-05-12",
+   "sell": "2026-08-21",
+   "days": 101,
+   "sh": 44000.0,
+   "proceedsUsd": 9327,
+   "basisUsd": 10271,
+   "gainUsd": -944,
+   "gainEur": -590,
+   "ret": -9.19,
+   "ticker": "PINK.V",
+   "name": "PERIMETER MEDICAL IMAGING AI",
+   "isin": "CA71385D1078"
+  },
+  {
+   "port": "IBKR",
+   "buy": "2026-05-12",
+   "sell": "2026-08-21",
+   "days": 101,
+   "sh": 81500.0,
+   "proceedsUsd": 16717,
+   "basisUsd": 19003,
+   "gainUsd": -2286,
+   "gainEur": -1564,
+   "ret": -12.03,
+   "ticker": "PINK.V",
+   "name": "PERIMETER MEDICAL IMAGING AI",
+   "isin": "CA71385D1078"
+  },
+  {
+   "port": "IBKR",
+   "buy": "2026-05-12",
+   "sell": "2026-08-21",
+   "days": 101,
+   "sh": 119000.0,
+   "proceedsUsd": 25224,
+   "basisUsd": 27768,
+   "gainUsd": -2544,
+   "gainEur": -1588,
+   "ret": -9.16,
+   "ticker": "PINK.V",
+   "name": "PERIMETER MEDICAL IMAGING AI",
+   "isin": "CA71385D1078"
+  },
+  {
+   "port": "IBKR",
+   "buy": "2026-05-12",
+   "sell": "2026-08-21",
+   "days": 101,
+   "sh": 38500.0,
+   "proceedsUsd": 8161,
+   "basisUsd": 8989,
+   "gainUsd": -828,
+   "gainEur": -518,
+   "ret": -9.21,
+   "ticker": "PINK.V",
+   "name": "PERIMETER MEDICAL IMAGING AI",
+   "isin": "CA71385D1078"
+  },
+  {
+   "port": "IBKR",
+   "buy": "2026-05-12",
+   "sell": "2026-08-21",
+   "days": 99,
+   "sh": 161500.0,
+   "proceedsUsd": 34233,
+   "basisUsd": 37662,
+   "gainUsd": -3430,
+   "gainEur": -2230,
+   "ret": -9.11,
+   "ticker": "PINK.V",
+   "name": "PERIMETER MEDICAL IMAGING AI",
+   "isin": "CA71385D1078"
+  },
+  {
+   "port": "IBKR",
+   "buy": "2026-05-21",
+   "sell": "2026-08-21",
+   "days": 92,
+   "sh": 10500.0,
+   "proceedsUsd": 2189,
+   "basisUsd": 2440,
+   "gainUsd": -251,
+   "gainEur": -189,
+   "ret": -10.31,
+   "ticker": "PINK.V",
+   "name": "PERIMETER MEDICAL IMAGING AI",
+   "isin": "CA71385D1078"
+  },
+  {
+   "port": "IBKR",
+   "buy": "2026-05-27",
+   "sell": "2026-08-21",
+   "days": 86,
+   "sh": 100.0,
+   "proceedsUsd": 7356,
+   "basisUsd": 6541,
+   "gainUsd": 816,
+   "gainEur": 815,
+   "ret": 12.47,
+   "ticker": "NKTR",
+   "name": "NEKTAR THERAPEUTICS",
+   "isin": "US6402683063"
+  },
+  {
+   "port": "SQ",
+   "buy": "2026-05-21",
+   "sell": "2026-08-21",
+   "days": 92,
    "sh": 250000.0,
    "proceedsUsd": 60902,
-   "basisUsd": 58308,
-   "gainUsd": 2594,
-   "gainEur": 3608,
-   "ret": 4.45,
+   "basisUsd": 57361,
+   "gainUsd": 3540,
+   "gainEur": 3829,
+   "ret": 6.17,
    "ticker": "PINK.V",
    "name": "PERIMETER MEDICAL IMAGING AI",
    "isin": "CA71385D1078"
   },
   {
    "port": "SQ",
-   "buy": "2026-05-12",
+   "buy": "2026-05-21",
    "sell": "2026-08-21",
-   "days": 99,
+   "days": 72,
    "sh": 250000.0,
    "proceedsUsd": 53091,
-   "basisUsd": 58314,
-   "gainUsd": -5223,
-   "gainEur": -3349,
-   "ret": -8.96,
+   "basisUsd": 55629,
+   "gainUsd": -2538,
+   "gainEur": -1764,
+   "ret": -4.56,
    "ticker": "PINK.V",
    "name": "PERIMETER MEDICAL IMAGING AI",
    "isin": "CA71385D1078"
@@ -64272,15 +64559,15 @@
    "name": "RAPID MICRO BIOSYSTEMS INC-A"
   }
  ],
- "ppReferenceTtwror": 378.74,
+ "ppReferenceTtwror": 378.6,
  "ppReferenceDate": "2026-08-22",
- "ttwrorApproxSince2022": 378.74,
+ "ttwrorApproxSince2022": 378.6,
  "yearlyReturnsApprox": {
   "2022": 3.3,
   "2023": 11.8,
   "2024": 45.2,
   "2025": 50.2,
-  "2026": 90.1
+  "2026": 90.0
  },
  "holdings": [
   {
@@ -64333,19 +64620,20 @@
    "ticker": "NKTR",
    "name": "NEKTAR THERAPEUTICS",
    "byPort": {
+    "IBKR": 1500.0,
     "SQ": 5000.0
    },
    "isin": "US6402683063",
    "ccy": "USD",
-   "shares": 5000.0,
+   "shares": 6500.0,
    "price": 74.01999664,
-   "value": 370099.98,
-   "valueEur": 323797,
-   "valueUsd": 370100,
-   "basisUsd": 342081,
-   "realizedUsd": -54345,
-   "avgCost": 68.4161,
-   "unrealRet": 8.2,
+   "value": 481129.98,
+   "valueEur": 420936,
+   "valueUsd": 481130,
+   "basisUsd": 456500,
+   "realizedUsd": -53529,
+   "avgCost": 70.2307,
+   "unrealRet": 5.4,
    "dayRet": -0.68,
    "prevClose": 74.53,
    "priceDate": "2026-08-21"
@@ -64414,28 +64702,6 @@
    "unrealRet": 8.7,
    "dayRet": -1.91,
    "prevClose": 6.27,
-   "priceDate": "2026-08-21"
-  },
-  {
-   "account": "ALL",
-   "ticker": "PINK.V",
-   "name": "PERIMETER MEDICAL IMAGING AI",
-   "byPort": {
-    "IBKR": 500000.0
-   },
-   "isin": "CA71385D1078",
-   "ccy": "CAD",
-   "shares": 500000.0,
-   "price": 0.30000001,
-   "value": 150000.01,
-   "valueEur": 92724,
-   "valueUsd": 105984,
-   "basisUsd": 112990,
-   "realizedUsd": -2629,
-   "avgCost": 0.3173,
-   "unrealRet": -6.2,
-   "dayRet": -16.67,
-   "prevClose": 0.36,
    "priceDate": "2026-08-21"
   }
  ],
