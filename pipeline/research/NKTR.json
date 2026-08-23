@@ -52,15 +52,15 @@
       "confirmed": true
     },
     {
-      "when": "2026-H2",
-      "label": "Additional REZOLVE-AD / REZOLVE-AA data at medical conferences",
-      "detail": "Nektar has signalled further presentations of longer-term Phase 2b atopic dermatitis and alopecia areata data, including off-treatment durability after discontinuation in severe-to-very-severe alopecia areata. Durability of the Treg effect off drug remains a key swing factor ahead of the AA Phase 3 start.",
-      "confirmed": false
+      "when": "2026-10-01",
+      "label": "REZOLVE-AD / REZOLVE-AA data at EADV Congress 2026 (Vienna)",
+      "detail": "Two oral presentations are on the official EADV Congress 2026 schedule (Vienna, September 30-October 3): Dr. Thomas Bieber presenting deepening/durable REZOLVE-AD maintenance responses with monthly vs quarterly dosing, and Dr. David Rosmain presenting 52-week REZOLVE-AA alopecia areata efficacy and safety data. Durability of the Treg effect is a key swing factor ahead of the early-2027 alopecia areata Phase 3 start.",
+      "confirmed": true
     },
     {
-      "when": "2026-11",
+      "when": "2026-11-05",
       "label": "Q3 2026 earnings",
-      "detail": "The next quarterly report should update cash burn against the year-end guidance of $815-840 million, confirm the ZENITH AD-3 start and early enrollment across all three studies, and detail preparations for the early-2027 alopecia areata Phase 3. Exact date not yet announced.",
+      "detail": "The next quarterly report should update cash burn against the year-end guidance of $815-840 million, confirm the ZENITH AD-3 start and early enrollment across all three studies, and detail preparations for the early-2027 alopecia areata Phase 3. Date is a consensus estimate; Nektar has not yet issued a formal announcement.",
       "confirmed": false
     },
     {
@@ -82,5 +82,5 @@
       "confirmed": true
     }
   ],
-  "pulse": "Nektar is a pure late-stage rezpeg story whose funding question is largely answered: Q2 2026 (reported August 13) showed $1.02 billion in cash and investments and runway into Q3 2028, past the mid-2028 ZENITH AD Phase 3 readout, with ZENITH AD-3 due to start in September 2026 and a registrational alopecia areata study in early 2027. The print itself was mixed - a big EPS beat ($1.23 loss vs about $2.06 expected) but revenue of $10.1 million slightly short and a widening loss from the Phase 3 ramp - and the stock slid roughly 4% and stayed near $76, well below the 52-week high around $109. The sell-side is now openly split: the consensus target sits near $141-153 with Piper Sandler at $192, while JPMorgan initiated at Neutral with a $65 target on August 21 and Wedbush sits at $80, so the debate is burn and valuation versus a catalyst calendar that is thin until AD-3 enrollment updates and any H2 durability data."
+  "pulse": "Nektar is a pure late-stage rezpeg story whose funding question is largely answered: Q2 2026 (reported August 13) showed $1.02 billion in cash and investments and runway into Q3 2028, past the mid-2028 ZENITH AD Phase 3 readout, with ZENITH AD-3 due to start in September 2026 and a registrational alopecia areata study in early 2027. The print itself was mixed - a big EPS beat ($1.23 loss vs about $2.06 expected) but revenue of $10.1 million slightly short and a widening loss from the Phase 3 ramp - and the stock slid roughly 4% and stayed near $76, well below the 52-week high around $109. The sell-side is now openly split: the consensus target sits near $141-153 with Piper Sandler at $192, while JPMorgan initiated at Neutral with a $65 target on August 21 and Wedbush sits at $80, so the debate is burn and valuation versus a nearer-term catalyst in the two REZOLVE-AD/REZOLVE-AA oral presentations on the EADV Congress 2026 agenda in Vienna (September 30-October 3)."
 }
