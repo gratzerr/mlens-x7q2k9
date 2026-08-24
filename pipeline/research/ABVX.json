@@ -1,92 +1,92 @@
 {
-  "ticker": "ABVX",
-  "news": [
-    {
-      "date": "2026-08-19",
-      "headline": "ABTECT Maintenance Part 2 Review: Obefazimod Sustains Week-44 Remission With No Dose-Dependent Malignancy Signal",
-      "source": "HCPLive",
-      "url": "https://www.hcplive.com/view/abtect-part-2-data-obefazimod-sustains-remission-in-uc",
-      "summary": "A detailed clinical review of the Phase 3 ABTECT maintenance package put Week-44 clinical remission at roughly 51% for both the 25 mg and 50 mg doses versus about 10% on placebo, with endoscopic remission of 41.5% (25 mg) and 47.7% (50 mg), and 50 mg converting about 37% of induction non-responders to remission. Critically for the June malignancy overhang, the expanded exposure showed stable exposure-adjusted safety rates and no apparent dose-dependent malignancy signal through Week 44."
-    },
-    {
-      "date": "2026-08-14",
-      "headline": "TCG Crossover and Invus Disclose a Combined ~13% Stake in Abivax After the July Offering",
-      "source": "Stock Titan (SEC Schedule 13G/A filings)",
-      "url": "https://www.stocktitan.net/sec-filings/ABVX/schedule-13g-a-abivax-s-a-amended-passive-investment-disclosure-8741cb45e81c.html",
-      "summary": "Healthcare crossover investor TCG Crossover (via managing partner Chen Yu) disclosed 6,007,834 ADSs (7.0%), while Invus and the Avicenna Fund separately disclosed 4,825,759 shares/ADSs (6.0%) as of the periods around Abivax's $920 million July offering. Together the filings show two long-standing biotech specialists held on through the large equity raise rather than selling into strength, pointing to a stable, concentrated institutional register ahead of the NDA filing."
-    },
-    {
-      "date": "2026-07-30",
-      "headline": "Abivax Announces Positive Pre-NDA Interaction with the FDA for Obefazimod",
-      "source": "GlobeNewswire / Abivax",
-      "url": "https://www.globenewswire.com/news-release/2026/07/30/3336434/0/en/Abivax-Announces-Positive-Pre-NDA-Interaction-with-the-FDA-for-Obefazimod.html",
-      "summary": "The FDA gave constructive feedback and aligned with Abivax on the planned submission strategy, content and format of the obefazimod NDA in moderately-to-severely active ulcerative colitis. Abivax confirmed it remains on track to file its first-ever NDA by the end of 2026, removing a key procedural uncertainty."
-    },
-    {
-      "date": "2026-07-24",
-      "headline": "Morgan Stanley Raises Abivax Price Target to $180 from $132, Maintains Overweight",
-      "source": "Moomoo / Morgan Stanley research note",
-      "url": "https://www.moomoo.com/news/post/73506815/morgan-stanley-maintains-abivax-sa-abvxus-with-buy-rating-raises",
-      "summary": "Morgan Stanley lifted its target well above the prevailing share price, citing growing confidence in the obefazimod UC data package and the NDA timeline after the maintenance results and pre-NDA FDA feedback. It sits at the top of a sell-side range whose consensus target is now roughly $148-166 (Piper Sandler raised to $175 on July 9 citing higher 2035 U.S. UC revenue estimates of $4.2bn)."
-    },
-    {
-      "date": "2026-07-23",
-      "headline": "Abivax Strengthens Commercial Capabilities With Strategic Leadership Appointments",
-      "source": "GlobeNewswire",
-      "url": "https://www.globenewswire.com/news-release/2026/07/23/3332548/0/en/Abivax-Strengthens-Commercial-Capabilities-With-Strategic-Leadership-Appointments.html",
-      "summary": "Abivax hired four senior commercial executives covering marketing, patient services, sales operations and market access/pricing to build a standalone U.S. commercial organization ahead of a potential obefazimod launch. The move signals the company is preparing to launch on its own rather than depending on a partner or acquirer."
-    },
-    {
-      "date": "2026-07-16",
-      "headline": "Valerio Therapeutics Signs Exclusive Worldwide R&D Collaboration With Abivax for Next-Generation Immune-Mediated Disease Candidates",
-      "source": "Business Wire / Valerio Therapeutics",
-      "url": "https://www.businesswire.com/news/home/20260716084841/en/Valerio-Therapeutics-Announces-Development-Collaboration-with-Abivax-and-Provides-Pipeline-Update",
-      "summary": "Valerio Therapeutics announced a binding term sheet with Abivax for an exclusive worldwide research and development collaboration, receiving roughly EUR 2.4 million upfront plus development and commercial milestones, royalties on net sales and sublicensing revenue, subject to a definitive agreement. The partners will identify, design and preclinically evaluate next-generation candidates for immune-mediated inflammatory diseases, giving Abivax an early pipeline option beyond obefazimod."
-    }
-  ],
-  "catalysts": [
-    {
-      "when": "2026-09-21",
-      "label": "H1 2026 financial results and pipeline update",
-      "detail": "Abivax's investor-relations financial calendar confirms half-year 2026 results on September 21, 2026. The update should refresh the post-raise cash position (guided into Q4 2029), R&D spend trajectory, NDA-preparation progress and the U.S. pre-launch commercial build-out.",
-      "confirmed": true
-    },
-    {
-      "when": "2026-10-17 to 2026-10-20",
-      "label": "Full ABTECT maintenance data at UEG Week 2026 (Barcelona)",
-      "detail": "Abivax presented its ABTECT induction late-breaker at UEG Week in October 2025 and has a pattern of taking full datasets to autumn congresses. UEG Week 2026 runs October 17-20 in Barcelona (Fira Gran Via); a detailed public presentation there of the Week-44 maintenance efficacy and, above all, the malignancy/safety dataset would be the cleanest way to retire the June cancer-signal overhang. Abivax has not yet confirmed a presentation slot or abstract acceptance for this specific meeting.",
-      "confirmed": false
-    },
-    {
-      "when": "2026-Q4",
-      "label": "NDA submission to FDA for obefazimod in ulcerative colitis",
-      "detail": "After positive Phase 3 ABTECT induction and 44-week maintenance data and the constructive pre-NDA meeting on July 30, 2026, Abivax plans to submit its first NDA for obefazimod in moderately-to-severely active UC in late Q4 2026. This is the single biggest near-term de-risking event and the gate that starts the FDA review clock.",
-      "confirmed": true
-    },
-    {
-      "when": "2026-12-14",
-      "label": "Q3 2026 financial results",
-      "detail": "Abivax's financial calendar lists Q3 2026 results for December 14, 2026, which should give an updated read on cash burn, NDA-preparation costs and commercial build-out spend heading into the year-end NDA filing.",
-      "confirmed": true
-    },
-    {
-      "when": "2026-H2 / 2027-H1",
-      "label": "MAA submission to the EMA for obefazimod in ulcerative colitis",
-      "detail": "Abivax guided to filing a Marketing Authorization Application in Europe in the second half of 2026, contingent on the (now positive) 44-week maintenance data. Recent communication has emphasised the Q4 2026 FDA filing without restating a precise EMA date, so exact MAA timing remains unconfirmed and could slip into H1 2027.",
-      "confirmed": false
-    },
-    {
-      "when": "2027-H1 (mid-2027)",
-      "label": "Phase 2b ENHANCE-CD Crohn's disease 12-week induction topline data",
-      "detail": "Topline results from the Phase 2b induction trial of obefazimod in moderately-to-severely active Crohn's disease are guided for mid-2027 (enrollment started Q3 2024). A positive readout opens a second large indication for the miR-124 mechanism, but it likely lands near or just after the March-2027 option expiry.",
-      "confirmed": true
-    },
-    {
-      "when": "2027-H2",
-      "label": "Potential FDA approval decision on the obefazimod NDA",
-      "detail": "With a Q4 2026 filing and a standard review cycle, an FDA decision would fall roughly 10-12 months later, i.e. in H2 2027 - after the March-2027 call expiry. No PDUFA date exists yet because the NDA has not been submitted; this remains the ultimate approval and launch catalyst for the equity.",
-      "confirmed": false
-    }
-  ],
-  "pulse": "Abivax trades around $128 per ADS as of August 23, 2026 (market cap roughly $11bn), comfortably above the $120 strike, with the average sell-side target near $148-166 and Morgan Stanley at $180. No new company-specific catalyst has broken since the August 19 ABTECT maintenance safety review that found no dose-dependent malignancy signal through Week 44 (about 51% remission vs 10% placebo); the July 30 pre-NDA meeting locked in FDA alignment for an end-2026 NDA, and mid-August 13G filings showed large crossover investors (TCG Crossover, Invus) held their stakes through the $920m July offering that funds a solo U.S. commercial build-out. For the March-2027 $120 call the position is in-the-money and now hinges on H1 2026 results confirmed for September 21, a possible UEG Week 2026 (Oct 17-20, Barcelona) presentation of the full safety dataset, the Q4 2026 NDA filing landing on time, and whether renewed takeover speculation (Eli Lilly reports earlier in 2026) re-rates the shares further before expiry."
+ "ticker": "ABVX",
+ "news": [
+  {
+   "date": "2026-08-19",
+   "headline": "ABTECT Maintenance Part 2 Review: Obefazimod Sustains Week-44 Remission With No Dose-Dependent Malignancy Signal",
+   "source": "HCPLive",
+   "url": "https://www.hcplive.com/view/abtect-part-2-data-obefazimod-sustains-remission-in-uc",
+   "summary": "A detailed clinical review of the Phase 3 ABTECT maintenance package put Week-44 clinical remission at roughly 51% for both the 25 mg and 50 mg doses versus about 10% on placebo, with the expanded safety exposure showing no apparent dose-dependent malignancy signal through Week 44."
+  },
+  {
+   "date": "2026-08-14",
+   "headline": "TCG Crossover and Invus Disclose a Combined ~13% Stake in Abivax After the July Offering",
+   "source": "Stock Titan (SEC Schedule 13G/A filings)",
+   "url": "https://www.stocktitan.net/sec-filings/ABVX/schedule-13g-a-abivax-s-a-amended-passive-investment-disclosure-8741cb45e81c.html",
+   "summary": "TCG Crossover disclosed 6,007,834 ADSs (7.0%) and Invus/Avicenna Fund separately disclosed 4,825,759 shares/ADSs (6.0%) around the time of Abivax's $920 million July offering, showing two long-standing biotech specialists held through the raise."
+  },
+  {
+   "date": "2026-07-30",
+   "headline": "Abivax Announces Positive Pre-NDA Interaction with the FDA for Obefazimod",
+   "source": "GlobeNewswire / BioSpace",
+   "url": "https://www.globenewswire.com/news-release/2026/07/30/3336434/0/en/Abivax-Announces-Positive-Pre-NDA-Interaction-with-the-FDA-for-Obefazimod.html",
+   "summary": "The FDA gave constructive feedback and aligned with Abivax on the planned submission strategy, content and format of the obefazimod NDA in moderately-to-severely active ulcerative colitis. Abivax confirmed it remains on track to file its first-ever NDA by the end of 2026."
+  },
+  {
+   "date": "2026-07-24",
+   "headline": "Morgan Stanley Raises Abivax Price Target to $180 from $132, Maintains Overweight",
+   "source": "Moomoo / Morgan Stanley research note",
+   "url": "https://www.moomoo.com/news/post/73506815/morgan-stanley-maintains-abivax-sa-abvxus-with-buy-rating-raises",
+   "summary": "Morgan Stanley lifted its target well above the prevailing share price, citing growing confidence in the obefazimod UC data package and the NDA timeline; it sits at the top of a sell-side range with consensus roughly $148-166."
+  },
+  {
+   "date": "2026-07-23",
+   "headline": "Abivax Strengthens Commercial Capabilities With Strategic Leadership Appointments",
+   "source": "GlobeNewswire",
+   "url": "https://www.globenewswire.com/news-release/2026/07/23/3332548/0/en/Abivax-Strengthens-Commercial-Capabilities-With-Strategic-Leadership-Appointments.html",
+   "summary": "Abivax hired four senior commercial executives, including a Global Head of Marketing with prior Entyvio and Tezspire launch experience, covering marketing, patient services, sales operations and market access ahead of a potential obefazimod launch."
+  },
+  {
+   "date": "2026-07-17",
+   "headline": "Abivax Reportedly Re-Engages Centerview Amid Renewed Big Pharma Takeover Interest",
+   "source": "La Lettre (via Sahm Capital)",
+   "url": "https://www.sahmcapital.com/news/content/biotech-abivax-re-engages-investment-bank-centerview-for-big-pharma-takeover-talks-la-lettre-2026-07-17",
+   "summary": "French outlet La Lettre reported that Abivax has re-engaged investment bank Centerview amid renewed acquisition interest from large pharmaceutical companies, though no formal deal has been confirmed."
+  }
+ ],
+ "catalysts": [
+  {
+   "when": "2026-09-21",
+   "label": "H1 2026 financial results and pipeline update",
+   "detail": "Abivax's investor-relations financial calendar confirms half-year 2026 results on September 21, 2026, expected to refresh the post-raise cash position (guided into Q4 2029), R&D spend trajectory, NDA-preparation progress and the U.S. pre-launch commercial build-out.",
+   "confirmed": true
+  },
+  {
+   "when": "2026-10-17 to 2026-10-20",
+   "label": "Full ABTECT maintenance data at UEG Week 2026 (Barcelona)",
+   "detail": "Abivax has a pattern of taking full datasets to autumn GI congresses; UEG Week 2026 runs October 17-20 in Barcelona and would be a natural venue for a detailed presentation of the Week-44 maintenance efficacy and safety dataset, though a presentation slot has not been confirmed.",
+   "confirmed": false
+  },
+  {
+   "when": "2026-Q4",
+   "label": "NDA submission to FDA for obefazimod in ulcerative colitis",
+   "detail": "After positive Phase 3 ABTECT induction and 44-week maintenance data and the constructive pre-NDA meeting on July 30, 2026, Abivax plans to submit its first NDA for obefazimod in moderately-to-severely active UC in late Q4 2026.",
+   "confirmed": true
+  },
+  {
+   "when": "2026-12-14",
+   "label": "Q3 2026 financial results",
+   "detail": "Abivax's financial calendar lists Q3 2026 results for December 14, 2026, expected to give an updated read on cash burn, NDA-preparation costs and commercial build-out spend heading into the year-end NDA filing.",
+   "confirmed": true
+  },
+  {
+   "when": "2026-H2 / 2027-H1",
+   "label": "MAA submission to the EMA for obefazimod in ulcerative colitis",
+   "detail": "Abivax guided to filing a Marketing Authorization Application in Europe in the second half of 2026, contingent on the (now positive) 44-week maintenance data; recent communication has emphasized the Q4 2026 FDA filing without restating a precise EMA date.",
+   "confirmed": false
+  },
+  {
+   "when": "2027-H1 (mid-2027)",
+   "label": "Phase 2b ENHANCE-CD Crohn's disease 12-week induction topline data",
+   "detail": "Topline results from the Phase 2b induction trial of obefazimod in moderately-to-severely active Crohn's disease are guided for mid-2027, opening a second large indication for the miR-124 mechanism.",
+   "confirmed": true
+  },
+  {
+   "when": "2027-H2",
+   "label": "Potential FDA approval decision on the obefazimod NDA",
+   "detail": "With a Q4 2026 filing and a standard review cycle, an FDA decision would fall roughly 10-12 months later, in H2 2027; no PDUFA date exists yet because the NDA has not been submitted.",
+   "confirmed": false
+  }
+ ],
+ "pulse": "Abivax remains squarely in pre-launch mode for obefazimod: the August 19 detailed ABTECT maintenance review found no dose-dependent malignancy signal through Week 44 (~51% remission vs ~10% placebo), reinforcing the positive July 30 pre-NDA FDA meeting that keeps the company on track for a Q4 2026 NDA filing. The $920M July offering funds a solo U.S. commercial build-out, and mid-August 13G filings showed large crossover investors (TCG Crossover, Invus) held their stakes through the raise, while sell-side targets cluster in the $148-180 range (Morgan Stanley at $180) and recurring Big Pharma takeover chatter (Centerview re-engagement) persists. For the March-2027 $120 call, the position stays in-the-money and now hinges on the September 21 H1 results, a possible UEG Week 2026 data presentation, and the Q4 2026 NDA filing landing on schedule."
 }
