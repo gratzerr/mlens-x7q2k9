@@ -1,8 +1,8 @@
 {
- "fileDate": "2026-08-25 04:17",
- "generated": "2026-08-25 04:26",
+ "fileDate": "2026-08-25 04:28",
+ "generated": "2026-08-25 04:37",
  "engine": "pp-exact (verified vs PP app 2026-07-11)",
- "totalSecuritiesEur": 1994192,
+ "totalSecuritiesEur": 1979831,
  "cashEur": -155862.25,
  "cashByAccount": [
   {
@@ -36,22 +36,22 @@
    "eur": 0.08
   }
  ],
- "totalEur": 1838329,
- "ttwrorSince2022": 362.98,
- "ttwrorYtd": 83.83,
- "ttwrorAnnualized": 39.07,
- "izf": 61.91,
+ "totalEur": 1823969,
+ "ttwrorSince2022": 359.36,
+ "ttwrorYtd": 82.39,
+ "ttwrorAnnualized": 38.84,
+ "izf": 61.39,
  "yearlyReturns": {
   "2022": 3.3,
   "2023": 11.8,
   "2024": 45.2,
   "2025": 50.2,
-  "2026": 83.8
+  "2026": 82.4
  },
  "realizedEur": 638956,
- "unrealizedEur": 502564,
+ "unrealizedEur": 488204,
  "realizedUsd": 789376,
- "unrealizedUsd": 595353,
+ "unrealizedUsd": 578603,
  "netContribEur": 693272,
  "netContribUsd": 769042,
  "earningsEur": 12772.29,
@@ -27199,9 +27199,9 @@
   },
   {
    "d": "2026-08-24",
-   "v": 2144227,
-   "e": 1838329,
-   "r": 3.629796,
+   "v": 2127477,
+   "e": 1823969,
+   "r": 3.593629,
    "c": 769042,
    "k": 693272,
    "q": 789376,
@@ -65079,41 +65079,17 @@
    "name": "RAPID MICRO BIOSYSTEMS INC-A"
   }
  ],
- "ppReferenceTtwror": 362.98,
+ "ppReferenceTtwror": 359.36,
  "ppReferenceDate": "2026-08-25",
- "ttwrorApproxSince2022": 362.98,
+ "ttwrorApproxSince2022": 359.36,
  "yearlyReturnsApprox": {
   "2022": 3.3,
   "2023": 11.8,
   "2024": 45.2,
   "2025": 50.2,
-  "2026": 83.8
+  "2026": 82.4
  },
  "holdings": [
-  {
-   "account": "ALL",
-   "ticker": "ABVX270319C00120000",
-   "name": "ABVX 19MAR27 120 C",
-   "byPort": {
-    "IBKR": 15000.0,
-    "SQ": 10000.0
-   },
-   "isin": "",
-   "ccy": "USD",
-   "shares": 25000.0,
-   "price": 19.64999999,
-   "value": 491250.0,
-   "valueEur": 421168,
-   "valueUsd": 491250,
-   "basisUsd": 559991,
-   "basisEur": 482998,
-   "realizedUsd": 0,
-   "avgCost": 22.3996,
-   "unrealRet": -12.3,
-   "dayRet": -8.94,
-   "prevClose": 21.58,
-   "priceDate": "2026-08-24"
-  },
   {
    "account": "ALL",
    "ticker": "NKTR",
@@ -65159,6 +65135,30 @@
    "unrealRet": 415.9,
    "dayRet": -1.88,
    "prevClose": 48.37,
+   "priceDate": "2026-08-24"
+  },
+  {
+   "account": "ALL",
+   "ticker": "ABVX270319C00120000",
+   "name": "ABVX 19MAR27 120 C",
+   "byPort": {
+    "IBKR": 15000.0,
+    "SQ": 10000.0
+   },
+   "isin": "",
+   "ccy": "USD",
+   "shares": 25000.0,
+   "price": 18.98,
+   "value": 474500.0,
+   "valueEur": 406807,
+   "valueUsd": 474500,
+   "basisUsd": 559991,
+   "basisEur": 482998,
+   "realizedUsd": 0,
+   "avgCost": 22.3996,
+   "unrealRet": -15.3,
+   "dayRet": -12.05,
+   "prevClose": 21.58,
    "priceDate": "2026-08-24"
   },
   {
