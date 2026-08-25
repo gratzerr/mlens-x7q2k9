@@ -1,19 +1,74 @@
-{"ticker": "DCTH",
+{
+ "ticker": "DCTH",
  "news": [
-  {"date": "2026-08-14", "headline": "Delcath Systems Amends Bylaws to Designate Delaware Courts as Exclusive Forum", "source": "Investing.com / SEC 8-K", "url": "https://in.investing.com/news/stock-market-news/delcath-systems-updates-bylaws-to-designate-delaware-courts-as-exclusive-forum-93CH-5557550", "summary": "The board amended and restated Delcath's bylaws effective 2026-08-12, making Delaware's Court of Chancery the exclusive forum for internal corporate claims and U.S. federal courts the forum for Securities Act claims. It is a routine governance update for a Delaware-incorporated company, recommended by the Nominating and Corporate Governance Committee."},
-  {"date": "2026-08-12", "headline": "Delcath Hits Fresh 12-Month High Above $17 as Analysts Lift Targets After Q2 Beat", "source": "MarketBeat / Daily Political", "url": "https://www.dailypolitical.com/2026/08/14/delcath-systems-nasdaqdcth-sets-new-52-week-high-whats-next.html", "summary": "DCTH pushed to a new 52-week high (around $17.30-$17.40 in mid-to-late August) as the post-earnings rally extended, after BTIG raised its target to $21 from $17 on August 6 and H.C. Wainwright to $32 from $30 on August 7, both Buy. Short interest has also climbed into late July/August as bears pushed back against the rally."},
-  {"date": "2026-08-11", "headline": "Delcath Systems Presents at Canaccord Genuity 46th Annual Growth Conference in Boston", "source": "StockTitan / Business Wire", "url": "https://www.stocktitan.net/news/DCTH/delcath-systems-to-participate-at-the-canaccord-genuity-46th-annual-009zp3gicxvx.html", "summary": "Management presented to institutional investors in Boston five days after the Q2 beat, using the slot to reinforce the HEPZATO KIT commercial-ramp story and the center-activation roadmap toward roughly 37 active centers. Investor outreach at growth conferences has been a consistent part of the post-approval narrative build."},
-  {"date": "2026-08-06", "headline": "Q2 Call: mCRC Phase 2 Screening at 13 Centers, FDA Pre-IND Meetings Planned for Additional Indications", "source": "Seeking Alpha (Q2 2026 earnings call transcript)", "url": "https://seekingalpha.com/article/4932280-delcath-systems-inc-dcth-q2-2026-earnings-call-transcript", "summary": "On the Q2 call management said the company-sponsored Phase 2 trial of HEPZATO in metastatic colorectal cancer now has 13 centers actively screening (targeting roughly 26 sites by year-end, interim results anticipated late 2027), and that it plans pre-IND meetings with the FDA later in 2026 to discuss further liver-dominant indications beyond the mCRC and breast cancer programs already underway. Management also cited independent ESMO Breast Cancer 2026 data showing a 60% hepatic partial response rate with percutaneous hepatic perfusion in heavily pretreated liver-dominant metastatic breast cancer."},
-  {"date": "2026-08-06", "headline": "Delcath Reports Q2 2026: $29.1M Revenue Beats Estimates, FY Guidance Raised to $104M-$108M", "source": "Delcath Investor Relations / Business Wire", "url": "https://investors.delcath.com/news-releases/news-release-details/delcath-systems-reports-second-quarter-2026-results-and-business", "summary": "Total revenue rose to $29.1M from $24.2M a year earlier (HEPZATO KIT $27.1M, CHEMOSAT $2.0M) on roughly 30% HEPZATO volume growth, with gross margin expanding to 90% from 86%, net income of $2.7M and EPS of $0.07 versus a consensus loss of $0.09; two new centers were activated in the quarter, including MD Anderson and Mayo Clinic Scottsdale, bringing the active total to 31 toward a year-end target of 37. Delcath raised FY2026 revenue guidance to $104M-$108M and reiterated its expectation of positive adjusted EBITDA for the year, though management flagged that 340B pricing introduced in mid-2025 continues to hold revenue growth below volume growth; the stock jumped more than 20% on the print, its best day since May 2025."},
-  {"date": "2026-07-09", "headline": "First Patient Dosed in DELUMA Phase 2 of HEPZATO in Liver-Dominant Metastatic Breast Cancer", "source": "Business Wire", "url": "https://www.businesswire.com/news/home/20260709141093/en/Delcath-Systems-Announces-First-Patient-Dosed-in-Phase-2-Clinical-Trial-of-HEPZATO-in-Liver-Dominant-Metastatic-Breast-Cancer", "summary": "The first patient was dosed at the European Institute of Oncology in Milan in the roughly 90-patient randomized DELUMA trial (NCT06875128), testing HEPZATO plus standard of care in HER2-negative liver-dominant metastatic breast cancer. It is the company's key pipeline expansion beyond ocular melanoma into a far larger addressable indication."}
+  {
+   "date": "2026-08-14",
+   "headline": "Delcath amends bylaws to designate Delaware Chancery Court as exclusive forum",
+   "source": "SEC 8-K / Delcath Systems",
+   "url": "https://www.sec.gov/cgi-bin/browse-edgar?action=getcompany&CIK=0000872912&type=8-K",
+   "summary": "Delcath's board amended and restated the company bylaws, effective immediately, making the Delaware Court of Chancery the exclusive forum for internal corporate claims and federal district courts the exclusive forum for Securities Act claims. This is a standard governance/litigation-venue housekeeping change, not a business catalyst."
+  },
+  {
+   "date": "2026-08-12",
+   "headline": "DCTH shares hit new 12-month high above $17 after Q2 beat and target raises",
+   "source": "Daily Political / market data",
+   "url": "https://www.dailypolitical.com/2026/08/14/delcath-systems-nasdaqdcth-sets-new-52-week-high-whats-next.html",
+   "summary": "Delcath stock climbed to a fresh 52-week high (intraday around $17.4, 52-week range $8.12-$17.42) as momentum from the Q2 earnings beat and a wave of analyst price-target increases carried into the following week."
+  },
+  {
+   "date": "2026-08-11",
+   "headline": "Delcath presents at Canaccord Genuity 46th Annual Growth Conference",
+   "source": "Delcath Systems investor relations",
+   "url": "https://investors.delcath.com/news-events/events-and-presentations",
+   "summary": "Management participated in the Canaccord Genuity growth-stock conference in Boston, using the forum to reinforce the raised 2026 guidance and HEPZATO KIT commercial momentum communicated at Q2 earnings."
+  },
+  {
+   "date": "2026-08-07",
+   "headline": "H.C. Wainwright raises Delcath price target to $31-32, reiterates Buy",
+   "source": "Investing.com / TipRanks (The Fly)",
+   "url": "https://www.investing.com/news/analyst-ratings/delcath-stock-price-target-raised-to-29-at-hc-wainwright-93CH-4062865",
+   "summary": "Following the Q2 beat and raised guidance, H.C. Wainwright lifted its DCTH price target into the low-$30s while maintaining a Buy rating, one of several sell-side target hikes that week (BTIG to $21, Wall Street Zen upgrade to Buy)."
+  },
+  {
+   "date": "2026-08-06",
+   "headline": "Delcath reports Q2 2026 revenue of $29.1M, raises full-year guidance to $104-108M",
+   "source": "Delcath Systems / SEC 8-K",
+   "url": "https://investors.delcath.com/news-releases/news-release-details/delcath-systems-reports-second-quarter-2026-results-and-business",
+   "summary": "Total revenue rose 20% year-over-year to $29.1 million (HEPZATO KIT revenue $27.1M, up 21%), gross margin improved to 90%, and the company posted a $2.7M net income while raising 2026 revenue guidance to $104M-$108M on roughly 30% HEPZATO volume growth."
+  },
+  {
+   "date": "2026-08-06",
+   "headline": "Independent data at ESMO Breast Cancer 2026 show 60% hepatic response rate with PHP in metastatic breast cancer",
+   "source": "Delcath Systems / BioSpace",
+   "url": "https://www.biospace.com/press-releases/delcath-systems-announces-presentation-of-new-data-on-percutaneous-hepatic-perfusion-with-melphalan-in-liver-dominant-metastatic-breast-cancer-at-esmo-breast-cancer-2026",
+   "summary": "A retrospective analysis by independent European investigators, referenced in the Q2 update, showed a 60% hepatic partial response rate using percutaneous hepatic perfusion with melphalan in heavily pretreated liver-dominant metastatic breast cancer patients, supporting Delcath's multi-indication platform thesis beyond melanoma."
+  }
  ],
  "catalysts": [
-  {"when": "2026-11 (expected)", "label": "Q3 2026 earnings", "detail": "The next quarterly report is expected in early-to-mid November 2026 based on prior-year timing; no exact date has been announced yet. It is the first checkpoint on whether HEPZATO volume growth and center activations are tracking the raised full-year guidance.", "confirmed": false},
-  {"when": "2026-Q4", "label": "37 active HEPZATO treatment centers", "detail": "Delcath exited Q2 2026 with 31 active HEPZATO KIT centers, including newly activated MD Anderson and Mayo Clinic Scottsdale, and targets roughly 37 by year-end. Center count is the most direct driver of near-term revenue, so the pace of the final activations is the key operational metric to watch.", "confirmed": true},
-  {"when": "FY2026 (reported early 2027)", "label": "FY2026 revenue $104M-$108M and positive adjusted EBITDA", "detail": "Raised guidance implies at least 28% HEPZATO volume growth over 2025 with gross margin around 90%, though 340B pricing introduced in mid-2025 continues to cap revenue growth below volume growth. Management also guided to positive adjusted EBITDA for the full year, which would mark the transition to a self-funding commercial model.", "confirmed": true},
-  {"when": "2026-2027", "label": "mCRC Phase 2 site activation and enrollment", "detail": "The company-sponsored Phase 2 trial of HEPZATO in metastatic colorectal cancer had 13 centers actively screening as of the Q2 call, targeting roughly 26 sites activated by year-end 2026, with interim hepatic progression-free survival results anticipated in late 2027. Enrollment milestones and eventual data would open the largest liver-dominant indication in the pipeline.", "confirmed": true},
-  {"when": "2026 H2", "label": "FDA pre-IND meetings for additional liver-dominant indications", "detail": "Management said on the Q2 call it plans pre-IND meetings with the FDA later in 2026 to discuss further liver-dominant indications beyond the ongoing mCRC and breast cancer Phase 2 programs, each estimated at 6,000-10,000 U.S. patients annually in the third-line setting. Outcomes would signal which indication(s) the company pursues next for formal trials.", "confirmed": false},
-  {"when": "2027+", "label": "DELUMA breast cancer Phase 2 enrollment and data", "detail": "The roughly 90-patient randomized Phase 2 in HER2-negative liver-dominant metastatic breast cancer began dosing in July 2026 and is enrolling across US and EU sites. Full enrollment and first efficacy readouts are the next major pipeline catalysts, supported by independent ESMO retrospective data showing a 60% hepatic partial response rate.", "confirmed": false}
+  {
+   "when": "Q4 2026 (date TBD, historically early November)",
+   "label": "Q3 2026 earnings report",
+   "detail": "Next quarterly update will show whether the raised FY2026 guidance ($104M-$108M revenue) and center-activation pace (target ~37 active HEPZATO centers by year-end, up from 31 in Q2) are on track.",
+   "confirmed": false
+  },
+  {
+   "when": "H2 2026",
+   "label": "Additional HEPZATO treatment center activations",
+   "detail": "Company guided to roughly six more active U.S. centers coming online by year-end 2026, a direct volume/revenue driver.",
+   "confirmed": true
+  },
+  {
+   "when": "Late 2027",
+   "label": "Phase 2 mCRC (colorectal) trial primary endpoint (hPFS) readout",
+   "detail": "FDA-cleared randomized Phase 2 trial of HEPZATO plus chemo vs. chemo alone in liver-dominant metastatic colorectal cancer; hepatic progression-free survival data expected by end of 2027, with overall survival data to follow in 2028. Would be the first major pipeline expansion catalyst beyond melanoma/breast.",
+   "confirmed": true
+  },
+  {
+   "when": "2026 (ongoing)",
+   "label": "Continued conference/analyst circuit",
+   "detail": "Following the Canaccord Genuity appearance, Delcath is expected to keep presenting at investor conferences as it builds Street coverage; no confirmed additional 2026 date verified yet.",
+   "confirmed": false
+  }
  ],
- "pulse": "Delcath remains in the strongest stretch of its commercial story: Q2 2026 revenue of $29.1M beat estimates, gross margin hit 90%, EPS flipped to $0.07 against an expected loss, and full-year guidance was lifted to $104M-$108M with positive adjusted EBITDA expected, while two prestigious new centers (MD Anderson, Mayo Clinic Scottsdale) joined the network. The stock jumped over 20% on the August 6 print, pushed to fresh 52-week highs near $17.30-$17.40, and has held in that range through August 19-23 with no fresh company-specific catalysts since the routine mid-August bylaws filing, while sell-side targets from BTIG ($21) and H.C. Wainwright ($32) remain well above the current price even as short interest has climbed. The near-term story is pure execution -- getting from 31 to 37 active HEPZATO centers by year-end and offsetting the 340B pricing headwind -- while the DELUMA breast cancer Phase 2, the mCRC Phase 2 (targeting ~26 sites by year-end), and planned FDA pre-IND meetings for further indications carry the longer-dated optionality beyond ocular melanoma, with Q3 earnings in November the next major checkpoint."
+ "pulse": "Since the August 14 bylaws housekeeping filing, no material new company-specific news has surfaced through August 25 - the story remains anchored on the strong August 6 Q2 2026 beat (revenue +20% to $29.1M, guidance raised to $104-108M) and the subsequent run of analyst target hikes (H.C. Wainwright to ~$31-32, BTIG to $21, Wall Street Zen upgrade) that pushed DCTH to a new 52-week high near $17.4 in mid-August. Consensus is now a Strong/Moderate Buy with an average target in the low-to-mid $20s, implying meaningful upside from current levels around $17. Near-term catalysts are execution-driven (center activations toward ~37 by year-end) rather than binary, with the next major data event - the Phase 2 colorectal cancer readout - not expected until late 2027."
 }
