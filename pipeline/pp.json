@@ -1,8 +1,8 @@
 {
- "fileDate": "2026-08-25 13:25",
- "generated": "2026-08-25 13:34",
+ "fileDate": "2026-08-25 13:35",
+ "generated": "2026-08-25 13:45",
  "engine": "pp-exact (verified vs PP app 2026-07-11)",
- "totalSecuritiesEur": 2010767,
+ "totalSecuritiesEur": 2021026,
  "cashEur": -155862.25,
  "cashByAccount": [
   {
@@ -36,22 +36,22 @@
    "eur": 0.08
   }
  ],
- "totalEur": 1854905,
- "ttwrorSince2022": 367.15,
- "ttwrorYtd": 85.49,
- "ttwrorAnnualized": 39.34,
- "izf": 62.51,
+ "totalEur": 1865164,
+ "ttwrorSince2022": 369.74,
+ "ttwrorYtd": 86.51,
+ "ttwrorAnnualized": 39.48,
+ "izf": 62.79,
  "yearlyReturns": {
   "2022": 3.3,
   "2023": 11.8,
   "2024": 45.2,
   "2025": 50.2,
-  "2026": 85.5
+  "2026": 86.5
  },
  "realizedEur": 638956,
- "unrealizedEur": 519140,
+ "unrealizedEur": 529399,
  "realizedUsd": 789376,
- "unrealizedUsd": 614686,
+ "unrealizedUsd": 626653,
  "netContribEur": 693272,
  "netContribUsd": 769042,
  "earningsEur": 12772.29,
@@ -27199,9 +27199,25 @@
   },
   {
    "d": "2026-08-24",
-   "v": 2163561,
-   "e": 1854905,
-   "r": 3.67154,
+   "v": 2192477,
+   "e": 1879696,
+   "r": 3.733977,
+   "c": 769042,
+   "k": 693272,
+   "q": 789376,
+   "Q": 638956,
+   "g": 13769,
+   "G": 12772,
+   "f": 12076,
+   "F": 10544,
+   "t": 1907,
+   "T": 1717
+  },
+  {
+   "d": "2026-08-25",
+   "v": 2175527,
+   "e": 1865164,
+   "r": 3.697378,
    "c": 769042,
    "k": 693272,
    "q": 789376,
@@ -65079,15 +65095,15 @@
    "name": "RAPID MICRO BIOSYSTEMS INC-A"
   }
  ],
- "ppReferenceTtwror": 367.15,
+ "ppReferenceTtwror": 369.74,
  "ppReferenceDate": "2026-08-25",
- "ttwrorApproxSince2022": 367.15,
+ "ttwrorApproxSince2022": 369.74,
  "yearlyReturnsApprox": {
   "2022": 3.3,
   "2023": 11.8,
   "2024": 45.2,
   "2025": 50.2,
-  "2026": 85.5
+  "2026": 86.5
  },
  "holdings": [
   {
@@ -65101,18 +65117,18 @@
    "isin": "US6402683063",
    "ccy": "USD",
    "shares": 6500.0,
-   "price": 75.51999664,
-   "value": 490879.98,
-   "valueEur": 420850,
-   "valueUsd": 490880,
+   "price": 76.56999969,
+   "value": 497705.0,
+   "valueEur": 426702,
+   "valueUsd": 497705,
    "basisUsd": 456500,
    "basisEur": 391643,
    "realizedUsd": -53529,
    "avgCost": 70.2307,
-   "unrealRet": 7.5,
-   "dayRet": 2.03,
-   "prevClose": 74.02,
-   "priceDate": "2026-08-24"
+   "unrealRet": 9.0,
+   "dayRet": 3.91,
+   "prevClose": 73.69,
+   "priceDate": "2026-08-25"
   },
   {
    "account": "ALL",
@@ -65124,18 +65140,18 @@
    "isin": "NL0010696654",
    "ccy": "USD",
    "shares": 10000.0,
-   "price": 49.0,
-   "value": 490000.0,
-   "valueEur": 420096,
-   "valueUsd": 490000,
+   "price": 49.22999954,
+   "value": 492300.0,
+   "valueEur": 422068,
+   "valueUsd": 492300,
    "basisUsd": 91996,
    "basisEur": 79119,
    "realizedUsd": 11487,
    "avgCost": 9.1996,
-   "unrealRet": 432.6,
-   "dayRet": 1.3,
-   "prevClose": 48.37,
-   "priceDate": "2026-08-24"
+   "unrealRet": 435.1,
+   "dayRet": 3.73,
+   "prevClose": 47.46,
+   "priceDate": "2026-08-25"
   },
   {
    "account": "ALL",
@@ -65157,32 +65173,9 @@
    "realizedUsd": 0,
    "avgCost": 22.3996,
    "unrealRet": -15.3,
-   "dayRet": -12.05,
-   "prevClose": 21.58,
-   "priceDate": "2026-08-24"
-  },
-  {
-   "account": "ALL",
-   "ticker": "CLPT",
-   "name": "CLEARPOINT NEURO INC",
-   "byPort": {
-    "IBKR": 22000.0
-   },
-   "isin": "US18507C1036",
-   "ccy": "USD",
-   "shares": 22000.0,
-   "price": 15.4421997,
-   "value": 339728.39,
-   "valueEur": 291262,
-   "valueUsd": 339728,
-   "basisUsd": 230515,
-   "basisEur": 198900,
-   "realizedUsd": -60391,
-   "avgCost": 10.4779,
-   "unrealRet": 47.4,
-   "dayRet": 0.34,
-   "prevClose": 15.39,
-   "priceDate": "2026-08-24"
+   "dayRet": 0.0,
+   "prevClose": 18.98,
+   "priceDate": "2026-08-25"
   },
   {
    "account": "ALL",
@@ -65194,18 +65187,41 @@
    "isin": "US24661P8077",
    "ccy": "USD",
    "shares": 20000.0,
-   "price": 16.88999938,
-   "value": 337799.99,
-   "valueEur": 289609,
-   "valueUsd": 337800,
+   "price": 17.04000091,
+   "value": 340800.02,
+   "valueEur": 292181,
+   "valueUsd": 340800,
    "basisUsd": 193634,
    "basisEur": 168834,
    "realizedUsd": -16090,
    "avgCost": 9.6817,
-   "unrealRet": 74.5,
-   "dayRet": -1.46,
-   "prevClose": 17.14,
-   "priceDate": "2026-08-24"
+   "unrealRet": 76.0,
+   "dayRet": 1.73,
+   "prevClose": 16.75,
+   "priceDate": "2026-08-25"
+  },
+  {
+   "account": "ALL",
+   "ticker": "CLPT",
+   "name": "CLEARPOINT NEURO INC",
+   "byPort": {
+    "IBKR": 22000.0
+   },
+   "isin": "US18507C1036",
+   "ccy": "USD",
+   "shares": 22000.0,
+   "price": 15.43500041,
+   "value": 339570.01,
+   "valueEur": 291127,
+   "valueUsd": 339570,
+   "basisUsd": 230515,
+   "basisEur": 198900,
+   "realizedUsd": -60391,
+   "avgCost": 10.4779,
+   "unrealRet": 47.3,
+   "dayRet": 1.75,
+   "prevClose": 15.17,
+   "priceDate": "2026-08-25"
   },
   {
    "account": "ALL",
@@ -65226,9 +65242,9 @@
    "realizedUsd": 0,
    "avgCost": 5.6582,
    "unrealRet": 7.3,
-   "dayRet": -1.3,
-   "prevClose": 6.15,
-   "priceDate": "2026-08-24"
+   "dayRet": -0.0,
+   "prevClose": 6.07,
+   "priceDate": "2026-08-25"
   }
  ],
  "txmax": "2026-08-21"
