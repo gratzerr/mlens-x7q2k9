@@ -1,8 +1,8 @@
 {
- "fileDate": "2026-08-25 19:54",
- "generated": "2026-08-25 20:03",
+ "fileDate": "2026-08-25 20:05",
+ "generated": "2026-08-25 20:14",
  "engine": "pp-exact (verified vs PP app 2026-07-11)",
- "totalSecuritiesEur": 2114997,
+ "totalSecuritiesEur": 2109638,
  "cashEur": -155890.22,
  "cashByAccount": [
   {
@@ -36,22 +36,22 @@
    "eur": 0.08
   }
  ],
- "totalEur": 1959107,
- "ttwrorSince2022": 393.4,
- "ttwrorYtd": 95.91,
- "ttwrorAnnualized": 40.96,
- "izf": 66.06,
+ "totalEur": 1953748,
+ "ttwrorSince2022": 392.05,
+ "ttwrorYtd": 95.37,
+ "ttwrorAnnualized": 40.88,
+ "izf": 65.88,
  "yearlyReturns": {
   "2022": 3.3,
   "2023": 11.8,
   "2024": 45.2,
   "2025": 50.2,
-  "2026": 95.9
+  "2026": 95.4
  },
  "realizedEur": 638956,
- "unrealizedEur": 623370,
+ "unrealizedEur": 618011,
  "realizedUsd": 789376,
- "unrealizedUsd": 735838,
+ "unrealizedUsd": 729588,
  "netContribEur": 693272,
  "netContribUsd": 769042,
  "earningsEur": 12772.29,
@@ -27215,9 +27215,9 @@
   },
   {
    "d": "2026-08-25",
-   "v": 2284711,
-   "e": 1959107,
-   "r": 3.933972,
+   "v": 2278461,
+   "e": 1953748,
+   "r": 3.920475,
    "c": 769042,
    "k": 693272,
    "q": 789376,
@@ -65095,15 +65095,15 @@
    "name": "RAPID MICRO BIOSYSTEMS INC-A"
   }
  ],
- "ppReferenceTtwror": 393.4,
+ "ppReferenceTtwror": 392.05,
  "ppReferenceDate": "2026-08-25",
- "ttwrorApproxSince2022": 393.4,
+ "ttwrorApproxSince2022": 392.05,
  "yearlyReturnsApprox": {
   "2022": 3.3,
   "2023": 11.8,
   "2024": 45.2,
   "2025": 50.2,
-  "2026": 95.9
+  "2026": 95.4
  },
  "holdings": [
   {
@@ -65117,16 +65117,16 @@
    "isin": "",
    "ccy": "USD",
    "shares": 25000.0,
-   "price": 21.75,
-   "value": 543750.0,
-   "valueEur": 466258,
-   "valueUsd": 543750,
+   "price": 21.5,
+   "value": 537500.0,
+   "valueEur": 460899,
+   "valueUsd": 537500,
    "basisUsd": 559991,
    "basisEur": 482998,
    "realizedUsd": 0,
    "avgCost": 22.3996,
-   "unrealRet": -2.9,
-   "dayRet": 14.59,
+   "unrealRet": -4.0,
+   "dayRet": 13.28,
    "prevClose": 18.98,
    "priceDate": "2026-08-25"
   },
