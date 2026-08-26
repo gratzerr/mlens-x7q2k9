@@ -3,65 +3,72 @@
  "news": [
   {
    "date": "2026-08-19",
-   "headline": "NeurAxis Completes Stock Option-for-RSU Exchange, Discloses New Executive Grants",
-   "source": "8-K / StockTitan",
+   "headline": "Neuraxis swaps 1.3M options for RSUs, adds new executive/director grants",
+   "source": "SEC 8-K (via StockTitan)",
    "url": "https://www.stocktitan.net/sec-filings/NRXS/8-k-neuraxis-inc-reports-material-event-9c119c67ffc3.html",
-   "summary": "The previously approved option exchange became effective July 24, 2026, converting 1,319,394 outstanding stock options into RSUs 1-for-1 under the 2022 Omnibus Plan; on August 13 the company also granted new three-year vesting RSUs to CEO Brian Carrico, CFO Timothy Henrichs, and other executives."
+   "summary": "NeurAxis disclosed that its previously approved option-for-RSU exchange became effective, converting 1,319,394 options into RSUs for CEO Brian Carrico, CMO Adrian Miranda and CRO Thomas Carrico, and that the Compensation Committee separately granted new multi-year RSU awards to officers and one-time equity awards to independent directors."
   },
   {
    "date": "2026-08-14",
    "headline": "NRXS Stock Dips Post Q2 Earnings Despite Revenue Surge, Gross Margin Up",
-   "source": "Zacks / TradingView / GlobeAndMail",
-   "url": "https://www.theglobeandmail.com/investing/markets/stocks/NRXS-A/pressreleases/3856006/nrxs-stock-dips-post-q2-earnings-despite-revenue-surge-gross-margin-up/",
-   "summary": "Shares fell roughly 8-9% in the days after Q2 results even though revenue jumped 116% and gross margin expanded to 85.9% from 83.6%, as the $1.93M revenue print landed slightly below a thin two-analyst consensus of about $2M."
+   "source": "TradingView / Zacks",
+   "url": "https://www.tradingview.com/news/zacks:b8b963a22094b:0-nrxs-stock-dips-post-q2-earnings-despite-revenue-surge-gross-margin-up/",
+   "summary": "Shares fell roughly 7% after Q2 results as NeurAxis posted a wider-than-expected per-share loss ($0.19 vs. $0.16 forecast) even though revenue grew 116% and gross margin expanded to 85.9%."
   },
   {
    "date": "2026-08-11",
-   "headline": "NeurAxis Reports Record Second Quarter 2026 Financial Results, Revenue Up 116% Year Over Year",
-   "source": "GlobeNewswire",
+   "headline": "NeurAxis Reports Record Second Quarter 2026 Financial Results Driven by 116% Year Over Year Revenue Growth",
+   "source": "GlobeNewswire (company release)",
    "url": "https://www.globenewswire.com/news-release/2026/08/11/3342584/0/en/neuraxis-reports-record-second-quarter-2026-financial-results-driven-by-116-year-over-year-revenue-growth.html",
-   "summary": "Q2 2026 revenue reached $1.9M (up 115.7% YoY), IB-Stim unit deliveries grew 60% and average selling price rose 28% to $992/device, reflecting continued benefit from the Category I CPT code for PENFS that took effect January 1, 2026; H1 2026 revenue totaled $3.6M, up 98% YoY."
+   "summary": "NeurAxis reported Q2 2026 revenue of $1.9 million, up 116% year over year, its eighth straight quarter of double-digit growth, crediting the new Category I CPT code for PENFS effective January 2026 for expanding payer coverage."
   },
   {
    "date": "2026-08-04",
-   "headline": "NeurAxis Expands Payer Coverage with New Mid-Atlantic Policies",
-   "source": "GlobeNewswire",
+   "headline": "NeurAxis Expands Payer Coverage with New Policies",
+   "source": "GlobeNewswire (company release)",
    "url": "https://www.globenewswire.com/news-release/2026/08/04/3338132/0/en/NeurAxis-Expands-Payer-Coverage-with-New-Policies.html",
-   "summary": "NeurAxis announced additional medical policy coverage for PENFS/IB-Stim representing over 500,000 covered lives in the Mid-Atlantic region, part of its push toward comprehensive nationwide written payer coverage."
+   "summary": "NeurAxis announced additional medical policy coverage for PENFS representing over 500,000 covered lives, extending IB-Stim access for beneficiaries in the Mid-Atlantic region."
   },
   {
    "date": "2026-07-28",
-   "headline": "NeurAxis to Host Second Quarter 2026 Results and Business Update Call on August 11",
-   "source": "GlobeNewswire",
+   "headline": "NeurAxis to Host Second Quarter 2026 Results and Business Update Call on Tuesday, August 11, 2026",
+   "source": "GlobeNewswire (company release)",
    "url": "https://www.globenewswire.com/news-release/2026/07/28/3334108/0/en/neuraxis-to-host-second-quarter-2026-results-and-business-update-call-on-tuesday-august-11-2026.html",
-   "summary": "Company confirmed it would report Q2 2026 results before market open on August 11, 2026, with a management conference call at 9:00am ET the same day."
+   "summary": "NeurAxis announced it would report Q2 2026 results before market open on August 11, 2026, with a conference call at 9:00 a.m. ET to review results and provide a business update."
+  },
+  {
+   "date": "2026-07-09",
+   "headline": "NeurAxis Declares Q2 Stock Dividend on Series B Preferred Stock",
+   "source": "TipRanks (company announcement)",
+   "url": "https://www.tipranks.com/news/company-announcements/neuraxis-declares-q2-stock-dividend-on-series-b",
+   "summary": "NeurAxis's board declared its Q2 2026 Series B Preferred Stock dividend payable entirely in common shares (about 80,463 shares) rather than cash, continuing its equity-based capital management approach."
   }
  ],
  "catalysts": [
   {
-   "when": "~Nov 2026 (estimate)",
-   "label": "Q3 2026 earnings report",
-   "detail": "Next quarterly results and business update call; company has posted eight consecutive quarters of double-digit YoY revenue growth heading in.",
+   "when": "~November 2026",
+   "label": "Q3 2026 earnings",
+   "detail": "Next quarterly results and business-update call; exact date not yet announced.",
    "confirmed": false
   },
   {
-   "when": "Ongoing 2026",
-   "label": "Continued payer coverage expansion",
-   "detail": "NeurAxis is actively adding regional insurer medical policies for PENFS/IB-Stim (most recently Mid-Atlantic, >500K lives in August) as it works toward comprehensive nationwide written coverage.",
+   "when": "Ongoing",
+   "label": "Payer coverage expansion",
+   "detail": "Continued rollout of new medical policies covering PENFS/IB-Stim beyond the >500K covered lives added in the Mid-Atlantic in early August 2026.",
    "confirmed": true
   },
   {
-   "when": "2026 (ongoing)",
-   "label": "Category I CPT code ramp",
-   "detail": "Full-year benefit of the AMA Category I CPT code for PENFS (effective Jan 1, 2026) continuing to drive reimbursement, ASP gains, and gross margin expansion.",
+   "when": "Ongoing",
+   "label": "Category I CPT code reimbursement ramp",
+   "detail": "Continued benefit from the AMA Category I CPT code for PENFS (effective January 1, 2026) driving revenue and margin growth through 2026.",
    "confirmed": true
   },
   {
    "when": "Unspecified",
-   "label": "RED (Rectal Expulsion Device) commercialization progress",
-   "detail": "Company's second product line targeting rectal hypersensitivity/neuromuscular evaluation; watch for updates on adoption alongside IB-Stim in future earnings calls.",
+   "label": "RED device commercialization progress",
+   "detail": "Further commercialization updates on the FDA-cleared Rectal Expulsion Device (RED) for chronic constipation/pelvic floor dysfunction screening.",
    "confirmed": false
   }
  ],
- "pulse": "As of 2026-08-25, no NeurAxis-specific news has been confirmed beyond the August 19 option-for-RSU exchange 8-K and the post-Q2-earnings stock dip on August 14 - searches for the intervening week (Aug 20-25) turned up nothing new. Fundamentally the story remains intact: record Q2 revenue (+116% YoY) and margin expansion, though shares sold off on a narrow miss versus thin analyst consensus. Near-term watch items are continued payer-coverage additions and the next quarterly print, likely in November."
+ "pulse": "NeurAxis continues to post record top-line growth — Q2 2026 revenue rose 116% YoY to $1.9M with gross margin near 86% — driven by expanding payer coverage and the new Category I CPT code for PENFS, but the stock sold off after the August 11 print on a wider-than-expected per-share loss, and it remains down over the trailing month. Since the earnings release, company-specific activity has been limited to routine compensation actions (an option-for-RSU exchange and new executive/director RSU grants disclosed August 19), with no new business catalysts, filings, or analyst actions reported through August 26. The near-term story remains unchanged: watch continued payer-coverage wins and CPT-code-driven volume ramp into Q3 2026 earnings (expected around November)."
 }
