@@ -2,71 +2,71 @@
  "ticker": "QURE",
  "news": [
   {
+   "date": "2026-08-14",
+   "headline": "RTW Investments Reports 5.7% Passive Stake in uniQure",
+   "source": "SEC 13G / StockTitan",
+   "url": "https://www.stocktitan.net/sec-filings/QURE/schedule-13g-uni-qure-n-v-passive-investment-disclosure-5-dd4d86427d6d.html",
+   "summary": "RTW Investments and Roderick Wong disclosed beneficial ownership of roughly 3.94M ordinary shares (5.7%), after adding over 1.35M shares around uniQure's June 2026 public offering."
+  },
+  {
    "date": "2026-08-13",
    "headline": "uniQure Charts Accelerated Path With AMT-130",
    "source": "TipRanks",
    "url": "https://www.tipranks.com/news/company-announcements/uniqure-charts-accelerated-path-with-amt130",
-   "summary": "Recap piece confirming uniQure's alignment with FDA on using 3-year Phase I/II data as the primary basis for an accelerated-approval BLA, with filing still slated for Q3 2026. No new data or dates beyond what was already disclosed at the Q2 earnings update."
+   "summary": "Recap piece confirming uniQure's alignment with FDA on using 3-year Phase I/II data as the primary basis for an accelerated-approval BLA, with filing still slated for Q3 2026."
   },
   {
    "date": "2026-08-07",
    "headline": "uniQure (QURE) Q2 2026 Earnings Call Transcript",
    "source": "The Motley Fool",
    "url": "https://www.fool.com/earnings/call-transcripts/2026/08/07/uniqure-qure-q2-2026-earnings-call-transcript/",
-   "summary": "Management detailed the accelerated-approval strategy for AMT-130 and reiterated that clinical updates for the epilepsy and Fabry disease pipeline programs are now expected in the first half of 2027."
+   "summary": "Management detailed the accelerated-approval strategy for AMT-130 and reiterated that clinical updates for epilepsy and Fabry disease programs are expected H1 2027."
   },
   {
    "date": "2026-07-31",
-   "headline": "uniQure (QURE) Price Target Raised to $75.00 at Wells Fargo",
-   "source": "Wells Fargo (via Defense World/Investing.com)",
+   "headline": "uniQure Price Target Raised to $75 at Wells Fargo",
+   "source": "Wells Fargo",
    "url": "https://www.defenseworld.net/2026/07/31/uniqure-nasdaqqure-price-target-raised-to-75-00-at-wells-fargo-company.html",
-   "summary": "Wells Fargo raised its price target to $75 from $60 and maintained an Overweight rating, citing confidence in AMT-130's regulatory and commercial trajectory ahead of the September four-year data readout."
+   "summary": "Wells Fargo raised PT to $75, Overweight, citing confidence ahead of the September four-year data readout."
   },
   {
    "date": "2026-07-30",
    "headline": "Wolfe Research Upgrades uniQure to Outperform, $65 Price Target",
-   "source": "Wolfe Research (via Investing.com/Sahm Capital)",
+   "source": "Wolfe Research",
    "url": "https://www.investing.com/news/analyst-ratings/uniqure-stock-upgraded-by-wolfe-research-on-huntingtons-therapy-outlook-93CH-4821823",
-   "summary": "Wolfe Research upgraded QURE to Outperform with a $65 price target, pointing to an improved Huntington's therapy outlook following the FDA's accelerated-approval alignment."
+   "summary": "Wolfe upgraded QURE to Outperform with a $65 price target, on an improved Huntington's therapy outlook."
   },
   {
    "date": "2026-07-29",
    "headline": "uniQure Announces Second Quarter 2026 Financial Results and Provides Company Update",
-   "source": "GlobeNewswire/BioSpace",
+   "source": "GlobeNewswire",
    "url": "https://www.globenewswire.com/news-release/2026/07/29/3335112/0/en/uniqure-announces-second-quarter-2026-financial-results-and-provides-company-update.html",
-   "summary": "uniQure entered H2 2026 with over $810M in cash after a $259M capital raise, extending its runway into 2030, and reaffirmed plans to submit the AMT-130 BLA (US) and MAA (UK) in Q3 2026."
-  },
-  {
-   "date": "2026-07-16",
-   "headline": "JPMorgan Chase & Co. Reports 7.0% Passive Stake in uniQure",
-   "source": "SEC Schedule 13G / StockTitan",
-   "url": "https://www.stocktitan.net/sec-filings/QURE/schedule-13g-uni-qure-n-v-passive-investment-disclosure-5-d1a76ec62177.html",
-   "summary": "JPMorgan disclosed beneficial ownership of roughly 4.87 million uniQure shares (7.0% of the class) in a passive-investment Schedule 13G filing."
+   "summary": "uniQure entered H2 2026 with over $810M in cash, extending its runway into 2030, and reaffirmed plans to submit the AMT-130 BLA (US) and MAA (UK) in Q3 2026."
   }
  ],
  "catalysts": [
   {
    "when": "September 2026",
    "label": "AMT-130 four-year topline data (Huntington's disease)",
-   "detail": "Four-year safety/efficacy readout on the first two treatment cohorts (12 high-dose + 12 low-dose patients, plus 3 additional high-dose patients at 3 years), benchmarked against a natural-history external control cohort; widely flagged by Stifel, Wells Fargo and Wolfe as the next major stock catalyst.",
+   "detail": "Four-year safety/efficacy readout on all 24 patients across the first two cohorts (12 high-dose, 12 low-dose), benchmarked against an updated ~26,000-patient Enroll-HD external control cohort. Data cut June 30, 2026; results not yet released as of Aug 26, 2026.",
    "confirmed": true
   },
   {
    "when": "Q3 2026",
    "label": "AMT-130 BLA submission to FDA (accelerated approval)",
-   "detail": "uniQure and the FDA aligned that 3-year Phase I/II data can serve as the primary basis for a Biologics License Application under the accelerated approval pathway; company reaffirmed Q3 2026 filing timeline at Q2 earnings.",
+   "detail": "3-year Phase I/II data as primary basis for BLA under accelerated approval; FDA also requested agreement on a confirmatory study design before filing.",
    "confirmed": true
   },
   {
    "when": "Q3 2026",
    "label": "AMT-130 UK MHRA Marketing Authorization Application",
-   "detail": "Following a successful pre-submission meeting, uniQure plans to submit an MAA to the UK's MHRA in parallel with the US BLA.",
+   "detail": "Parallel MAA submission to MHRA following a successful pre-submission meeting.",
    "confirmed": true
   },
   {
    "when": "H1 2027",
    "label": "Epilepsy and Fabry disease program updates",
-   "detail": "Management guided to clinical data/updates for the AMT-191 (Fabry) and epilepsy gene-therapy programs in the first half of 2027.",
+   "detail": "Clinical data/updates for AMT-191 (Fabry) and AMT-260 (refractory mesial temporal lobe epilepsy) programs.",
    "confirmed": true
   },
   {
@@ -78,9 +78,9 @@
   {
    "when": "~November 2026 (estimated)",
    "label": "Q3 2026 earnings report",
-   "detail": "Next quarterly results and corporate update; exact date not yet announced by the company.",
+   "detail": "Next quarterly results and corporate update; exact date not yet announced.",
    "confirmed": false
   }
  ],
- "pulse": "uniQure remains in a holding pattern of high anticipation heading into its September 2026 AMT-130 four-year Huntington's data readout, with the stock (~$44-48 in mid-to-late August, off its 52-week high of $71.50) still reflecting Strong Buy consensus (~$65-71 average PT) after Wolfe's late-July upgrade and Wells Fargo's $75 target. The regulatory picture has been de-risked since June's FDA reversal clearing an accelerated-approval path, and the $259M July capital raise (cash to 2030) removed near-term financing overhang, leaving the September data and the planned Q3 2026 BLA/MAA filings as the key swing factors for the stock into year-end."
+ "pulse": "uniQure remains in a holding pattern of high anticipation heading into its AMT-130 four-year Huntington's data readout, still expected in September 2026 and not yet released as of Aug 26, 2026; shares have climbed into the low $50s (from roughly $40 in early August) as sell-side targets keep rising (Wells Fargo $75, Wolfe $65) and institutional holders like RTW Investments have added to positions. With FDA alignment on an accelerated-approval BLA path already secured and Q3 2026 BLA/MAA filings reaffirmed on the Q2 earnings call, the September data readout is now the single most important near-term catalyst for the stock."
 }
