@@ -6,68 +6,69 @@
    "headline": "ClearPoint Neuro shares extend rebound, trading up over 8% intraday",
    "source": "The Cerbat Gem",
    "url": "https://www.thecerbatgem.com/2026/08/25/clearpoint-neuro-nasdaqclpt-trading-up-8-3-heres-why.html",
-   "summary": "CLPT traded as high as $16.19 and continued a multi-week bounce off its post-Q2-earnings lows (shares fell to roughly $13 after the August 3 miss); the move tracks broader recovery/analyst sentiment rather than a single confirmed company-specific announcement, with consensus rating still split between Hold and Strong Buy and an average price target near $25-$29."
+   "summary": "Multi-week bounce off post-Q2-earnings lows continues; consensus split Hold/Strong Buy, average price target roughly $25-29 versus a stock still well below its 52-week high near $30."
+  },
+  {
+   "date": "2026-08-18",
+   "headline": "Conway Capital Management discloses new $1.66M stake in ClearPoint Neuro",
+   "source": "MarketBeat (13F filing)",
+   "url": "https://www.marketbeat.com/instant-alerts/filing-conway-capital-management-inc-makes-new-166-million-investment-in-clearpoint-neuro-inc-clpt-2026-08-18/",
+   "summary": "Q2 13F shows Conway Capital initiating a ~92,975-share position, part of a broader wave of institutional 13F filings reported in mid-August covering the quarter."
   },
   {
    "date": "2026-08-12",
-   "headline": "MAK Capital discloses 7.8% passive stake in ClearPoint Neuro via Schedule 13G/A",
-   "source": "SEC EDGAR / StockTitan",
+   "headline": "MAK Capital discloses 7.8% passive stake in ClearPoint Neuro",
+   "source": "SEC 13G/A",
    "url": "https://www.stocktitan.net/sec-filings/CLPT/schedule-13g-a-clear-point-neuro-inc-amended-passive-investment-discl-68dc7086232f.html",
-   "summary": "MAK Capital Fund LP and Michael A. Kaufman reported beneficial ownership of 2,375,861 shares (7.8%) as of June 30, 2026, up from a 6.3% stake disclosed in an earlier May 2026 filing, all held with shared (not sole) voting/dispositive power."
+   "summary": "MAK Capital reported 2,375,861 shares (7.8%), up from 6.3% in May, reinforcing it as one of the largest outside holders."
   },
   {
    "date": "2026-08-11",
-   "headline": "ClearPoint Neuro Q2 2026 earnings call: management frames revenue miss as service-timing issue, not lost demand",
-   "source": "Company earnings call transcript (Globe and Mail / Yahoo Finance)",
+   "headline": "ClearPoint Neuro Q2 2026 earnings call: revenue miss framed as service-timing issue",
+   "source": "Earnings call transcript",
    "url": "https://www.theglobeandmail.com/investing/markets/stocks/CLPT/pressreleases/3767651/clearpoint-neuro-clpt-q2-2026-earnings-call-transcript/",
-   "summary": "Management attributed the roughly $1.8M Q2 revenue shortfall to timing of clinical case and preclinical service delivery rather than weaker underlying demand, while flagging opex growth of 51% (largely IRRAS integration and team expansion) and cash declining to $29.4M."
+   "summary": "Management attributed the ~$1.8M Q2 shortfall to service timing rather than demand; opex +51%, cash $29.4M, and CAL facility now in hand as of July with first GLP statement of work signed."
   },
   {
    "date": "2026-08-03",
-   "headline": "ClearPoint Neuro reports Q2 2026 revenue of $10.9M, cuts full-year guidance to $48M-$52M",
-   "source": "Company press release (BioSpace / AccessWire)",
+   "headline": "ClearPoint Neuro reports Q2 2026 revenue of $10.9M, cuts full-year guidance to $48-52M",
+   "source": "BioSpace/AccessWire",
    "url": "https://www.biospace.com/press-releases/clearpoint-neuro-reports-second-quarter-2026-results",
-   "summary": "Q2 revenue grew 18% YoY to $10.9M (about $1.8M below the $12.73M consensus) as a 62% jump in neurosurgery navigation/therapy revenue was offset by a 15% decline in biologics/drug delivery revenue; shares fell over 15% after hours and full-year revenue guidance was cut to $48M-$52M."
+   "summary": "Q2 revenue +18% YoY but roughly $1.8M below consensus; shares fell over 15% after hours as guidance was cut from the prior $52-56M range."
   },
   {
    "date": "2026-08-03",
    "headline": "ClearPoint Neuro outlines five-pillar strategy targeting $500M in annual revenue",
    "source": "Investing.com",
    "url": "https://www.investing.com/news/company-news/clearpoint-neuro-aug-2026-slides-500m-revenue-target-amid-q2-miss-93CH-4832435",
-   "summary": "Alongside the Q2 miss, management presented a long-term roadmap built around cell-and-gene-therapy delivery to the brain, citing 175+ active global centers, 60+ active biopharma partners, and expectations of roughly 10 partner clinical data readouts over the next 18 months."
+   "summary": "Company cited 175+ active global centers, 60+ biopharma partners across 25+ active trials, and ~10 partner data readouts expected over the next 18 months."
   }
  ],
  "catalysts": [
   {
    "when": "Q3 2026",
    "label": "uniQure AMT-130 BLA submission",
-   "detail": "Partner uniQure plans to submit its Biologics License Application for AMT-130 (Huntington's disease gene therapy delivered via ClearPoint's navigation platform and SmartFlow cannula) in Q3 2026, following FDA agreement that 3-year Phase I/II data can support an accelerated-approval filing; a filing would be a strong read-through for ClearPoint's platform adoption.",
+   "detail": "Partner uniQure's planned BLA for AMT-130 (Huntington's disease), delivered via ClearPoint navigation and SmartFlow cannula; still on track per uniQure's Q3 2026 target as of this window with no confirmed submission yet.",
    "confirmed": true
   },
   {
-   "when": "2026-11-05",
+   "when": "~2026-11-05 (est.)",
    "label": "Q3 2026 earnings release",
-   "detail": "ClearPoint Neuro's next quarterly results (Q3 2026) are expected around November 5, 2026, which will show whether the Q2 revenue shortfall was indeed timing-related as management claimed.",
-   "confirmed": true
+   "detail": "Date not yet officially announced by the company; based on prior-year pattern (Q3 2025 was reported Nov 6, 2025). Will show whether the Q2 shortfall was timing-related.",
+   "confirmed": false
   },
   {
-   "when": "Next ~18 months (from Aug 2026)",
+   "when": "Next ~18 months",
    "label": "~10 partner clinical trial data readouts",
-   "detail": "Management guided to roughly 10 biopharma partner data readouts and 10-15 enrolling clinical trials using ClearPoint's delivery platform over the next 18 months, any of which could move the stock.",
+   "detail": "Biopharma partner readouts (e.g. AskBio, BlueRock, REGENXBIO, AviadoBio, PTC, Neurona, uniQure) using ClearPoint's delivery platform, out of 25+ active trials.",
    "confirmed": false
   },
   {
    "when": "1H 2027",
-   "label": "First GLP IND-enabling study at ClearPoint Advanced Laboratories (CAL)",
-   "detail": "ClearPoint's newly acquired Torrey Pines preclinical facility has signed its first statement of work for a GLP IND-enabling study, expected to be performed in the first half of 2027, an early proof point for the CAL revenue pillar.",
+   "label": "First GLP IND-enabling study at ClearPoint Advanced Laboratories",
+   "detail": "Torrey Pines preclinical facility's first statement of work, expected to complete in 1H 2027 and help return the Biologics and Drug Delivery segment to growth.",
    "confirmed": true
-  },
-  {
-   "when": "2027 (potential)",
-   "label": "First commercial cell/gene therapy approvals using ClearPoint delivery",
-   "detail": "Management believes renewed FDA openness toward rare-disease BLAs could enable the first commercial approvals of cell/gene therapies delivered via ClearPoint's system as early as 2027, which would open a capital-equipment and disposables revenue ramp.",
-   "confirmed": false
   }
  ],
- "pulse": "Since the August 11-12 disclosures (Q2 miss framed as service timing, MAK Capital's 7.8% passive stake), there has been no major new company-specific press release; CLPT has instead been mechanically recovering off its post-earnings low near $13, trading back up around $16-17 (up roughly 8% on August 25) without a single confirmed fresh catalyst behind the move. The dominant forward-looking story remains unchanged: cash is down to $29.4M after a 51% opex jump, full-year guidance was cut to $48-52M, and the bull case now rests on uniQure's planned Q3 2026 AMT-130 BLA filing and a wave of roughly 10 partner data readouts expected over the next 18 months, with the next hard checkpoint being Q3 2026 earnings around November 5."
+ "pulse": "Since the Aug 3 Q2 miss and guidance cut, no new company-authored press release has followed as of Aug 26 -- the only fresh developments are financing-flow signals (MAK Capital raising its stake to 7.8%, a small new Conway Capital 13F position) and a continued technical rebound in the shares off their post-earnings lows. The near-term story remains a wait for uniQure's Q3 2026 AMT-130 BLA filing as proof-of-platform-value, with ClearPoint's own Q3 earnings (expected early November, unconfirmed) the next hard data point on whether the Q2 shortfall was truly service-timing noise."
 }
