@@ -1,68 +1,18 @@
 {
  "ticker": "DCTH",
  "news": [
-  {
-   "date": "2026-08-12",
-   "headline": "Zacks Research Upgrades Delcath Systems to Strong-Buy",
-   "source": "MarketBeat",
-   "url": "https://www.marketbeat.com/instant-alerts/delcath-systems-nasdaqdcth-stock-rating-upgraded-by-zacks-research-2026-08-12/",
-   "summary": "Zacks Research upgraded DCTH from Hold to Strong-Buy following the Q2 beat and raised guidance. The upgrade came alongside the stock's push to fresh 52-week highs."
-  },
-  {
-   "date": "2026-08-12",
-   "headline": "Delcath Systems Sets New 52-Week High",
-   "source": "Daily Political / MarketBeat network",
-   "url": "https://www.dailypolitical.com/2026/08/14/delcath-systems-nasdaqdcth-sets-new-52-week-high-whats-next.html",
-   "summary": "DCTH shares traded as high as roughly $17.42, a new 52-week high, extending the post-earnings rally. The move followed the Q2 revenue beat and raised full-year guidance."
-  },
-  {
-   "date": "2026-08-11",
-   "headline": "Delcath Systems Presents at Canaccord Genuity 46th Annual Growth Conference",
-   "source": "BioSpace / Delcath Systems",
-   "url": "https://www.biospace.com/press-releases/delcath-systems-to-participate-at-the-canaccord-genuity-46th-annual-growth-conference",
-   "summary": "Delcath management presented a corporate update to investors in Boston, reiterating HEPZATO KIT commercial momentum and center-expansion plans."
-  },
-  {
-   "date": "2026-08-07",
-   "headline": "H.C. Wainwright Raises Delcath Price Target to $32 from $30",
-   "source": "Daily Political / MarketBeat network",
-   "url": "https://www.dailypolitical.com/2026/08/24/delcath-systems-inc-nasdaqdcth-given-consensus-rating-of-moderate-buy-by-brokerages.html",
-   "summary": "H.C. Wainwright reiterated its Buy rating and lifted its price target to $32, citing HEPZATO demand momentum; several other brokerages also raised targets after the Q2 print (BTIG to $21)."
-  },
-  {
-   "date": "2026-08-06",
-   "headline": "Delcath Systems Reports Second Quarter 2026 Results, Raises Full-Year Guidance",
-   "source": "Delcath Systems, Inc. (press release)",
-   "url": "https://investors.delcath.com/news-releases/news-release-details/delcath-systems-reports-second-quarter-2026-results-and-business",
-   "summary": "Delcath reported Q2 2026 revenue of $29.1 million, up 20% year-over-year (HEPZATO KIT revenue $27.1 million, up ~30% in volume), with 90% gross margin and net income of $2.7 million. Management raised full-year 2026 revenue guidance to $104-108 million and reiterated expectations for positive adjusted EBITDA for the year."
-  },
-  {
-   "date": "2026-08-06",
-   "headline": "New Data at ESMO Breast Cancer 2026 Show 60% Hepatic Response Rate with Percutaneous Hepatic Perfusion",
-   "source": "Delcath Systems, Inc. (press release)",
-   "url": "https://investors.delcath.com/news-releases/news-release-details/delcath-systems-announces-presentation-new-data-percutaneous",
-   "summary": "Independent investigators presented retrospective data at ESMO Breast Cancer 2026 showing a 60% hepatic partial response rate using melphalan percutaneous hepatic perfusion in heavily pretreated liver-dominant metastatic breast cancer patients, supporting the ongoing Phase 2 breast cancer program."
-  }
+  {"date": "2026-08-24", "headline": "Delcath Systems Given Consensus Rating of \"Moderate Buy\" by Brokerages", "source": "Daily Political", "url": "https://www.dailypolitical.com/2026/08/24/delcath-systems-inc-nasdaqdcth-given-consensus-rating-of-moderate-buy-by-brokerages.html", "summary": "A roundup of sell-side coverage shows Delcath holding a consensus \"Moderate Buy\" rating with an average 12-month price target around $21-24, reflecting broad but not unanimous analyst bullishness after the Q2 beat."},
+  {"date": "2026-08-12", "headline": "Delcath Systems Updates Bylaws to Designate Delaware Courts as Exclusive Forum", "source": "Investing.com (SEC filing wire)", "url": "https://www.investing.com/news/sec-filings/delcath-systems-updates-bylaws-to-designate-delaware-courts-as-exclusive-forum-93CH-4860630", "summary": "Delcath's board amended and restated the company's bylaws, effective immediately, to make the Delaware Court of Chancery (or federal district court for Delaware) the exclusive forum for internal corporate claims and U.S. federal courts the exclusive forum for Securities Act claims."},
+  {"date": "2026-08-12", "headline": "Zacks Research Upgrades Delcath Systems to Strong-Buy; Shares Hit New 52-Week High", "source": "Zacks / Daily Political", "url": "https://www.dailypolitical.com/2026/08/14/delcath-systems-nasdaqdcth-sets-new-52-week-high-whats-next.html", "summary": "Zacks moved Delcath from Hold to Strong-Buy and the stock touched a fresh 52-week high of about $17.42 intraday, extending the post-earnings rally."},
+  {"date": "2026-08-07", "headline": "H.C. Wainwright Raises Delcath Price Target to $32, Reiterates Buy", "source": "H.C. Wainwright (via MarketBeat/TipRanks wires)", "url": "https://www.tipranks.com/news/ratings/strong-growth-potential-for-delcath-systems-buy-rating-affirmed-with-raised-price-target", "summary": "H.C. Wainwright lifted its price target on Delcath to $32 from $30 following the Q2 beat and raised guidance, maintaining a Buy rating; BTIG similarly raised its target to $21 from $17 the same week."},
+  {"date": "2026-08-06", "headline": "Delcath Systems Reports Second Quarter 2026 Results, Raises Full-Year Guidance", "source": "Delcath Systems / BusinessWire", "url": "https://investors.delcath.com/news-releases/news-release-details/delcath-systems-reports-second-quarter-2026-results-and-business", "summary": "Q2 2026 total revenue rose to $29.1 million (+20% YoY) with HEPZATO KIT revenue of $27.1 million, 90% gross margin, and net income of $2.7 million; the company raised FY2026 guidance to $104-108 million with positive adjusted EBITDA and $95.9 million in cash with no debt."},
+  {"date": "2026-08-06", "headline": "Independent Data at ESMO Breast Cancer 2026 Shows 60% Hepatic Response Rate with HEPZATO/PHP", "source": "Delcath Systems (ESMO Breast Cancer 2026 presentation)", "url": "https://investors.delcath.com/news-releases/news-release-details/delcath-systems-reports-second-quarter-2026-results-and-business", "summary": "Investigator-presented retrospective data in heavily pretreated, liver-dominant metastatic breast cancer patients showed a 60% hepatic partial response rate using percutaneous hepatic perfusion, supporting the ongoing Phase 2 breast cancer trial now dosing patients in Milan."}
  ],
  "catalysts": [
-  {
-   "when": "~Nov 2026",
-   "label": "Q3 2026 earnings report",
-   "detail": "Delcath's next scheduled quarterly results release; date not yet formally announced.",
-   "confirmed": false
-  },
-  {
-   "when": "H2 2026",
-   "label": "Additional HEPZATO treatment center activations",
-   "detail": "Company plans to continue expanding its network of active HEPZATO KIT treatment centers (31+ as of Q2 2026) to support raised FY2026 volume guidance.",
-   "confirmed": true
-  },
-  {
-   "when": "Late 2027",
-   "label": "Phase 2 mCRC hepatic-PFS readout",
-   "detail": "Hepatic progression-free survival data expected from the Phase 2 trial of HEPZATO in liver-dominant metastatic colorectal cancer, combined with standard of care.",
-   "confirmed": false
-  }
+  {"when": "~Nov 2026", "label": "Q3 2026 earnings", "detail": "Next quarterly results and updated guidance/treatment-center count; exact date not yet announced.", "confirmed": false},
+  {"when": "H2 2026", "label": "Additional HEPZATO treatment center activations", "detail": "Company targets roughly 6 more center activations to reach ~37 active centers by year-end 2026 (40 centers now guided for Q1 2027).", "confirmed": true},
+  {"when": "Mid-2028", "label": "Phase 2 mCRC hepatic-PFS readout", "detail": "Primary endpoint (hepatic progression-free survival) for the ~90-patient global Phase 2 liver-dominant metastatic colorectal cancer trial; overall survival data expected late 2028 (timeline pushed out from prior 'late 2027' estimate).", "confirmed": false},
+  {"when": "Ongoing 2026-2027", "label": "Phase 2 metastatic breast cancer trial enrollment/data", "detail": "Global Phase 2 trial of HEPZATO plus standard of care in liver-dominant metastatic breast cancer is actively screening across 6 sites with first patient dosed in Milan (July 2026); interim signals could follow further ESMO/ASCO-style disclosures.", "confirmed": true}
  ],
- "pulse": "Delcath continues to execute on strong commercial momentum for HEPZATO KIT, with Q2 2026 revenue up 20% year-over-year, raised FY2026 guidance to $104-108 million, and shares hitting fresh 52-week highs above $17 in mid-August on a wave of analyst price-target increases (H.C. Wainwright to $32, others following). No major new catalysts or setbacks have emerged since the mid-August highs; the stock is consolidating gains from the Q2 beat and ESMO breast cancer data while the market awaits further center activations and the next quarterly print (~November)."
+ "pulse": "Delcath's commercial momentum from the Q2 2026 beat (revenue +20% YoY, raised FY26 guidance to $104-108M, $95.9M cash, no debt) continued to drive the stock to fresh 52-week highs (~$17.40) and further analyst price-target increases (H.C. Wainwright to $32, BTIG to $21) through mid-August. Since then, news flow has thinned to housekeeping (a Delaware exclusive-forum bylaws amendment) and a consensus-rating roundup confirming a 'Moderate Buy' stance, with no major new catalysts disclosed between August 13-27. The near-term story remains steady HEPZATO volume/center-activation growth, with the next hard catalyst being Q3 2026 earnings likely in November and pipeline readouts (breast cancer, colorectal cancer) pushed out to 2028."
 }
