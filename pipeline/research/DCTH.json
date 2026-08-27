@@ -2,18 +2,18 @@
  "ticker": "DCTH",
  "news": [
   {
-   "date": "2026-08-12",
-   "headline": "Zacks Research Upgrades Delcath Systems to Strong-Buy",
-   "source": "MarketBeat",
-   "url": "https://www.marketbeat.com/instant-alerts/delcath-systems-nasdaqdcth-stock-rating-upgraded-by-zacks-research-2026-08-12/",
-   "summary": "Zacks Research upgraded DCTH from Hold to Strong-Buy following the Q2 beat and raised guidance. The upgrade came alongside the stock's push to fresh 52-week highs."
+   "date": "2026-08-24",
+   "headline": "Delcath Systems, Inc. (NASDAQ:DCTH) Given Consensus Rating of \"Moderate Buy\" by Brokerages",
+   "source": "Daily Political / MarketBeat network",
+   "url": "https://www.dailypolitical.com/2026/08/24/delcath-systems-inc-nasdaqdcth-given-consensus-rating-of-moderate-buy-by-brokerages.html",
+   "summary": "Seven brokerages covering Delcath now carry an average \"Moderate Buy\" rating with an average price target of about $23.17, roughly double the recent share price. Recent moves include BTIG raising its target to $21 from $17 and Wall Street Zen upgrading the stock from Hold to Buy."
   },
   {
    "date": "2026-08-12",
-   "headline": "Delcath Systems Sets New 52-Week High",
-   "source": "Daily Political / MarketBeat network",
-   "url": "https://www.dailypolitical.com/2026/08/14/delcath-systems-nasdaqdcth-sets-new-52-week-high-whats-next.html",
-   "summary": "DCTH shares traded as high as roughly $17.42, a new 52-week high, extending the post-earnings rally. The move followed the Q2 revenue beat and raised full-year guidance."
+   "headline": "Delcath Systems Hits New 52-Week High as Zacks Upgrades Stock to Strong-Buy",
+   "source": "MarketBeat / Daily Political network",
+   "url": "https://www.marketbeat.com/instant-alerts/delcath-systems-nasdaqdcth-stock-rating-upgraded-by-zacks-research-2026-08-12/",
+   "summary": "Zacks Research upgraded DCTH from Hold to Strong-Buy following the Q2 beat and raised guidance, and shares traded as high as roughly $17.42, a new 52-week high. The move extended the post-earnings rally that began after the August 6 results."
   },
   {
    "date": "2026-08-11",
@@ -27,14 +27,14 @@
    "headline": "H.C. Wainwright Raises Delcath Price Target to $32 from $30",
    "source": "Daily Political / MarketBeat network",
    "url": "https://www.dailypolitical.com/2026/08/24/delcath-systems-inc-nasdaqdcth-given-consensus-rating-of-moderate-buy-by-brokerages.html",
-   "summary": "H.C. Wainwright reiterated its Buy rating and lifted its price target to $32, citing HEPZATO demand momentum; several other brokerages also raised targets after the Q2 print (BTIG to $21)."
+   "summary": "H.C. Wainwright reiterated its Buy rating and lifted its price target to $32, citing HEPZATO demand momentum; several other brokerages also raised targets after the Q2 print."
   },
   {
    "date": "2026-08-06",
    "headline": "Delcath Systems Reports Second Quarter 2026 Results, Raises Full-Year Guidance",
    "source": "Delcath Systems, Inc. (press release)",
    "url": "https://investors.delcath.com/news-releases/news-release-details/delcath-systems-reports-second-quarter-2026-results-and-business",
-   "summary": "Delcath reported Q2 2026 revenue of $29.1 million, up 20% year-over-year (HEPZATO KIT revenue $27.1 million, up ~30% in volume), with 90% gross margin and net income of $2.7 million. Management raised full-year 2026 revenue guidance to $104-108 million and reiterated expectations for positive adjusted EBITDA for the year."
+   "summary": "Delcath reported Q2 2026 revenue of $29.1 million, up 20% year-over-year (HEPZATO KIT revenue $27.1 million, up ~30% in volume), with 90% gross margin and net income of $2.7 million. Management raised full-year 2026 revenue guidance to $104-108 million and said it plans to reach 37 active HEPZATO treatment centers by year-end, up from 31."
   },
   {
    "date": "2026-08-06",
@@ -54,15 +54,15 @@
   {
    "when": "H2 2026",
    "label": "Additional HEPZATO treatment center activations",
-   "detail": "Company plans to continue expanding its network of active HEPZATO KIT treatment centers (31+ as of Q2 2026) to support raised FY2026 volume guidance.",
+   "detail": "Company plans to activate roughly six more HEPZATO KIT treatment centers by year-end 2026, reaching about 37 active centers (up from 31 as of Q2 2026), to support raised FY2026 volume guidance.",
    "confirmed": true
   },
   {
-   "when": "Late 2027",
+   "when": "Mid-2028",
    "label": "Phase 2 mCRC hepatic-PFS readout",
-   "detail": "Hepatic progression-free survival data expected from the Phase 2 trial of HEPZATO in liver-dominant metastatic colorectal cancer, combined with standard of care.",
+   "detail": "Hepatic progression-free survival data expected from the Phase 2 trial of HEPZATO in liver-dominant metastatic colorectal cancer, combined with standard of care; overall survival data expected later in 2028.",
    "confirmed": false
   }
  ],
- "pulse": "Delcath continues to execute on strong commercial momentum for HEPZATO KIT, with Q2 2026 revenue up 20% year-over-year, raised FY2026 guidance to $104-108 million, and shares hitting fresh 52-week highs above $17 in mid-August on a wave of analyst price-target increases (H.C. Wainwright to $32, others following). No major new catalysts or setbacks have emerged since the mid-August highs; the stock is consolidating gains from the Q2 beat and ESMO breast cancer data while the market awaits further center activations and the next quarterly print (~November)."
+ "pulse": "Delcath continues to execute on strong commercial momentum for HEPZATO KIT, with Q2 2026 revenue up 20% year-over-year, raised FY2026 guidance to $104-108 million, and plans to expand to 37 active treatment centers by year-end. Shares hit fresh 52-week highs above $17 in mid-August on a wave of analyst upgrades and price-target increases (Zacks to Strong-Buy, H.C. Wainwright to $32, BTIG to $21), and as of late August the stock carries a consensus \"Moderate Buy\" rating with an average target near $23. No major new catalysts or setbacks have emerged since the mid-August highs; the stock is consolidating gains from the Q2 beat and ESMO breast cancer data while the market awaits further center activations and the next quarterly print (~November)."
 }

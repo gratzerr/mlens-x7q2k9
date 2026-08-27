@@ -37,11 +37,11 @@
    "summary": "uniQure reported Q2 revenue of $5.8 million and $810.3 million in cash (runway into 2030) after its June $259 million raise, and confirmed that written FDA meeting minutes received in July support an AMT-130 accelerated-approval BLA filing in Q3 2026, with four-year topline data due in September."
   },
   {
-   "date": "2026-07-25",
-   "headline": "Senvest Management LLC Buys 22,300 Shares of uniQure N.V. $QURE",
-   "source": "Daily Political",
-   "url": "https://www.dailypolitical.com/2026/07/25/senvest-management-llc-buys-22300-shares-of-uniqure-n-v-qure.html",
-   "summary": "Hedge fund Senvest Management increased its uniQure stake by 44.6% in a recent quarter to 72,300 shares, a minor but illustrative sign of continued institutional accumulation."
+   "date": "2026-07-29",
+   "headline": "Wolfe Research Upgrades uniQure to Outperform, Announces $65 Price Target",
+   "source": "The Fly / GuruFocus",
+   "url": "https://www.tipranks.com/news/the-fly/wolfe-upgrades-uniqure-to-outperform-sees-clear-path-to-approval-for-amt-130-thefly-news",
+   "summary": "Wolfe Research analyst Rudy Li upgraded uniQure to Outperform from Peer Perform, arguing the market underappreciates a roughly 70% chance of AMT-130 approval and estimating up to $2 billion in peak U.S. sales for the Huntington's gene therapy."
   }
  ],
  "catalysts": [
@@ -76,11 +76,17 @@
    "confirmed": true
   },
   {
+   "when": "Q4 2026 / early 2027",
+   "label": "Possible FDA Advisory Committee (AdCom) meeting for AMT-130",
+   "detail": "uniQure management said on the Q2 2026 call that an FDA advisory committee review is likely for AMT-130 given it would be the first disease-modifying Huntington's therapy, though the FDA had not formally requested one as of early August 2026; if it occurs it would follow the BLA filing.",
+   "confirmed": false
+  },
+  {
    "when": "H1 2027",
    "label": "Epilepsy (AMT-260) and Fabry disease (AMT-191) program updates",
    "detail": "uniQure plans further clinical data updates for its AMT-260 epilepsy and AMT-191 Fabry disease gene therapy programs.",
    "confirmed": true
   }
  ],
- "pulse": "uniQure shares have rebounded to roughly $51 (Aug 25, 2026) from a brief early-August dip near $44, as the stock rebuilds momentum ahead of two major near-term catalysts: four-year AMT-130 topline data due in September and a planned Q3 2026 BLA filing for accelerated approval in Huntington's disease, now that the FDA has confirmed in writing that three-year data can support the application. Q2 2026 results (July 29) showed a strengthened balance sheet — $810.3 million in cash providing runway into 2030 after June's $259 million raise — and sell-side reaction has been mixed but broadly bullish, with Wells Fargo raising its target to $75 even as Barclays trimmed to $60; consensus sits around $65-71 with a Strong Buy/Moderate Buy tilt. The key swing factor now is finalizing the confirmatory post-approval study design with the FDA, which must be resolved before the BLA can actually be submitted."
+ "pulse": "uniQure shares have rebounded to roughly $51 (Aug 25, 2026) after a sharp swing between an early-August dip near $44 and a Wall Street Zen sell-to-hold whipsaw, as the stock rebuilds momentum heading into two major near-term catalysts: four-year AMT-130 topline data due in September and a planned Q3 2026 BLA filing for accelerated approval in Huntington's disease, now that the FDA has confirmed in writing that three-year data can support the application. Q2 2026 results (July 29) showed a strengthened balance sheet - $810.3 million in cash providing runway into 2030 after June's $259 million raise - and sell-side sentiment has turned more bullish, with Wolfe Research initiating at Outperform and Wells Fargo raising its target to $75, even as Barclays trimmed to $60; consensus sits around $65 with a Strong Buy/Moderate Buy tilt. The key swing factor now is finalizing the confirmatory post-approval study design with the FDA - and the possibility of an advisory committee review - before the BLA can actually be submitted."
 }

@@ -64,11 +64,17 @@
    "confirmed": true
   },
   {
+   "when": "Ongoing",
+   "label": "Veterans Affairs FSS contract ramp",
+   "detail": "Early-stage adoption of IB-Stim under the VA Federal Supply Schedule contract (effective December 2025), which management has said is tracking ahead of initial internal expectations but is not yet reflected in analyst models.",
+   "confirmed": true
+  },
+  {
    "when": "Unspecified",
    "label": "RED device commercialization progress",
    "detail": "Further commercialization updates on the FDA-cleared Rectal Expulsion Device (RED) for chronic constipation/pelvic floor dysfunction screening.",
    "confirmed": false
   }
  ],
- "pulse": "NeurAxis continues to post record top-line growth — Q2 2026 revenue rose 116% YoY to $1.9M with gross margin near 86% — driven by expanding payer coverage and the new Category I CPT code for PENFS, but the stock sold off after the August 11 print on a wider-than-expected per-share loss, and it remains down over the trailing month. Since the earnings release, company-specific activity has been limited to routine compensation actions (an option-for-RSU exchange and new executive/director RSU grants disclosed August 19), with no new business catalysts, filings, or analyst actions reported through August 26. The near-term story remains unchanged: watch continued payer-coverage wins and CPT-code-driven volume ramp into Q3 2026 earnings (expected around November)."
+ "pulse": "NeurAxis continues to post record top-line growth — Q2 2026 revenue rose 116% YoY to $1.9M with gross margin near 86% — driven by expanding payer coverage and the new Category I CPT code for PENFS, but the stock sold off after the August 11 print on a wider-than-expected per-share loss and traded around $6.90s in the following weeks. Since the earnings release, company-specific activity has been limited to routine compensation actions (an option-for-RSU exchange and new executive/director RSU grants disclosed August 19, with related insider Form 4 filings through August 24), with no new business catalysts, filings, or analyst updates reported through August 27. The two analysts covering the stock still carry Buy/Strong Buy ratings with price targets around $11-13, and the near-term story remains unchanged: watch continued payer-coverage wins, VA contract ramp, and CPT-code-driven volume growth into Q3 2026 earnings (expected around November)."
 }
