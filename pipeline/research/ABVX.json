@@ -59,15 +59,15 @@
       "confirmed": true
     },
     {
-      "when": "2026-09 (mid/late)",
-      "label": "Euronext Paris annual index review - possible CAC 40 / CAC Next 20 promotion",
-      "detail": "The Euronext index Scientific Council runs its annual review each September; the 2025 edition (decision September 11, effective September 19) moved Abivax into the CAC Mid 60 and SBF 120. With a market capitalisation now around EUR 8.5bn, Abivax is a plausible candidate for a step up into the larger Paris indices, which would force passive buying. Nothing has been announced and promotion is not assured.",
+      "when": "2026-09 (annual review, decision ~Sept 11)",
+      "label": "Euronext Paris annual index review - possible CAC 40 promotion",
+      "detail": "Abivax was already promoted one step further at Euronext's June 2026 quarterly review, joining the CAC Next 20 and CAC Large 60 (together with Ipsen and Soitec) effective after close on June 19, 2026 - so the earlier 'possible CAC Mid 60/SBF 120' catalyst has already played out. The next test is Euronext's annual index review each September (the 2025 edition was decided September 11); with a market cap now above EUR 11bn, Abivax is a plausible, though unconfirmed, candidate for a further step up toward the CAC 40 itself, which would force passive buying.",
       "confirmed": false
     },
     {
-      "when": "2026-Q4 (Oct)",
+      "when": "2026-10-17 to 2026-10-20 (UEG Week, Barcelona)",
       "label": "Full ABTECT maintenance dataset at a major gastroenterology congress",
-      "detail": "Abivax presented its ABTECT induction late-breaker at UEG Week in October 2025 and has a consistent pattern of taking full datasets to autumn congresses. A detailed public presentation of the Week-44 maintenance efficacy and, above all, the complete malignancy/safety database would be the cleanest way to fully retire the June cancer-signal overhang. Neither a venue nor an abstract acceptance has been announced yet.",
+      "detail": "UEG Week 2026 runs October 17-20 in Barcelona. Abivax presented its ABTECT induction late-breaker at UEG Week in October 2025 and has a consistent pattern of taking full datasets to autumn congresses. A detailed public presentation of the Week-44 maintenance efficacy and, above all, the complete malignancy/safety database would be the cleanest way to fully retire the June cancer-signal overhang. No abstract acceptance specific to this data has been announced yet.",
       "confirmed": false
     },
     {
@@ -95,5 +95,5 @@
       "confirmed": false
     }
   ],
-  "pulse": "Abivax trades at $113.51 per ADS on August 31, 2026 (market cap about $10.6bn, 52-week range $69.81-$148.83), having drifted back roughly 7% from its mid-August level in a news vacuum - the company has issued no press release since the July 30 pre-NDA announcement. Fundamentally the story is de-risked and now about execution: ABTECT induction plus Week-44 maintenance data are strong (about 51% remission vs 10% placebo, 37.2% of induction non-responders converted and 45.5% of relapsers recaptured on 50 mg), the Part 2 safety database shows malignancy rates in line with UC background rates, FDA alignment on the NDA is locked in for a late-Q4 2026 filing, and the $920m raise funds a solo U.S. launch into Q4 2029 with a senior commercial team already hired. Sell-side consensus sits near $166 with Morgan Stanley at $180; for the March-2027 $120 call the position is now slightly out of the money and hinges on the September 21 H1 report, a likely autumn congress presentation of the full safety dataset, the NDA landing on time, and whether takeover speculation re-ignites before expiry."
+  "pulse": "Abivax remains in a genuine news vacuum at the end of August 2026 - the company has issued no press release since the July 30 pre-NDA FDA alignment announcement, and the ADS has traded in a roughly $115-$130 range through the second half of August (market cap around $11bn) after the July equity raise and index promotion into the CAC Next 20/CAC Large 60. Fundamentally the story is de-risked and now about execution: ABTECT induction plus Week-44 maintenance data are strong (about 51% remission vs 10% placebo, 37.2% of induction non-responders converted and 45.5% of relapsers recaptured on 50 mg), an August HCPLive review confirmed no dose-dependent malignancy signal, FDA alignment on the NDA is locked in for a late-Q4 2026 filing, and the $920m raise funds a solo U.S. launch into Q4 2029 with a senior commercial team already hired (crossover holders TCG and Invus both held through the raise). Sell-side consensus sits in the $155-$166 area with Morgan Stanley at $180; for the March-2027 $120 call the near-term catalysts are the September 21 H1 report, a possible autumn Euronext index step-up, an expected full safety-dataset presentation at UEG Week (October 17-20, Barcelona), and the NDA landing on time."
 }
