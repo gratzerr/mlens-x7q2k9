@@ -1,8 +1,8 @@
 {
- "fileDate": "2026-09-02 04:05",
- "generated": "2026-09-02 04:14",
+ "fileDate": "2026-09-02 04:16",
+ "generated": "2026-09-02 04:26",
  "engine": "pp-exact (verified vs PP app 2026-07-11)",
- "totalSecuritiesEur": 1800151,
+ "totalSecuritiesEur": 1775561,
  "cashEur": -17700.87,
  "cashByAccount": [
   {
@@ -30,22 +30,22 @@
    "eur": 828.99
   }
  ],
- "totalEur": 1782450,
- "ttwrorSince2022": 348.91,
- "ttwrorYtd": 78.24,
- "ttwrorAnnualized": 37.94,
- "izf": 59.19,
+ "totalEur": 1757860,
+ "ttwrorSince2022": 342.71,
+ "ttwrorYtd": 75.78,
+ "ttwrorAnnualized": 37.53,
+ "izf": 58.28,
  "yearlyReturns": {
   "2022": 3.3,
   "2023": 11.8,
   "2024": 45.2,
   "2025": 50.2,
-  "2026": 78.2
+  "2026": 75.8
  },
  "realizedEur": 748159,
- "unrealizedEur": 337975,
+ "unrealizedEur": 313385,
  "realizedUsd": 919459,
- "unrealizedUsd": 387054,
+ "unrealizedUsd": 358554,
  "netContribEur": 693272,
  "netContribUsd": 769042,
  "earningsEur": 12772.29,
@@ -27257,9 +27257,9 @@
   },
   {
    "d": "2026-08-28",
-   "v": 2102723,
-   "e": 1805998,
-   "r": 3.548369,
+   "v": 2117948,
+   "e": 1819074,
+   "r": 3.581302,
    "c": 769042,
    "k": 693272,
    "q": 919459,
@@ -27273,9 +27273,9 @@
   },
   {
    "d": "2026-08-29",
-   "v": 2102723,
-   "e": 1805998,
-   "r": 3.548369,
+   "v": 2117948,
+   "e": 1819074,
+   "r": 3.581302,
    "c": 769042,
    "k": 693272,
    "q": 919459,
@@ -27289,9 +27289,9 @@
   },
   {
    "d": "2026-08-30",
-   "v": 2102723,
-   "e": 1805998,
-   "r": 3.548369,
+   "v": 2117948,
+   "e": 1819074,
+   "r": 3.581302,
    "c": 769042,
    "k": 693272,
    "q": 919459,
@@ -27321,9 +27321,9 @@
   },
   {
    "d": "2026-09-01",
-   "v": 2065860,
-   "e": 1782450,
-   "r": 3.489065,
+   "v": 2037360,
+   "e": 1757860,
+   "r": 3.427135,
    "c": 769042,
    "k": 693272,
    "q": 919459,
@@ -65237,41 +65237,17 @@
    "name": "RAPID MICRO BIOSYSTEMS INC-A"
   }
  ],
- "ppReferenceTtwror": 348.91,
+ "ppReferenceTtwror": 342.71,
  "ppReferenceDate": "2026-09-02",
- "ttwrorApproxSince2022": 348.91,
+ "ttwrorApproxSince2022": 342.71,
  "yearlyReturnsApprox": {
   "2022": 3.3,
   "2023": 11.8,
   "2024": 45.2,
   "2025": 50.2,
-  "2026": 78.2
+  "2026": 75.8
  },
  "holdings": [
-  {
-   "account": "ALL",
-   "ticker": "ABVX270319C00120000",
-   "name": "ABVX 19MAR27 120 C",
-   "byPort": {
-    "IBKR": 20000.0,
-    "SQ": 10000.0
-   },
-   "isin": "",
-   "ccy": "USD",
-   "shares": 30000.0,
-   "price": 17.95,
-   "value": 538500.0,
-   "valueEur": 464625,
-   "valueUsd": 538500,
-   "basisUsd": 649942,
-   "basisEur": 560256,
-   "realizedUsd": 0,
-   "avgCost": 21.6647,
-   "unrealRet": -17.1,
-   "dayRet": -0.28,
-   "prevClose": 18.0,
-   "priceDate": "2026-09-01"
-  },
   {
    "account": "ALL",
    "ticker": "NKTR",
@@ -65294,6 +65270,30 @@
    "unrealRet": 1.8,
    "dayRet": 0.52,
    "prevClose": 71.38,
+   "priceDate": "2026-09-01"
+  },
+  {
+   "account": "ALL",
+   "ticker": "ABVX270319C00120000",
+   "name": "ABVX 19MAR27 120 C",
+   "byPort": {
+    "IBKR": 20000.0,
+    "SQ": 10000.0
+   },
+   "isin": "",
+   "ccy": "USD",
+   "shares": 30000.0,
+   "price": 17.0,
+   "value": 510000.0,
+   "valueEur": 440035,
+   "valueUsd": 510000,
+   "basisUsd": 649942,
+   "basisEur": 560256,
+   "realizedUsd": 0,
+   "avgCost": 21.6647,
+   "unrealRet": -21.5,
+   "dayRet": -5.56,
+   "prevClose": 18.0,
    "priceDate": "2026-09-01"
   },
   {
