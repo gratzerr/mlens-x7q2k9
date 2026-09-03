@@ -2,6 +2,13 @@
   "ticker": "CLPT",
   "news": [
     {
+      "date": "2026-09-02",
+      "headline": "Partner uniQure submits BLA to FDA and MAA to UK MHRA for AMT-130 in Huntington's disease, delivered via ClearPoint's navigation platform",
+      "source": "uniQure press release / GlobeNewswire",
+      "url": "https://www.globenewswire.com/news-release/2026/09/02/3354993/0/en/uniqure-announces-submission-of-biologics-license-application-for-ifezuntirgene-inilparvovec-amt-130-in-huntington-s-disease.html",
+      "summary": "uniQure submitted a Biologics License Application to the FDA requesting priority review, plus a Marketing Authorisation Application to the UK's MHRA, for ifezuntirgene inilparvovec (AMT-130), its Huntington's disease gene therapy, based on three-year Phase I/II data versus a propensity-matched Enroll-HD external control. Every dose in the trial was administered using ClearPoint's Navigation System and SmartFlow cannula, so the filing converts the long-pending Q3 BLA/MAA catalyst into an actual regulatory submission and starts the clock on the FDA's 60-day filing review."
+    },
+    {
       "date": "2026-08-25",
       "headline": "ClearPoint Neuro rallies 8.3% to $16.43 as the post-earnings selloff starts to reverse",
       "source": "MarketBeat / The Cerbat Gem",
@@ -35,33 +42,20 @@
       "source": "Investing.com",
       "url": "https://www.investing.com/news/company-news/clearpoint-neuro-aug-2026-slides-500m-revenue-target-amid-q2-miss-93CH-4832435",
       "summary": "Alongside the Q2 print management presented a five-pillar strategy targeting $500M in annual revenue, built on cell and gene therapy delivery to the brain, the newly possessed 30,000 sq ft ClearPoint Advanced Laboratories (CAL) site, the 10-year SONOCARE focused-ultrasound partnership at Sungkyunkwan University, a cranial robot shaped by feedback from 50+ neurosurgeons, and Harmony software. The deck cited 175+ active global centers, 60+ pharma partners, a 2.1 million-patient US opportunity across partner-targeted indications, and CAL lifting preclinical service capacity from roughly $8M to over $60M annually."
-    },
-    {
-      "date": "2026-07-31",
-      "headline": "Partner Aspen Neuroscience wins FDA RMAT designation for Parkinson's cell therapy delivered with ClearPoint hardware",
-      "source": "ClearPoint Neuro IR / ACCESS Newswire",
-      "url": "https://ir.clearpointneuro.com/news-events/press-releases/detail/1155/clearpoint-neuro-congratulates-partner-aspen-neuroscience",
-      "summary": "The FDA granted Regenerative Medicine Advanced Therapy designation to Aspen Neuroscience's sasineprocel (ANPD001), an autologous dopaminergic neuron replacement therapy for Parkinson's disease, on the strength of the ongoing Phase 1/2a ASPIRO trial. Every transplantation procedure in ASPIRO uses the ClearPoint Neuro Navigation System and the SmartFlow cannula, so RMAT's early and frequent FDA interactions and accelerated-approval eligibility put a second partner program on a faster route to commercial procedure volume."
     }
   ],
   "catalysts": [
     {
       "when": "2026-09",
       "label": "uniQure presents four-year AMT-130 follow-up data",
-      "detail": "uniQure said it will present data from its ongoing Phase I/II AMT-130 studies in September 2026, covering all patients in the first two cohorts including four years of follow-up on 24 patients. Every one of those patients was dosed through ClearPoint's SmartFlow cannula and navigation system, so durability of the 75% cUHDRS progression-slowing signal is the closest thing to a read on ClearPoint's delivery platform performing over multiple years. A clean four-year dataset also de-risks the pending BLA and the ex-US filings that would drive per-procedure revenue. No exact date has been announced yet.",
+      "detail": "uniQure said it will present topline data from its ongoing Phase I/II AMT-130 studies in September 2026, covering all patients in the first two cohorts including four years of follow-up on 24 patients (12 high-dose, 12 low-dose) plus three additional high-dose patients at three years, measured on cUHDRS, TFC and other endpoints against a propensity-matched Enroll-HD natural-history control. Every one of those patients was dosed through ClearPoint's SmartFlow cannula and navigation system, so a clean four-year dataset following the September 2 BLA/MAA filing would further de-risk the regulatory review already underway. No exact date has been announced yet.",
       "confirmed": true
     },
     {
-      "when": "2026-Q3",
-      "label": "uniQure AMT-130 BLA submission for Huntington's disease",
-      "detail": "uniQure remains guided to file a BLA for AMT-130 under accelerated approval in Q3 2026 with a Priority Review request, which would shorten review from ten months to roughly six; high-dose AMT-130 slowed disease progression on the cUHDRS by a statistically significant 75% at three years. The July FDA minutes added a condition: the agency wants alignment on the confirmatory study design, possibly a randomized standard-of-care control instead of sham surgery, before the submission. With one month left in the guided quarter and no filing announced as of September 1, slippage into Q4 is the main near-term risk to the single most important partner milestone in the CLPT thesis.",
-      "confirmed": true
-    },
-    {
-      "when": "2026-Q3",
-      "label": "uniQure UK MAA filing for AMT-130",
-      "detail": "Following a constructive interaction with the MHRA, uniQure is preparing a Marketing Authorisation Application for AMT-130 in the UK in the third quarter of 2026, a second regulatory path running in parallel with the US BLA. A UK filing would extend ClearPoint's delivery platform into an ex-US commercial channel and supports the company's global regulatory product expansion pillar.",
-      "confirmed": true
+      "when": "2026-11",
+      "label": "FDA priority-review decision on uniQure's AMT-130 BLA (filing acceptance)",
+      "detail": "uniQure submitted the AMT-130 BLA on September 2, 2026 and requested priority review; the FDA typically rules on a priority-review request within 60 days of receiving a BLA, putting a decision around early November 2026. Priority review would compress the substantive review to roughly six months from acceptance, meaning a possible action date in Q2 2027; a standard-review outcome or a refuse-to-file letter would push the timeline out and is the main near-term risk to ClearPoint's most important partner program.",
+      "confirmed": false
     },
     {
       "when": "2026-11",
@@ -100,11 +94,11 @@
       "confirmed": false
     },
     {
-      "when": "2027",
+      "when": "2027-Q2",
       "label": "Potential FDA decision on AMT-130",
-      "detail": "Assuming a Q3 2026 filing with Priority Review, an FDA decision on the first Huntington's gene therapy could arrive around mid-2027, with uniQure flagging a possible US launch inside that window. Approval would establish recurring per-procedure delivery revenue for ClearPoint and be the first commercial validation of the platform in a large chronic indication, following the Kebilidi precedent where SmartFlow is the only FDA-authorized delivery device.",
+      "detail": "With the BLA filed September 2, 2026 under a priority-review request, an FDA action date would fall roughly six months after acceptance, pointing to Q2 2027 (potentially April-May) if priority review is granted; a standard-review clock would push this later. Approval would establish recurring per-procedure delivery revenue for ClearPoint and be the first commercial validation of the platform in a large chronic indication, following the Kebilidi precedent where SmartFlow is the only FDA-authorized delivery device.",
       "confirmed": false
     }
   ],
-  "pulse": "CLPT trades around $15.1-15.8 for a market cap of roughly $460-470M as of September 1-3, having clawed back part of the August selloff but still sitting well below the $30.10 52-week high and the sell-side price targets (B. Riley $30, Lake Street $25, Stifel $22). The tape has been quiet for over a week, with no fresh company news since the August 25 unexplained 8.3% pop on thin volume - the last substantive update remains the August 3 Q2 report, where revenue of $10.88M missed by about $1.8M, biologics and drug delivery fell 15%, opex rose 51%, cash dropped to $29.4M and FY2026 guidance was cut to $48-52M, alongside management's pitch of a $500M long-term revenue target. Two rising stakes (MAK Capital to 7.8%, BlackRock to 7.1%) suggest institutional accumulation into the weakness, but the next real catalysts are external and still pending: uniQure's promised September four-year AMT-130 follow-up data and its Q3 BLA filing - still gated on agreeing a confirmatory study design with the FDA and with under four weeks left in the guided quarter - followed by the November Q3 print, where biologics has to reaccelerate on the new CAL facility or the shrinking cash runway becomes the dominant story."
+  "pulse": "The headline development since late August is that partner uniQure formally submitted the AMT-130 BLA to the FDA (with a priority-review request) and a parallel MAA to the UK MHRA on September 2, converting the single most important pending catalyst in the CLPT thesis from a guided plan into an actual filing built entirely on ClearPoint's navigation system and SmartFlow cannula. CLPT itself has had no new operational or financial news since the August 3 Q2 report, where revenue of $10.88M missed estimates, biologics and drug delivery fell 15%, opex rose 51%, cash dropped to $29.4M and FY2026 guidance was cut to $48-52M; the stock has traded choppily in the $14.50-16.50 range since, still well below the $30.10 52-week high and sell-side targets (B. Riley $30, Lake Street $25, Stifel $22), while MAK Capital (7.8%) and BlackRock (7.1%) built stakes into the weakness. The next real checkpoints are the FDA's roughly 60-day filing-acceptance/priority-review decision expected around early November, uniQure's promised September four-year AMT-130 follow-up data, and ClearPoint's own Q3 print in November, where biologics needs to reaccelerate on the new CAL facility or the shrinking cash runway becomes the dominant story."
 }
