@@ -6,7 +6,7 @@
       "headline": "Nektar v. Eli Lilly: Final Pretrial Rulings and Jury Selection Clear the Way for September 8 Trial",
       "source": "CourtListener (N.D. Cal. docket 3:23-cv-03943)",
       "url": "https://www.courtlistener.com/docket/67670334/nektar-therapeutics-v-eli-lilly-co/",
-      "summary": "Judge James Donato resolved the parties' motions in limine on August 7 (splitting rulings between both sides) and held a jury excusal conference on September 2, keeping the long-delayed breach-of-contract trial over the terminated rezpegaldesleukin collaboration on track to open September 8 in San Francisco with a 45-minute opening statement per side. Nektar alleges Lilly used flawed math that understated efficacy (about 66% versus a true ~83%) and let a conflict with its own lebrikizumab undermine the program, costing milestone and royalty payments, while Lilly denies wrongdoing and blames a third-party CRO calculation error; a summary judgment motion by Lilly was denied in March 2026."
+      "summary": "Judge James Donato resolved the parties' motions in limine on August 7 (splitting rulings between both sides) and held a jury excusal conference on September 2, keeping the long-delayed breach-of-contract trial over the terminated rezpegaldesleukin collaboration on track to open September 8 in San Francisco, with each side given 45 minutes for opening statements, 45 minutes for closing, and 13 hours total for witness examination. Nektar alleges Lilly used flawed math that understated efficacy (Lilly's 11% EASI-75 responder figure versus Nektar's own 21%) and let a conflict with its own lebrikizumab undermine the program, costing milestone and royalty payments, while Lilly denies wrongdoing and blames a third-party CRO calculation error; a summary judgment motion by Lilly was denied in March 2026."
     },
     {
       "date": "2026-08-28",
@@ -27,7 +27,7 @@
       "headline": "JPMorgan Initiates Coverage on Nektar Therapeutics with Neutral Rating and $65 Price Target",
       "source": "MarketBeat",
       "url": "https://www.marketbeat.com/instant-alerts/jpmorgan-chase-co-initiates-coverage-on-nektar-therapeutics-nasdaqnktr-2026-08-21/",
-      "summary": "JPMorgan started NKTR at Neutral with a $65 target, roughly 14% below the prior close and the second cautious voice after Wedbush's $80. It sits far under a consensus 12-month target near $153, where the sell-side skews Buy and Piper Sandler is highest at $192."
+      "summary": "JPMorgan started NKTR at Neutral with a $65 target, roughly 14% below the prior close and the second cautious voice after Wedbush, which has since trimmed its own target to $80 from $95 while keeping Neutral. Both sit far under a consensus 12-month target near $153 (10 analysts, mostly Buy-rated), where Piper Sandler is highest at $192."
     },
     {
       "date": "2026-08-13",
@@ -48,7 +48,7 @@
     {
       "when": "2026-09-08",
       "label": "Nektar v. Eli Lilly jury trial opens (San Francisco federal court)",
-      "detail": "Trial opens September 8, 2026 before an 8-person jury; motions in limine were resolved August 7 and a jury excusal conference was held September 2, so the case is on track to proceed as scheduled after being postponed once from October 2025 by the government shutdown. Nektar alleges Lilly mismanaged and manipulated rezpeg efficacy data during their terminated collaboration and seeks damages for lost milestone/royalty payments; Lilly denies wrongdoing. A verdict either direction is a binary, uncorrelated legal catalyst layered on top of the clinical story.",
+      "detail": "Trial opens September 8, 2026 before an 8-person jury; motions in limine were resolved August 7 and a jury excusal conference was held September 2, so the case is on track to proceed as scheduled after being postponed once from October 2025 by the government shutdown. Nektar alleges Lilly mismanaged and manipulated rezpeg efficacy data during their terminated collaboration and seeks damages for lost milestone/royalty payments; Lilly denies wrongdoing and points to a third-party CRO error. As of today (September 4) no verdict or settlement has been reported; a decision either direction is a binary, uncorrelated legal catalyst layered on top of the clinical story.",
       "confirmed": true
     },
     {
@@ -78,7 +78,7 @@
     {
       "when": "2026-11",
       "label": "Q3 2026 earnings",
-      "detail": "Third-party estimates cluster around early-to-mid November 2026 for the next quarterly report, which should update cash burn against full-year R&D guidance of $210-230 million, confirm the ZENITH AD-3 start, give first enrollment colour across all three AD studies, and address the outcome of the September 8 Eli Lilly jury trial. Nektar has not yet announced an official date.",
+      "detail": "Third-party estimates cluster around early-to-mid November 2026 for the next quarterly report, which should update cash burn against full-year R&D guidance of $210-230 million, confirm the ZENITH AD-3 start, give first enrollment colour across all three AD studies, and address the outcome of the September 8 Eli Lilly jury trial (which will have concluded or be underway by then). Nektar has not yet announced an official date.",
       "confirmed": false
     },
     {
@@ -106,5 +106,5 @@
       "confirmed": true
     }
   ],
-  "pulse": "Nektar enters the week of September 3 with its two-track story converging fast: the Nektar v. Eli Lilly jury trial over the pair's soured rezpeg collaboration opens September 8 in San Francisco after motions in limine were resolved August 7 and jury selection wrapped September 2, making this a genuinely binary, uncorrelated legal catalyst layered on top of the clinical program. Underlying fundamentals remain constructive: $1.02 billion of cash funds runway into Q3 2028 past the mid-2028 ZENITH AD Phase 3 readout, The Lancet's August 25 publication of the REZOLVE-AD Phase 2b data (61% vs 31% mean EASI reduction) gave the mechanism its first peer-reviewed validation, and ZENITH AD-3 is guided to start by month-end alongside two EADV Congress oral presentations September 30-October 3. Sentiment stays split and skeptical near-term: JPMorgan's August 21 Neutral initiation at $65 and Wedbush at $80 sit well below a consensus near $153 (Piper Sandler high at $192), short interest is around 20% of float, and the stock continues to digest a roughly two-year wait to real Phase 3 data alongside the now-imminent Lilly litigation overhang."
+  "pulse": "With four trading days left before the Nektar v. Eli Lilly jury trial opens September 8 in San Francisco, nothing new has surfaced since the September 2 jury-excusal conference: motions in limine are resolved, an 8-person jury is set, and the case over the terminated rezpeg collaboration remains on track with no settlement or verdict yet to report as of today, September 4. Underlying fundamentals stay constructive: $1.02 billion of cash funds runway into Q3 2028 past the mid-2028 ZENITH AD Phase 3 readout, The Lancet's August 25 publication of the REZOLVE-AD Phase 2b data (61% vs 31% mean EASI reduction) gave the mechanism its first peer-reviewed validation, and ZENITH AD-3 is guided to start by month-end alongside two EADV Congress oral presentations September 30-October 3. Sentiment stays split and skeptical near-term: JPMorgan's Neutral initiation at $65 and Wedbush's trimmed $80 target sit well below a consensus near $153 (Piper Sandler high at $192), short interest is around 20% of float, and the stock continues to digest a roughly two-year wait to real Phase 3 data alongside the now-imminent Lilly litigation overhang."
 }
