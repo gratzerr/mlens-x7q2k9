@@ -1,8 +1,8 @@
 {
- "fileDate": "2026-09-04 20:01",
- "generated": "2026-09-04 20:10",
+ "fileDate": "2026-09-04 20:12",
+ "generated": "2026-09-04 20:21",
  "engine": "pp-exact (verified vs PP app 2026-07-11)",
- "totalSecuritiesEur": 1774217,
+ "totalSecuritiesEur": 1773916,
  "cashEur": -17632.15,
  "cashByAccount": [
   {
@@ -30,22 +30,22 @@
    "eur": 828.99
   }
  ],
- "totalEur": 1756585,
- "ttwrorSince2022": 342.39,
- "ttwrorYtd": 75.66,
+ "totalEur": 1756284,
+ "ttwrorSince2022": 342.32,
+ "ttwrorYtd": 75.63,
  "ttwrorAnnualized": 37.43,
- "izf": 57.99,
+ "izf": 57.98,
  "yearlyReturns": {
   "2022": 3.3,
   "2023": 11.8,
   "2024": 45.2,
   "2025": 50.2,
-  "2026": 75.7
+  "2026": 75.6
  },
  "realizedEur": 748159,
- "unrealizedEur": 312041,
+ "unrealizedEur": 311740,
  "realizedUsd": 919459,
- "unrealizedUsd": 362675,
+ "unrealizedUsd": 362325,
  "netContribEur": 693272,
  "netContribUsd": 769042,
  "earningsEur": 12772.29,
@@ -27369,9 +27369,9 @@
   },
   {
    "d": "2026-09-04",
-   "v": 2041503,
-   "e": 1756585,
-   "r": 3.423924,
+   "v": 2041153,
+   "e": 1756284,
+   "r": 3.423165,
    "c": 769042,
    "k": 693272,
    "q": 919459,
@@ -65285,15 +65285,15 @@
    "name": "RAPID MICRO BIOSYSTEMS INC-A"
   }
  ],
- "ppReferenceTtwror": 342.39,
+ "ppReferenceTtwror": 342.32,
  "ppReferenceDate": "2026-09-04",
- "ttwrorApproxSince2022": 342.39,
+ "ttwrorApproxSince2022": 342.32,
  "yearlyReturnsApprox": {
   "2022": 3.3,
   "2023": 11.8,
   "2024": 45.2,
   "2025": 50.2,
-  "2026": 75.7
+  "2026": 75.6
  },
  "holdings": [
   {
@@ -65400,16 +65400,16 @@
    "isin": "US64134X2018",
    "ccy": "USD",
    "shares": 35000.0,
-   "price": 5.96999979,
-   "value": 208949.99,
-   "valueEur": 179788,
-   "valueUsd": 208950,
+   "price": 5.96000003,
+   "value": 208600.0,
+   "valueEur": 179487,
+   "valueUsd": 208600,
    "basisUsd": 198036,
    "basisEur": 170134,
    "realizedUsd": 0,
    "avgCost": 5.6582,
-   "unrealRet": 5.5,
-   "dayRet": -1.65,
+   "unrealRet": 5.3,
+   "dayRet": -1.81,
    "prevClose": 6.07,
    "priceDate": "2026-09-04"
   }
