@@ -4,10 +4,10 @@
  "source": "Parqet (live)",
  "portfolioId": "66e18c9426cf62020ccc7ee7",
  "totalValue": 2379073,
- "cashValue": -20515,
+ "cashValue": -114886,
  "netGainUnrealized": 772404,
  "unrealizedReturn": 48.1,
- "izf": 58.96,
+ "izf": 58.06,
  "ttwror": 331.6,
  "realizedAllTime": 1075764,
  "chartYtd": "__CHART_YTD__",
@@ -16,7 +16,7 @@
    "ticker": "Cash",
    "name": "Net Cash (PP)",
    "assetType": "cash",
-   "value": -20515,
+   "value": -114886,
    "unrealizedReturn": 0,
    "totalGainNet": 0,
    "thesis": "SQ USD/EUR + IBKR EUR/USD incl. margin",
@@ -27,9 +27,9 @@
    "ticker": "NKTR",
    "name": "Nektar Therapeutics",
    "assetType": "security",
-   "value": 540750,
-   "unrealizedReturn": 2.3,
-   "totalGainNet": -41610,
+   "value": 556425,
+   "unrealizedReturn": 5.2,
+   "totalGainNet": -25935,
    "thesis": "Rezpegaldesleukin (immunology / Treg biologic)",
    "ySym": "NKTR",
    "gquery": "Nektar Therapeutics",
@@ -40,18 +40,18 @@
     "finviz": "https://finviz.com/quote.ashx?t=NKTR"
    },
    "shares": 7500.0,
-   "price": 72.09999847,
-   "dayChange": 1.01,
-   "prevClose": 71.38
+   "price": 74.19000244,
+   "dayChange": -2.85,
+   "prevClose": 76.37
   },
   {
    "pid": "hld_69abfecda62d224ba6f896ed",
    "ticker": "QURE",
    "name": "uniQure",
    "assetType": "security",
-   "value": 473800,
-   "unrealizedReturn": 415.0,
-   "totalGainNet": 393291,
+   "value": 445000,
+   "unrealizedReturn": 383.7,
+   "totalGainNet": 364491,
    "thesis": "AMT-130 gene therapy for Huntington's disease",
    "ySym": "QURE",
    "gquery": "uniQure",
@@ -62,18 +62,18 @@
     "finviz": "https://finviz.com/quote.ashx?t=QURE"
    },
    "shares": 10000.0,
-   "price": 47.38000106,
-   "dayChange": -2.67,
-   "prevClose": 48.68
+   "price": 44.5,
+   "dayChange": -0.8,
+   "prevClose": 44.86
   },
   {
    "pid": "hld_695f994d700de118b95a7054",
    "ticker": "CLPT",
    "name": "ClearPoint Neuro",
    "assetType": "security",
-   "value": 319000,
-   "unrealizedReturn": 38.4,
-   "totalGainNet": 28094,
+   "value": 307120,
+   "unrealizedReturn": 33.2,
+   "totalGainNet": 16214,
    "thesis": "Neuro-navigation / gene-therapy delivery",
    "ySym": "CLPT",
    "gquery": "ClearPoint Neuro",
@@ -84,18 +84,18 @@
     "finviz": "https://finviz.com/quote.ashx?t=CLPT"
    },
    "shares": 22000.0,
-   "price": 14.5,
-   "dayChange": -4.23,
-   "prevClose": 15.14
+   "price": 13.96000003,
+   "dayChange": -0.64,
+   "prevClose": 14.05
   },
   {
    "pid": "hld_69958ddb69baa58c8f1f8c4d",
    "ticker": "NRXS",
    "name": "Neuraxis",
    "assetType": "security",
-   "value": 201250,
-   "unrealizedReturn": 1.6,
-   "totalGainNet": 3214,
+   "value": 208600,
+   "unrealizedReturn": 5.3,
+   "totalGainNet": 10564,
    "thesis": "IB-Stim / PENFS neuromodulation (pediatrics)",
    "ySym": "NRXS",
    "gquery": "Neuraxis",
@@ -106,9 +106,30 @@
     "finviz": "https://finviz.com/quote.ashx?t=NRXS"
    },
    "shares": 35000.0,
-   "price": 5.75,
-   "dayChange": -4.33,
-   "prevClose": 6.01
+   "price": 5.96000003,
+   "dayChange": -1.81,
+   "prevClose": 6.07
+  },
+  {
+   "pid": "pp_TENX",
+   "ticker": "TENX",
+   "name": "Tenax Therapeutics Inc",
+   "assetType": "security",
+   "thesis": "",
+   "ySym": "TENX",
+   "gquery": "Tenax Therapeutics Inc",
+   "links": {
+    "stocktwits": "https://stocktwits.com/symbol/TENX",
+    "x": "https://x.com/search?q=%24TENX&f=live",
+    "finviz": "https://finviz.com/quote.ashx?t=TENX"
+   },
+   "shares": 50000.0,
+   "price": 1.94000005,
+   "value": 97000,
+   "dayChange": 8.99,
+   "prevClose": 1.78,
+   "unrealizedReturn": 3.9,
+   "totalGainNet": -46635
   },
   {
    "ticker": "ABVX",
@@ -129,10 +150,10 @@
    },
    "gquery": "Abivax",
    "occ": "ABVX270319C00120000",
-   "dayChange": 0.83,
-   "prevClose": 18.0
+   "dayChange": 6.76,
+   "prevClose": 17.0
   }
  ],
- "ttwrorYtd": 77.63,
- "since2022": 347.37
+ "ttwrorYtd": 75.85,
+ "since2022": 342.88
 }
