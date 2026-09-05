@@ -2,6 +2,13 @@
  "ticker": "PINK",
  "news": [
   {
+   "date": "2026-08-27",
+   "headline": "Post-Q2 review: 'Early Ramp Signals' - Claire live, but revenue still all legacy S-Series",
+   "source": "TipRanks",
+   "url": "https://www.tipranks.com/stocks/pynkf",
+   "summary": "Post-earnings commentary framed Q2 as an early-ramp quarter: Claire is in clinical use, but the entire US$503K of revenue still came from legacy S-Series consumables, leases and service, with no Claire capital-sale revenue yet. The debate has narrowed to whether new-customer deals close in Q4 2026 or slip into 2027 as hospital AI review committees work through approvals."
+  },
+  {
    "date": "2026-08-21",
    "headline": "MicroCap Opportunities: 'First Two Claires and the Reimbursement Clock'",
    "source": "MicroCap Opportunities (Substack)",
@@ -23,13 +30,6 @@
    "summary": "CEO Adrian Mendes confirmed only two Claire systems are commercially installed - both conversions of existing S-Series customers - with the installed base unchanged at 22 sites, and declined to quantify the sales funnel, calling it 'in flux' as hospital AI review committees push some deals toward 2027. CFO Sara Brien reiterated roughly 12 months of runway on the US$6.4M cash balance, and management confirmed the HCPCS coding application filed with CMS in June is under review, with the first Medicare claims expected in Q1 2027."
   },
   {
-   "date": "2026-08-18",
-   "headline": "Perimeter Debuts At Intermountain Health With FDA-Approved AI System For Breast Cancer Surgery",
-   "source": "Medtech Insight (Citeline)",
-   "url": "https://insights.citeline.com/medtech-insight/device-area/diagnostics/diagnostic-imaging/perimeter-debuts-at-intermountain-health-with-fda-approved-ai-system-for-breast-cancer-surgery-4XDCC4HIF5CCVO423YGNMPYUBA/",
-   "summary": "Trade press picked up Perimeter's first commercial deployment, framing Claire as the first PMA-approved, AI-enabled intraoperative margin assessment system to move from clinical trials into routine surgical practice. The shares traded around C$0.40 that week, roughly double their late-July level, before giving back most of the move after the Q2 print."
-  },
-  {
    "date": "2026-08-14",
    "headline": "Intermountain Health Deploys Claire OCT System to Aid Breast Cancer Surgery",
    "source": "Imaging Technology News (ITN)",
@@ -48,39 +48,39 @@
   {
    "when": "2026-Q4",
    "label": "CMS HCPCS code decision for Claire",
-   "detail": "Perimeter filed its HCPCS coding application with CMS in June 2026 and management confirmed on the Q2 call that it is under review. A June filing normally carries a January 1, 2027 effective date, with an outside chance of October 1, 2026; management guided to first Medicare and Medicare Advantage claims in Q1 2027. A dedicated code is the precondition for hospital billing and for commercial payers opening medical policy reviews.",
+   "detail": "Perimeter filed its HCPCS coding application with CMS in June 2026 and management confirmed on the August 20 call that it is under review. A June filing normally carries a January 1, 2027 effective date, with an outside chance of October 1, 2026; management guided to first Medicare and Medicare Advantage claims in Q1 2027. A dedicated code is the precondition for hospital billing and for commercial payers opening medical policy reviews, and is the single biggest structural unlock for the adoption curve.",
    "confirmed": false
   },
   {
-   "when": "2026-H2",
-   "label": "First net-new Claire placement",
-   "detail": "Only two Claire systems are commercially installed, both conversions of existing S-Series customers, on a flat installed base of 22 sites. Conversions carry no upfront capital-sale revenue, so a genuinely new hospital system signing - rather than another legacy swap - is the single clearest proof that the Intermountain deal is repeatable.",
+   "when": "2026-Q4",
+   "label": "First net-new Claire placement outside the legacy base",
+   "detail": "Only two Claire systems are commercially installed, both conversions of existing S-Series customers, on a flat installed base of 22 sites. Conversions carry no upfront capital-sale revenue, so a genuinely new hospital system signing - rather than another legacy swap - is the clearest proof that the Intermountain deal is repeatable. Management said late-stage pipeline opportunities exist but would not size the funnel, citing hospital AI review committees as the bottleneck.",
    "confirmed": false
   },
   {
    "when": "2026-H2",
    "label": "Roll-out across the wider Intermountain Health network",
-   "detail": "Claire is live at only two Intermountain hospitals (LDS Hospital and American Fork Hospital) despite a systemwide agreement covering a much larger network. Expansion to further Intermountain sites would show the flagship customer scales instead of stalling at a two-site footprint, and would lift per-procedure consumable revenue.",
+   "detail": "Claire is live at only two Intermountain hospitals (LDS Hospital and American Fork Hospital) despite a systemwide agreement covering a much larger network. Expansion to further Intermountain sites would show the flagship customer scales instead of stalling at a two-site footprint, and would lift per-procedure consumable revenue, which is the recurring part of the model.",
    "confirmed": false
   },
   {
    "when": "2026-11 (est.)",
    "label": "Q3 2026 results - first full quarter of Claire commercialization",
-   "detail": "The Q3 print, typically released in November, is the first full reporting period after the August Intermountain go-live. It is the first look at Claire-related recurring revenue and gross margin against the roughly US$2M annualized S-Series base, and the next hard update on cash burn and runway.",
+   "detail": "The Q3 print, typically released in November (Q2 preliminary results came on August 20), is the first full reporting period after the August Intermountain go-live. It is the first look at Claire-related recurring revenue and gross margin against the roughly US$2M annualized S-Series base, and the next hard update on cash burn and runway. No date has been announced yet.",
    "confirmed": false
   },
   {
    "when": "2026-Q4",
    "label": "Delivery on the 2-3x FY2026 revenue growth target",
-   "detail": "Management reaffirmed guidance of 2-3x revenue growth for 2026 but conceded that hospital AI review committees could push deals into 2027. With H1 revenue under US$0.9M against FY2025 revenue of about US$2.3M, the target implies an extremely back-loaded Q4, making the year-end update a hard test of the commercial ramp.",
+   "detail": "Management reaffirmed guidance of 2-3x revenue growth for 2026 but conceded that hospital AI review committees could push deals into 2027. With H1 revenue under US$0.9M against FY2025 revenue of about US$2.3M, the target implies an extremely back-loaded Q4 built on capital sales that have not yet been signed, making the year-end update a hard test of the commercial ramp and of management credibility.",
    "confirmed": false
   },
   {
    "when": "2027-H1 (est.)",
    "label": "Next financing round",
-   "detail": "Cash stood at US$6.4M on June 30 with management projecting roughly 12 months of runway, following the spring C$7.5M LIFE offering (21.5M units at C$0.35) and C$6.04M of convertible debentures. With the shares now well below that C$0.35 issue price, a further raise is likely and would be materially more dilutive unless commercial traction or the HCPCS code re-rates the stock first.",
+   "detail": "Cash stood at US$6.4M on June 30 with management projecting roughly 12 months of runway, following the spring C$7.5M LIFE offering (21,489,000 units at C$0.35) and C$6.04M of convertible debentures closed in June. With the shares around C$0.30, well below that C$0.35 issue price, a further raise is likely and would be materially more dilutive unless a new customer signing or the HCPCS code re-rates the stock first.",
    "confirmed": false
   }
  ],
- "pulse": "Nothing new has moved the story since the August 20 Q2 print - no press releases have followed on the IR page and the stock has simply drifted sideways to slightly down, trading around C$0.27-0.29 into early September versus the roughly C$0.29 level right after earnings. The setup is unchanged: Claire is live in real operating rooms at Intermountain (the only FDA PMA-approved AI-enabled breast-margin device on the market), but both installations are conversions of existing S-Series customers on a flat 22-site base, and management would not quantify the sales funnel beyond calling it 'in flux' as hospital AI committees slow decisions. With US$6.4M cash and about 12 months of runway, the market is watching the same two triggers as three weeks ago: the CMS HCPCS code filed in June (first Medicare claims guided to Q1 2027) and a first genuinely new hospital signing that would show Intermountain is a template rather than a one-off. The November Q3 print is the next scheduled catalyst."
+ "pulse": "Nothing new has come out of the company since the August 20 Q2 print - the IR press-release feed has been silent for over two weeks - and the stock has settled in a narrow range, closing around C$0.30 on September 4 (+3.5% on the day) for a market cap near C$46M, versus roughly C$0.40 at the mid-August Intermountain peak. The setup is unchanged: Claire is the only FDA PMA-approved AI-enabled breast-margin device and is now live in real operating rooms, but both installations are conversions of existing S-Series customers on a flat 22-site base, Q2 revenue of US$503K was entirely legacy, and management would not quantify the funnel beyond calling it 'in flux' as hospital AI committees slow decisions. With US$6.4M cash and about 12 months of runway against a Brookline Buy rating and C$1.54 target that assumes the ramp works, the two things to watch are the CMS HCPCS code filed in June (first Medicare claims guided to Q1 2027) and a first genuinely new hospital signing; the November Q3 print is the next scheduled checkpoint."
 }
