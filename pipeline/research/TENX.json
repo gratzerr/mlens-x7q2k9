@@ -1,1 +1,68 @@
-{"ticker":"TENX","news":[{"date":"2026-08-15","headline":"Tenax Therapeutics (NASDAQ:TENX) Rating Lowered to Strong Sell at Wall Street Zen","source":"MarketBeat","url":"https://www.marketbeat.com/instant-alerts/tenax-therapeutics-nasdaqtenx-rating-lowered-to-strong-sell-at-wall-street-zen-2026-08-15/","summary":"Wall Street Zen cut its rating on Tenax from Sell to Strong Sell days after the failed Phase 3 LEVEL readout. The downgrade reflects post-trial-failure caution even as some sell-side peers stayed constructive."},{"date":"2026-08-14","headline":"Tenax Therapeutics (TENX) holder BVF reports 3.11M shares, big warrant overhang","source":"StockTitan","url":"https://www.stocktitan.net/news/TENX/","summary":"A regulatory filing shows BVF Partners holding roughly 3.11 million TENX shares, with the disclosure highlighting a substantial outstanding warrant overhang. Large institutional positioning and potential future dilution remain a key overhang after the trial miss."},{"date":"2026-08-13","headline":"Piper Sandler Maintains Tenax Therapeutics With Buy Rating, Cuts Target Price to $14","source":"Moomoo","url":"https://www.moomoo.com/news/post/TENX","summary":"Piper Sandler kept its Buy rating but slashed its price target sharply following the LEVEL trial's missed primary endpoint. The firm still sees value in the subgroup and biomarker data despite the setback."},{"date":"2026-08-11","headline":"TENX Downgraded by Evercore ISI Group -- Price Target Lowered to $5.00","source":"GuruFocus","url":"https://www.gurufocus.com/news/9024865/tenx-downgraded-by-evercore-isi-group-price-target-lowered-to-500","summary":"Evercore ISI cut Tenax to In Line from Outperform and slashed its target from $39 to $5, one of several sharp analyst downgrades after the Phase 3 miss. William Blair also downgraded the stock the same day."},{"date":"2026-08-10","headline":"Tenax Therapeutics Announces Topline Results from Phase 3 LEVEL Clinical Trial of TNX-103 in Patients with PH-HFpEF","source":"GlobeNewswire","url":"https://www.globenewswire.com/news-release/2026/08/10/3341675/12401/en/tenax-therapeutics-announces-topline-results-from-phase-3-level-clinical-trial-of-tnx-103-in-patients-with-ph-hfpef.html","summary":"The pivotal LEVEL trial missed its primary endpoint (6-minute walk distance, +3.5m vs placebo, p=0.63) and its key secondary endpoint (KCCQ), though prespecified subgroups of sicker patients showed a 26.3-meter benefit, a 49% NT-proBNP reduction, and a 3.5 mmHg RVSP improvement. Shares collapsed roughly 87-90% on the news, and Tenax said it will seek an FDA Type C meeting to discuss a revised registrational path."},{"date":"2026-07-31","headline":"Tenax Therapeutics Reports Second Quarter 2026 Financial Results and Provides Corporate Update","source":"GlobeNewswire / BioSpace","url":"https://www.biospace.com/press-releases/tenax-therapeutics-reports-second-quarter-2026-financial-results-and-provides-corporate-update","summary":"Tenax reported a Q2 net loss of $17.8M and cash of $118.0M as of June 30, 2026, with $13.4M in warrant-exercise proceeds extending its runway guidance to the second quarter of 2028. The update, issued days before the LEVEL trial miss, still guided to August 2026 topline data."}],"catalysts":[{"when":"2026-08-29","label":"ESC Congress 2026 full LEVEL data presentation","detail":"Prof. Sanjiv Shah is scheduled to present the full Phase 3 LEVEL dataset, including the subgroup, biomarker and hemodynamic findings, in a Late-Breaking Clinical Science session at ESC Congress in Munich. With topline already disclosed as a miss, focus shifts to whether the deeper data set supports a narrower FDA path.","confirmed":true},{"when":"2026-Q4","label":"FDA Type C meeting on levosimendan path forward","detail":"Following the LEVEL primary-endpoint miss, Tenax plans to request a Type C meeting with the FDA (and consult the EMA) to discuss revising the registrational program, potentially narrowing eligibility toward more severely affected PH-HFpEF patients. Outcome will determine whether LEVEL-2 is modified or a new study is required.","confirmed":false},{"when":"2027-12","label":"LEVEL-2 Phase 3 enrollment completion","detail":"The global, ~540-patient LEVEL-2 registrational trial (2:1 randomization) remains ongoing, with enrollment completion previously guided to end of 2027. Design and enrollment criteria may still be revised pending FDA feedback from the planned Type C meeting.","confirmed":false},{"when":"2026-11","label":"Q3 2026 earnings / cash runway and strategy update","detail":"Next quarterly report should update the cash position (runway guided to Q2 2028 as of Q2 2026) and provide concrete next steps for the levosimendan program following the LEVEL trial failure.","confirmed":false}],"pulse":"TENX's story flipped overnight from a binary bull setup to post-failure damage control: the pivotal Phase 3 LEVEL trial missed its primary and key secondary endpoints on August 10, 2026, sending shares down roughly 87-90%, even as subgroup and biomarker data (49% NT-proBNP reduction, benefit in sicker patients) kept the drug's biological rationale alive. Analysts slashed price targets across the board (Evercore ISI to $5, Piper Sandler to $14) while several, including Piper Sandler, kept Buy ratings, and Wall Street Zen moved to Strong Sell. With about $118M in cash and runway guided into Q2 2028, the stock now trades on whether an FDA Type C meeting yields a viable narrower path for LEVEL-2, alongside warrant-overhang and dilution concerns flagged by recent large-holder filings (BVF)."}
+{
+  "ticker": "TENX",
+  "news": [
+    {
+      "date": "2026-09-04",
+      "headline": "ADAR1 Capital Management Continues Building Stake in Tenax Therapeutics, Crosses 13% Ownership",
+      "source": "The Cerbat Gem",
+      "url": "https://www.thecerbatgem.com/2026/09/04/adar1-capital-management-llc-acquires-403571-shares-of-tenax-therapeutics-nasdaqtenx-stock.html",
+      "summary": "ADAR1 Capital Management has kept adding TENX shares in open-market purchases through early September 2026, building on its late-August accumulation (4.85M shares, ~13% stake, at ~$1.77) with further buys around $1.79-$1.85. The sustained institutional buying at depressed post-crash prices sparked premarket rallies and fueled a deep-value debate around the stock."
+    },
+    {
+      "date": "2026-08-29",
+      "headline": "Tenax Therapeutics Presents Full Phase 3 LEVEL Data in Late-Breaking Session at ESC Congress 2026",
+      "source": "GlobeNewswire",
+      "url": "https://www.globenewswire.com/news-release/2026/08/29/3352929/12401/en/tenax-therapeutics-announces-presentation-of-phase-3-level-results-in-late-breaking-scientific-sessions-at-esc-congress-2026.html",
+      "summary": "Prof. Sanjiv Shah presented the complete LEVEL dataset in Munich, confirming that TNX-103's treatment effect concentrates in patients with baseline 6MWD below the trial median of 333 meters, who saw a 26.3-meter benefit (p=0.0112) and a 47% NT-proBNP reduction versus placebo. The data reinforced Tenax's rationale for pursuing an enriched-population registrational strategy with the FDA."
+    },
+    {
+      "date": "2026-08-15",
+      "headline": "Tenax Therapeutics (NASDAQ:TENX) Rating Lowered to Strong Sell at Wall Street Zen",
+      "source": "MarketBeat",
+      "url": "https://www.marketbeat.com/instant-alerts/tenax-therapeutics-nasdaqtenx-rating-lowered-to-strong-sell-at-wall-street-zen-2026-08-15/",
+      "summary": "Wall Street Zen cut its rating on Tenax from Sell to Strong Sell days after the failed Phase 3 LEVEL readout. The downgrade reflects post-trial-failure caution even as some sell-side peers stayed constructive."
+    },
+    {
+      "date": "2026-08-13",
+      "headline": "Piper Sandler Maintains Tenax Therapeutics With Buy Rating, Cuts Target Price to $14",
+      "source": "Moomoo",
+      "url": "https://www.moomoo.com/news/post/TENX",
+      "summary": "Piper Sandler kept its Buy rating but slashed its price target sharply following the LEVEL trial's missed primary endpoint. The firm still sees value in the subgroup and biomarker data despite the setback."
+    },
+    {
+      "date": "2026-08-11",
+      "headline": "TENX Downgraded by Evercore ISI Group -- Price Target Lowered to $5.00",
+      "source": "GuruFocus",
+      "url": "https://www.gurufocus.com/news/9024865/tenx-downgraded-by-evercore-isi-group-price-target-lowered-to-500",
+      "summary": "Evercore ISI cut Tenax to In Line from Outperform and slashed its target from $39 to $5, one of several sharp analyst downgrades after the Phase 3 miss. William Blair and Guggenheim also downgraded the stock around the same time."
+    },
+    {
+      "date": "2026-08-10",
+      "headline": "Tenax Therapeutics Announces Topline Results from Phase 3 LEVEL Clinical Trial of TNX-103 in Patients with PH-HFpEF",
+      "source": "GlobeNewswire",
+      "url": "https://www.globenewswire.com/news-release/2026/08/10/3341675/12401/en/tenax-therapeutics-announces-topline-results-from-phase-3-level-clinical-trial-of-tnx-103-in-patients-with-ph-hfpef.html",
+      "summary": "The pivotal LEVEL trial missed its primary endpoint (6-minute walk distance, +3.5m vs placebo, p=0.63) and its key secondary endpoint (KCCQ), though prespecified subgroups of sicker patients showed a 26.3-meter benefit, a 49% NT-proBNP reduction, and a 3.5 mmHg RVSP improvement. Shares collapsed roughly 87-90% on the news, and Tenax said it will seek an FDA Type C meeting to discuss a revised registrational path."
+    }
+  ],
+  "catalysts": [
+    {
+      "when": "2026-Q4",
+      "label": "FDA Type C meeting on levosimendan path forward",
+      "detail": "Tenax has requested a Type C meeting with the FDA (with parallel EMA scientific consultation) to present the full LEVEL dataset, now reinforced by the ESC Congress presentation, and discuss an enriched-population registrational strategy focused on patients with lower baseline walk distance. The FDA's prior agreement that a single Phase 3 trial at p=0.01 could support an NDA is expected to be a key discussion point. The meeting had not yet occurred as of early September 2026.",
+      "confirmed": false
+    },
+    {
+      "when": "2027-12",
+      "label": "LEVEL-2 Phase 3 enrollment completion",
+      "detail": "The global, ~540-patient LEVEL-2 registrational trial (2:1 randomization) remains ongoing, with enrollment completion previously guided to end of 2027. Design and enrollment criteria may still be revised pending FDA feedback from the pending Type C meeting, potentially narrowing the study toward the enriched, lower-baseline-6MWD population.",
+      "confirmed": false
+    },
+    {
+      "when": "2026-11",
+      "label": "Q3 2026 earnings / cash runway and strategy update",
+      "detail": "Next quarterly report should update the cash position (runway guided to Q2 2028 as of Q2 2026) and provide concrete next steps for the levosimendan program following the LEVEL trial failure and the FDA Type C meeting.",
+      "confirmed": false
+    }
+  ],
+  "pulse": "TENX shares have stabilized in the $1.80-$1.90 range (market cap roughly $70-110M depending on share count used) after the catastrophic 87-90% collapse following the August 10, 2026 Phase 3 LEVEL primary-endpoint miss, with the full dataset presented at ESC Congress on August 29 reinforcing a narrower enriched-population rationale (26.3m walk-distance benefit and 47-49% NT-proBNP reduction in sicker, lower-baseline patients). The most notable recent development is sustained aggressive open-market buying by ADAR1 Capital Management, which has built a stake above 13% since late August at prices near the post-crash lows, signaling a deep-value bet even as sell-side analysts remain split (some slashed targets to $5 while keeping Buy ratings, others moved to Strong Sell). Watch for the still-pending FDA Type C meeting outcome, which will determine whether Tenax can pursue a narrower, faster registrational path or must redesign LEVEL-2, alongside the Q3 2026 earnings update on cash runway."
+}

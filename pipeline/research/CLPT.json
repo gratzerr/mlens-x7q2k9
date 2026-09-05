@@ -9,13 +9,6 @@
       "summary": "uniQure submitted a Biologics License Application to the FDA seeking accelerated approval of AMT-130 (ifezuntirgene inilparvovec) plus a parallel Marketing Authorisation Application to the UK MHRA, based on three-year Phase I/II data showing a statistically significant 75% slowing of progression on cUHDRS versus an external control (p=0.003). Every patient in those studies was dosed through the ClearPoint Neuro Navigation System and SmartFlow cannula, making this the first BLA built on ClearPoint's delivery platform in a large chronic indication."
     },
     {
-      "date": "2026-08-25",
-      "headline": "ClearPoint Neuro rallies 8.3% to $16.43 as the post-earnings selloff starts to reverse",
-      "source": "MarketBeat / The Cerbat Gem",
-      "url": "https://www.thecerbatgem.com/2026/08/25/clearpoint-neuro-nasdaqclpt-trading-up-8-3-heres-why.html",
-      "summary": "CLPT jumped 8.3% on August 25 from a $15.17 close to $16.43 on unusually thin volume of 179,361 shares, about 75% below the 719,603-share average, with no company announcement behind the move. Sell-side targets remain far above the market, with B. Riley at $30, Lake Street at $25 and Stifel at $22."
-    },
-    {
       "date": "2026-08-12",
       "headline": "MAK Capital group discloses 7.8% passive stake in ClearPoint Neuro via Schedule 13G/A",
       "source": "StockTitan / SEC EDGAR",
@@ -55,7 +48,7 @@
     {
       "when": "2026-09",
       "label": "uniQure presents four-year AMT-130 follow-up data",
-      "detail": "uniQure has guided to topline four-year safety and efficacy data on all 24 patients from the first two AMT-130 cohorts (12 high-dose, 12 low-dose) in September 2026, using a June 30, 2026 data cut. Every one of those patients was dosed through ClearPoint's SmartFlow cannula and navigation system, so durability of the 75% progression-slowing signal seen at three years is the closest available read on the delivery platform performing over multiple years. A clean four-year dataset further de-risks the BLA now under FDA review; no exact presentation date has been announced.",
+      "detail": "uniQure has guided to topline four-year safety and efficacy data on all 24 patients from the first two AMT-130 cohorts (12 high-dose, 12 low-dose) before the end of Q3 2026, using a June 30, 2026 data cut. Every one of those patients was dosed through ClearPoint's SmartFlow cannula and navigation system, so durability of the 75% progression-slowing signal seen at three years is the closest available read on the delivery platform performing over multiple years. A clean four-year dataset further de-risks the BLA now under FDA review; no exact presentation date has been announced as of September 5.",
       "confirmed": true
     },
     {
@@ -119,5 +112,5 @@
       "confirmed": false
     }
   ],
-  "pulse": "CLPT trades around $14.07 for a market cap of roughly $429M as of September 3, well below the $30.10 52-week high and the sell-side targets (B. Riley $30, Lake Street $25 reiterated on September 3, Stifel $22). The dominant development is external: partner uniQure filed the AMT-130 BLA with the FDA and a parallel MAA with the UK MHRA on September 2 with a Priority Review request, turning a pending catalyst into an active regulatory review, with a 60-day filing-acceptance decision due around early November and four-year Phase I/II data still expected this month. That sits against an August dominated by the Q2 miss (revenue $10.88M vs $12.73M consensus, guidance cut to $48-52M, cash down to $29.4M) and rising institutional stakes (MAK Capital 7.8%, BlackRock 7.1%). Next to watch: the September four-year readout, then the November Q3 print, where biologics has to reaccelerate on the new CAL facility or the shrinking cash runway becomes the story."
+  "pulse": "CLPT has drifted down to roughly $13.9-14.2 (close to a $425M market cap on about 30.5M shares outstanding) as of September 4, still well below the $30.10 52-week high and far under sell-side targets (B. Riley $30, Lake Street $25, Stifel $22). The dominant recent development remains external: partner uniQure filed the AMT-130 BLA with the FDA and a parallel MAA with the UK MHRA on September 2 with a Priority Review request, converting a long-anticipated catalyst into an active regulatory review, while the August print (Q2 revenue $10.88M vs $12.73M consensus, FY guidance cut to $48-52M, cash down to $29.4M) and rising institutional stakes (MAK Capital 7.8%, BlackRock 7.1%) still weigh on sentiment. Next to watch: uniQure's still-pending four-year AMT-130 data (guided before quarter-end), the FDA's 60-day filing/Priority Review decision due around early November, and the Q3 print where biologics needs to reaccelerate on the new CAL facility before cash runway becomes the bigger story."
 }

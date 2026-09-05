@@ -2,6 +2,13 @@
   "ticker": "ABVX",
   "news": [
     {
+      "date": "2026-09-03",
+      "headline": "STAT News Asks Why Abivax Still Hasn't Been Acquired, Nine Months Into Takeover Speculation",
+      "source": "STAT News",
+      "url": "https://www.statnews.com/2026/09/03/abivax-acquisition-target-replimune-fda/",
+      "summary": "STAT's Biotech Scorecard column examined why Abivax remains independent despite widely reported interest from Eli Lilly (roughly EUR 15bn) in January and an AstraZeneca exclusivity story in March, concluding the $920m July capital raise gave the company genuine financial independence and shifted leverage toward Abivax rather than any suitor. The piece frames the next move as the company's own to make, not a signal that a deal is imminent or dead."
+    },
+    {
       "date": "2026-08-26",
       "headline": "Abivax Named Among Three Top Immunology Takeover Targets in PharmaVoice Dealmaking Analysis",
       "source": "PharmaVoice",
@@ -23,13 +30,6 @@
       "summary": "Healthcare crossover investor TCG Crossover (Funds I and II, via managing partner Chen Yu) disclosed beneficial ownership of 6,007,834 ADSs, or 7.0% of Abivax, based on 86.09 million shares outstanding after the July 2, 2026 offering. It confirms that a dedicated biotech specialist held on through the large equity raise rather than selling into strength."
     },
     {
-      "date": "2026-08-13",
-      "headline": "Invus Entities Disclose 6.0% Beneficial Stake in Abivax",
-      "source": "Stock Titan (SEC Schedule 13G/A)",
-      "url": "https://www.stocktitan.net/sec-filings/ABVX/schedule-13g-a-abivax-s-a-amended-passive-investment-disclosure-a60edefd9648.html",
-      "summary": "Long-standing shareholder Invus (together with the Avicenna Fund) reported 4,825,759 ordinary shares and ADSs, equal to 6.0% of Abivax as of June 30, 2026. Alongside the TCG filing it rounds out a picture of a stable, concentrated institutional register ahead of the NDA filing."
-    },
-    {
       "date": "2026-07-30",
       "headline": "Abivax Announces Positive Pre-NDA Interaction with the FDA for Obefazimod",
       "source": "Abivax Investor Relations",
@@ -41,21 +41,21 @@
       "headline": "Morgan Stanley Raises Abivax Price Target to $180 from $132, Maintains Overweight",
       "source": "Moomoo / Morgan Stanley research note",
       "url": "https://www.moomoo.com/news/post/73506815/morgan-stanley-maintains-abivax-sa-abvxus-with-buy-rating-raises",
-      "summary": "Morgan Stanley lifted its target far above the prevailing share price, citing growing confidence in the obefazimod UC data package and the NDA timeline after the maintenance results and pre-NDA FDA feedback. It sits at the top of a sell-side range whose consensus target was roughly $152-164 as of end-August (BTIG $175, Jefferies Buy at $158, Leerink $148)."
+      "summary": "Morgan Stanley lifted its target far above the prevailing share price, citing growing confidence in the obefazimod UC data package and the NDA timeline after the maintenance results and pre-NDA FDA feedback. It sits at the top of a sell-side range whose consensus target was roughly $152-166 as of late August (BTIG $175, Jefferies Buy at $158, Leerink $148)."
     }
   ],
   "catalysts": [
     {
-      "when": "2026-09-21",
-      "label": "H1 2026 financial results",
-      "detail": "Abivax has this date fixed in its published financial calendar, now about two and a half weeks out. The report will show the first post-raise balance sheet (cash was EUR 491.6m at March 31, 2026 before the $920m July offering, with runway now guided into 2029) and the step-up in R&D and pre-launch commercial spend. Expect a business update on NDA preparation, EMA filing timing and the U.S. commercial build-out alongside the numbers. This is the next scheduled company event of any kind.",
-      "confirmed": true
+      "when": "2026-09-10",
+      "label": "Euronext CAC family annual index review - possible CAC 40 / CAC Next 20 / CAC Mid 60 promotion",
+      "detail": "Euronext's CAC Steering Committee meets Thursday, September 10, 2026 for the comprehensive annual review (the CAC family is also reviewed quarterly in March, June and December). The 2025 edition (decision September 11, effective September 19) moved Abivax into the CAC Mid 60 and SBF 120. With a market capitalisation now around $11bn, Abivax is a plausible candidate for a step up into a larger Paris index, which would force passive buying, but nothing has been announced and promotion is not assured.",
+      "confirmed": false
     },
     {
-      "when": "2026-09",
-      "label": "Euronext Paris annual index review - possible CAC 40 / CAC Next 20 promotion",
-      "detail": "The Euronext index Scientific Council runs its annual review each September; the 2025 edition (decision September 11, effective September 19) moved Abivax into the CAC Mid 60 and SBF 120. With a market capitalisation now around $10.6bn, Abivax is a plausible candidate for a step up into the larger Paris indices, which would force passive buying. Nothing has been announced and promotion is not assured.",
-      "confirmed": false
+      "when": "2026-09-21",
+      "label": "H1 2026 financial results",
+      "detail": "Abivax has this date fixed in its published financial calendar, now about two weeks out. The report will show the first post-raise balance sheet (cash was EUR 491.6m at March 31, 2026 before the $920m July offering, with runway now guided into 2029) and the step-up in R&D and pre-launch commercial spend. Expect a business update on NDA preparation, EMA filing timing and the U.S. commercial build-out alongside the numbers. This is the next scheduled company event of any kind.",
+      "confirmed": true
     },
     {
       "when": "2026-Q4",
@@ -66,7 +66,7 @@
     {
       "when": "2026-Q4",
       "label": "NDA submission to FDA for obefazimod in ulcerative colitis",
-      "detail": "After positive Phase 3 ABTECT induction data, the 44-week maintenance readout, the Part 2 refractory-patient dataset and the constructive pre-NDA meeting on July 30, 2026, Abivax plans to submit its first NDA for obefazimod in moderately-to-severely active UC by the end of 2026. This is the single biggest near-term de-risking event and the gate that starts the FDA review clock. Management has reiterated the timeline at every update this year, most recently on July 30.",
+      "detail": "After positive Phase 3 ABTECT induction data, the 44-week maintenance readout, the Part 2 refractory-patient dataset and the constructive pre-NDA meeting on July 30, 2026, Abivax plans to submit its first NDA for obefazimod in moderately-to-severely active UC in late Q4 2026. This is the single biggest near-term de-risking event and the gate that starts the FDA review clock. Management has reiterated the timeline at every update this year, most recently on July 30, and has built out a full commercial leadership team (four senior hires announced July 23) in anticipation.",
       "confirmed": true
     },
     {
@@ -94,5 +94,5 @@
       "confirmed": false
     }
   ],
-  "pulse": "ABVX closed at $114.79 on September 4 (+0.7%), a market cap of about $10.6bn, still range-bound in the $110-$125 band it has held since late August and well off the $148.83 52-week high; there has been no company press release since the July 30 pre-NDA announcement, so the tape is drifting on positioning rather than news. Fundamentally the story is de-risked and now about execution: ABTECT induction plus Week-44 maintenance data are strong (about 51% remission vs 10% placebo, 37.2% of induction non-responders converted and 45.5% of relapsers recaptured on 50 mg), the Part 2 safety database puts malignancy rates in line with UC background rates, FDA alignment on the NDA is locked in for a filing by end-2026, and the $920m raise funds a solo U.S. launch into 2029 with a senior commercial team hired in July. At $114.79 the March-2027 $120 call is about 5% out of the money with roughly six months of life left, against a sell-side consensus target near $152-164 (Morgan Stanley $180, BTIG $175, Jefferies $158); the things that can move it back through the strike are the September 21 H1 report, a possible Euronext index promotion this month, a full safety-dataset presentation at an autumn congress, the NDA actually landing on time, and any re-ignition of the M&A speculation the CEO keeps downplaying - note the Crohn's readout and the FDA decision both sit after expiry."
+  "pulse": "ABVX closed at $114.79 on September 4 but climbed roughly 4-5% intraday on September 5 toward about $119, pushing back near the March-2027 $120 call's strike and a market cap around $11bn, though still well off the $148.83 52-week high; there is no confirmed company press release behind the move, but it follows STAT News' September 3 'Biotech Scorecard' feature publicly asking why nobody has acquired Abivax yet nine months after Eli Lilly and AstraZeneca takeover chatter first surfaced, which likely reignited M&A speculation even as management continues to point to the $920m July raise as proof it can go it alone into a 2029-funded solo U.S. launch. Fundamentally the story remains de-risked and execution-focused: ABTECT induction plus Week-44 maintenance data are strong, the Part 2 safety database puts malignancy rates in line with UC background rates, FDA alignment on the NDA is locked in for a filing in late Q4 2026, and a senior commercial team has been hired since July - all against a sell-side consensus target near $152-166 (Morgan Stanley $180, BTIG $175, Jefferies $158). What to watch next: the September 10 Euronext CAC family annual index review (a possible promotion given the larger market cap), the September 21 H1 2026 results (first post-raise balance sheet and an NDA/EMA timing update), a full safety-dataset presentation at an autumn congress, and any concrete confirmation or denial of renewed acquisition interest - note the Crohn's readout and any FDA approval decision both sit after the option's expiry."
 }
